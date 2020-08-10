@@ -1,0 +1,288 @@
+.flex-center {
+  display: flex;
+  align-items: center;
+}
+
+.flex-center i {
+  padding-right: 5px;
+}
+
+#mapDetail {
+  width: 100%;
+}
+
+.as-split-area[_ngcontent-serverApp-c6] .as-split-area[_ngcontent-serverApp-c6] {
+  padding: 0;
+}
+
+.card-body {
+  padding: 0;
+}
+
+.e-grid {
+  border-left-color: transparent;
+}
+
+.right-content {
+  position: relative;
+}
+
+.group-action {
+  position: absolute;
+  width: auto;
+  display: inline-flex;
+  top: 10px;
+  left: 0;
+  z-index: 99;
+  height: 30px;
+}
+
+.group-action .btn {
+  color: #fff;
+  background: #293040;
+}
+
+.group-action .btn:hover {
+  background-color: #5e6169;
+  cursor: pointer;
+}
+
+.close-btn {
+  border-radius: 0 16px 16px 0;
+  width: 30px;
+  height: 100%;
+  padding: 0;
+  padding-right: 5px;
+  display: grid;
+  align-items: center;
+  text-align: center;
+}
+
+#mapView {
+  width: 100%;
+}
+
+.e-accordion .e-acrdn-item.e-selected.e-select.e-expand-state>.e-acrdn-header {
+  background: #eee;
+}
+
+.e-accordion .e-acrdn-item.e-select.e-selected.e-expand-state>.e-acrdn-header .e-acrdn-header-content {
+  color: #202020;
+}
+
+.e-accordion {
+  border-left: none;
+}
+
+.mat-expansion-panel-header {
+  border-radius: 0 !important;
+}
+
+.control-panel {
+  display: block;
+  text-align: right;
+  padding: 15px 20px;
+  color: inherit;
+}
+
+.about-layer {
+  text-align: right;
+  padding: 10px 5px;
+}
+
+.mat-expansion-panel {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-bottom: 10px;
+  box-shadow: none;
+}
+
+::ng-deep {
+
+  .mat-slider.mat-accent.mat-slider-horizontal {
+    width: 100%;
+    margin-top: -10px;
+    padding: 0;
+  }
+
+  .mat-slider-horizontal .mat-slider-wrapper {
+    left: 0 !important;
+  }
+
+  #widget .widget {
+    z-index: 999;
+    width: auto;
+    height: auto;
+    position: absolute;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  #widget .widget.top-right {
+    top: 60px;
+    right: 15px;
+    background-color: red;
+  }
+
+  #widget .widget.top-left {
+    top: 60px;
+    left: 15px;
+    background-color: yellow;
+  }
+
+  #widget .widget.bottom-right {
+    bottom: 15px;
+    right: 15px;
+    background-color: green;
+  }
+
+  #widget .widget.bottom-left {
+    bottom: 15px;
+    left: 15px;
+    background-color: blue;
+  }
+
+  .esri-popup__header-buttons {
+    justify-content: flex-end;
+  }
+
+  .esri-widget--button.active {
+    background: #4c4c4c;
+    color: #fff;
+  }
+
+  .mat-dialog-container {
+    height: 75vh;
+    position: relative;
+    overflow: inherit !important;
+  }
+
+  .close-modal {
+    position: absolute;
+    right: 10px;
+    top: 5px;
+    z-index: 999;
+    padding: 5px 10px;
+  }
+
+  .close-modal i {
+    font-size: 17px;
+    cursor: pointer;
+  }
+
+  .close-modal:hover {
+    background: #ddd;
+  }
+
+  .as-split-gutter {
+    height: auto !important;
+  }
+
+  .esri-feature__text.esri-feature__content-element table {
+    color: #323232;
+    border: none;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .esri-feature__text.esri-feature__content-element table tr:nth-child(odd) {
+    background-color: rgba(76, 76, 76, 0.1);
+  }
+
+  .esri-feature__text.esri-feature__content-element table tr th {
+    width: 50%;
+    text-align: left;
+    border-right: 3px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .esri-feature__text.esri-feature__content-element table tr td,
+  .esri-feature__text.esri-feature__content-element table tr th {
+    padding: 0.5em 0.7em;
+    word-break: break-word;
+    vertical-align: top;
+    font-size: 12px;
+    font-weight: 400;
+  }
+
+}
+
+.mat-accordion>.mat-expansion-panel-spacing:last-child,
+.mat-accordion>:last-child:not(.mat-expansion-panel) .mat-expansion-panel-spacing {
+  margin-bottom: 10px;
+}
+
+.btn-more {
+  display: grid;
+  align-items: center;
+  margin-top: -25px;
+}
+
+.widgets {
+  left: 0;
+  height: 100%;
+  width: 340px;
+  margin-top: 10px;
+  position: absolute;
+  box-sizing: border-box;
+}
+
+.widgets .widget-items {
+  color: initial;
+  padding: 20px 15px;
+  background: #fff;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 2px 6px 2px rgba(60, 64, 67, .15);
+  overflow-x: hidden;
+  position: relative;
+  width: 100%;
+}
+
+.widgets .widget-items .item {
+  padding: 15px 5px;
+  height: 75px;
+  position: relative;
+}
+
+.widgets .widget-items .item.active {
+  background-color: #f8f8f8;
+}
+
+.widgets .widget-items .fa {
+  display: block;
+  font-size: 30px;
+}
+
+span {
+  line-height: 20px;
+}
+
+.hidden {
+  display: none;
+}
+
+.txt-label {
+  left: 0;
+  width: 100%;
+  padding: 0 3px;
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.widgets .widget-items .item:hover {
+  background-color: #f8f8f8;
+  transition: 0.2s;
+}
+
+.widgets .widget-items .item:hover .txt-label {
+  background: green;
+  overflow: visible;
+  white-space: normal;
+  position: absolute;
+  background-color: #f8f8f8;
+  z-index: 999;
+  transition: 0.2s;
+}

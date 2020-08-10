@@ -1,0 +1,21 @@
+.mat-progress-bar {
+  position: fixed;
+  top: 0;
+  z-index: 1031;
+  height: 3px;
+}
+
+#progressService {
+  display: none;
+}
+
+#progressService.active {
+  display: block;
+}
+
+::ng-deep {
+  app-admin,
+  .page-content {
+    height: 100%;
+  }
+}

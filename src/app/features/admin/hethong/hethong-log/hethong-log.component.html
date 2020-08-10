@@ -1,0 +1,142 @@
+<div class="row m-4">
+  <div class="d-flex" style="flex-direction: column; width: 100%; height: 93%;">
+    <div style="height: 10%; border-bottom: 1px solid gray;">
+      <div class="row" [formGroup]="hethongLogForm">
+        <div class="col-12">
+          <h5>
+            <i class="fas fa-exchange-alt"></i
+            ><b> NHẬT KÝ THAO TÁC NGƯỜI DÙNG</b>
+          </h5>
+        </div>
+        <div class="col-lg-6 col-md-6 mb-3">
+          <label>Chọn loại công trình:</label>
+          <mat-select
+            placeholder="Chọn công trình"
+            formControlName="objKey"
+            class="form-control"
+          >
+            <mat-select-filter
+              [displayMember]="'objName'"
+              [array]="loaiCongTrinhFilters"
+              (filteredReturn)="allLoaiCongTrinh = $event"
+            >
+            </mat-select-filter>
+            <mat-option value="">
+              ---Chọn loại công trình---
+            </mat-option>
+            <mat-option
+              *ngFor="let lct of allLoaiCongTrinh"
+              [value]="lct.objKey"
+            >
+              {{ lct.objName }}
+            </mat-option>
+          </mat-select>
+        </div>
+        <div class="col-lg-6 col-md-6 mb-3">
+          <label>Chọn tên công trình:</label>
+          <input
+            class="form-control"
+            placeholder="Nhập tên công trình"
+            formControlName="tenCongTrinh"
+            type="text"
+          />
+        </div>
+        <div class="col-lg-6 col-md-6 mb-3">
+          <label>Tên người dùng:</label>
+          <input
+            class="form-control"
+            placeholder="Nhập tên người dùng"
+            formControlName="userName"
+            type="text"
+          />
+        </div>
+        <div class="col-lg-6 col-md-6 row pr-0 mb-3">
+          <label class="col-12">Chọn thời gian:</label>
+          <div class="col-lg-8 col-md-12">
+            <div class="col-12 row">
+              <input
+                class="form-control col-lg-9 col-md-6"
+                [owlDateTime]="dt"
+                formControlName="dateTime"
+                placeholder="Nhập thời gian"
+              />
+              <div class="col-lg-3 col-md-6">
+                <span
+                  [owlDateTimeTrigger]="dt"
+                  style="cursor: pointer;"
+                  class="btn btn-outline-secondary"
+                  ><i class="fa fa-calendar"></i
+                ></span>
+                <owl-date-time
+                  [pickerType]="'calendar'"
+                  [startView]="'multi-years'"
+                  #dt
+                ></owl-date-time>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-md-12 pr-0">
+            <button class="btn btn-danger float-right">
+              <i class="fas fa-trash-alt"></i> Xóa dữ liệu
+            </button>
+            <button class="btn btn-success float-right mr-2">
+              <i class="fas fa-search"></i> Xem
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="pt-1" style="height: 80%; overflow: auto;">
+      <div class="overflow-auto" style="">
+        <div style="max-height: 90%;">
+          <ejs-grid
+            #grid
+            *ngIf="dataLog"
+            [dataSource]="dataLog | async"
+            class="table-striped border"
+            allowPaging="true"
+            [allowResizing]="true"
+            [allowExcelExport]="true"
+            (dataStateChange)="dataStateChange($event)"
+            [pageSettings]="settingsCommon.pageSettings"
+          >
+            <e-columns>
+              <e-column field="serialNumber" headerText="STT"></e-column>
+              <e-column headerText="Người dùng">
+                <ng-template #template let-data>
+                  {{data.message.user}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Loại module">
+                <ng-template #template let-data>
+                  {{data.message.moduleCode}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Full url request">
+                <ng-template #template let-data>
+                  {{data.message.fullRequestUrl}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Chức năng">
+                <ng-template #template let-data>
+                  {{data.message.action.actionName}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Trạng thái">
+                <ng-template #template let-data>
+                  {{data.message.method}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Thời gian">
+                <ng-template #template let-data>
+                  {{data.entryDate}}
+                </ng-template>
+              </e-column>
+              <e-column headerText="Dữ liệu thay đổi"></e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

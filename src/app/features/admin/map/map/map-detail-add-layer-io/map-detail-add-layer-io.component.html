@@ -1,0 +1,42 @@
+<div class="pt-5 mt-5">
+  <div class="form-group row mx-0">
+    <div class="col-sm-12">
+      <mat-tab-group>
+        <mat-tab [label]="'MAP.mapDetail.mapLayer' | translate">
+          <ng-template matTabContent>
+            <app-layer-tree
+              [actionType]="'checkbox'"
+              [selectedChildIds]="selectedLayerIds"
+              [dataSource]="listLayers"
+              *ngIf="listLayers"
+              (rowDataBound)="rowDataBound($event)"
+              [parentItemSelected]="obj.parentItem"
+            >
+            </app-layer-tree>
+          </ng-template>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+  <div class="toolbar-container py-2">
+    <div class="function-toolbar">
+      <div class="form-group row mx-0">
+        <div class="col-12">
+          <button
+            class="btn btn-primary float-right"
+            (click)="onSubmit(purpose)"
+          >
+            <i class="far fa-save"></i> {{ "COMMON.default.save" | translate }}
+          </button>
+          <button
+            class="btn btn-danger float-right mr-3"
+            (click)="closeIOSidebar()"
+          >
+            <i class="far fa-times-circle"></i>
+            {{ "COMMON.default.cancel" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

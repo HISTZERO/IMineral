@@ -1,0 +1,326 @@
+<div class="pt-3" style="width: 510px !important;">
+  <form [formGroup]="createForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.categories" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.map.categoriesPlaceholder' | translate }}"
+          [compareWith]="compareFn"
+          class="form-control"
+          formControlName="categories"
+          multiple
+        >
+          <mat-option
+            *ngFor="let category of categories"
+            [value]="category.id"
+            >{{ category.catName }}</mat-option
+          >
+        </mat-select>
+        <span *ngIf="formErrors.categories" class="alert-danger">{{
+          formErrors.categories
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.mapTitle" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="mapTitle" />
+        <span *ngIf="formErrors.mapTitle" class="alert-danger">{{
+          formErrors.mapTitle
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.mapSlug" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="mapSlug" />
+        <span *ngIf="formErrors.mapSlug" class="alert-danger">{{
+          formErrors.mapSlug
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.description" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <ckeditor
+          formControlName="mapAbstract"
+          [editor]="Editor"
+          [config]="{ enterMode: 2, shiftEnterMode: 1 }"
+        >
+        </ckeditor>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.extentMinx" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMinx" />
+        <span *ngIf="formErrors.extentMinx" class="alert-danger">{{
+          formErrors.extentMinx
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.extentMaxx" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMaxx" />
+        <span *ngIf="formErrors.extentMaxx" class="alert-danger">{{
+          formErrors.extentMaxx
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.extentMiny" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMiny" />
+        <span *ngIf="formErrors.extentMiny" class="alert-danger">{{
+          formErrors.extentMiny
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.extentMaxy" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMaxy" />
+        <span *ngIf="formErrors.extentMaxy" class="alert-danger">{{
+          formErrors.extentMaxy
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.center" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="center" />
+        <span *ngIf="formErrors.center" class="alert-danger">{{
+          formErrors.center
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.unit" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.map.unitPlaceholder' | translate }}"
+          class="form-control"
+          formControlName="unit"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="mapUnits"
+          ></mat-select-filter>
+          <mat-option *ngFor="let mapUnit of mapUnits" [value]="mapUnit.index">
+            {{ mapUnit.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.unit" class="alert-danger">{{
+          formErrors.unit
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.sizeX" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="sizeX" />
+        <span *ngIf="formErrors.sizeX" class="alert-danger">{{
+          formErrors.sizeX
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.sizeY" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="sizeY" />
+        <span *ngIf="formErrors.sizeY" class="alert-danger">{{
+          formErrors.sizeY
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.status" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.map.statusPlaceholder' | translate }}"
+          class="form-control"
+          formControlName="status"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="mapStatus"
+          ></mat-select-filter>
+          <mat-option *ngFor="let mapStt of mapStatus" [value]="mapStt.index">
+            {{ mapStt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.status" class="alert-danger">{{
+          formErrors.status
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.projection" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.map.projectionPlaceholder' | translate }}"
+          class="form-control"
+          formControlName="projectionId"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="listProjections"
+          ></mat-select-filter>
+          <mat-option
+            *ngFor="let projection of listProjections"
+            [value]="projection.index"
+          >
+            {{ projection.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.projectionId" class="alert-danger">{{
+          formErrors.projectionId
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.webMinscale" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="webMinscale" />
+        <span *ngIf="formErrors.webMinscale" class="alert-danger">{{
+          formErrors.webMinscale
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.webMaxscale" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="webMaxscale" />
+        <span *ngIf="formErrors.webMaxscale" class="alert-danger">{{
+          formErrors.webMaxscale
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.map.zoomLevel" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="zoomLevel" />
+        <span *ngIf="formErrors.zoomLevel" class="alert-danger">{{
+          formErrors.zoomLevel
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right"
+        >{{ "MAP.map.refImageLink" | translate }}:</label
+      >
+      <div class="col-sm-8 row">
+        <div class="image-preview col-8">
+          <div class="row px-2">
+            <a *ngIf="!srcanh === false" [href]="srcanh">
+              <img [src]="srcanh" height="100" style="padding-bottom: 10px;" />
+            </a>
+            <img
+              *ngIf="!srcanh === true"
+              class="pb-2 border"
+              src="assets/media/images/no_image_available.png"
+              alt="image"
+              width="100%"
+            />
+            <input
+              class="form-control"
+              hidden
+              type="text"
+              formControlName="refImageLink"
+            />
+          </div>
+          <div class="row p-0">
+            <button
+              class="btn btn-xsm btn-link text-danger"
+              type="button"
+              *ngIf="srcanh"
+              (click)="deleteAnh()"
+            >
+              <i class="fas fa-trash-alt"></i>
+              {{ "MAP.map.deleteImage" | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-primary"
+            style="margin: auto;"
+            (click)="showMatDialog()"
+          >
+            Chọn ảnh
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit()">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onContinueAdd()"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <ng-template #detailInfo> </ng-template>
+</div>

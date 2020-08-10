@@ -1,0 +1,195 @@
+<div class="d-md-flex align-items-md-start">
+
+  <!-- Left sidebar component -->
+  <div class="sidebar sidebar-light bg-transparent sidebar-component sidebar-component-left border-0 shadow-0 sidebar-expand-md">
+
+    <!-- Sidebar content -->
+    <div class="sidebar-content pl-2">
+
+<!--      &lt;!&ndash; Bộ lọc từ khóa &ndash;&gt;-->
+<!--      <div class="card">-->
+<!--        <div class="card-header bg-transparent header-elements-inline">-->
+<!--          <span class="text-uppercase font-size-sm font-weight-semibold">Bộ lọc</span>-->
+<!--          <div class="header-elements">-->
+<!--            <div class="list-icons">-->
+<!--              <a class="list-icons-item" data-action="collapse"></a>-->
+<!--            </div>-->
+<!--          </div>-->
+<!--        </div>-->
+
+<!--        <div class="card-body">-->
+<!--          <form action="#">-->
+<!--            <div class="form-group form-group-feedback form-group-feedback-left">-->
+<!--              <input type="search" class="form-control" placeholder="Từ khóa tìm kiếm . . .">-->
+<!--              <div class="form-control-feedback">-->
+<!--                <i class="icon-reading text-muted"></i>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            &lt;!&ndash;              <div class="form-group form-group-feedback form-group-feedback-left">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <input type="search" class="form-control" placeholder="Location">&ndash;&gt;-->
+<!--            &lt;!&ndash;                <div class="form-control-feedback">&ndash;&gt;-->
+<!--            &lt;!&ndash;                  <i class="icon-pin-alt text-muted"></i>&ndash;&gt;-->
+<!--            &lt;!&ndash;                </div>&ndash;&gt;-->
+<!--            &lt;!&ndash;              </div>&ndash;&gt;-->
+
+<!--            <div class="form-group">-->
+<!--              <div class="form-check">-->
+<!--                <label class="form-check-label">-->
+<!--                  <div class="uniform-checker"><span><input type="checkbox" class="form-input-styled" data-fouc=""></span></div>-->
+<!--                  Full time-->
+<!--                </label>-->
+<!--              </div>-->
+
+<!--              <div class="form-check">-->
+<!--                <label class="form-check-label">-->
+<!--                  <div class="uniform-checker"><span class=""><input type="checkbox" class="form-input-styled" data-fouc=""></span></div>-->
+<!--                  Part time-->
+<!--                </label>-->
+<!--              </div>-->
+
+<!--              <div class="form-check">-->
+<!--                <label class="form-check-label">-->
+<!--                  <div class="uniform-checker"><span class=""><input type="checkbox" class="form-input-styled" data-fouc=""></span></div>-->
+<!--                  Remote-->
+<!--                </label>-->
+<!--              </div>-->
+<!--            </div>-->
+
+<!--            <button type="submit" class="btn btn-primary btn-block">-->
+<!--              <i class="fa fa-search font-size-base mr-2"></i>-->
+<!--              Tìm kiếm-->
+<!--            </button>-->
+<!--          </form>-->
+<!--        </div>-->
+<!--      </div>-->
+<!--      &lt;!&ndash; /Bộ lọc từ khóa &ndash;&gt;-->
+
+
+      <!--         Đơn vị hành chính-->
+      <div class="card">
+        <div class="card-header bg-transparent header-elements-inline">
+          <span class="text-uppercase font-size-sm font-weight-semibold">Đơn vị hành chính</span>
+          <div class="header-elements">
+            <div class="list-icons">
+              <a class="list-icons-item" data-action="collapse"></a>
+            </div>
+          </div>
+        </div>
+
+        <form [formGroup]="searchDvhcForm" class="">
+          <div class="card-body">
+            <div class="form-group row mx-0" [ngClass]="displayFieldCss(formErrors.matinh)">
+              <label class="col-sm-4 col-form-label text-right">Tỉnh:</label>
+              <div class="col-sm-8">
+                <mat-select placeholder="Chọn tỉnh/thành phố" class="form-control" formControlName="matinh"
+                            (selectionChange)="showDvhcHuyen()"  >
+                  <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters"
+                                     (filteredReturn)="allTinh = $event">
+                  </mat-select-filter>
+                  <mat-option value="">
+                    ---Chọn tỉnh---
+                  </mat-option>
+                  <mat-option *ngFor="let tinh of allTinh" [value]="tinh.matinh">
+                    {{tinh.tendvhc}}
+                  </mat-option>
+                </mat-select>
+                <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
+              </div>
+            </div>
+            <div class="form-group row mx-0" [ngClass]="displayFieldCss(formErrors.mahuyen)">
+              <label class="col-sm-4 col-form-label text-right">Huyện:</label>
+              <div class="col-sm-8">
+
+                <mat-select placeholder="Chọn huyện/phường" class="form-control" formControlName="mahuyen"
+                            (selectionChange)="showDvhcXa()"  >
+                  <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"
+                                     (filteredReturn)="allHuyen = $event">
+                  </mat-select-filter>
+                  <mat-option value="">
+                    ---Chọn huyện---
+                  </mat-option>
+                  <mat-option *ngFor="let huyen of allHuyen" [value]="huyen.mahuyen">
+                    {{huyen.tendvhc}}
+                  </mat-option>
+                </mat-select>
+                <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
+              </div>
+            </div>
+            <div class="form-group row mx-0" [ngClass]="displayFieldCss(formErrors.maxa)">
+              <label class="col-sm-4 col-form-label text-right">Xã:</label>
+              <div class="col-sm-8">
+                <mat-select placeholder="Chọn xã/thị trấn" class="form-control" formControlName="maxa"  >
+                  <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters"
+                                     (filteredReturn)="allXa = $event">
+                  </mat-select-filter>
+                  <mat-option value="">
+                    ---Chọn xã---
+                  </mat-option>
+                  <mat-option *ngFor="let xa of allXa" [value]="xa.maxa">
+                    {{xa.tendvhc}}
+                  </mat-option>
+                </mat-select>
+                <span *ngIf="formErrors.maxa" class="alert-danger">{{formErrors.maxa}}</span>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+      <!-- /đơn vị hành chính -->
+
+      <!-- Tìm kiếm gần đây -->
+      <div class="card card-collapsed">
+        <div class="card-header bg-transparent header-elements-inline">
+          <span class="text-uppercase font-size-sm font-weight-semibold">Tìm kiếm gần đây</span>
+          <div class="header-elements">
+            <div class="list-icons">
+              <a class="list-icons-item rotate-180" data-action="collapse"></a>
+            </div>
+          </div>
+        </div>
+
+        <div class="card-body p-0" style="display: none;">
+          <div class="list-group list-group-flush">
+            <a href="#" class="list-group-item list-group-item-action">
+              <div>
+                Senior UI/UX designer
+                <div class="font-size-sm text-muted">Amsterdam</div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div>
+                Full stack web developer
+                <div class="font-size-sm text-muted">Zurich</div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div>
+                Business controller
+                <div class="font-size-sm text-muted">Budapest</div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div>
+                Python/Django developer
+                <div class="font-size-sm text-muted">Hamburg</div>
+              </div>
+            </a>
+            <a href="#" class="list-group-item list-group-item-action">
+              <div>
+                Senior PHP software engineer
+                <div class="font-size-sm text-muted">London</div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+      <!-- /Tìm kiếm gần đây -->
+
+    </div>
+    <!-- /sidebar content -->
+
+  </div>
+  <!-- /left sidebar component -->
+
+</div>

@@ -1,0 +1,506 @@
+<div class="flex-fill">
+  <div class="row m-0">
+    <div class="col-lg-12 col-md-12 pl-0">
+      <div class="card border">
+        <div class="card-body">
+          <ejs-grid #grid [dataSource]="listData | async" *ngIf="listData" [allowPaging]="true" [toolbar]="settingsCommon.toolbar" [allowSorting]="true"
+                    [pageSettings]="settingsCommon.pageSettings" class="table-striped"
+                    (dataStateChange)="dataStateChange($event)" [allowResizing]="true">
+            <e-columns>
+              <e-column headerText="Kết quả tìm kiếm">
+                <ng-template #template let-data>
+                  <div class="media card-body flex-column flex-sm-row">
+                    <div class="mr-sm-3 mb-2 mb-sm-0">
+                      <a href="#">
+                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcSY9rX3wAluPPdCXgq_0x4pMm0G4ESv1rzmJhmB0eosP9qX1OMh&usqp=CAU" class="rounded" width="44" height="44" alt="">
+                      </a>
+                    </div>
+                    <div class="media-body" >
+                      <h6 class="media-title font-weight-semibold" style="text-align: left">
+                        <li class="list-inline-item"><a class="text-muted">Tên công trình </a></li>
+                        <a href="{{setRouterLink(data)}}" [innerHTML]="getName(data)"></a>
+                      </h6>
+                      <ul class="list-inline list-inline-dotted text-muted mb-2" style="text-align: left">
+                        <li class="list-inline-item"><a class="text-muted">Loại công trình: </a></li>
+                        <li class="list-inline-item" [innerHTML]="getObjkeyName(data)"></li>
+                      </ul>
+                      <ul class="list-inline list-inline-dotted text-muted mb-2" style="text-align: left">
+                        <li class="list-inline-item"><a class="text-muted">Cơ quan tổ chức: </a></li>
+                        <li class="list-inline-item" [innerHTML]="getOrganization(data)" ></li>
+                      </ul>
+                      <ul class="list-inline list-inline-dotted text-muted mb-2" style="text-align: left">
+                        <li class="list-inline-item"><a class="text-muted">Đơn vị hành chính: </a></li>
+                        <li class="list-inline-item" [innerHTML]="getDvhc(data)" ></li>
+                      </ul>
+                      <ul class="list-inline list-inline-dotted text-muted mb-2" style="text-align: left">
+                        <li class="list-inline-item"><a class="text-muted">Vị trí: </a></li>
+                        <li class="list-inline-item" [innerHTML]="getLocation(data)"></li>
+                      </ul>
+                    </div>
+                  </div>
+                </ng-template>
+              </e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- List layout -->
+  <!--  <div class="card">-->
+  <!--    <div class="card-header bg-white header-elements-inline">-->
+  <!--      <h6 class="card-title">Kết quả tìm kiếm</h6>-->
+  <!--      <div class="header-elements">-->
+  <!--        <div class="list-icons">-->
+  <!--          <a class="list-icons-item" data-action="collapse"></a>-->
+  <!--          <a class="list-icons-item" data-action="reload"></a>-->
+  <!--          &lt;!&ndash;              <a class="list-icons-item" data-action="remove"></a>&ndash;&gt;-->
+  <!--        </div>-->
+  <!--      </div>-->
+  <!--    </div>-->
+
+  <!--    <ul class="media-list">-->
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Interaction UX/UI Industrial Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Dell</a></li>-->
+  <!--            <li class="list-inline-item">Amsterdam, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Extended kindness trifling remember he confined outlived if. Assistance sentiments yet unpleasing say. Open they an busy they my such high. An active dinner wishes at unable hardly no talked on. Immediate him her resolving his favourite. Wished denote abroad at branch at. Mind what no by kept.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="badge bg-blue">New</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Front-End Designer / Developer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">The North Face</a></li>-->
+  <!--            <li class="list-inline-item">The Hague, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Quick six blind smart out burst. Perfectly on furniture dejection determine my depending an to. Add short water court fat. Her bachelor honoured perceive securing but desirous ham required. Questions deficient acuteness to engrossed as. Entirely led ten humoured greatest and yourself besides country.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="badge bg-blue">New</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">UX Lead Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">IBM</a></li>-->
+  <!--            <li class="list-inline-item">Lelystad, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Contented get distrusts certainty nay are frankness concealed ham. On unaffected resolution on considered of. No thought me husband or colonel forming effects. End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">3 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Designer, CRM</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">CNN</a></li>-->
+  <!--            <li class="list-inline-item">Rotterdam, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          At as in understood an remarkably solicitude. Mean them very seen she she. Use totally written the observe pressed justice. Instantly cordially far intention recommend estimable yet her his. Ladies stairs enough esteem add fat all enable. Needed its design number winter see. Oh be me sure wise.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">4 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Senior UX Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Transfer Wise</a></li>-->
+  <!--            <li class="list-inline-item">Nijmegen, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          By an outlived insisted procured improved am. Paid hill fine ten now love even leaf. Supplied feelings mr of dissuade recurred no it offering honoured. Am of of in collecting devonshire favourable excellence. Her sixteen end ashamed cottage yet reached get hearing invited. Resources ourselves.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">5 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">UI Designer E-commerce</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Uber</a></li>-->
+  <!--            <li class="list-inline-item">Utrecht, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Insipidity the sufficient discretion imprudence resolution sir him decisively. Proceed how any engaged visitor. Explained propriety off out perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated astonished is. Was sister for few longer mrs sudden talent become.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">6 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">FPGA Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">ING Bank</a></li>-->
+  <!--            <li class="list-inline-item">Eindhoven, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          By so delight of showing neither believe he present. Deal sigh up in shew away when. Pursuit express no or prepare replied. Wholly formed old latter future but way she. Day her likewise smallest expenses judgment building man carriage gay. Considered introduced themselves mr to discretion at.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">7 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Medior JAVA Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Amazon</a></li>-->
+  <!--            <li class="list-inline-item">Baarn, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Woody equal ask saw sir weeks aware decay. Entrance prospect removing we packages strictly is no smallest he. For hopes may chief get hours day rooms. Oh no turned behind polite piqued enough at. Forbade few through inquiry blushes you. Cousin no itself eldest it in dinner latter missed no.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">8 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Full-stack UX Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Facebook</a></li>-->
+  <!--            <li class="list-inline-item">Nijmegen, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Situation admitting promotion at or to perceived be. Mr acuteness we as estimable enjoyment up. An held late as felt know. Learn do allow solid to grave. Middleton suspicion age her attention. Chiefly several bed its wishing. Is so moments on chamber pressed to. Doubtful yet way properly answered.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">9 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Front End Web Developer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Microsoft</a></li>-->
+  <!--            <li class="list-inline-item">Coevorden, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Out believe has request not how comfort evident. Up delight cousins we feeling minutes. Genius has looked end piqued spring. Down has rose feel find man. Learning day desirous informed expenses material returned six the. She enabled invited exposed him another. Reasonably conviction solicitude me.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">10 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Interaction UX/UI Industrial Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Dell</a></li>-->
+  <!--            <li class="list-inline-item">Amsterdam, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Extended kindness trifling remember he confined outlived if. Assistance sentiments yet unpleasing say. Open they an busy they my such high. An active dinner wishes at unable hardly no talked on. Immediate him her resolving his favourite. Wished denote abroad at branch at. Mind what no by kept.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">12 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Front-End Designer / Developer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">The North Face</a></li>-->
+  <!--            <li class="list-inline-item">The Hague, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Quick six blind smart out burst. Perfectly on furniture dejection determine my depending an to. Add short water court fat. Her bachelor honoured perceive securing but desirous ham required. Questions deficient acuteness to engrossed as. Entirely led ten humoured greatest and yourself besides country.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">13 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">UX Lead Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">IBM</a></li>-->
+  <!--            <li class="list-inline-item">Lelystad, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Contented get distrusts certainty nay are frankness concealed ham. On unaffected resolution on considered of. No thought me husband or colonel forming effects. End sitting shewing who saw besides son musical adapted. Contrasted interested eat alteration pianoforte sympathize was.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">14 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Designer, CRM</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">CNN</a></li>-->
+  <!--            <li class="list-inline-item">Rotterdam, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          At as in understood an remarkably solicitude. Mean them very seen she she. Use totally written the observe pressed justice. Instantly cordially far intention recommend estimable yet her his. Ladies stairs enough esteem add fat all enable. Needed its design number winter see. Oh be me sure wise.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">15 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">Senior UX Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Transfer Wise</a></li>-->
+  <!--            <li class="list-inline-item">Nijmegen, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          By an outlived insisted procured improved am. Paid hill fine ten now love even leaf. Supplied feelings mr of dissuade recurred no it offering honoured. Am of of in collecting devonshire favourable excellence. Her sixteen end ashamed cottage yet reached get hearing invited. Resources ourselves.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">16 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">UI Designer E-commerce</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">Uber</a></li>-->
+  <!--            <li class="list-inline-item">Utrecht, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          Insipidity the sufficient discretion imprudence resolution sir him decisively. Proceed how any engaged visitor. Explained propriety off out perpetual his you. Feel sold off felt nay rose met you. We so entreaties cultivated astonished is. Was sister for few longer mrs sudden talent become.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">17 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+
+  <!--      <li class="media card-body flex-column flex-sm-row">-->
+  <!--        <div class="mr-sm-3 mb-2 mb-sm-0">-->
+  <!--          <a href="#">-->
+  <!--            <img src="" class="rounded" width="44" height="44" alt="">-->
+  <!--          </a>-->
+  <!--        </div>-->
+
+  <!--        <div class="media-body">-->
+  <!--          <h6 class="media-title font-weight-semibold">-->
+  <!--            <a href="#">FPGA Designer</a>-->
+  <!--          </h6>-->
+
+  <!--          <ul class="list-inline list-inline-dotted text-muted mb-2">-->
+  <!--            <li class="list-inline-item"><a href="#" class="text-muted">ING Bank</a></li>-->
+  <!--            <li class="list-inline-item">Eindhoven, Netherlands</li>-->
+  <!--          </ul>-->
+
+  <!--          By so delight of showing neither believe he present. Deal sigh up in shew away when. Pursuit express no or prepare replied. Wholly formed old latter future but way she. Day her likewise smallest expenses judgment building man carriage gay. Considered introduced themselves mr to discretion at.-->
+  <!--        </div>-->
+
+  <!--        <div class="ml-sm-3 mt-2 mt-sm-0">-->
+  <!--          <span class="text-muted">18 days ago</span>-->
+  <!--        </div>-->
+  <!--      </li>-->
+  <!--    </ul>-->
+  <!--  </div>-->
+  <!--  &lt;!&ndash; /list layout &ndash;&gt;-->
+
+
+  <!--  &lt;!&ndash; Pagination &ndash;&gt;-->
+  <!--  <div class="d-flex justify-content-center pt-3 mb-3">-->
+  <!--    <ul class="pagination">-->
+  <!--      <li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-left"></i></a></li>-->
+  <!--      <li class="page-item active"><a href="#" class="page-link">1</a></li>-->
+  <!--      <li class="page-item"><a href="#" class="page-link">2</a></li>-->
+  <!--      <li class="page-item"><a href="#" class="page-link">3</a></li>-->
+  <!--      <li class="page-item"><a href="#" class="page-link">4</a></li>-->
+  <!--      <li class="page-item"><a href="#" class="page-link">5</a></li>-->
+  <!--      <li class="page-item"><a href="#" class="page-link"><i class="fas fa-angle-right"></i></a></li>-->
+  <!--    </ul>-->
+  <!--  </div>-->
+  <!-- /pagination -->
+
+</div>

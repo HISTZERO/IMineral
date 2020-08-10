@@ -1,0 +1,127 @@
+<!-- Page header -->
+<app-sub-header [menuItems]="navArray"></app-sub-header>
+<!-- /page header -->
+<div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
+    <mat-sidenav-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <span class="title">{{
+                    "TINBAI.chude.titleList" | translate
+                  }}</span>
+                  <button
+                    class="btn btn-primary"
+                    style="float: right;"
+                    (click)="openChudeIOSidebar()"
+                    [disabled]="!addChuDeAction"
+                  >
+                    <i class="fal fa-plus-square"></i>
+                    {{ "COMMON.default.add" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-outline-primary mr-3"
+                    style="float: right;"
+                    (click)="getAllChude()"
+                    [disabled]="!listChuDeAction"
+                  >
+                    <i class="far fa-sync-alt"></i>
+                    {{ "COMMON.default.load" | translate }}
+                  </button>
+                </h3>
+              </div>
+              <div class="card-body">
+                <ejs-grid
+                  #grid
+                  *ngIf="listChude && dataTranslate"
+                  [dataSource]="listChude"
+                  [editSettings]="settingsCommon.editSettings"
+                  [allowPaging]="true"
+                  [allowSorting]="true"
+                  [pageSettings]="settingsCommon.pageSettings"
+                  [toolbar]="settingsCommon.toolbar"
+                  class="table-striped"
+                  (queryCellInfo)="customiseCell($event)"
+                  [allowResizing]="true"
+                >
+                  <e-columns>
+                    <e-column
+                      field="serialNumber"
+                      headerText="{{
+                        'COMMON.default.numericalOrder' | translate
+                      }}"
+                    ></e-column>
+                    <e-column
+                      field="catName"
+                      headerText="{{ 'TINBAI.chude.catName' | translate }}"
+                    ></e-column>
+                    <e-column
+                      field="catType"
+                      headerText="{{ 'TINBAI.chude.catType' | translate }}"
+                    ></e-column>
+                    <e-column
+                      field="slug"
+                      headerText="{{ 'TINBAI.chude.slug' | translate }}"
+                    ></e-column>
+                    <e-column
+                      field="parentId"
+                      headerText="{{ 'TINBAI.chude.parentId' | translate }}"
+                    ></e-column>
+                    <e-column
+                      field="id"
+                      headerText="{{ 'COMMON.default.action' | translate }}"
+                    >
+                      <ng-template #template let-data>
+                        <div class="btn-group">
+                          <button
+                            class="btn btn-sm btn-primary"
+                            title="{{ 'COMMON.default.edit' | translate }}"
+                            (click)="editItemChude($event)"
+                            [disabled]="!editChuDeAction"
+                          >
+                            <i class="far fa-edit"></i>
+                          </button>
+                          <button
+                            class="btn btn-sm btn-danger"
+                            title="{{ 'COMMON.default.delete' | translate }}"
+                            (click)="deleteItemChude($event)"
+                            [disabled]="!deleteChuDeAction"
+                          >
+                            <i class="far fa-trash"></i>
+                          </button>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-sidenav
+        #aside
+        [fixedInViewport]="true"
+        [fixedTopGap]="50"
+        class="aside"
+        position="end"
+        style="width: 600px;"
+      >
+        <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
+          <button class="btn btn-sm btn-light" (click)="closeChudeIOSidebar()">
+            <i class="fad fa-chevron-double-right"></i>
+          </button>
+          <span
+            style="vertical-align: middle;"
+            class="ml-3 mat-sidenav-title-text"
+            >{{ matSidenavService.sidenavTitle }}</span
+          >
+        </div>
+        <template #compchudeio> </template>
+      </mat-sidenav>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

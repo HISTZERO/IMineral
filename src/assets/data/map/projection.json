@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "prj_name": "Test",
+    "srid": 123,
+    "proj4_params": "Test",
+    "extent": "Test",
+    "status": 0
+  },
+  {
+    "id": 2,
+    "prj_name": "Test",
+    "srid": 123,
+    "proj4_params": "Test",
+    "extent": "Test",
+    "status": 0
+  },
+  {
+    "id": 3,
+    "prj_name": "Test",
+    "srid": 123,
+    "proj4_params": "Test",
+    "extent": "Test",
+    "status": 0
+  }
+]

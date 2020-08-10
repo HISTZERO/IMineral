@@ -1,0 +1,41 @@
+<div class="content pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card border">
+          <div class="card-body">
+            <div class="mt-3 mb-3" style="border: 4px dashed #b4b9be;">
+              <div class="mt-4 mb-4" style="text-align: center">
+                <h2>{{'COMMON.thuvien.chooseFileHere' | translate}}</h2>
+                <input #file type="file" name="image" style="margin: auto" [accept]="accept" hidden multiple
+                  (change)="fileProgress($event)" />
+                <button (click)="file.click()" class="btn btn-light btn-lg fs-16 px-5 py-2"><i
+                    class="fal fa-check-square"></i> {{'COMMON.thuvien.chooseFile' | translate}}
+                </button>
+              </div>
+            </div>
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <span class="title">{{'COMMON.thuvien.titleListFile' | translate}}</span>
+                  <button class="btn btn-primary float-right" *ngIf="ArrayMedia.length > 0" (click)="uploadFile()"
+                    [disabled]="!uploadMediaAction">
+                    <i class="fas fa-upload"></i> {{'COMMON.thuvien.uploadFileChoosed' | translate}}
+                  </button>
+                </h3>
+              </div>
+              <div class="card-body" *ngIf="previewUrl">
+                <div class="image-preview pt-1 pb-2 m-2" *ngFor="let preview of previewUrl.link; let i = index"
+                  style="width: 130px; float: left;">
+                  <img class="ml-2" *ngIf="preview !== null" [src]="preview"
+                    style="width: 100px; border: 2px solid #fff;box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05);">
+                  <p>{{previewUrl.name[i]}}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

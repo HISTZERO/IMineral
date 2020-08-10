@@ -1,0 +1,55 @@
+<!-- Page header -->
+<!-- <app-sub-header></app-sub-header> -->
+<!-- /page header -->
+<div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
+    <mat-sidenav-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <span class="title">Phê duyệt dữ liệu</span>
+                </h3>
+              </div>
+              <div class="card-body">
+                <div class="group-layer-detail">
+                  <div class="row mx-0">
+                    <label class="col-sm-3 col-form-label text-right">Tên trạm:</label>
+                    <label class="col-sm-9 col-form-label"><strong>Trạm quan trắc ABC</strong></label>
+                  </div>
+                  <div class="row mx-0">
+                    <label class="col-sm-3 col-form-label text-right">Thông số:</label>
+                    <label class="col-sm-9 col-form-label"><strong>Mực nước</strong></label>
+                  </div>
+                  <div class="row mx-0">
+                    <label class="col-sm-3 col-form-label text-right">Người gửi:</label>
+                    <label class="col-sm-9 col-form-label"><strong>Trần Minh Tiến</strong></label>
+                  </div>
+                </div>
+                <div class="d-flex justify-content-end mb-2">
+                  <button class="btn btn-success mr-2" (click)="clickBtnDuyet()">Duyệt</button>
+                  <button class="btn btn-danger">Không duyệt</button>
+                </div>
+                <ejs-grid #grid [dataSource]="data" [editSettings]="settingsCommon.editSettings" [allowSelection]="true"
+                  persistSelection="true" [allowPaging]="true" [allowSorting]="true" [pageSettings]="pageSize"
+                  [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true">
+                  <e-columns>
+                    <e-column field="serialNumber" headerText="STT" width="50"></e-column>
+                    <e-column type='checkbox' width="70"></e-column>
+                    <e-column field="thoigiando" headerText="Thời gian đo" width="150"></e-column>
+                    <e-column field="ngaydo" headerText="Ngày đo" width="150"></e-column>
+                    <e-column field="ketqua" headerText="Kết quả" width="150"></e-column>
+                    <e-column field='status' headerText='Trạng thái' width="150"></e-column>
+                    <e-column field="ngaytao" headerText="Ngày tạo" width="150"></e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

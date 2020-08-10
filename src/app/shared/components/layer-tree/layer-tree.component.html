@@ -1,0 +1,205 @@
+<div class="layer-grid">
+  <ejs-treegrid
+    [toolbar]="toolbarOption"
+    #treeGrid
+    [dataSource]="dtSource"
+    [allowRowDragAndDrop]="allowRowDragAndDrop"
+    [treeColumnIndex]="0"
+    childMapping="childs"
+    (rowDataBound)="treeGridRowDataBound($event)"
+    (rowDrop)="treeGridRowDrop($event)"
+    *ngIf="actionType === 'button'"
+    (rowSelected)="treeGridRowSelected($event)"
+    [selectedRowIndex]="selectedItem ? selectedItem.index : null"
+  >
+    <e-columns>
+      <e-column
+        headerText="{{ 'MAP.layerTree.layerNameAndLayerGroup' | translate }}"
+        textAlign="Left"
+      >
+        <ng-template #template let-data>
+          <i
+            [ngClass]="{
+              fal: true,
+              'pr-1': true,
+              hidden: notDisplayIcon,
+              'fa-folder-open': data.childs,
+              'fa-layer-group': !data.childs
+            }"
+          ></i>
+          {{ data.name }}
+        </ng-template>
+      </e-column>
+      <e-column
+        headerText="{{ 'COMMON.default.action' | translate }}"
+        textAlign="Center"
+        width="30"
+      >
+        <ng-template #template let-data>
+          <div class="action-btn" *ngIf="data.childs">
+            <div class="btn-group">
+              <button
+                type="button"
+                class="btn btn-sm btn-primary ml-1 mr-1"
+                data-toggle="dropdown"
+                aria-expanded="false"
+              >
+                <i class="fal fa-plus-square"></i>
+              </button>
+              <div class="dropdown-menu dropdown-menu-right">
+                <a
+                  href="javascript:void(0)"
+                  class="dropdown-item"
+                  (click)="action(data, 'update', $event)"
+                >
+                  {{ "MAP.layerGroupDetail.displayOptions" | translate }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a
+                  href="javascript:void(0)"
+                  class="dropdown-item"
+                  (click)="action(data, 'addExistingLayer', $event)"
+                >
+                  {{ "MAP.mapDetail.addLayerExist" | translate }}
+                </a>
+                <div class="dropdown-divider"></div>
+                <a
+                  href="javascript:void(0)"
+                  class="dropdown-item"
+                  (click)="action(data, 'addNewLayerGroup', $event)"
+                >
+                  {{ "MAP.mapDetail.addGroupLayer" | translate }}
+                </a>
+                <a
+                  href="javascript:void(0)"
+                  class="dropdown-item"
+                  (click)="action(data, 'addExistingLayerGroup', $event)"
+                >
+                  {{ "MAP.mapDetail.addGroupLayerExist" | translate }}
+                </a>
+              </div>
+            </div>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="action(data, 'treeGridRowDelete', $event)"
+              title="{{ 'MAP.layerTree.deleteGroup' | translate }}"
+            >
+              <i class="far fa-trash"></i>
+            </button>
+          </div>
+          <div class="action-btn" *ngIf="!data.childs">
+            <button
+              class="btn btn-sm btn-primary ml-1 mr-1"
+              (click)="action(data, 'update', $event)"
+              title="{{ 'MAP.layerGroupDetail.displayOptions' | translate }}"
+            >
+              <i class="fad fa-compass"></i>
+            </button>
+            <button
+              class="btn btn-sm btn-danger"
+              (click)="action(data, 'treeGridRowDelete', $event)"
+              title="{{ 'COMMON.default.delete' | translate }}"
+            >
+              <i class="far fa-trash"></i>
+            </button>
+          </div>
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-treegrid>
+  <ejs-treegrid
+    [toolbar]="toolbarOption"
+    #treeGrid
+    [dataSource]="dtSource"
+    [allowRowDragAndDrop]="allowRowDragAndDrop"
+    [treeColumnIndex]="0"
+    childMapping="childs"
+    (rowDataBound)="treeGridRowDataBound($event)"
+    (rowDrop)="treeGridRowDrop($event)"
+    *ngIf="actionType === 'icon'"
+    (rowSelected)="treeGridRowSelected($event)"
+    [selectedRowIndex]="selectedItem ? selectedItem.index : null"
+  >
+    <e-columns>
+      <e-column
+        headerText="{{ 'MAP.layerTree.layerNameAndLayerGroup' | translate }}"
+        textAlign="Left"
+      >
+        <ng-template #template let-data>
+          <i
+            [ngClass]="{
+              fal: true,
+              'pr-1': true,
+              hidden: notDisplayIcon,
+              'fa-folder-open': data.childs,
+              'fa-layer-group': !data.childs
+            }"
+          ></i>
+          {{ data.name }}
+        </ng-template>
+      </e-column>
+      <e-column
+        headerText="{{ 'COMMON.default.action' | translate }}"
+        textAlign="Center"
+        width="30"
+      >
+        <ng-template #template let-data>
+          <div class="action-btn">
+            <i
+              [ngClass]="{
+                'esri-icon-plus-circled':
+                  selectedChildIds.indexOf(data.id) === -1,
+                'esri-icon-minus-circled':
+                  selectedChildIds.indexOf(data.id) !== -1
+              }"
+              *ngIf="!data.childs"
+              (click)="
+                action(
+                  data,
+                  selectedChildIds.indexOf(data.id) === -1 ? 'add' : 'remove',
+                  $event
+                )
+              "
+            ></i>
+          </div>
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-treegrid>
+  <ejs-treegrid
+    [toolbar]="toolbarOption"
+    #treeGrid
+    [dataSource]="dtSource"
+    [allowRowDragAndDrop]="allowRowDragAndDrop"
+    [treeColumnIndex]="0"
+    childMapping="childs"
+    (rowDataBound)="treeGridRowDataBound($event)"
+    (rowDrop)="treeGridRowDrop($event)"
+    autoCheckHierarchy="true"
+    (checkboxChange)="checkboxChange($event)"
+    *ngIf="actionType === 'checkbox'"
+    (rowSelected)="treeGridRowSelected($event)"
+    [selectedRowIndex]="selectedItem ? selectedItem.index : null"
+  >
+    <e-columns>
+      <e-column
+        headerText="{{ 'MAP.layerTree.layerNameAndLayerGroup' | translate }}"
+        textAlign="Left"
+        [showCheckbox]="true"
+      >
+        <ng-template #template let-data>
+          <i
+            [ngClass]="{
+              fal: true,
+              'pr-1': true,
+              hidden: notDisplayIcon,
+              'fa-folder-open': data.childs,
+              'fa-layer-group': !data.childs
+            }"
+          ></i>
+          {{ data.name }}
+        </ng-template>
+      </e-column>
+    </e-columns>
+  </ejs-treegrid>
+</div>

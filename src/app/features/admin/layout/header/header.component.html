@@ -1,0 +1,83 @@
+<!-- Main navbar -->
+<div class="navbar navbar-expand-md navbar-light fixed-top">
+  <!-- Header with logos -->
+  <div class="navbar-header d-none d-md-flex align-items-md-center">
+    <div class="navbar-brand navbar-brand-md p-0">
+      <a class="d-none d-md-flex align-items-md-center ewater-brand p-0" href="#">
+        <img src="assets/media/logos/logo_dark.png" height="40px" width="40px" alt="" />
+        <span class="brand-name">VNPT - iNRES</span>
+      </a>
+    </div>
+    <div class="navbar-brand navbar-brand-xs p-0">
+      <a class="d-inline-block" href="">
+        <img src="assets/media/logos/logo_dark.png" class="text-white" height="40px" width="40px" alt="" />
+      </a>
+    </div>
+  </div>
+  <!-- /header with logos -->
+
+  <!-- Navbar content -->
+  <div class="collapse navbar-collapse justify-content-between" id="navbar-mobile">
+    <ul class="navbar-nav" (click)="sidebarToggle()">
+      <li class="nav-item">
+        <a href="javascript:void(0)" class="navbar-nav-link sidebar-control sidebar-main-toggle d-none d-md-block">
+          <i class="fas fa-bars"></i>
+        </a>
+      </li>
+    </ul>
+    <ul class="navbar-nav">
+      <li class="nav-item dropdown">
+        <div class="navbar-nav-link dropdown-toggle caret-0" style="padding: 0.675rem 1rem; font-size: 17px;"
+          data-toggle="dropdown">
+          <i class="far fa-bell"></i>
+          <span class="d-md-none ml-2">Thông báo</span>
+          <span class="badge border-pink-400 ml-auto ml-md-0" style="
+              top: 3px;
+              left: 23px;
+              color: white;
+              background: red;
+              border-radius: 100%;
+            ">3</span>
+        </div>
+
+        <div class="dropdown-menu dropdown-menu-right dropdown-content wmin-md-350">
+          <div class="dropdown-content-header">
+            <span class="font-weight-semibold">Thông báo</span>
+            <a href="#" class="text-default"><i class="icon-compose"></i></a>
+          </div>
+          <div class="dropdown-content-body dropdown-scrollable">
+            <ul class="media-list">
+              <li class="media">
+                <div class="media-body">
+                  <div class="media-title">
+                    <a [routerLink]="['/admin/pheduyetdulieu']">
+                      <span class="font-weight-semibold">Trạm X có dữ liệu mới</span>
+                      <span class="text-muted float-right font-size-sm">04:58</span>
+                    </a>
+                  </div>
+
+                  <span class="text-muted">Nhấn vào đây để xem</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      <li class="nav-item dropdown dropdown-user">
+        <a href="javascript:void(0)" class="navbar-nav-link d-flex align-items-center dropdown-toggle"
+          data-toggle="dropdown" aria-expanded="false">
+          <img src="" class="rounded-circle mr-2" height="34" alt="" />
+          <span>{{ userName }}</span>
+        </a>
+        <div class="dropdown-menu dropdown-menu-right">
+          <a class="dropdown-item" href="admin"><i class="fas fa-cogs"></i> @Admin</a>
+          <a class="dropdown-item" href="/"><i class="fas fa-info-circle"></i> @Public</a>
+          <a class="dropdown-item" href="bando"><i class="far fa-map-marked-alt"></i> @Map</a>
+          <div class="dropdown-divider"></div>
+          <a class="dropdown-item" (click)="logOut()"><i class="icon-switch2"></i> Thoát</a>
+        </div>
+      </li>
+    </ul>
+  </div>
+  <!-- /navbar content -->
+</div>

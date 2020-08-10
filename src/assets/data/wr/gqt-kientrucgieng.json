@@ -1,0 +1,33 @@
+<<<<<<< HEAD
+[{
+        "id": 1,
+        "idGieng": 123,
+        "chieusautu": 10,
+        "chieusauden": 30,
+        "duongkinh": 50,
+        "loaiong": "XYZ",
+        "note": "string"
+    },
+    {
+        "id": 2,
+        "idGieng": 23,
+        "chieusautu": 14,
+        "chieusauden": 20,
+        "duongkinh": 40,
+        "loaiong": "ABC",
+        "note": "string"
+    }
+]
+=======
+[
+  {
+    "id": 1,
+    "idGieng": 111,
+    "chieusautu": 10,
+    "chieusauden": 30,
+    "duongkinh": 50,
+    "loaiong": "XYZ",
+    "note": "string"
+  }
+]
+>>>>>>> develop

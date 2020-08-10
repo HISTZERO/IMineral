@@ -1,0 +1,122 @@
+<div class="pt-3" style="width: 510px !important;">
+  <form [formGroup]="createForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "TINBAI.chude.catName" | translate }} <small>(*)</small>:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="catName"
+          placeholder="{{ 'TINBAI.chude.catName' | translate }}"
+          (ngModelChange)="translateSlug()"
+        />
+        <span *ngIf="formErrors.catName" class="alert-danger">{{
+          formErrors.catName
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "TINBAI.chude.catType" | translate }} <small>(*)</small>:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          *ngIf="dataTranslate"
+          placeholder="{{ 'TINBAI.chude.catTypePlaceholder' | translate }}"
+          class="form-control"
+          formControlName="catType"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="listCatType"
+          ></mat-select-filter>
+          <mat-option *ngFor="let lstcat of listCatType" [value]="lstcat.index">
+            {{ lstcat.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.catType" class="alert-danger">{{
+          formErrors.catType
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "TINBAI.chude.slug" | translate }} <small>(*)</small>:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="slug"
+          placeholder="Slug"
+        />
+        <span *ngIf="formErrors.slug" class="alert-danger">{{
+          formErrors.slug
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "TINBAI.chude.parentId" | translate }}<small>(*)</small>:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          *ngIf="dataTranslate"
+          placeholder="Chọn parent id"
+          class="form-control"
+          formControlName="parentId"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="listParentId"
+          ></mat-select-filter>
+          <mat-option
+            *ngFor="let lstparentId of listParentId"
+            [value]="lstparentId.index"
+          >
+            {{ lstparentId.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.parentId" class="alert-danger">{{
+          formErrors.parentId
+        }}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit()">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onContinueAdd()"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

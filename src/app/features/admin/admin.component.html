@@ -1,0 +1,26 @@
+<div [class]="containerClass">
+  <!-- Header -->
+  <app-header (toggleSidebar)="toggleSidebar()"></app-header>
+  <!-- End Header -->
+  <div class="page-content">
+    <!-- Sidebar -->
+    <app-sidenav class="sidebar sidebar-dark sidebar-main sidebar-fixed sidebar-expand-md"></app-sidenav>
+    <!-- End Sidebar -->
+    <!-- Main content -->
+    <div class="content-wrapper" [hidden]="authService.isHidden | async">
+      <div class="content pt-0 pl-0 pr-0">
+        <div class="d-flex align-items-start flex-column flex-md-row">
+          <div class="w-100 order-2 order-md-1">
+            <!-- Latest posts -->
+            <router-outlet></router-outlet>
+            <!-- /latest posts -->
+          </div>
+        </div>
+      </div>
+      <!-- Footer -->
+      <app-footer></app-footer>
+      <!-- /footer -->
+    </div>
+    <!-- /main content -->
+  </div>
+</div>

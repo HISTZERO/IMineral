@@ -1,0 +1,15 @@
+::ng-deep {
+  .mat-tab-body-content {
+    min-height: 20vh;
+  }
+
+  #map-detail {
+    .e-grid .e-table {
+      table-layout: auto;
+    }
+    .e-grid .e-detailcell,
+    .e-detailindentcell {
+      border: none;
+    }
+  }
+}

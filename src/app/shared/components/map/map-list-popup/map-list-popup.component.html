@@ -1,0 +1,91 @@
+<h2 mat-dialog-title class="mb-3">
+  {{'SHARE.map.mapListPopup.title' | translate}}
+  <span class="close-modal" mat-dialog-close><i class="esri-icon-close"></i></span>
+</h2>
+<mat-dialog-content class="mat-typography">
+  <div class="row">
+    <div class="col-12">
+      <div class="view-map" style="width: 100%; border: 1px solid #ccddcc;">
+        <as-split #mySplit1 direction="horizontal" (gutterClick)="gutterClick()" [useTransition]="useTransition">
+          <as-split-area size="{{ areas[0].size }}">
+            <as-split direction="vertical">
+              <as-split-area>
+                <app-layer-tree *ngIf="treeCategories && treeCategories.length" [actionType]="'checkbox'"
+                  [dataSource]="treeCategories" (rowDataBound)="rowDataBound($event)" [fullCheck]="true"
+                  [notDisplayIcon]="true">
+                </app-layer-tree>
+              </as-split-area>
+            </as-split>
+          </as-split-area>
+          <as-split-area size="{{ areas[1].size }}">
+            <as-split direction="vertical">
+              <as-split-area class="right-content">
+                <ejs-grid #grid [dataSource]="listMapShow" class="lst-categories">
+                  <e-columns>
+                    <e-column headerText="{{'SHARE.map.mapListPopup.image' | translate}}" width="30%">
+                      <ng-template #template let-data>
+                        <div class="image thumbnail-map">
+                          <img src="{{
+                              data.refImageLink
+                                ? data.refImageLink
+                                : ('SHARE.map.mapListPopup.noMapImageLink' | translate)
+                            }}" [style.max-width]="'100%'" [style.maxHeight]="'150px'" alt="{{ data.mapTitle }}" />
+                          <!-- data.refImageLink -->
+                        </div>
+                      </ng-template>
+                    </e-column>
+                    <e-column headerText="Thông tin" width="70%">
+                      <ng-template #template let-data>
+                        <div class="row mx-0">
+                          <label
+                            class="col-2 col-form-label text-right">{{'SHARE.map.mapListPopup.name' | translate}}:</label>
+                          <label class="col-10 col-form-label text-left"><strong>{{ data.mapTitle }}</strong></label>
+                        </div>
+                        <div class="row mx-0">
+                          <label
+                            class="col-2 col-form-label text-right">{{'SHARE.map.mapListPopup.description' | translate}}:</label>
+                          <label class="col-10 col-form-label text-left">
+                            <strong [innerHtml]="data.mapAbstract"></strong>
+                          </label>
+                        </div>
+                        <div class="row mx-0">
+                          <label
+                            class="col-2 col-form-label text-right">{{'SHARE.map.mapListPopup.status' | translate}}:</label>
+                          <label class="col-10 col-form-label text-left">
+                            <strong>
+                              <span *ngIf="data.status !== null" [ngClass]="{
+                                  label: true,
+                                  'label-success': data.status === 1,
+                                  'label-default': data.status !== 1
+                                }">
+                                {{
+                                  data.status
+                                    | getFieldValueFromArrayObject
+                                      : mapStatus
+                                      : "name"
+                                }}
+                              </span>
+                            </strong>
+                          </label>
+                        </div>
+                        <div class="row mx-0">
+                          <label class="col-2 col-form-label text-right"></label>
+                          <label class="col-10 col-form-label text-right">
+                            <button class="btn btn-primary" [mat-dialog-close]="data">
+                              <i class="fa fa-eye" aria-hidden="true"></i>
+                              {{'SHARE.map.mapListPopup.showMap' | translate}}
+                            </button>
+                          </label>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </as-split-area>
+            </as-split>
+          </as-split-area>
+        </as-split>
+      </div>
+    </div>
+  </div>
+</mat-dialog-content>

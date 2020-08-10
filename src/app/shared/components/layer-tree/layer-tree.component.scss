@@ -1,0 +1,45 @@
+::ng-deep {
+  .layer-grid .e-grid .e-gridheader {
+    position: fixed;
+    top: -1000px;
+  }
+
+  .layer-grid .e-grid table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .layer-grid .e-grid .e-rowcell .e-checkbox-wrapper,
+  .layer-grid .e-grid .e-rowcell .e-css.e-checkbox-wrapper {
+    float: right;
+  }
+
+  .layer-grid .e-table {
+    border-top: 1px solid #e4e4e4;
+  }
+
+  .hide-childs-checkbox
+    .layer-grid
+    .e-grid
+    [class*="level1"]
+    .e-checkbox-wrapper {
+    display: none;
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  .layer-grid td.e-rowcell.e-templatecell:last-child {
+    overflow: unset;
+    opacity: 1;
+  }
+
+  .disablecheckbox {
+    pointer-events: none;
+    opacity: 0.55;
+  }
+
+  .layer-grid i {
+    cursor: pointer;
+  }
+}

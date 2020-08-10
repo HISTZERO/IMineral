@@ -1,0 +1,67 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="huonggioIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.huonggio.tenhuonggio" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="tenhuonggio" />
+        <span *ngIf="formErrors.tenhuonggio" class="alert-danger">{{
+          formErrors.tenhuonggio
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.huonggio.mahuonggio" | translate }}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="mahuonggio" />
+        <span *ngIf="formErrors.mahuonggio" class="alert-danger">{{
+          formErrors.mahuonggio
+        }}</span>
+      </div>
+    </div>
+
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button
+              class="btn btn-primary float-right"
+              (click)="onSubmit(purpose)"
+            >
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="addOrUpdateContinue(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeHuonggioIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

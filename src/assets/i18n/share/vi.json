@@ -1,0 +1,37 @@
+{
+  "file": {
+    "importSuccess": "Import file thành công !",
+    "errorImportMutipleFiles": "Cannot use multiple files",
+    "errorFileHad": "File đã tồn tại trong bảng vui lòng chon file khác",
+    "download": "Tải xuống"
+  },
+  "map": {
+    "statisticsFeaturesInfo": {
+      "title": "Thông tin công trình quan trắc",
+      "key": "Tên trường",
+      "value": "Giá trị",
+      "thongtinchung": "Thông tin chung",
+      "thongke": "Thống kê",
+      "timeFrom": "Từ ngày",
+      "timeTo": "Đến ngày",
+      "object": "Chọn tham số",
+      "result": "Kết quả"
+    },
+    "mapListPopup": {
+      "title": "Danh sách bản đồ",
+      "name": "Tên bản đồ",
+      "description": "Mô tả",
+      "status": "Trạng thái",
+      "image": "Hình ảnh",
+      "noMapImageLink": "assets/media/images/no_map_img.jpg",
+      "showMap": "Xem bản đồ"
+    },
+    "layerListPopup": {
+      "title": "Thêm lớp/Nhóm lớp",
+      "info": "Thông tin lớp",
+      "layerTitle": "Tiêu đề lớp",
+      "layerType": "Loại lớp",
+      "copyright": "Bản quyền"
+    }
+  }
+}

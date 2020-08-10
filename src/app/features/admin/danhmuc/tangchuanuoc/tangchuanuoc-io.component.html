@@ -1,0 +1,123 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="comTangchuanuocIOForm" class="pt-toolbar">
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.tentangchuanuoc)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tangchuanuoc.tentangchuanuoc" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="tentangchuanuoc" />
+        <span *ngIf="formErrors.tentangchuanuoc" class="alert-danger">{{
+          formErrors.tentangchuanuoc
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.kieutangchuanuoc)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tangchuanuoc.kieutangchuanuoc" | translate }}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="kieutangchuanuoc"
+        />
+        <span *ngIf="formErrors.kieutangchuanuoc" class="alert-danger">{{
+          formErrors.kieutangchuanuoc
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.hesotrunuoc)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tangchuanuoc.hesotrunuoc" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="hesotrunuoc" />
+        <span *ngIf="formErrors.hesotrunuoc" class="alert-danger">{{
+          formErrors.hesotrunuoc
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.hesotham)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tangchuanuoc.hesotham" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="hesotham" />
+        <span *ngIf="formErrors.hesotham" class="alert-danger">{{
+          formErrors.hesotham
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.bedaytangchua)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tangchuanuoc.bedaytangchua" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="bedaytangchua"
+        />
+        <span *ngIf="formErrors.bedaytangchua" class="alert-danger">{{
+          formErrors.bedaytangchua
+        }}</span>
+      </div>
+    </div>
+
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button
+              class="btn btn-primary float-right"
+              (click)="onSubmit(purpose)"
+            >
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="addOrUpdateContinue(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              (click)="onFormReset()"
+              *ngIf="purpose === 'new'"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeTangchuanuocIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

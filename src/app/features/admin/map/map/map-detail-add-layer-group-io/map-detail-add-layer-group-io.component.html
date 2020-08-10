@@ -1,0 +1,36 @@
+<div class="pt-4">
+  <form class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <div class="col-sm-12">
+        <app-layer-tree
+          *ngIf="treeGroupsAndLayers"
+          [dataSource]="treeGroupsAndLayers"
+          [actionType]="'checkbox'"
+          class="hide-childs-checkbox"
+          [selectedParentIds]="selectedParentIds"
+          [parentItemSelected]="obj.parentItem"
+          (rowDataBound)="rowDataBoundAddLayerGroup($event)"
+        >
+        </app-layer-tree>
+      </div>
+    </div>
+  </form>
+  <div class="toolbar-container py-2">
+    <div class="function-toolbar">
+      <div class="form-group row mx-0">
+        <div class="col-12">
+          <button class="btn btn-primary float-right" (click)="onSubmit()">
+            <i class="far fa-save"></i> {{ "COMMON.default.save" | translate }}
+          </button>
+          <button
+            class="btn btn-danger float-right mr-3"
+            (click)="closeIOSidebar()"
+          >
+            <i class="far fa-times-circle"></i>
+            {{ "COMMON.default.cancel" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

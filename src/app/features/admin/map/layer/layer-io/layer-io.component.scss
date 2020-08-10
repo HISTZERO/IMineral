@@ -1,0 +1,19 @@
+.upload-icon {
+  line-height: 15px;
+  padding: 10px;
+  background: #ddd;
+  cursor: pointer;
+}
+
+.upload-icon:hover {
+  background: #cdcdcd;
+}
+
+.d-inherit {
+  display: inherit !important;
+}
+
+.d-inherit input {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}

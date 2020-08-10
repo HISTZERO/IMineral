@@ -1,0 +1,29 @@
+{
+  "monitoringResult": {
+    "statistic": "Thống kê",
+    "stationsMonitoringList": "Danh sách công trình quan trắc",
+    "stationsMonitoringInfo": "Thông tin công trình quan trắc",
+    "stationName": "Tên công trình",
+    "generalInfo": "Thông tin chung",
+    "statisticStation": "Thống kê",
+    "fieldName": "Tên trường",
+    "value": "Kết quả",
+    "paramPlaceholder": "Chọn tham số",
+    "dateTimeFromPlaceholder": "Từ ngày",
+    "dateTimeToPlaceholder": "Đến ngày",
+    "resultButton": "Kết quả"
+  },
+  "mapDetail": {
+    "layerAndLayerGroupTab": "Lớp/Nhóm lớp",
+    "noteTab": "Chú giải",
+    "addNewLayer": "Lớp thêm mới",
+    "deleteAllLayer": "Xóa tất cả lớp",
+    "display": "Hiển thị",
+    "opacity": "Opacity",
+    "widgets": "Widgets",
+    "layerInfo": "Thông tin lớp",
+    "deleteLayer": "Xóa lớp",
+    "mapButton": "Bản đồ",
+    "addLayerButton": "Thêm lớp"
+  }
+}

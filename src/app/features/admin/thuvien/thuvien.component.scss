@@ -1,0 +1,19 @@
+.content {
+  padding: 0px;
+}
+.itemFile {
+  &:hover {
+    background-color: #e0e0e0;
+  }
+  border: 1px solid #fff !important;
+}
+.formatNameThuVien{
+  margin-bottom: 0px;
+  text-align: center;
+  padding-top: 5px;
+  width: 108px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+

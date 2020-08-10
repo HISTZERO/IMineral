@@ -1,0 +1,168 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="tieuchuanIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tieuchuan.tentieuchuan" | translate }}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="tentieuchuan"
+        />
+        <span *ngIf="formErrors.tentieuchuan" class="alert-danger">{{
+          formErrors.tentieuchuan
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tieuchuan.sohieutieuchuan" | translate }}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="sohieutieuchuan"
+        />
+        <span *ngIf="formErrors.sohieutieuchuan" class="alert-danger">{{
+          formErrors.sohieutieuchuan
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right"
+        >''
+        {{ "DANHMUC.tieuchuan.thoigianbanhanh" | translate }}
+      </label>
+      <div class="col-sm-8 d-flex">
+        <input
+          class="form-control mr-1"
+          formControlName="thoigianbanhanh"
+          [owlDateTimeTrigger]="dt1"
+          [owlDateTime]="dt1"
+          [max]=""
+          placeholder="DD-MM-YYYY"
+        />
+        <span
+          [owlDateTimeTrigger]="dt1"
+          style="cursor: pointer;"
+          class="btn btn-outline-secondary"
+          ><i class="fa fa-calendar"></i
+        ></span>
+        <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tieuchuan.coquanbanhanh" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="coquanbanhanh"
+        />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tieuchuan.hientrang" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="hientrang" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.tieuchuan.tailieuLink" | translate }}
+      </label>
+      <div class="col-sm-8 row">
+        <div class="image-preview col-8">
+          <div class="row px-2">
+            <a *ngIf="!srcanh === false" [href]="srcanh">
+              <i [class]="typeFile" style="font-size: 100px;"></i>
+            </a>
+            <img
+              *ngIf="!srcanh === true"
+              class="pb-2 border"
+              src="assets/media/images/no_image_available.png"
+              alt="image"
+              width="100%"
+            />
+            <input
+              class="form-control"
+              hidden
+              type="text"
+              formControlName="tailieuLink"
+            />
+          </div>
+          <div class="row p-0">
+            <p *ngIf="fileArray">
+              {{ fileArray[0].tenFile + fileArray[0].type }}
+            </p>
+            <button
+              class="btn btn-xsm btn-link text-danger"
+              type="button"
+              *ngIf="srcanh"
+              (click)="deleteAnh()"
+            >
+              <i class="fas fa-trash-alt"></i>
+              {{ "DANHMUC.tieuchuan.deleteFile" | translate }}
+            </button>
+          </div>
+        </div>
+        <div class="col-4">
+          <button
+            class="btn btn-primary"
+            style="margin: auto;"
+            (click)="showMatDialog()"
+          >
+            <i class="fal fa-check-square"></i>
+            {{ "DANHMUC.tieuchuan.chooseFile" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button
+              class="btn btn-primary float-right"
+              (click)="onSubmit(purpose)"
+            >
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="addContinue(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeTieuchuanIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

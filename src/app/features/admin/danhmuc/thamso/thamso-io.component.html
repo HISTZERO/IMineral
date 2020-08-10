@@ -1,0 +1,144 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="thamsoIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.thamso.tenthamso" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="tenthamso" />
+        <span *ngIf="formErrors.tenthamso" class="alert-danger">{{
+          formErrors.tenthamso
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.thamso.kyhieuthamso" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="kyhieuthamso"
+        />
+        <span *ngIf="formErrors.kyhieuthamso" class="alert-danger">{{
+          formErrors.kyhieuthamso
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.thamso.idNhomthamso" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <mat-select
+          placeholder="{{ 'DANHMUC.thamso.chonNhomthamso' | translate }}"
+          class="form-control"
+          formControlName="idNhomthamso"
+          *ngIf="dataTranslate"
+        >
+          <mat-select-filter
+            [displayMember]="'tennhomthamso'"
+            [array]="nhomthamsoListFilter"
+            (filteredReturn)="nhomthamsoList = $event"
+          >
+          </mat-select-filter>
+          <mat-option value="">
+            {{ "DANHMUC.thamso.chonNhomthamso" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let item of nhomthamsoList" [value]="item.id">
+            {{ item.tennhom }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.idNhomthamso" class="alert-danger">{{
+          formErrors.idNhomthamso
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.thamso.idDonvidomacdinh" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <mat-select
+          placeholder="{{ 'DANHMUC.thamso.chonDonvido' | translate }}"
+          class="form-control"
+          formControlName="idDonvidomacdinh"
+          *ngIf="dataTranslate"
+        >
+          <mat-select-filter
+            [displayMember]="'idDonvidomacdinh'"
+            [array]="donvidoListFilter"
+            (filteredReturn)="listDonvido = $event"
+          >
+          </mat-select-filter>
+          <mat-option [value]="">
+            {{ "DANHMUC.thamso.chonDonvido" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let item of listDonvido" [value]="item.id">
+            {{ item.tendovido }}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.thamso.Tag" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <div class="border" style="border-radius: 0.1875rem;">
+          <tag-input
+            formControlName="tag"
+            [theme]="'minimal'"
+            [modelAsStrings]="true"
+            [dragZone]="'zone1'"
+            [editable]="true"
+            style="padding-left: 10px;"
+          >
+          </tag-input>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button
+              class="btn btn-primary float-right"
+              (click)="onSubmit(purpose)"
+            >
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="addContinue(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              (click)="onFormReset()"
+              *ngIf="purpose === 'new'"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeThamsoIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

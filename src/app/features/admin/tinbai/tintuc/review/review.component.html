@@ -1,0 +1,45 @@
+<!-- Page header -->
+<app-sub-header [menuItems]="navArray"></app-sub-header>
+<div class="content pt-3">
+  <div class="sidenav-container" hasBackdrop="false">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12 px-0">
+          <div class="card border">
+            <div class="card-header">
+              <p
+                style="
+                  font-size: 2em;
+                  font-weight: bold;
+                  font-family: Arial, Helvetica, sans-serif;
+                "
+              >
+                {{ title }}
+              </p>
+            </div>
+            <div class="card-body">
+              <div class="group-layer-detail">
+                <p
+                  class="group-layer-detail"
+                  style="
+                    float: right;
+                    font-size: 1em;
+                    font-weight: bold;
+                    font-family: Arial, Helvetica, sans-serif;
+                    font-style: italic;
+                  "
+                >
+                  {{ author }}
+                </p>
+                <br />
+                <div class="form-group row mx-0">
+                  <div [innerHTML]="content"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

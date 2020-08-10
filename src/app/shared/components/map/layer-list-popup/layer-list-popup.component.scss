@@ -1,0 +1,51 @@
+::ng-deep {
+  .layer-list-and-group .layer-grid td.e-rowcell.e-templatecell.e-treerowcell.e-treegridcheckbox .e-checkbox-wrapper {
+    display: none;
+  }
+
+  .no-data {
+    width: 100%;
+    height: 100vh;
+    text-align: center;
+    display: grid;
+    align-items: center;
+  }
+
+  .layer-info {
+    font-size: 18px;
+    font-weight: 500;
+  }
+
+  #mapViewPopup {
+    width: 100%;
+    height: 70vh;
+    position: relative;
+  }
+
+  .layer-detail {
+    position: absolute;
+    left: 20px;
+    top: 20px;
+    width: 340px;
+    padding: 6px 7px;
+    background-color: #f5f5f5;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  }
+
+  .e-grid .e-content {
+    height: 70vh !important;
+  }
+
+  .fa {
+    cursor: pointer;
+  }
+}
+
+
+.e-grid {
+  border: none;
+}
+
+.e-grid .e-gridheader {
+  border-top: none;
+}

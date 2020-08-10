@@ -1,0 +1,126 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="duanIOForm" class="pt-toolbar">
+    <div
+      class="form-group row mx-0"
+      [ngClass]="displayFieldCss(formErrors.projectName)"
+    >
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.projectName" | translate }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="projectName" />
+        <span *ngIf="formErrors.projectName" class="alert-danger">{{
+          formErrors.projectName
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.projectCode" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="projectCode" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.signedAgency" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="signedAgency" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.projectLeader" | translate }}
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" formControlName="projectLeader" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.signedDate" | translate }}
+      </label>
+      <div class="col-sm-8 d-flex">
+        <input
+          class="form-control mr-1"
+          formControlName="signedDate"
+          [owlDateTimeTrigger]="d1"
+          [owlDateTime]="d1"
+          [max]=""
+          placeholder="DD-MM-YYYY"
+        />
+        <span
+          [owlDateTimeTrigger]="d1"
+          style="cursor: pointer;"
+          class="btn btn-outline-secondary"
+          ><i class="fa fa-calendar"></i
+        ></span>
+        <owl-date-time #d1 [pickerType]="'calendar'"></owl-date-time>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">
+        {{ "DANHMUC.duan.completeDate" | translate }}
+      </label>
+      <div class="col-sm-8 d-flex">
+        <input
+          class="form-control mr-1"
+          formControlName="completeDate"
+          [owlDateTimeTrigger]="d2"
+          [owlDateTime]="d2"
+          [max]=""
+          placeholder="DD-MM-YYYY"
+        />
+        <span
+          [owlDateTimeTrigger]="d2"
+          style="cursor: pointer;"
+          class="btn btn-outline-secondary"
+          ><i class="fa fa-calendar"></i
+        ></span>
+        <owl-date-time #d2 [pickerType]="'calendar'"></owl-date-time>
+      </div>
+    </div>
+
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button
+              class="btn btn-primary float-right"
+              (click)="onSubmit(purpose)"
+            >
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="addOrUpdateContinue(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeDuanIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

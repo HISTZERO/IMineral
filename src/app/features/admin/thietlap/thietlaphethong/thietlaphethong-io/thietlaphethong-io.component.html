@@ -1,0 +1,49 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="thietLapHeThongIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlaphethong.settingKey' | translate}}
+        <small>(*)</small> </label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlaphethong.settingKeyPlaceholder' | translate}}"
+          type="text" formControlName="settingKey" />
+        <span *ngIf="formErrors.settingKey" class="alert-danger">{{formErrors.settingKey}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlaphethong.settingValue' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlaphethong.settingValuePlaceholder' | translate}}"
+          type="text" formControlName="settingValue" />
+        <span *ngIf="formErrors.settingValue" class="alert-danger">{{formErrors.settingValue}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlaphethong.description' | translate}}:</label>
+      <div class="col-sm-8">
+        <textarea formControlName="description" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i> {{'COMMON.default.saveAndClose' |translate}}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i> {{'COMMON.default.saveAndRefresh' |translate}}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i> {{'COMMON.default.refresh' |translate}}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeThietLapIOSidebar()">
+              <i class="far fa-times-circle"></i> {{'COMMON.default.cancel' |translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

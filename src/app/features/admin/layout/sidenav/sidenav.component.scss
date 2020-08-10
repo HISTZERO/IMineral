@@ -1,0 +1,15 @@
+.nav-group-sub.open {
+  display: block;
+}
+
+.nav-sidebar .nav-item {
+  cursor: pointer;
+}
+
+.nav-sidebar .nav-item-open > .nav-link {
+  background: none;
+}
+
+.nav-sidebar .nav-item-open > .nav-link.active {
+  background-color: rgba(255, 255, 255, 0.1);
+}

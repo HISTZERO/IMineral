@@ -1,0 +1,37 @@
+{
+  "chude": {
+    "titleList": "Danh sách chủ đề",
+    "titleAdd": "Thêm mới chủ đề",
+    "titleEdit": "Sửa dữ liệu chủ đề",
+    "contentDelete": "Tên chủ đề: ",
+    "catName": "Tên chủ đề",
+    "catType": "Loại chủ đề",
+    "slug": "Slug",
+    "parentId": "Parent Id",
+    "catNameRequired": "Tên chủ đề không được để trống",
+    "catTYpeRequired": "Kiểu chủ đề không được để trống",
+    "slugRequired": "Slug không được để trống",
+    "parentIdRequired": "Parent Id không được để trống",
+    "catTypePlaceholder": "Chọn loại chủ đề"
+  },
+  "tintuc": {
+    "titleList": "Danh sách tin tức",
+    "titleAdd": "Thêm mới tin tức",
+    "titleEdit": "Sửa dữ liệu tin tức",
+    "contentDelete": "Tiêu đề: ",
+    "title": "Tiêu đề",
+    "author": "Tác giả",
+    "categoryId": "Mã chủ đề",
+    "imgLink": "Ảnh",
+    "review": "Xem trước",
+    "slug": "Slug",
+    "slugRequired": "Slug không được để trống",
+    "authorRequired": "Tác giả không được để trống",
+    "titleRequired": "Tiêu đề không được để trống",
+    "contentRequired": "Nội dung không được để trống",
+    "categoryIdRequired": "Mã chủ đề không được để trống",
+    "seoTitle": "Tiêu đề SEO",
+    "chonCategoryId": "Chọn category id",
+    "content": "Nội dung"
+  }
+}

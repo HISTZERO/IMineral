@@ -1,0 +1,251 @@
+<div id="mapDetail" class="content mx-0 px-0 pt-0 pb-0">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card-body">
+          <div
+            class="view-map"
+            style="width: 100%; height: calc(100vh - 50px);"
+          >
+            <as-split
+              #mySplit
+              direction="horizontal"
+              (gutterClick)="gutterClick(1)"
+              [useTransition]="useTransition"
+            >
+              <as-split-area size="{{ areas[0].size }}">
+                <as-split direction="vertical">
+                  <as-split-area>
+                    <mat-tab-group
+                      (selectedTabChange)="changeTab($event)"
+                      [(selectedIndex)]="matTabIndex"
+                    >
+                      <!--  Lớp/Nhóm lớp -->
+                      <mat-tab
+                        label="{{
+                          'PUBLIC.mapDetail.layerAndLayerGroupTab' | translate
+                        }}"
+                      >
+                        <div class="border p-2">
+                          <app-layer-tree
+                            [actionType]="'checkbox'"
+                            [dataSource]="treeLayersAndGroups"
+                            (rowDataBound)="rowDataBound($event)"
+                            [allowRowDragAndDrop]="true"
+                            [fullCheck]="true"
+                          >
+                          </app-layer-tree>
+                        </div>
+                      </mat-tab>
+
+                      <!-- Chú giải -->
+                      <mat-tab
+                        label="{{ 'PUBLIC.mapDetail.noteTab' | translate }}"
+                        *ngIf="layersDisplayOnMap && layersDisplayOnMap.length"
+                      >
+                        <div class="border p-2">
+                          <div id="legendView"></div>
+                        </div>
+                      </mat-tab>
+
+                      <!-- Lớp bản đồ được thêm mới -->
+                      <mat-tab
+                        label="{{ 'PUBLIC.mapDetail.addNewLayer' | translate }}"
+                        *ngIf="extendedLayers.length > 0"
+                      >
+                        <div class="border b-2">
+                          <a
+                            href="javascript:void(0)"
+                            class="control-panel"
+                            (click)="removeAllAddedLayers()"
+                          >
+                            <i
+                              class="fa fa-minus-circle"
+                              aria-hidden="true"
+                            ></i>
+                            {{ "PUBLIC.mapDetail.deleteAllLayer" | translate }}
+                          </a>
+                          <mat-accordion
+                            class="example-headers-align"
+                            #accordion="matAccordion"
+                            [multi]="true"
+                          >
+                            <mat-expansion-panel
+                              [expanded]="true"
+                              *ngFor="
+                                let extendedLayer of extendedLayers;
+                                index as i
+                              "
+                            >
+                              <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                  <p>{{ extendedLayer.layerTitle }}</p>
+                                </mat-panel-title>
+                              </mat-expansion-panel-header>
+                              <div class="row">
+                                <div class="col-sm-10 col-md-10 col-xs-10">
+                                  <label class="col-sm-3 col-form-label">{{
+                                    "PUBLIC.mapDetail.display" | translate
+                                  }}</label>
+                                  <label class="col-sm-9 col-form-label">
+                                    <mat-slide-toggle
+                                      class="example-margin"
+                                      [checked]="extendedLayer.isShow"
+                                      (change)="
+                                        extendedLayerChange(
+                                          $event,
+                                          extendedLayer.guid
+                                        )
+                                      "
+                                    >
+                                    </mat-slide-toggle>
+                                  </label>
+                                  <label class="col-sm-3 col-form-label">
+                                    {{ "PUBLIC.mapDetail.opacity" | translate }}
+                                  </label>
+                                  <label
+                                    class="col-sm-9 col-form-label text-left"
+                                  >
+                                    <mat-slider
+                                      min="0"
+                                      max="1"
+                                      step="0.1"
+                                      thumbLabel
+                                      [displayWith]="formatLabel"
+                                      value="{{ extendedLayer.opacity }}"
+                                      (change)="
+                                        changeLayerOpacity(
+                                          $event,
+                                          extendedLayer
+                                        )
+                                      "
+                                      displayValue
+                                    >
+                                    </mat-slider>
+                                  </label>
+                                </div>
+                                <div
+                                  class="col-sm-2 col-md-2 col-xs-2"
+                                  class="btn-more"
+                                >
+                                  <button
+                                    ejs-dropdownbutton
+                                    [items]="items"
+                                    iconCss="fa fa-ellipsis-v"
+                                    (select)="selectMenu($event, extendedLayer)"
+                                    class="btn btn-primary ml-2"
+                                  ></button>
+                                </div>
+                              </div>
+                            </mat-expansion-panel>
+                          </mat-accordion>
+                        </div>
+                      </mat-tab>
+                    </mat-tab-group>
+                  </as-split-area>
+                </as-split>
+              </as-split-area>
+              <as-split-area size="{{ areas[1].size }}" class="right-content">
+                <as-split
+                  direction="vertical"
+                  (gutterClick)="gutterClick(2)"
+                  [useTransition]="useTransition"
+                >
+                  <as-split-area>
+                    <!-- Control button -->
+                    <div class="group-action">
+                      <div class="btn close-btn" (click)="gutterClick(1)">
+                        <i
+                          [ngClass]="{
+                            fa: true,
+                            'fa-times': areas[0].size > 0,
+                            'fa-angle-right': areas[0].size === 0,
+                            'fa-1': true
+                          }"
+                          aria-hidden="true"
+                        ></i>
+                      </div>
+
+                      <!-- Bản đồ -->
+                      <div
+                        class="btn show-map flex-center ml-3"
+                        (click)="openMapDialog()"
+                      >
+                        <i class="esri-icon-globe" aria-hidden="true"></i>
+                        {{ "PUBLIC.mapDetail.mapButton" | translate }}
+                      </div>
+
+                      <!-- Thêm lớp -->
+                      <div
+                        class="btn flex-center ml-1"
+                        (click)="openLayerDialog()"
+                        *ngIf="layersDisplayOnMap && layersDisplayOnMap.length"
+                      >
+                        <i
+                          class="esri-icon-add-attachment"
+                          aria-hidden="true"
+                        ></i>
+                        {{ "PUBLIC.mapDetail.addLayerButton" | translate }}
+                      </div>
+
+                      <!-- Widgets -->
+                      <div
+                        class="btn flex-center ml-1"
+                        (click)="showWidget = !showWidget"
+                        #insideElement
+                        *ngIf="layersDisplayOnMap && layersDisplayOnMap.length"
+                      >
+                        <i class="esri-icon-basemap" aria-hidden="true"></i>
+                        {{ "PUBLIC.mapDetail.widgets" | translate }}
+                        <div
+                          [ngClass]="{
+                            widgets: true,
+                            hidden: showWidget === false
+                          }"
+                        >
+                          <div class="widget-items">
+                            <div class="row">
+                              <div
+                                class="col-4 mb-2"
+                                *ngFor="let widget of listWidgets"
+                              >
+                                <div
+                                  [ngClass]="{
+                                    item: true,
+                                    active: widget.display === true
+                                  }"
+                                  (click)="clickOnWidget(widget, $event)"
+                                >
+                                  <i
+                                    class="{{ widget.iconClass }} fa-5 mb-1"
+                                    aria-hidden="true"
+                                  ></i>
+                                  <span class="txt-label">{{
+                                    widget.name
+                                  }}</span>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+
+                    <!-- Map view -->
+                    <div
+                      id="mapView"
+                      [style.height]="mapHeight ? mapHeight : '100%'"
+                    ></div>
+
+                    <!-- Custom float widget -->
+                    <div #floatWidget></div>
+                  </as-split-area>
+                </as-split>
+              </as-split-area>
+            </as-split>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

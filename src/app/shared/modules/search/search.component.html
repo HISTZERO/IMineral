@@ -1,0 +1,20 @@
+<div class="page-header pt-0" style="width: 100%">
+    <div class="page-header page-header-dark has-cover" style="border: 1px solid #ddd; border-bottom: 0;">
+        <div class="page-header-content header-elements-inline justify-content-center">
+            <div class="page-title">
+                <h5 class="my-md-2">
+                    <span class="font-weight-semibold">Tìm kiếm . . .</span>
+                </h5>
+                <app-search-box (objkey)="receiveobj($event)" (keyvalue)="receivekeyvalue($event)" (version)="receiveVersion($event)"></app-search-box>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="page-content pt-0">
+    <!--left contennt-->
+    <app-search-result-fillter></app-search-result-fillter>
+    <!--  /left-content-->
+    <!--  ringht content-->
+    <app-search-result-data style="width: 100%" [objkey]="objkeyTo" [keyvalue]="keyvalueTo" [version]="versionTo"></app-search-result-data>
+    <!--  /right content-->
+</div>

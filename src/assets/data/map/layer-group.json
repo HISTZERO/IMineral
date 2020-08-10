@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "group_key": "Test",
+    "group_name": "Test",
+    "description": "Test",
+    "group_type": 1,
+    "status": 0
+  },
+  {
+    "id": 2,
+    "group_key": "Test",
+    "group_name": "Test",
+    "description": "Test",
+    "group_type": 1,
+    "status": 0
+  },
+  {
+    "id": 3,
+    "group_key": "Test",
+    "group_name": "Test",
+    "description": "Test",
+    "group_type": 1,
+    "status": 0
+  }
+]

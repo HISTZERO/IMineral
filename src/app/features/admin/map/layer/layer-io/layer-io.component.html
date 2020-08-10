@@ -1,0 +1,934 @@
+<div class="pt-3" style="width: 510px !important;">
+  <form [formGroup]="createForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.layerType" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.layer.layerTypePlaceholder' | translate }}"
+          class="form-control"
+          formControlName="layerType"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="layerTypes"
+          ></mat-select-filter>
+          <mat-option
+            *ngFor="let layerType of layerTypes"
+            [value]="layerType.index"
+          >
+            {{ layerType.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.layerType" class="alert-danger">{{
+          formErrors.layerType
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.projection" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.layer.projectionPlaceholder' | translate }}"
+          class="form-control"
+          formControlName="projectionId"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="listProjections"
+          ></mat-select-filter>
+          <mat-option
+            *ngFor="let projection of listProjections"
+            [value]="projection.index"
+          >
+            {{ projection.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.projectionId" class="alert-danger">{{
+          formErrors.projectionId
+        }}</span>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.layerTitle" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="layerTitle" />
+        <span *ngIf="formErrors.layerTitle" class="alert-danger">{{
+          formErrors.layerTitle
+        }}</span>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.layerName" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="layerName" />
+        <span *ngIf="formErrors.layerName" class="alert-danger">{{
+          formErrors.layerName
+        }}</span>
+      </div>
+    </div>
+
+    <!-- Optional -->
+    <!-- START BING -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'bing'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.bingKey" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="bingKey" />
+        <span *ngIf="formErrors.bingKey" class="alert-danger">{{
+          formErrors.bingKey
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'bing'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.bingImageryset" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="bingImageryset"
+        />
+        <span *ngIf="formErrors.bingImageryset" class="alert-danger">{{
+          formErrors.bingImageryset
+        }}</span>
+      </div>
+    </div>
+    <!-- END BING -->
+    <!-- START MAPQUEST -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'mapquest'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.mapquestLayer" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="mapquestLayer"
+        />
+        <span *ngIf="formErrors.mapquestLayer" class="alert-danger">{{
+          formErrors.mapquestLayer
+        }}</span>
+      </div>
+    </div>
+    <!-- END MAPQUEST -->
+    <!-- START WMS -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsServertype" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="wmsServertype"
+        />
+        <span *ngIf="formErrors.wmsServertype" class="alert-danger">{{
+          formErrors.wmsServertype
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsUrl" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wmsUrl" />
+        <span *ngIf="formErrors.wmsUrl" class="alert-danger">{{
+          formErrors.wmsUrl
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsInfoUrl" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wmsInfoUrl" />
+        <span *ngIf="formErrors.wmsInfoUrl" class="alert-danger">{{
+          formErrors.wmsInfoUrl
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsLayers" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wmsLayers" />
+        <span *ngIf="formErrors.wmsLayers" class="alert-danger">{{
+          formErrors.wmsLayers
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsTiled" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wmsTiled" />
+        <span *ngIf="formErrors.wmsTiled" class="alert-danger">{{
+          formErrors.wmsTiled
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wms'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wmsVersion" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wmsVersion" />
+        <span *ngIf="formErrors.wmsVersion" class="alert-danger">{{
+          formErrors.wmsVersion
+        }}</span>
+      </div>
+    </div>
+    <!-- END WMS -->
+    <!-- START WSF -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wsf'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wfsUrl" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wfsUrl" />
+        <span *ngIf="formErrors.wfsUrl" class="alert-danger">{{
+          formErrors.wfsUrl
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wsf'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wfsTypename" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wfsTypename" />
+        <span *ngIf="formErrors.wfsTypename" class="alert-danger">{{
+          formErrors.wfsTypename
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wsf'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.featureInfoTemplate" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="featureInfoTemplate"
+        />
+        <span *ngIf="formErrors.featureInfoTemplate" class="alert-danger">{{
+          formErrors.featureInfoTemplate
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'wsf'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.wfsVersion" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="wfsVersion" />
+        <span *ngIf="formErrors.wfsVersion" class="alert-danger">{{
+          formErrors.wfsVersion
+        }}</span>
+      </div>
+    </div>
+    <!-- END WSF -->
+    <!-- START GPX FILENAME -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'gpx'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.gpxFilename" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="gpxFilename" />
+        <span *ngIf="formErrors.gpxFilename" class="alert-danger">{{
+          formErrors.gpxFilename
+        }}</span>
+      </div>
+    </div>
+    <!-- END GPX FILENAME -->
+    <!-- START KML FILENAME -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'kml'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.kmlFilename" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="kmlFilename" />
+        <span *ngIf="formErrors.kmlFilename" class="alert-danger">{{
+          formErrors.kmlFilename
+        }}</span>
+      </div>
+    </div>
+    <!-- END KML FILENAME -->
+    <!-- START POSTGIS -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisHost" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="postgisHost" />
+        <span *ngIf="formErrors.postgisHost" class="alert-danger">{{
+          formErrors.postgisHost
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisPort" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="postgisPort" />
+        <span *ngIf="formErrors.postgisPort" class="alert-danger">{{
+          formErrors.postgisPort
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisUser" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="postgisUser" />
+        <span *ngIf="formErrors.postgisUser" class="alert-danger">{{
+          formErrors.postgisUser
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisPass" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="postgisPass" />
+        <span *ngIf="formErrors.postgisPass" class="alert-danger">{{
+          formErrors.postgisPass
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisSchema" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postgisSchema"
+        />
+        <span *ngIf="formErrors.postgisSchema" class="alert-danger">{{
+          formErrors.postgisSchema
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisDbname" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postgisDbname"
+        />
+        <span *ngIf="formErrors.postgisDbname" class="alert-danger">{{
+          formErrors.postgisDbname
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisTable" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postgisTable"
+        />
+        <span *ngIf="formErrors.postgisTable" class="alert-danger">{{
+          formErrors.postgisTable
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.PostgisField" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postgisField"
+        />
+        <span *ngIf="formErrors.postgisField" class="alert-danger">{{
+          formErrors.postgisField
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'postgis'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.postgisAttributes" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="postgisAttributes"
+        />
+        <span *ngIf="formErrors.postgisAttributes" class="alert-danger">{{
+          formErrors.postgisAttributes
+        }}</span>
+      </div>
+    </div>
+    <!-- END POSTGIS -->
+    <!-- START GEOJSON -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geojson'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geojsonGeomtype" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geojsonGeomtype"
+        />
+        <span *ngIf="formErrors.geojsonGeomtype" class="alert-danger">{{
+          formErrors.geojsonGeomtype
+        }}</span>
+      </div>
+    </div>
+    <!-- CSV FILE || GEOJSON -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="
+        createForm.value.layerType === 'geojson' ||
+        createForm.value.layerType === 'csv'
+      "
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.sourceUrl" | translate }}:</label
+      >
+      <div class="col-sm-9 d-inherit">
+        <input
+          class="form-control"
+          type="text"
+          placeholder="{{ 'MAP.layer.sourceUrlPlaceholder' | translate }}"
+          formControlName="sourceUrl"
+        />
+        <span class="material-icons upload-icon" (click)="showMatDialog()">
+          cloud_upload
+        </span>
+        <span *ngIf="formErrors.sourceUrl" class="alert-danger">{{
+          formErrors.sourceUrl
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geojson'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geojsonAttributes" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geojsonAttributes"
+        />
+        <span *ngIf="formErrors.geojsonAttributes" class="alert-danger">{{
+          formErrors.geojsonAttributes
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geojson'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geojsonFeatures" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geojsonFeatures"
+        />
+        <span *ngIf="formErrors.geojsonFeatures" class="alert-danger">{{
+          formErrors.geojsonFeatures
+        }}</span>
+      </div>
+    </div>
+    <!-- END GEOJSON -->
+    <!-- START SHAPEFILE -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'shapefile'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.shapefileFilename" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="shapefileFilename"
+        />
+        <span *ngIf="formErrors.shapefileFilename" class="alert-danger">{{
+          formErrors.shapefileFilename
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'shapefile'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.shapefileGeomtype" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="shapefileGeomtype"
+        />
+        <span *ngIf="formErrors.shapefileGeomtype" class="alert-danger">{{
+          formErrors.shapefileGeomtype
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'shapefile'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.shapefileWmsurl" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="shapefileWmsurl"
+        />
+        <span *ngIf="formErrors.shapefileWmsurl" class="alert-danger">{{
+          formErrors.shapefileWmsurl
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'shapefile'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.shapefileMsclass" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="shapefileMsclass"
+        />
+        <span *ngIf="formErrors.shapefileMsclass" class="alert-danger">{{
+          formErrors.shapefileMsclass
+        }}</span>
+      </div>
+    </div>
+    <!-- END SHAPEFILE -->
+    <!-- START GEOPACKAGE -->
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geopackage'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geopackageFilename" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geopackageFilename"
+        />
+        <span *ngIf="formErrors.geopackageFilename" class="alert-danger">{{
+          formErrors.geopackageFilename
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geopackage'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geopackageTable" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geopackageTable"
+        />
+        <span *ngIf="formErrors.geopackageTable" class="alert-danger">{{
+          formErrors.geopackageTable
+        }}</span>
+      </div>
+    </div>
+    <div
+      class="form-group row mx-0"
+      *ngIf="createForm.value.layerType === 'geopackage'"
+    >
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.geopackageFields" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="geopackageFields"
+        />
+        <span *ngIf="formErrors.geopackageFields" class="alert-danger">{{
+          formErrors.geopackageFields
+        }}</span>
+      </div>
+    </div>
+    <!-- END GEOPACKAGE -->
+    <!-- END OPTIONS-->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.opacity" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="opacity" />
+        <span *ngIf="formErrors.opacity" class="alert-danger">{{
+          formErrors.opacity
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.extentMinx" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMinx" />
+        <span *ngIf="formErrors.extentMinx" class="alert-danger">{{
+          formErrors.extentMinx
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.extentMaxx" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMaxx" />
+        <span *ngIf="formErrors.extentMaxx" class="alert-danger">{{
+          formErrors.extentMaxx
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.extentMiny" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMiny" />
+        <span *ngIf="formErrors.extentMiny" class="alert-danger">{{
+          formErrors.extentMiny
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.extentMaxy" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="extentMaxy" />
+        <span *ngIf="formErrors.extentMaxy" class="alert-danger">{{
+          formErrors.extentMaxy
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.layerStatus" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-select
+          placeholder="{{ 'MAP.layer.layerStatusPlaceholder' | translate }}"
+          class="form-control"
+          formControlName="status"
+        >
+          <mat-select-filter
+            [displayMember]="'name'"
+            [array]="layerStatus"
+          ></mat-select-filter>
+          <mat-option
+            *ngFor="let layerStt of layerStatus"
+            [value]="layerStt.index"
+          >
+            {{ layerStt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.status" class="alert-danger">{{
+          formErrors.status
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.dataFormatReturn" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="fieldsInfoFormat"
+        />
+        <span *ngIf="formErrors.fieldsInfoFormat" class="alert-danger">{{
+          formErrors.fieldsInfoFormat
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.htmlTemplateInfoReturn" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <textarea
+          class="form-control"
+          formControlName="fieldsInfoTemplate"
+        ></textarea>
+        <span *ngIf="formErrors.fieldsInfoTemplate" class="alert-danger">{{
+          formErrors.fieldsInfoTemplate
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.otherSettings" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <textarea
+          class="form-control"
+          formControlName="moreSettings"
+        ></textarea>
+        <span *ngIf="formErrors.moreSettings" class="alert-danger">{{
+          formErrors.moreSettings
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.hasz" | translate }}:
+      </label>
+      <div class="col-sm-9">
+        <mat-slide-toggle
+          class="example-margin"
+          formControlName="hasz"
+        ></mat-slide-toggle>
+        <span *ngIf="formErrors.hasz" class="alert-danger">{{
+          formErrors.hasz
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.license" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="copyright" />
+        <span *ngIf="formErrors.copyright" class="alert-danger">{{
+          formErrors.copyright
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.minResolution" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="minResolution"
+        />
+        <span *ngIf="formErrors.minResolution" class="alert-danger">{{
+          formErrors.minResolution
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.maxResolution" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="maxResolution"
+        />
+        <span *ngIf="formErrors.maxResolution" class="alert-danger">{{
+          formErrors.maxResolution
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.queryFieldName" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="fieldsInfo" />
+        <span *ngIf="formErrors.fieldsInfo" class="alert-danger">{{
+          formErrors.fieldsInfo
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.labelFieldName" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="fieldsDisplay"
+        />
+        <span *ngIf="formErrors.fieldsDisplay" class="alert-danger">{{
+          formErrors.fieldsDisplay
+        }}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{ "MAP.layer.description" | translate }}:</label
+      >
+      <div class="col-sm-9">
+        <ckeditor
+          formControlName="description"
+          [editor]="Editor"
+          [config]="{ enterMode: 2, shiftEnterMode: 1 }"
+        >
+        </ckeditor>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit()">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onContinueAdd()"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeIOSidebar()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+  <ng-template #detailInfo> </ng-template>
+</div>

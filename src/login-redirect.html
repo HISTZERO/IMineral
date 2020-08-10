@@ -1,0 +1,26 @@
+<script src="https://cdnjs.cloudflare.com/ajax/libs/oidc-client/1.5.2/oidc-client.min.js"></script>
+<script>
+  var config = {
+    userStore: new Oidc.WebStorageStateStore({ store: window.localStorage }),
+  };
+
+  var mgr = new Oidc.UserManager(config);
+  mgr
+    .signinRedirectCallback()
+    .then((user) => {
+      console.log(user);
+      replaceAndNavigate(user);
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+
+  function replaceAndNavigate(user) {
+    window.history.replaceState(
+      {},
+      window.document.title,
+      window.location.origin
+    );
+    window.location = user.state || "/";
+  }
+</script>

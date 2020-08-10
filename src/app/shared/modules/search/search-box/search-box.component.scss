@@ -1,0 +1,12 @@
+.bullet {
+  display: inline-block;
+  background-color: #e5eaee;
+  width: 10px;
+  height: 2px;
+  border-radius: 2rem;
+}
+
+.bullet.bullet-ver {
+  width: 2px;
+  height: 25px;
+}

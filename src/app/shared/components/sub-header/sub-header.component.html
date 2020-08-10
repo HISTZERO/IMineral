@@ -1,0 +1,32 @@
+<div class="page-header">
+  <div class="breadcrumb-line breadcrumb-line-light header-elements-md-inline">
+    <div class="d-flex">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+          <i class="fa fa-home" style="padding-top: 12px;"></i
+          >&nbsp;
+          <li class="breadcrumb-item" *ngFor="let subnav of menuItems">
+            <a *ngIf="subnav.url; else nohref" routerLink="{{ subnav.url }}">{{
+              subnav.title
+            }}</a>
+            <ng-template #nohref
+              ><a>{{ subnav.title }}</a></ng-template
+            >
+          </li>
+        </ol>
+      </nav>
+    </div>
+    <div class="header-elements d-none">
+      <div class="breadcrumb justify-content-center">
+        <button
+          type="button"
+          *ngFor="let button of buttonItems"
+          routerLink="{{ button.url }}"
+          class="mr-1 btn btn-sm {{ button.color }}"
+        >
+          <i class="{{ button.icon }} pr-1"></i>{{ button.title }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

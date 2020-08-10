@@ -1,0 +1,10 @@
+<div [class]="containerClass">
+    <div class="content-wrapper" [style.hidden]="authService.isHidden | async">
+        <!-- Latest posts -->
+        <router-outlet></router-outlet>
+        <!-- /latest posts -->
+        <!-- Footer -->
+        <app-footer></app-footer>
+        <!-- /footer -->
+    </div>
+</div>

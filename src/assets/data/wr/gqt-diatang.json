@@ -1,0 +1,13 @@
+[{
+    "id": 1,
+<<<<<<< HEAD
+    "idGieng": 123,
+=======
+    "idGieng": 112,
+>>>>>>> develop
+    "chieusautu": 10,
+    "chieusauden": 30,
+    "diatang": "ABC",
+    "vatlieu": "text",
+    "note": "string"
+}]

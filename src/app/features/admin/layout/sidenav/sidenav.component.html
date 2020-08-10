@@ -1,0 +1,62 @@
+<div class="sidebar-mobile-toggler text-center">
+  <a class="sidebar-mobile-main-toggle" href="">
+    <i class="icon-arrow-left8"></i>
+  </a>
+  Navigation
+  <a class="sidebar-mobile-expand" href="">
+    <i class="icon-screen-full"></i>
+    <i class="icon-screen-normal"></i>
+  </a>
+</div>
+<div class="sidebar-content" style="overflow: hidden;">
+  <div class="sidebar-user">
+    <div class="card-body">
+      <div class="media">
+        <div class="mr-3">
+          <a href=""><img alt="" class="rounded-circle" height="38" src="" width="38" /></a>
+        </div>
+        <div class="media-body">
+          <div class="media-title font-weight-semibold">{{ userFullName }}</div>
+          <div class="font-size-xs opacity-50">
+            <i class="icon-pin font-size-sm"></i> &nbsp;@{{userName}}
+          </div>
+        </div>
+        <div class="ml-3 align-self-center">
+          <a class="text-white" routerLink="admin"><i class="fas fa-cog"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <ngx-simplebar>
+    <div class="card card-sidebar-mobile">
+      <ul class="nav nav-sidebar" data-nav-type="accordion">
+        <li *ngFor="let quantri of QuantriList"
+          [ngClass]="{'nav-item': true, 'nav-item-submenu': quantri.items !== undefined}"
+          (click)="onClickMenu($event, quantri)">
+          <a class="nav-link">
+            <i class="{{ quantri.faIcon }}"></i>
+            <span>{{ quantri.label }}</span>
+          </a>
+          <ul [@slideInOut]="quantri.animationState || 'out'" class="nav nav-group-sub" id="{{ quantri.label.lo }}">
+            <li *ngFor="let itemquantri of quantri.items" (click)="onClickMenu($event, itemquantri)"
+              [ngClass]="{'nav-item': true, 'nav-item-submenu': itemquantri.items !== undefined}">
+              <a class="nav-link">
+                <i class="{{ itemquantri.faIcon }}"></i>{{ itemquantri.label }}
+              </a>
+              <ul class="nav nav-group-sub" [@slideInOut]="itemquantri.animationState || 'out'">
+                <li *ngFor="let itemquantrit of itemquantri.items" class="nav-item"
+                  (click)="onClickMenu($event, itemquantrit)">
+                  <a class="nav-link">
+                    <i class="{{ itemquantrit.faIcon }}"></i>{{ itemquantrit.label }}
+                  </a>
+                </li>
+              </ul>
+            </li>
+            <li class="nav-item-divider" style="margin: 0px"></li>
+          </ul>
+        </li>
+        <li class="nav-item nav-item-submenu mt-5"></li>
+      </ul>
+    </div>
+  </ngx-simplebar>
+</div>

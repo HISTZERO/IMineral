@@ -1,0 +1,64 @@
+<h2 mat-dialog-title class="mb-3">{{'SHARE.map.layerListPopup.title' | translate}} <span class="close-modal"
+    mat-dialog-close><i class="esri-icon-close"></i></span>
+  <mat-dialog-content class="mat-typography">
+    <div class="row">
+      <div class="col-12">
+        <div class="view-map" style="width: 100%; border: 1px solid #ccddcc;">
+          <as-split #mySplit direction="horizontal" (gutterClick)="log('gutterClick', $event)"
+            [useTransition]="useTransition">
+            <as-split-area size="{{ areas[0].size }}">
+              <as-split direction="vertical">
+                <as-split-area>
+                  <app-layer-tree [actionType]="'icon'" *ngIf="treeGroupsAndLayers && treeGroupsAndLayers.length"
+                    [dataSource]="treeGroupsAndLayers" class="layer-list-and-group"
+                    [selectedChildIds]="selectedLayerIds" [selectedItem]="selectedItem"
+                    (rowDataBound)="rowDataBound($event)">
+                  </app-layer-tree>
+                </as-split-area>
+              </as-split>
+            </as-split-area>
+            <as-split-area size="{{ areas[1].size }}">
+              <as-split direction="vertical">
+                <as-split-area class="right-content infomation">
+                  <div class="row">
+                    <div class="col-12">
+                      <div id="mapViewPopup">
+                        <div class="layer-detail" *ngIf="layerDetail">
+                          <div class="row mx-0">
+                            <label class="col-sm-12 col-form-label text-center layer-info">
+                              {{'SHARE.map.layerListPopup.info' | translate}}
+                            </label>
+                          </div>
+                          <div class="row mx-0">
+                            <label
+                              class="col-sm-5 col-form-label text-right">{{'SHARE.map.layerListPopup.layerTitle' | translate}}:</label>
+                            <label class="col-sm-7 col-form-label text-left">
+                              <strong>{{ layerDetail.layerTitle }}</strong>
+                            </label>
+                          </div>
+                          <div class="row mx-0">
+                            <label
+                              class="col-sm-5 col-form-label text-right">{{'SHARE.map.layerListPopup.layerType' | translate}}:</label>
+                            <label class="col-sm-7 col-form-label text-left">
+                              <strong>{{ layerDetail.layerType }}</strong>
+                            </label>
+                          </div>
+                          <div class="row mx-0">
+                            <label
+                              class="col-sm-5 col-form-label text-right">{{'SHARE.map.layerListPopup.copyright' | translate}}:</label>
+                            <label class="col-sm-7 col-form-label text-left">
+                              <strong>{{ layerDetail.copyright }}</strong>
+                            </label>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </as-split-area>
+              </as-split>
+            </as-split-area>
+          </as-split>
+        </div>
+      </div>
+    </div>
+  </mat-dialog-content>

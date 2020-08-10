@@ -1,0 +1,261 @@
+<mat-tab-group [selectedIndex]="activeTabCheck" (selectedTabChange)="selectTabChange($event)" style="min-height: 75vh">
+  <mat-tab label="{{'COMMON.thuvien.titleThuVien' | translate}}">
+    <div class="content pl-3 pt-3 pr-3 pb-0">
+      <div class="container-fluid p-0">
+        <div class="card border">
+          <div class="card-body row">
+            <div class="ex-percent col-12 p-0">
+              <as-split direction="horizontal" #split="asSplit">
+                <as-split-area size="70" #area1="asSplitArea">
+                  <div class="card border-0 shadow-none">
+                    <div class="card-header">
+                      <h3>
+                        <button class="btn btn-xsm btn-outline-dark mb-1" type="button"
+                          *ngIf="(loaiGiaoDien === 0) && (arrayIndex.length > 0) " style="float:left"
+                          (click)="downloadFile()">
+                          <i class="fas fa-download"></i> {{'COMMON.thuvien.download' | translate}}
+                        </button>
+                        <button class="btn btn-xsm btn-link text-danger mb-1" type="button"
+                          *ngIf="(loaiGiaoDien === 0) && (arrayIndex.length > 0) " style="float:left"
+                          (click)="deleteFile()" [disabled]="!deleteMediaAction">
+                          <i class="fas fa-trash-alt"></i> {{'COMMON.thuvien.deleteMutiple' | translate}}
+                        </button>
+                        <div class="input-group">
+                          <input #search class="form-control" (keyup.enter)="searchEnter(search.value)" type="text"
+                            placeholder="{{'COMMON.thuvien.searchPlaceholder' | translate}}" aria-label="Nhập từ khóa">
+                          <div class="input-group-append">
+                            <button class="btn btn-outline-primary" type="button" (click)="searchEnter(search.value)">
+                              <i class="fas fa-search"></i> {{'COMMON.thuvien.search' | translate}}
+                            </button>
+                          </div>
+                        </div>
+                      </h3>
+                    </div>
+                    <div class="card-body">
+                      <div [class]="changeClass" (mouseover)="changeClass= 'overflow-auto'"
+                        (mouseout)="changeClass= 'overflow-hidden'" (scroll)="onScroll($event)"
+                        [ngStyle]="{'max-height': maxHeight}" class="border">
+                        <div *ngFor="let data of listDataItems; let i = index"
+                          style="width: 110px;height: 130px; float: left; margin: 10px;">
+                          <div class="card border itemFile shadow-sm"
+                            [ngStyle]="{'background-color': listDataItems[i].checked === false? '': '#e0e0e0', 'cursor': 'pointer'}">
+                            <div class="card-header" style="padding: 0px; height: 16px">
+                              <mat-checkbox *ngIf="listDataItems[i].checked === true" #checkbox
+                                (change)='showOptions(checkbox.checked, i)' [checked]="listDataItems[i].checked">
+                              </mat-checkbox>
+                            </div>
+                            <div class="card-body" (click)="clickDivFile(i)" style="padding: 0px; width: 108px">
+                              <img *ngIf="!data.iconFile === true" [src]="data.link"
+                                style="width: 68px; height: 68px; border: 2px solid #fff;box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05); margin-left: 18px;">
+                              <i *ngIf="!data.iconFile === false" [class]="data.iconFile"
+                                style="font-size: 68px;box-shadow: 0 1px 3px 1px rgba(0, 0, 0, 0.05); margin-left: 27px;color: #82c91e"></i>
+                              <p class="formatNameThuVien">{{data.tenFile}}</p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <button *ngIf="checkLoadMore === true" class="btn btn-sm btn-outline-primary" type="button"
+                      style="margin: auto" (click)="LoadMore()">
+                      <i class="fas fa-sync-alt"></i> {{'COMMON.thuvien.loadMore' | translate}}
+                    </button>
+                  </div>
+                </as-split-area>
+                <as-split-area size="30" #area2="asSplitArea">
+                  <div>
+                    <div class="card shadow-none border-0">
+                      <div class="card-header">
+                        <div>
+                          <span>{{'COMMON.thuvien.titleFile' | translate}}: </span>
+                          <span
+                            *ngIf="arrayIndex.length > 0">{{listDataItems[arrayIndex[0]].tenFile}}{{listDataItems[arrayIndex[0]].type}}</span>
+                        </div>
+                      </div>
+                      <div class="card-body overflow-auto" [ngStyle]="{'max-height': maxHeight}">
+                        <div class="row mb-3 px-2 text-right" style="display: list-item;">
+                          <button class="btn btn-xsm btn-link text-danger" type="button"
+                            *ngIf="(arrayIndex.length === 1) && ((loaiGiaoDien === 1) || (loaiGiaoDien === 2))"
+                            style="float:right; margin-top: 5px" (click)="deleteFile()" [disabled]="!deleteMediaAction">
+                            <i class="fas fa-trash-alt"></i> {{'COMMON.thuvien.deleteSingle' | translate}}
+                          </button>
+                        </div>
+                        <form [formGroup]="mediaIOForm">
+                          <div class="form-group row mx-0" [ngClass]="displayFieldCss(formErrors.tieude)">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.tieude' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" formControlName="tieude">
+                              <span *ngIf="formErrors.tieude" class="alert-danger">{{formErrors.tieude}}</span>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0" [ngClass]="displayFieldCss(formErrors.tacgia)">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.tacgia' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" type="text" formControlName="tacgia">
+                              <span *ngIf="formErrors.tacgia" class="alert-danger">{{formErrors.tacgia}}</span>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0" *ngIf="(loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                            [ngClass]="displayFieldCss(formErrors.idLoaitailieu)">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.idLoaitailieu' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <mat-select *ngIf="dataTranslate" placeholder="Chọn loại tài liệu" class="form-control"
+                                formControlName="idLoaitailieu">
+                                <mat-option value="">
+                                  {{'COMMON.thuvien.chonLoaitailieu' | translate}}
+                                </mat-option>
+                                <mat-option [value]="1">
+                                  Quyết định
+                                </mat-option>
+                                <mat-option [value]="2">
+                                  Thông tư
+                                </mat-option>
+                                <mat-option [value]="3">
+                                  Tài liệu khác
+                                </mat-option>
+                              </mat-select>
+                              <span *ngIf="formErrors.idLoaitailieu"
+                                class="alert-danger">{{formErrors.idLoaitailieu}}</span>
+                            </div>
+                          </div>
+                          <div *ngIf=" (loaiGiaoDien === 0) || (loaiGiaoDien === 2)" class="form-group row mx-0">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.kieutoado' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <mat-select *ngIf="dataTranslate" placeholder="Hệ tọa độ" class="form-control"
+                                (selectionChange)="resetValidator()" formControlName="kieutoado">
+                                <mat-option value="">
+                                  {{'COMMON.thuvien.chonKieutoado' | translate}}
+                                </mat-option>
+                                <mat-option value="xy">
+                                  {{'COMMON.thuvien.kieutoadoxy' | translate}}
+                                </mat-option>
+                                <mat-option value="latlng">
+                                  {{'COMMON.thuvien.kieutoadolatlng' | translate}}
+                                </mat-option>
+                              </mat-select>
+                              <span *ngIf="errorKieuToaDo !== ''" class="alert-danger">{{errorKieuToaDo}}</span>
+                            </div>
+                          </div>
+                          <div>
+                            <div class="form-group row mx-0" *ngIf=" (loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                              [ngClass]="displayFieldCss(formErrors.toadox)">
+                              <label class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.toadox' | translate}}:
+                              </label>
+                              <div class="col-sm-8">
+                                <input class="form-control" formControlName="toadox">
+                                <span *ngIf="formErrors.toadox" class="alert-danger">{{formErrors.toadox}}</span>
+                                <span *ngIf="errorX !== ''" class="alert-danger">{{errorX}}</span>
+                              </div>
+                            </div>
+                            <div class="form-group row mx-0" *ngIf=" (loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                              [ngClass]="displayFieldCss(formErrors.toadoy)">
+                              <label
+                                class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.toadoy' | translate}}:</label>
+                              <div class="col-sm-8">
+                                <input class="form-control" formControlName="toadoy">
+                                <span *ngIf="formErrors.toadoy" class="alert-danger">{{formErrors.toadoy}}</span>
+                                <span *ngIf="errorY !== ''" class="alert-danger">{{errorY}}</span>
+                              </div>
+                            </div>
+                            <div class="form-group row mx-0" *ngIf=" (loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                              [ngClass]="displayFieldCss(formErrors.caodoz)">
+                              <label
+                                class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.caodoz' | translate}}:</label>
+                              <div class="col-sm-8">
+                                <input class="form-control" formControlName="caodoz">
+                                <span *ngIf="formErrors.caodoz" class="alert-danger">{{formErrors.caodoz}}</span>
+                              </div>
+                            </div>
+                            <div class="form-group row mx-0" *ngIf=" (loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                              [ngClass]="displayFieldCss(formErrors.srid)">
+                              <label
+                                class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.srid' | translate}}:</label>
+                              <div class="col-sm-8">
+                                <mat-select *ngIf="dataTranslate" placeholder="Hệ tọa độ" class="form-control"
+                                  formControlName="srid">
+                                  <mat-select-filter [displayMember]="'prjName'" [array]="projectionFilters"
+                                    (filteredReturn)="projection = $event">
+                                  </mat-select-filter>
+                                  <mat-option value="">
+                                    {{'COMMON.thuvien.chonSrid' | translate}}
+                                  </mat-option>
+                                  <mat-option *ngFor="let pj of projection" [value]="pj.srid">
+                                    {{pj.prjName}}
+                                  </mat-option>
+                                </mat-select>
+                                <span *ngIf="formErrors.srid" class="alert-danger">{{formErrors.srid}}</span>
+                                <span *ngIf="errorSrid !== ''" class="alert-danger">{{errorSrid}}</span>
+                              </div>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0" *ngIf="(loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                            [ngClass]="displayFieldCss(formErrors.vitri)">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.vitri' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" formControlName="vitri">
+                              <span *ngIf="formErrors.vitri" class="alert-danger">{{formErrors.vitri}}</span>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0" *ngIf="loaiGiaoDien === 0">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.objKey' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <mat-select *ngIf="dataTranslate" placeholder="Chọn trạm công trình" class="form-control"
+                                formControlName="objKey">
+                                <mat-option value="">
+                                  {{'COMMON.thuvien.chonCongTrinh' | translate}}
+                                </mat-option>
+                                <mat-option *ngFor="let obj of ObjKeyArray" [value]="obj.value">
+                                  {{obj.name}}
+                                </mat-option>
+                              </mat-select>
+                              <span *ngIf="formErrors.objKey" class="alert-danger">{{formErrors.objKey}}</span>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0" *ngIf="(loaiGiaoDien === 0) || (loaiGiaoDien === 2)"
+                            [ngClass]="displayFieldCss(formErrors.nguoiky)">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.nguoiky' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <input class="form-control" type="text" formControlName="nguoiky">
+                              <span *ngIf="formErrors.nguoiky" class="alert-danger">{{formErrors.nguoiky}}</span>
+                            </div>
+                          </div>
+                          <div class="form-group row mx-0">
+                            <label
+                              class="col-sm-4 col-form-label text-right">{{'COMMON.thuvien.note' | translate}}:</label>
+                            <div class="col-sm-8">
+                              <textarea class="form-control" formControlName="note"></textarea>
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  </div>
+                </as-split-area>
+              </as-split>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-tab>
+  <mat-tab label="{{'COMMON.thuvien.titleUpload' | translate}}">
+    <ng-template matTabContent>
+      <app-tab-upload [loaiGD]="loaiGiaoDien" (selectTab)="getDataUpload($event)"></app-tab-upload>
+    </ng-template>
+  </mat-tab>
+</mat-tab-group>
+<div>
+  <button *ngIf="dataGetIO.model" class="btn btn-danger" style="float:right" (click)="onNoClick()">
+    <i class="far fa-times-circle"></i> {{'COMMON.default.close' | translate}}
+  </button>
+  <button *ngIf="activeTabCheck === 0" [disabled]="(arrayIndex.length === 0 ? true : false)"
+    class="btn btn-primary mr-3" style="float:right" (click)="addFiles()" [disabled]="!editMediaAction">
+    <i class="far fa-save"></i> {{'COMMON.default.save' | translate}}
+  </button>
+</div>

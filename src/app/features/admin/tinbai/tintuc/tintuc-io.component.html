@@ -1,0 +1,176 @@
+<div class="content pt-3">
+  <form [formGroup]="createForm" class="sidenav-container" hasBackdrop="false">
+    <div class="form-group row mx-0">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <button
+                    class="btn btn-primary float-right"
+                    (click)="onSubmit()"
+                  >
+                    <i class="far fa-save"></i>
+                    {{ "COMMON.default.saveAndClose" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-outline-primary float-right mr-3"
+                    (click)="onContinueAdd()"
+                    *ngIf="!obj"
+                  >
+                    <i class="far fa-download"></i>
+                    {{ "COMMON.default.saveAndRefresh" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-outline-info float-right mr-3"
+                    (click)="onFormReset()"
+                  >
+                    <i class="far fa-sync-alt"></i>
+                    {{ "COMMON.default.refresh" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-danger float-right mr-3"
+                    (click)="closeTinTucIoPage()"
+                  >
+                    <i class="far fa-times-circle"></i>
+                    {{ "COMMON.default.cancel" | translate }}
+                  </button>
+                </h3>
+              </div>
+              <div class="card-body">
+                <div class="group-layer-detail">
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.title" | translate }}
+                        <small>(*)</small>:</strong
+                      >
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="title"
+                      placeholder="{{ 'TINBAI.tintuc.title' | translate }}"
+                      (ngModelChange)="translateSlug()"
+                    />
+                    <span *ngIf="formErrors.title" class="alert-danger">{{
+                      formErrors.title
+                    }}</span>
+                  </div>
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.author" | translate }}
+                        <small>(*)</small>:</strong
+                      >
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="author"
+                      placeholder="{{ 'TINBAI.tintuc.title' | translate }}"
+                    />
+                    <span *ngIf="formErrors.author" class="alert-danger">{{
+                      formErrors.author
+                    }}</span>
+                  </div>
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.seoTitle" | translate }}:</strong
+                      >
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="seoTitle"
+                      placeholder="{{ 'TINBAI.tintuc.seoTitle' | translate }}"
+                    />
+                  </div>
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.imgLink" | translate }}:</strong
+                      >
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="image"
+                      placeholder="{{ 'TINBAI.tintuc.imgLink' | translate }}"
+                    />
+                  </div>
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.slug" | translate }}
+                        <small>(*)</small>:</strong
+                      >
+                    </label>
+                    <input
+                      class="form-control"
+                      type="text"
+                      formControlName="slug"
+                      placeholder="{{ 'TINBAI.tintuc.slug' | translate }}"
+                    />
+                    <span *ngIf="formErrors.slug" class="alert-danger">{{
+                      formErrors.slug
+                    }}</span>
+                  </div>
+                  <div class="form-group row mx-0">
+                    <label class="col-form-label text-right"
+                      ><strong
+                        >{{ "TINBAI.tintuc.categoryId" | translate }}
+                        <small>(*)</small>:</strong
+                      >
+                    </label>
+                    <mat-select
+                      *ngIf="dataTranslate"
+                      formControlName="categoryId"
+                      placeholder="{{
+                        'TINBAI.tintuc.chonCategoryId' | translate
+                      }}"
+                      class="form-control"
+                    >
+                      <mat-select-filter
+                        [displayMember]="'name'"
+                        [array]="listCatId"
+                      ></mat-select-filter>
+                      <mat-option
+                        *ngFor="let lstcatId of listCatId"
+                        [value]="lstcatId.index"
+                      >
+                        {{ lstcatId.name }}
+                      </mat-option>
+                    </mat-select>
+                    <span *ngIf="formErrors.categoryId" class="alert-danger">{{
+                      formErrors.categoryId
+                    }}</span>
+                  </div>
+                  <div class="form-group mx-0">
+                    <label class="col-form-label text-right">
+                      <strong
+                        >{{ "TINBAI.tintuc.content" | translate }}
+                        <small>(*)</small>:</strong
+                      >
+                    </label>
+                    <ckeditor
+                      formControlName="content"
+                      [editor]="Editor"
+                      [config]="{ enterMode: 2, shiftEnterMode: 1 }"
+                    >
+                    </ckeditor>
+                    <span *ngIf="formErrors.content" class="alert-danger">{{
+                      formErrors.content
+                    }}</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

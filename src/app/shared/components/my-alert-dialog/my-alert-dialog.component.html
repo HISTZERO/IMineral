@@ -1,0 +1,8 @@
+<h2 matDialogTitle [innerHTML]="header" [ngStyle]="{'color': headerColor}"></h2>
+<mat-dialog-content style="min-width: 500px;">
+  <p [innerHTML]="content"></p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button [ngStyle]="{'display': (visibleCancelButton === true ? 'inline' : 'none')}" [innerHTML]="cancelButton" class="btn btn-primary mr-3"  matDialogClose="cancel" color="primary"></button>
+  <button [ngStyle]="{'display': (visibleOkButton === true ? 'inline' : 'none')}" [innerHTML]="okeButton" class="btn btn-danger"  matDialogClose="confirm" color="warn"></button>
+</mat-dialog-actions>

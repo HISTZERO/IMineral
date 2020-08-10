@@ -1,0 +1,99 @@
+<div class="pt-3">
+  <form *ngIf="editMode" [formGroup]="thietLapDuLieuIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.objName' | translate}}
+        <small>(*)</small> </label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.objNamePlaceholder' | translate}}"
+          type="text" formControlName="objName" />
+        <span *ngIf="formErrors.objName" class="alert-danger">{{formErrors.objName}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.objTable' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.objTablePlaceholder' | translate}}"
+          type="text" formControlName="objTable" />
+        <span *ngIf="formErrors.objTable" class="alert-danger">{{formErrors.objTable}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.objKey' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.objKeyPlaceholder' | translate}}"
+          type="text" formControlName="objKey" />
+        <span *ngIf="formErrors.objKey" class="alert-danger">{{formErrors.objKey}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.serviceName' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.serviceNamePlaceholder' | translate}}"
+          type="text" formControlName="serviceName" />
+        <span *ngIf="formErrors.serviceName" class="alert-danger">{{formErrors.serviceName}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.moduleName' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.moduleNamePlaceholder' | translate}}"
+          type="text" formControlName="moduleName" />
+        <span *ngIf="formErrors.moduleName" class="alert-danger">{{formErrors.moduleName}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.fieldsInfo' | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.fieldsInfoPlaceholder' | translate}}"
+          type="text" formControlName="fieldsInfo" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.fieldsDisplay' | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.fieldsDisplayPlaceholder' | translate}}"
+          type="text" formControlName="fieldsDisplay" />
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.status' | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" placeholder="{{'THIETLAP.thietlapdulieu.statusPlaceholder' | translate}}"
+          type="text" formControlName="status" />
+        <span *ngIf="formErrors.status" class="alert-danger">{{formErrors.status}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{'THIETLAP.thietlapdulieu.note' | translate}}</label>
+      <div class="col-sm-8">
+        <textarea formControlName="note" class="form-control"></textarea>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i> {{'COMMON.default.saveAndClose' |translate}}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i> {{'COMMON.default.saveAndRefresh' |translate}}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i> {{'COMMON.default.refresh' |translate}}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeThietLapIOSidebar()">
+              <i class="far fa-times-circle"></i> {{'COMMON.default.cancel' |translate}}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -1,0 +1,106 @@
+/* You can add global styles to this file, and also import other style files */
+
+@import "./assets/css/bootstrap.min.css";
+@import "./assets/css/bootstrap_limitless.min.css";
+@import "./assets/css/layout.min.css";
+@import "./assets/css/components.min.css";
+@import "./assets/css/fa5pro.css";
+@import "./assets/css/app.css";
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "../node_modules/@syncfusion/ej2-inputs/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-base/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-angular-grids/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-navigations/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-buttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-calendars/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-dropdowns/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-popups/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-splitbuttons/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-grids/styles/material.css";
+@import "../node_modules/@syncfusion/ej2-treegrid/styles/material.css";
+@import "~ng-pick-datetime/assets/style/picker.min.css";
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.bg-teal-400 {
+  background-color: #26a69a;
+}
+
+.bg-green-400 {
+  background-color: #66bb6a;
+}
+
+.bg-blue-400 {
+  background-color: #29b6f6;
+}
+
+.mat-tab-header-pagination {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  position: relative;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  min-width: 32px;
+  cursor: pointer;
+  z-index: 0 !important;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: none;
+}
+
+.label {
+  display: inline;
+  padding: 0.2em 0.6em 0.3em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25em;
+}
+
+.label-success {
+  background-color: #5cb85c;
+}
+
+.label-default {
+  background-color: #777;
+}
+
+.layer-grid td.e-rowcell.e-templatecell:last-child {
+  width: 30px !important;
+}
+
+.mat-menu-content {
+  padding: 0px !important;
+}
+
+label small {
+  color: red;
+  font-weight: bold;
+}
+span.highlightText{
+  background-color: yellow;
+}
