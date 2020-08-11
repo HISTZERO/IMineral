@@ -81,315 +81,83 @@ export class SidenavComponent implements OnInit {
           items: [
             {
               label: "Cá nhân",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.canhanUri,
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.canhanUri}`,
               faIcon: "far fa-user",
             },
             {
-              label: "Công ty",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.congtyUri,
-              faIcon: "far fa-building",
-            },
-            {
-              label: "Cơ quan/Tổ chức",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.coquanUri,
-              faIcon: "fal fa-landmark-alt",
-            },
-            {
-              label: "Đơn vị hành chính",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.dvhcUri,
+              label: "Cấp quản lý",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.capquanlyUri}`,
               faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Tầng chứa nước",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.tangchuanuocUri,
-              faIcon: "far fa-layer-group",
+              label: "Cấp tài nguyên",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.captainguyenUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Đơn vị đo",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.donvidoUri,
-              faIcon: "far fa-sort-amount-up-alt",
+              label: "Cấp trữ lượng",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.captruluongUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Hướng gió",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.huonggioUri,
-              faIcon: "fas fa-wind",
+              label: "Đơn vị hành chính",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.dvhcUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Tiêu chuẩn",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.tieuchuanUri,
-              faIcon: "far fa-books",
+              label: "Loại báo cáo",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaibaocaoUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Nhóm tham số",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.nhomthamsoUri,
-              faIcon: "far fa-list-ul",
+              label: "Loại cấp phép",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaicapphepUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Tham số",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.thamsoUri,
-              faIcon: "fab fa-elementor",
+              label: "Loại giấy phép",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaigiayphepUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Tiêu chuẩn chất lượng",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.tcclUri,
-              faIcon: "fab fa-elementor",
+              label: "Loại khoáng sản",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaikhoangsanUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Dự án",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.duanUri,
-              faIcon: "far fa-project-diagram",
+              label: "Loại tài liệu",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaitailieuUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Loại số liệu",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.loaisolieuUri,
-              faIcon: "fab fa-elementor",
+              label: "Loại tổ chức",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaitochucUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Thiết bị quan trắc",
-              link:
-                "/admin/" +
-                AdminRoutingName.danhmucUri +
-                "/" +
-                AdminRoutingName.thietbiquantracUri,
-              faIcon: "fab fa-elementor",
+              label: "Nguồn gốc mỏ",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.nguongocmoUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
             {
-              label: "Hệ tọa độ",
-              link:
-                "/admin/" +
-                AdminRoutingName.mapUri +
-                "/" +
-                AdminRoutingName.hetoadoUri,
-              faIcon: "fal fa-globe-stand",
+              label: "Nhóm khoáng sản",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.nhomkhoangsanUri}`,
+              faIcon: "far fa-map-marked-alt",
+            },
+            {
+              label: "Thử tục hành chính",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.thutuchanhchinhUri}`,
+              faIcon: "far fa-map-marked-alt",
+            },
+            {
+              label: "Tổ chức",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.tochucUri}`,
+              faIcon: "far fa-map-marked-alt",
             },
           ],
         },
       ],
     },
-    // {
-    //   label: "MÔI TRƯỜNG",
-    //   faIcon: "fal fa-leaf",
-    //   items: [
-    //     {
-    //       label: "Chất lượng không khí",
-    //       faIcon: "far fa-wind",
-    //       items: [
-    //         {
-    //           label: "Công trình quan trắc",
-    //           faIcon: "far fa-building",
-    //           link:
-    //             "/admin/" +
-    //             AdminRoutingName.enUri +
-    //             "/" +
-    //             AdminRoutingName.enTramAqi +
-    //             "/" +
-    //             AdminRoutingName.enAqiCongtrinh,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Giám sát khí thải",
-    //       faIcon: "far fa-wind-warning",
-    //       items: [
-    //         {
-    //           label: "Công trình quan trắc",
-    //           faIcon: "far fa-building",
-    //           link:
-    //             "/admin/" +
-    //             AdminRoutingName.enUri +
-    //             "/" +
-    //             AdminRoutingName.enKhithai +
-    //             "/" +
-    //             AdminRoutingName.enKhithaiCongtrinh,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Trạm môi trường nước",
-    //       faIcon: "far fa-house-flood",
-    //       items: [
-    //         {
-    //           label: "Công trình quan trắc",
-    //           faIcon: "far fa-building",
-    //           link:
-    //             "/admin/" +
-    //             AdminRoutingName.enUri +
-    //             "/" +
-    //             AdminRoutingName.enMoitruongnuoc +
-    //             "/" +
-    //             AdminRoutingName.enMoitruongnuocCongtrinh,
-    //         },
-    //       ],
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "TÀI NGUYÊN NƯỚC",
-    //   faIcon: "far fa-dewpoint",
-    //   link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${TENLINHVUC.TAINGUYENNUOC}`,
-    //   items: [
-    //     {
-    //       label: "Quan trắc nước mặt",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.TramQuanTracNM}`,
-    //       items: [
-    //         {
-    //           label: "Công trình quan trắc nước mặt",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.TramQuanTracNM}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Khai thác nước mặt",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.KhaiThacNuocMat}`,
-    //       items: [
-    //         {
-    //           label: "Công trình khai thác nước mặt",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.KhaiThacNuocMat}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Trạm bơm",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.TramBom}`,
-    //       items: [
-    //         {
-    //           label: "Công trình trạm bơm",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.TramBom}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Quan trắc nước dưới đất",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.GiengQuantrac}`,
-    //       items: [
-    //         {
-    //           label: "Trạm quan trắc",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.TramQuanTracNDD}`,
-    //         },
-    //         {
-    //           label: "Công trình quan trắc",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.GiengQuantrac}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Khai thác nước dưới đất",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.GiengKhaiThac}`,
-    //       items: [
-    //         {
-    //           label: "Công trình khai thác",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.GiengKhaiThac}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Xả thải vào nguồn nước",
-    //       faIcon: "far fa-monitor-heart-rate",
-    //       link: `${AdminRoutingName.adminUri}/${AdminRoutingName.quantrac}/${AdminRoutingName.wrUri}/${ObjKey.DiemXaThai}`,
-    //       items: [
-    //         {
-    //           label: "Điểm xả thải",
-    //           faIcon: "far fa-monitor-heart-rate",
-    //           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.danhsachtram}/${ObjKey.DiemXaThai}`,
-    //         },
-    //       ],
-    //     },
-    //     {
-    //       label: "Công trình khác",
-    //       faIcon: "far fa-signal-stream",
-    //       items: this.menuCongTrinhKhacTnnuoc,
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "MÔI TRƯỜNG BIỂN",
-    //   faIcon: "fal fa-ship",
-    //   items: [
-    //     {
-    //       label: "Phao biển",
-    //       faIcon: "far fa-broadcast-tower",
-    //       link: "/admin/se/phao",
-    //     },
-    //     {
-    //       label: "Rada biển",
-    //       faIcon: "far fa-satellite-dish",
-    //       link: "/admin/se/rada",
-    //     },
-    //     {
-    //       label: "Trạm môi trường biển",
-    //       faIcon: "far fa-vial",
-    //       link: "/admin/se/se_en",
-    //     },
-    //   ],
-    // },
-    // {
-    //   label: "BÁO CÁO",
-    //   faIcon: "fal fa-file-chart-pie",
-    //   items: [
-    //     {
-    //       label: "Biểu đồ n3js",
-    //       link: AdminRoutingName.chartsUri,
-    //       faIcon: "fal fa-chart-line",
-    //     },
-    //   ],
-    // },
     {
       label: "DỮ LIỆU KHÔNG GIAN",
       faIcon: "fal fa-globe",

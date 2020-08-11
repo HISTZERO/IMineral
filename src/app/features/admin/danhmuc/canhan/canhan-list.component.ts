@@ -1,38 +1,16 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  ComponentRef,
-  OnDestroy,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
-} from "@angular/core";
+import { Component, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { QueryCellInfoEventArgs } from "@syncfusion/ej2-grids";
 import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
 
-import {
-  SettingsCommon,
-  ThietLapHeThong,
-} from "src/app/shared/constants/setting-common";
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io.component";
-import { HttpErrorResponse } from "@angular/common/http";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {
-  _listTinhAction,
-  _listHuyenAction,
-  _listXaAction,
-} from "src/app/shared/constants/actions/danhmuc/dvhc";
-import {
-  _addCaNhanAction,
-  _listCaNhanAction,
-  _editCaNhanAction,
-  _deleteCaNhanAction,
-} from "src/app/shared/constants/actions/danhmuc/canhan";
 import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 
 @Component({
@@ -41,32 +19,32 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
   styleUrls: ["./canhan-list.component.scss"],
 })
 export class DmCanhanListComponent implements OnDestroy, OnInit {
-  // @ts-ignore
+  // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compcanhanio", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
+  // Chứa component
   public componentRef: ComponentRef<any>;
+
+  // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
+
+  // Chứa danh sách Cá nhân
   public listCanhan: OutputCanhanModel[];
+
+  // Chứa dữ liệu đã chọn 
   public selectedItem: OutputCanhanModel;
+
+  // Chứa danh sách dữ liệu
   public listData: any;
 
-  // Danh sách các quyền
-  addCaNhanAction = _addCaNhanAction;
-  listCaNhanAction = _listCaNhanAction;
-  editCaNhanAction = _editCaNhanAction;
-  deleteCaNhanAction = _deleteCaNhanAction;
-  listTinhAction = _listTinhAction;
-  listHuyenAction = _listHuyenAction;
-  listXaAction = _listXaAction;
-
-  // Các biến translate
+  // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa menu item trên subheader
   public navArray = MenuDanhMucCaNhan;
 
-  // Hàm constructor phải bắt buộc có hai biến là MatSidenavService và ComponentFactoryResolver để Init MatsidenavService
+  // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
@@ -76,46 +54,92 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     private translate: TranslateService
   ) { }
 
-  // Khi khởi tạo component cha phải gọi setSidenave để khỏi tạo Sidenav
   async ngOnInit() {
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    // Gọi hàm lấy dữ liệu pagesize
+    await this.getDataPageSize();
+  }
+
+  /**
+   * Hàm lấy dữ liệu translate
+   */
+  async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-      .getTranslation(this.translate.getDefaultLang())
-      .toPromise();
+    .getTranslation(this.translate.getDefaultLang())
+    .toPromise();
+  }
 
-    this.matSidenavService.setSidenav(
-      this.matSidenav,
-      this,
-      this.content,
-      this.cfr
-    );
-    this.settingsCommon.toolbar = ["Search"];
-    // Lấy dữ liệu truyền vào ejs grid tạo bảng
+  /**
+   * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
+   */
+  async getDataPageSize() {
+    const pageSize: any = await this.thietlapFacadeService
+    .getThietLapHeThongService()
+    .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
+    if (pageSize) {
+      this.settingsCommon.pageSettings.pageSize = +pageSize;
+    } else {
+      this.settingsCommon.pageSettings.pageSize = 10;
+    }
+    // Gọi hàm lấy dữ liệu cá nhân
     await this.getAllCanhan();
   }
 
-  // Hàm getAll Nhóm tham số đẻ binding dữ liệu lên EJS grid
+  /**
+   * Hàm lấy dữ liệu Cá nhân
+   */
   async getAllCanhan() {
-    // Get settings
-    const pageSize: any = await this.thietlapFacadeService
-      .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-    this.settingsCommon.pageSettings.pageSize = +pageSize;
-    this.listData = await this.dmFacadeService
+    const listData: any = await this.dmFacadeService
       .getDmCanhanService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    const listDataItems = this.listData.items;
-    if (listDataItems) {
-      listDataItems.map((canhan, index) => {
+    if (listData.items) {
+      listData.items.map((canhan, index) => {
         canhan.serialNumber = index + 1;
       });
     }
-    this.listCanhan = listDataItems;
+    this.listCanhan = listData;
   }
 
-  // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemCanhan(event) {
-    this.getItemByEvent(event);
+  /**
+   * Hàm mở sidenav chức năng sửa dữ liệu
+   * @param id
+   */
+  async editItemCanhan(id: number) {
+    // Lấy dữ liệu cá nhân theo id
+    const dataItem: any = await this.dmFacadeService
+    .getDmCanhanService()
+    .getByid(id).toPromise();
+    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.canhan.titleEdit );
+    await this.matSidenavService.setContentComp( DmCanhanIoComponent, "edit", dataItem);
+    await this.matSidenavService.open();
+  }
+
+  /**
+   * Hàm mở sidenav chức năng thêm mới
+   */
+  public openCanhanIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleAdd);
+    this.matSidenavService.setContentComp(DmCanhanIoComponent, "new");
+    this.matSidenavService.open();
+  }
+
+  /**
+   * Hàm đóng sidenav
+   */
+  public closeCanhanIOSidenav() {
+    this.matSidenavService.close();
+  }
+
+
+  /**
+   *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
+   */
+  async deleteItemCanhan(data) {
+    this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
@@ -125,6 +149,10 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     this.canBeDeletedCheck(canDelete);
   }
 
+  /**
+   * Hàm check điều kiện xóa bản ghi
+   * @param sMsg 
+   */
   public canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
       this.confirmDeleteDiaLog();
@@ -133,6 +161,9 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     }
   }
 
+  /** 
+   * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
+   */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.DANHMUC.canhan.contentDelete,
@@ -162,31 +193,7 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     this.commonService.canDeleteDialogService(sMsg);
   }
 
-  // Hàm sửa thông tin chi tiết một bản ghi, được gọi khi nhấn nút xem chi tiết trên giao diện list
-  public editItemCanhan(event) {
-    this.getItemByEvent(event);
-    this.matSidenavService.setTitle(
-      this.dataTranslate.DANHMUC.canhan.titleEdit
-    );
-    this.matSidenavService.setContentComp(
-      DmCanhanIoComponent,
-      "edit",
-      this.selectedItem
-    );
-    this.matSidenavService.open();
-  }
-
-  // Hàm đặt tiêu đề, Đặt content component và sau đó mở sidebar lên
-  public openCanhanIOSidebar() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleAdd);
-    this.matSidenavService.setContentComp(DmCanhanIoComponent, "new");
-    this.matSidenavService.open();
-  }
-
-  public closeCanhanIOSidebar() {
-    this.matSidenavService.close();
-  }
-
+  
   // Hàm lấy ra đối tượng khi người dùng click vào một trong 3 nút xóa, chi tiết, sửa
   public getItemByEvent(event) {
     const target = event.currentTarget;

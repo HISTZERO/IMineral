@@ -1,9 +1,11 @@
 export class AdminRoutingName {
   // Các routes cấp 1
   public static danhmucUri = "danhmuc";
-  public static wrUri = "tnnuoc";
-  public static mapUri = "map";
   public static adminUri = "admin";
+  public static mapUri = "map";
+
+
+
   public static baocaoUri = "baocao";
   public static thietlapUri = "thietlap";
   public static thuvienUri = "thuvien";
@@ -13,13 +15,29 @@ export class AdminRoutingName {
   public static tinbaiUri = "tinbai";
   public static quantrac = "quantrac";
   public static seUri = "moitruongbien";
+  public static wrUri = "tnnuoc";
   public static danhsachtram = "danhsachtram";
 
   // Các routes cấp 2
   // 1.1. Routes phần danh mục
   public static canhanUri = "canhan";
-  public static nhomthamsoUri = "nhomthamso";
   public static dvhcUri = "dvhc";
+  public static capquanlyUri = "capquanly";
+  public static captainguyenUri = "captainguyen";
+  public static captruluongUri = "captruluong";
+  public static coquanquanlyUri = "coquanquanly";
+  public static loaibaocaoUri = "loaibaocao";
+  public static loaicapphepUri = "loaicapphep";
+  public static loaigiayphepUri = "loaigiayphep";
+  public static loaikhoangsanUri = "loaikhoangsan";
+  public static loaitailieuUri = "loaitailieu";
+  public static loaitochucUri = "loaitochuc";
+  public static nguongocmoUri = "nguongocmo";
+  public static nhomkhoangsanUri = "nhomkhoangsan";
+  public static thutuchanhchinhUri = "thutuchanhchinh";
+  public static tochucUri = "tochuc";
+
+
   public static congtyUri = "congty";
   public static coquanUri = "coquan";
   public static tangchuanuocUri = "tangchuanuoc";
@@ -30,6 +48,7 @@ export class AdminRoutingName {
   public static loaisolieuUri = "loaisolieu";
   public static donvidoUri = "donvido";
   public static huonggioUri = "huonggio";
+  public static nhomthamsoUri = "nhomthamso";
   public static thietbiquantracUri = "thietbiquantrac";
 
   // 1.3 Routes phần dữ liệu bản đồ
