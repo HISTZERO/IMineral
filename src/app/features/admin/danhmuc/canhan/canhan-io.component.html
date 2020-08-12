@@ -1,41 +1,76 @@
 <div class="pt-3">
   <form *ngIf="editMode" [formGroup]="canhanIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right"
-        >{{ "DANHMUC.canhan.hovaten" | translate }} <small>(*)</small></label
-      >
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.canhan.hovaten" | translate }}
+        <small>(*)</small></label>
       <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="hovaten" />
-        <span *ngIf="formErrors.hovaten" class="alert-danger">{{
-          formErrors.hovaten
-        }}</span>
+        <input class="form-control" type="text" formControlName="hovaten" placeholder="{{'DANHMUC.canhan.hovatenPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.hovaten" class="alert-danger">{{formErrors.hovaten}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.diachi" | translate
-      }}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.diachi" | translate}}</label>
       <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="diachi" />
+        <input class="form-control" type="text" formControlName="diachi" placeholder="{{'DANHMUC.canhan.diachiPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right"
-        >{{ "COMMON.default.matinh" | translate }} <small>(*)</small></label
-      >
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.sogiayto" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select
-          placeholder="Chọn tỉnh/thành phố"
-          class="form-control"
-          formControlName="matinh"
-          (selectionChange)="showDvhcHuyen()"
-          *ngIf="dataTranslate"
-        >
-          <mat-select-filter
-            [displayMember]="'tendvhc'"
-            [array]="dvhcProvinceFilters"
-            (filteredReturn)="allTinh = $event"
-          >
+        <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'DANHMUC.canhan.sogiaytoPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.loaigiayto" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="loaigiayto" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.canhan.chonLoaiGiayTo" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let loai of loaigiayto" [value]="loai.id">
+            {{ loai.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.loaigiayto" class="alert-danger">{{formErrors.loaigiayto}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.ngaycap" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="ngaycap"  placeholder="{{'DANHMUC.canhan.ngaycapPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.noicap" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="noicap" placeholder="{{'DANHMUC.canhan.noicapPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.dienthoai" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="dienthoai" placeholder="{{'DANHMUC.canhan.dienthoaiPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.dienthoai" class="alert-danger">{{formErrors.dienthoai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.email" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="email" placeholder="{{'DANHMUC.canhan.emailPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.email" class="alert-danger">{{formErrors.email}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="matinh"
+          (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonTinh" | translate }}
@@ -44,28 +79,16 @@
             {{ tinh.tendvhc }}
           </mat-option>
         </mat-select>
-        <span *ngIf="formErrors.matinh" class="alert-danger">{{
-          formErrors.matinh
-        }}</span>
+        <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right"
-        >{{ "COMMON.default.mahuyen" | translate }} <small>(*)</small></label
-      >
+      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
+        <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select
-          placeholder="Chọn huyện/phường"
-          class="form-control"
-          formControlName="mahuyen"
-          (selectionChange)="showDvhcXa()"
-          *ngIf="dataTranslate"
-        >
-          <mat-select-filter
-            [displayMember]="'tendvhc'"
-            [array]="dvhcDistrictFilters"
-            (filteredReturn)="allHuyen = $event"
-          >
+        <mat-select class="form-control" formControlName="mahuyen"
+          (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonHuyen" | translate }}
@@ -74,27 +97,14 @@
             {{ huyen.tendvhc }}
           </mat-option>
         </mat-select>
-        <span *ngIf="formErrors.mahuyen" class="alert-danger">{{
-          formErrors.mahuyen
-        }}</span>
+        <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "COMMON.default.maxa" | translate
-      }}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"COMMON.default.maxa" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select
-          placeholder="Chọn xã/thị trấn"
-          class="form-control"
-          formControlName="maxa"
-          *ngIf="dataTranslate"
-        >
-          <mat-select-filter
-            [displayMember]="'tendvhc'"
-            [array]="dvhcWardFilters"
-            (filteredReturn)="allXa = $event"
-          >
+        <mat-select class="form-control" formControlName="maxa" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonXa" | translate }}
@@ -106,147 +116,44 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.sodienthoai" | translate
-      }}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="sodienthoai" />
-        <span *ngIf="formErrors.sodienthoai" class="alert-danger">{{
-          formErrors.sodienthoai
-        }}</span>
-      </div>
-    </div>
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.loaigiayto" | translate
-      }}</label>
-      <div class="col-sm-8">
-        <mat-select
-          placeholder="Chọn loại giấy tờ"
-          class="form-control"
-          formControlName="loaigiayto"
-          *ngIf="dataTranslate"
-        >
+        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
-            {{ "DANHMUC.canhan.chonLoaiGiayTo" | translate }}
+            {{ "DANHMUC.canhan.chonTrangthai" | translate }}
           </mat-option>
-          <mat-option [value]="loaigiayto.Cmnd">
-            {{ loaigiayto.Cmnd }}
-          </mat-option>
-          <mat-option [value]="loaigiayto.Hc">
-            {{ loaigiayto.Hc }}
+          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+            {{ tt.name }}
           </mat-option>
         </mat-select>
+        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.socmthochieu" | translate
-      }}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.thutu" | translate}}</label>
       <div class="col-sm-8">
-        <input
-          class="form-control"
-          type="text"
-          formControlName="socmthochieu"
-        />
-      </div>
-    </div>
-
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.email" | translate
-      }}</label>
-      <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="email" />
-      </div>
-    </div>
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.note" | translate
-      }}</label>
-      <div class="col-sm-8">
-        <textarea formControlName="note" class="form-control"></textarea>
-      </div>
-    </div>
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{
-        "DANHMUC.canhan.imgLink" | translate
-      }}</label>
-      <div class="col-sm-8 row">
-        <div class="image-preview col-8">
-          <div class="row px-2">
-            <a *ngIf="!srcanh === false" [href]="srcanh">
-              <img [src]="srcanh" height="100" style="padding-bottom: 10px;" />
-            </a>
-            <img
-              *ngIf="!srcanh === true"
-              class="pb-2 border"
-              src="{{ 'COMMON.default.linkImage' | translate }}"
-              alt="image"
-              width="100%"
-            />
-            <input
-              class="form-control"
-              hidden
-              type="text"
-              formControlName="imgLink"
-            />
-          </div>
-          <div class="row p-0">
-            <button
-              class="btn btn-xsm btn-link text-danger"
-              type="button"
-              *ngIf="srcanh"
-              (click)="deleteAnh()"
-            >
-              <i class="fas fa-trash-alt"></i>
-              {{ "COMMON.default.deleteImage" | translate }}
-            </button>
-          </div>
-        </div>
-        <div class="col-4">
-          <button
-            class="btn btn-primary"
-            style="margin: auto;"
-            (click)="showMatDialog()"
-          >
-            <i class="fal fa-check-square"></i>
-            {{ "COMMON.default.chooseImage" | translate }}
-          </button>
-        </div>
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.canhan.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
       </div>
     </div>
     <div class="toolbar-container py-2">
       <div class="function-toolbar">
         <div class="form-group row mx-0">
           <div class="col-12">
-            <button
-              class="btn btn-primary float-right"
-              (click)="onSubmit(purpose)"
-            >
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
               <i class="far fa-save"></i>
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
-            <button
-              class="btn btn-outline-primary float-right mr-3"
-              *ngIf="purpose === 'new'"
-              (click)="onContinueAdd(purpose)"
-            >
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>
-            <button
-              class="btn btn-outline-info float-right mr-3"
-              *ngIf="purpose === 'new'"
-              (click)="onFormReset()"
-            >
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
               <i class="far fa-sync-alt"></i>
               {{ "COMMON.default.refresh" | translate }}
             </button>
-            <button
-              class="btn btn-danger float-right mr-3"
-              (click)="closeCanhanIOSidebar()"
-            >
+            <button class="btn btn-danger float-right mr-3" (click)="closeCanhanIOSidenav()">
               <i class="far fa-times-circle"></i>
               {{ "COMMON.default.cancel" | translate }}
             </button>

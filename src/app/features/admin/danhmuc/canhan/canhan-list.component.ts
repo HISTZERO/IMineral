@@ -1,6 +1,5 @@
 import { Component, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
-import { QueryCellInfoEventArgs } from "@syncfusion/ej2-grids";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -101,7 +100,7 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
         canhan.serialNumber = index + 1;
       });
     }
-    this.listCanhan = listData;
+    this.listCanhan = listData.items;
   }
 
   /**
@@ -145,7 +144,7 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
       .getDmCanhanService()
-      .checkBeDeleted(this.selectedItem.id);
+      .checkBeDeleted(this.selectedItem.idcanhan);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -173,7 +172,7 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getDmCanhanService()
-          .deleteItem({ id: this.selectedItem.id })
+          .deleteItem({ id: this.selectedItem.idcanhan })
           .subscribe(
             () => this.getAllCanhan(),
             (error: HttpErrorResponse) => {
@@ -189,24 +188,11 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     });
   }
 
+  /**
+   * Hàm thông báo không thể xóa
+   */
   cantDeleteDialog(sMsg: string) {
     this.commonService.canDeleteDialogService(sMsg);
-  }
-
-  
-  // Hàm lấy ra đối tượng khi người dùng click vào một trong 3 nút xóa, chi tiết, sửa
-  public getItemByEvent(event) {
-    const target = event.currentTarget;
-    const pElement = target.parentElement.parentElement;
-    const pclassID = pElement.getAttribute("id");
-    const item = this.listCanhan.find((x) => x.id === +pclassID);
-    this.selectedItem = item;
-  }
-
-  customiseCell(args: QueryCellInfoEventArgs) {
-    if (args.column.field === "id") {
-      args.cell.id = args.data[args.column.field];
-    }
   }
 
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi

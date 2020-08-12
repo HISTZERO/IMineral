@@ -25,12 +25,12 @@
                 <ejs-grid #grid *ngIf="listCanhan" [dataSource]="listCanhan"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                   [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  (queryCellInfo)="customiseCell($event)" [allowResizing]="true">
+                  [allowResizing]="true">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="hovaten" headerText="{{ 'DANHMUC.canhan.hovaten' | translate }}"></e-column>
                     <e-column field="diachi" headerText="{{ 'DANHMUC.canhan.diachi' | translate }}"></e-column>
-                    <e-column field="sodienthoai" headerText="{{ 'DANHMUC.canhan.sodienthoai' | translate }}"></e-column>
+                    <e-column field="dienthoai" headerText="{{ 'DANHMUC.canhan.dienthoai' | translate }}"></e-column>
                     <e-column field="email" headerText="{{ 'DANHMUC.canhan.email' | translate }}"></e-column>
                     <e-column field="id" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
