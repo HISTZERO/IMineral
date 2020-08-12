@@ -158,7 +158,7 @@ export class DmCanhanIoComponent implements OnInit {
    * hàm set value cho form
    */
   formOnEdit() {
-    if (this.obj) {
+    if (this.obj && this.purpose === 'edit') {
       this.canhanIOForm.setValue({
         hovaten: this.obj.hovaten,
         diachi: this.obj.diachi,

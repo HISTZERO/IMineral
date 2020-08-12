@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, ComponentRef, OnDestroy, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -17,13 +17,10 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
   templateUrl: "./canhan-list.component.html",
   styleUrls: ["./canhan-list.component.scss"],
 })
-export class DmCanhanListComponent implements OnDestroy, OnInit {
+export class DmCanhanListComponent implements OnInit {
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
-  // Chứa component
-  public componentRef: ComponentRef<any>;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -200,10 +197,4 @@ export class DmCanhanListComponent implements OnDestroy, OnInit {
     this[methodName]();
   }
 
-  ngOnDestroy(): void {
-    if (this.componentRef) {
-      this.componentRef.destroy();
-      this.componentRef = null;
-    }
-  }
 }

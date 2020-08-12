@@ -1,8 +1,24 @@
 export class ServiceName {
+  // Danh mục
   public static CANHAN = "canhan";
+  public static DVHC = "dvhc";
+  public static CAPQUANLY = "capquanly";
+  public static CAPTAINGUYEN = "captainguyen";
+  public static CAPTRULUONG = "captruluong";
+  public static COQUANQUANLY = "coquanquanly";
+  public static LOAIBAOCAO = "loaibaocao";
+  public static LOAICAPPHEP = "loaicapphep";
+  public static LOAIGIAYPHEP = "loaigiayphep";
+  public static LOAIKHOANGSAN = "loaikhoangsan";
+  public static LOAITAILIEU = "loaitailieu";
+  public static LOAITOCHUC = "loaitochuc";
+  public static NGUONGOCMO = "nguongocmo";
+  public static NHOMKHOANGSAN = "nhomkhoangsan";
+  public static THUTUCHANHCHINH = "thutuchanhchinh";
+  public static TOCHUC = "tochuc";
+
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
-  public static DVHC = "dvhc";
   public static PROVINCE = "tinh";
   public static DISTRICT = "huyen";
   public static WARD = "xa";

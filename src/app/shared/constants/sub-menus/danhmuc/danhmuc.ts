@@ -12,30 +12,6 @@ export const MenuDanhMucCaNhan = [
   },
 ];
 
-export const MenuDanhMucCongTy = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Công ty",
-    url: "",
-  },
-];
-
-export const MenuDanhMucCoQuan = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Cơ quan & Tổ chức",
-    url: "",
-  },
-];
-
 export const MenuDanhMucDVHC = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
@@ -48,122 +24,40 @@ export const MenuDanhMucDVHC = [
   },
 ];
 
-export const MenuDanhMucTangChuaNuoc = [
+export const MenuDanhMucCapQuanLy = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
     title: "Danh mục",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
   },
   {
-    title: "Tầng chứa nước",
+    title: "Cấp quản lý",
     url: "",
   },
 ];
 
-export const MenuDanhMucDonViDo = [
+export const MenuDanhMucCapTaiNguyen = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
     title: "Danh mục",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
   },
   {
-    title: "Đơn vị đo",
+    title: "Cấp tài nguyên",
     url: "",
   },
 ];
 
-export const MenuDanhMucHuongGio = [
+export const MenuDanhMucCapTruLuong = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
     title: "Danh mục",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
   },
   {
-    title: "Hướng gió",
+    title: "Cấp trữ lượng",
     url: "",
   },
 ];
 
-export const MenuDanhMucTieuChuan = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Tiêu chuẩn",
-    url: "",
-  },
-];
 
-export const MenuDanhMucNhomThamSo = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Nhóm tham số",
-    url: "",
-  },
-];
-
-export const MenuDanhMucThamSo = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Tham số",
-    url: "",
-  },
-];
-
-export const MenuDanhMucTieuChuanChatLuong = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Tiêu chuẩn chất lượng",
-    url: "",
-  },
-];
-
-export const MenuDanhMucDuAn = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Dự án",
-    url: "",
-  },
-];
-
-export const MenuDanhMucLoaiSoLieu = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Loại số liệu",
-    url: "",
-  },
-];
-
-export const MenuDanhMucThietBiQuanTrac = [
-  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
-  {
-    title: "Danh mục",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
-  },
-  {
-    title: "Thiết bị quan trắc",
-    url: "",
-  },
-];
