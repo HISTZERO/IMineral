@@ -112,7 +112,7 @@ export class CaptruluongIoComponent implements OnInit {
  }
 
  /**
-  * hàm set value cho form
+  * Hàm set value cho form
   */
  formOnEdit() {
    if (this.obj && this.purpose === 'edit') {
@@ -146,8 +146,7 @@ export class CaptruluongIoComponent implements OnInit {
          )
      );
    } else if (operMode === "edit") {
-     const id: string = this.obj.id;
-     this.inputModel.idcaptruluong = id;
+     this.inputModel.idcaptruluong = this.obj.idcaptruluong;
      dmFacadeService.updateItem(this.inputModel).subscribe(
        (res) => this.matSidenavService.doParentFunction("getAllCapTruLuong"),
        (error: HttpErrorResponse) => {

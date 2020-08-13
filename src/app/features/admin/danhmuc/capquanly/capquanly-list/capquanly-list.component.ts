@@ -32,9 +32,6 @@ export class CapquanlyListComponent implements OnInit {
   // Chứa dữ liệu đã chọn 
   public selectedItem: OutputCapQuanLyModel;
 
-  // Chứa danh sách dữ liệu
-  public listData: any;
-
   // Chứa dữ liệu translate
   public dataTranslate: any;
 

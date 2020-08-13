@@ -1,3 +1,85 @@
-<p>
-  loaitailieu-io works!
-</p>
+<div class="pt-3">
+  <form [formGroup]="loaiTaiLieuIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaitailieu.maloaitailieu" | translate }}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="maloaitailieu" placeholder="{{'DANHMUC.loaitailieu.maloaitailieuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.maloaitailieu" class="alert-danger">{{formErrors.maloaitailieu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaitailieu.tenloaitailieu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="tenloaitailieu" placeholder="{{'DANHMUC.loaitailieu.tenloaitailieuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tenloaitailieu" class="alert-danger">{{formErrors.tenloaitailieu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaitailieu.nhomloaitailieu" | translate }}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="nhomloaitailieu" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.loaitailieu.chonNhomloaitailieu" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let nhom of listNhomloaitailieu" [value]="nhom.id">
+            {{ nhom.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.nhomloaitailieu" class="alert-danger">{{formErrors.nhomloaitailieu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaitailieu.trangthai" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.loaitailieu.chonTrangthai" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+            {{ tt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaitailieu.thutu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.loaitailieu.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaitailieu.mota" | translate}}</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" formControlName="mota" placeholder="{{'DANHMUC.loaitailieu.motaPlaceholder' | translate}}"></textarea>
+        <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeLoaiTaiLieuIOSidenav()">
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

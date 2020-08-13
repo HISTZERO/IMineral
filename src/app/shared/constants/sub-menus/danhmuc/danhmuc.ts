@@ -60,4 +60,98 @@ export const MenuDanhMucCapTruLuong = [
   },
 ];
 
+export const MenuDanhMucCoQuanQuanLy = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Cơ quan quản lý",
+    url: "",
+  },
+];
 
+export const MenuDanhMucLoaiBaoCao = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại Báo Cáo",
+    url: "",
+  },
+];
+
+export const MenuDanhMucNhomKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Nhóm khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuDanhMucLoaiKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuDanhMucLoaiTaiLieu = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại tài liệu",
+    url: "",
+  },
+];
+
+export const MenuDanhMucLoaiToChuc = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại tổ chức",
+    url: "",
+  },
+];
+
+export const MenuDanhMucNguonGocMo = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Nguồn gốc mỏ",
+    url: "",
+  },
+];
+
+export const MenuDanhMucThuTucHanhChinh = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Thủ tục hành chính",
+    url: "",
+  },
+];

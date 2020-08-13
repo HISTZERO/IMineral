@@ -33,24 +33,6 @@ export class CaptainguyenIoComponent implements OnInit {
   // Chứa dữ liệu input
   public inputModel: InputCapTaiNguyenModel;
 
-  // Chứa danh sách Dvhc Tỉnh
-  public allTinh: any;
-
-  // Chứa danh sách Dvhc Huyện
-  public allHuyen: any;
-
-  // Chứa danh sách Dvhc Xã
-  public allXa: any;
-  
-  // Filter Đơn vị hành chính Tỉnh
-  public dvhcProvinceFilters: OutputDvhcModel[];
-
-  // Filter Đơn vị hành chính Huyện
-  public dvhcDistrictFilters: OutputDvhcModel[];
-
-  // Filter Đơn vị hành chính Xã
-  public dvhcWardFilters: OutputDvhcModel[];
-
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
 
@@ -112,7 +94,6 @@ export class CaptainguyenIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   public bindingConfigAddOrUpdate() {
-    this.showDvhcTinh();
     this.editMode = false;
     this.inputModel = new InputCapTaiNguyenModel();
     // check edit
@@ -146,72 +127,8 @@ export class CaptainguyenIoComponent implements OnInit {
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
-      this.showDvhcHuyen();
-      this.showDvhcXa();
     }
     this.editMode = true;
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Tỉnh
-   */
-  async showDvhcTinh() {
-    const allTinhData: any = await this.dmFacadeService
-      .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Huyện
-   */
-  async showDvhcHuyen() {
-    if (!this.capTaiNguyenIOForm.value.matinh === true) {
-      this.allHuyen = [];
-      this.dvhcDistrictFilters = [];
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      if (this.editMode === true) {
-        this.capTaiNguyenIOForm.controls["mahuyen"].setValue("");
-      }
-    }
-    if (!this.capTaiNguyenIOForm.value.matinh === false) {
-      if (this.editMode === true) {
-        this.capTaiNguyenIOForm.controls["mahuyen"].setValue("");
-      }
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      this.allHuyen = await this.dmFacadeService
-        .getDistrictService()
-        .getFetchAll({ matinh: this.capTaiNguyenIOForm.value.matinh });
-      this.dvhcDistrictFilters = this.allHuyen;
-    }
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Xã
-   */
-  async showDvhcXa() {
-    if (!this.capTaiNguyenIOForm.value.mahuyen === true) {
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      if (this.editMode === true) {
-        this.capTaiNguyenIOForm.controls["maxa"].setValue("");
-      }
-    }
-    if (
-      !this.capTaiNguyenIOForm.value.matinh === false &&
-      !this.capTaiNguyenIOForm.value.mahuyen === false
-    ) {
-      if (this.editMode === true) {
-        this.capTaiNguyenIOForm.controls["maxa"].setValue("");
-      }
-      this.allXa = await this.dmFacadeService
-        .getWardService()
-        .getFetchAll({ mahuyen: this.capTaiNguyenIOForm.value.mahuyen });
-      this.dvhcWardFilters = this.allXa;
-    }
   }
 
   /**
@@ -233,8 +150,7 @@ export class CaptainguyenIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      const id: string = this.obj.id;
-      this.inputModel.idcaptainguyen = id;
+      this.inputModel.idcaptainguyen = this.obj.idcaptainguyen;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapTaiNguyen"),
         (error: HttpErrorResponse) => {

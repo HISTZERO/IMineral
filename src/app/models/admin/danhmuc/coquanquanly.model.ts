@@ -11,6 +11,9 @@ export class OutputCoQuanQuanLyModel {
     matinh: string;
     mahuyen: string;
     maxa: string;
+    idtinh: string;
+    idhuyen: string;
+    idxa: string;
     trangthai: number;
     thutu: number;
 }
@@ -28,6 +31,9 @@ export class InputCoQuanQuanLyModel {
     matinh: string;
     mahuyen: string;
     maxa: string;
+    idtinh: string;
+    idhuyen: string;
+    idxa: string;
     trangthai: number;
     thutu: number;
 }

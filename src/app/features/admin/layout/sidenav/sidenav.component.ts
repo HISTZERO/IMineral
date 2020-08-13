@@ -100,6 +100,11 @@ export class SidenavComponent implements OnInit {
               faIcon: "far fa-map-marked-alt",
             },
             {
+              label: "Cơ quan quản lý",
+              link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.coquanquanlyUri}`,
+              faIcon: "far fa-map-marked-alt",
+            },
+            {
               label: "Đơn vị hành chính",
               link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.dvhcUri}`,
               faIcon: "far fa-map-marked-alt",

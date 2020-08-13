@@ -33,24 +33,6 @@ export class CapquanlyIoComponent implements OnInit {
   // Chứa dữ liệu input
   public inputModel: InputCapQuanLyModel;
 
-  // Chứa danh sách Dvhc Tỉnh
-  public allTinh: any;
-
-  // Chứa danh sách Dvhc Huyện
-  public allHuyen: any;
-
-  // Chứa danh sách Dvhc Xã
-  public allXa: any;
-  
-  // Filter Đơn vị hành chính Tỉnh
-  public dvhcProvinceFilters: OutputDvhcModel[];
-
-  // Filter Đơn vị hành chính Huyện
-  public dvhcDistrictFilters: OutputDvhcModel[];
-
-  // Filter Đơn vị hành chính Xã
-  public dvhcWardFilters: OutputDvhcModel[];
-
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
 
@@ -111,7 +93,6 @@ export class CapquanlyIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.showDvhcTinh();
     this.editMode = false;
     this.inputModel = new InputCapQuanLyModel();
     // check edit
@@ -143,72 +124,8 @@ export class CapquanlyIoComponent implements OnInit {
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
-      this.showDvhcHuyen();
-      this.showDvhcXa();
     }
     this.editMode = true;
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Tỉnh
-   */
-  async showDvhcTinh() {
-    const allTinhData: any = await this.dmFacadeService
-      .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Huyện
-   */
-  async showDvhcHuyen() {
-    if (!this.capQuanLyIOForm.value.matinh === true) {
-      this.allHuyen = [];
-      this.dvhcDistrictFilters = [];
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      if (this.editMode === true) {
-        this.capQuanLyIOForm.controls["mahuyen"].setValue("");
-      }
-    }
-    if (!this.capQuanLyIOForm.value.matinh === false) {
-      if (this.editMode === true) {
-        this.capQuanLyIOForm.controls["mahuyen"].setValue("");
-      }
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      this.allHuyen = await this.dmFacadeService
-        .getDistrictService()
-        .getFetchAll({ matinh: this.capQuanLyIOForm.value.matinh });
-      this.dvhcDistrictFilters = this.allHuyen;
-    }
-  }
-
-  /**
-   * Hàm lấy danh sách Dvhc Xã
-   */
-  async showDvhcXa() {
-    if (!this.capQuanLyIOForm.value.mahuyen === true) {
-      this.allXa = [];
-      this.dvhcWardFilters = [];
-      if (this.editMode === true) {
-        this.capQuanLyIOForm.controls["maxa"].setValue("");
-      }
-    }
-    if (
-      !this.capQuanLyIOForm.value.matinh === false &&
-      !this.capQuanLyIOForm.value.mahuyen === false
-    ) {
-      if (this.editMode === true) {
-        this.capQuanLyIOForm.controls["maxa"].setValue("");
-      }
-      this.allXa = await this.dmFacadeService
-        .getWardService()
-        .getFetchAll({ mahuyen: this.capQuanLyIOForm.value.mahuyen });
-      this.dvhcWardFilters = this.allXa;
-    }
   }
 
   /**
@@ -230,8 +147,7 @@ export class CapquanlyIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      const id: string = this.obj.id;
-      this.inputModel.idcapquanly = id;
+      this.inputModel.idcapquanly = this.obj.idcapquanly;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapQuanLy"),
         (error: HttpErrorResponse) => {

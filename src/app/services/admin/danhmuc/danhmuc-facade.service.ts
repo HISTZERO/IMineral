@@ -9,7 +9,14 @@ import { DvhcService } from "src/app/services/admin/common/dvhc.service";
 import { CapquanlyService } from "src/app/services/admin/danhmuc/capquanly.service";
 import { CaptainguyenService } from "src/app/services/admin/danhmuc/captainguyen.service";
 import { CaptruluongService } from "src/app/services/admin/danhmuc/captruluong.service";
-import { CoquanquanlyService } from "./coquanquanly.service";
+import { CoquanquanlyService } from "src/app/services/admin/danhmuc/coquanquanly.service";
+import { LoaibaocaoService } from "src/app/services/admin/danhmuc/loaibaocao.service";
+import { NhomkhoangsanService } from "src/app/services/admin/danhmuc/nhomkhoangsan.service";
+import { LoaikhoangsanService } from "src/app/services/admin/danhmuc/loaikhoangsan.service";
+import { LoaitailieuService } from "src/app/services/admin/danhmuc/loaitailieu.service";
+import { LoaitochucService } from "src/app/services/admin/danhmuc/loaitochuc.service";
+import { NguongocmoService } from "src/app/services/admin/danhmuc/nguongocmo.service";
+import { ThutuchanhchinhService } from "./thutuchanhchinh.service";
 
 @Injectable({
   providedIn: "root",
@@ -60,5 +67,40 @@ export class DmFacadeService {
   // Cơ quan quản lý Service
   public getCoQuanQuanLyService() {
     return new CoquanquanlyService(this.httpClient);
+  }
+
+  // Loại báo cáo service
+  public getLoaiBaoCaoService() {
+    return new LoaibaocaoService(this.httpClient);
+  }
+
+  // Nhóm khoáng sản Service
+  public getNhomKhoangSanService() {
+    return new NhomkhoangsanService(this.httpClient);
+  }
+
+  // Loại khoáng sản Service
+  public getLoaiKhoangSanService() {
+    return new LoaikhoangsanService(this.httpClient);
+  }
+
+  // Loại tài liệu Service
+  public getLoaiTaiLieuService() {
+    return new LoaitailieuService(this.httpClient);
+  }
+
+  // Loại tổ chức Service
+  public getLoaiToChucService() {
+    return new LoaitochucService(this.httpClient);
+  }
+
+  // Nguồn gốc mỏ Service
+  public getNguonGocMoService() {
+    return new NguongocmoService(this.httpClient);
+  }
+
+  // Thủ tục hành chính Service
+  public getThuTucHanhChinhService() {
+    return new ThutuchanhchinhService(this.httpClient);
   }
 }

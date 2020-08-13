@@ -261,8 +261,7 @@ export class DmCanhanIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      const id: number = this.obj.id;
-      this.inputModel.idcanhan = id;
+      this.inputModel.idcanhan = this.obj.idcanhan;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
         (error: HttpErrorResponse) => {
