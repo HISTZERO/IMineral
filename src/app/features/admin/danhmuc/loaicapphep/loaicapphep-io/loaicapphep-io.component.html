@@ -1,3 +1,99 @@
-<p>
-  loaicapphep-io works!
-</p>
+<div class="pt-3">
+  <form [formGroup]="loaiCapPhepIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaicapphep.maloaicapphep" | translate }}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="maloaicapphep" placeholder="{{'DANHMUC.loaicapphep.maloaicapphepPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.maloaicapphep" class="alert-danger">{{formErrors.maloaicapphep}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.tenloaicapphep" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="tenloaicapphep" placeholder="{{'DANHMUC.loaicapphep.tenloaicapphepPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tenloaicapphep" class="alert-danger">{{formErrors.tenloaicapphep}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.nhomloaicapphep" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="nhomloaicapphep" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.loaicapphep.chonNhomloaicapphep" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let nhomLCP of nhomLoaiCapPhep" [value]="nhomLCP.id">
+            {{ nhomLCP.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.nhomloaicapphep" class="alert-danger">{{formErrors.nhomloaicapphep}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="idthutuchanhchinh" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let thutuc of thuTucHanhChinh" [value]="thutuc.id">
+            {{ thutuc.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.idthutuchanhchinh" class="alert-danger">{{formErrors.idthutuchanhchinh}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.trangthai" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.loaicapphep.chonTrangthai" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+            {{ tt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.thutu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.loaicapphep.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.mota" | translate}}</label>
+      <div class="col-sm-8">
+        <textarea class="form-control" formControlName="mota" placeholder="{{'DANHMUC.loaicapphep.motaPlaceholder' | translate}}"></textarea>
+        <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeLoaiCapPhepIOSidenav()">
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

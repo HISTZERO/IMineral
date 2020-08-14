@@ -155,3 +155,39 @@ export const MenuDanhMucThuTucHanhChinh = [
     url: "",
   },
 ];
+
+export const MenuDanhMucToChuc = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Tổ chức",
+    url: "",
+  },
+];
+
+export const MenuDanhMucLoaiCapPhep = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại cấp phép",
+    url: "",
+  },
+];
+
+export const MenuDanhMucLoaiGiayPhep = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Loại giấy phép",
+    url: "",
+  },
+];

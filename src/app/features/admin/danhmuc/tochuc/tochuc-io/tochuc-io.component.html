@@ -1,3 +1,195 @@
-<p>
-  tochuc-io works!
-</p>
+<div class="pt-3">
+  <form [formGroup]="tochucIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.tochuc.tentochuc" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="tentochuc" placeholder="{{'DANHMUC.tochuc.tentochucPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tentochuc" class="alert-danger">{{formErrors.tentochuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.diachi" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="diachi" placeholder="{{'DANHMUC.tochuc.diachiPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.sogiayto" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'DANHMUC.tochuc.sogiaytoPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.loaigiayto" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="loaigiayto" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.tochuc.chonLoaiGiayTo" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let loai of loaigiayto" [value]="loai.id">
+            {{ loai.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.loaigiayto" class="alert-danger">{{formErrors.loaigiayto}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.ngaycap" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="ngaycap"  placeholder="{{'DANHMUC.tochuc.ngaycapPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.noicap" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="noicap" placeholder="{{'DANHMUC.tochuc.noicapPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.tochuc.loaitochuc" | translate }}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="idloaitochuc" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tenloaitochuc'" [array]="listLoaiToChucFilter" (filteredReturn)="listLoaiToChuc = $event">
+          </mat-select-filter>
+          <mat-option value="">
+            {{ "DANHMUC.tochuc.chonLoaiToChuc" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let loaiTC of listLoaiToChuc" [value]="loaiTC.idloaitochuc">
+            {{ loaiTC.tenloaitochuc }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.idloaitochuc" class="alert-danger">{{formErrors.idloaitochuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.fax" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="fax" placeholder="{{'DANHMUC.tochuc.faxPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.fax" class="alert-danger">{{formErrors.fax}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.website" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="website"  placeholder="{{'DANHMUC.tochuc.websitePlaceholder' | translate}}" />
+        <span *ngIf="formErrors.website" class="alert-danger">{{formErrors.website}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.dienthoai" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="dienthoai" placeholder="{{'DANHMUC.tochuc.dienthoaiPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.dienthoai" class="alert-danger">{{formErrors.dienthoai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.email" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="email" placeholder="{{'DANHMUC.tochuc.emailPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.email" class="alert-danger">{{formErrors.email}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="matinh"
+          (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+          </mat-select-filter>
+          <mat-option value="">
+            {{ "COMMON.default.chonTinh" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let tinh of allTinh" [value]="tinh.matinh">
+            {{ tinh.tendvhc }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="mahuyen"
+          (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
+          </mat-select-filter>
+          <mat-option value="">
+            {{ "COMMON.default.chonHuyen" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let huyen of allHuyen" [value]="huyen.mahuyen">
+            {{ huyen.tendvhc }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"COMMON.default.maxa" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="maxa" *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
+          </mat-select-filter>
+          <mat-option value="">
+            {{ "COMMON.default.chonXa" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let xa of allXa" [value]="xa.maxa">
+            {{ xa.tendvhc }}
+          </mat-option>
+        </mat-select>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.trangthai" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.tochuc.chonTrangthai" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+            {{ tt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.thutu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.tochuc.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeToChucIOSidenav()">
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

@@ -16,11 +16,15 @@ import { LoaikhoangsanService } from "src/app/services/admin/danhmuc/loaikhoangs
 import { LoaitailieuService } from "src/app/services/admin/danhmuc/loaitailieu.service";
 import { LoaitochucService } from "src/app/services/admin/danhmuc/loaitochuc.service";
 import { NguongocmoService } from "src/app/services/admin/danhmuc/nguongocmo.service";
-import { ThutuchanhchinhService } from "./thutuchanhchinh.service";
+import { ThutuchanhchinhService } from "src/app/services/admin/danhmuc/thutuchanhchinh.service";
+import { TochucService } from "src/app/services/admin/danhmuc/tochuc.service";
+import { LoaicapphepService } from "./loaicapphep.service";
+import { LoaigiayphepService } from "./loaigiayphep.service";
 
 @Injectable({
   providedIn: "root",
 })
+
 export class DmFacadeService {
   constructor(private httpClient: HttpClient) {}
 
@@ -102,5 +106,20 @@ export class DmFacadeService {
   // Thủ tục hành chính Service
   public getThuTucHanhChinhService() {
     return new ThutuchanhchinhService(this.httpClient);
+  }
+
+  // Tổ chức Service
+  public getToChucService() {
+    return new TochucService(this.httpClient);
+  }
+
+  // Loại cấp phép Service
+  public getLoaiCapPhepService() {
+    return new LoaicapphepService(this.httpClient);
+  }
+
+  // Loại giấy phép Service
+  public getLoaiGiayPhepService() {
+    return new LoaigiayphepService(this.httpClient);
   }
 }

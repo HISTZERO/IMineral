@@ -1,10 +1,10 @@
 export const TrangThai = [
     {
-        id: 1,
-        name: "Active"
+        id: 0,
+        name: "NoActive"
     },
     {
-        id: 2,
-        name: "Unactive"
+        id: 1,
+        name: "Active"
     }
 ]
