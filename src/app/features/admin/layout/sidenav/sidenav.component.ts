@@ -176,16 +176,6 @@ export class SidenavComponent implements OnInit {
       link: ""
     },
     {
-      label: "BÁO CÁO ĐIỀU TRA KHẢO SÁT KHOÁNG SẢN",
-      faIcon: "",
-      link: ""
-    },
-    {
-      label: "BÁO CÁO ĐỊNH KỲ HOẠT ĐỘNG KHOÁNG SẢN",
-      faIcon: "",
-      link: ""
-    },
-    {
       label: "DỮ LIỆU KHÔNG GIAN",
       faIcon: "fal fa-globe",
       items: [
@@ -219,15 +209,27 @@ export class SidenavComponent implements OnInit {
     {
       label: "BÁO CÁO THỐNG KÊ",
       faIcon: "",
-      link: ""
+      link: "",
+      items: [
+        {
+          label: "Báo cáo điều tra khảo sát khoáng sản",
+          faIcon: "",
+          link: ""
+        },
+        {
+          label: "Báo cáo định kỳ hoạt động khoáng sản",
+          faIcon: "",
+          link: ""
+        },
+        {
+          label: "Giám sát hoạt động khoáng sản",
+          faIcon: "",
+          link: ""
+        },
+      ]
     },
     {
       label: "VĂN BẢN PHÁP QUY",
-      faIcon: "",
-      link: ""
-    },
-    {
-      label: "GIÁM SÁT HOẠT ĐỘNG KHOÁNG SẢN",
       faIcon: "",
       link: ""
     },
