@@ -1,21 +1,24 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { DmCanhanListComponent } from "src/app/features/admin/danhmuc/canhan/canhan-list.component";
-import { DmNhomthamsoListComponent } from "src/app/features/admin/danhmuc/nhomthamso/nhomthamso-list.component";
 import { DmDvhcListComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-list.component";
-import { DmCongtyListComponent } from "src/app/features/admin/danhmuc/congty/congty-list.component";
-import { DmCoquanListComponent } from "src/app/features/admin/danhmuc/coquan/coquan-list.component";
-import { DmTangchuanuocListComponent } from "src/app/features/admin/danhmuc/tangchuanuoc/tangchuanuoc-list.component";
-import { DmTieuchuanListComponent } from "src/app/features/admin/danhmuc/tieuchuan/tieuchuan-list.component";
-import { DmThamsoListComponent } from "src/app/features/admin/danhmuc/thamso/thamso-list.component";
-import { DmTcclListComponent } from "src/app/features/admin/danhmuc/tccl/tccl-list.component";
-import { DmDuanListComponent } from "src/app/features/admin/danhmuc/duan/duan-list.component";
-import { DmLoaisolieuListComponent } from "src/app/features/admin/danhmuc/loaisolieu/loaisolieu-list.component";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { DmDonvidoListComponent } from "src/app/features/admin/danhmuc/donvido/donvido-list.component";
-import { HuonggioListComponent } from "src/app/features/admin/danhmuc/huonggio/huonggio-list/huonggio-list.component";
-import { DmThietbiquantracListComponent } from "src/app/features/admin/danhmuc/thietbiquantrac/thietbiquantrac-list.component";
+import { DmCanhanListComponent } from "src/app/features/admin/danhmuc/canhan/canhan-list.component";
+import { CapquanlyListComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-list/capquanly-list.component";
+import { CaptainguyenListComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-list/captainguyen-list.component";
+import { CaptruluongListComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-list/captruluong-list.component";
+import { CoquanquanlyListComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-list/coquanquanly-list.component";
+import { LoaibaocaoListComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-list/loaibaocao-list.component";
+import { LoaicapphepListComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-list/loaicapphep-list.component";
+import { LoaigiayphepListComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-list/loaigiayphep-list.component";
+import { LoaikhoangsanListComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component";
+import { LoaitailieuListComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-list/loaitailieu-list.component";
+import { LoaitochucListComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-list/loaitochuc-list.component";
+import { NguongocmoListComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-list/nguongocmo-list.component";
+import { NhomkhoangsanListComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-list/nhomkhoangsan-list.component";
+import { ThutuchanhchinhListComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-list/thutuchanhchinh-list.component";
+import { TochucListComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-list/tochuc-list.component";
+
 
 const dmRoutes: Routes = [
   {
@@ -24,54 +27,22 @@ const dmRoutes: Routes = [
       {
         path: "",
         children: [
-          { path: "", component: DmCanhanListComponent },
-          {
-            path: AdminRoutingName.canhanUri,
-            component: DmCanhanListComponent,
-          },
-          {
-            path: AdminRoutingName.nhomthamsoUri,
-            component: DmNhomthamsoListComponent,
-          },
+          { path: AdminRoutingName.canhanUri, component: DmCanhanListComponent},
           { path: AdminRoutingName.dvhcUri, component: DmDvhcListComponent },
-          {
-            path: AdminRoutingName.congtyUri,
-            component: DmCongtyListComponent,
-          },
-          {
-            path: AdminRoutingName.coquanUri,
-            component: DmCoquanListComponent,
-          },
-          {
-            path: AdminRoutingName.tangchuanuocUri,
-            component: DmTangchuanuocListComponent,
-          },
-          {
-            path: AdminRoutingName.donvidoUri,
-            component: DmDonvidoListComponent,
-          },
-          {
-            path: AdminRoutingName.tieuchuanUri,
-            component: DmTieuchuanListComponent,
-          },
-          {
-            path: AdminRoutingName.huonggioUri,
-            component: HuonggioListComponent,
-          },
-          {
-            path: AdminRoutingName.thamsoUri,
-            component: DmThamsoListComponent,
-          },
-          { path: AdminRoutingName.tcclUri, component: DmTcclListComponent },
-          { path: AdminRoutingName.duanUri, component: DmDuanListComponent },
-          {
-            path: AdminRoutingName.loaisolieuUri,
-            component: DmLoaisolieuListComponent,
-          },
-          {
-            path: AdminRoutingName.thietbiquantracUri,
-            component: DmThietbiquantracListComponent,
-          },
+          { path: AdminRoutingName.capquanlyUri, component: CapquanlyListComponent },
+          { path: AdminRoutingName.captainguyenUri, component: CaptainguyenListComponent },
+          { path: AdminRoutingName.captruluongUri, component: CaptruluongListComponent },
+          { path: AdminRoutingName.coquanquanlyUri, component: CoquanquanlyListComponent },
+          { path: AdminRoutingName.loaibaocaoUri, component: LoaibaocaoListComponent },
+          { path: AdminRoutingName.loaicapphepUri, component: LoaicapphepListComponent },
+          { path: AdminRoutingName.loaigiayphepUri, component: LoaigiayphepListComponent },
+          { path: AdminRoutingName.loaikhoangsanUri, component: LoaikhoangsanListComponent },
+          { path: AdminRoutingName.loaitailieuUri, component: LoaitailieuListComponent },
+          { path: AdminRoutingName.loaitochucUri, component: LoaitochucListComponent },
+          { path: AdminRoutingName.nguongocmoUri, component: NguongocmoListComponent },
+          { path: AdminRoutingName.nhomkhoangsanUri, component: NhomkhoangsanListComponent },
+          { path: AdminRoutingName.thutuchanhchinhUri, component: ThutuchanhchinhListComponent},
+          { path: AdminRoutingName.tochucUri, component: TochucListComponent}
         ],
       },
     ],

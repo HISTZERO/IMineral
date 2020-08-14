@@ -1,0 +1,141 @@
+<div class="pt-3">
+  <form [formGroup]="thuTucHanhChinhIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.thutuchanhchinh.mathutuc" | translate }}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="mathutuc" placeholder="{{'DANHMUC.thutuchanhchinh.mathutucPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.mathutuc" class="alert-danger">{{formErrors.mathutuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.tenthutuc" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="tenthutuc" placeholder="{{'DANHMUC.thutuchanhchinh.tenthutucPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tenthutuc" class="alert-danger">{{formErrors.tenthutuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.linhvuc" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.linhvucPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.idlinhvuc" class="alert-danger">{{formErrors.idlinhvuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.capthuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="idcapthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.idcapthuchien" class="alert-danger">{{formErrors.idcapthuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.doituongthuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="doituongthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.doituongthuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.doituongthuchien" class="alert-danger">{{formErrors.doituongthuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.coquanthuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="coquanthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.coquanthuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.coquanthuchien" class="alert-danger">{{formErrors.coquanthuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.ketquathuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="ketquathuchien" placeholder="{{'DANHMUC.thutuchanhchinh.ketquathuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.ketquathuchien" class="alert-danger">{{formErrors.ketquathuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.yeucaudieukien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="yeucaudieukien" placeholder="{{'DANHMUC.thutuchanhchinh.yeucaudieukienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.yeucaudieukien" class="alert-danger">{{formErrors.yeucaudieukien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.noitiepnhanhoso" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="noitiepnhanhoso" placeholder="{{'DANHMUC.thutuchanhchinh.noitiepnhanhosoPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.noitiepnhanhoso" class="alert-danger">{{formErrors.noitiepnhanhoso}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.trinhtuthuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="trinhtuthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.trinhtuthuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.trinhtuthuchien" class="alert-danger">{{formErrors.trinhtuthuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.cachthucthuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="cachthucthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.cachthucthuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.cachthucthuchien" class="alert-danger">{{formErrors.cachthucthuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.songaythuchien" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="songaythuchien" placeholder="{{'DANHMUC.thutuchanhchinh.songaythuchienPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.songaythuchien" class="alert-danger">{{formErrors.songaythuchien}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.lephi" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="lephi" placeholder="{{'DANHMUC.thutuchanhchinh.lephiPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.lephi" class="alert-danger">{{formErrors.lephi}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.trangthai" | translate}}</label>
+      <div class="col-sm-8">
+        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANHMUC.thutuchanhchinh.chonTrangthai" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+            {{ tt.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.thutu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.thutuchanhchinh.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeThuTucHanhChinhIOSidenav()">
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

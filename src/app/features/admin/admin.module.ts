@@ -11,7 +11,6 @@ import { SimplebarAngularModule } from "simplebar-angular";
 import { ThietlapModule } from "./thietlap/thietlap.module";
 import { QuantriRoutingModule } from "./admin-routing.module";
 import { MapModule } from "src/app/features/admin/map/map.module";
-import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
 import { ThongkeModule } from "src/app/features/admin/thongke/thongke.module";
 import { BaocaoModule } from "src/app/features/admin/baocao/baocao.module";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
@@ -20,6 +19,7 @@ import { ErrorModule } from "src/app/shared/modules/error/error.module";
 // Components
 import { DashboardComponent } from "src/app/features/admin/dashboard/dashboard.component";
 import { SidenavComponent } from "src/app/features/admin/layout/sidenav/sidenav.component";
+import { DanhmucModule } from "./danhmuc/danhmuc.module";
 
 @NgModule({
   declarations: [SidenavComponent, AdminComponent, DashboardComponent],
