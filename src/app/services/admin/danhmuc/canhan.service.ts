@@ -19,7 +19,7 @@ export class DmCanhanService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputCanhanModel(),
       outputModelName: new OutputCanhanModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.CANHAN
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN
     });
   }
 

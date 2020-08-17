@@ -87,7 +87,6 @@ export class LoaicapphepListComponent implements OnInit {
    * Hàm lấy dữ liệu Loại cấp phép
    */
   async getAllLoaiCapPhep() {
-    this.listLoaiCapPhep = [];
     const listData: any = await this.dmFacadeService
       .getLoaiCapPhepService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class LoaicapphepListComponent implements OnInit {
         loaiCP.serialNumber = index + 1;
       });
     }
-    // this.listLoaiCapPhep = listData.items;
+    this.listLoaiCapPhep = listData.items;
   }
 
   /**
@@ -168,7 +167,7 @@ export class LoaicapphepListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getLoaiCapPhepService()
-          .deleteItem({ id: this.selectedItem.idloaicapphep })
+          .deleteItem({ idLoaicapphep: this.selectedItem.idloaicapphep })
           .subscribe(
             () => this.getAllLoaiCapPhep(),
             (error: HttpErrorResponse) => {

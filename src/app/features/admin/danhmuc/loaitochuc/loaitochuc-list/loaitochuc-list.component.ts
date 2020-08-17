@@ -87,7 +87,6 @@ export class LoaitochucListComponent implements OnInit {
    * Hàm lấy dữ liệu loại tổ chức
    */
   async getAllLoaiToChuc() {
-    this.listLoaiToChuc = [];
     const listData: any = await this.dmFacadeService
       .getLoaiToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class LoaitochucListComponent implements OnInit {
         loaiTC.serialNumber = index + 1;
       });
     }
-    // this.listLoaiToChuc = listData.items;
+    this.listLoaiToChuc = listData.items;
   }
 
   /**

@@ -87,7 +87,6 @@ export class LoaibaocaoListComponent implements OnInit {
     * Hàm lấy dữ liệu Loại báo cáo
     */
    async getAllLoaiBaoCao() {
-     this.listLoaiBaoCao = [];
      const listData: any = await this.dmFacadeService
        .getLoaiBaoCaoService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class LoaibaocaoListComponent implements OnInit {
          loaibaocao.serialNumber = index + 1;
        });
      }
-     // this.listLoaiBaoCao = listData.items;
+     this.listLoaiBaoCao = listData.items;
    }
  
    /**
@@ -168,7 +167,7 @@ export class LoaibaocaoListComponent implements OnInit {
        if (result === "confirm") {
          await this.dmFacadeService
            .getLoaiBaoCaoService()
-           .deleteItem({ id: this.selectedItem.idloaibaocao })
+           .deleteItem({ idLoaibaocao: this.selectedItem.idloaibaocao })
            .subscribe(
              () => this.getAllLoaiBaoCao(),
              (error: HttpErrorResponse) => {

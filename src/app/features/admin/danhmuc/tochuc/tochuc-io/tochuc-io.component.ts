@@ -132,6 +132,7 @@ export class TochucIoComponent implements OnInit {
      dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber},
      matinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
      mahuyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
+     thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber }
     };
   }
 
@@ -139,11 +140,10 @@ export class TochucIoComponent implements OnInit {
    * Hàm lấy dữ liệu loại tổ chức
    */
   async getAllLoaiToChuc() {
-    this.listLoaiToChuc = [];
     const listData: any = await this.dmFacadeService
       .getLoaiToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    // this.listLoaiToChuc = listData.items;
+    this.listLoaiToChuc = listData.items;
   }
 
   /**
@@ -168,7 +168,7 @@ export class TochucIoComponent implements OnInit {
       loaigiayto: [""],
       ngaycap: [""],
       noicap: [""],
-      idloaisolieu: [""],
+      idloaitochuc: [""],
       fax: [""],
       website: [""],
       dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
@@ -177,7 +177,7 @@ export class TochucIoComponent implements OnInit {
       mahuyen: ["", Validators.required],
       maxa: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 
@@ -193,7 +193,7 @@ export class TochucIoComponent implements OnInit {
         loaigiayto: this.obj.loaigiayto,
         ngaycap: this.obj.ngaycap,
         noicap: this.obj.noicap,
-        idloaisolieu: this.obj.idloaisolieu,
+        idloaitochuc: this.obj.idloaitochuc,
         fax: this.obj.fax,
         website: this.obj.website,
         dienthoai: this.obj.dienthoai,

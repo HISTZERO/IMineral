@@ -90,7 +90,6 @@ export class CaptainguyenListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp tài nguyên
    */
   async getAllCapTaiNguyen() {
-    this.listCapTaiNguyen = [];
     const listData: any = await this.dmFacadeService
       .getCapTaiNguyenService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -99,7 +98,7 @@ export class CaptainguyenListComponent implements OnInit {
         captainguyen.serialNumber = index + 1;
       });
     }
-    // this.listCapTaiNguyen = listData.items;
+    this.listCapTaiNguyen = listData.items;
   }
 
   /**
@@ -171,7 +170,7 @@ export class CaptainguyenListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getCapTaiNguyenService()
-          .deleteItem({ id: this.selectedItem.idcaptainguyen })
+          .deleteItem({ idCaptainguyen: this.selectedItem.idcaptainguyen })
           .subscribe(
             () => this.getAllCapTaiNguyen(),
             (error: HttpErrorResponse) => {

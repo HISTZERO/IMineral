@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -96,7 +96,9 @@ export class LoaikhoangsanIoComponent implements OnInit {
     * Hàm set validate
     */
    setValidation() {
-     this.validationErrorMessages = {};
+     this.validationErrorMessages = {
+        thutu: { pattern: this.dataTranslate.DANHMUC.loaikhoangsan.thutuIsNumber }
+     };
    }
  
     /**
@@ -129,7 +131,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
        tenloaikhoangsan: [""],
        mota: [""],
        trangthai: [""],
-       thutu: [""],
+       thutu: ["", Validators.pattern("^[0-9-+]+$")],
        idnhomkhoangsan: [""]
      });
    }

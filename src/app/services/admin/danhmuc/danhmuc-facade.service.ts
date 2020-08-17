@@ -18,8 +18,8 @@ import { LoaitochucService } from "src/app/services/admin/danhmuc/loaitochuc.ser
 import { NguongocmoService } from "src/app/services/admin/danhmuc/nguongocmo.service";
 import { ThutuchanhchinhService } from "src/app/services/admin/danhmuc/thutuchanhchinh.service";
 import { TochucService } from "src/app/services/admin/danhmuc/tochuc.service";
-import { LoaicapphepService } from "./loaicapphep.service";
-import { LoaigiayphepService } from "./loaigiayphep.service";
+import { LoaicapphepService } from "src/app/services/admin/danhmuc/loaicapphep.service";
+import { LoaigiayphepService } from "src/app/services/admin/danhmuc/loaigiayphep.service";
 
 @Injectable({
   providedIn: "root",

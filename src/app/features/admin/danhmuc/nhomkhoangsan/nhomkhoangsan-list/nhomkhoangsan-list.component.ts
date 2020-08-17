@@ -87,7 +87,6 @@ export class NhomkhoangsanListComponent implements OnInit {
     * Hàm lấy dữ liệu Nhóm khoáng sản
     */
    async getAllNhomKhoangSan() {
-     this.listNhomKhoangSan = [];
      const listData: any = await this.dmFacadeService
        .getNhomKhoangSanService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class NhomkhoangsanListComponent implements OnInit {
          nhomks.serialNumber = index + 1;
        });
      }
-     // this.listNhomKhoangSan = listData.items;
+     this.listNhomKhoangSan = listData.items;
    }
  
    /**

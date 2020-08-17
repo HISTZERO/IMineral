@@ -87,7 +87,6 @@ export class CapquanlyListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp quản lý
    */
   async getAllCapQuanLy() {
-    this.listCapQuanLy = [];
     const listData: any = await this.dmFacadeService
       .getCapQuanLyService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class CapquanlyListComponent implements OnInit {
         capquanly.serialNumber = index + 1;
       });
     }
-    // this.listCapQuanLy = listData.items;
+    this.listCapQuanLy = listData.items;
   }
 
   /**
@@ -168,7 +167,7 @@ export class CapquanlyListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getCapQuanLyService()
-          .deleteItem({ id: this.selectedItem.idcapquanly })
+          .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
           .subscribe(
             () => this.getAllCapQuanLy(),
             (error: HttpErrorResponse) => {

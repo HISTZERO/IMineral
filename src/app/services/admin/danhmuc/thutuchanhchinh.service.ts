@@ -17,7 +17,7 @@ export class ThutuchanhchinhService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputThuTucHanhChinhModel(),
       outputModelName: new OutputThuTucHanhChinhModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.THUTUCHANHCHINH
+      apiUrl: environment.apiIMineral + ServiceName.THUTUCHANHCHINH
     });
   }
 

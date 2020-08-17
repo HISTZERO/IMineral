@@ -1,15 +1,16 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { InputLoaiCapPhepModel } from "../../../../../models/admin/danhmuc/loaicapphep.model";
-import { TrangThai } from "../../../../../shared/constants/trangthai-constants";
-import { NhomLoaiCapPhep } from "../../../../../shared/constants/nhomloaigiayphep-constants";
-import { ThuTucHanhChinh } from "../../../../../shared/constants/thutuchanhchinh-constants";
-import { MatsidenavService } from "../../../../../services/utilities/matsidenav.service";
-import { DmFacadeService } from "../../../../../services/admin/danhmuc/danhmuc-facade.service";
-import { CommonServiceShared } from "../../../../../services/utilities/common-service";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { validationAllErrorMessagesService } from "../../../../../services/utilities/validatorService";
+
+import { InputLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { ThuTucHanhChinh } from "src/app/shared/constants/thutuchanhchinh-constants";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-constants";
 
 @Component({
   selector: 'app-loaicapphep-io',
@@ -94,7 +95,9 @@ export class LoaicapphepIoComponent implements OnInit {
     * Hàm set validate
     */
   setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      thutu: { pattern: this.dataTranslate.DANHMUC.loaicapphep.thutuIsNumber }
+    };
   }
 
   /**
@@ -118,7 +121,7 @@ export class LoaicapphepIoComponent implements OnInit {
       idthutuchanhchinh: [""],
       mota: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 

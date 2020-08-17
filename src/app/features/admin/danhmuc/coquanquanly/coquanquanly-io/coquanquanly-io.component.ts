@@ -117,6 +117,7 @@ export class CoquanquanlyIoComponent implements OnInit {
       dienthoai: { pattern: this.dataTranslate.DANHMUC.coquanquanly.dienthoaiIsNumber},
       matinh: { required: this.dataTranslate.DANHMUC.coquanquanly.matinhRequired },
       mahuyen: { required: this.dataTranslate.DANHMUC.coquanquanly.mahuyenRequired },
+      thutu: { pattern: this.dataTranslate.DANHMUC.coquanquanly.thutuIsNumber }
      };
    }
  
@@ -148,7 +149,7 @@ export class CoquanquanlyIoComponent implements OnInit {
        mahuyen: ["", Validators.required],
        maxa: [""],
        trangthai: [""],
-       thutu: [""],
+       thutu: ["", Validators.pattern("^[0-9-+]+$")],
      });
    }
  

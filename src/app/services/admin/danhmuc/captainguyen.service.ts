@@ -17,7 +17,7 @@ export class CaptainguyenService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputCapTaiNguyenModel(),
       outputModelName: new OutputCapTaiNguyenModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.CAPTAINGUYEN
+      apiUrl: environment.apiIMineral + ServiceName.CAPTAINGUYEN
     });
   }
 

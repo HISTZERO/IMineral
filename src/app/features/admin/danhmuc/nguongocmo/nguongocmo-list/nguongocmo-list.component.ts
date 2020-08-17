@@ -87,7 +87,6 @@ export class NguongocmoListComponent implements OnInit {
     * Hàm lấy dữ liệu nguồn gốc mỏ
     */
    async getAllnguonGocMo() {
-     this.listNguonGocMo = [];
      const listData: any = await this.dmFacadeService
        .getNguonGocMoService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class NguongocmoListComponent implements OnInit {
         nguongocmo.serialNumber = index + 1;
        });
      }
-     // this.listNguonGocMo = listData.items;
+     this.listNguonGocMo = listData.items;
    }
  
    /**

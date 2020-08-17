@@ -17,7 +17,7 @@ export class CapquanlyService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputCapQuanLyModel(),
       outputModelName: new OutputCapQuanLyModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.CAPQUANLY
+      apiUrl: environment.apiIMineral + ServiceName.CAPQUANLY
     });
   }
 

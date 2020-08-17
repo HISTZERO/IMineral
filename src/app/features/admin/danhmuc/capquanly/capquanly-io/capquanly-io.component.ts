@@ -1,10 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
 import { InputCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -86,7 +85,9 @@ export class CapquanlyIoComponent implements OnInit {
    * Hàm set validate
    */
   setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      thutu: { pattern: this.dataTranslate.DANHMUC.capquanly.thutuIsNumber }
+    };
   }
 
   /**
@@ -108,7 +109,7 @@ export class CapquanlyIoComponent implements OnInit {
       tencapquanly: [""],
       mota: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 

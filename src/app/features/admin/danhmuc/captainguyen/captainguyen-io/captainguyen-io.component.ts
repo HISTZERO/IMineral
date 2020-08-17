@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { InputCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-captainguyen-io',
@@ -35,6 +35,9 @@ export class CaptainguyenIoComponent implements OnInit {
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
+
+  // Chứa nhóm cấp tài nguyên
+  public nhomCapTainguyen = NhomCapTaiNguyen;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -87,7 +90,9 @@ export class CaptainguyenIoComponent implements OnInit {
    * Hàm set validate
    */
   public setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      thutu: { pattern: this.dataTranslate.DANHMUC.captainguyen.thutuIsNumber }
+    };
   }
 
   /**
@@ -110,7 +115,7 @@ export class CaptainguyenIoComponent implements OnInit {
       nhomcaptainguyen: [""],
       mota: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["",  Validators.pattern("^[0-9-+]+$")],
     });
   }
 

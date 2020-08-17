@@ -17,7 +17,7 @@ export class LoaicapphepService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiCapPhepModel(),
       outputModelName: new OutputLoaiCapPhepModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.LOAICAPPHEP
+      apiUrl: environment.apiIMineral + ServiceName.LOAICAPPHEP
     });
   }
 

@@ -169,7 +169,7 @@ export class DmCanhanListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getDmCanhanService()
-          .deleteItem({ id: this.selectedItem.idcanhan })
+          .deleteItem({ idCanhan: this.selectedItem.idcanhan })
           .subscribe(
             () => this.getAllCanhan(),
             (error: HttpErrorResponse) => {

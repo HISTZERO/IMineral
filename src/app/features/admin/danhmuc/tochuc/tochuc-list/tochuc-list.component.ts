@@ -87,7 +87,6 @@ export class TochucListComponent implements OnInit {
    * Hàm lấy dữ liệu Tổ chức
    */
   async getAllToChuc() {
-    this.listToChuc = [];
     const listData: any = await this.dmFacadeService
       .getToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,7 +95,7 @@ export class TochucListComponent implements OnInit {
         tochuc.serialNumber = index + 1;
       });
     }
-   //  this.listToChuc = listData.items;
+    this.listToChuc = listData.items;
   }
 
   /**

@@ -17,7 +17,7 @@ export class LoaibaocaoService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiBaoCaoModel(),
       outputModelName: new OutputLoaiBaoCaoModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.LOAIBAOCAO
+      apiUrl: environment.apiIMineral + ServiceName.LOAIBAOCAO
     });
   }
 

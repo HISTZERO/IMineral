@@ -17,7 +17,7 @@ export class CaptruluongService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputCapTruLuongModel(),
       outputModelName: new OutputCapTruLuongModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.CAPTRULUONG
+      apiUrl: environment.apiIMineral + ServiceName.CAPTRULUONG
     });
   }
 

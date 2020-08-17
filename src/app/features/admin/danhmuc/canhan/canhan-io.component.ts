@@ -2,6 +2,7 @@ import { Component, OnInit } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
+import { DatePipe } from "@angular/common";
 
 import { InputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
@@ -85,7 +86,8 @@ export class DmCanhanIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public datePipe: DatePipe
   ) {}
 
   async ngOnInit() {
@@ -116,9 +118,15 @@ export class DmCanhanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       hovaten: { required: this.dataTranslate.DANHMUC.canhan.hovatenRequired },
-      dienthoai: { pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber},
+      dienthoai: { 
+        required: this.dataTranslate.DANHMUC.canhan.dienthoaiRequired,
+        pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber},
       matinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
       mahuyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
+      email: { 
+        required: this.dataTranslate.DANHMUC.canhan.emailRequired,
+        email: this.dataTranslate.DANHMUC.canhan.emailCheck},
+      thutu: { pattern: this.dataTranslate.DANHMUC.canhan.thutuIsNumber }
     };
   }
 
@@ -144,13 +152,13 @@ export class DmCanhanIoComponent implements OnInit {
       loaigiayto: [""],
       ngaycap: [""],
       noicap: [""],
-      dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
-      email: [""],
+      dienthoai: ["", [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      email: ["", [Validators.required, Validators.email]],
       matinh: ["", Validators.required],
       mahuyen: ["", Validators.required],
       maxa: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 
@@ -168,9 +176,9 @@ export class DmCanhanIoComponent implements OnInit {
         noicap: this.obj.noicap,
         dienthoai: this.obj.dienthoai,
         email: this.obj.email,
-        matinh: this.obj.matinh,
-        mahuyen: this.obj.mahuyen,
-        maxa: this.obj.maxa,
+        matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
+        mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
+        maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
@@ -212,7 +220,7 @@ export class DmCanhanIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.canhanIOForm.value.matinh });
+        .getFetchAll({ matinh: this.canhanIOForm.value.matinh.matinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -237,7 +245,7 @@ export class DmCanhanIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.canhanIOForm.value.mahuyen });
+        .getFetchAll({ mahuyen: this.canhanIOForm.value.mahuyen.mahuyen });
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -246,8 +254,19 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
+    const idtinh = this.canhanIOForm.value.matinh.idtinh;
+    const idhuyen = this.canhanIOForm.value.mahuyen.idhuyen;
+    const idxa =  this.canhanIOForm.value.maxa.idxa;
     const dmFacadeService = this.dmFacadeService.getDmCanhanService();
     this.inputModel = this.canhanIOForm.value;
+    this.inputModel.matinh = this.canhanIOForm.value.matinh.matinh;
+    this.inputModel.mahuyen = this.canhanIOForm.value.mahuyen.mahuyen;
+    this.inputModel.maxa = this.canhanIOForm.value.maxa.maxa;
+    this.inputModel.idtinh = idtinh;
+    this.inputModel.idhuyen = idhuyen;
+    this.inputModel.idxa = idxa;
+    this.inputModel.ngaycap = this.datePipe.transform( this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
+    console.log(this.inputModel);
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
@@ -281,11 +300,11 @@ export class DmCanhanIoComponent implements OnInit {
    * @param operMode 
    */
   async onSubmit(operMode: string) {
-    this.logAllValidationErrorMessages();
-    if (this.canhanIOForm.valid === true) {
+    // this.logAllValidationErrorMessages();
+    // if (this.canhanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
-    }
+    // }
   }
 
   /**
@@ -320,6 +339,38 @@ export class DmCanhanIoComponent implements OnInit {
     );
   }
 
+  /**
+   * Hàm check giá trị trong seletec option Tỉnh
+   */
+  public compareTinh(item1, item2) {
+    if(item2 === this.obj.matinh) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Huyện
+   */
+  public compareHuyen(item1, item2) {
+    if(item2 === this.obj.mahuyen) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Xã
+   */
+  public compareXa(item1, item2) {
+    if(item2 === this.obj.maxa) {
+      return true;
+    } else {
+      return false
+    }
+  }
   /**
    * Hàm close sidenav
    */

@@ -17,7 +17,7 @@ export class NguongocmoService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputNguonGocMoModel(),
       outputModelName: new OutputNguonGocMoModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.NGUONGOCMO
+      apiUrl: environment.apiIMineral + ServiceName.NGUONGOCMO
     });
   }
 
