@@ -117,7 +117,8 @@ export class CoquanquanlyIoComponent implements OnInit {
       dienthoai: { pattern: this.dataTranslate.DANHMUC.coquanquanly.dienthoaiIsNumber},
       matinh: { required: this.dataTranslate.DANHMUC.coquanquanly.matinhRequired },
       mahuyen: { required: this.dataTranslate.DANHMUC.coquanquanly.mahuyenRequired },
-      thutu: { pattern: this.dataTranslate.DANHMUC.coquanquanly.thutuIsNumber }
+      thutu: { pattern: this.dataTranslate.DANHMUC.coquanquanly.thutuIsNumber },
+      email: { email: this.dataTranslate.DANHMUC.coquanquanly.emailCheck},
      };
    }
  
@@ -144,7 +145,7 @@ export class CoquanquanlyIoComponent implements OnInit {
        website: [""],
        mota: [""],
        dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
-       email: [""],
+       email: ["", Validators.email],
        matinh: ["", Validators.required],
        mahuyen: ["", Validators.required],
        maxa: [""],
@@ -167,9 +168,9 @@ export class CoquanquanlyIoComponent implements OnInit {
          mota: this.obj.mota,
          dienthoai: this.obj.dienthoai,
          email: this.obj.email,
-         matinh: this.obj.matinh,
-         mahuyen: this.obj.mahuyen,
-         maxa: this.obj.maxa,
+         matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
+         mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
+         maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
          trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
        });
@@ -211,7 +212,7 @@ export class CoquanquanlyIoComponent implements OnInit {
        this.dvhcWardFilters = [];
        this.allHuyen = await this.dmFacadeService
          .getDistrictService()
-         .getFetchAll({ matinh: this.coQuanQuanLyIOForm.value.matinh });
+         .getFetchAll({ matinh: this.coQuanQuanLyIOForm.value.matinh.matinh });
        this.dvhcDistrictFilters = this.allHuyen;
      }
    }
@@ -236,7 +237,7 @@ export class CoquanquanlyIoComponent implements OnInit {
        }
        this.allXa = await this.dmFacadeService
          .getWardService()
-         .getFetchAll({ mahuyen: this.coQuanQuanLyIOForm.value.mahuyen });
+         .getFetchAll({ mahuyen: this.coQuanQuanLyIOForm.value.mahuyen.mahuyen });
        this.dvhcWardFilters = this.allXa;
      }
    }
@@ -245,8 +246,17 @@ export class CoquanquanlyIoComponent implements OnInit {
     * Hàm thực thi chức năng add và edit
     */
    private addOrUpdate(operMode: string) {
-     const dmFacadeService = this.dmFacadeService.getCoQuanQuanLyService();
-     this.inputModel = this.coQuanQuanLyIOForm.value;
+    const dmFacadeService = this.dmFacadeService.getCoQuanQuanLyService();
+    const idtinh = this.coQuanQuanLyIOForm.value.matinh.idtinh;
+    const idhuyen = this.coQuanQuanLyIOForm.value.mahuyen.idhuyen;
+    const idxa =  this.coQuanQuanLyIOForm.value.maxa.idxa;
+    this.inputModel = this.coQuanQuanLyIOForm.value;
+    this.inputModel.matinh = this.coQuanQuanLyIOForm.value.matinh.matinh;
+    this.inputModel.mahuyen = this.coQuanQuanLyIOForm.value.mahuyen.mahuyen;
+    this.inputModel.maxa = this.coQuanQuanLyIOForm.value.maxa.maxa;
+    this.inputModel.idtinh = idtinh;
+    this.inputModel.idhuyen = idhuyen;
+    this.inputModel.idxa = idxa ? idxa : "";
      if (operMode === "new") {
        dmFacadeService.addItem(this.inputModel).subscribe(
          (res) => this.matSidenavService.doParentFunction("getAllCoQuanQuanLy"),
@@ -319,6 +329,39 @@ export class CoquanquanlyIoComponent implements OnInit {
      );
    }
  
+   /**
+   * Hàm check giá trị trong seletec option Tỉnh
+   */
+  public compareTinh(item1: any, item2: any) {
+    if(item1.matinh === item2.matinh) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Huyện
+   */
+  public compareHuyen(item1: any, item2: any) {
+    if(item1.mahuyen === item2.mahuyen) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Xã
+   */
+  public compareXa(item1: any, item2: any) {
+    if(item1.maxa === item2.maxa) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
    /**
     * Hàm close sidenav
     */

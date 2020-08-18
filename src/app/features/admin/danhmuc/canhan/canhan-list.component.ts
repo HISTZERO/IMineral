@@ -104,7 +104,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCanhan(id: number) {
+  async editItemCanhan(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dmFacadeService
     .getDmCanhanService()

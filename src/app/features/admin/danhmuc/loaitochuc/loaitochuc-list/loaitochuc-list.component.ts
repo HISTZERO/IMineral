@@ -102,7 +102,7 @@ export class LoaitochucListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemLoaiToChuc(id: number) {
+  async editItemLoaiToChuc(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
     .getLoaiToChucService()

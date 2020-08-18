@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.capquanly.tencapquanly" | translate}}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.capquanly.tencapquanly" | translate}} <small>(*)</small></label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="tencapquanly" placeholder="{{'DANHMUC.capquanly.tencapquanlyPlaceholder' | translate}}" />
         <span *ngIf="formErrors.tencapquanly" class="alert-danger">{{formErrors.tencapquanly}}</span>
@@ -17,7 +17,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.capquanly.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.capquanly.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.capquanly.chonTrangthai" | translate }}
           </mat-option>

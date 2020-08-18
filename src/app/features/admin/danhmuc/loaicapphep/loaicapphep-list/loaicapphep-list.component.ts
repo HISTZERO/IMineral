@@ -102,7 +102,7 @@ export class LoaicapphepListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemLoaiCapPhep(id: number) {
+  async editItemLoaiCapPhep(id: string) {
     // Lấy dữ liệu loại cấp phép theo id
     const dataItem: any = await this.dmFacadeService
     .getLoaiCapPhepService()

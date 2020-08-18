@@ -102,7 +102,7 @@ export class CapquanlyListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCapQuanLy(id: number) {
+  async editItemCapQuanLy(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
     .getCapQuanLyService()

@@ -102,7 +102,7 @@ export class TochucListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemToChuc(id: number) {
+  async editItemToChuc(id: string) {
     // Lấy dữ liệu tổ chức theo id
     const dataItem: any = await this.dmFacadeService
     .getToChucService()

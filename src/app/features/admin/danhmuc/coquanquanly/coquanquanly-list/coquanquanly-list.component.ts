@@ -102,7 +102,7 @@ export class CoquanquanlyListComponent implements OnInit {
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
     */
-   async editItemCoQuanQuanLy(id: number) {
+   async editItemCoQuanQuanLy(id: string) {
      // Lấy dữ liệu cơ quan quản lý theo id
      const dataItem: any = await this.dmFacadeService
      .getCoQuanQuanLyService()

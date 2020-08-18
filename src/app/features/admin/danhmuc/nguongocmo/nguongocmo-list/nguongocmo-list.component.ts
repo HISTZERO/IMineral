@@ -102,7 +102,7 @@ export class NguongocmoListComponent implements OnInit {
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
     */
-   async editItemNguonGocMo(id: number) {
+   async editItemNguonGocMo(id: string) {
      // Lấy dữ liệu cấp quản lý theo id
      const dataItem: any = await this.dmFacadeService
      .getNguonGocMoService()

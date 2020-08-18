@@ -72,6 +72,7 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "macapquanlyPlaceholder": "Nhập mã cấp quản lý",
     "tencapquanlyPlaceholder": "Nhập tên cấp quản lý",
+    "tencapquanlyRequired": "Tên cấp quản lý không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
     "thutuPlaceholder": "Nhập thứ tự"
@@ -90,6 +91,7 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "macaptainguyenPlaceholder": "Nhập mã cấp tài nguyên",
     "tencaptainguyenPlaceholder": "Nhập tên cấp tài nguyên",
+    "tencaptainguyenRequired": "Tên cấp tài nguyên không được để trống",
     "chonNhomCapTaiNguyen": "---Chọn nhóm cấp tài nguyên---",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
@@ -108,6 +110,7 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "macaptruluongPlaceholder": "Nhập mã cấp trữ lượng",
     "tencaptruluongPlaceholder": "Nhập tên cấp trữ lượng",
+    "tencaptruluongRequired": "Tên cấp trữ lượng không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
     "thutuPlaceholder": "Nhập thứ tự"
@@ -136,6 +139,7 @@
     "websitePlaceholder": "Nhập địa chỉ website",
     "dienthoaiPlaceholder": "Nhập số điện thoại",
     "emailPlaceholder": "Nhập email",
+    "emailCheck": "Email không đúng định dạng",
     "chonTrangthai": "---Chọn trạng thái---",
     "thutuPlaceholder": "Nhập thứ tự",
     "motaPlaceholder": "Mô tả",

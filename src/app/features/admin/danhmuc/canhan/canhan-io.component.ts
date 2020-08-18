@@ -254,6 +254,7 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
+    // Gán dữ liệu input vào model
     const idtinh = this.canhanIOForm.value.matinh.idtinh;
     const idhuyen = this.canhanIOForm.value.mahuyen.idhuyen;
     const idxa =  this.canhanIOForm.value.maxa.idxa;
@@ -264,9 +265,8 @@ export class DmCanhanIoComponent implements OnInit {
     this.inputModel.maxa = this.canhanIOForm.value.maxa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
-    this.inputModel.idxa = idxa;
+    this.inputModel.idxa = idxa ? idxa : "";
     this.inputModel.ngaycap = this.datePipe.transform( this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
-    console.log(this.inputModel);
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
@@ -342,8 +342,8 @@ export class DmCanhanIoComponent implements OnInit {
   /**
    * Hàm check giá trị trong seletec option Tỉnh
    */
-  public compareTinh(item1, item2) {
-    if(item2 === this.obj.matinh) {
+  public compareTinh(item1: any, item2: any) {
+    if(item1.matinh === item2.matinh) {
       return true;
     } else {
       return false
@@ -353,8 +353,8 @@ export class DmCanhanIoComponent implements OnInit {
   /**
    * Hàm check giá trị trong seletec option Huyện
    */
-  public compareHuyen(item1, item2) {
-    if(item2 === this.obj.mahuyen) {
+  public compareHuyen(item1: any, item2: any) {
+    if(item1.mahuyen === item2.mahuyen) {
       return true;
     } else {
       return false
@@ -364,13 +364,14 @@ export class DmCanhanIoComponent implements OnInit {
   /**
    * Hàm check giá trị trong seletec option Xã
    */
-  public compareXa(item1, item2) {
-    if(item2 === this.obj.maxa) {
+  public compareXa(item1: any, item2: any) {
+    if(item1.maxa === item2.maxa) {
       return true;
     } else {
       return false
     }
   }
+  
   /**
    * Hàm close sidenav
    */

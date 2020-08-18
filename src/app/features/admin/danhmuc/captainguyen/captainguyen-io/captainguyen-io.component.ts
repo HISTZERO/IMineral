@@ -91,6 +91,7 @@ export class CaptainguyenIoComponent implements OnInit {
    */
   public setValidation() {
     this.validationErrorMessages = {
+      tencaptainguyen: { required: this.dataTranslate.DANHMUC.captainguyen.tencaptainguyenRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.captainguyen.thutuIsNumber }
     };
   }
@@ -111,7 +112,7 @@ export class CaptainguyenIoComponent implements OnInit {
   public formInit() {
     this.capTaiNguyenIOForm = this.formBuilder.group({
       macaptainguyen: [""],
-      tencaptainguyen: [""],
+      tencaptainguyen: ["", Validators.required],
       nhomcaptainguyen: [""],
       mota: [""],
       trangthai: [""],
@@ -127,7 +128,7 @@ export class CaptainguyenIoComponent implements OnInit {
       this.capTaiNguyenIOForm.setValue({
         macaptainguyen: this.obj.macaptainguyen,
         tencaptainguyen: this.obj.tencaptainguyen,
-        nhomcaptainguyen: this.obj.nhomcaptainguyen,
+        nhomcaptainguyen: +this.obj.nhomcaptainguyen,
         mota: this.obj.mota,
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,

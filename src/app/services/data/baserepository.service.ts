@@ -23,9 +23,7 @@ let outputModelName;
 @Injectable({
   providedIn: "root",
 })
-export class RepositoryEloquentService extends Subject<
-DataStateChangeEventArgs
-> {
+export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs> {
   // Các biến dành cho phân trang serve: search và order
   public orderColumn = "";
   public orderValue = "false";
@@ -194,7 +192,7 @@ DataStateChangeEventArgs
    * Fetch all data
    * @returns {Promise}
    */
-  public getByid(id: number): Observable<typeof inputModelName> {
+  public getByid(id: string): Observable<typeof inputModelName> {
     try {
       return this.httpClient.get<typeof inputModelName>(`${this.apiUrl}\\${id}`, {
         headers: this.headers,

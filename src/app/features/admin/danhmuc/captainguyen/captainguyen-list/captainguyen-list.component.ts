@@ -11,6 +11,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { CaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
+import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-captainguyen-list',
@@ -40,6 +41,9 @@ export class CaptainguyenListComponent implements OnInit {
 
   // Chứa menu item trên subheader
   public navArray = MenuDanhMucCapTaiNguyen;
+
+  // Chứa nhóm cấp tài nguyên
+  public nhomCapTainguyen = NhomCapTaiNguyen;
 
   // Contructor
   constructor(
@@ -105,7 +109,7 @@ export class CaptainguyenListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCapTaiNguyen(id: number) {
+  async editItemCapTaiNguyen(id: string) {
     // Lấy dữ liệu cấp tài nguyên theo id
     const dataItem: any = await this.dmFacadeService
     .getCapTaiNguyenService()

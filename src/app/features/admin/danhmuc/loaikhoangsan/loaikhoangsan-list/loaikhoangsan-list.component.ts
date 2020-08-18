@@ -102,7 +102,7 @@ export class LoaikhoangsanListComponent implements OnInit {
       * Hàm mở sidenav chức năng sửa dữ liệu
       * @param id
       */
-    async editItemLoaiKhoangSan(id: number) {
+    async editItemLoaiKhoangSan(id: string) {
       // Lấy dữ liệu loại khoáng sản theo id
       const dataItem: any = await this.dmFacadeService
       .getLoaiKhoangSanService()

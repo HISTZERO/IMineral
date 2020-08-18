@@ -102,7 +102,7 @@ export class ThutuchanhchinhListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemThuTucHanhChinh(id: number) {
+  async editItemThuTucHanhChinh(id: string) {
     // Lấy dữ liệu nhóm khoáng sản theo id
     const dataItem: any = await this.dmFacadeService
     .getThuTucHanhChinhService()

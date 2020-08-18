@@ -25,7 +25,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.loaigiayto" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="loaigiayto" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{'DANHMUC.canhan.chonLoaiGiayTo' | translate}}" formControlName="loaigiayto" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.canhan.chonLoaiGiayTo" | translate }}
           </mat-option>
@@ -69,7 +69,7 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="matinh" [compareWith]="compareTinh" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate" placeholder="{{ 'COMMON.default.chonTinh' | translate }}">
+        <mat-select class="form-control"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}" formControlName="matinh" [compareWith]="compareTinh" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'"  [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
           </mat-select-filter>
           <mat-option value="">
@@ -86,8 +86,7 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"
-          (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+        <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}" (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
           </mat-select-filter>
           <mat-option value="">
@@ -118,7 +117,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.canhan.chonTrangthai" | translate }}
           </mat-option>

@@ -86,6 +86,7 @@ export class CapquanlyIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tencapquanly: { required: this.dataTranslate.DANHMUC.capquanly.tencapquanlyRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.capquanly.thutuIsNumber }
     };
   }
@@ -106,7 +107,7 @@ export class CapquanlyIoComponent implements OnInit {
   formInit() {
     this.capQuanLyIOForm = this.formBuilder.group({
       macapquanly: [""],
-      tencapquanly: [""],
+      tencapquanly: ["", Validators.required],
       mota: [""],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],

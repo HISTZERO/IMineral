@@ -102,7 +102,7 @@ export class LoaigiayphepListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemLoaiGiayPhep(id: number) {
+  async editItemLoaiGiayPhep(id: string) {
     // Lấy dữ liệu loại giấy phép theo id
     const dataItem: any = await this.dmFacadeService
     .getLoaiGiayPhepService()

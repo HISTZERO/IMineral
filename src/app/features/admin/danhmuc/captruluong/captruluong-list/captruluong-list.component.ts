@@ -105,7 +105,7 @@ export class CaptruluongListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCapTruLuong(id: number) {
+  async editItemCapTruLuong(id: string) {
     // Lấy dữ liệu cấp trữ lượng theo id
     const dataItem: any = await this.dmFacadeService
     .getCapTruLuongService()

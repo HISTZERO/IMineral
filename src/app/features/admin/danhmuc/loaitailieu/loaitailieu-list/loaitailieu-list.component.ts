@@ -102,7 +102,7 @@ export class LoaitailieuListComponent implements OnInit {
       * Hàm mở sidenav chức năng sửa dữ liệu
       * @param id
       */
-    async editItemLoaiTaiLieu(id: number) {
+    async editItemLoaiTaiLieu(id: string) {
       // Lấy dữ liệu loại tài liệu theo id
       const dataItem: any = await this.dmFacadeService
       .getLoaiTaiLieuService()

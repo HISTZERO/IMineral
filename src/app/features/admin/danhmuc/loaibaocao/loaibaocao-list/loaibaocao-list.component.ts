@@ -102,7 +102,7 @@ export class LoaibaocaoListComponent implements OnInit {
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
     */
-   async editItemLoaiBaoCao(id: number) {
+   async editItemLoaiBaoCao(id: string) {
      // Lấy dữ liệu loại báo cáo theo id
      const dataItem: any = await this.dmFacadeService
      .getLoaiBaoCaoService()
