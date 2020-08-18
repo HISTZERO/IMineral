@@ -192,7 +192,7 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
    * Fetch all data
    * @returns {Promise}
    */
-  public getByid(id: string): Observable<typeof inputModelName> {
+  public getByid(id: any): Observable<typeof inputModelName> {
     try {
       return this.httpClient.get<typeof inputModelName>(`${this.apiUrl}\\${id}`, {
         headers: this.headers,
