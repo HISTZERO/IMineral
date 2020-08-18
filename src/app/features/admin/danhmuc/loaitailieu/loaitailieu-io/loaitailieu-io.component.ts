@@ -91,6 +91,7 @@ export class LoaitailieuIoComponent implements OnInit {
     */
    setValidation() {
      this.validationErrorMessages = {
+      tenloaitailieu: { required: this.dataTranslate.DANHMUC.loaitailieu.tenloaitailieuRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.loaitailieu.thutuIsNumber }
      };
    }
@@ -111,7 +112,7 @@ export class LoaitailieuIoComponent implements OnInit {
    formInit() {
      this.loaiTaiLieuIOForm = this.formBuilder.group({
        maloaitailieu: [""],
-       tenloaitailieu: [""],
+       tenloaitailieu: ["", Validators.required],
        mota: [""],
        trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],
@@ -130,7 +131,7 @@ export class LoaitailieuIoComponent implements OnInit {
          mota: this.obj.mota,
          trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
-         nhomloaitailieu: this.obj.nhomloaitailieu
+         nhomloaitailieu: +this.obj.nhomloaitailieu
        });
      }
      this.editMode = true;

@@ -86,7 +86,8 @@ export class LoaibaocaoIoComponent implements OnInit {
       */
     setValidation() {
       this.validationErrorMessages = {
-        thutu: { pattern: this.dataTranslate.DANHMUC.loaibaocao.thutuIsNumber }
+        thutu: { pattern: this.dataTranslate.DANHMUC.loaibaocao.thutuIsNumber },
+        tenloaibaocao: { required: this.dataTranslate.DANHMUC.loaibaocao.tenloaibaocaoRequired }
       };
     }
 
@@ -106,7 +107,7 @@ export class LoaibaocaoIoComponent implements OnInit {
     formInit() {
       this.loaiBaoCaoIOForm = this.formBuilder.group({
         maloaibaocao: [""],
-        tenloaibaocao: [""],
+        tenloaibaocao: ["", Validators.required],
         mota: [""],
         trangthai: [""],
         thutu: ["", Validators.pattern("^[0-9-+]+$")],

@@ -86,6 +86,7 @@ export class LoaitochucIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tenloaitochuc: {required: this.dataTranslate.DANHMUC.loaitochuc.tenloaitochucRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.loaitochuc.thutuIsNumber }
     };
   }
@@ -106,7 +107,7 @@ export class LoaitochucIoComponent implements OnInit {
   formInit() {
     this.loaiToChucIOForm = this.formBuilder.group({
       maloaitochuc: [""],
-      tenloaitochuc: [""],
+      tenloaitochuc: ["", Validators.required],
       mota: [""],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],

@@ -96,6 +96,7 @@ export class LoaicapphepIoComponent implements OnInit {
     */
   setValidation() {
     this.validationErrorMessages = {
+      tenloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.tenloaicapphepRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.loaicapphep.thutuIsNumber }
     };
   }
@@ -116,7 +117,7 @@ export class LoaicapphepIoComponent implements OnInit {
   formInit() {
     this.loaiCapPhepIOForm = this.formBuilder.group({
       maloaicapphep: [""],
-      tenloaicapphep: [""],
+      tenloaicapphep: ["", Validators.required],
       nhomloaicapphep: [""],
       idthutuchanhchinh: [""],
       mota: [""],
@@ -133,8 +134,8 @@ export class LoaicapphepIoComponent implements OnInit {
       this.loaiCapPhepIOForm.setValue({
         maloaicapphep: this.obj.maloaicapphep,
         tenloaicapphep: this.obj.tenloaicapphep,
-        nhomloaicapphep: this.obj.nhomloaicapphep,
-        idthutuchanhchinh: this.obj.idthutuchanhchinh,
+        nhomloaicapphep: +this.obj.nhomloaicapphep,
+        idthutuchanhchinh: +this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,

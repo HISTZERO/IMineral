@@ -97,6 +97,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     */
    setValidation() {
      this.validationErrorMessages = {
+        tenloaikhoangsan: { required: this.dataTranslate.DANHMUC.loaikhoangsan.tenloaikhoangsanRequired },
         thutu: { pattern: this.dataTranslate.DANHMUC.loaikhoangsan.thutuIsNumber }
      };
    }
@@ -128,7 +129,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
    formInit() {
      this.loaiKhoangSanIOForm = this.formBuilder.group({
        maloaikhoangsan: [""],
-       tenloaikhoangsan: [""],
+       tenloaikhoangsan: ["", Validators.required],
        mota: [""],
        trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],
@@ -147,7 +148,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
          mota: this.obj.mota,
          trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
-         idnhomkhoangsan: this.obj.idnhomkhoangsan
+         idnhomkhoangsan: +this.obj.idnhomkhoangsan
        });
      }
      this.editMode = true;

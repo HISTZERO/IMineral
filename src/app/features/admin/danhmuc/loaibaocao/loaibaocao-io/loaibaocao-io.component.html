@@ -17,7 +17,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaibaocao.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaibaocao.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.loaibaocao.chonTrangthai" | translate }}
           </mat-option>

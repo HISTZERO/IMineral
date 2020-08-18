@@ -86,6 +86,7 @@ export class NhomkhoangsanIoComponent implements OnInit {
     */
    setValidation() {
      this.validationErrorMessages = {
+      tennhomkhoangsan: { required: this.dataTranslate.DANHMUC.nhomkhoangsan.tennhomkhoangsanRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.nhomkhoangsan.thutuIsNumber }
      };
    }
@@ -106,7 +107,7 @@ export class NhomkhoangsanIoComponent implements OnInit {
    formInit() {
      this.nhomKhoangSanIOForm = this.formBuilder.group({
        manhomkhoangsan: [""],
-       tennhomkhoangsan: [""],
+       tennhomkhoangsan: ["", Validators.required],
        mota: [""],
        trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],

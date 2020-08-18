@@ -86,6 +86,7 @@ export class NguongocmoIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tennguongocmo: { required: this.dataTranslate.DANHMUC.nguongocmo.tennguongocmoRequired},
       thutu: { pattern: this.dataTranslate.DANHMUC.nguongocmo.thutuIsNumber }
     };
   }
@@ -106,7 +107,7 @@ export class NguongocmoIoComponent implements OnInit {
   formInit() {
     this.nguongocmoIOForm = this.formBuilder.group({
       manguongocmo: [""],
-      tennguongocmo: [""],
+      tennguongocmo: ["", Validators.required],
       mota: [""],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
