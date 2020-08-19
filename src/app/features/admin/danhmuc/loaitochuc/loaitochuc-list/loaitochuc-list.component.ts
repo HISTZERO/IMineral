@@ -87,7 +87,6 @@ export class LoaitochucListComponent implements OnInit {
    * Hàm lấy dữ liệu loại tổ chức
    */
   async getAllLoaiToChuc() {
-    this.listLoaiToChuc = [];
     const listData: any = await this.dmFacadeService
       .getLoaiToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class LoaitochucListComponent implements OnInit {
         loaiTC.serialNumber = index + 1;
       });
     }
-    // this.listLoaiToChuc = listData.items;
+    this.listLoaiToChuc = listData.items;
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemLoaiToChuc(id: number) {
+  async editItemLoaiToChuc(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
     .getLoaiToChucService()

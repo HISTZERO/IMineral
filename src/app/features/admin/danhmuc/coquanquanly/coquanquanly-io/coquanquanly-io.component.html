@@ -1,4 +1,4 @@
-<div class="pt-3">
+<div class="pt-3 pb-4">
   <form [formGroup]="coQuanQuanLyIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.coquanquanly.tencoquanquanly" | translate }}
@@ -54,14 +54,13 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="matinh"
-          (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+        <mat-select class="form-control" formControlName="matinh" [compareWith]="compareTinh" placeholder="{{ 'COMMON.default.chonTinh' | translate }}" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonTinh" | translate }}
           </mat-option>
-          <mat-option *ngFor="let tinh of allTinh" [value]="tinh.matinh">
+          <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh}">
             {{ tinh.tendvhc }}
           </mat-option>
         </mat-select>
@@ -72,14 +71,13 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="mahuyen"
-          (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+        <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}" (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonHuyen" | translate }}
           </mat-option>
-          <mat-option *ngFor="let huyen of allHuyen" [value]="huyen.mahuyen">
+          <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen}">
             {{ huyen.tendvhc }}
           </mat-option>
         </mat-select>
@@ -89,13 +87,13 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"COMMON.default.maxa" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="maxa" *ngIf="dataTranslate">
+        <mat-select class="form-control" formControlName="maxa" [compareWith]="compareXa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
           </mat-select-filter>
           <mat-option value="">
             {{ "COMMON.default.chonXa" | translate }}
           </mat-option>
-          <mat-option *ngFor="let xa of allXa" [value]="xa.maxa">
+          <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa}">
             {{ xa.tendvhc }}
           </mat-option>
         </mat-select>

@@ -17,7 +17,7 @@ export class LoaikhoangsanService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiKhoangSanModel(),
       outputModelName: new OutputLoaiKhoangSanModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.NHOMKHOANGSAN
+      apiUrl: environment.apiIMineral + ServiceName.LOAIKHOANGSAN
     });
   }
 

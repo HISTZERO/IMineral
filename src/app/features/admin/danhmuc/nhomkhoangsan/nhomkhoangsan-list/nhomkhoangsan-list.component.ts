@@ -87,7 +87,6 @@ export class NhomkhoangsanListComponent implements OnInit {
     * Hàm lấy dữ liệu Nhóm khoáng sản
     */
    async getAllNhomKhoangSan() {
-     this.listNhomKhoangSan = [];
      const listData: any = await this.dmFacadeService
        .getNhomKhoangSanService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class NhomkhoangsanListComponent implements OnInit {
          nhomks.serialNumber = index + 1;
        });
      }
-     // this.listNhomKhoangSan = listData.items;
+     this.listNhomKhoangSan = listData.items;
    }
  
    /**
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
     */
-   async editItemNhomKhoangSan(id: number) {
+   async editItemNhomKhoangSan(id: string) {
      // Lấy dữ liệu nhóm khoáng sản theo id
      const dataItem: any = await this.dmFacadeService
      .getNhomKhoangSanService()

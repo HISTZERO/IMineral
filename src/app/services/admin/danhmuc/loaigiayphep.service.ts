@@ -17,7 +17,7 @@ export class LoaigiayphepService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiGiayPhepModel(),
       outputModelName: new OutputLoaiGiayPhepModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.LOAIGIAYPHEP
+      apiUrl: environment.apiIMineral + ServiceName.LOAIGIAYPHEP
     });
   }
 

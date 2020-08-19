@@ -90,7 +90,6 @@ export class CaptruluongListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp trữ lượng
    */
   async getAllCapTruLuong() {
-    this.listCapTruLuong = [];
     const listData: any = await this.dmFacadeService
       .getCapTruLuongService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -99,14 +98,14 @@ export class CaptruluongListComponent implements OnInit {
         truluong.serialNumber = index + 1;
       });
     }
-    // this.listCapTruLuong = listData.items;
+    this.listCapTruLuong = listData.items;
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCapTruLuong(id: number) {
+  async editItemCapTruLuong(id: string) {
     // Lấy dữ liệu cấp trữ lượng theo id
     const dataItem: any = await this.dmFacadeService
     .getCapTruLuongService()
@@ -171,7 +170,7 @@ export class CaptruluongListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getCapTruLuongService()
-          .deleteItem({ id: this.selectedItem.idcaptruluong })
+          .deleteItem({ idCaptruluong: this.selectedItem.idcaptruluong })
           .subscribe(
             () => this.getAllCapTruLuong(),
             (error: HttpErrorResponse) => {

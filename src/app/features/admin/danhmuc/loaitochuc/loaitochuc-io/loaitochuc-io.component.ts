@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -85,7 +85,10 @@ export class LoaitochucIoComponent implements OnInit {
    * Hàm set validate
    */
   setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      tenloaitochuc: {required: this.dataTranslate.DANHMUC.loaitochuc.tenloaitochucRequired},
+      thutu: { pattern: this.dataTranslate.DANHMUC.loaitochuc.thutuIsNumber }
+    };
   }
 
   /**
@@ -104,10 +107,10 @@ export class LoaitochucIoComponent implements OnInit {
   formInit() {
     this.loaiToChucIOForm = this.formBuilder.group({
       maloaitochuc: [""],
-      tenloaitochuc: [""],
+      tenloaitochuc: ["", Validators.required],
       mota: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 

@@ -1,15 +1,14 @@
-<div class="pt-3">
+<div class="pt-3 pb-4">
   <form [formGroup]="capTruLuongIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.captruluong.macaptruluong" | translate }}
-        <small>(*)</small></label>
+      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.captruluong.macaptruluong" | translate }}</label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="macaptruluong" placeholder="{{'DANHMUC.captruluong.macaptruluongPlaceholder' | translate}}" />
         <span *ngIf="formErrors.macaptruluong" class="alert-danger">{{formErrors.macaptruluong}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.captruluong.tencaptruluong" | translate}}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.captruluong.tencaptruluong" | translate}} <small>(*)</small></label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="tencaptruluong" placeholder="{{'DANHMUC.captruluong.tencaptruluongPlaceholder' | translate}}" />
         <span *ngIf="formErrors.tencaptruluong" class="alert-danger">{{formErrors.tencaptruluong}}</span>
@@ -18,7 +17,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.captruluong.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.captruluong.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.captruluong.chonTrangthai" | translate }}
           </mat-option>

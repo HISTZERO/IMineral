@@ -87,7 +87,6 @@ export class CoquanquanlyListComponent implements OnInit {
     * Hàm lấy dữ liệu Cơ Quan Quản Lý
     */
    async getAllCoQuanQuanLy() {
-     this.listCoQuanQuanLy = [];
      const listData: any = await this.dmFacadeService
        .getCoQuanQuanLyService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class CoquanquanlyListComponent implements OnInit {
          coquan.serialNumber = index + 1;
        });
      }
-    //  this.listCoQuanQuanLy = listData.items;
+     this.listCoQuanQuanLy = listData.items;
    }
  
    /**
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
     */
-   async editItemCoQuanQuanLy(id: number) {
+   async editItemCoQuanQuanLy(id: string) {
      // Lấy dữ liệu cơ quan quản lý theo id
      const dataItem: any = await this.dmFacadeService
      .getCoQuanQuanLyService()
@@ -168,7 +167,7 @@ export class CoquanquanlyListComponent implements OnInit {
        if (result === "confirm") {
          await this.dmFacadeService
            .getCoQuanQuanLyService()
-           .deleteItem({ id: this.selectedItem.idcoquanquanly })
+           .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
            .subscribe(
              () => this.getAllCoQuanQuanLy(),
              (error: HttpErrorResponse) => {

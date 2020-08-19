@@ -87,7 +87,6 @@ export class ThutuchanhchinhListComponent implements OnInit {
    * Hàm lấy dữ liệu Thủ tục hành chính
    */
   async getAllThuTucHanhChinh() {
-    this.listThuTucHanhChinh = [];
     const listData: any = await this.dmFacadeService
       .getThuTucHanhChinhService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class ThutuchanhchinhListComponent implements OnInit {
         thutucHC.serialNumber = index + 1;
       });
     }
-    // this.listThuTucHanhChinh = listData.items;
+    this.listThuTucHanhChinh = listData.items;
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemThuTucHanhChinh(id: number) {
+  async editItemThuTucHanhChinh(id: string) {
     // Lấy dữ liệu nhóm khoáng sản theo id
     const dataItem: any = await this.dmFacadeService
     .getThuTucHanhChinhService()

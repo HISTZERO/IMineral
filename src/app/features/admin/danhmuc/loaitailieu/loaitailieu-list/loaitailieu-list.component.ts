@@ -87,7 +87,6 @@ export class LoaitailieuListComponent implements OnInit {
       * Hàm lấy dữ liệu loại tài liệu
       */
     async getAllLoaiTaiLieu() {
-      this.listLoaitaiLieu = [];
       const listData: any = await this.dmFacadeService
         .getLoaiTaiLieuService()
         .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class LoaitailieuListComponent implements OnInit {
           loaiTL.serialNumber = index + 1;
         });
       }
-      // this.listLoaitaiLieu = listData.items;
+      this.listLoaitaiLieu = listData.items;
     }
 
     /**
       * Hàm mở sidenav chức năng sửa dữ liệu
       * @param id
       */
-    async editItemLoaiTaiLieu(id: number) {
+    async editItemLoaiTaiLieu(id: string) {
       // Lấy dữ liệu loại tài liệu theo id
       const dataItem: any = await this.dmFacadeService
       .getLoaiTaiLieuService()

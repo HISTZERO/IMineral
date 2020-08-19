@@ -17,7 +17,7 @@ export class NhomkhoangsanService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputNhomKhoangSanModel(),
       outputModelName: new OutputNhomKhoangSanModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.NHOMKHOANGSAN
+      apiUrl: environment.apiIMineral + ServiceName.NHOMKHOANGSAN
     });
   }
 

@@ -17,7 +17,7 @@ export class LoaitailieuService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiTaiLieuModel(),
       outputModelName: new OutputLoaiTaiLieuModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.LOAITAILIEU
+      apiUrl: environment.apiIMineral + ServiceName.LOAITAILIEU
     });
   }
 

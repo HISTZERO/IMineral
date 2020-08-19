@@ -17,7 +17,7 @@ export class LoaitochucService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputLoaiToChucModel(),
       outputModelName: new OutputLoaiToChucModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.LOAITOCHUC
+      apiUrl: environment.apiIMineral + ServiceName.LOAITOCHUC
     });
   }
 

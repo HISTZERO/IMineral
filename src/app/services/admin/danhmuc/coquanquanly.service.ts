@@ -17,7 +17,7 @@ export class CoquanquanlyService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputCoQuanQuanLyModel(),
       outputModelName: new OutputCoQuanQuanLyModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.COQUANQUANLY
+      apiUrl: environment.apiIMineral + ServiceName.COQUANQUANLY
     });
   }
 

@@ -1,4 +1,4 @@
-<div class="pt-3">
+<div class="pt-3 pb-4">
   <form [formGroup]="loaiKhoangSanIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaikhoangsan.maloaikhoangsan" | translate }}</label>
@@ -17,7 +17,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaikhoangsan.idnhomkhoangsan" | translate }}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="idnhomkhoangsan" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaikhoangsan.chonNhomkhoangsan' | translate }}" formControlName="idnhomkhoangsan" *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tendvhc'" [array]="listNhomKhoangSanFilter" (filteredReturn)="listNhomKhoangSan = $event">
           </mat-select-filter>
           <mat-option value="">
@@ -33,7 +33,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaikhoangsan.trangthai" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaikhoangsan.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.loaikhoangsan.chonTrangthai" | translate }}
           </mat-option>

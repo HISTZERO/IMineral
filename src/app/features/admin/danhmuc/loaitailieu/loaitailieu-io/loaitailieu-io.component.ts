@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -90,7 +90,10 @@ export class LoaitailieuIoComponent implements OnInit {
     * Hàm set validate
     */
    setValidation() {
-     this.validationErrorMessages = {};
+     this.validationErrorMessages = {
+      tenloaitailieu: { required: this.dataTranslate.DANHMUC.loaitailieu.tenloaitailieuRequired},
+      thutu: { pattern: this.dataTranslate.DANHMUC.loaitailieu.thutuIsNumber }
+     };
    }
 
    /**
@@ -109,10 +112,10 @@ export class LoaitailieuIoComponent implements OnInit {
    formInit() {
      this.loaiTaiLieuIOForm = this.formBuilder.group({
        maloaitailieu: [""],
-       tenloaitailieu: [""],
+       tenloaitailieu: ["", Validators.required],
        mota: [""],
        trangthai: [""],
-       thutu: [""],
+       thutu: ["", Validators.pattern("^[0-9-+]+$")],
        nhomloaitailieu: [""]
      });
    }
@@ -128,7 +131,7 @@ export class LoaitailieuIoComponent implements OnInit {
          mota: this.obj.mota,
          trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
-         nhomloaitailieu: this.obj.nhomloaitailieu
+         nhomloaitailieu: +this.obj.nhomloaitailieu
        });
      }
      this.editMode = true;

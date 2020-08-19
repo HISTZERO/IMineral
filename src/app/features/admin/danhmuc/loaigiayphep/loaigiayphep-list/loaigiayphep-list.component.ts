@@ -87,7 +87,6 @@ export class LoaigiayphepListComponent implements OnInit {
    * Hàm lấy dữ liệu Loại giấy phép
    */
   async getAllLoaiGiayPhep() {
-    this.listLoaiGiayPhep = [];
     const listData: any = await this.dmFacadeService
       .getLoaiGiayPhepService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class LoaigiayphepListComponent implements OnInit {
         loaiGP.serialNumber = index + 1;
       });
     }
-    // this.listLoaiGiayPhep = listData.items;
+    this.listLoaiGiayPhep = listData.items;
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemLoaiGiayPhep(id: number) {
+  async editItemLoaiGiayPhep(id: string) {
     // Lấy dữ liệu loại giấy phép theo id
     const dataItem: any = await this.dmFacadeService
     .getLoaiGiayPhepService()

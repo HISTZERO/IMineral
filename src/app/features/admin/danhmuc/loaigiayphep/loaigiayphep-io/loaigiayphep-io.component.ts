@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -95,7 +95,10 @@ export class LoaigiayphepIoComponent implements OnInit {
     * Hàm set validate
     */
   setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      tenloaigiayphep: { required: this.dataTranslate.DANHMUC.loaigiayphep.tenloaigiayphepRequired },
+      thutu: { pattern: this.dataTranslate.DANHMUC.loaigiayphep.thutuIsNumber }
+    };
   }
 
   /**
@@ -114,12 +117,12 @@ export class LoaigiayphepIoComponent implements OnInit {
   formInit() {
     this.loaiGiayPhepIOForm = this.formBuilder.group({
       maloaigiayphep: [""],
-      tenloaigiayphep: [""],
+      tenloaigiayphep: ["", Validators.required],
       nhomloaigiayphep: [""],
       idthutuchanhchinh: [""],
       mota: [""],
       trangthai: [""],
-      thutu: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 
@@ -131,8 +134,8 @@ export class LoaigiayphepIoComponent implements OnInit {
       this.loaiGiayPhepIOForm.setValue({
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
-        nhomloaigiayphep: this.obj.nhomloaigiayphep,
-        idthutuchanhchinh: this.obj.idthutuchanhchinh,
+        nhomloaigiayphep: +this.obj.nhomloaigiayphep,
+        idthutuchanhchinh: +this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,

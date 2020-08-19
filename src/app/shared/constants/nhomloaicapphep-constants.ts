@@ -1,4 +1,4 @@
-export const NhomLoaiGiayPhep = [
+export const NhomLoaiCapPhep = [
     {
         id: 1,
         name: "Thăm dò khoáng sản"
@@ -26,5 +26,9 @@ export const NhomLoaiGiayPhep = [
     {
         id: 7,
         name: "Đóng cửa mỏ, khoáng sản"
+    },
+    {
+        id: 8,
+        name: "Chuyển nhượng thăm dò khai thác"
     }
 ]

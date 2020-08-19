@@ -17,7 +17,7 @@ export class TochucService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputToChucModel(),
       outputModelName: new OutputToChucModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.TOCHUC
+      apiUrl: environment.apiIMineral + ServiceName.TOCHUC
     });
   }
 

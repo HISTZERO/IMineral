@@ -87,7 +87,6 @@ export class LoaikhoangsanListComponent implements OnInit {
       * Hàm lấy dữ liệu Loại khoáng sản
       */
     async getAllLoaiKhoangSan() {
-      this.listLoaiKhoangSan = [];
       const listData: any = await this.dmFacadeService
         .getLoaiKhoangSanService()
         .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -96,14 +95,14 @@ export class LoaikhoangsanListComponent implements OnInit {
           loaiks.serialNumber = index + 1;
         });
       }
-      // this.listLoaiKhoangSan = listData.items;
+      this.listLoaiKhoangSan = listData.items;
     }
 
     /**
       * Hàm mở sidenav chức năng sửa dữ liệu
       * @param id
       */
-    async editItemLoaiKhoangSan(id: number) {
+    async editItemLoaiKhoangSan(id: string) {
       // Lấy dữ liệu loại khoáng sản theo id
       const dataItem: any = await this.dmFacadeService
       .getLoaiKhoangSanService()
@@ -168,7 +167,7 @@ export class LoaikhoangsanListComponent implements OnInit {
         if (result === "confirm") {
           await this.dmFacadeService
             .getLoaiKhoangSanService()
-            .deleteItem({ id: this.selectedItem.idnhomkhoangsan })
+            .deleteItem({ id: this.selectedItem.idloaikhoangsan })
             .subscribe(
               () => this.getAllLoaiKhoangSan(),
               (error: HttpErrorResponse) => {

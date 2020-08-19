@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -85,7 +85,10 @@ export class CaptruluongIoComponent implements OnInit {
   * Hàm set validate
   */
  setValidation() {
-   this.validationErrorMessages = {};
+   this.validationErrorMessages = {
+    tencaptruluong: { required: this.dataTranslate.DANHMUC.captruluong.tencaptruluongRequired}, 
+    thutu: { pattern: this.dataTranslate.DANHMUC.captruluong.thutuIsNumber }
+   };
  }
 
  /**
@@ -104,10 +107,10 @@ export class CaptruluongIoComponent implements OnInit {
  formInit() {
    this.capTruLuongIOForm = this.formBuilder.group({
      macaptruluong: [""],
-     tencaptruluong: [""],
+     tencaptruluong: ["", Validators.required],
      mota: [""],
      trangthai: [""],
-     thutu: [""],
+     thutu: ["", Validators.pattern("^[0-9-+]+$")],
    });
  }
 

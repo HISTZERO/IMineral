@@ -30,7 +30,11 @@
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tencaptainguyen" headerText="{{ 'DANHMUC.captainguyen.tencaptainguyen' | translate }}"></e-column>
                     <e-column field="macaptainguyen" headerText="{{ 'DANHMUC.captainguyen.macaptainguyen' | translate }}"></e-column>
-                    <e-column field="nhomcaptainguyen" headerText="{{ 'DANHMUC.captainguyen.nhomcaptainguyen' | translate }}"></e-column>
+                    <e-column field="nhomcaptainguyen" headerText="{{ 'DANHMUC.captainguyen.nhomcaptainguyen' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.nhomcaptainguyen | getNameFileConstant: nhomCapTainguyen}}
+                      </ng-template>
+                    </e-column>
                     <e-column field="id" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
