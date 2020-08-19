@@ -36,6 +36,7 @@ export class AdminRoutingName {
   public static nhomkhoangsanUri = "nhomkhoangsan";
   public static thutuchanhchinhUri = "thutuchanhchinh";
   public static tochucUri = "tochuc";
+  public static linhvucUri = "linhvuc";
 
 
   public static congtyUri = "congty";

@@ -41,7 +41,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   // Chứa danh sách Dvhc Xã
   public allXa: any;
-  
+
   // Filter Đơn vị hành chính Tỉnh
   public dvhcProvinceFilters: OutputDvhcModel[];
 
@@ -50,7 +50,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   // Filter Đơn vị hành chính Xã
   public dvhcWardFilters: OutputDvhcModel[];
-  
+
   // Chứa dữ liệu loại giấy tờ
   public loaigiayto = LoaiGiayTo;
 
@@ -97,7 +97,7 @@ export class DmCanhanIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
+
   }
 
   /**
@@ -118,12 +118,12 @@ export class DmCanhanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       hovaten: { required: this.dataTranslate.DANHMUC.canhan.hovatenRequired },
-      dienthoai: { 
+      dienthoai: {
         required: this.dataTranslate.DANHMUC.canhan.dienthoaiRequired,
         pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber},
       matinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
       mahuyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
-      email: { 
+      email: {
         required: this.dataTranslate.DANHMUC.canhan.emailRequired,
         email: this.dataTranslate.DANHMUC.canhan.emailCheck},
       thutu: { pattern: this.dataTranslate.DANHMUC.canhan.thutuIsNumber }
@@ -297,7 +297,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     // this.logAllValidationErrorMessages();
@@ -317,7 +317,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -371,7 +371,7 @@ export class DmCanhanIoComponent implements OnInit {
       return false
     }
   }
-  
+
   /**
    * Hàm close sidenav
    */

@@ -134,7 +134,7 @@ export class LinhvucIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     // Gán dữ liệu input vào model
-    const dmFacadeService = this.dmFacadeService.getDmCanhanService();
+    const dmFacadeService = this.dmFacadeService.getLinhVucService();
     this.inputModel = this.linhvucIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
@@ -169,8 +169,11 @@ export class LinhvucIoComponent implements OnInit {
    * @param operMode
    */
   async onSubmit(operMode: string) {
-    this.addOrUpdate(operMode);
-    this.matSidenavService.close();
+    this.logAllValidationErrorMessages();
+    if (this.linhvucIOForm.valid === true) {
+      this.addOrUpdate(operMode);
+      this.matSidenavService.close();
+    }
   }
 
   /**

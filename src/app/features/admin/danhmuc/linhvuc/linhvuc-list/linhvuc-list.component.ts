@@ -103,9 +103,9 @@ export class LinhvucListComponent implements OnInit {
   async editItemLinhvuc(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmCanhanService()
+    .getLinhVucService()
     .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.canhan.titleEdit );
+    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.linhvuc.titleEdit );
     await this.matSidenavService.setContentComp(LinhvucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -114,7 +114,7 @@ export class LinhvucListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openLinhvucIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.linhvuc.titleAdd);
     this.matSidenavService.setContentComp(LinhvucIoComponent, "new");
     this.matSidenavService.open();
   }
@@ -135,7 +135,7 @@ export class LinhvucListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getDmCanhanService()
+      .getLinhVucService()
       .checkBeDeleted(this.selectedItem.idlinhvuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -164,7 +164,7 @@ export class LinhvucListComponent implements OnInit {
       if (result === "confirm") {
         await this.dmFacadeService
           .getLinhVucService()
-          .deleteItem({ idCanhan: this.selectedItem.idlinhvuc })
+          .deleteItem({ idlinhvuc: this.selectedItem.idlinhvuc })
           .subscribe(
             () => this.getAllLinhvuc(),
             (error: HttpErrorResponse) => {

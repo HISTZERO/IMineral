@@ -18,6 +18,7 @@ import { NguongocmoListComponent } from "src/app/features/admin/danhmuc/nguongoc
 import { NhomkhoangsanListComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-list/nhomkhoangsan-list.component";
 import { ThutuchanhchinhListComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-list/thutuchanhchinh-list.component";
 import { TochucListComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-list/tochuc-list.component";
+import { LinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-list/linhvuc-list.component";
 
 
 const dmRoutes: Routes = [
@@ -42,7 +43,8 @@ const dmRoutes: Routes = [
           { path: AdminRoutingName.nguongocmoUri, component: NguongocmoListComponent },
           { path: AdminRoutingName.nhomkhoangsanUri, component: NhomkhoangsanListComponent },
           { path: AdminRoutingName.thutuchanhchinhUri, component: ThutuchanhchinhListComponent},
-          { path: AdminRoutingName.tochucUri, component: TochucListComponent}
+          { path: AdminRoutingName.tochucUri, component: TochucListComponent},
+          { path: AdminRoutingName.linhvucUri, component: LinhvucListComponent}
         ],
       },
     ],
