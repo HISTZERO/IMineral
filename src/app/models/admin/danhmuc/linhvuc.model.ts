@@ -1,4 +1,4 @@
-export class OutputLinhvucModel {
+export class OutputDmLinhvucModel {
   idlinhvuc: number;
   malinhvuc: string;
   tenlinhvuc: string;
@@ -7,7 +7,7 @@ export class OutputLinhvucModel {
   thutu: number;
 }
 
-export class InputLinhvucModel {
+export class InputDmLinhvucModel {
   idlinhvuc: number;
   malinhvuc: string;
   tenlinhvuc: string;

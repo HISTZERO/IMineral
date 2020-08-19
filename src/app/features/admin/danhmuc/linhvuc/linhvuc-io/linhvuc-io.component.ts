@@ -4,7 +4,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
 
-import { InputLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
+import { InputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -16,7 +16,7 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
   templateUrl: './linhvuc-io.component.html',
   styleUrls: ['./linhvuc-io.component.scss']
 })
-export class LinhvucIoComponent implements OnInit {
+export class DmLinhvucIoComponent implements OnInit {
   // Chứa dữ liệu Form
   public linhvucIOForm: FormGroup;
 
@@ -30,7 +30,7 @@ export class LinhvucIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputLinhvucModel;
+  public inputModel: InputDmLinhvucModel;
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -94,7 +94,7 @@ export class LinhvucIoComponent implements OnInit {
    */
   bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputLinhvucModel();
+    this.inputModel = new InputDmLinhvucModel();
     // check edit
     this.formOnEdit();
   }
@@ -134,7 +134,7 @@ export class LinhvucIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     // Gán dữ liệu input vào model
-    const dmFacadeService = this.dmFacadeService.getDmCanhanService();
+    const dmFacadeService = this.dmFacadeService.getDmLinhvucService();
     this.inputModel = this.linhvucIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
@@ -169,8 +169,11 @@ export class LinhvucIoComponent implements OnInit {
    * @param operMode
    */
   async onSubmit(operMode: string) {
-    this.addOrUpdate(operMode);
-    this.matSidenavService.close();
+    this.logAllValidationErrorMessages();
+    if (this.linhvucIOForm.valid === true) {
+      this.addOrUpdate(operMode);
+      this.matSidenavService.close();
+    }
   }
 
   /**

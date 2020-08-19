@@ -318,6 +318,11 @@ export class SidenavComponent implements OnInit {
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.tochucUri}`,
           faIcon: "",
         },
+        {
+          label: "Lĩnh vực",
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.linhvucUri}`,
+          faIcon: "",
+        },
       ]
     },
     {

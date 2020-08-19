@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import {
-  InputLinhvucModel,
-  OutputLinhvucModel
+  InputDmLinhvucModel,
+  OutputDmLinhvucModel
 } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
@@ -12,13 +12,13 @@ import { RepositoryEloquentService } from "src/app/services/data/baserepository.
 @Injectable({
   providedIn: "root"
 })
-export class LinhvucService extends RepositoryEloquentService {
+export class DmLinhvucService extends RepositoryEloquentService {
   constructor(public httpClient: HttpClient) {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputLinhvucModel(),
-      outputModelName: new OutputLinhvucModel(),
+      inputModelName: new InputDmLinhvucModel(),
+      outputModelName: new OutputDmLinhvucModel(),
       apiUrl: environment.apiIMineral + ServiceName.LINHVUC
     });
   }
