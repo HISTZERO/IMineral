@@ -12,6 +12,7 @@ import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canha
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
+import { TrangThai } from "../../../../../shared/constants/trangthai-constants";
 
 @Component({
   selector: "app-canhan-list",
@@ -20,7 +21,7 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
 })
 export class DmCanhanListComponent implements OnInit {
   // Viewchild template
-  @ViewChild('grid', { static: true }) public grid: GridComponent;
+  @ViewChild("gridCaNhan", { static: false }) public gridCaNhan: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -29,6 +30,9 @@ export class DmCanhanListComponent implements OnInit {
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: Object[];
 
   // Chứa danh sách Cá nhân
   public listCanhan: OutputDmCanhanModel[];
@@ -41,6 +45,9 @@ export class DmCanhanListComponent implements OnInit {
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
+  // Chứa trạng thái
+  public trangthai = TrangThai;
 
   // Chứa menu item trên subheader
   public navArray = MenuDanhMucCaNhan;
@@ -104,6 +111,13 @@ export class DmCanhanListComponent implements OnInit {
       });
     }
     this.listCanhan = listData.items;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridCaNhan.getSelectedRecords();
   }
 
   /**
