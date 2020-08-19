@@ -2,9 +2,10 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { SelectionSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
@@ -19,17 +20,21 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
 })
 export class DmCanhanListComponent implements OnInit {
   // Viewchild template
+  @ViewChild('grid', { static: true }) public grid: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // Chứa model selection grid
+  public selectionOptions: SelectionSettingsModel;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Cá nhân
-  public listCanhan: OutputCanhanModel[];
+  public listCanhan: OutputDmCanhanModel[];
 
-  // Chứa dữ liệu đã chọn
-  public selectedItem: OutputCanhanModel;
+  // Chứa dữ liệu đã chọn 
+  public selectedItem: OutputDmCanhanModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;

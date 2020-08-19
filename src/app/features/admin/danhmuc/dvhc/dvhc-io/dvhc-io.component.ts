@@ -1,7 +1,7 @@
 import { Component, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { InputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { InputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { GlobalVar } from "src/app/shared/constants/global-var";
@@ -19,7 +19,7 @@ export class DmDvhcIoComponent implements OnInit {
   submitted = false;
   public editMode: boolean;
   public purpose: string;
-  public inputDvhcModel: InputDvhcModel;
+  public InputDmDvhcModel: InputDmDvhcModel;
   hiddenProvineName = true;
   hiddenDistrictName = true;
   hiddenMatinh = false;
@@ -74,7 +74,7 @@ export class DmDvhcIoComponent implements OnInit {
   // config OnInit
   configOnInit() {
     this.editMode = false;
-    this.inputDvhcModel = new InputDvhcModel();
+    this.InputDmDvhcModel = new InputDmDvhcModel();
     // declare fields, validate
     this.dvhcIOForm = this.formBuilder.group({
       id: [0],
@@ -188,11 +188,11 @@ export class DmDvhcIoComponent implements OnInit {
 
   // add or update province
   private addOrUpdateProvince(operMode: string) {
-    this.inputDvhcModel = this.dvhcIOForm.value;
+    this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newProvince") {
       this.dmFacadeSv
         .getProvinceService()
-        .addItem(this.inputDvhcModel)
+        .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("getAllProvince"),
           (errorResponese: HttpErrorResponse) => {
@@ -206,10 +206,10 @@ export class DmDvhcIoComponent implements OnInit {
         );
     } else if (operMode === "editProvince") {
       const id: number = this.obj.id;
-      this.inputDvhcModel.id = id;
+      this.InputDmDvhcModel.id = id;
       this.dmFacadeSv
         .getProvinceService()
-        .updateItem(this.inputDvhcModel)
+        .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("getAllProvince"),
           (errorResponese: HttpErrorResponse) => {
@@ -226,13 +226,13 @@ export class DmDvhcIoComponent implements OnInit {
 
   // add or update district
   private addOrUpdateDistrict(operMode: string) {
-    this.inputDvhcModel = this.dvhcIOForm.value;
+    this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newDistrict") {
-      this.inputDvhcModel.id = 0;
-      this.inputDvhcModel.parentid = this.obj.id;
+      this.InputDmDvhcModel.id = 0;
+      this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
         .getDistrictService()
-        .addItem(this.inputDvhcModel)
+        .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) =>
             this.matSidenavService.doParentFunction("refreshGridDistrict"),
@@ -247,12 +247,12 @@ export class DmDvhcIoComponent implements OnInit {
         );
     } else if (operMode === "editDistrict") {
       const id: number = this.obj.id;
-      this.inputDvhcModel.id = id;
-      this.inputDvhcModel.matinh = this.obj.matinh;
-      this.inputDvhcModel.parentid = this.obj.parentid;
+      this.InputDmDvhcModel.id = id;
+      this.InputDmDvhcModel.matinh = this.obj.matinh;
+      this.InputDmDvhcModel.parentid = this.obj.parentid;
       this.dmFacadeSv
         .getDistrictService()
-        .updateItem(this.inputDvhcModel)
+        .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) =>
             this.matSidenavService.doParentFunction("refreshGridDistrict"),
@@ -270,13 +270,13 @@ export class DmDvhcIoComponent implements OnInit {
 
   // add or update ward
   private addOrUpdateWard(operMode: string) {
-    this.inputDvhcModel = this.dvhcIOForm.value;
+    this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newWard") {
-      this.inputDvhcModel.id = 0;
-      this.inputDvhcModel.parentid = this.obj.id;
+      this.InputDmDvhcModel.id = 0;
+      this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
         .getWardService()
-        .addItem(this.inputDvhcModel)
+        .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
           (errorResponse: HttpErrorResponse) => {
@@ -290,13 +290,13 @@ export class DmDvhcIoComponent implements OnInit {
         );
     } else if (operMode === "editWard") {
       const id: number = this.obj.id;
-      this.inputDvhcModel.id = id;
-      this.inputDvhcModel.matinh = this.obj.matinh;
-      this.inputDvhcModel.mahuyen = this.obj.mahuyen;
-      this.inputDvhcModel.parentid = this.obj.parentid;
+      this.InputDmDvhcModel.id = id;
+      this.InputDmDvhcModel.matinh = this.obj.matinh;
+      this.InputDmDvhcModel.mahuyen = this.obj.mahuyen;
+      this.InputDmDvhcModel.parentid = this.obj.parentid;
       this.dmFacadeSv
         .getWardService()
-        .updateItem(this.inputDvhcModel)
+        .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
           (errorResponse: HttpErrorResponse) => {

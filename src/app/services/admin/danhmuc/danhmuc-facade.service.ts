@@ -5,21 +5,21 @@ import { DmCanhanService } from "src/app/services/admin/danhmuc/canhan.service";
 import { ProvinceService } from "src/app/services/admin/common/province.service";
 import { DistrictService } from "src/app/services/admin/common/district.service";
 import { WardService } from "src/app/services/admin/common/ward.service";
-import { DvhcService } from "src/app/services/admin/common/dvhc.service";
-import { CapquanlyService } from "src/app/services/admin/danhmuc/capquanly.service";
-import { CaptainguyenService } from "src/app/services/admin/danhmuc/captainguyen.service";
-import { CaptruluongService } from "src/app/services/admin/danhmuc/captruluong.service";
-import { CoquanquanlyService } from "src/app/services/admin/danhmuc/coquanquanly.service";
-import { LoaibaocaoService } from "src/app/services/admin/danhmuc/loaibaocao.service";
-import { NhomkhoangsanService } from "src/app/services/admin/danhmuc/nhomkhoangsan.service";
-import { LoaikhoangsanService } from "src/app/services/admin/danhmuc/loaikhoangsan.service";
-import { LoaitailieuService } from "src/app/services/admin/danhmuc/loaitailieu.service";
-import { LoaitochucService } from "src/app/services/admin/danhmuc/loaitochuc.service";
-import { NguongocmoService } from "src/app/services/admin/danhmuc/nguongocmo.service";
-import { ThutuchanhchinhService } from "src/app/services/admin/danhmuc/thutuchanhchinh.service";
-import { TochucService } from "src/app/services/admin/danhmuc/tochuc.service";
-import { LoaicapphepService } from "src/app/services/admin/danhmuc/loaicapphep.service";
-import { LoaigiayphepService } from "src/app/services/admin/danhmuc/loaigiayphep.service";
+import { DmDvhcService } from "src/app/services/admin/common/dvhc.service";
+import { DmCapquanlyService } from "src/app/services/admin/danhmuc/capquanly.service";
+import { DmCaptainguyenService } from "src/app/services/admin/danhmuc/captainguyen.service";
+import { DmCaptruluongService } from "src/app/services/admin/danhmuc/captruluong.service";
+import { DmCoquanquanlyService } from "src/app/services/admin/danhmuc/coquanquanly.service";
+import { DmLoaibaocaoService } from "src/app/services/admin/danhmuc/loaibaocao.service";
+import { DmNhomkhoangsanService } from "src/app/services/admin/danhmuc/nhomkhoangsan.service";
+import { DmLoaikhoangsanService } from "src/app/services/admin/danhmuc/loaikhoangsan.service";
+import { DmLoaitailieuService } from "src/app/services/admin/danhmuc/loaitailieu.service";
+import { DmLoaitochucService } from "src/app/services/admin/danhmuc/loaitochuc.service";
+import { DmNguongocmoService } from "src/app/services/admin/danhmuc/nguongocmo.service";
+import { DmThutuchanhchinhService } from "src/app/services/admin/danhmuc/thutuchanhchinh.service";
+import { DmTochucService } from "src/app/services/admin/danhmuc/tochuc.service";
+import { DmLoaicapphepService } from "src/app/services/admin/danhmuc/loaicapphep.service";
+import { DmLoaigiayphepService } from "src/app/services/admin/danhmuc/loaigiayphep.service";
 import { LinhvucService } from "src/app/services/admin/danhmuc/linhvuc.service";
 
 @Injectable({
@@ -45,8 +45,8 @@ export class DmFacadeService {
   }
 
   // get all dvhc service
-  public getAllDvhcService() {
-    return new DvhcService(this.httpClient);
+  public getAllDmDvhcService() {
+    return new DmDvhcService(this.httpClient);
   }
 
   // ward service
@@ -55,73 +55,73 @@ export class DmFacadeService {
   }
 
   // Cấp quản lý Service
-  public getCapQuanLyService() {
-    return new CapquanlyService(this.httpClient);
+  public getDmCapQuanLyService() {
+    return new DmCapquanlyService(this.httpClient);
   }
 
   // Cấp tài nguyên Service
-  public getCapTaiNguyenService() {
-    return new CaptainguyenService(this.httpClient);
+  public getDmCapTaiNguyenService() {
+    return new DmCaptainguyenService(this.httpClient);
   }
 
   // Cấp trữ lượng Service
-  public getCapTruLuongService() {
-    return new CaptruluongService(this.httpClient);
+  public getDmCapTruLuongService() {
+    return new DmCaptruluongService(this.httpClient);
   }
 
   // Cơ quan quản lý Service
-  public getCoQuanQuanLyService() {
-    return new CoquanquanlyService(this.httpClient);
+  public getDmCoQuanQuanLyService() {
+    return new DmCoquanquanlyService(this.httpClient);
   }
 
   // Loại báo cáo service
-  public getLoaiBaoCaoService() {
-    return new LoaibaocaoService(this.httpClient);
+  public getDmLoaiBaoCaoService() {
+    return new DmLoaibaocaoService(this.httpClient);
   }
 
   // Nhóm khoáng sản Service
-  public getNhomKhoangSanService() {
-    return new NhomkhoangsanService(this.httpClient);
+  public getDmNhomKhoangSanService() {
+    return new DmNhomkhoangsanService(this.httpClient);
   }
 
   // Loại khoáng sản Service
-  public getLoaiKhoangSanService() {
-    return new LoaikhoangsanService(this.httpClient);
+  public getDmLoaiKhoangSanService() {
+    return new DmLoaikhoangsanService(this.httpClient);
   }
 
   // Loại tài liệu Service
-  public getLoaiTaiLieuService() {
-    return new LoaitailieuService(this.httpClient);
+  public getDmLoaiTaiLieuService() {
+    return new DmLoaitailieuService(this.httpClient);
   }
 
   // Loại tổ chức Service
-  public getLoaiToChucService() {
-    return new LoaitochucService(this.httpClient);
+  public getDmLoaiToChucService() {
+    return new DmLoaitochucService(this.httpClient);
   }
 
   // Nguồn gốc mỏ Service
-  public getNguonGocMoService() {
-    return new NguongocmoService(this.httpClient);
+  public getDmNguonGocMoService() {
+    return new DmNguongocmoService(this.httpClient);
   }
 
   // Thủ tục hành chính Service
-  public getThuTucHanhChinhService() {
-    return new ThutuchanhchinhService(this.httpClient);
+  public getDmThuTucHanhChinhService() {
+    return new DmThutuchanhchinhService(this.httpClient);
   }
 
   // Tổ chức Service
-  public getToChucService() {
-    return new TochucService(this.httpClient);
+  public getDmToChucService() {
+    return new DmTochucService(this.httpClient);
   }
 
   // Loại cấp phép Service
-  public getLoaiCapPhepService() {
-    return new LoaicapphepService(this.httpClient);
+  public getDmLoaiCapPhepService() {
+    return new DmLoaicapphepService(this.httpClient);
   }
 
   // Loại giấy phép Service
-  public getLoaiGiayPhepService() {
-    return new LoaigiayphepService(this.httpClient);
+  public getDmLoaiGiayPhepService() {
+    return new DmLoaigiayphepService(this.httpClient);
   }
 
   // lĩnh vực service

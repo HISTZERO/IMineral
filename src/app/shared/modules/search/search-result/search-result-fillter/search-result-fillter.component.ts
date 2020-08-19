@@ -3,7 +3,7 @@ import { HttpClient } from "@angular/common/http";
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { displayFieldCssService } from "src/app/services/utilities/validatorService";
@@ -19,9 +19,9 @@ export class SearchResultFillterComponent implements OnInit {
   public allHuyen: any;
   public allXa: any;
   public allTinhData: any;
-  public dvhcProvinceFilters: OutputDvhcModel[];
-  public dvhcDistrictFilters: OutputDvhcModel[];
-  public dvhcWardFilters: OutputDvhcModel[];
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
+  public dvhcWardFilters: OutputDmDvhcModel[];
   validationErrorMessages = {
     matinh: { required: "Hãy chọn tỉnh!" },
     mahuyen: { required: "Hãy chọn huyện!" },

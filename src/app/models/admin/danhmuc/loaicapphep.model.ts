@@ -1,4 +1,4 @@
-export class OutputLoaiCapPhepModel {
+export class OutputDmLoaiCapPhepModel {
     idloaicapphep: string;
     maloaicapphep: number;
     tenloaicapphep: string;
@@ -9,7 +9,7 @@ export class OutputLoaiCapPhepModel {
     thutu: number;
 }
 
-export class InputLoaiCapPhepModel {
+export class InputDmLoaiCapPhepModel {
     idloaicapphep: string;
     maloaicapphep: number;
     tenloaicapphep: string;

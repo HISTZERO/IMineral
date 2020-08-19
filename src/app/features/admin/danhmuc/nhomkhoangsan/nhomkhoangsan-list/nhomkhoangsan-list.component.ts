@@ -4,20 +4,20 @@ import { MatSidenav } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
+import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 import { MenuDanhMucNhomKhoangSan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { NhomkhoangsanIoComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-io/nhomkhoangsan-io.component";
+import { DmNhomkhoangsanIoComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-io/nhomkhoangsan-io.component";
 
 @Component({
   selector: 'app-nhomkhoangsan-list',
   templateUrl: './nhomkhoangsan-list.component.html',
   styleUrls: ['./nhomkhoangsan-list.component.scss']
 })
-export class NhomkhoangsanListComponent implements OnInit {
+export class DmNhomkhoangsanListComponent implements OnInit {
 
    // Viewchild template
    @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class NhomkhoangsanListComponent implements OnInit {
    public settingsCommon = new SettingsCommon();
  
    // Chứa danh sách Nhóm khoáng sản
-   public listNhomKhoangSan: OutputNhomKhoangSanModel[];
+   public listNhomKhoangSan: OutputDmNhomKhoangSanModel[];
  
    // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputNhomKhoangSanModel;
+   public selectedItem: OutputDmNhomKhoangSanModel;
  
    // Chứa dữ liệu translate
    public dataTranslate: any;
@@ -88,7 +88,7 @@ export class NhomkhoangsanListComponent implements OnInit {
     */
    async getAllNhomKhoangSan() {
      const listData: any = await this.dmFacadeService
-       .getNhomKhoangSanService()
+       .getDmNhomKhoangSanService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
      if (listData.items) {
        listData.items.map((nhomks, index) => {
@@ -105,10 +105,10 @@ export class NhomkhoangsanListComponent implements OnInit {
    async editItemNhomKhoangSan(id: string) {
      // Lấy dữ liệu nhóm khoáng sản theo id
      const dataItem: any = await this.dmFacadeService
-     .getNhomKhoangSanService()
+     .getDmNhomKhoangSanService()
      .getByid(id).toPromise();
      await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.nhomkhoangsan.titleEdit );
-     await this.matSidenavService.setContentComp( NhomkhoangsanIoComponent, "edit", dataItem);
+     await this.matSidenavService.setContentComp( DmNhomkhoangsanIoComponent, "edit", dataItem);
      await this.matSidenavService.open();
    }
  
@@ -117,7 +117,7 @@ export class NhomkhoangsanListComponent implements OnInit {
     */
    public openNhomKhoangSanIOSidenav() {
      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.nhomkhoangsan.titleAdd);
-     this.matSidenavService.setContentComp( NhomkhoangsanIoComponent, "new");
+     this.matSidenavService.setContentComp( DmNhomkhoangsanIoComponent, "new");
      this.matSidenavService.open();
    }
  
@@ -138,7 +138,7 @@ export class NhomkhoangsanListComponent implements OnInit {
      // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
      // Nếu đồng ý xóa
      const canDelete: string = this.dmFacadeService
-       .getNhomKhoangSanService()
+       .getDmNhomKhoangSanService()
        .checkBeDeleted(+this.selectedItem.idnhomkhoangsan);
      this.canBeDeletedCheck(canDelete);
    }
@@ -166,7 +166,7 @@ export class NhomkhoangsanListComponent implements OnInit {
      dialogRef.afterClosed().subscribe(async (result) => {
        if (result === "confirm") {
          await this.dmFacadeService
-           .getNhomKhoangSanService()
+           .getDmNhomKhoangSanService()
            .deleteItem({ id: this.selectedItem.idnhomkhoangsan })
            .subscribe(
              () => this.getAllNhomKhoangSan(),

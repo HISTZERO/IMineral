@@ -4,20 +4,20 @@ import { MatSidenav } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputCapTruLuongModel } from "src/app/models/admin/danhmuc/captruluong.model";
+import { OutputDmCapTruLuongModel } from "src/app/models/admin/danhmuc/captruluong.model";
 import { MenuDanhMucCapTruLuong } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { CaptruluongIoComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-io/captruluong-io.component";
+import { DmCaptruluongIoComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-io/captruluong-io.component";
 
 @Component({
   selector: 'app-captruluong-list',
   templateUrl: './captruluong-list.component.html',
   styleUrls: ['./captruluong-list.component.scss']
 })
-export class CaptruluongListComponent implements OnInit {
+export class DmCaptruluongListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class CaptruluongListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Cấp trữ lượng
-  public listCapTruLuong: OutputCapTruLuongModel[];
+  public listCapTruLuong: OutputDmCapTruLuongModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputCapTruLuongModel;
+  public selectedItem: OutputDmCapTruLuongModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;
@@ -91,7 +91,7 @@ export class CaptruluongListComponent implements OnInit {
    */
   async getAllCapTruLuong() {
     const listData: any = await this.dmFacadeService
-      .getCapTruLuongService()
+      .getDmCapTruLuongService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((truluong, index) => {
@@ -108,10 +108,10 @@ export class CaptruluongListComponent implements OnInit {
   async editItemCapTruLuong(id: string) {
     // Lấy dữ liệu cấp trữ lượng theo id
     const dataItem: any = await this.dmFacadeService
-    .getCapTruLuongService()
+    .getDmCapTruLuongService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.captruluong.titleEdit );
-    await this.matSidenavService.setContentComp( CaptruluongIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmCaptruluongIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -120,7 +120,7 @@ export class CaptruluongListComponent implements OnInit {
    */
   public openCapTruLuongIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.captruluong.titleAdd);
-    this.matSidenavService.setContentComp( CaptruluongIoComponent, "new");
+    this.matSidenavService.setContentComp( DmCaptruluongIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -141,7 +141,7 @@ export class CaptruluongListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getCapTruLuongService()
+      .getDmCapTruLuongService()
       .checkBeDeleted(+this.selectedItem.idcaptruluong);
     this.canBeDeletedCheck(canDelete);
   }
@@ -169,7 +169,7 @@ export class CaptruluongListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getCapTruLuongService()
+          .getDmCapTruLuongService()
           .deleteItem({ idCaptruluong: this.selectedItem.idcaptruluong })
           .subscribe(
             () => this.getAllCapTruLuong(),

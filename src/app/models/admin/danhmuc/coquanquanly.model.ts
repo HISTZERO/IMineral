@@ -1,4 +1,4 @@
-export class OutputCoQuanQuanLyModel {
+export class OutputDmCoQuanQuanLyModel {
     idcoquanquanly: string;
     macoquanquanly: string;
     tencoquanquanly: string;
@@ -18,7 +18,7 @@ export class OutputCoQuanQuanLyModel {
     thutu: number;
 }
 
-export class InputCoQuanQuanLyModel {
+export class InputDmCoQuanQuanLyModel {
     idcoquanquanly: string;
     macoquanquanly: string;
     tencoquanquanly: string;

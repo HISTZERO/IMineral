@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LoaicapphepListComponent } from './loaicapphep-list.component';
+import { DmLoaicapphepListComponent } from './loaicapphep-list.component';
 
-describe('LoaicapphepListComponent', () => {
-  let component: LoaicapphepListComponent;
-  let fixture: ComponentFixture<LoaicapphepListComponent>;
+describe('DmLoaicapphepListComponent', () => {
+  let component: DmLoaicapphepListComponent;
+  let fixture: ComponentFixture<DmLoaicapphepListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaicapphepListComponent ]
+      declarations: [ DmLoaicapphepListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoaicapphepListComponent);
+    fixture = TestBed.createComponent(DmLoaicapphepListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

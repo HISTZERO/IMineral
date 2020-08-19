@@ -4,13 +4,13 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
+import { OutputDmCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
 import { MenuDanhMucCapTaiNguyen } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { CaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
+import { DmCaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
 import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
 
 @Component({
@@ -18,7 +18,7 @@ import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
   templateUrl: './captainguyen-list.component.html',
   styleUrls: ['./captainguyen-list.component.scss']
 })
-export class CaptainguyenListComponent implements OnInit {
+export class DmCaptainguyenListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -28,10 +28,10 @@ export class CaptainguyenListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Cấp tài nguyên
-  public listCapTaiNguyen: OutputCapTaiNguyenModel[];
+  public listCapTaiNguyen: OutputDmCapTaiNguyenModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputCapTaiNguyenModel;
+  public selectedItem: OutputDmCapTaiNguyenModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;
@@ -95,7 +95,7 @@ export class CaptainguyenListComponent implements OnInit {
    */
   async getAllCapTaiNguyen() {
     const listData: any = await this.dmFacadeService
-      .getCapTaiNguyenService()
+      .getDmCapTaiNguyenService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((captainguyen, index) => {
@@ -112,10 +112,10 @@ export class CaptainguyenListComponent implements OnInit {
   async editItemCapTaiNguyen(id: string) {
     // Lấy dữ liệu cấp tài nguyên theo id
     const dataItem: any = await this.dmFacadeService
-    .getCapTaiNguyenService()
+    .getDmCapTaiNguyenService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.captainguyen.titleEdit );
-    await this.matSidenavService.setContentComp( CaptainguyenIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmCaptainguyenIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -124,7 +124,7 @@ export class CaptainguyenListComponent implements OnInit {
    */
   public openCapTaiNguyenIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.captainguyen.titleAdd);
-    this.matSidenavService.setContentComp(CaptainguyenIoComponent, "new");
+    this.matSidenavService.setContentComp(DmCaptainguyenIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -145,7 +145,7 @@ export class CaptainguyenListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getCapTaiNguyenService()
+      .getDmCapTaiNguyenService()
       .checkBeDeleted(+this.selectedItem.idcaptainguyen);
     this.canBeDeletedCheck(canDelete);
   }
@@ -173,7 +173,7 @@ export class CaptainguyenListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getCapTaiNguyenService()
+          .getDmCapTaiNguyenService()
           .deleteItem({ idCaptainguyen: this.selectedItem.idcaptainguyen })
           .subscribe(
             () => this.getAllCapTaiNguyen(),

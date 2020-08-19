@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
+import { OutputDmLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
 import { MenuDanhMucLoaiToChuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaitochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
+import { DmLoaiDmTochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
 
 @Component({
   selector: 'app-loaitochuc-list',
   templateUrl: './loaitochuc-list.component.html',
   styleUrls: ['./loaitochuc-list.component.scss']
 })
-export class LoaitochucListComponent implements OnInit {
+export class DmLoaiDmTochucListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class LoaitochucListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Loại tổ chức
-  public listLoaiToChuc: OutputLoaiToChucModel[];
+  public listLoaiToChuc: OutputDmLoaiToChucModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputLoaiToChucModel;
+  public selectedItem: OutputDmLoaiToChucModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class LoaitochucListComponent implements OnInit {
    */
   async getAllLoaiToChuc() {
     const listData: any = await this.dmFacadeService
-      .getLoaiToChucService()
+      .getDmLoaiToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((loaiTC, index) => {
@@ -105,10 +105,10 @@ export class LoaitochucListComponent implements OnInit {
   async editItemLoaiToChuc(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getLoaiToChucService()
+    .getDmLoaiToChucService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaitochuc.titleEdit );
-    await this.matSidenavService.setContentComp( LoaitochucIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmLoaiDmTochucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class LoaitochucListComponent implements OnInit {
    */
   public openLoaiToChucIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaitochuc.titleAdd);
-    this.matSidenavService.setContentComp(LoaitochucIoComponent, "new");
+    this.matSidenavService.setContentComp(DmLoaiDmTochucIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class LoaitochucListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getLoaiToChucService()
+      .getDmLoaiToChucService()
       .checkBeDeleted(+this.selectedItem.idloaitochuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class LoaitochucListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getLoaiToChucService()
+          .getDmLoaiToChucService()
           .deleteItem({ id: this.selectedItem.idloaitochuc })
           .subscribe(
             () => this.getAllLoaiToChuc(),

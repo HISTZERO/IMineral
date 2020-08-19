@@ -1,4 +1,4 @@
-export class OutputCapTruLuongModel {
+export class OutputDmCapTruLuongModel {
     idcaptruluong: string;
     macaptruluong: string;
     tencaptruluong: string;
@@ -7,7 +7,7 @@ export class OutputCapTruLuongModel {
     thutu: number;
 }
 
-export class InputCapTruLuongModel {
+export class InputDmCapTruLuongModel {
     idcaptruluong: string;
     macaptruluong: string;
     tencaptruluong: string;

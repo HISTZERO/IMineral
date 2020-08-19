@@ -4,14 +4,15 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
 
-import { InputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { InputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+
 @Component({
   selector: "app-canhan-io",
   templateUrl: "./canhan-io.component.html",
@@ -20,6 +21,9 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 export class DmCanhanIoComponent implements OnInit {
   // Chứa dữ liệu Form
   public canhanIOForm: FormGroup;
+
+  // Chứa giá trị ẩn input
+  public hiddenInput: boolean = false;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -31,7 +35,7 @@ export class DmCanhanIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputCanhanModel;
+  public inputModel: InputDmCanhanModel;
 
   // Chứa danh sách Dvhc Tỉnh
   public allTinh: any;
@@ -41,16 +45,16 @@ export class DmCanhanIoComponent implements OnInit {
 
   // Chứa danh sách Dvhc Xã
   public allXa: any;
-
+  
   // Filter Đơn vị hành chính Tỉnh
-  public dvhcProvinceFilters: OutputDvhcModel[];
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Huyện
-  public dvhcDistrictFilters: OutputDvhcModel[];
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Xã
-  public dvhcWardFilters: OutputDvhcModel[];
-
+  public dvhcWardFilters: OutputDmDvhcModel[];
+  
   // Chứa dữ liệu loại giấy tờ
   public loaigiayto = LoaiGiayTo;
 
@@ -97,7 +101,7 @@ export class DmCanhanIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-
+    
   }
 
   /**
@@ -118,12 +122,12 @@ export class DmCanhanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       hovaten: { required: this.dataTranslate.DANHMUC.canhan.hovatenRequired },
-      dienthoai: {
+      dienthoai: { 
         required: this.dataTranslate.DANHMUC.canhan.dienthoaiRequired,
         pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber},
       matinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
       mahuyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
-      email: {
+      email: { 
         required: this.dataTranslate.DANHMUC.canhan.emailRequired,
         email: this.dataTranslate.DANHMUC.canhan.emailCheck},
       thutu: { pattern: this.dataTranslate.DANHMUC.canhan.thutuIsNumber }
@@ -136,7 +140,7 @@ export class DmCanhanIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.showDvhcTinh();
     this.editMode = false;
-    this.inputModel = new InputCanhanModel();
+    this.inputModel = new InputDmCanhanModel();
     // check edit
     this.formOnEdit();
   }
@@ -167,6 +171,7 @@ export class DmCanhanIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.hiddenInput = true;
       this.canhanIOForm.setValue({
         hovaten: this.obj.hovaten,
         diachi: this.obj.diachi,
@@ -297,7 +302,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode
+   * @param operMode 
    */
   async onSubmit(operMode: string) {
     // this.logAllValidationErrorMessages();
@@ -317,7 +322,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode
+   * @param operMode 
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -371,7 +376,7 @@ export class DmCanhanIoComponent implements OnInit {
       return false
     }
   }
-
+  
   /**
    * Hàm close sidenav
    */

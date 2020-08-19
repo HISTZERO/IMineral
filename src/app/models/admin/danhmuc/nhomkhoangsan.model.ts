@@ -1,4 +1,4 @@
-export class OutputNhomKhoangSanModel {
+export class OutputDmNhomKhoangSanModel {
     idnhomkhoangsan: string;
     manhomkhoangsan: string;
     tennhomkhoangsan: string;
@@ -7,7 +7,7 @@ export class OutputNhomKhoangSanModel {
     thutu: number;
 }
 
-export class InputNhomKhoangSanModel {
+export class InputDmNhomKhoangSanModel {
     idnhomkhoangsan: string;
     manhomkhoangsan: string;
     tennhomkhoangsan: string;

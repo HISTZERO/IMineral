@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
+import { InputDmLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -16,7 +16,7 @@ import { NhomLoaiTaiLieu } from "src/app/shared/constants/nhomloaitailieu";
   templateUrl: './loaitailieu-io.component.html',
   styleUrls: ['./loaitailieu-io.component.scss']
 })
-export class LoaitailieuIoComponent implements OnInit {
+export class DmLoaitailieuIoComponent implements OnInit {
 
    // Chứa dữ liệu Form
    public loaiTaiLieuIOForm: FormGroup;
@@ -31,7 +31,7 @@ export class LoaitailieuIoComponent implements OnInit {
    public editMode: boolean;
  
    // Chứa dữ liệu input
-   public inputModel: InputLoaiTaiLieuModel;
+   public inputModel: InputDmLoaiTaiLieuModel;
  
    // Chứa dữ liệu Trạng thái
    public trangthai = TrangThai;
@@ -101,7 +101,7 @@ export class LoaitailieuIoComponent implements OnInit {
     */
    bindingConfigAddOrUpdate() {
      this.editMode = false;
-     this.inputModel = new InputLoaiTaiLieuModel();
+     this.inputModel = new InputDmLoaiTaiLieuModel();
      // check edit
      this.formOnEdit();
    }
@@ -141,7 +141,7 @@ export class LoaitailieuIoComponent implements OnInit {
     * Hàm thực thi chức năng add và edit
     */
    private addOrUpdate(operMode: string) {
-     const dmFacadeService = this.dmFacadeService.getLoaiTaiLieuService();
+     const dmFacadeService = this.dmFacadeService.getDmLoaiTaiLieuService();
      this.inputModel = this.loaiTaiLieuIOForm.value;
      if (operMode === "new") {
        dmFacadeService.addItem(this.inputModel).subscribe(

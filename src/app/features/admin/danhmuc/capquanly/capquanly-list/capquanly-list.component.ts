@@ -8,8 +8,8 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { CapquanlyIoComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-io/capquanly-io.component";
-import { OutputCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
+import { DmCapquanlyIoComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-io/capquanly-io.component";
+import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { MenuDanhMucCapQuanLy } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 
 @Component({
@@ -17,7 +17,7 @@ import { MenuDanhMucCapQuanLy } from "src/app/shared/constants/sub-menus/danhmuc
   templateUrl: './capquanly-list.component.html',
   styleUrls: ['./capquanly-list.component.scss']
 })
-export class CapquanlyListComponent implements OnInit {
+export class DmCapquanlyListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class CapquanlyListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Cấp quản lý
-  public listCapQuanLy: OutputCapQuanLyModel[];
+  public listCapQuanLy: OutputDmCapQuanLyModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputCapQuanLyModel;
+  public selectedItem: OutputDmCapQuanLyModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class CapquanlyListComponent implements OnInit {
    */
   async getAllCapQuanLy() {
     const listData: any = await this.dmFacadeService
-      .getCapQuanLyService()
+      .getDmCapQuanLyService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((capquanly, index) => {
@@ -105,10 +105,10 @@ export class CapquanlyListComponent implements OnInit {
   async editItemCapQuanLy(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getCapQuanLyService()
+    .getDmCapQuanLyService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.capquanly.titleEdit );
-    await this.matSidenavService.setContentComp( CapquanlyIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmCapquanlyIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class CapquanlyListComponent implements OnInit {
    */
   public openCapQuanLyIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.capquanly.titleAdd);
-    this.matSidenavService.setContentComp(CapquanlyIoComponent, "new");
+    this.matSidenavService.setContentComp(DmCapquanlyIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class CapquanlyListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getCapQuanLyService()
+      .getDmCapQuanLyService()
       .checkBeDeleted(+this.selectedItem.idcapquanly);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class CapquanlyListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getCapQuanLyService()
+          .getDmCapQuanLyService()
           .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
           .subscribe(
             () => this.getAllCapQuanLy(),

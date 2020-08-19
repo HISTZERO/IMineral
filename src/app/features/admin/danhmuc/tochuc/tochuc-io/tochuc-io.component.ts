@@ -4,22 +4,22 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
 
-import { InputToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { InputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
-import { OutputLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
+import { OutputDmLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
 
 @Component({
   selector: 'app-tochuc-io',
   templateUrl: './tochuc-io.component.html',
   styleUrls: ['./tochuc-io.component.scss']
 })
-export class TochucIoComponent implements OnInit {
+export class DmTochucIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public tochucIOForm: FormGroup;
@@ -34,7 +34,7 @@ export class TochucIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputToChucModel;
+  public inputModel: InputDmToChucModel;
 
   // Chứa danh sách Dvhc Tỉnh
   public allTinh: any;
@@ -46,19 +46,19 @@ export class TochucIoComponent implements OnInit {
   public allXa: any;
   
   // Filter Đơn vị hành chính Tỉnh
-  public dvhcProvinceFilters: OutputDvhcModel[];
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Huyện
-  public dvhcDistrictFilters: OutputDvhcModel[];
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Xã
-  public dvhcWardFilters: OutputDvhcModel[];
+  public dvhcWardFilters: OutputDmDvhcModel[];
 
   // Chứa danh sách loại tổ chức
-  public listLoaiToChuc: OutputLoaiToChucModel[];
+  public listLoaiToChuc: OutputDmLoaiToChucModel[];
 
   // Chứa danh sách loại tổ chức Filter
-  public listLoaiToChucFilter: OutputLoaiToChucModel[];
+  public listLoaiToChucFilter: OutputDmLoaiToChucModel[];
   
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -144,7 +144,7 @@ export class TochucIoComponent implements OnInit {
    */
   async getAllLoaiToChuc() {
     const listData: any = await this.dmFacadeService
-      .getLoaiToChucService()
+      .getDmLoaiToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.listLoaiToChuc = listData.items;
   }
@@ -155,7 +155,7 @@ export class TochucIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.showDvhcTinh();
     this.editMode = false;
-    this.inputModel = new InputToChucModel();
+    this.inputModel = new InputDmToChucModel();
     // check edit
     this.formOnEdit();
   }
@@ -279,7 +279,7 @@ export class TochucIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getToChucService();
+    const dmFacadeService = this.dmFacadeService.getDmToChucService();
     // Gán dữ liệu input vào model
     const idtinh = this.tochucIOForm.value.matinh.idtinh;
     const idhuyen = this.tochucIOForm.value.mahuyen.idhuyen;

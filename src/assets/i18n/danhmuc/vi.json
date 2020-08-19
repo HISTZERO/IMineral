@@ -283,8 +283,9 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "mathutucPlaceholder": "Nhập mã thủ tục hành chính",
     "tenthutucPlaceholder": "Nhập tên thủ tục hành chính",
+    "tenthutucRequired": "Tên thủ tục hành chính không được để trống",
     "linhvucPlaceholder": "Nhập lĩnh vực",
-    "capthuchienPlaceholder": "Nhập cấp thực hiện",
+    "capthuchienPlaceholder": "---Chọn cấp thực hiện---",
     "doituongthuchienPlaceholder": "Nhập đối tượng thực hiện",
     "coquanthuchienPlaceholder": "Nhập cơ quan thực hiện",
     "ketquathuchienPlaceholder": "Nhập kết quả thực hiện",
@@ -293,6 +294,7 @@
     "trinhtuthuchienPlaceholder": "Nhập trình tự thực hiện",
     "cachthucthuchienPlaceholder": "Nhập cách thức thực hiện",
     "songaythuchienPlaceholder": "Nhập số ngày thực hiện",
+    "songaythuchienIsNumber": "Số ngày thực hiện phải là kiểu số",
     "chonTrangthai": "---Chọn trạng thái---",
     "thutuPlaceholder": "Nhập thứ tự",
     "lephiPlaceholder": "Nhập lệ phí"

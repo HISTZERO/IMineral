@@ -4,20 +4,20 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputThuTucHanhChinhModel } from "src/app/models/admin/danhmuc/thutuchanhchinh.model";
+import { OutputDmThuTucHanhChinhModel } from "src/app/models/admin/danhmuc/thutuchanhchinh.model";
 import { MenuDanhMucThuTucHanhChinh } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { ThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
+import { DmThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
 
 @Component({
   selector: 'app-thutuchanhchinh-list',
   templateUrl: './thutuchanhchinh-list.component.html',
   styleUrls: ['./thutuchanhchinh-list.component.scss']
 })
-export class ThutuchanhchinhListComponent implements OnInit {
+export class DmThutuchanhchinhListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class ThutuchanhchinhListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Thủ tục hành chính
-  public listThuTucHanhChinh: OutputThuTucHanhChinhModel[];
+  public listThuTucHanhChinh: OutputDmThuTucHanhChinhModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputThuTucHanhChinhModel;
+  public selectedItem: OutputDmThuTucHanhChinhModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class ThutuchanhchinhListComponent implements OnInit {
    */
   async getAllThuTucHanhChinh() {
     const listData: any = await this.dmFacadeService
-      .getThuTucHanhChinhService()
+      .getDmThuTucHanhChinhService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((thutucHC, index) => {
@@ -105,10 +105,10 @@ export class ThutuchanhchinhListComponent implements OnInit {
   async editItemThuTucHanhChinh(id: string) {
     // Lấy dữ liệu nhóm khoáng sản theo id
     const dataItem: any = await this.dmFacadeService
-    .getThuTucHanhChinhService()
+    .getDmThuTucHanhChinhService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.thutuchanhchinh.titleEdit );
-    await this.matSidenavService.setContentComp( ThutuchanhchinhIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmThutuchanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class ThutuchanhchinhListComponent implements OnInit {
    */
   public openThuTucHanhChinhIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.thutuchanhchinh.titleAdd);
-    this.matSidenavService.setContentComp( ThutuchanhchinhIoComponent, "new");
+    this.matSidenavService.setContentComp( DmThutuchanhchinhIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class ThutuchanhchinhListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getThuTucHanhChinhService()
+      .getDmThuTucHanhChinhService()
       .checkBeDeleted(+this.selectedItem.idthutuchanhchinh);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class ThutuchanhchinhListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getThuTucHanhChinhService()
+          .getDmThuTucHanhChinhService()
           .deleteItem({ id: this.selectedItem.idthutuchanhchinh })
           .subscribe(
             () => this.getAllThuTucHanhChinh(),

@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputCoQuanQuanLyModel } from "src/app/models/admin/danhmuc/coquanquanly.model";
+import { OutputDmCoQuanQuanLyModel } from "src/app/models/admin/danhmuc/coquanquanly.model";
 import { MenuDanhMucCoQuanQuanLy } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { CoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
+import { DmCoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
 
 @Component({
   selector: 'app-coquanquanly-list',
   templateUrl: './coquanquanly-list.component.html',
   styleUrls: ['./coquanquanly-list.component.scss']
 })
-export class CoquanquanlyListComponent implements OnInit {
+export class DmCoquanquanlyListComponent implements OnInit {
 
    // Viewchild template
    @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class CoquanquanlyListComponent implements OnInit {
    public settingsCommon = new SettingsCommon();
  
    // Chứa danh sách Cơ quan quản lý
-   public listCoQuanQuanLy: OutputCoQuanQuanLyModel[];
+   public listCoQuanQuanLy: OutputDmCoQuanQuanLyModel[];
  
    // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputCoQuanQuanLyModel;
+   public selectedItem: OutputDmCoQuanQuanLyModel;
  
    // Chứa dữ liệu translate
    public dataTranslate: any;
@@ -88,7 +88,7 @@ export class CoquanquanlyListComponent implements OnInit {
     */
    async getAllCoQuanQuanLy() {
      const listData: any = await this.dmFacadeService
-       .getCoQuanQuanLyService()
+       .getDmCoQuanQuanLyService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
      if (listData.items) {
        listData.items.map((coquan, index) => {
@@ -105,10 +105,10 @@ export class CoquanquanlyListComponent implements OnInit {
    async editItemCoQuanQuanLy(id: string) {
      // Lấy dữ liệu cơ quan quản lý theo id
      const dataItem: any = await this.dmFacadeService
-     .getCoQuanQuanLyService()
+     .getDmCoQuanQuanLyService()
      .getByid(id).toPromise();
      await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.coquanquanly.titleEdit );
-     await this.matSidenavService.setContentComp( CoquanquanlyIoComponent, "edit", dataItem);
+     await this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "edit", dataItem);
      await this.matSidenavService.open();
    }
  
@@ -117,7 +117,7 @@ export class CoquanquanlyListComponent implements OnInit {
     */
    public openCoQuanQuanLyIOSidenav() {
      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.coquanquanly.titleAdd);
-     this.matSidenavService.setContentComp( CoquanquanlyIoComponent, "new");
+     this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "new");
      this.matSidenavService.open();
    }
  
@@ -138,7 +138,7 @@ export class CoquanquanlyListComponent implements OnInit {
      // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
      // Nếu đồng ý xóa
      const canDelete: string = this.dmFacadeService
-       .getCoQuanQuanLyService()
+       .getDmCoQuanQuanLyService()
        .checkBeDeleted(+this.selectedItem.idcoquanquanly);
      this.canBeDeletedCheck(canDelete);
    }
@@ -166,7 +166,7 @@ export class CoquanquanlyListComponent implements OnInit {
      dialogRef.afterClosed().subscribe(async (result) => {
        if (result === "confirm") {
          await this.dmFacadeService
-           .getCoQuanQuanLyService()
+           .getDmCoQuanQuanLyService()
            .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
            .subscribe(
              () => this.getAllCoQuanQuanLy(),

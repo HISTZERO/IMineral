@@ -1,4 +1,4 @@
-export class OutputToChucModel {
+export class OutputDmToChucModel {
     idtochuc: string;
     tentochuc: string;
     diachi: string;
@@ -21,7 +21,7 @@ export class OutputToChucModel {
     thutu: number;
 }
 
-export class InputToChucModel {
+export class InputDmToChucModel {
     idtochuc: string;
     tentochuc: string;
     diachi: string;

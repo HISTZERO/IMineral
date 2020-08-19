@@ -1,4 +1,4 @@
-export class OutputLoaiBaoCaoModel {
+export class OutputDmLoaiBaoCaoModel {
     idloaibaocao: string;
     maloaibaocao: string;
     tenloaibaocao: string;
@@ -7,7 +7,7 @@ export class OutputLoaiBaoCaoModel {
     thutu: number;
 }
 
-export class InputLoaiBaoCaoModel {
+export class InputDmLoaiBaoCaoModel {
     idloaibaocao: string;
     maloaibaocao: string;
     tenloaibaocao: string;
