@@ -4,20 +4,20 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
+import { OutputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
 import { MenuDanhMucLoaiBaoCao } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
+import { DmLoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
 
 @Component({
   selector: 'app-loaibaocao-list',
   templateUrl: './loaibaocao-list.component.html',
   styleUrls: ['./loaibaocao-list.component.scss']
 })
-export class LoaibaocaoListComponent implements OnInit {
+export class DmLoaibaocaoListComponent implements OnInit {
 
    // Viewchild template
    @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class LoaibaocaoListComponent implements OnInit {
    public settingsCommon = new SettingsCommon();
  
    // Chứa danh sách Loại Báo Cáo
-   public listLoaiBaoCao: OutputLoaiBaoCaoModel[];
+   public listLoaiBaoCao: OutputDmLoaiBaoCaoModel[];
  
    // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputLoaiBaoCaoModel;
+   public selectedItem: OutputDmLoaiBaoCaoModel;
  
    // Chứa dữ liệu translate
    public dataTranslate: any;
@@ -88,7 +88,7 @@ export class LoaibaocaoListComponent implements OnInit {
     */
    async getAllLoaiBaoCao() {
      const listData: any = await this.dmFacadeService
-       .getLoaiBaoCaoService()
+       .getDmLoaiBaoCaoService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
      if (listData.items) {
        listData.items.map((loaibaocao, index) => {
@@ -105,10 +105,10 @@ export class LoaibaocaoListComponent implements OnInit {
    async editItemLoaiBaoCao(id: string) {
      // Lấy dữ liệu loại báo cáo theo id
      const dataItem: any = await this.dmFacadeService
-     .getLoaiBaoCaoService()
+     .getDmLoaiBaoCaoService()
      .getByid(id).toPromise();
      await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaibaocao.titleEdit );
-     await this.matSidenavService.setContentComp( LoaibaocaoIoComponent, "edit", dataItem);
+     await this.matSidenavService.setContentComp( DmLoaibaocaoIoComponent, "edit", dataItem);
      await this.matSidenavService.open();
    }
  
@@ -117,7 +117,7 @@ export class LoaibaocaoListComponent implements OnInit {
     */
    public openLoaiBaoCaoIOSidenav() {
      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaibaocao.titleAdd);
-     this.matSidenavService.setContentComp(LoaibaocaoIoComponent, "new");
+     this.matSidenavService.setContentComp(DmLoaibaocaoIoComponent, "new");
      this.matSidenavService.open();
    }
  
@@ -138,7 +138,7 @@ export class LoaibaocaoListComponent implements OnInit {
      // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
      // Nếu đồng ý xóa
      const canDelete: string = this.dmFacadeService
-       .getLoaiBaoCaoService()
+       .getDmLoaiBaoCaoService()
        .checkBeDeleted(+this.selectedItem.idloaibaocao);
      this.canBeDeletedCheck(canDelete);
    }
@@ -166,7 +166,7 @@ export class LoaibaocaoListComponent implements OnInit {
      dialogRef.afterClosed().subscribe(async (result) => {
        if (result === "confirm") {
          await this.dmFacadeService
-           .getLoaiBaoCaoService()
+           .getDmLoaiBaoCaoService()
            .deleteItem({ idLoaibaocao: this.selectedItem.idloaibaocao })
            .subscribe(
              () => this.getAllLoaiBaoCao(),

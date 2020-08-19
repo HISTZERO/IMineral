@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputCapTruLuongModel } from "src/app/models/admin/danhmuc/captruluong.model";
+import { InputDmCapTruLuongModel } from "src/app/models/admin/danhmuc/captruluong.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -15,7 +15,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   templateUrl: './captruluong-io.component.html',
   styleUrls: ['./captruluong-io.component.scss']
 })
-export class CaptruluongIoComponent implements OnInit {
+export class DmCaptruluongIoComponent implements OnInit {
 
  // Chứa dữ liệu Form
  public capTruLuongIOForm: FormGroup;
@@ -30,7 +30,7 @@ export class CaptruluongIoComponent implements OnInit {
  public editMode: boolean;
 
  // Chứa dữ liệu input
- public inputModel: InputCapTruLuongModel;
+ public inputModel: InputDmCapTruLuongModel;
 
  // Chứa dữ liệu Trạng thái
  public trangthai = TrangThai;
@@ -96,7 +96,7 @@ export class CaptruluongIoComponent implements OnInit {
   */
  bindingConfigAddOrUpdate() {
    this.editMode = false;
-   this.inputModel = new InputCapTruLuongModel();
+   this.inputModel = new InputDmCapTruLuongModel();
    // check edit
    this.formOnEdit();
  }
@@ -134,7 +134,7 @@ export class CaptruluongIoComponent implements OnInit {
   * Hàm thực thi chức năng add và edit
   */
  private addOrUpdate(operMode: string) {
-   const dmFacadeService = this.dmFacadeService.getCapTruLuongService();
+   const dmFacadeService = this.dmFacadeService.getDmCapTruLuongService();
    this.inputModel = this.capTruLuongIOForm.value;
    if (operMode === "new") {
      dmFacadeService.addItem(this.inputModel).subscribe(

@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
+import { OutputDmLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
 import { MenuDanhMucLoaiTaiLieu } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaitailieuIoComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-io/loaitailieu-io.component";
+import { DmLoaitailieuIoComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-io/loaitailieu-io.component";
 
 @Component({
   selector: 'app-loaitailieu-list',
   templateUrl: './loaitailieu-list.component.html',
   styleUrls: ['./loaitailieu-list.component.scss']
 })
-export class LoaitailieuListComponent implements OnInit {
+export class DmLoaitailieuListComponent implements OnInit {
 
       // Viewchild template
     @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class LoaitailieuListComponent implements OnInit {
     public settingsCommon = new SettingsCommon();
 
     // Chứa danh sách Loại tài liệu
-    public listLoaitaiLieu: OutputLoaiTaiLieuModel[];
+    public listLoaitaiLieu: OutputDmLoaiTaiLieuModel[];
 
     // Chứa dữ liệu đã chọn 
-    public selectedItem: OutputLoaiTaiLieuModel;
+    public selectedItem: OutputDmLoaiTaiLieuModel;
 
     // Chứa dữ liệu translate
     public dataTranslate: any;
@@ -88,7 +88,7 @@ export class LoaitailieuListComponent implements OnInit {
       */
     async getAllLoaiTaiLieu() {
       const listData: any = await this.dmFacadeService
-        .getLoaiTaiLieuService()
+        .getDmLoaiTaiLieuService()
         .getFetchAll({ PageNumber: 1, PageSize: -1 });
       if (listData.items) {
         listData.items.map((loaiTL, index) => {
@@ -105,10 +105,10 @@ export class LoaitailieuListComponent implements OnInit {
     async editItemLoaiTaiLieu(id: string) {
       // Lấy dữ liệu loại tài liệu theo id
       const dataItem: any = await this.dmFacadeService
-      .getLoaiTaiLieuService()
+      .getDmLoaiTaiLieuService()
       .getByid(id).toPromise();
       await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaitailieu.titleEdit );
-      await this.matSidenavService.setContentComp( LoaitailieuIoComponent, "edit", dataItem);
+      await this.matSidenavService.setContentComp( DmLoaitailieuIoComponent, "edit", dataItem);
       await this.matSidenavService.open();
     }
 
@@ -117,7 +117,7 @@ export class LoaitailieuListComponent implements OnInit {
       */
     public openLoaiTaiLieuIOSidenav() {
       this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaitailieu.titleAdd);
-      this.matSidenavService.setContentComp( LoaitailieuIoComponent, "new");
+      this.matSidenavService.setContentComp( DmLoaitailieuIoComponent, "new");
       this.matSidenavService.open();
     }
 
@@ -138,7 +138,7 @@ export class LoaitailieuListComponent implements OnInit {
       // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
       // Nếu đồng ý xóa
       const canDelete: string = this.dmFacadeService
-        .getLoaiKhoangSanService()
+        .getDmLoaiKhoangSanService()
         .checkBeDeleted(+this.selectedItem.idloaitailieu);
       this.canBeDeletedCheck(canDelete);
     }
@@ -166,7 +166,7 @@ export class LoaitailieuListComponent implements OnInit {
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
           await this.dmFacadeService
-            .getLoaiTaiLieuService()
+            .getDmLoaiTaiLieuService()
             .deleteItem({ id: this.selectedItem.idloaitailieu })
             .subscribe(
               () => this.getAllLoaiTaiLieu(),

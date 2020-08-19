@@ -1,4 +1,4 @@
-export class OutputLoaiGiayPhepModel {
+export class OutputDmLoaiGiayPhepModel {
     idloaigiayphep: string;
     maloaigiayphep: number;
     tenloaigiayphep: string;
@@ -9,7 +9,7 @@ export class OutputLoaiGiayPhepModel {
     thutu: number;
 }
 
-export class InputLoaiGiayPhepModel {
+export class InputDmLoaiGiayPhepModel {
     idloaigiayphep: string;
     maloaigiayphep: number;
     tenloaigiayphep: string;

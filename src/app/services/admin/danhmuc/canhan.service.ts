@@ -2,8 +2,8 @@ import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
 import {
-  InputCanhanModel,
-  OutputCanhanModel
+  InputDmCanhanModel,
+  OutputDmCanhanModel
 } from "src/app/models/admin/danhmuc/canhan.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
@@ -17,8 +17,8 @@ export class DmCanhanService extends RepositoryEloquentService {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputCanhanModel(),
-      outputModelName: new OutputCanhanModel(),
+      inputModelName: new InputDmCanhanModel(),
+      outputModelName: new OutputDmCanhanModel(),
       apiUrl: environment.apiIMineral + ServiceName.CANHAN
     });
   }

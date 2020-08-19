@@ -4,8 +4,8 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
 
-import { InputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { InputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -31,7 +31,7 @@ export class DmCanhanIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputCanhanModel;
+  public inputModel: InputDmCanhanModel;
 
   // Chứa danh sách Dvhc Tỉnh
   public allTinh: any;
@@ -43,13 +43,13 @@ export class DmCanhanIoComponent implements OnInit {
   public allXa: any;
   
   // Filter Đơn vị hành chính Tỉnh
-  public dvhcProvinceFilters: OutputDvhcModel[];
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Huyện
-  public dvhcDistrictFilters: OutputDvhcModel[];
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
 
   // Filter Đơn vị hành chính Xã
-  public dvhcWardFilters: OutputDvhcModel[];
+  public dvhcWardFilters: OutputDmDvhcModel[];
   
   // Chứa dữ liệu loại giấy tờ
   public loaigiayto = LoaiGiayTo;
@@ -136,7 +136,7 @@ export class DmCanhanIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.showDvhcTinh();
     this.editMode = false;
-    this.inputModel = new InputCanhanModel();
+    this.inputModel = new InputDmCanhanModel();
     // check edit
     this.formOnEdit();
   }

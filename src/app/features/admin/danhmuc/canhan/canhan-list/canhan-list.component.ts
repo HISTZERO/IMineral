@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
@@ -26,10 +26,10 @@ export class DmCanhanListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Cá nhân
-  public listCanhan: OutputCanhanModel[];
+  public listCanhan: OutputDmCanhanModel[];
 
-  // Chứa dữ liệu đã chọn
-  public selectedItem: OutputCanhanModel;
+  // Chứa dữ liệu đã chọn 
+  public selectedItem: OutputDmCanhanModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;

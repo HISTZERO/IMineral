@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { CoquanquanlyListComponent } from './coquanquanly-list.component';
+import { DmCoquanquanlyListComponent } from './coquanquanly-list.component';
 
-describe('CoquanquanlyListComponent', () => {
-  let component: CoquanquanlyListComponent;
-  let fixture: ComponentFixture<CoquanquanlyListComponent>;
+describe('DmCoquanquanlyListComponent', () => {
+  let component: DmCoquanquanlyListComponent;
+  let fixture: ComponentFixture<DmCoquanquanlyListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CoquanquanlyListComponent ]
+      declarations: [ DmCoquanquanlyListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CoquanquanlyListComponent);
+    fixture = TestBed.createComponent(DmCoquanquanlyListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

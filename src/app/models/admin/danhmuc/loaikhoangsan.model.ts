@@ -1,4 +1,4 @@
-export class OutputLoaiKhoangSanModel {
+export class OutputDmLoaiKhoangSanModel {
     idloaikhoangsan: string;
     maloaikhoangsan: string;
     tenloaikhoangsan: string;
@@ -8,7 +8,7 @@ export class OutputLoaiKhoangSanModel {
     idnhomkhoangsan: string;
 }
 
-export class InputLoaiKhoangSanModel {
+export class InputDmLoaiKhoangSanModel {
     idloaikhoangsan: string;
     maloaikhoangsan: string;
     tenloaikhoangsan: string;

@@ -1,4 +1,4 @@
-export class OutputNguonGocMoModel {
+export class OutputDmNguonGocMoModel {
     idnguongocmo: string;
     manguongocmo: string;
     tennguongocmo: string;
@@ -7,7 +7,7 @@ export class OutputNguonGocMoModel {
     thutu: number;
 }
 
-export class InputNguonGocMoModel {
+export class InputDmNguonGocMoModel {
     idnguongocmo: string;
     manguongocmo: string;
     tennguongocmo: string;

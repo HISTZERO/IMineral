@@ -3,8 +3,8 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputCoQuanQuanLyModel } from "src/app/models/admin/danhmuc/coquanquanly.model";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { InputDmCoQuanQuanLyModel } from "src/app/models/admin/danhmuc/coquanquanly.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -16,7 +16,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   templateUrl: './coquanquanly-io.component.html',
   styleUrls: ['./coquanquanly-io.component.scss']
 })
-export class CoquanquanlyIoComponent implements OnInit {
+export class DmCoquanquanlyIoComponent implements OnInit {
 
    // Chứa dữ liệu Form
    public coQuanQuanLyIOForm: FormGroup;
@@ -31,7 +31,7 @@ export class CoquanquanlyIoComponent implements OnInit {
    public editMode: boolean;
  
    // Chứa dữ liệu input
-   public inputModel: InputCoQuanQuanLyModel;
+   public inputModel: InputDmCoQuanQuanLyModel;
  
    // Chứa danh sách Dvhc Tỉnh
    public allTinh: any;
@@ -43,13 +43,13 @@ export class CoquanquanlyIoComponent implements OnInit {
    public allXa: any;
    
    // Filter Đơn vị hành chính Tỉnh
-   public dvhcProvinceFilters: OutputDvhcModel[];
+   public dvhcProvinceFilters: OutputDmDvhcModel[];
  
    // Filter Đơn vị hành chính Huyện
-   public dvhcDistrictFilters: OutputDvhcModel[];
+   public dvhcDistrictFilters: OutputDmDvhcModel[];
  
    // Filter Đơn vị hành chính Xã
-   public dvhcWardFilters: OutputDvhcModel[];
+   public dvhcWardFilters: OutputDmDvhcModel[];
    
    // Chứa dữ liệu Trạng thái
    public trangthai = TrangThai;
@@ -128,7 +128,7 @@ export class CoquanquanlyIoComponent implements OnInit {
    bindingConfigAddOrUpdate() {
      this.showDvhcTinh();
      this.editMode = false;
-     this.inputModel = new InputCoQuanQuanLyModel();
+     this.inputModel = new InputDmCoQuanQuanLyModel();
      // check edit
      this.formOnEdit();
    }
@@ -246,7 +246,7 @@ export class CoquanquanlyIoComponent implements OnInit {
     * Hàm thực thi chức năng add và edit
     */
    private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getCoQuanQuanLyService();
+    const dmFacadeService = this.dmFacadeService.getDmCoQuanQuanLyService();
     const idtinh = this.coQuanQuanLyIOForm.value.matinh.idtinh;
     const idhuyen = this.coQuanQuanLyIOForm.value.mahuyen.idhuyen;
     const idxa =  this.coQuanQuanLyIOForm.value.maxa.idxa;

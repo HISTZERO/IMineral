@@ -1,4 +1,4 @@
-export class OutputLoaiToChucModel {
+export class OutputDmLoaiToChucModel {
     idloaitochuc: string;
     maloaitochuc: string;
     tenloaitochuc: string;
@@ -7,7 +7,7 @@ export class OutputLoaiToChucModel {
     thutu: number;
 }
 
-export class InputLoaiToChucModel {
+export class InputDmLoaiToChucModel {
     idloaitochuc: string;
     maloaitochuc: string;
     tenloaitochuc: string;
