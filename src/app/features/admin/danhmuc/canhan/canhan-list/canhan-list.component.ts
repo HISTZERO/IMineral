@@ -2,6 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { SelectionSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
@@ -19,8 +20,12 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
 })
 export class DmCanhanListComponent implements OnInit {
   // Viewchild template
+  @ViewChild('grid', { static: true }) public grid: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // Chứa model selection grid
+  public selectionOptions: SelectionSettingsModel;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
