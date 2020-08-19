@@ -1,4 +1,4 @@
-export class OutputLoaiTaiLieuModel {
+export class OutputDmLoaiTaiLieuModel {
     idloaitailieu: string;
     maloaitailieu: string;
     tenloaitailieu: string;
@@ -8,7 +8,7 @@ export class OutputLoaiTaiLieuModel {
     thutu: number;
 }
 
-export class InputLoaiTaiLieuModel {
+export class InputDmLoaiTaiLieuModel {
     idloaitailieu: string;
     maloaitailieu: string;
     tenloaitailieu: string;

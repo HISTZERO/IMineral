@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
+import { InputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -15,7 +15,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   templateUrl: './loaibaocao-io.component.html',
   styleUrls: ['./loaibaocao-io.component.scss']
 })
-export class LoaibaocaoIoComponent implements OnInit {
+export class DmLoaibaocaoIoComponent implements OnInit {
 
     // Chứa dữ liệu Form
     public loaiBaoCaoIOForm: FormGroup;
@@ -30,7 +30,7 @@ export class LoaibaocaoIoComponent implements OnInit {
     public editMode: boolean;
 
     // Chứa dữ liệu input
-    public inputModel: InputLoaiBaoCaoModel;
+    public inputModel: InputDmLoaiBaoCaoModel;
 
     // Chứa dữ liệu Trạng thái
     public trangthai = TrangThai;
@@ -96,7 +96,7 @@ export class LoaibaocaoIoComponent implements OnInit {
       */
     bindingConfigAddOrUpdate() {
       this.editMode = false;
-      this.inputModel = new InputLoaiBaoCaoModel();
+      this.inputModel = new InputDmLoaiBaoCaoModel();
       // check edit
       this.formOnEdit();
     }
@@ -134,7 +134,7 @@ export class LoaibaocaoIoComponent implements OnInit {
       * Hàm thực thi chức năng add và edit
       */
     private addOrUpdate(operMode: string) {
-      const dmFacadeService = this.dmFacadeService.getLoaiBaoCaoService();
+      const dmFacadeService = this.dmFacadeService.getDmLoaiBaoCaoService();
       this.inputModel = this.loaiBaoCaoIOForm.value;
       if (operMode === "new") {
         dmFacadeService.addItem(this.inputModel).subscribe(

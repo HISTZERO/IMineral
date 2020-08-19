@@ -3,19 +3,20 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputThuTucHanhChinhModel } from "src/app/models/admin/danhmuc/thutuchanhchinh.model";
+import { InputDmThuTucHanhChinhModel } from "src/app/models/admin/danhmuc/thutuchanhchinh.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 
 @Component({
   selector: 'app-thutuchanhchinh-io',
   templateUrl: './thutuchanhchinh-io.component.html',
   styleUrls: ['./thutuchanhchinh-io.component.scss']
 })
-export class ThutuchanhchinhIoComponent implements OnInit {
+export class DmThutuchanhchinhIoComponent implements OnInit {
 
     // Chứa dữ liệu Form
     public thuTucHanhChinhIOForm: FormGroup;
@@ -30,7 +31,13 @@ export class ThutuchanhchinhIoComponent implements OnInit {
     public editMode: boolean;
   
     // Chứa dữ liệu input
-    public inputModel: InputThuTucHanhChinhModel;
+    public inputModel: InputDmThuTucHanhChinhModel;
+
+    // Chứa danh sách Cấp quản lý
+    public listCapQuanLy: OutputDmCapQuanLyModel[];
+
+    // Chứa danh sách Cấp quản lý để tìm kiếm
+    public listCapQuanLyFilter: OutputDmCapQuanLyModel[];
   
     // Chứa dữ liệu Trạng thái
     public trangthai = TrangThai;
@@ -76,7 +83,8 @@ export class ThutuchanhchinhIoComponent implements OnInit {
       await this.bindingConfigAddOrUpdate();
       // Lấy dữ liệu translate
       await this.getDataTranslate();
-      
+      // Lấy dữ liệu Cấp quản lý
+      this.getAllCapQuanLy();
     }
   
     /**
@@ -96,6 +104,8 @@ export class ThutuchanhchinhIoComponent implements OnInit {
       */
     setValidation() {
       this.validationErrorMessages = {
+        tenthutuc: { required: this.dataTranslate.DANHMUC.thutuchanhchinh.tenthutucRequired},
+        songaythuchien: { pattern: this.dataTranslate.DANHMUC.thutuchanhchinh.songaythuchienIsNumber},
         thutu: { pattern: this.dataTranslate.DANHMUC.thutuchanhchinh.thutuIsNumber }
       };
     }
@@ -105,7 +115,7 @@ export class ThutuchanhchinhIoComponent implements OnInit {
       */
     bindingConfigAddOrUpdate() {
       this.editMode = false;
-      this.inputModel = new InputThuTucHanhChinhModel();
+      this.inputModel = new InputDmThuTucHanhChinhModel();
       // check edit
       this.formOnEdit();
     }
@@ -116,7 +126,7 @@ export class ThutuchanhchinhIoComponent implements OnInit {
     formInit() {
       this.thuTucHanhChinhIOForm = this.formBuilder.group({
         mathutuc: [""],
-        tenthutuc: [""],
+        tenthutuc: ["", Validators.required],
         idlinhvuc: [""],
         idcapthuchien: [""],
         doituongthuchien: [""],
@@ -126,7 +136,7 @@ export class ThutuchanhchinhIoComponent implements OnInit {
         noitiepnhanhoso: [""],
         trinhtuthuchien: [""],
         cachthucthuchien: [""],
-        songaythuchien: [""],
+        songaythuchien: ["", Validators.pattern("^[0-9-+]+$")],
         trangthai: [""],
         thutu: ["", Validators.pattern("^[0-9-+]+$")],
         lephi: [""]
@@ -160,10 +170,21 @@ export class ThutuchanhchinhIoComponent implements OnInit {
     }
   
     /**
+     * Hàm lấy dữ liệu Cấp quản lý
+     */
+    async getAllCapQuanLy() {
+      const listData: any = await this.dmFacadeService
+        .getDmCapQuanLyService()
+        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      this.listCapQuanLy = listData.items;
+      this.listCapQuanLyFilter = listData.items;
+    }
+
+    /**
       * Hàm thực thi chức năng add và edit
       */
     private addOrUpdate(operMode: string) {
-      const dmFacadeService = this.dmFacadeService.getThuTucHanhChinhService();
+      const dmFacadeService = this.dmFacadeService.getDmThuTucHanhChinhService();
       this.inputModel = this.thuTucHanhChinhIOForm.value;
       if (operMode === "new") {
         dmFacadeService.addItem(this.inputModel).subscribe(

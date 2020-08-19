@@ -3,7 +3,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 
-import { InputCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
+import { InputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -15,7 +15,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   templateUrl: './capquanly-io.component.html',
   styleUrls: ['./capquanly-io.component.scss']
 })
-export class CapquanlyIoComponent implements OnInit {
+export class DmCapquanlyIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public capQuanLyIOForm: FormGroup;
@@ -30,7 +30,7 @@ export class CapquanlyIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputCapQuanLyModel;
+  public inputModel: InputDmCapQuanLyModel;
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -96,7 +96,7 @@ export class CapquanlyIoComponent implements OnInit {
    */
   bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputCapQuanLyModel();
+    this.inputModel = new InputDmCapQuanLyModel();
     // check edit
     this.formOnEdit();
   }
@@ -134,7 +134,7 @@ export class CapquanlyIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getCapQuanLyService();
+    const dmFacadeService = this.dmFacadeService.getDmCapQuanLyService();
     this.inputModel = this.capQuanLyIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(

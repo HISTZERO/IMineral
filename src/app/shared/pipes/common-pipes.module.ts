@@ -5,20 +5,23 @@ import { GetFieldValueFromArrayObjectPipe } from "src/app/shared/pipes/get-field
 import { SafeHTML } from "src/app/shared/pipes/safe-html.pipe";
 import { ConvertTimeString } from "src/app/shared/pipes/convert-time-string.pipe";
 import { GetNameFileConstantPipe } from 'src/app/shared/pipes/get-name-file-constant.pipe';
+import { GetNameNhomkhoangsanPipe } from 'src/app/shared/pipes/get-name-nhomkhoangsan.pipe';
 
 @NgModule({
-  declarations: [	
+  declarations: [		
     GetFieldValueFromArrayObjectPipe,
     ConvertTimeString,
     SafeHTML,
     GetNameFileConstantPipe,
+    GetNameNhomkhoangsanPipe
    ],
   imports: [CommonModule],
   exports: [
     GetFieldValueFromArrayObjectPipe,
     ConvertTimeString,
     SafeHTML,
-    GetNameFileConstantPipe
+    GetNameFileConstantPipe,
+    GetNameNhomkhoangsanPipe
   ],
 })
 export class CommonPipesModule { }

@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
+import { InputDmLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { ThuTucHanhChinh } from "src/app/shared/constants/thutuchanhchinh-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -17,7 +17,7 @@ import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-consta
   templateUrl: './loaicapphep-io.component.html',
   styleUrls: ['./loaicapphep-io.component.scss']
 })
-export class LoaicapphepIoComponent implements OnInit {
+export class DmLoaicapphepIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public loaiCapPhepIOForm: FormGroup;
@@ -32,7 +32,7 @@ export class LoaicapphepIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputLoaiCapPhepModel;
+  public inputModel: InputDmLoaiCapPhepModel;
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -106,7 +106,7 @@ export class LoaicapphepIoComponent implements OnInit {
     */
   bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputLoaiCapPhepModel();
+    this.inputModel = new InputDmLoaiCapPhepModel();
     // check edit
     this.formOnEdit();
   }
@@ -148,7 +148,7 @@ export class LoaicapphepIoComponent implements OnInit {
     * Hàm thực thi chức năng add và edit
     */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getLoaiCapPhepService();
+    const dmFacadeService = this.dmFacadeService.getDmLoaiCapPhepService();
     this.inputModel = this.loaiCapPhepIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(

@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { LoaibaocaoListComponent } from './loaibaocao-list.component';
+import { DmLoaibaocaoListComponent } from './loaibaocao-list.component';
 
-describe('LoaibaocaoListComponent', () => {
-  let component: LoaibaocaoListComponent;
-  let fixture: ComponentFixture<LoaibaocaoListComponent>;
+describe('DmLoaibaocaoListComponent', () => {
+  let component: DmLoaibaocaoListComponent;
+  let fixture: ComponentFixture<DmLoaibaocaoListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoaibaocaoListComponent ]
+      declarations: [ DmLoaibaocaoListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LoaibaocaoListComponent);
+    fixture = TestBed.createComponent(DmLoaibaocaoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

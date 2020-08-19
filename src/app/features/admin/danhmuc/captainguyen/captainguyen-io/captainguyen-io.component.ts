@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
+import { InputDmCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -16,7 +16,7 @@ import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
   templateUrl: './captainguyen-io.component.html',
   styleUrls: ['./captainguyen-io.component.scss']
 })
-export class CaptainguyenIoComponent implements OnInit {
+export class DmCaptainguyenIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public capTaiNguyenIOForm: FormGroup;
@@ -31,7 +31,7 @@ export class CaptainguyenIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputCapTaiNguyenModel;
+  public inputModel: InputDmCapTaiNguyenModel;
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -101,7 +101,7 @@ export class CaptainguyenIoComponent implements OnInit {
    */
   public bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputCapTaiNguyenModel();
+    this.inputModel = new InputDmCapTaiNguyenModel();
     // check edit
     this.formOnEdit();
   }
@@ -141,7 +141,7 @@ export class CaptainguyenIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getCapTaiNguyenService();
+    const dmFacadeService = this.dmFacadeService.getDmCapTaiNguyenService();
     this.inputModel = this.capTaiNguyenIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(

@@ -1,4 +1,4 @@
-export class OutputThuTucHanhChinhModel {
+export class OutputDmThuTucHanhChinhModel {
     idthutuchanhchinh: string;
     mathutuc: string;
     tenthutuc: string;
@@ -17,7 +17,7 @@ export class OutputThuTucHanhChinhModel {
     lephi: string;
 }
 
-export class InputThuTucHanhChinhModel {
+export class InputDmThuTucHanhChinhModel {
     idthutuchanhchinh: string;
     mathutuc: string;
     tenthutuc: string;

@@ -1,6 +1,6 @@
 import { DeserializableModel } from '../deserializable.model';
 // output model
-export class OutputDvhcModel implements DeserializableModel {
+export class OutputDmDvhcModel implements DeserializableModel {
   id: number;
   tendvhc: string;
   parentid: number;
@@ -14,7 +14,7 @@ export class OutputDvhcModel implements DeserializableModel {
 }
 
 // input model
-export class InputDvhcModel {
+export class InputDmDvhcModel {
   id: number;
   tendvhc: string;
   parentid: number;

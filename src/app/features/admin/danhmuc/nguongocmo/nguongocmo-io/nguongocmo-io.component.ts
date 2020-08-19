@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputNguonGocMoModel } from "src/app/models/admin/danhmuc/nguongocmo.model";
+import { InputDmNguonGocMoModel } from "src/app/models/admin/danhmuc/nguongocmo.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -15,7 +15,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   templateUrl: './nguongocmo-io.component.html',
   styleUrls: ['./nguongocmo-io.component.scss']
 })
-export class NguongocmoIoComponent implements OnInit {
+export class DmNguongocmoIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public nguongocmoIOForm: FormGroup;
@@ -30,7 +30,7 @@ export class NguongocmoIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputNguonGocMoModel;
+  public inputModel: InputDmNguonGocMoModel;
 
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
@@ -96,7 +96,7 @@ export class NguongocmoIoComponent implements OnInit {
    */
   bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputNguonGocMoModel();
+    this.inputModel = new InputDmNguonGocMoModel();
     // check edit
     this.formOnEdit();
   }
@@ -134,7 +134,7 @@ export class NguongocmoIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getNguonGocMoService();
+    const dmFacadeService = this.dmFacadeService.getDmNguonGocMoService();
     this.inputModel = this.nguongocmoIOForm.value;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(

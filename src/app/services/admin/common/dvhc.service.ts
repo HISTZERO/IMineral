@@ -7,7 +7,7 @@ import { RepositoryEloquentService } from "src/app/services/data/baserepository.
 @Injectable({
   providedIn: 'root'
 })
-export class DvhcService extends RepositoryEloquentService {
+export class DmDvhcService extends RepositoryEloquentService {
 
   constructor(public httpClient: HttpClient) {
     super();

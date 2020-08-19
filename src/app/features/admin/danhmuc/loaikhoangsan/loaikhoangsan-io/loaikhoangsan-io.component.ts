@@ -3,29 +3,29 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
-import { InputLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
+import { InputDmLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { OutputNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
+import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 
 @Component({
   selector: 'app-loaikhoangsan-io',
   templateUrl: './loaikhoangsan-io.component.html',
   styleUrls: ['./loaikhoangsan-io.component.scss']
 })
-export class LoaikhoangsanIoComponent implements OnInit {
+export class DmLoaikhoangsanIoComponent implements OnInit {
 
    // Chứa dữ liệu Form
    public loaiKhoangSanIOForm: FormGroup;
 
    // Chứa dữ liệu Nhóm khoáng sản
-   public listNhomKhoangSan: OutputNhomKhoangSanModel[];
+   public listNhomKhoangSan: OutputDmNhomKhoangSanModel[];
 
    // Chứa dữ liệu Nhóm khoáng sản để tìm kiếm
-   public listNhomKhoangSanFilter: OutputNhomKhoangSanModel[];
+   public listNhomKhoangSanFilter: OutputDmNhomKhoangSanModel[];
 
 
    // Chứa dữ liệu đối tượng truyền từ list comp
@@ -38,7 +38,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
    public editMode: boolean;
  
    // Chứa dữ liệu input
-   public inputModel: InputLoaiKhoangSanModel;
+   public inputModel: InputDmLoaiKhoangSanModel;
  
    // Chứa dữ liệu Trạng thái
    public trangthai = TrangThai;
@@ -106,11 +106,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
     * Hàm lấy dữ liệu Nhóm khoáng sản
     */
    async getAllNhomKhoangSan() {
-    this.listNhomKhoangSan = [];
     const listData: any = await this.dmFacadeService
-      .getNhomKhoangSanService()
+      .getDmNhomKhoangSanService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    // this.listNhomKhoangSan = listData.items;
+    this.listNhomKhoangSan = listData.items;
   }
 
    /**
@@ -118,7 +117,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     */
    bindingConfigAddOrUpdate() {
      this.editMode = false;
-     this.inputModel = new InputLoaiKhoangSanModel();
+     this.inputModel = new InputDmLoaiKhoangSanModel();
      // check edit
      this.formOnEdit();
    }
@@ -148,7 +147,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
          mota: this.obj.mota,
          trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
-         idnhomkhoangsan: +this.obj.idnhomkhoangsan
+         idnhomkhoangsan: this.obj.idnhomkhoangsan
        });
      }
      this.editMode = true;
@@ -158,7 +157,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     * Hàm thực thi chức năng add và edit
     */
    private addOrUpdate(operMode: string) {
-     const dmFacadeService = this.dmFacadeService.getLoaiKhoangSanService();
+     const dmFacadeService = this.dmFacadeService.getDmLoaiKhoangSanService();
      this.inputModel = this.loaiKhoangSanIOForm.value;
      if (operMode === "new") {
        dmFacadeService.addItem(this.inputModel).subscribe(

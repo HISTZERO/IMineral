@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputNguonGocMoModel } from "src/app/models/admin/danhmuc/nguongocmo.model";
+import { OutputDmNguonGocMoModel } from "src/app/models/admin/danhmuc/nguongocmo.model";
 import { MenuDanhMucNguonGocMo } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { NguongocmoIoComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-io/nguongocmo-io.component";
+import { DmNguongocmoIoComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-io/nguongocmo-io.component";
 
 @Component({
   selector: 'app-nguongocmo-list',
   templateUrl: './nguongocmo-list.component.html',
   styleUrls: ['./nguongocmo-list.component.scss']
 })
-export class NguongocmoListComponent implements OnInit {
+export class DmNguongocmoListComponent implements OnInit {
 
    // Viewchild template
    @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class NguongocmoListComponent implements OnInit {
    public settingsCommon = new SettingsCommon();
  
    // Chứa danh sách Nguồn gốc mỏ
-   public listNguonGocMo: OutputNguonGocMoModel[];
+   public listNguonGocMo: OutputDmNguonGocMoModel[];
  
    // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputNguonGocMoModel;
+   public selectedItem: OutputDmNguonGocMoModel;
  
    // Chứa dữ liệu translate
    public dataTranslate: any;
@@ -88,7 +88,7 @@ export class NguongocmoListComponent implements OnInit {
     */
    async getAllnguonGocMo() {
      const listData: any = await this.dmFacadeService
-       .getNguonGocMoService()
+       .getDmNguonGocMoService()
        .getFetchAll({ PageNumber: 1, PageSize: -1 });
      if (listData.items) {
        listData.items.map((nguongocmo, index) => {
@@ -105,10 +105,10 @@ export class NguongocmoListComponent implements OnInit {
    async editItemNguonGocMo(id: string) {
      // Lấy dữ liệu cấp quản lý theo id
      const dataItem: any = await this.dmFacadeService
-     .getNguonGocMoService()
+     .getDmNguonGocMoService()
      .getByid(id).toPromise();
      await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.nguongocmo.titleEdit );
-     await this.matSidenavService.setContentComp( NguongocmoIoComponent, "edit", dataItem);
+     await this.matSidenavService.setContentComp( DmNguongocmoIoComponent, "edit", dataItem);
      await this.matSidenavService.open();
    }
  
@@ -117,7 +117,7 @@ export class NguongocmoListComponent implements OnInit {
     */
    public openNguonGocMoIOSidenav() {
      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.nguongocmo.titleAdd);
-     this.matSidenavService.setContentComp(NguongocmoIoComponent, "new");
+     this.matSidenavService.setContentComp(DmNguongocmoIoComponent, "new");
      this.matSidenavService.open();
    }
  
@@ -138,7 +138,7 @@ export class NguongocmoListComponent implements OnInit {
      // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
      // Nếu đồng ý xóa
      const canDelete: string = this.dmFacadeService
-       .getNguonGocMoService()
+       .getDmNguonGocMoService()
        .checkBeDeleted(+this.selectedItem.idnguongocmo);
      this.canBeDeletedCheck(canDelete);
    }
@@ -166,7 +166,7 @@ export class NguongocmoListComponent implements OnInit {
      dialogRef.afterClosed().subscribe(async (result) => {
        if (result === "confirm") {
          await this.dmFacadeService
-           .getNguonGocMoService()
+           .getDmNguonGocMoService()
            .deleteItem({ id: this.selectedItem.idnguongocmo })
            .subscribe(
              () => this.getAllnguonGocMo(),

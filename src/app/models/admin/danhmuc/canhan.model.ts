@@ -1,4 +1,4 @@
-export class OutputCanhanModel {
+export class OutputDmCanhanModel {
   idcanhan: number;
   hovaten: string;
   diachi: string;
@@ -18,7 +18,7 @@ export class OutputCanhanModel {
   thutu: number;
 }
 
-export class InputCanhanModel {
+export class InputDmCanhanModel {
   idcanhan: number;
   hovaten: string;
   diachi: string;

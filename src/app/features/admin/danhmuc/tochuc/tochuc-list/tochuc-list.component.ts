@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
+import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { MenuDanhMucToChuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
+import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
 
 @Component({
   selector: 'app-tochuc-list',
   templateUrl: './tochuc-list.component.html',
   styleUrls: ['./tochuc-list.component.scss']
 })
-export class TochucListComponent implements OnInit {
+export class DmTochucListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class TochucListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Tổ chức
-  public listToChuc: OutputToChucModel[];
+  public listToChuc: OutputDmToChucModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputToChucModel;
+  public selectedItem: OutputDmToChucModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class TochucListComponent implements OnInit {
    */
   async getAllToChuc() {
     const listData: any = await this.dmFacadeService
-      .getToChucService()
+      .getDmToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((tochuc, index) => {
@@ -105,10 +105,10 @@ export class TochucListComponent implements OnInit {
   async editItemToChuc(id: string) {
     // Lấy dữ liệu tổ chức theo id
     const dataItem: any = await this.dmFacadeService
-    .getToChucService()
+    .getDmToChucService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.tochuc.titleEdit );
-    await this.matSidenavService.setContentComp( TochucIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmTochucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class TochucListComponent implements OnInit {
    */
   public openToChucIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.tochuc.titleAdd);
-    this.matSidenavService.setContentComp( TochucIoComponent, "new");
+    this.matSidenavService.setContentComp( DmTochucIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class TochucListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getToChucService()
+      .getDmToChucService()
       .checkBeDeleted(+this.selectedItem.idtochuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class TochucListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getToChucService()
+          .getDmToChucService()
           .deleteItem({ id: this.selectedItem.idtochuc })
           .subscribe(
             () => this.getAllToChuc(),

@@ -18,34 +18,34 @@ import { DanhmucComponent } from "src/app/features/admin/danhmuc/danhmuc.compone
 import { MY_CUSTOM_FORMATS } from "src/app/features/admin/admin-shared.module";
 import { DmCanhanListComponent } from "src/app/features/admin/danhmuc/canhan/canhan-list/canhan-list.component";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
-import { CapquanlyListComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-list/capquanly-list.component";
-import { CapquanlyIoComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-io/capquanly-io.component";
-import { CaptainguyenListComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-list/captainguyen-list.component";
-import { CaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
-import { CaptruluongListComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-list/captruluong-list.component";
-import { CaptruluongIoComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-io/captruluong-io.component";
-import { CoquanquanlyListComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-list/coquanquanly-list.component";
-import { CoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
-import { LoaibaocaoListComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-list/loaibaocao-list.component";
-import { LoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
-import { LoaigiayphepListComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-list/loaigiayphep-list.component";
-import { LoaigiayphepIoComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-io/loaigiayphep-io.component";
-import { LoaicapphepListComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-list/loaicapphep-list.component";
-import { LoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
-import { LoaikhoangsanListComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component";
-import { LoaikhoangsanIoComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
-import { LoaitailieuListComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-list/loaitailieu-list.component";
-import { LoaitailieuIoComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-io/loaitailieu-io.component";
-import { LoaitochucListComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-list/loaitochuc-list.component";
-import { LoaitochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
-import { NguongocmoListComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-list/nguongocmo-list.component";
-import { NguongocmoIoComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-io/nguongocmo-io.component";
-import { NhomkhoangsanListComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-list/nhomkhoangsan-list.component";
-import { NhomkhoangsanIoComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-io/nhomkhoangsan-io.component";
-import { ThutuchanhchinhListComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-list/thutuchanhchinh-list.component";
-import { ThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
-import { TochucListComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-list/tochuc-list.component";
-import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
+import { DmCapquanlyListComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-list/capquanly-list.component";
+import { DmCapquanlyIoComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-io/capquanly-io.component";
+import { DmCaptainguyenListComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-list/captainguyen-list.component";
+import { DmCaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
+import { DmCaptruluongListComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-list/captruluong-list.component";
+import { DmCaptruluongIoComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-io/captruluong-io.component";
+import { DmCoquanquanlyListComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-list/coquanquanly-list.component";
+import { DmCoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
+import { DmLoaibaocaoListComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-list/loaibaocao-list.component";
+import { DmLoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
+import { DmLoaigiayphepListComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-list/loaigiayphep-list.component";
+import { DmLoaigiayphepIoComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-io/loaigiayphep-io.component";
+import { DmLoaicapphepListComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-list/loaicapphep-list.component";
+import { DmLoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
+import { DmLoaikhoangsanListComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component";
+import { DmLoaikhoangsanIoComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
+import { DmLoaitailieuListComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-list/loaitailieu-list.component";
+import { DmLoaitailieuIoComponent } from "src/app/features/admin/danhmuc/loaitailieu/loaitailieu-io/loaitailieu-io.component";
+import { DmLoaiDmTochucListComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-list/loaitochuc-list.component";
+import { DmLoaiDmTochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
+import { DmNguongocmoListComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-list/nguongocmo-list.component";
+import { DmNguongocmoIoComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-io/nguongocmo-io.component";
+import { DmNhomkhoangsanListComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-list/nhomkhoangsan-list.component";
+import { DmNhomkhoangsanIoComponent } from "src/app/features/admin/danhmuc/nhomkhoangsan/nhomkhoangsan-io/nhomkhoangsan-io.component";
+import { DmThutuchanhchinhListComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-list/thutuchanhchinh-list.component";
+import { DmThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
+import { DmTochucListComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-list/tochuc-list.component";
+import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
 
 @NgModule({
   declarations: [
@@ -54,34 +54,34 @@ import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-
     DmDvhcIoComponent,
     DmCanhanListComponent,
     DmCanhanIoComponent,
-    CapquanlyListComponent,
-    CapquanlyIoComponent,
-    CaptainguyenListComponent,
-    CaptainguyenIoComponent,
-    CaptruluongListComponent,
-    CaptruluongIoComponent,
-    CoquanquanlyListComponent,
-    CoquanquanlyIoComponent,
-    LoaibaocaoListComponent,
-    LoaibaocaoIoComponent,
-    LoaigiayphepListComponent,
-    LoaigiayphepIoComponent,
-    LoaicapphepListComponent,
-    LoaicapphepIoComponent,
-    LoaikhoangsanListComponent,
-    LoaikhoangsanIoComponent,
-    LoaitailieuListComponent,
-    LoaitailieuIoComponent,
-    LoaitochucListComponent,
-    LoaitochucIoComponent,
-    NguongocmoListComponent,
-    NguongocmoIoComponent,
-    NhomkhoangsanListComponent,
-    NhomkhoangsanIoComponent,
-    ThutuchanhchinhListComponent,
-    ThutuchanhchinhIoComponent,
-    TochucListComponent,
-    TochucIoComponent
+    DmCapquanlyListComponent,
+    DmCapquanlyIoComponent,
+    DmCaptainguyenListComponent,
+    DmCaptainguyenIoComponent,
+    DmCaptruluongListComponent,
+    DmCaptruluongIoComponent,
+    DmCoquanquanlyListComponent,
+    DmCoquanquanlyIoComponent,
+    DmLoaibaocaoListComponent,
+    DmLoaibaocaoIoComponent,
+    DmLoaigiayphepListComponent,
+    DmLoaigiayphepIoComponent,
+    DmLoaicapphepListComponent,
+    DmLoaicapphepIoComponent,
+    DmLoaikhoangsanListComponent,
+    DmLoaikhoangsanIoComponent,
+    DmLoaitailieuListComponent,
+    DmLoaitailieuIoComponent,
+    DmLoaiDmTochucListComponent,
+    DmLoaiDmTochucIoComponent,
+    DmNguongocmoListComponent,
+    DmNguongocmoIoComponent,
+    DmNhomkhoangsanListComponent,
+    DmNhomkhoangsanIoComponent,
+    DmThutuchanhchinhListComponent,
+    DmThutuchanhchinhIoComponent,
+    DmTochucListComponent,
+    DmTochucIoComponent
   ],
   exports: [],
   imports: [
@@ -96,20 +96,20 @@ import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-
   entryComponents: [
     DmDvhcIoComponent,
     DmCanhanIoComponent,
-    CapquanlyIoComponent,
-    CaptainguyenIoComponent,
-    CaptruluongIoComponent,
-    CoquanquanlyIoComponent,
-    LoaibaocaoIoComponent,
-    LoaigiayphepIoComponent,
-    LoaicapphepIoComponent,
-    LoaikhoangsanIoComponent,
-    LoaitailieuIoComponent,
-    LoaitochucIoComponent,
-    NguongocmoIoComponent,
-    NhomkhoangsanIoComponent,
-    ThutuchanhchinhIoComponent,
-    TochucIoComponent
+    DmCapquanlyIoComponent,
+    DmCaptainguyenIoComponent,
+    DmCaptruluongIoComponent,
+    DmCoquanquanlyIoComponent,
+    DmLoaibaocaoIoComponent,
+    DmLoaigiayphepIoComponent,
+    DmLoaicapphepIoComponent,
+    DmLoaikhoangsanIoComponent,
+    DmLoaitailieuIoComponent,
+    DmLoaiDmTochucIoComponent,
+    DmNguongocmoIoComponent,
+    DmNhomkhoangsanIoComponent,
+    DmThutuchanhchinhIoComponent,
+    DmTochucIoComponent
   ],
   providers: [
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },

@@ -1,4 +1,4 @@
-export class OutputCapQuanLyModel {
+export class OutputDmCapQuanLyModel {
     idcapquanly: string;
     macapquanly: string;
     tencapquanly: string;
@@ -7,7 +7,7 @@ export class OutputCapQuanLyModel {
     thutu: number;
 }
 
-export class InputCapQuanLyModel {
+export class InputDmCapQuanLyModel {
     idcapquanly: string;
     macapquanly: string;
     tencapquanly: string;

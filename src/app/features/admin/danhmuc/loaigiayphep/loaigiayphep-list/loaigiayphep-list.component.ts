@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiGiayPhepModel } from "src/app/models/admin/danhmuc/loaigiayphep.model";
+import { OutputDmLoaiGiayPhepModel } from "src/app/models/admin/danhmuc/loaigiayphep.model";
 import { MenuDanhMucLoaiGiayPhep } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaigiayphepIoComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-io/loaigiayphep-io.component";
+import { DmLoaigiayphepIoComponent } from "src/app/features/admin/danhmuc/loaigiayphep/loaigiayphep-io/loaigiayphep-io.component";
 
 @Component({
   selector: 'app-loaigiayphep-list',
   templateUrl: './loaigiayphep-list.component.html',
   styleUrls: ['./loaigiayphep-list.component.scss']
 })
-export class LoaigiayphepListComponent implements OnInit {
+export class DmLoaigiayphepListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class LoaigiayphepListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Loại giấy phép
-  public listLoaiGiayPhep: OutputLoaiGiayPhepModel[];
+  public listLoaiGiayPhep: OutputDmLoaiGiayPhepModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputLoaiGiayPhepModel;
+  public selectedItem: OutputDmLoaiGiayPhepModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class LoaigiayphepListComponent implements OnInit {
    */
   async getAllLoaiGiayPhep() {
     const listData: any = await this.dmFacadeService
-      .getLoaiGiayPhepService()
+      .getDmLoaiGiayPhepService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((loaiGP, index) => {
@@ -105,10 +105,10 @@ export class LoaigiayphepListComponent implements OnInit {
   async editItemLoaiGiayPhep(id: string) {
     // Lấy dữ liệu loại giấy phép theo id
     const dataItem: any = await this.dmFacadeService
-    .getLoaiGiayPhepService()
+    .getDmLoaiGiayPhepService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaigiayphep.titleEdit );
-    await this.matSidenavService.setContentComp( LoaigiayphepIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmLoaigiayphepIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class LoaigiayphepListComponent implements OnInit {
    */
   public openLoaiGiayPhepIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaigiayphep.titleAdd);
-    this.matSidenavService.setContentComp( LoaigiayphepIoComponent, "new");
+    this.matSidenavService.setContentComp( DmLoaigiayphepIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class LoaigiayphepListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getLoaiGiayPhepService()
+      .getDmLoaiGiayPhepService()
       .checkBeDeleted(this.selectedItem.idloaigiayphep);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class LoaigiayphepListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getLoaiGiayPhepService()
+          .getDmLoaiGiayPhepService()
           .deleteItem({ id: this.selectedItem.idloaigiayphep })
           .subscribe(
             () => this.getAllLoaiGiayPhep(),

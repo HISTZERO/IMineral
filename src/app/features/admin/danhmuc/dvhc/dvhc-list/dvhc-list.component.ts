@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { QueryCellInfoEventArgs } from "@syncfusion/ej2-angular-grids";
 
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import { ServiceName } from "src/app/shared/constants/service-name";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -22,10 +22,10 @@ import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/d
   styleUrls: ["./dvhc-list.component.scss"],
 })
 export class DmDvhcListComponent implements OnInit {
-  listDataDvhcProvince: OutputDvhcModel[];
-  listDatadvhcDistrict: OutputDvhcModel[];
-  listDatadvhcWard: OutputDvhcModel[];
-  selectedItem: OutputDvhcModel;
+  listDataDvhcProvince: OutputDmDvhcModel[];
+  listDatadvhcDistrict: OutputDmDvhcModel[];
+  listDatadvhcWard: OutputDmDvhcModel[];
+  selectedItem: OutputDmDvhcModel;
   disabledDistrict = true;
   disabledWard = true;
   deleteName: string;

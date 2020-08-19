@@ -4,20 +4,21 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
+import { OutputDmLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
 import { MenuDanhMucLoaiKhoangSan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaikhoangsanIoComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
+import { DmLoaikhoangsanIoComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
+import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 
 @Component({
   selector: 'app-loaikhoangsan-list',
   templateUrl: './loaikhoangsan-list.component.html',
   styleUrls: ['./loaikhoangsan-list.component.scss']
 })
-export class LoaikhoangsanListComponent implements OnInit {
+export class DmLoaikhoangsanListComponent implements OnInit {
 
     // Viewchild template
     @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +28,13 @@ export class LoaikhoangsanListComponent implements OnInit {
     public settingsCommon = new SettingsCommon();
 
     // Chứa danh sách Loại khoáng sản
-    public listLoaiKhoangSan: OutputLoaiKhoangSanModel[];
+    public listLoaiKhoangSan: OutputDmLoaiKhoangSanModel[];
 
     // Chứa dữ liệu đã chọn 
-    public selectedItem: OutputLoaiKhoangSanModel;
+    public selectedItem: OutputDmLoaiKhoangSanModel;
+
+    // Chứa dữ liệu Nhóm khoáng sản
+   public listNhomKhoangSan: OutputDmNhomKhoangSanModel[];
 
     // Chứa dữ liệu translate
     public dataTranslate: any;
@@ -55,6 +59,8 @@ export class LoaikhoangsanListComponent implements OnInit {
       this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
       // Gọi hàm lấy dữ liệu pagesize
       await this.getDataPageSize();
+      // Gọi hàm lấy dữ liệu nhóm khoáng sản
+      // this.getAllNhomKhoangSan();
     }
 
     /**
@@ -88,7 +94,7 @@ export class LoaikhoangsanListComponent implements OnInit {
       */
     async getAllLoaiKhoangSan() {
       const listData: any = await this.dmFacadeService
-        .getLoaiKhoangSanService()
+        .getDmLoaiKhoangSanService()
         .getFetchAll({ PageNumber: 1, PageSize: -1 });
       if (listData.items) {
         listData.items.map((loaiks, index) => {
@@ -99,16 +105,26 @@ export class LoaikhoangsanListComponent implements OnInit {
     }
 
     /**
+    * Hàm lấy dữ liệu Nhóm khoáng sản
+    */
+    async getAllNhomKhoangSan() {
+      const listData: any = await this.dmFacadeService
+        .getDmNhomKhoangSanService()
+        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      this.listNhomKhoangSan = listData.items;
+    }
+
+    /**
       * Hàm mở sidenav chức năng sửa dữ liệu
       * @param id
       */
     async editItemLoaiKhoangSan(id: string) {
       // Lấy dữ liệu loại khoáng sản theo id
       const dataItem: any = await this.dmFacadeService
-      .getLoaiKhoangSanService()
+      .getDmLoaiKhoangSanService()
       .getByid(id).toPromise();
       await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaikhoangsan.titleEdit );
-      await this.matSidenavService.setContentComp( LoaikhoangsanIoComponent, "edit", dataItem);
+      await this.matSidenavService.setContentComp( DmLoaikhoangsanIoComponent, "edit", dataItem);
       await this.matSidenavService.open();
     }
 
@@ -117,7 +133,7 @@ export class LoaikhoangsanListComponent implements OnInit {
       */
     public openLoaiKhoangSanIOSidenav() {
       this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaikhoangsan.titleAdd);
-      this.matSidenavService.setContentComp( LoaikhoangsanIoComponent, "new");
+      this.matSidenavService.setContentComp( DmLoaikhoangsanIoComponent, "new");
       this.matSidenavService.open();
     }
 
@@ -138,7 +154,7 @@ export class LoaikhoangsanListComponent implements OnInit {
       // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
       // Nếu đồng ý xóa
       const canDelete: string = this.dmFacadeService
-        .getLoaiKhoangSanService()
+        .getDmLoaiKhoangSanService()
         .checkBeDeleted(+this.selectedItem.idloaikhoangsan);
       this.canBeDeletedCheck(canDelete);
     }
@@ -166,7 +182,7 @@ export class LoaikhoangsanListComponent implements OnInit {
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
           await this.dmFacadeService
-            .getLoaiKhoangSanService()
+            .getDmLoaiKhoangSanService()
             .deleteItem({ id: this.selectedItem.idloaikhoangsan })
             .subscribe(
               () => this.getAllLoaiKhoangSan(),

@@ -31,6 +31,11 @@
                     <e-column field="tenloaikhoangsan" headerText="{{ 'DANHMUC.loaikhoangsan.tenloaikhoangsan' | translate }}"></e-column>
                     <e-column field="maloaikhoangsan" headerText="{{ 'DANHMUC.loaikhoangsan.maloaikhoangsan' | translate }}"></e-column>
                     <e-column field="mota" headerText="{{ 'DANHMUC.loaikhoangsan.mota' | translate }}"></e-column>
+                    <!-- <e-column field="idnhomkhoangsan" headerText="{{ 'DANHMUC.loaikhoangsan.idnhomkhoangsan' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.idnhomkhoangsan | getNameNhomKhoangSan: listNhomKhoangSan}}
+                      </ng-template>
+                    </e-column> -->
                     <e-column field="id" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">

@@ -1,4 +1,4 @@
-export class OutputCapTaiNguyenModel {
+export class OutputDmCapTaiNguyenModel {
     idcaptainguyen: string;
     macaptainguyen: string;
     tencaptainguyen: string;
@@ -8,7 +8,7 @@ export class OutputCapTaiNguyenModel {
     thutu: number;
 }
 
-export class InputCapTaiNguyenModel {
+export class InputDmCapTaiNguyenModel {
     idcaptainguyen: string;
     macaptainguyen: string;
     tencaptainguyen: string;

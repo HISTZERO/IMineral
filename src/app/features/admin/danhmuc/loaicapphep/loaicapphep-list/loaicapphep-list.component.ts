@@ -4,20 +4,20 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
+import { OutputDmLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
 import { MenuDanhMucLoaiCapPhep } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { LoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
+import { DmLoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
 
 @Component({
   selector: 'app-loaicapphep-list',
   templateUrl: './loaicapphep-list.component.html',
   styleUrls: ['./loaicapphep-list.component.scss']
 })
-export class LoaicapphepListComponent implements OnInit {
+export class DmLoaicapphepListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
@@ -27,10 +27,10 @@ export class LoaicapphepListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Loại cấp phép
-  public listLoaiCapPhep: OutputLoaiCapPhepModel[];
+  public listLoaiCapPhep: OutputDmLoaiCapPhepModel[];
 
   // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputLoaiCapPhepModel;
+  public selectedItem: OutputDmLoaiCapPhepModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -88,7 +88,7 @@ export class LoaicapphepListComponent implements OnInit {
    */
   async getAllLoaiCapPhep() {
     const listData: any = await this.dmFacadeService
-      .getLoaiCapPhepService()
+      .getDmLoaiCapPhepService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((loaiCP, index) => {
@@ -105,10 +105,10 @@ export class LoaicapphepListComponent implements OnInit {
   async editItemLoaiCapPhep(id: string) {
     // Lấy dữ liệu loại cấp phép theo id
     const dataItem: any = await this.dmFacadeService
-    .getLoaiCapPhepService()
+    .getDmLoaiCapPhepService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaicapphep.titleEdit );
-    await this.matSidenavService.setContentComp( LoaicapphepIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp( DmLoaicapphepIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -117,7 +117,7 @@ export class LoaicapphepListComponent implements OnInit {
    */
   public openLoaiCapPhepIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaicapphep.titleAdd);
-    this.matSidenavService.setContentComp(LoaicapphepIoComponent, "new");
+    this.matSidenavService.setContentComp(DmLoaicapphepIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -138,7 +138,7 @@ export class LoaicapphepListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getLoaiCapPhepService()
+      .getDmLoaiCapPhepService()
       .checkBeDeleted(this.selectedItem.idloaicapphep);
     this.canBeDeletedCheck(canDelete);
   }
@@ -166,7 +166,7 @@ export class LoaicapphepListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getLoaiCapPhepService()
+          .getDmLoaiCapPhepService()
           .deleteItem({ idLoaicapphep: this.selectedItem.idloaicapphep })
           .subscribe(
             () => this.getAllLoaiCapPhep(),
