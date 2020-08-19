@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { DatePipe } from "@angular/common";
 
 import { InputToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
@@ -97,7 +98,8 @@ export class TochucIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public datePipe: DatePipe
   ) {}
 
   async ngOnInit() {
@@ -132,7 +134,8 @@ export class TochucIoComponent implements OnInit {
      dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber},
      matinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
      mahuyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
-     thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber }
+     thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber },
+     email: { email: this.dataTranslate.DANHMUC.tochuc.emailCheck}
     };
   }
 
@@ -172,7 +175,7 @@ export class TochucIoComponent implements OnInit {
       fax: [""],
       website: [""],
       dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
-      email: [""],
+      email: ["", Validators.email],
       matinh: ["", Validators.required],
       mahuyen: ["", Validators.required],
       maxa: [""],
@@ -187,7 +190,7 @@ export class TochucIoComponent implements OnInit {
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.tochucIOForm.setValue({
-        tencoquanquanly: this.obj.tencoquanquanly,
+        tentochuc: this.obj.tentochuc,
         diachi: this.obj.diachi,
         sogiayto: this.obj.sogiayto,
         loaigiayto: this.obj.loaigiayto,
@@ -198,9 +201,9 @@ export class TochucIoComponent implements OnInit {
         website: this.obj.website,
         dienthoai: this.obj.dienthoai,
         email: this.obj.email,
-        matinh: this.obj.matinh,
-        mahuyen: this.obj.mahuyen,
-        maxa: this.obj.maxa,
+        matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
+        mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
+        maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
@@ -242,7 +245,7 @@ export class TochucIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.tochucIOForm.value.matinh });
+        .getFetchAll({ matinh: this.tochucIOForm.value.matinh.matinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -267,7 +270,7 @@ export class TochucIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.tochucIOForm.value.mahuyen });
+        .getFetchAll({ mahuyen: this.tochucIOForm.value.mahuyen.mahuyen });
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -277,7 +280,18 @@ export class TochucIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     const dmFacadeService = this.dmFacadeService.getToChucService();
+    // Gán dữ liệu input vào model
+    const idtinh = this.tochucIOForm.value.matinh.idtinh;
+    const idhuyen = this.tochucIOForm.value.mahuyen.idhuyen;
+    const idxa =  this.tochucIOForm.value.maxa.idxa;
     this.inputModel = this.tochucIOForm.value;
+    this.inputModel.matinh = this.tochucIOForm.value.matinh.matinh;
+    this.inputModel.mahuyen = this.tochucIOForm.value.mahuyen.mahuyen;
+    this.inputModel.maxa = this.tochucIOForm.value.maxa.maxa;
+    this.inputModel.idtinh = idtinh;
+    this.inputModel.idhuyen = idhuyen;
+    this.inputModel.idxa = idxa ? idxa : "";
+    this.inputModel.ngaycap = this.datePipe.transform( this.tochucIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllToChuc"),
@@ -348,6 +362,39 @@ export class TochucIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Tỉnh
+   */
+  public compareTinh(item1: any, item2: any) {
+    if(item1.matinh === item2.matinh) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Huyện
+   */
+  public compareHuyen(item1: any, item2: any) {
+    if(item1.mahuyen === item2.mahuyen) {
+      return true;
+    } else {
+      return false
+    }
+  }
+
+  /**
+   * Hàm check giá trị trong seletec option Xã
+   */
+  public compareXa(item1: any, item2: any) {
+    if(item1.maxa === item2.maxa) {
+      return true;
+    } else {
+      return false
+    }
   }
 
   /**
