@@ -7,7 +7,7 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { OutputCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io.component";
+import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";

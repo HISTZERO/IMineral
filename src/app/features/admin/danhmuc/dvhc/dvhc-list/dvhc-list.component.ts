@@ -1,43 +1,20 @@
-import {
-  Component,
-  ComponentFactoryResolver,
-  OnInit,
-  ViewChild,
-  ViewContainerRef,
-} from "@angular/core";
-import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
-import {
-  SettingsCommon,
-  ThietLapHeThong,
-} from "src/app/shared/constants/setting-common";
-import { ServiceName } from "src/app/shared/constants/service-name";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef,} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
-
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { HttpErrorResponse } from "@angular/common/http";
 import { QueryCellInfoEventArgs } from "@syncfusion/ej2-angular-grids";
-import { DmDvhcIoComponent } from "./dvhc-io.component";
+
+import { OutputDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import { ServiceName } from "src/app/shared/constants/service-name";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { GlobalVar } from "src/app/shared/constants/global-var";
-import { HttpErrorResponse } from "@angular/common/http";
-import { MatDialog } from "@angular/material/dialog";
-import {
-  _addTinhAction,
-  _listTinhAction,
-  _editTinhAction,
-  _deleteTinhAction,
-  _addHuyenAction,
-  _listHuyenAction,
-  _editHuyenAction,
-  _deleteHuyenAction,
-  _addXaAction,
-  _listXaAction,
-  _editXaAction,
-  _deleteXaAction,
-} from "src/app/shared/constants/actions/danhmuc/dvhc";
+import { _addTinhAction, _listTinhAction, _editTinhAction, _deleteTinhAction, _addHuyenAction, _listHuyenAction, _editHuyenAction, _deleteHuyenAction, _addXaAction, _listXaAction, _editXaAction, _deleteXaAction} from "src/app/shared/constants/actions/danhmuc/dvhc";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucDVHC } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
+import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/dvhc-io.component";
 
 @Component({
   selector: "app-dvhc-list",
@@ -82,7 +59,6 @@ export class DmDvhcListComponent implements OnInit {
     public matsidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
     public commonService: CommonServiceShared,
-    private modalDialog: MatDialog,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService
   ) { }
@@ -93,12 +69,7 @@ export class DmDvhcListComponent implements OnInit {
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
-    this.matsidenavService.setSidenav(
-      this.matSidenav,
-      this,
-      this.content,
-      this.cfr
-    );
+    this.matsidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.settingsCommon.toolbar = ["Search"];
     // Lấy dữ liệu truyền vào ejs grid tạo bảng
     await this.getPageSize();
@@ -199,11 +170,7 @@ export class DmDvhcListComponent implements OnInit {
 
   // Open sidebar add Province
   public openDvhcProvinceIOSidebar() {
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleAddProvince,
-      DmDvhcIoComponent,
-      "newProvince"
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleAddProvince, DmDvhcIoComponent, "newProvince");
     this.listDatadvhcDistrict = [];
     this.listDatadvhcWard = [];
     this.disabledDistrict = true;
@@ -212,57 +179,32 @@ export class DmDvhcListComponent implements OnInit {
 
   // open sidebar add District
   public openDvhcDistrictIOSidebar() {
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleAddDistrict,
-      DmDvhcIoComponent,
-      "newDistrict",
-      this.selectedItem
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleAddDistrict, DmDvhcIoComponent, "newDistrict", this.selectedItem);
     this.listDatadvhcWard = [];
     this.disabledWard = true;
   }
 
   // open sidebar add ward
   public openDvhcWardIOSidebar() {
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleAddWard,
-      DmDvhcIoComponent,
-      "newWard",
-      this.selectedItem
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleAddWard, DmDvhcIoComponent, "newWard", this.selectedItem);
   }
 
   // open sidebar edit Province
   public openDvhcEditProvince(event: any) {
     this.getItemByEvent(event, this.listDataDvhcProvince);
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleEditProvince,
-      DmDvhcIoComponent,
-      "editProvince",
-      this.selectedItem
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditProvince, DmDvhcIoComponent, "editProvince", this.selectedItem);
   }
 
   // open sidebar edit district
   public openDvhcEditDistrict(event: any) {
     this.getItemByEvent(event, this.listDatadvhcDistrict);
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleEditDistrict,
-      DmDvhcIoComponent,
-      "editDistrict",
-      this.selectedItem
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditDistrict, DmDvhcIoComponent, "editDistrict", this.selectedItem);
   }
 
   // open sidebar edit ward
   public openDvhcEditWard(event: any) {
     this.getItemByEvent(event, this.listDatadvhcWard);
-    this.setValueSidebar(
-      this.dataTranslate.DANHMUC.dvhc.titleEditWard,
-      DmDvhcIoComponent,
-      "editWard",
-      this.selectedItem
-    );
+    this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditWard, DmDvhcIoComponent, "editWard",this.selectedItem);
   }
 
   // get item by envent
@@ -273,12 +215,7 @@ export class DmDvhcListComponent implements OnInit {
   }
 
   // set value open/edit sidebar
-  public setValueSidebar(
-    title: string,
-    component: any,
-    editMode: string,
-    item?: any
-  ) {
+  public setValueSidebar( title: string, component: any, editMode: string, item?: any) {
     this.matsidenavService.setTitle(title);
     this.matsidenavService.setContentComp(component, editMode, item);
     this.matsidenavService.open();

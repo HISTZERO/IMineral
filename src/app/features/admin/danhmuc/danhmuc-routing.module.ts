@@ -1,9 +1,9 @@
 import { NgModule } from "@angular/core";
 import { Routes, RouterModule } from "@angular/router";
 
-import { DmDvhcListComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-list.component";
+import { DmDvhcListComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-list/dvhc-list.component";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { DmCanhanListComponent } from "src/app/features/admin/danhmuc/canhan/canhan-list.component";
+import { DmCanhanListComponent } from "src/app/features/admin/danhmuc/canhan/canhan-list/canhan-list.component";
 import { CapquanlyListComponent } from "src/app/features/admin/danhmuc/capquanly/capquanly-list/capquanly-list.component";
 import { CaptainguyenListComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-list/captainguyen-list.component";
 import { CaptruluongListComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-list/captruluong-list.component";
