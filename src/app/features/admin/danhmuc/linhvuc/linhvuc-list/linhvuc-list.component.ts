@@ -4,10 +4,10 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
+import { OutputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { LinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-io/linhvuc-io.component";
+import { DmLinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-io/linhvuc-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucLinhVuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
@@ -17,7 +17,7 @@ import { MenuDanhMucLinhVuc } from "src/app/shared/constants/sub-menus/danhmuc/d
   templateUrl: './linhvuc-list.component.html',
   styleUrls: ['./linhvuc-list.component.scss']
 })
-export class LinhvucListComponent implements OnInit {
+export class DmLinhvucListComponent implements OnInit {
   // Viewchild template
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("complinhvucio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
@@ -26,10 +26,10 @@ export class LinhvucListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách lĩnh vực
-  public listLinhvuc: OutputLinhvucModel[];
+  public listLinhvuc: OutputDmLinhvucModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputLinhvucModel;
+  public selectedItem: OutputDmLinhvucModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;
@@ -86,7 +86,7 @@ export class LinhvucListComponent implements OnInit {
    */
   async getAllLinhvuc() {
     const listData: any = await this.dmFacadeService
-      .getLinhVucService()
+      .getDmLinhvucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     if (listData.items) {
       listData.items.map((linhvuc, index) => {
@@ -103,10 +103,10 @@ export class LinhvucListComponent implements OnInit {
   async editItemLinhvuc(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dmFacadeService
-    .getLinhVucService()
+    .getDmLinhvucService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.linhvuc.titleEdit );
-    await this.matSidenavService.setContentComp(LinhvucIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp(DmLinhvucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -115,7 +115,7 @@ export class LinhvucListComponent implements OnInit {
    */
   public openLinhvucIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.linhvuc.titleAdd);
-    this.matSidenavService.setContentComp(LinhvucIoComponent, "new");
+    this.matSidenavService.setContentComp(DmLinhvucIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -135,7 +135,7 @@ export class LinhvucListComponent implements OnInit {
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeService
-      .getLinhVucService()
+      .getDmLinhvucService()
       .checkBeDeleted(this.selectedItem.idlinhvuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -163,7 +163,7 @@ export class LinhvucListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dmFacadeService
-          .getLinhVucService()
+          .getDmLinhvucService()
           .deleteItem({ idlinhvuc: this.selectedItem.idlinhvuc })
           .subscribe(
             () => this.getAllLinhvuc(),

@@ -33,7 +33,7 @@ export class DmCanhanListComponent implements OnInit {
   // Chứa danh sách Cá nhân
   public listCanhan: OutputDmCanhanModel[];
 
-  // Chứa dữ liệu đã chọn 
+  // Chứa dữ liệu đã chọn
   public selectedItem: OutputDmCanhanModel;
 
   // Chứa danh sách dữ liệu
@@ -62,6 +62,7 @@ export class DmCanhanListComponent implements OnInit {
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
+    this.selectionOptions = { persistSelection: true };
   }
 
   /**

@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { LinhvucListComponent } from './linhvuc-list.component';
+import { DmLinhvucListComponent } from './linhvuc-list.component';
 
-describe('LinhvucListComponent', () => {
-  let component: LinhvucListComponent;
-  let fixture: ComponentFixture<LinhvucListComponent>;
+describe('DmLinhvucListComponent', () => {
+  let component: DmLinhvucListComponent;
+  let fixture: ComponentFixture<DmLinhvucListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LinhvucListComponent ]
+      declarations: [ DmLinhvucListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(LinhvucListComponent);
+    fixture = TestBed.createComponent(DmLinhvucListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
