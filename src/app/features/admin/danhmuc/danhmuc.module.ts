@@ -46,6 +46,8 @@ import { ThutuchanhchinhListComponent } from "src/app/features/admin/danhmuc/thu
 import { ThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
 import { TochucListComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-list/tochuc-list.component";
 import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
+import { LinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-io/linhvuc-io.component";
+import { LinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-list/linhvuc-list.component";
 
 @NgModule({
   declarations: [
@@ -81,7 +83,9 @@ import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-
     ThutuchanhchinhListComponent,
     ThutuchanhchinhIoComponent,
     TochucListComponent,
-    TochucIoComponent
+    TochucIoComponent,
+    LinhvucIoComponent,
+    LinhvucListComponent
   ],
   exports: [],
   imports: [
@@ -109,7 +113,8 @@ import { TochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-
     NguongocmoIoComponent,
     NhomkhoangsanIoComponent,
     ThutuchanhchinhIoComponent,
-    TochucIoComponent
+    TochucIoComponent,
+    LinhvucIoComponent
   ],
   providers: [
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },

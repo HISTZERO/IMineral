@@ -191,3 +191,15 @@ export const MenuDanhMucLoaiGiayPhep = [
     url: "",
   },
 ];
+
+export const MenuDanhMucLinhVuc = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Danh mục",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}`,
+  },
+  {
+    title: "Lĩnh vực",
+    url: "",
+  },
+];
