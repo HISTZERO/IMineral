@@ -20,6 +20,7 @@ import { ThutuchanhchinhService } from "src/app/services/admin/danhmuc/thutuchan
 import { TochucService } from "src/app/services/admin/danhmuc/tochuc.service";
 import { LoaicapphepService } from "src/app/services/admin/danhmuc/loaicapphep.service";
 import { LoaigiayphepService } from "src/app/services/admin/danhmuc/loaigiayphep.service";
+import { LinhvucService } from "src/app/services/admin/danhmuc/linhvuc.service";
 
 @Injectable({
   providedIn: "root",
@@ -121,5 +122,10 @@ export class DmFacadeService {
   // Loại giấy phép Service
   public getLoaiGiayPhepService() {
     return new LoaigiayphepService(this.httpClient);
+  }
+
+  // lĩnh vực service
+  public getLinhVucService() {
+    return new LinhvucService(this.httpClient);
   }
 }
