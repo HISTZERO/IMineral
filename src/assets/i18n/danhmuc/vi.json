@@ -382,5 +382,24 @@
     "chonNhomloaigiayphep": "---Chọn nhóm loại giấy phép---",
     "chonThutuchanhchinh": "--Chọn thủ tục hành chính---",
     "thutuPlaceholder": "Nhập thứ tự"
+  },
+  "linhvuc": {
+    "titleList": "Danh sách lĩnh vực",
+    "titleAdd": "Thêm mới lĩnh vực",
+    "titleEdit": "Sửa dữ liệu lĩnh vực",
+    "contentDelete": "Lĩnh vực: ",
+    "malinhvuc": "Mã lĩnh vực",
+    "tenlinhvuc": "Tên lĩnh vực",
+    "mota": "Mô tả",
+    "trangthai": "Trạng thái",
+    "thutu": "Thứ tự",
+    "malinhvucPlaceholder": "Nhập mã lĩnh vực",
+    "tenlinhvucPlaceholder": "Nhập tên lĩnh vực",
+    "motaPlaceholder": "Nhập mô tả",
+    "chonTrangthai": "---Chọn trạng thái---",
+    "thutuPlaceholder": "Nhập thứ tự",
+    "malinhvucRequired": "Mã lĩnh vực không được để trống",
+    "tenlinhvucRequired": "Mã lĩnh vực không được để trống",
+    "thutuIsNumber": "Thứ tự phải là kiểu số"
   }
 }

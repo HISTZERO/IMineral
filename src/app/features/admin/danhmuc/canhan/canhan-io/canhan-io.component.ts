@@ -12,6 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+
 @Component({
   selector: "app-canhan-io",
   templateUrl: "./canhan-io.component.html",
@@ -20,6 +21,9 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 export class DmCanhanIoComponent implements OnInit {
   // Chứa dữ liệu Form
   public canhanIOForm: FormGroup;
+
+  // Chứa giá trị ẩn input
+  public hiddenInput: boolean = false;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -167,6 +171,7 @@ export class DmCanhanIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.hiddenInput = true;
       this.canhanIOForm.setValue({
         hovaten: this.obj.hovaten,
         diachi: this.obj.diachi,

@@ -16,6 +16,7 @@ export class ServiceName {
   public static NHOMKHOANGSAN = "NhomKhoangSan";
   public static THUTUCHANHCHINH = "ThuTucHanhChinh";
   public static TOCHUC = "ToChuc";
+  public static LINHVUC = "LinhVuc";
 
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
