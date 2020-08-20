@@ -36,7 +36,8 @@
     "upload": "Upload file",
     "save": "Lưu",
     "resultChart": "Biểu đồ kết quả",
-    "noResult": "Không có kết quả"
+    "noResult": "Không có kết quả",
+    "active": "Active"
   },
   "dulieutram": {
     "thongtinchung": "THÔNG TIN CHUNG",
