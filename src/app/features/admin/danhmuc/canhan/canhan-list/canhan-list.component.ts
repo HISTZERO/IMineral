@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { SelectionSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -15,6 +15,8 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import {TrangThaiEnum} from "src/app/shared/constants/enum";
 
 @Component({
   selector: "app-canhan-list",
@@ -27,9 +29,6 @@ export class DmCanhanListComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
-  // Chứa model selection grid
-  public selectionOptions: SelectionSettingsModel;
-
   // Chứa thuộc tính form
   public formSearch: FormGroup;
 
@@ -37,10 +36,7 @@ export class DmCanhanListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách item đã chọn
-  public listDataSelect: Object[];
-
-  // Chứa kiểu dữ liệu để ẩn button khi checkbox
-  public hiddenBtn = false;
+  public listDataSelect: any[];
 
   // Chứa danh sách Cá nhân
   public listCanhan: OutputDmCanhanModel[];
@@ -59,16 +55,16 @@ export class DmCanhanListComponent implements OnInit {
 
    // Chứa danh sách Dvhc Huyện
    public allHuyen: any;
- 
+
    // Chứa danh sách Dvhc Xã
    public allXa: any;
-   
+
    // Filter Đơn vị hành chính Tỉnh
    public dvhcProvinceFilters: OutputDmDvhcModel[];
- 
+
    // Filter Đơn vị hành chính Huyện
    public dvhcDistrictFilters: OutputDmDvhcModel[];
- 
+
    // Filter Đơn vị hành chính Xã
    public dvhcWardFilters: OutputDmDvhcModel[];
 
@@ -78,6 +74,15 @@ export class DmCanhanListComponent implements OnInit {
   // Chứa menu item trên subheader
   public navArray = MenuDanhMucCaNhan;
 
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+   // disable unactive button
+   public disableUnActiveButton = false;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -86,7 +91,8 @@ export class DmCanhanListComponent implements OnInit {
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
@@ -100,7 +106,8 @@ export class DmCanhanListComponent implements OnInit {
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-    this.selectionOptions = { persistSelection: true };
+
+    await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
   /**
@@ -111,6 +118,18 @@ export class DmCanhanListComponent implements OnInit {
     this.dataTranslate = await this.translate
     .getTranslation(this.translate.getDefaultLang())
     .toPromise();
+  }
+
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
   }
 
   /**
@@ -219,10 +238,15 @@ export class DmCanhanListComponent implements OnInit {
    */
   public getAllDataActive() {
     this.listDataSelect = this.gridCaNhan.getSelectedRecords();
-    if( this.listDataSelect.length > 0 ) {
-      this.hiddenBtn = true;
+
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
     } else {
-      this.hiddenBtn = false;
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
     }
   }
 
@@ -230,22 +254,24 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.COMMON.default.titleUnActiveDialog);
-    // dialogRef.afterClosed().subscribe(async (result) => {
-    //   if (result === "confirm") {
-        
-    //   }
-    // });
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
   }
 
   /**
    * Hàm active mảng item đã chọn
    */
   public activeArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.COMMON.default.titleActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        
+        if (this.listDataSelect.length === 0) {
+
+        }
       }
     });
   }
@@ -254,10 +280,20 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "");
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.canhan.nameofobject + " (" + data.hovaten + ") " + this.dataTranslate.DANHMUC.canhan.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.canhan.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
       }
     });
   }
