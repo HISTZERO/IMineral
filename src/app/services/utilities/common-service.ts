@@ -145,9 +145,9 @@ export class CommonServiceShared {
   }
 
   // confirm delete dialog
-  public confirmDeleteDiaLogService(titleText: string, nameObj: string) {
+  public confirmDeleteDiaLogService(titleText: string, nameObj: string, titleHeader?: string) {
     const dialogRef = this.modalDialog.open(MyAlertDialogComponent);
-    dialogRef.componentInstance.header = this.dataTranslate.COMMON.default.deleteSub;
+    dialogRef.componentInstance.header = titleHeader ? titleHeader : this.dataTranslate.COMMON.default.deleteSub;
     dialogRef.componentInstance.content = titleText + ' <b>' + nameObj + '</b>';
     dialogRef.componentInstance.okeButton = this.dataTranslate.COMMON.default.success;
     dialogRef.componentInstance.cancelButton = this.dataTranslate.COMMON.default.cancel;

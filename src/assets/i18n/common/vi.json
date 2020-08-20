@@ -37,7 +37,11 @@
     "save": "Lưu",
     "resultChart": "Biểu đồ kết quả",
     "noResult": "Không có kết quả",
-    "active": "Active"
+    "active": "Active",
+    "unActive": "UnActive",
+    "key": "Từ khóa",
+    "keyPlaceholder": "Nhập từ khóa",
+    "search":"Tìm kiếm"
   },
   "dulieutram": {
     "thongtinchung": "THÔNG TIN CHUNG",
