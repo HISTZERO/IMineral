@@ -4,3 +4,9 @@ export enum donvido {
   mol,
   l,
 }
+
+export enum TrangThaiEnum {
+  Created = 0,
+  Active = 1,
+  NoActive = 2
+}

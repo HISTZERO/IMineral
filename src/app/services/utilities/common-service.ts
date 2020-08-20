@@ -156,6 +156,18 @@ export class CommonServiceShared {
     return dialogRef;
   }
 
+  // information dialog
+  public informationDiaLogService(titleText: string, nameObj: string, titleHeader?: string) {
+    const dialogRef = this.modalDialog.open(MyAlertDialogComponent);
+    dialogRef.componentInstance.header = titleHeader ? titleHeader : this.dataTranslate.COMMON.default.deleteSub;
+    dialogRef.componentInstance.content = titleText + ' <b>' + nameObj + '</b>';
+    dialogRef.componentInstance.okeButton = this.dataTranslate.COMMON.default.success;
+    dialogRef.componentInstance.cancelButton = this.dataTranslate.COMMON.default.cancel;
+    dialogRef.componentInstance.visibleOkButton = false;
+    dialogRef.componentInstance.visibleCancelButton = true;
+    return dialogRef;
+  }
+
   // canDeleteDialog
   public canDeleteDialogService(sMsg: string) {
     const dialogRef = this.modalDialog.open(MyAlertDialogComponent);
