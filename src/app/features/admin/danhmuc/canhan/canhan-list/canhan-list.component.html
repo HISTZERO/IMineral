@@ -2,6 +2,82 @@
 <app-sub-header [menuItems]="navArray"></app-sub-header>
 <!-- /page header -->
 <div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content>
+     <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-body">
+                <h4>Tìm kiếm nâng cao:</h4>
+                <div class="row" [formGroup]="formSearch">
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{ "COMMON.default.matinh" | translate }}:</label>
+                      <mat-select class="form-control" formControlName="Idtinh"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}"  *ngIf="dataTranslate" (selectionChange)="showDvhcHuyen()">
+                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+                        </mat-select-filter>
+                        <mat-option value="">
+                          {{ "COMMON.default.chonTinh" | translate }}
+                        </mat-option>
+                        <mat-option *ngFor="let tinh of allTinh" [value]="tinh.id">
+                          {{ tinh.tendvhc }}
+                        </mat-option>
+                      </mat-select>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}:</label>
+                      <mat-select class="form-control" formControlName="Idhuyen"  placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"  *ngIf="dataTranslate" (selectionChange)="showDvhcXa()">
+                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
+                        </mat-select-filter>
+                        <mat-option value="">
+                          {{ "COMMON.default.chonHuyen" | translate }}
+                        </mat-option>
+                        <mat-option *ngFor="let huyen of allHuyen" [value]="huyen.id">
+                          {{ huyen.tendvhc }}
+                        </mat-option>
+                      </mat-select>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"COMMON.default.maxa" | translate}}:</label>
+                      <mat-select class="form-control" formControlName="Idxa"  placeholder="{{ 'COMMON.default.chonXa' | translate }}"  *ngIf="dataTranslate">
+                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
+                        </mat-select-filter>
+                        <mat-option value="">
+                          {{ "COMMON.default.chonXa" | translate }}
+                        </mat-option>
+                        <mat-option *ngFor="let xa of allXa" [value]="xa.id">
+                          {{ xa.tendvhc }}
+                        </mat-option>
+                      </mat-select>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                    <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                      <mat-option value="">
+                        {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+                          {{ tt.name }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"COMMON.default.key" | translate}}:</label>
+                    <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <button class="btn btn-success" style="position: absolute; bottom: 0;">
+                      {{"COMMON.default.search" | translate}}
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
   <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
     <mat-sidenav-content>
       <div class="container-fluid">
@@ -10,19 +86,33 @@
             <div class="card border">
               <div class="card-header">
                 <h3>
-                  <span class="title">{{ "DANHMUC.canhan.titleList" | translate }}</span>
-                  <button class="btn btn-primary" style="float: right;" (click)="openCanhanIOSidenav()">
-                    <i class="fal fa-plus-square"></i>
-                    {{ "COMMON.default.add" | translate }}
-                  </button>
-                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllCanhan()">
-                    <i class="far fa-sync-alt"></i>
-                    {{ "COMMON.default.load" | translate }}
-                  </button>
-                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllDataActive()">
-                    <i class="fas fa-check"></i>
-                    {{ "COMMON.default.active" | translate }}
-                  </button>
+                  <div class="row">
+                    <div class="col-md-4 mb-sm-1">
+                      <span class="title">{{ "DANHMUC.canhan.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-8">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCanhanIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="getAllCanhan()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="activeArrayItem()">
+                        <i class="fas fa-check"></i>
+                        {{ "COMMON.default.active" | translate }}
+                      </button>
+                      <button class="btn btn-outline-secondary mr-2 mb-sm-1" style="float: right;" (click)="unActiveArrayItem()">
+                        <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                        {{ "COMMON.default.unActive" | translate }}
+                      </button>
+                      <button class="btn btn-outline-danger mr-2 mb-sm-1" style="float: right;" (click)="deleteArrayItem()">
+                        <i class="far fa-trash"></i>
+                        {{ "COMMON.default.delete" | translate }}
+                      </button>
+                  </div>
+                  </div>
                 </h3>
               </div>
               <div class="card-body" >
