@@ -191,24 +191,18 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.formSearch.value.matinh === true) {
+    if (!this.formSearch.value.Idtinh === true) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["mahuyen"].setValue("");
-      // }
     }
-    if (!this.formSearch.value.matinh === false) {
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["mahuyen"].setValue("");
-      // }
+    if (!this.formSearch.value.Idtinh === false) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.matinh.matinh });
+        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -217,25 +211,26 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.formSearch.value.mahuyen === true) {
+    if (!this.formSearch.value.Idhuyen === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["maxa"].setValue("");
-      // }
     }
     if (
-      !this.formSearch.value.matinh === false &&
-      !this.formSearch.value.mahuyen === false
+      !this.formSearch.value.Idtinh === false &&
+      !this.formSearch.value.Idhuyen === false
     ) {
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["maxa"].setValue("");
-      // }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.mahuyen.mahuyen });
+        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
       this.dvhcWardFilters = this.allXa;
     }
+  }
+
+  /**
+   * Tìm kiếm nâng cao
+   */
+  public searchAdvance() {
+    const dataSearch = this.formSearch.value;
   }
 
   /**
