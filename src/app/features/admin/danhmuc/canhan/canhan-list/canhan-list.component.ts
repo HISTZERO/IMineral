@@ -280,7 +280,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.canhan.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
