@@ -343,7 +343,13 @@
     "tentochucRequired": "Tên tổ chức không được để trống",
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
     "matinhRequired": "Hãy chọn tỉnh!",
-    "mahuyenRequired": "Hãy chọn huyện!"
+    "mahuyenRequired": "Hãy chọn huyện!",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cá nhân",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạn thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạn thái không sử dụng các đối tượng vừa chọn không?"
   },
   "loaicapphep": {
     "titleList": "Danh sách loại cấp phép",
