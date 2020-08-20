@@ -39,6 +39,9 @@ export class DmCanhanListComponent implements OnInit {
   // Chứa danh sách item đã chọn
   public listDataSelect: Object[];
 
+  // Chứa kiểu dữ liệu để ẩn button khi checkbox
+  public hiddenBtn = false;
+
   // Chứa danh sách Cá nhân
   public listCanhan: OutputDmCanhanModel[];
 
@@ -169,24 +172,18 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.formSearch.value.matinh === true) {
+    if (!this.formSearch.value.Idtinh === true) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["mahuyen"].setValue("");
-      // }
     }
-    if (!this.formSearch.value.matinh === false) {
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["mahuyen"].setValue("");
-      // }
+    if (!this.formSearch.value.Idtinh === false) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.matinh.matinh });
+        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -195,25 +192,26 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.formSearch.value.mahuyen === true) {
+    if (!this.formSearch.value.Idhuyen === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["maxa"].setValue("");
-      // }
     }
     if (
-      !this.formSearch.value.matinh === false &&
-      !this.formSearch.value.mahuyen === false
+      !this.formSearch.value.Idtinh === false &&
+      !this.formSearch.value.Idhuyen === false
     ) {
-      // if (this.editMode === true) {
-      //   this.formSearch.controls["maxa"].setValue("");
-      // }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.mahuyen.mahuyen });
+        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
       this.dvhcWardFilters = this.allXa;
     }
+  }
+
+  /**
+   * Tìm kiếm nâng cao
+   */
+  public searchAdvance() {
+    const dataSearch = this.formSearch.value;
   }
 
   /**
@@ -221,25 +219,30 @@ export class DmCanhanListComponent implements OnInit {
    */
   public getAllDataActive() {
     this.listDataSelect = this.gridCaNhan.getSelectedRecords();
+    if( this.listDataSelect.length > 0 ) {
+      this.hiddenBtn = true;
+    } else {
+      this.hiddenBtn = false;
+    }
   }
 
   /**
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", "Bạn có muốn unActive đối tượng?");
-    dialogRef.afterClosed().subscribe(async (result) => {
-      if (result === "confirm") {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.COMMON.default.titleUnActiveDialog);
+    // dialogRef.afterClosed().subscribe(async (result) => {
+    //   if (result === "confirm") {
         
-      }
-    });
+    //   }
+    // });
   }
 
   /**
    * Hàm active mảng item đã chọn
    */
   public activeArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", "Bạn có muốn active các đối tượng?");
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.COMMON.default.titleActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         
