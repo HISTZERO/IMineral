@@ -31,7 +31,10 @@
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "matinhRequired": "Hãy chọn tỉnh!",
-    "mahuyenRequired": "Hãy chọn huyện!"
+    "mahuyenRequired": "Hãy chọn huyện!",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cá nhân"
   },
   "dvhc": {
     "titleList": "Đơn vị hành chính",

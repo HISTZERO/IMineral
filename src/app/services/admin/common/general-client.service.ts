@@ -8,7 +8,7 @@ export class GeneralClientService {
   constructor() {}
 
   filterByKeyName<T>(data: T[], keyName: string, value: any): T[] {
-    if (data !== null || data.length === 0) {
+    if (data === null || data.length === 0) {
       return data;
     }
 
@@ -31,7 +31,7 @@ export class GeneralClientService {
   }
 
   findByKeyName<T>(data: T[], keyName: string, value: any): T {
-    if (data !== null || data.length === 0) {
+    if (data === null || data.length === 0) {
       return null;
     }
 
@@ -45,7 +45,8 @@ export class GeneralClientService {
     let result: T = null;
 
     for (const item of data) {
-      if (this.isKeyName(Object.keys(item), keyName)  === true && item[keyName] === value) {
+      const dataKeys = Object.keys(item);
+      if (this.isKeyName(dataKeys, keyName)  === true && item[keyName] === value) {
         result = item;
       }
     }
@@ -54,7 +55,7 @@ export class GeneralClientService {
   }
 
   private isKeyName(data: string[], keyName: string): boolean {
-    if (data !== null || data.length === 0) {
+    if (data === null || data.length === 0) {
       return false;
     }
 
