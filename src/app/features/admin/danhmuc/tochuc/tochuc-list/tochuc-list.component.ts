@@ -286,7 +286,7 @@ export class DmTochucListComponent implements OnInit {
         if (data !== null) {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
-            this.dataTranslate.DANHMUC.tochuc.nameofobject + " (" + data.hovaten + ") " + this.dataTranslate.DANHMUC.tochuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.tochuc.nameofobject + " (" + data.tentochuc + ") " + this.dataTranslate.DANHMUC.tochuc.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.tochuc.informedDialogTitle,
           );
 
