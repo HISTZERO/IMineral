@@ -46,7 +46,6 @@ export class DmCapquanlyIoComponent implements OnInit {
     macapquanly: "",
     tencapquanly: "",
     mota: "",
-    trangthai: "",
     thutu: "",
   };
 
@@ -109,7 +108,6 @@ export class DmCapquanlyIoComponent implements OnInit {
       macapquanly: [""],
       tencapquanly: ["", Validators.required],
       mota: [""],
-      trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
@@ -123,7 +121,6 @@ export class DmCapquanlyIoComponent implements OnInit {
         macapquanly: this.obj.macapquanly,
         tencapquanly: this.obj.tencapquanly,
         mota: this.obj.mota,
-        trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
     }
@@ -136,6 +133,7 @@ export class DmCapquanlyIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const dmFacadeService = this.dmFacadeService.getDmCapQuanLyService();
     this.inputModel = this.capQuanLyIOForm.value;
+    this.inputModel.trangthai = this.obj.trangthai;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapQuanLy"),

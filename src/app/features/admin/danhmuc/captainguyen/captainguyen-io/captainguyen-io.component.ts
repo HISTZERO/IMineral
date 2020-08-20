@@ -51,7 +51,6 @@ export class DmCaptainguyenIoComponent implements OnInit {
     tencaptainguyen: "",
     nhomcaptainguyen: "",
     mota: "",
-    trangthai: "",
     thutu: "",
   };
 
@@ -115,7 +114,6 @@ export class DmCaptainguyenIoComponent implements OnInit {
       tencaptainguyen: ["", Validators.required],
       nhomcaptainguyen: [""],
       mota: [""],
-      trangthai: [""],
       thutu: ["",  Validators.pattern("^[0-9-+]+$")],
     });
   }
@@ -130,7 +128,6 @@ export class DmCaptainguyenIoComponent implements OnInit {
         tencaptainguyen: this.obj.tencaptainguyen,
         nhomcaptainguyen: +this.obj.nhomcaptainguyen,
         mota: this.obj.mota,
-        trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
     }
@@ -143,6 +140,7 @@ export class DmCaptainguyenIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const dmFacadeService = this.dmFacadeService.getDmCapTaiNguyenService();
     this.inputModel = this.capTaiNguyenIOForm.value;
+    this.inputModel.trangthai = this.obj.trangthai;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapTaiNguyen"),
