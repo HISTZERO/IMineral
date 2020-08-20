@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { SelectionSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -28,9 +28,6 @@ export class DmCanhanListComponent implements OnInit {
   @ViewChild("gridCaNhan", { static: false }) public gridCaNhan: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compcanhanio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
-  // Chứa model selection grid
-  public selectionOptions: SelectionSettingsModel;
 
   // Chứa thuộc tính form
   public formSearch: FormGroup;
@@ -109,7 +106,8 @@ export class DmCanhanListComponent implements OnInit {
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-    this.selectionOptions = { persistSelection: true };
+
+    await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
   /**
@@ -120,6 +118,18 @@ export class DmCanhanListComponent implements OnInit {
     this.dataTranslate = await this.translate
     .getTranslation(this.translate.getDefaultLang())
     .toPromise();
+  }
+
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
   }
 
   /**
@@ -249,7 +259,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", "Bạn có muốn unActive đối tượng?");
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
 
@@ -261,7 +271,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm active mảng item đã chọn
    */
   public activeArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", "Bạn có muốn active các đối tượng?");
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         if (this.listDataSelect.length === 0) {
@@ -275,7 +285,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "");
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);

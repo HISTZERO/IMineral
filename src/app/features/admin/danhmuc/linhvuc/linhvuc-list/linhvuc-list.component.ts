@@ -2,7 +2,8 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -11,6 +12,9 @@ import { DmLinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/lin
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucLinhVuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
   selector: 'app-linhvuc-list',
@@ -19,11 +23,18 @@ import { MenuDanhMucLinhVuc } from "src/app/shared/constants/sub-menus/danhmuc/d
 })
 export class DmLinhvucListComponent implements OnInit {
   // Viewchild template
+  @ViewChild("gridLinhVuc", { static: false }) public gridLinhVuc: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("complinhvucio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
+  // Chứa thuộc tính form
+  public formSearch: FormGroup;
+
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
+
+   // Chứa danh sách item đã chọn
+   public listDataSelect: any[];
 
   // Chứa danh sách lĩnh vực
   public listLinhvuc: OutputDmLinhvucModel[];
@@ -37,22 +48,51 @@ export class DmLinhvucListComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa trạng thái
+  public trangthai = TrangThai;
+
   // Chứa menu item trên subheader
   public navArray = MenuDanhMucLinhVuc;
+
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+  // disable unactive button
+  public disableUnActiveButton = false;
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
               public dmFacadeService: DmFacadeService,
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService) { }
+              private translate: TranslateService,
+              public formBuilder: FormBuilder,
+              public generalClientService: GeneralClientService) { }
 
   async ngOnInit(){
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
+
+    await this.setDisplayOfCheckBoxkOnGrid(true);
+  }
+
+  /**
+   * Form innit
+   */
+  public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Trangthai: [""]
+    });
   }
 
   /**
@@ -82,6 +122,18 @@ export class DmLinhvucListComponent implements OnInit {
   }
 
   /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
+  }
+
+  /**
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllLinhvuc() {
@@ -97,9 +149,74 @@ export class DmLinhvucListComponent implements OnInit {
   }
 
    /**
-   * Hàm mở sidenav chức năng sửa dữ liệu
-   * @param id
+    * Hàm lấy danh sách dữ liệu đã chọn trên grid
+    */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridLinhVuc.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
+    }
+  }
+
+  /**
+   * Hàm unActive mảng item đã chọn
    */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
+  }
+
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if (this.listDataSelect.length === 0) {
+
+        }
+      }
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.linhvuc.nameofobject + " (" + data.tenlinhvuc + ") " + this.dataTranslate.DANHMUC.linhvuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.linhvuc.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
+  }
+
+   /**
+    * Hàm mở sidenav chức năng sửa dữ liệu
+    * @param id
+    */
   async editItemLinhvuc(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dmFacadeService
