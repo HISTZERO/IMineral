@@ -50,23 +50,23 @@ export class DmCanhanListComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
-   // Chứa danh sách Dvhc Tỉnh
-   public allTinh: any;
+  // Chứa danh sách Dvhc Tỉnh
+  public allTinh: any;
 
-   // Chứa danh sách Dvhc Huyện
-   public allHuyen: any;
+  // Chứa danh sách Dvhc Huyện
+  public allHuyen: any;
 
-   // Chứa danh sách Dvhc Xã
-   public allXa: any;
+  // Chứa danh sách Dvhc Xã
+  public allXa: any;
 
-   // Filter Đơn vị hành chính Tỉnh
-   public dvhcProvinceFilters: OutputDmDvhcModel[];
+  // Filter Đơn vị hành chính Tỉnh
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
 
-   // Filter Đơn vị hành chính Huyện
-   public dvhcDistrictFilters: OutputDmDvhcModel[];
+  // Filter Đơn vị hành chính Huyện
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
 
-   // Filter Đơn vị hành chính Xã
-   public dvhcWardFilters: OutputDmDvhcModel[];
+  // Filter Đơn vị hành chính Xã
+  public dvhcWardFilters: OutputDmDvhcModel[];
 
   // Chứa trạng thái
   public trangthai = TrangThai;
@@ -123,7 +123,6 @@ export class DmCanhanListComponent implements OnInit {
   /**
    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
    */
-
   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
       this.settingsCommon.selectionOptions = { persistSelection: true };

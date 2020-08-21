@@ -265,7 +265,6 @@ export class DmCanhanIoComponent implements OnInit {
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
     this.inputModel.ngaycap = this.datePipe.transform( this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
-    this.inputModel.trangthai = this.obj.trangthai;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
@@ -280,6 +279,7 @@ export class DmCanhanIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idcanhan = this.obj.idcanhan;
+      this.inputModel.trangthai = this.obj.trangthai;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
         (error: HttpErrorResponse) => {

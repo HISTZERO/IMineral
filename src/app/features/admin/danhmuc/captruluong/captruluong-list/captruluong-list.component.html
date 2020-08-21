@@ -13,7 +13,7 @@
                 <div class="row" [formGroup]="formSearch">
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                    <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                    <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.captruluong.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
                         {{ "DANHMUC.canhan.chonTrangthai" | translate }}
                       </mat-option>
@@ -62,15 +62,15 @@
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
-                      <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="activeArrayItem()">
+                      <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
                         <i class="fas fa-check"></i>
                         {{ "COMMON.default.active" | translate }}
                       </button>
-                      <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2 mb-sm-1" style="float: right;" (click)="unActiveArrayItem()">
+                      <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
                         <i class="far fa-times-circle" style="font-size: 14px;"></i>
                         {{ "COMMON.default.unActive" | translate }}
                       </button>
-                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2 mb-sm-1" style="float: right;" (click)="deleteArrayItem()">
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
                         <i class="far fa-trash"></i>
                         {{ "COMMON.default.delete" | translate }}
                       </button>

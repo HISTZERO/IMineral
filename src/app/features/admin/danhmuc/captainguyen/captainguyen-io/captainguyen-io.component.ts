@@ -140,7 +140,6 @@ export class DmCaptainguyenIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const dmFacadeService = this.dmFacadeService.getDmCapTaiNguyenService();
     this.inputModel = this.capTaiNguyenIOForm.value;
-    this.inputModel.trangthai = this.obj.trangthai;
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapTaiNguyen"),
@@ -155,6 +154,7 @@ export class DmCaptainguyenIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idcaptainguyen = this.obj.idcaptainguyen;
+      this.inputModel.trangthai = this.obj.trangthai;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapTaiNguyen"),
         (error: HttpErrorResponse) => {

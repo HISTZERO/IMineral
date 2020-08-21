@@ -62,8 +62,8 @@ export class DmCaptruluongListComponent implements OnInit {
   // disable active button
   public disableActiveButton = false;
 
-   // disable unactive button
-   public disableUnActiveButton = false;
+  // disable unactive button
+  public disableUnActiveButton = false;
 
   // Contructor
   constructor(
@@ -165,7 +165,7 @@ public getAllDataActive() {
  * Hàm unActive mảng item đã chọn
  */
 public unActiveArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captruluong.confirmedContentOfUnActiveDialog);
   dialogRef.afterClosed().subscribe(async (result) => {
     if (result === "confirm") {
 
@@ -177,7 +177,7 @@ public unActiveArrayItem() {
  * Hàm active mảng item đã chọn
  */
 public activeArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
+  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captruluong.confirmedContentOfActiveDialog);
   dialogRef.afterClosed().subscribe(async (result) => {
     if (result === "confirm") {
       if (this.listDataSelect.length === 0) {
