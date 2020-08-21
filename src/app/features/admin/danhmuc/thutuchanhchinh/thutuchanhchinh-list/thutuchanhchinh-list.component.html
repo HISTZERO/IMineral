@@ -111,7 +111,18 @@
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenthutuc" headerText="{{ 'DANHMUC.thutuchanhchinh.tenthutuc' | translate }}"></e-column>
                     <e-column field="mathutuc" headerText="{{ 'DANHMUC.thutuchanhchinh.mathutuc' | translate }}"></e-column>
-                    <e-column field="idlinhvuc" headerText="{{ 'DANHMUC.thutuchanhchinh.linhvuc' | translate }}"></e-column>
+                    <e-column field="idcapthuchien" [visible]="false"></e-column>
+                    <e-column field="tenlinhvuc" headerText="{{ 'DANHMUC.thutuchanhchinh.capthuchien' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.idcapthuchien | getNameCapQuanLyPipe: allCapQuanLy}}
+                      </ng-template>
+                    </e-column>
+                    <e-column field="idlinhvuc" [visible]="false"></e-column>
+                    <e-column field="tenlinhvuc" headerText="{{ 'DANHMUC.thutuchanhchinh.linhvuc' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.idlinhvuc | getNameLinhVucPipe: allLinhVuc}}
+                      </ng-template>
+                    </e-column>
                     <e-column field="trangthai" headerText="{{ 'DANHMUC.linhvuc.trangthai' | translate }}">
                       <ng-template #template let-data>
                         {{ data.trangthai | getNameFileConstant: trangthai}}
