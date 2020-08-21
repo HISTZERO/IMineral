@@ -15,7 +15,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { DmLoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-loaibaocao-list',
@@ -115,10 +115,10 @@ export class DmLoaibaocaoListComponent implements OnInit {
    /**
     * Hàm lấy dữ liệu Loại báo cáo
     */
-   async getAllLoaiBaoCao() {
+   async getAllLoaiBaoCao(param: any = { PageNumber: 1, PageSize: -1 }) {
      const listData: any = await this.dmFacadeService
        .getDmLoaiBaoCaoService()
-       .getFetchAll({ PageNumber: 1, PageSize: -1 });
+       .getFetchAll(param);
      if (listData.items) {
        listData.items.map((loaibaocao, index) => {
          loaibaocao.serialNumber = index + 1;
@@ -128,99 +128,102 @@ export class DmLoaibaocaoListComponent implements OnInit {
    }
  
 
-   /**
-   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
-   */
+      /**
+       * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+       */
 
-  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
-    if (status) {
-      this.settingsCommon.selectionOptions = { persistSelection: true };
-    } else {
-      this.settingsCommon.selectionOptions = null;
+      async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+        if (status) {
+          this.settingsCommon.selectionOptions = { persistSelection: true };
+        } else {
+          this.settingsCommon.selectionOptions = null;
+        }
+      }
+
+      /**
+       * Form innit
+       */
+      public formInit() {
+        this.formSearch = this.formBuilder.group({
+          Keyword: [""],
+          Trangthai: [""]
+        });
+      }
+
+      /**
+      * Tìm kiếm nâng cao
+      */
+    public searchAdvance() {
+      let dataSearch = this.formSearch.value;
+      dataSearch['PageNumber'] = Paging.PageNumber;
+      dataSearch['PageSize'] = Paging.PageSize;
+      this.getAllLoaiBaoCao(dataSearch);
     }
-  }
 
-  /**
-   * Form innit
-   */
-  public formInit() {
-    this.formSearch = this.formBuilder.group({
-      Keyword: [""],
-      Trangthai: [""]
-    });
-  }
+    /**
+     * Hàm lấy danh sách dữ liệu đã chọn trên grid
+     */
+    public getAllDataActive() {
+      this.listDataSelect = this.gridLoaiBaoCao.getSelectedRecords();
 
-  /**
-  * Tìm kiếm nâng cao
-  */
- public searchAdvance() {
-  const dataSearch = this.formSearch.value;
-}
-
-/**
- * Hàm lấy danh sách dữ liệu đã chọn trên grid
- */
-public getAllDataActive() {
-  this.listDataSelect = this.gridLoaiBaoCao.getSelectedRecords();
-
-  if (this.listDataSelect.length > 0) {
-    this.disableActiveButton = true;
-    this.disableDeleteButton = true;
-    this.disableUnActiveButton = true;
-  } else {
-    this.disableActiveButton = false;
-    this.disableDeleteButton = false;
-    this.disableUnActiveButton = false;
-  }
-}
-
-/**
- * Hàm unActive mảng item đã chọn
- */
-public unActiveArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfUnActiveDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
-
-    }
-  });
-}
-
-/**
- * Hàm active mảng item đã chọn
- */
-public activeArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfActiveDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
-      if (this.listDataSelect.length === 0) {
-
+      if (this.listDataSelect.length > 0) {
+        this.disableActiveButton = true;
+        this.disableDeleteButton = true;
+        this.disableUnActiveButton = true;
+      } else {
+        this.disableActiveButton = false;
+        this.disableDeleteButton = false;
+        this.disableUnActiveButton = false;
       }
     }
-  });
-}
 
-/**
- * Hàm delete mảng item đã chọn
- */
-public deleteArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
-      const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+    /**
+     * Hàm unActive mảng item đã chọn
+     */
+    public unActiveArrayItem() {
+      const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfUnActiveDialog);
+      dialogRef.afterClosed().subscribe(async (result) => {
+        if (result === "confirm") {
 
-      if (data !== null) {
-        const informationDialogRef = this.commonService.informationDiaLogService(
-          "",
-          this.dataTranslate.DANHMUC.loaibaocao.nameofobject + " (" + data.tenloaibaocao + ") " + this.dataTranslate.DANHMUC.loaibaocao.informedContentOfUnDeletedDialog,
-          this.dataTranslate.DANHMUC.loaibaocao.informedDialogTitle,
-        );
-
-        informationDialogRef.afterClosed().subscribe(() => {});
-      }
+        }
+      });
     }
-  });
-}
+
+    /**
+     * Hàm active mảng item đã chọn
+     */
+    public activeArrayItem() {
+      const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfActiveDialog);
+      dialogRef.afterClosed().subscribe(async (result) => {
+        if (result === "confirm") {
+          if (this.listDataSelect.length === 0) {
+
+          }
+        }
+      });
+    }
+
+    /**
+     * Hàm delete mảng item đã chọn
+     */
+    public deleteArrayItem() {
+      const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+      dialogRef.afterClosed().subscribe(async (result) => {
+        if (result === "confirm") {
+          const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+          if (data !== null) {
+            const informationDialogRef = this.commonService.informationDiaLogService(
+              "",
+              this.dataTranslate.DANHMUC.loaibaocao.nameofobject + " (" + data.tenloaibaocao + ") " + this.dataTranslate.DANHMUC.loaibaocao.informedContentOfUnDeletedDialog,
+              this.dataTranslate.DANHMUC.loaibaocao.informedDialogTitle,
+            );
+
+            informationDialogRef.afterClosed().subscribe(() => {});
+          }
+        }
+      });
+    }
 
    /**
     * Hàm mở sidenav chức năng sửa dữ liệu

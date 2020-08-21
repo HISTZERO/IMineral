@@ -33,9 +33,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
    // Chứa dữ liệu input
    public inputModel: InputDmLoaiTaiLieuModel;
  
-   // Chứa dữ liệu Trạng thái
-   public trangthai = TrangThai;
- 
    // Chứa dữ liệu translate
    public dataTranslate: any;
  
@@ -50,7 +47,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
      maloaitailieu: "",
      tenloaitailieu: "",
      mota: "",
-     trangthai: "",
      thutu: "",
      nhomloaitailieu: ""
    };
@@ -114,7 +110,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
        maloaitailieu: [""],
        tenloaitailieu: ["", Validators.required],
        mota: [""],
-       trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],
        nhomloaitailieu: [""]
      });
@@ -129,7 +124,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
          maloaitailieu: this.obj.maloaitailieu,
          tenloaitailieu: this.obj.tenloaitailieu,
          mota: this.obj.mota,
-         trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
          nhomloaitailieu: +this.obj.nhomloaitailieu
        });
@@ -157,6 +151,7 @@ export class DmLoaitailieuIoComponent implements OnInit {
        );
      } else if (operMode === "edit") {
        this.inputModel.idloaitailieu = this.obj.idloaitailieu;
+       this.inputModel.trangthai = this.obj.trangthai;
        dmFacadeService.updateItem(this.inputModel).subscribe(
          (res) => this.matSidenavService.doParentFunction("getAllLoaiTaiLieu"),
          (error: HttpErrorResponse) => {

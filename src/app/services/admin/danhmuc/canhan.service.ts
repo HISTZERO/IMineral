@@ -23,6 +23,28 @@ export class DmCanhanService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusArrayItem(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/UpdateListStatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteArrayItem(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/RemoveList'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

@@ -51,10 +51,10 @@
                       </mat-select>
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                    <label class="col-form-label text-right">{{"DANHMUC.coquanquanly.trangthai" | translate}}:</label>
                     <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.coquanquanly.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                        {{ "DANHMUC.coquanquanly.chonTrangthai" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
                           {{ tt.name }}
@@ -88,27 +88,33 @@
             <div class="card border">
               <div class="card-header">
                 <h3>
-                  <span class="title">{{ "DANHMUC.coquanquanly.titleList" | translate }}</span>
-                  <button class="btn btn-primary" style="float: right;" (click)="openCoQuanQuanLyIOSidenav()">
-                    <i class="fal fa-plus-square"></i>
-                    {{ "COMMON.default.add" | translate }}
-                  </button>
-                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllCoQuanQuanLy()">
-                    <i class="far fa-sync-alt"></i>
-                    {{ "COMMON.default.load" | translate }}
-                  </button>
-                  <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
-                    <i class="fas fa-check"></i>
-                    {{ "COMMON.default.active" | translate }}
-                  </button>
-                  <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
-                    <i class="far fa-times-circle" style="font-size: 14px;"></i>
-                    {{ "COMMON.default.unActive" | translate }}
-                  </button>
-                  <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
-                    <i class="far fa-trash"></i>
-                    {{ "COMMON.default.delete" | translate }}
-                  </button>
+                  <div class="row">
+                    <div class="col-md-4 mb-sm-1">
+                      <span class="title">{{ "DANHMUC.coquanquanly.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-8">
+                      <button class="btn btn-primary" style="float: right;" (click)="openCoQuanQuanLyIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllCoQuanQuanLy()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                      <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
+                        <i class="fas fa-check"></i>
+                        {{ "COMMON.default.active" | translate }}
+                      </button>
+                      <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
+                        <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                        {{ "COMMON.default.unActive" | translate }}
+                      </button>
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
+                        <i class="far fa-trash"></i>
+                        {{ "COMMON.default.delete" | translate }}
+                      </button>
+                    </div>
+                  </div>
                 </h3>
               </div>
               <div class="card-body">

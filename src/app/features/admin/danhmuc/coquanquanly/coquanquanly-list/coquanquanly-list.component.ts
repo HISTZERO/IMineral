@@ -15,7 +15,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { DmCoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 
 @Component({
@@ -136,10 +136,10 @@ export class DmCoquanquanlyListComponent implements OnInit {
    /**
     * Hàm lấy dữ liệu Cơ Quan Quản Lý
     */
-   async getAllCoQuanQuanLy() {
+   async getAllCoQuanQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
      const listData: any = await this.dmFacadeService
        .getDmCoQuanQuanLyService()
-       .getFetchAll({ PageNumber: 1, PageSize: -1 });
+       .getFetchAll(param);
      if (listData.items) {
        listData.items.map((coquan, index) => {
          coquan.serialNumber = index + 1;
@@ -176,7 +176,10 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    const dataSearch = this.formSearch.value;
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllCoQuanQuanLy(dataSearch)
   }
 
   /**

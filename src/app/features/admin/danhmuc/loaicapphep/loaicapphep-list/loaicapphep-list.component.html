@@ -11,11 +11,33 @@
               <div class="card-body">
                 <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
                 <div class="row" [formGroup]="formSearch">
+                  <div class="col-lg-3 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}:</label>
+                    <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="Idthutuchanhchinh" *ngIf="dataTranslate">
+                      <mat-option value="">
+                        {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let thutuc of thuTucHanhChinh" [value]="thutuc.id">
+                        {{ thutuc.name }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.nhomloaicapphep" | translate}}:</label>
+                    <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonNhomloaicapphep' | translate }}" formControlName="Nhomloaicapphep" *ngIf="dataTranslate">
+                      <mat-option value="">
+                        {{ "DANHMUC.loaicapphep.chonNhomloaicapphep" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let nhomLCP of nhomLoaiCapPhep" [value]="nhomLCP.id">
+                        {{ nhomLCP.name }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.trangthai" | translate}}:</label>
                     <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.loaicapphep.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                        {{ "DANHMUC.loaicapphep.chonTrangthai" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
                           {{ tt.name }}
@@ -49,27 +71,33 @@
             <div class="card border">
               <div class="card-header">
                 <h3>
-                  <span class="title">{{ "DANHMUC.loaicapphep.titleList" | translate }}</span>
-                  <button class="btn btn-primary" style="float: right;" (click)="openLoaiCapPhepIOSidenav()">
-                    <i class="fal fa-plus-square"></i>
-                    {{ "COMMON.default.add" | translate }}
-                  </button>
-                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllLoaiCapPhep()">
-                    <i class="far fa-sync-alt"></i>
-                    {{ "COMMON.default.load" | translate }}
-                  </button>
-                  <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
-                    <i class="fas fa-check"></i>
-                    {{ "COMMON.default.active" | translate }}
-                  </button>
-                  <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
-                    <i class="far fa-times-circle" style="font-size: 14px;"></i>
-                    {{ "COMMON.default.unActive" | translate }}
-                  </button>
-                  <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
-                    <i class="far fa-trash"></i>
-                    {{ "COMMON.default.delete" | translate }}
-                  </button>
+                  <div class="row">
+                    <div class="col-md-4 mb-sm-1">
+                      <span class="title">{{ "DANHMUC.loaicapphep.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-8">
+                      <button class="btn btn-primary" style="float: right;" (click)="openLoaiCapPhepIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllLoaiCapPhep()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                      <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
+                        <i class="fas fa-check"></i>
+                        {{ "COMMON.default.active" | translate }}
+                      </button>
+                      <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
+                        <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                        {{ "COMMON.default.unActive" | translate }}
+                      </button>
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
+                        <i class="far fa-trash"></i>
+                        {{ "COMMON.default.delete" | translate }}
+                      </button>
+                    </div>
+                  </div>
                 </h3>
               </div>
               <div class="card-body">
@@ -80,14 +108,23 @@
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.tenloaicapphep' | translate }}"></e-column>
-                    <e-column field="maloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.maloaicapphep' | translate }}"></e-column>
-                    <e-column field="trangthai" headerText="{{ 'DANHMUC.loaibaocao.trangthai' | translate }}">
+                    <e-column field="idthutuchanhchinh" headerText="{{ 'DANHMUC.loaicapphep.thutuchanhchinh' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.idthutuchanhchinh | getNameFileConstant: thuTucHanhChinh}}
+                      </ng-template>
+                    </e-column>
+                    <e-column field="nhomloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.nhomloaicapphep' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.nhomloaicapphep | getNameFileConstant: nhomLoaiCapPhep}}
+                      </ng-template>
+                    </e-column>
+                    <e-column field="trangthai" headerText="{{ 'DANHMUC.loaicapphep.trangthai' | translate }}">
                       <ng-template #template let-data>
                         {{ data.trangthai | getNameFileConstant: trangthai}}
                       </ng-template>
                     </e-column>
                     <e-column *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
-                    <e-column field="id" headerText="{{ 'COMMON.default.action' | translate }}">
+                    <e-column field="idloaicapphep" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
