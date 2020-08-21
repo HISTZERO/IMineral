@@ -137,9 +137,13 @@ export class DmLinhvucListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllLinhvuc() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber = 1;
+    searchModel.PageSize = -1;
+
     const listData: any = await this.dmFacadeService
       .getDmLinhvucService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((linhvuc, index) => {
         linhvuc.serialNumber = index + 1;
