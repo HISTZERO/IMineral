@@ -49,7 +49,7 @@
                 <h3>
                   <div class="row">
                     <div class="col-md-4 mb-sm-1">
-                      <span class="title">{{ "DANHMUC.canhan.titleList" | translate }}</span>
+                      <span class="title">{{ "DANHMUC.linhvuc.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
                       <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openLinhvucIOSidenav()">
@@ -80,7 +80,7 @@
                 <ejs-grid #gridLinhVuc *ngIf="listLinhvuc" [dataSource]="listLinhvuc"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                   [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  [allowResizing]="true" [selectionSettings]='settingsCommon.selectionOptions' (rowDeselected) = 'getAllDataActive($event)' (rowSelected)='getAllDataActive($event)'>
+                  [allowResizing]="true" [selectionSettings]="settingsCommon.selectionOptions" (rowDeselected) = "getAllDataActive($event)" (rowSelected)="getAllDataActive($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="malinhvuc" headerText="{{ 'DANHMUC.linhvuc.malinhvuc' | translate }}"></e-column>

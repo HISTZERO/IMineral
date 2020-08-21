@@ -17,7 +17,16 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.linhvuc" | translate}}</label>
       <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.linhvucPlaceholder' | translate}}" />
+        <mat-select class="form-control" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}"  *ngIf="dataTranslate">
+          <mat-select-filter [displayMember]="'tenlinhvuc'" [array]="linhVucFilters" (filteredReturn)="allLinhVuc = $event">
+          </mat-select-filter>
+          <mat-option value="">
+            {{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}
+          </mat-option>
+          <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="linhVuc.idlinhvuc">
+            {{ linhVuc.tenlinhvuc }}
+          </mat-option>
+        </mat-select>
         <span *ngIf="formErrors.idlinhvuc" class="alert-danger">{{formErrors.idlinhvuc}}</span>
       </div>
     </div>
@@ -34,6 +43,7 @@
             {{ cap.tencapquanly }}
           </mat-option>
         </mat-select>
+        <span *ngIf="formErrors.idcapthuchien" class="alert-danger">{{formErrors.idcapthuchien}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
@@ -99,7 +109,7 @@
         <span *ngIf="formErrors.lephi" class="alert-danger">{{formErrors.lephi}}</span>
       </div>
     </div>
-    <div class="form-group row mx-0">
+    <!-- <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.trangthai" | translate}}</label>
       <div class="col-sm-8">
         <mat-select class="form-control" placeholder="{{ 'DANHMUC.thutuchanhchinh.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
@@ -112,7 +122,7 @@
         </mat-select>
         <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
       </div>
-    </div>
+    </div> -->
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.thutu" | translate}}</label>
       <div class="col-sm-8">

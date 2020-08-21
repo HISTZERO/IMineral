@@ -97,14 +97,14 @@ export class DmTochucListComponent implements OnInit {
     // Khởi tạo form
     this.formInit();
     // Lấy danh sách Tỉnh
-    this.showDvhcTinh();
+    await this.showDvhcTinh();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-
+    // Gọi hàm thiêt lập hiển thị nút check box trên Grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
