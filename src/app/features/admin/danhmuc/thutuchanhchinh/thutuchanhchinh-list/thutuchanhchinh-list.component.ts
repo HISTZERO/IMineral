@@ -183,9 +183,13 @@ export class DmThutuchanhchinhListComponent implements OnInit {
    * Hàm lấy dữ liệu Thủ tục hành chính
    */
   async getAllThuTucHanhChinh() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber = 1;
+    searchModel.PageSize = -1;
+
     const listData: any = await this.dmFacadeService
       .getDmThuTucHanhChinhService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((thutucHC, index) => {
         thutucHC.serialNumber = index + 1;

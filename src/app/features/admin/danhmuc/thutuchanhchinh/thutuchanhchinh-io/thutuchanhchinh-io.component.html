@@ -15,7 +15,9 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.linhvuc" | translate}}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.linhvuc" | translate}}
+        <small>(*)</small>
+      </label>
       <div class="col-sm-8">
         <mat-select class="form-control" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}"  *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tenlinhvuc'" [array]="linhVucFilters" (filteredReturn)="allLinhVuc = $event">
@@ -31,7 +33,9 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.capthuchien" | translate}}</label>
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.thutuchanhchinh.capthuchien" | translate}}
+        <small>(*)</small>
+      </label>
       <div class="col-sm-8">
         <mat-select class="form-control" formControlName="idcapthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}"  *ngIf="dataTranslate">
           <mat-select-filter [displayMember]="'tencapquanly'" [array]="listCapQuanLyFilter" (filteredReturn)="listCapQuanLy = $event">
