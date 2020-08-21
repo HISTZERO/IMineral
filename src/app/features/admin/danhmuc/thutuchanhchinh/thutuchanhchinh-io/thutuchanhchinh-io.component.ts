@@ -10,6 +10,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
+import { OutputDmLinhvucModel } from 'src/app/models/admin/danhmuc/linhvuc.model';
 
 @Component({
   selector: 'app-thutuchanhchinh-io',
@@ -23,13 +24,13 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
 
     // Chứa dữ liệu đối tượng truyền từ list comp
     public obj: any;
-  
+
     // Chứa kiểu form
     public purpose: string;
-  
+
     // Chứa chế độ form
     public editMode: boolean;
-  
+
     // Chứa dữ liệu input
     public inputModel: InputDmThuTucHanhChinhModel;
 
@@ -38,16 +39,22 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
 
     // Chứa danh sách Cấp quản lý để tìm kiếm
     public listCapQuanLyFilter: OutputDmCapQuanLyModel[];
-  
+
+     // Chứa danh sách Lĩnh Vực
+    public allLinhVuc: OutputDmLinhvucModel;
+
+    // Filter Lĩnh Vực
+    public linhVucFilters: OutputDmLinhvucModel[];
+
     // Chứa dữ liệu Trạng thái
     public trangthai = TrangThai;
-  
+
     // Chứa dữ liệu translate
     public dataTranslate: any;
-  
+
     // error message
     validationErrorMessages = {};
-  
+
     // form errors
     formErrors = {
       mathutuc: "",
@@ -66,7 +73,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       thutu: "",
       lephi: ""
     };
-  
+
     // Contructor
     constructor(
       public matSidenavService: MatsidenavService,
@@ -75,21 +82,23 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       public commonService: CommonServiceShared,
       private translate: TranslateService
     ) {}
-  
+
     async ngOnInit() {
       // Khởi tạo form
       await this.formInit();
-      //Khởi tạo form theo dạng add or edit
+      // Khởi tạo form theo dạng add or edit
       await this.bindingConfigAddOrUpdate();
       // Lấy dữ liệu translate
       await this.getDataTranslate();
       // Lấy dữ liệu Cấp quản lý
       this.getAllCapQuanLy();
+      // Gọi hàm lấy dữ liệu Lĩnh Vực
+      await this.getLinhVuc();
     }
-  
+
     /**
-      * Hàm lấy dữ liệu translate
-      */
+     * Hàm lấy dữ liệu translate
+     */
     async getDataTranslate() {
       // Lấy ra biến translate của hệ thống
       this.dataTranslate = await this.translate
@@ -98,37 +107,39 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       // Hàm set validation cho form
       await this.setValidation();
     }
-  
+
     /**
-      * Hàm set validate
-      */
+     * Hàm set validate
+     */
     setValidation() {
       this.validationErrorMessages = {
         tenthutuc: { required: this.dataTranslate.DANHMUC.thutuchanhchinh.tenthutucRequired},
+        idlinhvuc: {required: this.dataTranslate.DANHMUC.thutuchanhchinh.linhVucRequired},
+        idcapthuchien: {required: this.dataTranslate.DANHMUC.thutuchanhchinh.capThucHienRequired},
         songaythuchien: { pattern: this.dataTranslate.DANHMUC.thutuchanhchinh.songaythuchienIsNumber},
         thutu: { pattern: this.dataTranslate.DANHMUC.thutuchanhchinh.thutuIsNumber }
       };
     }
-  
+
     /**
-      * Hàm khởi tạo form theo dạng edit
-      */
+     * Hàm khởi tạo form theo dạng edit
+     */
     bindingConfigAddOrUpdate() {
       this.editMode = false;
       this.inputModel = new InputDmThuTucHanhChinhModel();
       // check edit
       this.formOnEdit();
     }
-  
+
     /**
-      * Hàm khởi tạo form
-      */
+     * Hàm khởi tạo form
+     */
     formInit() {
       this.thuTucHanhChinhIOForm = this.formBuilder.group({
         mathutuc: [""],
         tenthutuc: ["", Validators.required],
-        idlinhvuc: [""],
-        idcapthuchien: [""],
+        idlinhvuc: ["", Validators.required],
+        idcapthuchien: ["", Validators.required],
         doituongthuchien: [""],
         coquanthuchien: [""],
         ketquathuchien: [""],
@@ -142,10 +153,10 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         lephi: [""]
       });
     }
-  
+
     /**
-      * hàm set value cho form
-      */
+     * hàm set value cho form
+     */
     formOnEdit() {
       if (this.obj && this.purpose === 'edit') {
         this.thuTucHanhChinhIOForm.setValue({
@@ -168,7 +179,18 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       }
       this.editMode = true;
     }
-  
+
+    /**
+     * Hàm lấy danh sách Lĩnh Vực
+     */
+    async getLinhVuc() {
+      const allLinhVucData: any = await this.dmFacadeService
+        .getDmLinhvucService()
+        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      this.allLinhVuc = allLinhVucData.items;
+      this.linhVucFilters = allLinhVucData.items;
+    }
+
     /**
      * Hàm lấy dữ liệu Cấp quản lý
      */
@@ -181,8 +203,8 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     }
 
     /**
-      * Hàm thực thi chức năng add và edit
-      */
+     * Hàm thực thi chức năng add và edit
+     */
     private addOrUpdate(operMode: string) {
       const dmFacadeService = this.dmFacadeService.getDmThuTucHanhChinhService();
       this.inputModel = this.thuTucHanhChinhIOForm.value;
@@ -213,11 +235,11 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         );
       }
     }
-  
+
     /**
-      * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-      * @param operMode 
-      */
+     * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
+     * @param operMode
+     */
     async onSubmit(operMode: string) {
       this.logAllValidationErrorMessages();
       if (this.thuTucHanhChinhIOForm.valid === true) {
@@ -225,19 +247,19 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         this.matSidenavService.close();
       }
     }
-  
+
     /**
-      * Hàm reset form, gọi khi nhấn nút reset dữ liệu
-      */
+     * Hàm reset form, gọi khi nhấn nút reset dữ liệu
+     */
     public onFormReset() {
       // Hàm .reset sẽ xóa trắng mọi control trên form
       this.thuTucHanhChinhIOForm.reset();
     }
-  
+
     /**
-      * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-      * @param operMode 
-      */
+     * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
+     * @param operMode
+     */
     async onContinueAdd(operMode: string) {
       this.logAllValidationErrorMessages();
       if (this.thuTucHanhChinhIOForm.valid === true) {
@@ -246,10 +268,10 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         this.purpose = "new";
       }
     }
-  
+
     /**
-      * hàm kiểm tra validation form
-      */
+     * hàm kiểm tra validation form
+     */
     public logAllValidationErrorMessages() {
       validationAllErrorMessagesService(
         this.thuTucHanhChinhIOForm,
@@ -257,19 +279,19 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         this.formErrors
       );
     }
-  
+
     /**
-      * Hàm close sidenav
-      */
+     * Hàm close sidenav
+     */
     public closeThuTucHanhChinhIOSidenav() {
       this.matSidenavService.close();
     }
-  
-  
+
+
     /**
-      *  Hàm gọi từ function con gọi vào chạy function cha
-      * @param methodName
-      */
+     *  Hàm gọi từ function con gọi vào chạy function cha
+     * @param methodName
+     */
     doFunction(methodName) {
       this[methodName]();
     }
