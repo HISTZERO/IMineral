@@ -2,6 +2,45 @@
 <app-sub-header [menuItems]="navArray"></app-sub-header>
 <!-- /page header -->
 <div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container">
+    <mat-sidenav-content>
+     <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-body">
+                <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
+                <div class="row" [formGroup]="formSearch">
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                    <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.loaibaocao.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                      <mat-option value="">
+                        {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+                          {{ tt.name }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"COMMON.default.key" | translate}}:</label>
+                    <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
+                  </div>
+                  <div class="col-lg-2 col-md-3 col-sm-4 form-group d-flex" style="align-items: flex-end;">
+                    <div>
+                    <button class="btn btn-success" (click)="searchAdvance()">
+                      {{"COMMON.default.search" | translate}}
+                    </button>
+                  </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
   <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
     <mat-sidenav-content>
       <div class="container-fluid">
@@ -19,18 +58,35 @@
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
                   </button>
+                  <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
+                    <i class="fas fa-check"></i>
+                    {{ "COMMON.default.active" | translate }}
+                  </button>
+                  <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
+                    <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                    {{ "COMMON.default.unActive" | translate }}
+                  </button>
+                  <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
+                    <i class="far fa-trash"></i>
+                    {{ "COMMON.default.delete" | translate }}
+                  </button>
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid #grid *ngIf="listLoaiBaoCao" [dataSource]="listLoaiBaoCao"
+                <ejs-grid #gridLoaiBaoCao *ngIf="listLoaiBaoCao" [dataSource]="listLoaiBaoCao"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                   [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  [allowResizing]="true">
+                  [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenloaibaocao" headerText="{{ 'DANHMUC.loaibaocao.tenloaibaocao' | translate }}"></e-column>
                     <e-column field="maloaibaocao" headerText="{{ 'DANHMUC.loaibaocao.maloaibaocao' | translate }}"></e-column>
-                    <e-column field="mota" headerText="{{ 'DANHMUC.loaibaocao.mota' | translate }}"></e-column>
+                    <e-column field="trangthai" headerText="{{ 'DANHMUC.loaibaocao.trangthai' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.trangthai | getNameFileConstant: trangthai}}
+                      </ng-template>
+                    </e-column>
+                    <e-column *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
                     <e-column field="id" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">

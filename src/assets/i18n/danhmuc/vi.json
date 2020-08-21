@@ -36,8 +36,8 @@
     "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
     "nameofobject": "Cá nhân",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
-    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạn thái sử dụng các đối tượng vừa chọn không?",
-    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạn thái không sử dụng các đối tượng vừa chọn không?"
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "dvhc": {
     "titleList": "Đơn vị hành chính",
@@ -81,7 +81,13 @@
     "tencapquanlyRequired": "Tên cấp quản lý không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cấp quản lý",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "captainguyen": {
     "titleList": "Danh sách cấp tài nguyên",
@@ -101,7 +107,13 @@
     "chonNhomCapTaiNguyen": "---Chọn nhóm cấp tài nguyên---",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cấp tài nguyên",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "captruluong": {
     "titleList": "Danh sách cấp trữ lượng",
@@ -119,7 +131,13 @@
     "tencaptruluongRequired": "Tên cấp trữ lượng không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cấp trữ lượng",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "coquanquanly": {
     "titleList": "Danh sách cơ quan quản lý",
@@ -152,7 +170,13 @@
     "tencoquanquanlyRequired": "Tên cơ quan quản lý không được để trống",
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
     "matinhRequired": "Hãy chọn tỉnh!",
-    "mahuyenRequired": "Hãy chọn huyện!"
+    "mahuyenRequired": "Hãy chọn huyện!",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Cơ quan quản lý",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "loaibaocao": {
     "titleList": "Danh sách loại báo cáo",
@@ -170,7 +194,13 @@
     "tenloaibaocaoRequired": "Tên loại báo cáo không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Loại báo cáo",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "nhomkhoangsan": {
     "titleList": "Danh sách nhóm khoáng sản",
@@ -371,7 +401,13 @@
     "chonTrangthai": "---Chọn trạng thái---",
     "chonNhomloaicapphep": "---Chọn nhóm loại cấp phép---",
     "chonThutuchanhchinh": "--Chọn thủ tục hành chính---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Loại cấp phép",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "loaigiayphep": {
     "titleList": "Danh sách loại giấy phép",

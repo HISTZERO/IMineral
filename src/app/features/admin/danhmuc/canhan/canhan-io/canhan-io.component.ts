@@ -22,9 +22,6 @@ export class DmCanhanIoComponent implements OnInit {
   // Chứa dữ liệu Form
   public canhanIOForm: FormGroup;
 
-  // Chứa giá trị ẩn input
-  public hiddenInput: boolean = false;
-
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
 
@@ -80,7 +77,6 @@ export class DmCanhanIoComponent implements OnInit {
     matinh: "",
     mahuyen: "",
     maxa: "",
-    trangthai: "",
     thutu: "",
   };
 
@@ -161,7 +157,6 @@ export class DmCanhanIoComponent implements OnInit {
       matinh: ["", Validators.required],
       mahuyen: ["", Validators.required],
       maxa: [""],
-      trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
@@ -171,7 +166,6 @@ export class DmCanhanIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
-      this.hiddenInput = true;
       this.canhanIOForm.setValue({
         hovaten: this.obj.hovaten,
         diachi: this.obj.diachi,
@@ -184,7 +178,6 @@ export class DmCanhanIoComponent implements OnInit {
         matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
         mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
         maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
-        trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
       this.showDvhcHuyen();
@@ -286,6 +279,7 @@ export class DmCanhanIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idcanhan = this.obj.idcanhan;
+      this.inputModel.trangthai = this.obj.trangthai;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
         (error: HttpErrorResponse) => {
@@ -305,11 +299,11 @@ export class DmCanhanIoComponent implements OnInit {
    * @param operMode 
    */
   async onSubmit(operMode: string) {
-    // this.logAllValidationErrorMessages();
-    // if (this.canhanIOForm.valid === true) {
+    this.logAllValidationErrorMessages();
+    if (this.canhanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
-    // }
+    }
   }
 
   /**

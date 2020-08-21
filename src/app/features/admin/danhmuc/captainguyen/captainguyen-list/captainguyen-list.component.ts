@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmCapTaiNguyenModel } from "src/app/models/admin/danhmuc/captainguyen.model";
@@ -12,6 +14,9 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmCaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captainguyen/captainguyen-io/captainguyen-io.component";
 import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-captainguyen-list',
@@ -21,6 +26,7 @@ import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
 export class DmCaptainguyenListComponent implements OnInit {
 
   // Viewchild template
+  @ViewChild("gridCapTaiNguyen", { static: false }) public gridCapTaiNguyen: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compCapTaiNguyenIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -45,6 +51,24 @@ export class DmCaptainguyenListComponent implements OnInit {
   // Chứa nhóm cấp tài nguyên
   public nhomCapTainguyen = NhomCapTaiNguyen;
 
+  // Chứa thuộc tính form
+  public formSearch: FormGroup;
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+  
+  //Chứa data Trạng thái
+  public trangthai = TrangThai;
+
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+   // disable unactive button
+   public disableUnActiveButton = false;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -52,16 +76,22 @@ export class DmCaptainguyenListComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public generalClientService: GeneralClientService,
+    public formBuilder: FormBuilder
   ) { }
 
   async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
+
+    this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
   /**
@@ -90,6 +120,29 @@ export class DmCaptainguyenListComponent implements OnInit {
     await this.getAllCapTaiNguyen();
   }
 
+   /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
+  }
+
+  /**
+   * Form innit
+   */
+  public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Nhomcaptainguyen: [""],
+      Trangthai: [""]
+    });
+  }
+
   /**
    * Hàm lấy dữ liệu Cấp tài nguyên
    */
@@ -105,6 +158,78 @@ export class DmCaptainguyenListComponent implements OnInit {
     this.listCapTaiNguyen = listData.items;
   }
 
+  /**
+  * Tìm kiếm nâng cao
+  */
+  public searchAdvance() {
+    const dataSearch = this.formSearch.value;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridCapTaiNguyen.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
+    }
+  }
+
+  /**
+   * Hàm unActive mảng item đã chọn
+   */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
+  }
+
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if (this.listDataSelect.length === 0) {
+
+        }
+      }
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.captainguyen.nameofobject + " (" + data.tencaptainguyen + ") " + this.dataTranslate.DANHMUC.captainguyen.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.captainguyen.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
+  }
+  
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
