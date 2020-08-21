@@ -150,6 +150,10 @@ export class DmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu Tổ chức
    */
   async getAllToChuc() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber = 1;
+    searchModel.PageSize = -1;
+
     const listData: any = await this.dmFacadeService
       .getDmToChucService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
@@ -224,12 +228,6 @@ export class DmTochucListComponent implements OnInit {
     }
   }
 
-  /**
-   * Tìm kiếm nâng cao
-   */
-  public searchAdvance() {
-    const dataSearch = this.formSearch.value;
-  }
 
   /**
    * Hàm lấy danh sách dữ liệu đã chọn trên grid

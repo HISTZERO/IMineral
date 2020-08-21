@@ -44,7 +44,7 @@ export class DmTochucIoComponent implements OnInit {
 
   // Chứa danh sách Dvhc Xã
   public allXa: any;
-  
+
   // Filter Đơn vị hành chính Tỉnh
   public dvhcProvinceFilters: OutputDmDvhcModel[];
 
@@ -59,7 +59,7 @@ export class DmTochucIoComponent implements OnInit {
 
   // Chứa danh sách loại tổ chức Filter
   public listLoaiToChucFilter: OutputDmLoaiToChucModel[];
-  
+
   // Chứa dữ liệu Trạng thái
   public trangthai = TrangThai;
 
@@ -105,7 +105,7 @@ export class DmTochucIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-    //Khởi tạo form theo dạng add or edit
+    // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
@@ -131,9 +131,16 @@ export class DmTochucIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
      tentochuc: { required: this.dataTranslate.DANHMUC.tochuc.tentochucRequired },
+     diachi: { required: this.dataTranslate.DANHMUC.tochuc.diachitochucRequired },
+     sogiayto: { required: this.dataTranslate.DANHMUC.tochuc.sogiaytoRequired },
+     loaigiayto: { required: this.dataTranslate.DANHMUC.tochuc.loaigiaytoRequired },
+     ngaycap: { required: this.dataTranslate.DANHMUC.tochuc.ngaycapRequired },
+     noicap: { required: this.dataTranslate.DANHMUC.tochuc.noicapRequired },
+     idloaitochuc: { required: this.dataTranslate.DANHMUC.tochuc.loaitochucRequired },
      dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber},
      matinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
      mahuyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
+     maxa: { required: this.dataTranslate.DANHMUC.tochuc.maxaRequired },
      thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber },
      email: { email: this.dataTranslate.DANHMUC.tochuc.emailCheck}
     };
@@ -166,19 +173,19 @@ export class DmTochucIoComponent implements OnInit {
   formInit() {
     this.tochucIOForm = this.formBuilder.group({
       tentochuc: ["", Validators.required],
-      diachi: [""],
-      sogiayto: [""],
-      loaigiayto: [""],
-      ngaycap: [""],
-      noicap: [""],
-      idloaitochuc: [""],
+      diachi: ["", Validators.required],
+      sogiayto: ["", Validators.required],
+      loaigiayto: ["", Validators.required],
+      ngaycap: ["", Validators.required],
+      noicap: ["", Validators.required],
+      idloaitochuc: ["", Validators.required],
       fax: [""],
       website: [""],
       dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
       email: ["", Validators.email],
       matinh: ["", Validators.required],
       mahuyen: ["", Validators.required],
-      maxa: [""],
+      maxa: ["",  Validators.required],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
@@ -322,7 +329,7 @@ export class DmTochucIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -342,7 +349,7 @@ export class DmTochucIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
