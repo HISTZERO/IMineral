@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmCoQuanQuanLyModel } from "src/app/models/admin/danhmuc/coquanquanly.model";
@@ -11,6 +13,10 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmCoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquanquanly/coquanquanly-io/coquanquanly-io.component";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 
 @Component({
   selector: 'app-coquanquanly-list',
@@ -20,6 +26,7 @@ import { DmCoquanquanlyIoComponent } from "src/app/features/admin/danhmuc/coquan
 export class DmCoquanquanlyListComponent implements OnInit {
 
    // Viewchild template
+   @ViewChild("gridCoQuanQuanLy", { static: false }) public gridCoQuanQuanLy: GridComponent;
    @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
    @ViewChild("compCoQuanQuanLyIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
  
@@ -37,6 +44,42 @@ export class DmCoquanquanlyListComponent implements OnInit {
  
    // Chứa menu item trên subheader
    public navArray = MenuDanhMucCoQuanQuanLy;
+
+   // Chứa thuộc tính form
+  public formSearch: FormGroup;
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+  
+  //Chứa data Trạng thái
+  public trangthai = TrangThai;
+
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+  // disable unactive button
+  public disableUnActiveButton = false;
+
+  // Chứa danh sách Dvhc Tỉnh
+  public allTinh: any;
+
+  // Chứa danh sách Dvhc Huyện
+  public allHuyen: any;
+
+  // Chứa danh sách Dvhc Xã
+  public allXa: any;
+
+  // Filter Đơn vị hành chính Tỉnh
+  public dvhcProvinceFilters: OutputDmDvhcModel[];
+
+  // Filter Đơn vị hành chính Huyện
+  public dvhcDistrictFilters: OutputDmDvhcModel[];
+
+  // Filter Đơn vị hành chính Xã
+  public dvhcWardFilters: OutputDmDvhcModel[];
  
    // Contructor
    constructor(
@@ -45,17 +88,24 @@ export class DmCoquanquanlyListComponent implements OnInit {
      public dmFacadeService: DmFacadeService,
      public commonService: CommonServiceShared,
      public thietlapFacadeService: ThietlapFacadeService,
-     private translate: TranslateService
+     private translate: TranslateService,
+     public generalClientService: GeneralClientService,
+     public formBuilder: FormBuilder
    ) { }
  
-   async ngOnInit() {
-     // Gọi hàm lấy dữ liệu translate
-     await this.getDataTranslate();
-     // Khởi tạo sidenav
-     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
-     // Gọi hàm lấy dữ liệu pagesize
-     await this.getDataPageSize();
-   }
+  async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
+    // Lấy danh sách Tỉnh
+    this.showDvhcTinh();
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    // Gọi hàm lấy dữ liệu pagesize
+    await this.getDataPageSize();
+    await this.setDisplayOfCheckBoxkOnGrid(true);
+  }
  
    /**
     * Hàm lấy dữ liệu translate
@@ -99,34 +149,180 @@ export class DmCoquanquanlyListComponent implements OnInit {
    }
  
    /**
-    * Hàm mở sidenav chức năng sửa dữ liệu
-    * @param id
-    */
-   async editItemCoQuanQuanLy(id: string) {
-     // Lấy dữ liệu cơ quan quản lý theo id
-     const dataItem: any = await this.dmFacadeService
-     .getDmCoQuanQuanLyService()
-     .getByid(id).toPromise();
-     await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.coquanquanly.titleEdit );
-     await this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "edit", dataItem);
-     await this.matSidenavService.open();
-   }
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+    async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+      if (status) {
+        this.settingsCommon.selectionOptions = { persistSelection: true };
+      } else {
+        this.settingsCommon.selectionOptions = null;
+      }
+    }
+  
+    /**
+   * Form innit
+   */
+  public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Idtinh: [""],
+      Idhuyen: [""],
+      Idxa: [""],
+      Trangthai: [""]
+    });
+  }
+
+  /**
+   * Tìm kiếm nâng cao
+   */
+  public searchAdvance() {
+    const dataSearch = this.formSearch.value;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridCoQuanQuanLy.getSelectedRecords();
+    console.log(this.listDataSelect);
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
+    }
+  }
+
+  /**
+   * Hàm unActive mảng item đã chọn
+   */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
+  }
+
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if (this.listDataSelect.length === 0) {
+
+        }
+      }
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.coquanquanly.nameofobject + " (" + data.tencoquanquanly + ") " + this.dataTranslate.DANHMUC.coquanquanly.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.coquanquanly.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
+  }
+  
+  /**
+   * Hàm lấy danh sách Dvhc Tỉnh
+   */
+  async showDvhcTinh() {
+    const allTinhData: any = await this.dmFacadeService
+      .getProvinceService()
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+    this.allTinh = allTinhData.items;
+    this.dvhcProvinceFilters = allTinhData.items;
+  }
+
+  /**
+   * Hàm lấy danh sách Dvhc Huyện
+   */
+  async showDvhcHuyen() {
+    if (!this.formSearch.value.Idtinh === true) {
+      this.allHuyen = [];
+      this.dvhcDistrictFilters = [];
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+    }
+    if (!this.formSearch.value.Idtinh === false) {
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+      this.allHuyen = await this.dmFacadeService
+        .getDistrictService()
+        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
+      this.dvhcDistrictFilters = this.allHuyen;
+    }
+  }
+
+  /**
+   * Hàm lấy danh sách Dvhc Xã
+   */
+  async showDvhcXa() {
+    if (!this.formSearch.value.Idhuyen === true) {
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+    }
+    if (
+      !this.formSearch.value.Idtinh === false &&
+      !this.formSearch.value.Idhuyen === false
+    ) {
+      this.allXa = await this.dmFacadeService
+        .getWardService()
+        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
+      this.dvhcWardFilters = this.allXa;
+    }
+  }
+
+  /**
+  * Hàm mở sidenav chức năng sửa dữ liệu
+  * @param id
+  */
+  async editItemCoQuanQuanLy(id: string) {
+    // Lấy dữ liệu cơ quan quản lý theo id
+    const dataItem: any = await this.dmFacadeService
+    .getDmCoQuanQuanLyService()
+    .getByid(id).toPromise();
+    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.coquanquanly.titleEdit );
+    await this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "edit", dataItem);
+    await this.matSidenavService.open();
+  }
  
-   /**
-    * Hàm mở sidenav chức năng thêm mới
-    */
-   public openCoQuanQuanLyIOSidenav() {
-     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.coquanquanly.titleAdd);
-     this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "new");
-     this.matSidenavService.open();
-   }
+  /**
+  * Hàm mở sidenav chức năng thêm mới
+  */
+  public openCoQuanQuanLyIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.coquanquanly.titleAdd);
+    this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "new");
+    this.matSidenavService.open();
+  }
  
-   /**
-    * Hàm đóng sidenav
-    */
-   public closeCoQuanQuanLyIOSidenav() {
-     this.matSidenavService.close();
-   }
+  /**
+  * Hàm đóng sidenav
+  */
+  public closeCoQuanQuanLyIOSidenav() {
+    this.matSidenavService.close();
+  }
  
  
    /**

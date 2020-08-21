@@ -25,21 +25,7 @@
             {{ nhomCapTN.name }}
           </mat-option>
         </mat-select>
-        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
-      </div>
-    </div>
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.captainguyen.trangthai" | translate}}</label>
-      <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'DANHMUC.captainguyen.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
-          <mat-option value="">
-            {{ "DANHMUC.captainguyen.chonTrangthai" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
-            {{ tt.name }}
-          </mat-option>
-        </mat-select>
-        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
+        <span *ngIf="formErrors.nhomcaptainguyen" class="alert-danger">{{formErrors.nhomcaptainguyen}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">

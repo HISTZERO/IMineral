@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
@@ -11,6 +13,9 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmLoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaocao/loaibaocao-io/loaibaocao-io.component";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-loaibaocao-list',
@@ -19,24 +24,43 @@ import { DmLoaibaocaoIoComponent } from "src/app/features/admin/danhmuc/loaibaoc
 })
 export class DmLoaibaocaoListComponent implements OnInit {
 
-   // Viewchild template
-   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-   @ViewChild("compLoaiBaoCaoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  // Viewchild template
+  @ViewChild("gridLoaiBaoCao", { static: false }) public gridLoaiBaoCao: GridComponent;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compLoaiBaoCaoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
  
-   // Chứa thiết lập grid
-   public settingsCommon = new SettingsCommon();
+  // Chứa thiết lập grid
+  public settingsCommon = new SettingsCommon();
  
-   // Chứa danh sách Loại Báo Cáo
-   public listLoaiBaoCao: OutputDmLoaiBaoCaoModel[];
+  // Chứa danh sách Loại Báo Cáo
+  public listLoaiBaoCao: OutputDmLoaiBaoCaoModel[];
  
-   // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputDmLoaiBaoCaoModel;
+  // Chứa dữ liệu đã chọn 
+  public selectedItem: OutputDmLoaiBaoCaoModel;
  
-   // Chứa dữ liệu translate
-   public dataTranslate: any;
+  // Chứa dữ liệu translate
+  public dataTranslate: any;
  
-   // Chứa menu item trên subheader
-   public navArray = MenuDanhMucLoaiBaoCao;
+  // Chứa menu item trên subheader
+  public navArray = MenuDanhMucLoaiBaoCao;
+
+  // Chứa thuộc tính form
+  public formSearch: FormGroup;
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+  
+  //Chứa data Trạng thái
+  public trangthai = TrangThai;
+
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+  // disable unactive button
+  public disableUnActiveButton = false;
  
    // Contructor
    constructor(
@@ -45,10 +69,15 @@ export class DmLoaibaocaoListComponent implements OnInit {
      public dmFacadeService: DmFacadeService,
      public commonService: CommonServiceShared,
      public thietlapFacadeService: ThietlapFacadeService,
-     private translate: TranslateService
+     private translate: TranslateService,
+     public generalClientService: GeneralClientService,
+     public formBuilder: FormBuilder
    ) { }
  
    async ngOnInit() {
+     // Khởi tạo form
+     this.formInit();
+     this.setDisplayOfCheckBoxkOnGrid(true);
      // Gọi hàm lấy dữ liệu translate
      await this.getDataTranslate();
      // Khởi tạo sidenav
@@ -98,6 +127,101 @@ export class DmLoaibaocaoListComponent implements OnInit {
      this.listLoaiBaoCao = listData.items;
    }
  
+
+   /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
+  }
+
+  /**
+   * Form innit
+   */
+  public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Trangthai: [""]
+    });
+  }
+
+  /**
+  * Tìm kiếm nâng cao
+  */
+ public searchAdvance() {
+  const dataSearch = this.formSearch.value;
+}
+
+/**
+ * Hàm lấy danh sách dữ liệu đã chọn trên grid
+ */
+public getAllDataActive() {
+  this.listDataSelect = this.gridLoaiBaoCao.getSelectedRecords();
+
+  if (this.listDataSelect.length > 0) {
+    this.disableActiveButton = true;
+    this.disableDeleteButton = true;
+    this.disableUnActiveButton = true;
+  } else {
+    this.disableActiveButton = false;
+    this.disableDeleteButton = false;
+    this.disableUnActiveButton = false;
+  }
+}
+
+/**
+ * Hàm unActive mảng item đã chọn
+ */
+public unActiveArrayItem() {
+  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfUnActiveDialog);
+  dialogRef.afterClosed().subscribe(async (result) => {
+    if (result === "confirm") {
+
+    }
+  });
+}
+
+/**
+ * Hàm active mảng item đã chọn
+ */
+public activeArrayItem() {
+  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaibaocao.confirmedContentOfActiveDialog);
+  dialogRef.afterClosed().subscribe(async (result) => {
+    if (result === "confirm") {
+      if (this.listDataSelect.length === 0) {
+
+      }
+    }
+  });
+}
+
+/**
+ * Hàm delete mảng item đã chọn
+ */
+public deleteArrayItem() {
+  const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+  dialogRef.afterClosed().subscribe(async (result) => {
+    if (result === "confirm") {
+      const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+      if (data !== null) {
+        const informationDialogRef = this.commonService.informationDiaLogService(
+          "",
+          this.dataTranslate.DANHMUC.loaibaocao.nameofobject + " (" + data.tenloaibaocao + ") " + this.dataTranslate.DANHMUC.loaibaocao.informedContentOfUnDeletedDialog,
+          this.dataTranslate.DANHMUC.loaibaocao.informedDialogTitle,
+        );
+
+        informationDialogRef.afterClosed().subscribe(() => {});
+      }
+    }
+  });
+}
+
    /**
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id

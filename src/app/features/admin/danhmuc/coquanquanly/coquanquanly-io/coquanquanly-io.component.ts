@@ -73,7 +73,6 @@ export class DmCoquanquanlyIoComponent implements OnInit {
      matinh: "",
      mahuyen: "",
      maxa: "",
-     trangthai: "",
      thutu: "",
    };
  
@@ -149,7 +148,6 @@ export class DmCoquanquanlyIoComponent implements OnInit {
        matinh: ["", Validators.required],
        mahuyen: ["", Validators.required],
        maxa: [""],
-       trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],
      });
    }
@@ -171,7 +169,6 @@ export class DmCoquanquanlyIoComponent implements OnInit {
          matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
          mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
          maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
-         trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
        });
        this.showDvhcHuyen();
@@ -271,6 +268,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
        );
      } else if (operMode === "edit") {
        this.inputModel.idcoquanquanly = this.obj.idcoquanquanly;
+       this.inputModel.trangthai = this.obj.trangthai;
        dmFacadeService.updateItem(this.inputModel).subscribe(
          (res) => this.matSidenavService.doParentFunction("getAllCoQuanQuanLy"),
          (error: HttpErrorResponse) => {

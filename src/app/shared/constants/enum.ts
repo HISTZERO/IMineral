@@ -1,3 +1,5 @@
+import { TrangThai } from "./trangthai-constants";
+
 export enum donvido {
   m = 0,
   cm ,

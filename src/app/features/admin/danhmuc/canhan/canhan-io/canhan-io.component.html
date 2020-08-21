@@ -114,20 +114,6 @@
         </mat-select>
       </div>
     </div>
-    <div class="form-group row mx-0" *ngIf="hiddenInput">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}</label>
-      <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
-          <mat-option value="">
-            {{ "DANHMUC.canhan.chonTrangthai" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
-            {{ tt.name }}
-          </mat-option>
-        </mat-select>
-        <span *ngIf="formErrors.trangthai" class="alert-danger">{{formErrors.trangthai}}</span>
-      </div>
-    </div>
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.canhan.thutu" | translate}}</label>
       <div class="col-sm-8">
