@@ -156,7 +156,7 @@ export class DmTochucListComponent implements OnInit {
 
     const listData: any = await this.dmFacadeService
       .getDmToChucService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((tochuc, index) => {
         tochuc.serialNumber = index + 1;

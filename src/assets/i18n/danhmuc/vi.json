@@ -218,7 +218,11 @@
     "tennhomkhoangsanRequired": "Tên nhóm khoáng sản không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "nameofobject": "Lĩnh vực",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạn thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạn thái không sử dụng các đối tượng vừa chọn không?"
   },
   "loaikhoangsan": {
     "titleList": "Danh sách loại khoáng sản",
