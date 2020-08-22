@@ -17,7 +17,7 @@ export class DistrictService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.DISTRICT,
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllHuyenByIdTinh",
     });
   }
   public checkBeDeleted(id: number) {

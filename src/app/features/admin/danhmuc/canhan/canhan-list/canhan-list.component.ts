@@ -181,7 +181,7 @@ export class DmCanhanListComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll();
     this.allTinh = allTinhData.items;
     this.dvhcProvinceFilters = allTinhData.items;
   }
@@ -201,7 +201,7 @@ export class DmCanhanListComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
+        .getByid(this.formSearch.value.Idtinh);
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -220,7 +220,7 @@ export class DmCanhanListComponent implements OnInit {
     ) {
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
+        .getByid( this.formSearch.value.Idhuyen );
       this.dvhcWardFilters = this.allXa;
     }
   }
