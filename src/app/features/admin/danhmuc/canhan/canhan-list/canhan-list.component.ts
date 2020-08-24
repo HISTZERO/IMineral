@@ -151,7 +151,16 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset();
+    if (this.listCanhan.length > 0) {
+      this.gridCaNhan.clearSelection();
+    }
+    this.formSearch.reset({
+      Keyword: "",
+      Idtinh: "",
+      Idhuyen: "",
+      Idxa: "",
+      Trangthai: ""
+    });
     this.getAllCanhan();
   }
 

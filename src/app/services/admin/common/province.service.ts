@@ -17,10 +17,10 @@ export class ProvinceService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllTinh",
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/getalltinh",
     });
   }
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 }

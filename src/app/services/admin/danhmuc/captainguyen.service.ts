@@ -21,6 +21,28 @@ export class DmCaptainguyenService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsCapTaiNguyen(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPTAINGUYEN + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsCapTaiNguyen(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPTAINGUYEN + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

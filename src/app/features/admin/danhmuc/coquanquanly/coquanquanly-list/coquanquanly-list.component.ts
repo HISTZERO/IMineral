@@ -25,27 +25,27 @@ import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 })
 export class DmCoquanquanlyListComponent implements OnInit {
 
-   // Viewchild template
-   @ViewChild("gridCoQuanQuanLy", { static: false }) public gridCoQuanQuanLy: GridComponent;
-   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-   @ViewChild("compCoQuanQuanLyIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
- 
-   // Chứa thiết lập grid
-   public settingsCommon = new SettingsCommon();
- 
-   // Chứa danh sách Cơ quan quản lý
-   public listCoQuanQuanLy: OutputDmCoQuanQuanLyModel[];
- 
-   // Chứa dữ liệu đã chọn 
-   public selectedItem: OutputDmCoQuanQuanLyModel;
- 
-   // Chứa dữ liệu translate
-   public dataTranslate: any;
- 
-   // Chứa menu item trên subheader
-   public navArray = MenuDanhMucCoQuanQuanLy;
+  // Viewchild template
+  @ViewChild("gridCoQuanQuanLy", { static: false }) public gridCoQuanQuanLy: GridComponent;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compCoQuanQuanLyIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
-   // Chứa thuộc tính form
+  // Chứa thiết lập grid
+  public settingsCommon = new SettingsCommon();
+
+  // Chứa danh sách Cơ quan quản lý
+  public listCoQuanQuanLy: OutputDmCoQuanQuanLyModel[];
+
+  // Chứa dữ liệu đã chọn 
+  public selectedItem: OutputDmCoQuanQuanLyModel;
+
+  // Chứa dữ liệu translate
+  public dataTranslate: any;
+
+  // Chứa menu item trên subheader
+  public navArray = MenuDanhMucCoQuanQuanLy;
+
+  // Chứa thuộc tính form
   public formSearch: FormGroup;
 
   // Chứa danh sách item đã chọn
@@ -81,17 +81,17 @@ export class DmCoquanquanlyListComponent implements OnInit {
   // Filter Đơn vị hành chính Xã
   public dvhcWardFilters: OutputDmDvhcModel[];
  
-   // Contructor
-   constructor(
-     public matSidenavService: MatsidenavService,
-     public cfr: ComponentFactoryResolver,
-     public dmFacadeService: DmFacadeService,
-     public commonService: CommonServiceShared,
-     public thietlapFacadeService: ThietlapFacadeService,
-     private translate: TranslateService,
-     public generalClientService: GeneralClientService,
-     public formBuilder: FormBuilder
-   ) { }
+  // Contructor
+  constructor(
+    public matSidenavService: MatsidenavService,
+    public cfr: ComponentFactoryResolver,
+    public dmFacadeService: DmFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public generalClientService: GeneralClientService,
+    public formBuilder: FormBuilder
+  ) { }
  
   async ngOnInit() {
     // Khởi tạo form
@@ -107,61 +107,78 @@ export class DmCoquanquanlyListComponent implements OnInit {
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
  
-   /**
-    * Hàm lấy dữ liệu translate
-    */
-   async getDataTranslate() {
-     // Get all langs
-     this.dataTranslate = await this.translate
-     .getTranslation(this.translate.getDefaultLang())
-     .toPromise();
-   }
- 
-   /**
-    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
-    */
-   async getDataPageSize() {
-     const pageSize: any = await this.thietlapFacadeService
-     .getThietLapHeThongService()
-     .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-     if (pageSize) {
-       this.settingsCommon.pageSettings.pageSize = +pageSize;
-     } else {
-       this.settingsCommon.pageSettings.pageSize = 10;
-     }
-     // Gọi hàm lấy dữ liệu cơ quan quản lý
-     await this.getAllCoQuanQuanLy();
-   }
- 
-   /**
-    * Hàm lấy dữ liệu Cơ Quan Quản Lý
-    */
-   async getAllCoQuanQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
-     const listData: any = await this.dmFacadeService
-       .getDmCoQuanQuanLyService()
-       .getFetchAll(param);
-     if (listData.items) {
-       listData.items.map((coquan, index) => {
-         coquan.serialNumber = index + 1;
-       });
-     }
-     this.listCoQuanQuanLy = listData.items;
-   }
- 
-   /**
+  /**
+  * Hàm lấy dữ liệu translate
+  */
+  async getDataTranslate() {
+    // Get all langs
+    this.dataTranslate = await this.translate
+    .getTranslation(this.translate.getDefaultLang())
+    .toPromise();
+  }
+
+  /**
+  * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
+  */
+  async getDataPageSize() {
+    const pageSize: any = await this.thietlapFacadeService
+    .getThietLapHeThongService()
+    .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
+    if (pageSize) {
+      this.settingsCommon.pageSettings.pageSize = +pageSize;
+    } else {
+      this.settingsCommon.pageSettings.pageSize = 10;
+    }
+    // Gọi hàm lấy dữ liệu cơ quan quản lý
+    await this.getAllCoQuanQuanLy();
+  }
+
+  /**
+  * Hàm lấy dữ liệu Cơ Quan Quản Lý
+  */
+  async getAllCoQuanQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
+    const listData: any = await this.dmFacadeService
+      .getDmCoQuanQuanLyService()
+      .getFetchAll(param);
+    if (listData.items) {
+      listData.items.map((coquan, index) => {
+        coquan.serialNumber = index + 1;
+      });
+    }
+    this.listCoQuanQuanLy = listData.items;
+  }
+
+  /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+  if (this.listCoQuanQuanLy.length > 0) {
+    this.gridCoQuanQuanLy.clearSelection();
+  }
+  this.formSearch.reset({
+    Keyword: "",
+    Idtinh: "",
+    Idhuyen: "",
+    Idxa: "",
+    Trangthai: ""
+  });
+  this.getAllCoQuanQuanLy();
+  }
+
+  /**
    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
    */
-    async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
-      if (status) {
-        this.settingsCommon.selectionOptions = { persistSelection: true };
-      } else {
-        this.settingsCommon.selectionOptions = null;
-      }
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
     }
+  }
   
-    /**
-   * Form innit
-   */
+  /**
+  * Form innit
+  */
   public formInit() {
     this.formSearch = this.formBuilder.group({
       Keyword: [""],
@@ -176,6 +193,9 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
+    if (this.listCoQuanQuanLy.length > 0) {
+      this.gridCoQuanQuanLy.clearSelection();
+    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -187,7 +207,6 @@ export class DmCoquanquanlyListComponent implements OnInit {
    */
   public getAllDataActive() {
     this.listDataSelect = this.gridCoQuanQuanLy.getSelectedRecords();
-    console.log(this.listDataSelect);
     if (this.listDataSelect.length > 0) {
       this.disableActiveButton = true;
       this.disableDeleteButton = true;
@@ -206,7 +225,13 @@ export class DmCoquanquanlyListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmCoQuanQuanLyService().updateStatusItemsCoQuanQuanLy(dataParam).subscribe(res => {
+          this.getAllCoQuanQuanLy();
+        });
       }
     });
   }
@@ -218,9 +243,13 @@ export class DmCoquanquanlyListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmCoQuanQuanLyService().updateStatusItemsCoQuanQuanLy(dataParam).subscribe(res => {
+          this.getAllCoQuanQuanLy();
+        });
       }
     });
   }
@@ -253,9 +282,9 @@ export class DmCoquanquanlyListComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
+      .getFetchAll();
+    this.allTinh = allTinhData;
+    this.dvhcProvinceFilters = allTinhData;
   }
 
   /**
@@ -267,13 +296,15 @@ export class DmCoquanquanlyListComponent implements OnInit {
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idhuyen"].setValue("");
     }
     if (!this.formSearch.value.Idtinh === false) {
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idhuyen"].setValue("");
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
+        .getByid(this.formSearch.value.Idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -285,14 +316,16 @@ export class DmCoquanquanlyListComponent implements OnInit {
     if (!this.formSearch.value.Idhuyen === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idxa"].setValue("");
     }
     if (
       !this.formSearch.value.Idtinh === false &&
       !this.formSearch.value.Idhuyen === false
     ) {
+      this.formSearch.controls["Idxa"].setValue("");
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
+        .getByid( this.formSearch.value.Idhuyen ).toPromise();
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -328,69 +361,69 @@ export class DmCoquanquanlyListComponent implements OnInit {
   }
  
  
-   /**
-    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-    */
-   async deleteItemCoQuanQuanLy(data) {
-     this.selectedItem = data;
-     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
-     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
-     // Nếu đồng ý xóa
-     const canDelete: string = this.dmFacadeService
-       .getDmCoQuanQuanLyService()
-       .checkBeDeleted(+this.selectedItem.idcoquanquanly);
-     this.canBeDeletedCheck(canDelete);
-   }
+  /**
+  *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
+  */
+  async deleteItemCoQuanQuanLy(data) {
+    this.selectedItem = data;
+    // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
+    // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
+    // Nếu đồng ý xóa
+    const canDelete: string = this.dmFacadeService
+      .getDmCoQuanQuanLyService()
+      .checkBeDeleted(+this.selectedItem.idcoquanquanly);
+    this.canBeDeletedCheck(canDelete);
+  }
  
-   /**
-    * Hàm check điều kiện xóa bản ghi
-    * @param sMsg 
-    */
-   public canBeDeletedCheck(sMsg: string) {
-     if (sMsg === "ok") {
-       this.confirmDeleteDiaLog();
-     } else {
-       this.cantDeleteDialog(sMsg);
-     }
-   }
- 
-   /** 
-    * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
-    */
-   confirmDeleteDiaLog() {
-     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-       this.dataTranslate.DANHMUC.coquanquanly.contentDelete,
-       this.selectedItem.tencoquanquanly
-     );
-     dialogRef.afterClosed().subscribe(async (result) => {
-       if (result === "confirm") {
-         await this.dmFacadeService
-           .getDmCoQuanQuanLyService()
-           .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
-           .subscribe(
-             () => this.getAllCoQuanQuanLy(),
-             (error: HttpErrorResponse) => {
-               this.commonService.showeNotiResult(error.message, 2000);
-             },
-             () =>
-               this.commonService.showeNotiResult(
-                 this.dataTranslate.COMMON.default.successDelete,
-                 2000
-               )
-           );
-       }
-     });
-   }
- 
-   /**
-    * Hàm thông báo không thể xóa
-    */
-   cantDeleteDialog(sMsg: string) {
-     this.commonService.canDeleteDialogService(sMsg);
-   }
- 
-   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
-   doFunction(methodName) {
-     this[methodName]();
-   }
+  /**
+  * Hàm check điều kiện xóa bản ghi
+  * @param sMsg 
+  */
+  public canBeDeletedCheck(sMsg: string) {
+    if (sMsg === "ok") {
+      this.confirmDeleteDiaLog();
+    } else {
+      this.cantDeleteDialog(sMsg);
+    }
+  }
+
+  /** 
+  * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
+  */
+  confirmDeleteDiaLog() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(
+      this.dataTranslate.DANHMUC.coquanquanly.contentDelete,
+      this.selectedItem.tencoquanquanly
+    );
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        await this.dmFacadeService
+          .getDmCoQuanQuanLyService()
+          .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
+          .subscribe(
+            () => this.getAllCoQuanQuanLy(),
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+      }
+    });
+  }
+
+  /**
+  * Hàm thông báo không thể xóa
+  */
+  cantDeleteDialog(sMsg: string) {
+    this.commonService.canDeleteDialogService(sMsg);
+  }
+
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName) {
+    this[methodName]();
+  }
 }

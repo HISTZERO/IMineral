@@ -21,6 +21,28 @@ export class DmCapquanlyService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsCapQuanLy(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPQUANLY + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsCapQuanLy(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPQUANLY + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

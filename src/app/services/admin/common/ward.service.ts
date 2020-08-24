@@ -17,11 +17,11 @@ export class WardService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllXaByIdHuyen",
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/getallxabyidhuyen",
     });
   }
 
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 }

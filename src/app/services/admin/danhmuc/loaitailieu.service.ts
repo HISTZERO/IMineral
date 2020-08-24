@@ -21,6 +21,28 @@ export class DmLoaitailieuService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsLoaiTaiLieu(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAITAILIEU + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsLoaiTaiLieu(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAITAILIEU + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

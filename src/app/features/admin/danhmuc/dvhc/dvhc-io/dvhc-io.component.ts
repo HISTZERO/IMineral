@@ -116,9 +116,9 @@ export class DmDvhcIoComponent implements OnInit {
     if (this.purpose === "editProvince" && this.editMode === true && this.obj) {
       this.dvhcIOForm.setValue({
         id: this.obj.id,
-        tendvhc: this.obj.tendvhc,
+        tendvhc: this.obj.ten,
         matinh: this.obj.matinh,
-        tentinh: this.obj.tendvhc,
+        tentinh: this.obj.tentinh,
         tenhuyen: "",
         mahuyen: "",
         maxa: "",
@@ -129,9 +129,9 @@ export class DmDvhcIoComponent implements OnInit {
       this.hiddenProvineName = false;
       this.dvhcIOForm.setValue({
         id: this.obj.id,
-        tendvhc: this.obj.tendvhc,
+        tendvhc: this.obj.ten,
         mahuyen: this.obj.mahuyen,
-        tenhuyen: this.obj.tendvhc,
+        tenhuyen: this.obj.tenhuyen,
         maxa: "",
         matinh: "",
         tentinh: GlobalVar.provinceSelected,
@@ -143,7 +143,7 @@ export class DmDvhcIoComponent implements OnInit {
         (this.hiddenProvineName = false),
         this.dvhcIOForm.setValue({
           id: this.obj.id,
-          tendvhc: this.obj.tendvhc,
+          tendvhc: this.obj.ten,
           maxa: this.obj.maxa,
           mahuyen: "",
           matinh: "",
@@ -205,7 +205,7 @@ export class DmDvhcIoComponent implements OnInit {
             )
         );
     } else if (operMode === "editProvince") {
-      const id: number = this.obj.id;
+      const id: string = this.obj.id;
       this.InputDmDvhcModel.id = id;
       this.dmFacadeSv
         .getProvinceService()
@@ -228,7 +228,6 @@ export class DmDvhcIoComponent implements OnInit {
   private addOrUpdateDistrict(operMode: string) {
     this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newDistrict") {
-      this.InputDmDvhcModel.id = 0;
       this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
         .getDistrictService()
@@ -246,7 +245,7 @@ export class DmDvhcIoComponent implements OnInit {
             )
         );
     } else if (operMode === "editDistrict") {
-      const id: number = this.obj.id;
+      const id: string = this.obj.id;
       this.InputDmDvhcModel.id = id;
       this.InputDmDvhcModel.matinh = this.obj.matinh;
       this.InputDmDvhcModel.parentid = this.obj.parentid;
@@ -272,7 +271,6 @@ export class DmDvhcIoComponent implements OnInit {
   private addOrUpdateWard(operMode: string) {
     this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newWard") {
-      this.InputDmDvhcModel.id = 0;
       this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
         .getWardService()
@@ -289,7 +287,7 @@ export class DmDvhcIoComponent implements OnInit {
             )
         );
     } else if (operMode === "editWard") {
-      const id: number = this.obj.id;
+      const id: string = this.obj.id;
       this.InputDmDvhcModel.id = id;
       this.InputDmDvhcModel.matinh = this.obj.matinh;
       this.InputDmDvhcModel.mahuyen = this.obj.mahuyen;

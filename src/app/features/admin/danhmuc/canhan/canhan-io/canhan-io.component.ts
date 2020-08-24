@@ -61,6 +61,7 @@ export class DmCanhanIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa kiểu boolean hiển thị thuộc tính column
   public classColDvhc: boolean = false;
 
   // error message

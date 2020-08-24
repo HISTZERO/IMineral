@@ -66,8 +66,8 @@ export class DmCaptainguyenListComponent implements OnInit {
   // disable active button
   public disableActiveButton = false;
 
-   // disable unactive button
-   public disableUnActiveButton = false;
+  // disable unactive button
+  public disableUnActiveButton = false;
 
   // Contructor
   constructor(
@@ -143,6 +143,21 @@ export class DmCaptainguyenListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu và reset form tìm kiếm
+   */
+  public reloadDataGrid() {
+    if (this.listCapTaiNguyen.length > 0) {
+      this.gridCapTaiNguyen.clearSelection();
+    }
+    this.formSearch.reset({
+      Keyword: "",
+      Nhomcaptainguyen: "",
+      Trangthai: ""
+    });
+    this.getAllCapTaiNguyen();
+  }
+
+  /**
    * Hàm lấy dữ liệu Cấp tài nguyên
    */
   async getAllCapTaiNguyen(param: any = { PageNumber: 1, PageSize: -1 }) {
@@ -161,6 +176,9 @@ export class DmCaptainguyenListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
+    if (this.listCapTaiNguyen.length > 0) {
+      this.gridCapTaiNguyen.clearSelection();
+    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -191,7 +209,13 @@ export class DmCaptainguyenListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captainguyen.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmCapTaiNguyenService().updateStatusItemsCapTaiNguyen(dataParam).subscribe(res => {
+          this.getAllCapTaiNguyen();
+        });
       }
     });
   }
@@ -203,9 +227,13 @@ export class DmCaptainguyenListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captainguyen.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmCapTaiNguyenService().updateStatusItemsCapTaiNguyen(dataParam).subscribe(res => {
+          this.getAllCapTaiNguyen();
+        });
       }
     });
   }

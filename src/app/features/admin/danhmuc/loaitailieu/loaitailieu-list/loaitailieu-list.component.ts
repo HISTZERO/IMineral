@@ -131,6 +131,20 @@ export class DmLoaitailieuListComponent implements OnInit {
       this.listLoaitaiLieu = listData.items;
     }
 
+    /**
+     * Hàm load lại dữ liệu và reset form tìm kiếm
+     */
+    public reloadDataGrid() {
+      if (this.listLoaitaiLieu.length > 0) {
+        this.gridLoaiTaiLieu.clearSelection();
+      }
+      this.formSearch.reset({
+        Keyword: "",
+        Trangthai: "",
+        Nhomloaitailieu: "",
+      });
+      this.getAllLoaiTaiLieu();
+    }
 
     /**
      * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
@@ -159,6 +173,9 @@ export class DmLoaitailieuListComponent implements OnInit {
       * Tìm kiếm nâng cao
       */
     public searchAdvance() {
+      if (this.listLoaitaiLieu.length > 0) {
+        this.gridLoaiTaiLieu.clearSelection();
+      }
       let dataSearch = this.formSearch.value;
       dataSearch['PageNumber'] = Paging.PageNumber;
       dataSearch['PageSize'] = Paging.PageSize;
@@ -189,7 +206,13 @@ export class DmLoaitailieuListComponent implements OnInit {
       const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaitailieu.confirmedContentOfUnActiveDialog);
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
-
+          const dataParam: any = {
+            listStatus: this.listDataSelect,
+            status: TrangThaiEnum.NoActive
+          };
+          this.dmFacadeService.getDmLoaiTaiLieuService().updateStatusItemsLoaiTaiLieu(dataParam).subscribe(res => {
+            this.getAllLoaiTaiLieu();
+          });
         }
       });
     }
@@ -201,9 +224,13 @@ export class DmLoaitailieuListComponent implements OnInit {
       const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaitailieu.confirmedContentOfActiveDialog);
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
-          if (this.listDataSelect.length === 0) {
-
-          }
+          const dataParam: any = {
+            listStatus: this.listDataSelect,
+            status: TrangThaiEnum.Active
+          };
+          this.dmFacadeService.getDmLoaiTaiLieuService().updateStatusItemsLoaiTaiLieu(dataParam).subscribe(res => {
+            this.getAllLoaiTaiLieu();
+          });
         }
       });
     }
