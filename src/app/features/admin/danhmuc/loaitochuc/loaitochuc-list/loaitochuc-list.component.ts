@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
 import { MenuDanhMucLoaiToChuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
@@ -11,6 +10,11 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmLoaiDmTochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 
 @Component({
   selector: 'app-loaitochuc-list',
@@ -20,8 +24,12 @@ import { DmLoaiDmTochucIoComponent } from "src/app/features/admin/danhmuc/loaito
 export class DmLoaiDmTochucListComponent implements OnInit {
 
   // Viewchild template
+  @ViewChild("gridLoaiToChuc", { static: false }) public gridLinhVuc: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compLoaiToChucIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // Chứa thuộc tính form
+  public formSearch: FormGroup;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -29,14 +37,29 @@ export class DmLoaiDmTochucListComponent implements OnInit {
   // Chứa danh sách Loại tổ chức
   public listLoaiToChuc: OutputDmLoaiToChucModel[];
 
-  // Chứa dữ liệu đã chọn 
+  // Chứa dữ liệu đã chọn
   public selectedItem: OutputDmLoaiToChucModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+
   // Chứa menu item trên subheader
   public navArray = MenuDanhMucLoaiToChuc;
+
+  // Chứa trạng thái
+  public trangthai = TrangThai;
+
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // disable active button
+  public disableActiveButton = false;
+
+  // disable unactive button
+  public disableUnActiveButton = false;
 
   // Contructor
   constructor(
@@ -45,16 +68,44 @@ export class DmLoaiDmTochucListComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
+    // Thiết lập hiển thị checkbox trên grid
+    await this.setDisplayOfCheckBoxkOnGrid(true);
+  }
+
+  /**
+   * Form innit
+   */
+   public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Trangthai: [""]
+    });
+  }
+
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
   }
 
   /**
@@ -96,6 +147,71 @@ export class DmLoaiDmTochucListComponent implements OnInit {
       });
     }
     this.listLoaiToChuc = listData.items;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridLinhVuc.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
+    }
+  }
+
+  /**
+   * Hàm unActive mảng item đã chọn
+   */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaitochuc.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
+  }
+
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaitochuc.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if (this.listDataSelect.length === 0) {
+
+        }
+      }
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.loaitochuc.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaitochuc.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.loaitochuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaitochuc.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
   }
 
   /**
@@ -145,7 +261,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
 
   /**
    * Hàm check điều kiện xóa bản ghi
-   * @param sMsg 
+   * @param sMsg
    */
   public canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
@@ -155,7 +271,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
     }
   }
 
-  /** 
+  /**
    * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
    */
   confirmDeleteDiaLog() {
