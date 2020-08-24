@@ -137,6 +137,10 @@ export class DmLinhvucListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllLinhvuc() {
+    if (this.listLinhvuc != null && this.listLinhvuc.length > 0) {
+      this.gridLinhVuc.clearSelection();
+    }
+
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;

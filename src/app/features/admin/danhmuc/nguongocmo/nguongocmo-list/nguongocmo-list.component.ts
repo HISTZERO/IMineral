@@ -24,7 +24,7 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 export class DmNguongocmoListComponent implements OnInit {
 
    // Viewchild template
-  @ViewChild("gridNguonGocMo", { static: false }) public gridLinhVuc: GridComponent;
+  @ViewChild("gridNguonGocMo", { static: false }) public gridNguonGocMo: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compNguonGocMoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -138,6 +138,10 @@ export class DmNguongocmoListComponent implements OnInit {
    * Hàm lấy dữ liệu nguồn gốc mỏ
    */
   async getAllnguonGocMo() {
+    if (this.listNguonGocMo != null && this.listNguonGocMo.length > 0) {
+      this.gridNguonGocMo.clearSelection();
+    }
+
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;
@@ -157,7 +161,7 @@ export class DmNguongocmoListComponent implements OnInit {
    * Hàm lấy danh sách dữ liệu đã chọn trên grid
    */
   public getAllDataActive() {
-    this.listDataSelect = this.gridLinhVuc.getSelectedRecords();
+    this.listDataSelect = this.gridNguonGocMo.getSelectedRecords();
 
     if (this.listDataSelect.length > 0) {
       this.disableActiveButton = true;

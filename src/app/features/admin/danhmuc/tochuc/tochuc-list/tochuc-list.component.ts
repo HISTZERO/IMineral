@@ -150,6 +150,10 @@ export class DmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu Tổ chức
    */
   async getAllToChuc() {
+    if (this.listToChuc != null && this.listToChuc.length > 0) {
+      this.gridToChuc.clearSelection();
+    }
+
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;
@@ -185,8 +189,8 @@ export class DmTochucListComponent implements OnInit {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
+    this.allTinh = allTinhData;
+    this.dvhcProvinceFilters = allTinhData;
   }
 
   /**
@@ -204,7 +208,7 @@ export class DmTochucListComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
+        .getByid(this.formSearch.value.Idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -223,7 +227,7 @@ export class DmTochucListComponent implements OnInit {
     ) {
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
+        .getByid(this.formSearch.value.Idhuyen);
       this.dvhcWardFilters = this.allXa;
     }
   }
