@@ -17,7 +17,7 @@ export class WardService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.WARD,
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllXaByIdHuyen",
     });
   }
 

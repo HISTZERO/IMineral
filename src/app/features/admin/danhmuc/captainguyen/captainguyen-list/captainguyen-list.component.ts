@@ -16,7 +16,7 @@ import { DmCaptainguyenIoComponent } from "src/app/features/admin/danhmuc/captai
 import { NhomCapTaiNguyen } from "src/app/shared/constants/common-constants";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-captainguyen-list',
@@ -84,6 +84,7 @@ export class DmCaptainguyenListComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
+    this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
@@ -91,7 +92,6 @@ export class DmCaptainguyenListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
 
-    this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
   /**
@@ -120,10 +120,9 @@ export class DmCaptainguyenListComponent implements OnInit {
     await this.getAllCapTaiNguyen();
   }
 
-   /**
-   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
-   */
-
+  /**
+  * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+  */
   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
       this.settingsCommon.selectionOptions = { persistSelection: true };
@@ -146,10 +145,10 @@ export class DmCaptainguyenListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu Cấp tài nguyên
    */
-  async getAllCapTaiNguyen() {
+  async getAllCapTaiNguyen(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.dmFacadeService
       .getDmCapTaiNguyenService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(param);
     if (listData.items) {
       listData.items.map((captainguyen, index) => {
         captainguyen.serialNumber = index + 1;
@@ -162,7 +161,10 @@ export class DmCaptainguyenListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    const dataSearch = this.formSearch.value;
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllCapTaiNguyen(dataSearch);
   }
 
   /**
@@ -186,7 +188,7 @@ export class DmCaptainguyenListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captainguyen.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
 
@@ -198,7 +200,7 @@ export class DmCaptainguyenListComponent implements OnInit {
    * Hàm active mảng item đã chọn
    */
   public activeArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captainguyen.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         if (this.listDataSelect.length === 0) {

@@ -2,11 +2,13 @@ import { DeserializableModel } from '../deserializable.model';
 // output model
 export class OutputDmDvhcModel implements DeserializableModel {
   id: number;
-  tendvhc: string;
+  ten: string;
   parentid: number;
   matinh: string;
   mahuyen: string;
   maxa: string;
+  trangthai: number;
+  thutu: number;
 
   deserialize(input: any): this {
     return Object.assign(this, input);
@@ -16,9 +18,11 @@ export class OutputDmDvhcModel implements DeserializableModel {
 // input model
 export class InputDmDvhcModel {
   id: number;
-  tendvhc: string;
+  ten: string;
   parentid: number;
   matinh: string;
   mahuyen: string;
   maxa: string;
+  trangthai: number;
+  thutu: number;
 }

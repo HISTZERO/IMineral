@@ -14,7 +14,7 @@ import { DmCapquanlyIoComponent } from "src/app/features/admin/danhmuc/capquanly
 import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { MenuDanhMucCapQuanLy } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 
 @Component({
@@ -137,10 +137,10 @@ export class DmCapquanlyListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu Cấp quản lý
    */
-  async getAllCapQuanLy() {
+  async getAllCapQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.dmFacadeService
       .getDmCapQuanLyService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(param);
     if (listData.items) {
       listData.items.map((capquanly, index) => {
         capquanly.serialNumber = index + 1;
@@ -167,7 +167,10 @@ export class DmCapquanlyListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    const dataSearch = this.formSearch.value;
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllCapQuanLy(dataSearch);
   }
 
   /**
@@ -191,7 +194,7 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.capquanly.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
 
@@ -203,7 +206,7 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm active mảng item đã chọn
    */
   public activeArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.capquanly.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         if (this.listDataSelect.length === 0) {

@@ -54,7 +54,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
      maloaikhoangsan: "",
      tenloaikhoangsan: "",
      mota: "",
-     trangthai: "",
      thutu: "",
      idnhomkhoangsan: ""
    };
@@ -130,7 +129,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
        maloaikhoangsan: [""],
        tenloaikhoangsan: ["", Validators.required],
        mota: [""],
-       trangthai: [""],
        thutu: ["", Validators.pattern("^[0-9-+]+$")],
        idnhomkhoangsan: [""]
      });
@@ -145,7 +143,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
          maloaikhoangsan: this.obj.maloaikhoangsan,
          tenloaikhoangsan: this.obj.tenloaikhoangsan,
          mota: this.obj.mota,
-         trangthai: this.obj.trangthai,
          thutu: this.obj.thutu,
          idnhomkhoangsan: this.obj.idnhomkhoangsan
        });
@@ -173,6 +170,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
        );
      } else if (operMode === "edit") {
        this.inputModel.idloaikhoangsan = this.obj.idloaikhoangsan;
+       this.inputModel.trangthai = this.obj.trangthai;
        dmFacadeService.updateItem(this.inputModel).subscribe(
          (res) => this.matSidenavService.doParentFunction("getAllLoaiKhoangSan"),
          (error: HttpErrorResponse) => {

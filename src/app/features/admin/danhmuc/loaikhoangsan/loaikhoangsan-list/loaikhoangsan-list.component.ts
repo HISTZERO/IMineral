@@ -12,6 +12,11 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmLoaikhoangsanIoComponent } from "src/app/features/admin/danhmuc/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
 import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { TrangThai } from "../../../../../shared/constants/trangthai-constants";
+import { GeneralClientService } from "../../../../../services/admin/common/general-client.service";
+import { TrangThaiEnum, Paging } from "../../../../../shared/constants/enum";
 
 @Component({
   selector: 'app-loaikhoangsan-list',
@@ -21,6 +26,7 @@ import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkho
 export class DmLoaikhoangsanListComponent implements OnInit {
 
     // Viewchild template
+    @ViewChild("gridLoaiKhoangSan", { static: false }) public gridLoaiKhoangSan: GridComponent;
     @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
     @ViewChild("compLoaiKhoangSanIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -34,13 +40,31 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     public selectedItem: OutputDmLoaiKhoangSanModel;
 
     // Chứa dữ liệu Nhóm khoáng sản
-   public listNhomKhoangSan: OutputDmNhomKhoangSanModel[];
+    public listNhomKhoangSan: OutputDmNhomKhoangSanModel[];
 
     // Chứa dữ liệu translate
     public dataTranslate: any;
 
     // Chứa menu item trên subheader
     public navArray = MenuDanhMucLoaiKhoangSan;
+
+    // Chứa thuộc tính form
+    public formSearch: FormGroup;
+
+    // Chứa danh sách item đã chọn
+    public listDataSelect: any[];
+  
+    //Chứa data Trạng thái
+    public trangthai = TrangThai;
+
+    // disable delete button
+    public disableDeleteButton = false;
+
+    // disable active button
+    public disableActiveButton = false;
+
+    // disable unactive button
+    public disableUnActiveButton = false;
 
     // Contructor
     constructor(
@@ -49,18 +73,24 @@ export class DmLoaikhoangsanListComponent implements OnInit {
       public dmFacadeService: DmFacadeService,
       public commonService: CommonServiceShared,
       public thietlapFacadeService: ThietlapFacadeService,
-      private translate: TranslateService
+      private translate: TranslateService,
+      public generalClientService: GeneralClientService,
+      public formBuilder: FormBuilder
     ) { }
 
     async ngOnInit() {
+      // Khởi tạo form
+      this.formInit();
+      this.setDisplayOfCheckBoxkOnGrid(true);
+      // Gọi hàm lấy dữ liệu nhóm khoáng sản
+      this.getAllNhomKhoangSan();
       // Gọi hàm lấy dữ liệu translate
       await this.getDataTranslate();
       // Khởi tạo sidenav
       this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
       // Gọi hàm lấy dữ liệu pagesize
       await this.getDataPageSize();
-      // Gọi hàm lấy dữ liệu nhóm khoáng sản
-      // this.getAllNhomKhoangSan();
+    
     }
 
     /**
@@ -92,10 +122,10 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     /**
       * Hàm lấy dữ liệu Loại khoáng sản
       */
-    async getAllLoaiKhoangSan() {
+    async getAllLoaiKhoangSan(param: any = { PageNumber: 1, PageSize: -1 }) {
       const listData: any = await this.dmFacadeService
         .getDmLoaiKhoangSanService()
-        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+        .getFetchAll(param);
       if (listData.items) {
         listData.items.map((loaiks, index) => {
           loaiks.serialNumber = index + 1;
@@ -105,12 +135,109 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     }
 
     /**
+  * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+  */
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
+  }
+
+  /**
+   * Form innit
+   */
+  public formInit() {
+    this.formSearch = this.formBuilder.group({
+      Keyword: [""],
+      Nhomkhoangsan: [""],
+      Trangthai: [""]
+    });
+  }
+
+  /**
+  * Tìm kiếm nâng cao
+  */
+  public searchAdvance() {
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllLoaiKhoangSan(dataSearch);
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridLoaiKhoangSan.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
+    }
+  }
+
+  /**
+   * Hàm unActive mảng item đã chọn
+   */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaikhoangsan.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+
+      }
+    });
+  }
+
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaikhoangsan.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if (this.listDataSelect.length === 0) {
+
+        }
+      }
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaikhoangsan.nameofobject + " (" + data.tenloaikhoangsan + ") " + this.dataTranslate.DANHMUC.loaikhoangsan.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaikhoangsan.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
+  }
+
+    /**
     * Hàm lấy dữ liệu Nhóm khoáng sản
     */
-    async getAllNhomKhoangSan() {
+    async getAllNhomKhoangSan(param: any = { PageNumber: 1, PageSize: -1 }) {
       const listData: any = await this.dmFacadeService
         .getDmNhomKhoangSanService()
-        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+        .getFetchAll(param);
       this.listNhomKhoangSan = listData.items;
     }
 

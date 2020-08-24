@@ -16,7 +16,7 @@ import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/da
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import {TrangThaiEnum, Paging} from "src/app/shared/constants/enum";
 
 @Component({
   selector: "app-canhan-list",
@@ -150,10 +150,10 @@ export class DmCanhanListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu Cá nhân
    */
-  async getAllCanhan() {
+  async getAllCanhan(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.dmFacadeService
       .getDmCanhanService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(param);
     if (listData.items) {
       listData.items.map((canhan, index) => {
         canhan.serialNumber = index + 1;
@@ -181,7 +181,7 @@ export class DmCanhanListComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll();
     this.allTinh = allTinhData.items;
     this.dvhcProvinceFilters = allTinhData.items;
   }
@@ -201,7 +201,7 @@ export class DmCanhanListComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.formSearch.value.Idtinh });
+        .getByid(this.formSearch.value.Idtinh);
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -220,7 +220,7 @@ export class DmCanhanListComponent implements OnInit {
     ) {
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.formSearch.value.Idhuyen });
+        .getByid( this.formSearch.value.Idhuyen );
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -229,7 +229,10 @@ export class DmCanhanListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    const dataSearch = this.formSearch.value;
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllCanhan(dataSearch);
   }
 
   /**
@@ -256,7 +259,13 @@ export class DmCanhanListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmCanhanService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllCanhan();
+        });
       }
     });
   }
@@ -269,7 +278,13 @@ export class DmCanhanListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         if (this.listDataSelect.length === 0) {
-
+          const dataParam: any = {
+            listStatus: this.listDataSelect,
+            status: TrangThaiEnum.Active
+          };
+          this.dmFacadeService.getDmCanhanService().updateStatusArrayItem(dataParam).subscribe(res => {
+            this.getAllCanhan();
+          });
         }
       }
     });

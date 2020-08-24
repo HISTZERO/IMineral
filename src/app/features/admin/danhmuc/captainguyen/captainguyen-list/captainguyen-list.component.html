@@ -23,10 +23,10 @@
                     </mat-select>
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                    <label class="col-form-label text-right">{{"DANHMUC.captainguyen.trangthai" | translate}}:</label>
                     <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.captainguyen.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                        {{ "DANHMUC.captainguyen.chonTrangthai" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
                           {{ tt.name }}
@@ -103,7 +103,7 @@
                         {{ data.nhomcaptainguyen | getNameFileConstant: nhomCapTainguyen}}
                       </ng-template>
                     </e-column>
-                    <e-column field="trangthai" headerText="{{ 'DANHMUC.capquanly.trangthai' | translate }}">
+                    <e-column field="trangthai" headerText="{{ 'DANHMUC.captainguyen.trangthai' | translate }}">
                       <ng-template #template let-data>
                         {{ data.trangthai | getNameFileConstant: trangthai}}
                       </ng-template>

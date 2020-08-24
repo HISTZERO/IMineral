@@ -56,7 +56,6 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     nhomloaigiayphep: "",
     idthutuchanhchinh: "",
     mota: "",
-    trangthai: "",
     thutu: "",
   };
 
@@ -121,7 +120,6 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       nhomloaigiayphep: [""],
       idthutuchanhchinh: [""],
       mota: [""],
-      trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
@@ -137,7 +135,6 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
         idthutuchanhchinh: +this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
-        trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
     }
@@ -164,6 +161,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idloaigiayphep = this.obj.idloaigiayphep;
+      this.inputModel.trangthai = this.obj.trangthai;
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiGiayPhep"),
         (error: HttpErrorResponse) => {
