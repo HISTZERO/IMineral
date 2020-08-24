@@ -148,6 +148,14 @@ export class DmCanhanListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+    this.formSearch.reset();
+    this.getAllCanhan();
+  }
+
+  /**
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllCanhan(param: any = { PageNumber: 1, PageSize: -1 }) {
@@ -182,8 +190,8 @@ export class DmCanhanListComponent implements OnInit {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
       .getFetchAll();
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
+    this.allTinh = allTinhData;
+    this.dvhcProvinceFilters = allTinhData;
   }
 
   /**
@@ -195,13 +203,15 @@ export class DmCanhanListComponent implements OnInit {
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idhuyen"].setValue("");
     }
     if (!this.formSearch.value.Idtinh === false) {
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idhuyen"].setValue("");
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.formSearch.value.Idtinh);
+        .getByid(this.formSearch.value.Idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -213,14 +223,16 @@ export class DmCanhanListComponent implements OnInit {
     if (!this.formSearch.value.Idhuyen === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
+      this.formSearch.controls["Idxa"].setValue("");
     }
     if (
       !this.formSearch.value.Idtinh === false &&
       !this.formSearch.value.Idhuyen === false
     ) {
+      this.formSearch.controls["Idxa"].setValue("");
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid( this.formSearch.value.Idhuyen );
+        .getByid( this.formSearch.value.Idhuyen ).toPromise();
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -229,6 +241,9 @@ export class DmCanhanListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
+    if (this.listCanhan.length > 0) {
+      this.gridCaNhan.clearSelection();
+    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -240,7 +255,13 @@ export class DmCanhanListComponent implements OnInit {
    */
   public getAllDataActive() {
     this.listDataSelect = this.gridCaNhan.getSelectedRecords();
+    this.checkDisableButton();
+  }
 
+  /**
+   * Hàm check disable button active, unactive, delete multi items
+   */
+  public checkDisableButton() {
     if (this.listDataSelect.length > 0) {
       this.disableActiveButton = true;
       this.disableDeleteButton = true;
@@ -277,7 +298,6 @@ export class DmCanhanListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
           const dataParam: any = {
             listStatus: this.listDataSelect,
             status: TrangThaiEnum.Active
@@ -285,7 +305,6 @@ export class DmCanhanListComponent implements OnInit {
           this.dmFacadeService.getDmCanhanService().updateStatusArrayItem(dataParam).subscribe(res => {
             this.getAllCanhan();
           });
-        }
       }
     });
   }
@@ -307,6 +326,8 @@ export class DmCanhanListComponent implements OnInit {
           );
 
           informationDialogRef.afterClosed().subscribe(() => {});
+        } else {
+          
         }
       }
     });

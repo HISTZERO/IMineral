@@ -69,16 +69,24 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}" formControlName="matinh" [compareWith]="compareTinh" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tendvhc'"  [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{ "COMMON.default.chonTinh" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh}">
-            {{ tinh.tendvhc }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-select class="form-control"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}" formControlName="matinh" [compareWith]="compareTinh" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'"  [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonTinh" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh}">
+                {{ tinh.ten }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="col-sm-6">
+            <!-- <label class=""></label>
+            <div>{{ obj?.idtinh}}</div> -->
+          </div>
+        </div>
         <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
       </div>
     </div>
@@ -86,32 +94,40 @@
       <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}" (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{ "COMMON.default.chonHuyen" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen}">
-            {{ huyen.tendvhc }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}" (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonHuyen" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen}">
+                {{ huyen.ten }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
         <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"COMMON.default.maxa" | translate}}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="maxa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" [compareWith]="compareXa"  *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{ "COMMON.default.chonXa" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa}">
-            {{ xa.tendvhc }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-select class="form-control" formControlName="maxa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" [compareWith]="compareXa"  *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonXa" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa}">
+                {{ xa.ten }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
       </div>
     </div>
     <div class="form-group row mx-0">
