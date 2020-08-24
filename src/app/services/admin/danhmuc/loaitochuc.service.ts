@@ -25,4 +25,15 @@ export class DmLoaitochucService extends RepositoryEloquentService {
     return "ok";
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusArrayItem(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAITOCHUC + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
 }
