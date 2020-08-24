@@ -153,7 +153,7 @@ export class DmDvhcListComponent implements OnInit {
     );
     this.getDistrict(data.matinh);
     this.selectedItem = data;
-    GlobalVar.provinceSelected = this.selectedItem.tendvhc;
+    GlobalVar.provinceSelected = this.selectedItem.ten;
   }
 
   // get child district by event
@@ -165,7 +165,7 @@ export class DmDvhcListComponent implements OnInit {
     );
     this.getWard(data.mahuyen);
     this.selectedItem = data;
-    GlobalVar.districtSelected = this.selectedItem.tendvhc;
+    GlobalVar.districtSelected = this.selectedItem.ten;
   }
 
   // Open sidebar add Province
@@ -298,7 +298,7 @@ export class DmDvhcListComponent implements OnInit {
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.DANHMUC.canhan.contentDelete,
-      this.selectedItem.tendvhc
+      this.selectedItem.ten
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
