@@ -193,8 +193,8 @@ export class DmCanhanIoComponent implements OnInit {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    this.allTinh = allTinhData.items;
-    this.dvhcProvinceFilters = allTinhData.items;
+    this.allTinh = allTinhData;
+    this.dvhcProvinceFilters = allTinhData;
   }
 
   /**
@@ -218,7 +218,7 @@ export class DmCanhanIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ matinh: this.canhanIOForm.value.matinh.matinh });
+        .getByid(this.canhanIOForm.value.matinh.idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -243,7 +243,7 @@ export class DmCanhanIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ mahuyen: this.canhanIOForm.value.mahuyen.mahuyen });
+        .getByid(this.canhanIOForm.value.mahuyen.idhuyen).toPromise();
       this.dvhcWardFilters = this.allXa;
     }
   }
