@@ -147,6 +147,14 @@ export class DmNhomkhoangsanListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+    this.formSearch.reset({ Keyword: "", Trangthai: ""});
+    this.getAllNhomKhoangSan();
+  }
+
+  /**
    * Hàm lấy danh sách dữ liệu đã chọn trên grid
    */
   public getAllDataActive() {
@@ -182,7 +190,13 @@ export class DmNhomkhoangsanListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.nhomkhoangsan.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllNhomKhoangSan();
+        });
       }
     });
   }
@@ -194,9 +208,13 @@ export class DmNhomkhoangsanListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.nhomkhoangsan.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllNhomKhoangSan();
+        });
       }
     });
   }
