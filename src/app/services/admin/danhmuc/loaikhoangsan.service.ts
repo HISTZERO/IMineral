@@ -21,6 +21,28 @@ export class DmLoaikhoangsanService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsLoaiKhoangSan(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAIKHOANGSAN + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsLoaiKhoangSan(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAIKHOANGSAN + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

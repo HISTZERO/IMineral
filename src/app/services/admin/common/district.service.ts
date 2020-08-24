@@ -17,10 +17,10 @@ export class DistrictService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllHuyenByIdTinh",
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/getallhuyenbyidtinh",
     });
   }
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 }

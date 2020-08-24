@@ -100,6 +100,20 @@ export class DmCaptruluongListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu và reset form tìm kiếm
+   */
+  public reloadDataGrid() {
+    if (this.listCapTruLuong.length > 0) {
+      this.gridCapTruLuong.clearSelection();
+    }
+    this.formSearch.reset({
+      Keyword: "",
+      Trangthai: ""
+    });
+    this.getAllCapTruLuong();
+  }
+
+  /**
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
@@ -140,77 +154,90 @@ export class DmCaptruluongListComponent implements OnInit {
   /**
   * Tìm kiếm nâng cao
   */
- public searchAdvance() {
-  let dataSearch = this.formSearch.value;
-  dataSearch['PageNumber'] = Paging.PageNumber;
-  dataSearch['PageSize'] = Paging.PageSize;
-  this.getAllCapTruLuong(dataSearch);
-}
-
-/**
- * Hàm lấy danh sách dữ liệu đã chọn trên grid
- */
-public getAllDataActive() {
-  this.listDataSelect = this.gridCapTruLuong.getSelectedRecords();
-
-  if (this.listDataSelect.length > 0) {
-    this.disableActiveButton = true;
-    this.disableDeleteButton = true;
-    this.disableUnActiveButton = true;
-  } else {
-    this.disableActiveButton = false;
-    this.disableDeleteButton = false;
-    this.disableUnActiveButton = false;
+  public searchAdvance() {
+    if (this.listCapTruLuong.length > 0) {
+      this.gridCapTruLuong.clearSelection();
+    }
+    let dataSearch = this.formSearch.value;
+    dataSearch['PageNumber'] = Paging.PageNumber;
+    dataSearch['PageSize'] = Paging.PageSize;
+    this.getAllCapTruLuong(dataSearch);
   }
-}
 
-/**
- * Hàm unActive mảng item đã chọn
- */
-public unActiveArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captruluong.confirmedContentOfUnActiveDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.gridCapTruLuong.getSelectedRecords();
 
+    if (this.listDataSelect.length > 0) {
+      this.disableActiveButton = true;
+      this.disableDeleteButton = true;
+      this.disableUnActiveButton = true;
+    } else {
+      this.disableActiveButton = false;
+      this.disableDeleteButton = false;
+      this.disableUnActiveButton = false;
     }
-  });
-}
+  }
 
-/**
- * Hàm active mảng item đã chọn
- */
-public activeArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captruluong.confirmedContentOfActiveDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
-      if (this.listDataSelect.length === 0) {
-
+  /**
+   * Hàm unActive mảng item đã chọn
+   */
+  public unActiveArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captruluong.confirmedContentOfUnActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(res => {
+          this.getAllCapTruLuong();
+        });
       }
-    }
-  });
-}
+    });
+  }
 
-/**
- * Hàm delete mảng item đã chọn
- */
-public deleteArrayItem() {
-  const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
-  dialogRef.afterClosed().subscribe(async (result) => {
-    if (result === "confirm") {
-      const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
-
-      if (data !== null) {
-        const informationDialogRef = this.commonService.informationDiaLogService(
-          "",
-          this.dataTranslate.DANHMUC.captruluong.nameofobject + " (" + data.tencaptruluong + ") " + this.dataTranslate.DANHMUC.captruluong.informedContentOfUnDeletedDialog,
-          this.dataTranslate.DANHMUC.captruluong.informedDialogTitle,
-        );
-
-        informationDialogRef.afterClosed().subscribe(() => {});
+  /**
+   * Hàm active mảng item đã chọn
+   */
+  public activeArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captruluong.confirmedContentOfActiveDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(res => {
+          this.getAllCapTruLuong();
+        });
       }
-    }
-  });
-}
+    });
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.captruluong.nameofobject + " (" + data.tencaptruluong + ") " + this.dataTranslate.DANHMUC.captruluong.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.captruluong.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        }
+      }
+    });
+  }
 
   /**
    * Hàm lấy dữ liệu Cấp trữ lượng

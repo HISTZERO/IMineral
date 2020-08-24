@@ -53,6 +53,9 @@ export class DmCoquanquanlyIoComponent implements OnInit {
    
    // Chứa dữ liệu Trạng thái
    public trangthai = TrangThai;
+
+  // Chứa kiểu boolean hiển thị thuộc tính column
+  public classColDvhc: boolean = false;
  
    // Chứa dữ liệu translate
    public dataTranslate: any;
@@ -157,6 +160,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
     */
    formOnEdit() {
      if (this.obj && this.purpose === 'edit') {
+       this.classColDvhc = true;
        this.coQuanQuanLyIOForm.setValue({
          tencoquanquanly: this.obj.tencoquanquanly,
          diachi: this.obj.diachi,
@@ -183,61 +187,61 @@ export class DmCoquanquanlyIoComponent implements OnInit {
    async showDvhcTinh() {
      const allTinhData: any = await this.dmFacadeService
        .getProvinceService()
-       .getFetchAll({ PageNumber: 1, PageSize: -1 });
-     this.allTinh = allTinhData.items;
-     this.dvhcProvinceFilters = allTinhData.items;
+       .getFetchAll();
+     this.allTinh = allTinhData;
+     this.dvhcProvinceFilters = allTinhData;
    }
  
-   /**
-    * Hàm lấy danh sách Dvhc Huyện
-    */
-   async showDvhcHuyen() {
-     if (!this.coQuanQuanLyIOForm.value.matinh === true) {
-       this.allHuyen = [];
-       this.dvhcDistrictFilters = [];
-       this.allXa = [];
-       this.dvhcWardFilters = [];
-       if (this.editMode === true) {
-         this.coQuanQuanLyIOForm.controls["mahuyen"].setValue("");
-       }
-     }
-     if (!this.coQuanQuanLyIOForm.value.matinh === false) {
-       if (this.editMode === true) {
-         this.coQuanQuanLyIOForm.controls["mahuyen"].setValue("");
-       }
-       this.allXa = [];
-       this.dvhcWardFilters = [];
-       this.allHuyen = await this.dmFacadeService
-         .getDistrictService()
-         .getFetchAll({ matinh: this.coQuanQuanLyIOForm.value.matinh.matinh });
-       this.dvhcDistrictFilters = this.allHuyen;
-     }
-   }
- 
-   /**
-    * Hàm lấy danh sách Dvhc Xã
-    */
-   async showDvhcXa() {
-     if (!this.coQuanQuanLyIOForm.value.mahuyen === true) {
-       this.allXa = [];
-       this.dvhcWardFilters = [];
-       if (this.editMode === true) {
-         this.coQuanQuanLyIOForm.controls["maxa"].setValue("");
-       }
-     }
-     if (
-       !this.coQuanQuanLyIOForm.value.matinh === false &&
-       !this.coQuanQuanLyIOForm.value.mahuyen === false
-     ) {
-       if (this.editMode === true) {
-         this.coQuanQuanLyIOForm.controls["maxa"].setValue("");
-       }
-       this.allXa = await this.dmFacadeService
-         .getWardService()
-         .getFetchAll({ mahuyen: this.coQuanQuanLyIOForm.value.mahuyen.mahuyen });
-       this.dvhcWardFilters = this.allXa;
-     }
-   }
+  /**
+   * Hàm lấy danh sách Dvhc Huyện
+   */
+  async showDvhcHuyen() {
+    if (!this.coQuanQuanLyIOForm.value.matinh === true) {
+      this.allHuyen = [];
+      this.dvhcDistrictFilters = [];
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+      if (this.editMode === true) {
+        this.coQuanQuanLyIOForm.controls["mahuyen"].setValue("");
+      }
+    }
+    if (!this.coQuanQuanLyIOForm.value.matinh === false) {
+      if (this.editMode === true) {
+        this.coQuanQuanLyIOForm.controls["mahuyen"].setValue("");
+      }
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+      this.allHuyen = await this.dmFacadeService
+        .getDistrictService()
+        .getByid(this.coQuanQuanLyIOForm.value.matinh.idtinh).toPromise();
+      this.dvhcDistrictFilters = this.allHuyen;
+    }
+  }
+
+  /**
+   * Hàm lấy danh sách Dvhc Xã
+   */
+  async showDvhcXa() {
+    if (!this.coQuanQuanLyIOForm.value.mahuyen === true) {
+      this.allXa = [];
+      this.dvhcWardFilters = [];
+      if (this.editMode === true) {
+        this.coQuanQuanLyIOForm.controls["maxa"].setValue("");
+      }
+    }
+    if (
+      !this.coQuanQuanLyIOForm.value.matinh === false &&
+      !this.coQuanQuanLyIOForm.value.mahuyen === false
+    ) {
+      if (this.editMode === true) {
+        this.coQuanQuanLyIOForm.controls["maxa"].setValue("");
+      }
+      this.allXa = await this.dmFacadeService
+        .getWardService()
+        .getByid(this.coQuanQuanLyIOForm.value.mahuyen.idhuyen).toPromise();
+      this.dvhcWardFilters = this.allXa;
+    }
+  }
  
    /**
     * Hàm thực thi chức năng add và edit

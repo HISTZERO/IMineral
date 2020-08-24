@@ -107,7 +107,7 @@ export class DmDvhcListComponent implements OnInit {
   async getDistrict(idtinh: string) {
     const listDataItems: any = await this.dmFacadeSv
       .getDistrictService()
-      .getByid(idtinh);
+      .getByid(idtinh).toPromise();
     if (listDataItems) {
       listDataItems.map((huyen, index) => {
         huyen.serialNumber = index + 1;
@@ -117,10 +117,10 @@ export class DmDvhcListComponent implements OnInit {
   }
 
   // get ward
-  async getWard(mahuyen: string) {
+  async getWard(idhuyen: string) {
     const listDataItems: any = await this.dmFacadeSv
       .getWardService()
-      .getFetchAll({ mahuyen: mahuyen });
+      .getByid(idhuyen).toPromise();
     if (listDataItems) {
       listDataItems.map((xa, index) => {
         xa.serialNumber = index + 1;
@@ -144,28 +144,19 @@ export class DmDvhcListComponent implements OnInit {
   }
 
   // get Child Province by event
-  private getChildProvinceByEvent(event) {
+  private getChildProvinceByEvent(data) {
     this.selectedItem = null;
-    const data = this.commonService.getByEvent(
-      event,
-      this.listDataDvhcProvince
-    );
-    console.log(event);
     this.getDistrict(data.id);
     this.selectedItem = data;
-    GlobalVar.provinceSelected = this.selectedItem.ten;
+    GlobalVar.provinceSelected = data.ten;
   }
 
   // get child district by event
-  private getChildDistrictByEvent(event) {
+  private getChildDistrictByEvent(data) {
     this.selectedItem = null;
-    const data = this.commonService.getByEvent(
-      event,
-      this.listDatadvhcDistrict
-    );
-    this.getWard(data.mahuyen);
+    this.getWard(data.id);
     this.selectedItem = data;
-    GlobalVar.districtSelected = this.selectedItem.ten;
+    GlobalVar.districtSelected = data.ten;
   }
 
   // Open sidebar add Province
@@ -191,19 +182,19 @@ export class DmDvhcListComponent implements OnInit {
 
   // open sidebar edit Province
   public openDvhcEditProvince(event: any) {
-    this.getItemByEvent(event, this.listDataDvhcProvince);
+    this.selectedItem = event;
     this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditProvince, DmDvhcIoComponent, "editProvince", this.selectedItem);
   }
 
   // open sidebar edit district
   public openDvhcEditDistrict(event: any) {
-    this.getItemByEvent(event, this.listDatadvhcDistrict);
+    this.selectedItem = event;
     this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditDistrict, DmDvhcIoComponent, "editDistrict", this.selectedItem);
   }
 
   // open sidebar edit ward
   public openDvhcEditWard(event: any) {
-    this.getItemByEvent(event, this.listDatadvhcWard);
+    this.selectedItem = event;
     this.setValueSidebar( this.dataTranslate.DANHMUC.dvhc.titleEditWard, DmDvhcIoComponent, "editWard",this.selectedItem);
   }
 
@@ -251,8 +242,8 @@ export class DmDvhcListComponent implements OnInit {
   }
 
   // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemProvince(event: any) {
-    this.getItemByEvent(event, this.listDataDvhcProvince);
+  async deleteItemProvince(data: any) {
+    this.selectedItem = data;
     this.deleteName = "province";
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
@@ -263,8 +254,8 @@ export class DmDvhcListComponent implements OnInit {
     this.canBeDeletedCheck(canDelete);
   }
   // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemDistrict(event: any) {
-    this.getItemByEvent(event, this.listDatadvhcDistrict);
+  async deleteItemDistrict(data: any) {
+    this.selectedItem = data;
     this.deleteName = "District";
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
@@ -275,8 +266,8 @@ export class DmDvhcListComponent implements OnInit {
     this.canBeDeletedCheck(canDelete);
   }
   // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemWard(event: any) {
-    this.getItemByEvent(event, this.listDatadvhcWard);
+  async deleteItemWard(data: any) {
+    this.selectedItem = data;
     this.deleteName = "Ward";
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
@@ -297,7 +288,7 @@ export class DmDvhcListComponent implements OnInit {
 
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.canhan.contentDelete,
+      this.dataTranslate.DANHMUC.dvhc.contentDelete,
       this.selectedItem.ten
     );
     dialogRef.afterClosed().subscribe(async (result) => {

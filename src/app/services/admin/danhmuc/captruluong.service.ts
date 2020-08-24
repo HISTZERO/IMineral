@@ -21,6 +21,28 @@ export class DmCaptruluongService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsCapTruLuong(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPTRULUONG + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsCapTruLuong(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CAPTRULUONG + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }
