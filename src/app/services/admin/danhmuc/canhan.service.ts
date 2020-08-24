@@ -29,7 +29,7 @@ export class DmCanhanService extends RepositoryEloquentService {
    */
   public updateStatusArrayItem(params) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/UpdateListStatus'
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/updateliststatus'
     });
     return this.updateItem(params);
   }
@@ -40,7 +40,7 @@ export class DmCanhanService extends RepositoryEloquentService {
    */
   public deleteArrayItem(params) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/RemoveList'
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/removelist'
     });
     return this.deleteItem(params);
   }

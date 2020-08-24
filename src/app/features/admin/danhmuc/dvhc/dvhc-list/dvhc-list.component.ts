@@ -94,21 +94,20 @@ export class DmDvhcListComponent implements OnInit {
   async getAllProvince() {
     const listData: any = await this.dmFacadeSv
       .getProvinceService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
-    const listDataItems = listData.items;
-    if (listDataItems) {
-      listDataItems.map((tinh, index) => {
+      .getFetchAll();
+    if (listData) {
+      listData.map((tinh, index) => {
         tinh.serialNumber = index + 1;
       });
     }
-    this.listDataDvhcProvince = listDataItems;
+    this.listDataDvhcProvince = listData;
   }
 
   // get district
-  async getDistrict(matinh: string) {
+  async getDistrict(idtinh: string) {
     const listDataItems: any = await this.dmFacadeSv
       .getDistrictService()
-      .getFetchAll({ matinh: matinh });
+      .getByid(idtinh);
     if (listDataItems) {
       listDataItems.map((huyen, index) => {
         huyen.serialNumber = index + 1;
@@ -151,7 +150,8 @@ export class DmDvhcListComponent implements OnInit {
       event,
       this.listDataDvhcProvince
     );
-    this.getDistrict(data.matinh);
+    console.log(event);
+    this.getDistrict(data.id);
     this.selectedItem = data;
     GlobalVar.provinceSelected = this.selectedItem.ten;
   }
