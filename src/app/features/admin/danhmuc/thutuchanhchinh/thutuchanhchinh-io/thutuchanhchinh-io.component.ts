@@ -11,6 +11,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { OutputDmLinhvucModel } from 'src/app/models/admin/danhmuc/linhvuc.model';
+import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 
 @Component({
   selector: 'app-thutuchanhchinh-io',
@@ -186,7 +187,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     async getLinhVuc() {
       const allLinhVucData: any = await this.dmFacadeService
         .getDmLinhvucService()
-        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+        .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
       this.allLinhVuc = allLinhVucData.items;
       this.linhVucFilters = allLinhVucData.items;
     }
@@ -197,7 +198,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     async getAllCapQuanLy() {
       const listData: any = await this.dmFacadeService
         .getDmCapQuanLyService()
-        .getFetchAll({ PageNumber: 1, PageSize: -1 });
+        .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
       this.listCapQuanLy = listData.items;
       this.listCapQuanLyFilter = listData.items;
     }

@@ -19,16 +19,21 @@
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}"  *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tenlinhvuc'" [array]="linhVucFilters" (filteredReturn)="allLinhVuc = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}
-          </mat-option>
-          <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="linhVuc.idlinhvuc">
-            {{ linhVuc.tenlinhvuc }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-select class="form-control" formControlName="idlinhvuc" placeholder="{{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}"  *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'tenlinhvuc'" [array]="linhVucFilters" (filteredReturn)="allLinhVuc = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}
+              </mat-option>
+              <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="linhVuc.idlinhvuc">
+                {{ linhVuc.tenlinhvuc }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
         <span *ngIf="formErrors.idlinhvuc" class="alert-danger">{{formErrors.idlinhvuc}}</span>
       </div>
     </div>
@@ -37,16 +42,21 @@
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" formControlName="idcapthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}"  *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tencapquanly'" [array]="listCapQuanLyFilter" (filteredReturn)="listCapQuanLy = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}
-          </mat-option>
-          <mat-option *ngFor="let cap of listCapQuanLy" [value]="cap.idcapquanly">
-            {{ cap.tencapquanly }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="col-sm-6">
+            <mat-select class="form-control" formControlName="idcapthuchien" placeholder="{{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}"  *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'tencapquanly'" [array]="listCapQuanLyFilter" (filteredReturn)="listCapQuanLy = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}
+              </mat-option>
+              <mat-option *ngFor="let cap of listCapQuanLy" [value]="cap.idcapquanly">
+                {{ cap.tencapquanly }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div class="col-sm-6"></div>
+        </div>
         <span *ngIf="formErrors.idcapthuchien" class="alert-danger">{{formErrors.idcapthuchien}}</span>
       </div>
     </div>

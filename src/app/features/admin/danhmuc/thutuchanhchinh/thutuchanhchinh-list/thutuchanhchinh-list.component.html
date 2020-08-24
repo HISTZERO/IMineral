@@ -112,7 +112,7 @@
                     <e-column field="tenthutuc" headerText="{{ 'DANHMUC.thutuchanhchinh.tenthutuc' | translate }}"></e-column>
                     <e-column field="mathutuc" headerText="{{ 'DANHMUC.thutuchanhchinh.mathutuc' | translate }}"></e-column>
                     <e-column field="idcapthuchien" [visible]="false"></e-column>
-                    <e-column field="tenlinhvuc" headerText="{{ 'DANHMUC.thutuchanhchinh.capthuchien' | translate }}">
+                    <e-column field="tencapthuchien" headerText="{{ 'DANHMUC.thutuchanhchinh.capthuchien' | translate }}">
                       <ng-template #template let-data>
                         {{ data.idcapthuchien | getNameCapQuanLyPipe: allCapQuanLy}}
                       </ng-template>
@@ -151,7 +151,7 @@
         </div>
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 600px;">
+        style="width: 800px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeThuTucHanhChinhIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>

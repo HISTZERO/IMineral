@@ -138,7 +138,10 @@ export class DmNguongocmoListComponent implements OnInit {
    * Hàm lấy dữ liệu nguồn gốc mỏ
    */
   async getAllnguonGocMo() {
-    this.gridNguonGocMo.clearSelection();
+    if (this.listNguonGocMo != null && this.listNguonGocMo.length > 0) {
+      this.gridNguonGocMo.clearSelection();
+    }
+
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;

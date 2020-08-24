@@ -138,7 +138,10 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu loại tổ chức
    */
   async getAllLoaiToChuc() {
-    this.gridLoaiToChuc.clearSelection();
+    if (this.listLoaiToChuc != null && this.listLoaiToChuc.length > 0) {
+      this.gridLoaiToChuc.clearSelection();
+    }
+
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;
