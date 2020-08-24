@@ -69,6 +69,8 @@ export class DmTochucIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  public classColWithFiftyPercentForCombobox  = false;
+
   // error message
   validationErrorMessages = {};
 
@@ -196,6 +198,7 @@ export class DmTochucIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.classColWithFiftyPercentForCombobox = true;
       this.tochucIOForm.setValue({
         tentochuc: this.obj.tentochuc,
         diachi: this.obj.diachi,
