@@ -61,6 +61,8 @@ export class DmCanhanIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  public classColDvhc: boolean = false;
+
   // error message
   validationErrorMessages = {};
 
@@ -166,6 +168,7 @@ export class DmCanhanIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.classColDvhc = true;
       this.canhanIOForm.setValue({
         hovaten: this.obj.hovaten,
         diachi: this.obj.diachi,
