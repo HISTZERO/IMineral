@@ -82,7 +82,7 @@
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
-                      <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="getAllThuTucHanhChinh()">
+                      <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="reloadDataGrid()">
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
@@ -151,7 +151,7 @@
         </div>
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 800px;">
+        style="width: 700px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeThuTucHanhChinhIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>
