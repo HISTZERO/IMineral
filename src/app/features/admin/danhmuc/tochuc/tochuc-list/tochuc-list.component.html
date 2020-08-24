@@ -14,39 +14,39 @@
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{ "COMMON.default.matinh" | translate }}:</label>
                       <mat-select class="form-control" formControlName="Idtinh"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}"  *ngIf="dataTranslate" (selectionChange)="showDvhcHuyen()">
-                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+                        <mat-select-filter [displayMember]="'ten'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
                         </mat-select-filter>
                         <mat-option value="">
                           {{ "COMMON.default.chonTinh" | translate }}
                         </mat-option>
                         <mat-option *ngFor="let tinh of allTinh" [value]="tinh.id">
-                          {{ tinh.tendvhc }}
+                          {{ tinh.ten }}
                         </mat-option>
                       </mat-select>
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}:</label>
                       <mat-select class="form-control" formControlName="Idhuyen"  placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"  *ngIf="dataTranslate" (selectionChange)="showDvhcXa()">
-                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
+                        <mat-select-filter [displayMember]="'ten'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
                         </mat-select-filter>
                         <mat-option value="">
                           {{ "COMMON.default.chonHuyen" | translate }}
                         </mat-option>
                         <mat-option *ngFor="let huyen of allHuyen" [value]="huyen.id">
-                          {{ huyen.tendvhc }}
+                          {{ huyen.ten }}
                         </mat-option>
                       </mat-select>
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"COMMON.default.maxa" | translate}}:</label>
                       <mat-select class="form-control" formControlName="Idxa"  placeholder="{{ 'COMMON.default.chonXa' | translate }}"  *ngIf="dataTranslate">
-                        <mat-select-filter [displayMember]="'tendvhc'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
+                        <mat-select-filter [displayMember]="'ten'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
                         </mat-select-filter>
                         <mat-option value="">
                           {{ "COMMON.default.chonXa" | translate }}
                         </mat-option>
                         <mat-option *ngFor="let xa of allXa" [value]="xa.id">
-                          {{ xa.tendvhc }}
+                          {{ xa.ten }}
                         </mat-option>
                       </mat-select>
                   </div>
@@ -156,7 +156,7 @@
         </div>
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 600px;">
+        style="width: 800px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeToChucIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>
