@@ -127,6 +127,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
    * Hàm lấy dữ liệu Nhóm khoáng sản
    */
   async getAllNhomKhoangSan() {
+    this.gridNhomKhoanSan.clearSelection();
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;

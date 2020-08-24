@@ -24,7 +24,7 @@ import { GridComponent } from "@syncfusion/ej2-angular-grids";
 export class DmLoaiDmTochucListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridLoaiToChuc", { static: false }) public gridLinhVuc: GridComponent;
+  @ViewChild("gridLoaiToChuc", { static: false }) public gridLoaiToChuc: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compLoaiToChucIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -138,6 +138,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu loại tổ chức
    */
   async getAllLoaiToChuc() {
+    this.gridLoaiToChuc.clearSelection();
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;
@@ -157,7 +158,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm lấy danh sách dữ liệu đã chọn trên grid
    */
   public getAllDataActive() {
-    this.listDataSelect = this.gridLinhVuc.getSelectedRecords();
+    this.listDataSelect = this.gridLoaiToChuc.getSelectedRecords();
 
     if (this.listDataSelect.length > 0) {
       this.disableActiveButton = true;
@@ -213,6 +214,8 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           );
 
           informationDialogRef.afterClosed().subscribe(() => {});
+        } else {
+
         }
       }
     });

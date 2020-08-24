@@ -183,6 +183,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
    * Hàm lấy dữ liệu Thủ tục hành chính
    */
   async getAllThuTucHanhChinh() {
+    this.gridThuTucHanhChinh.clearSelection();
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;

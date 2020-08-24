@@ -150,6 +150,7 @@ export class DmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu Tổ chức
    */
   async getAllToChuc() {
+    this.gridToChuc.clearSelection();
     const searchModel = this.formSearch.value;
     searchModel.PageNumber = 1;
     searchModel.PageSize = -1;
