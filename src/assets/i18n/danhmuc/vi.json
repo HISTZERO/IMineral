@@ -310,7 +310,12 @@
     "tennguongocmoRequired": "Tên nguồn gốc mỏ không được để trống",
     "motaPlaceholder": "Mô tả",
     "chonTrangthai": "---Chọn trạng thái---",
-    "thutuPlaceholder": "Nhập thứ tự"
+    "thutuPlaceholder": "Nhập thứ tự",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Nguồn gốc mỏ",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạn thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạn thái không sử dụng các đối tượng vừa chọn không?"
   },
   "thutuchanhchinh": {
     "titleList": "Danh sách thủ tục hành chính",
