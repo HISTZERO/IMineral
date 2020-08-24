@@ -25,4 +25,14 @@ export class DmTochucService extends RepositoryEloquentService {
     return "ok";
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusArrayItem(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.TOCHUC + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
 }
