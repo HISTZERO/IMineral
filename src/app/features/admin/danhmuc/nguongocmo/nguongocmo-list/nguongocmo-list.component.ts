@@ -208,7 +208,7 @@ export class DmNguongocmoListComponent implements OnInit {
         if (data !== null) {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
-            this.dataTranslate.DANHMUC.nguongocmo.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.linhvuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.nguongocmo.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.nguongocmo.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.nguongocmo.informedDialogTitle,
           );
 
