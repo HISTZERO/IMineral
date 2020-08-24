@@ -157,6 +157,14 @@ export class DmLinhvucListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+    this.formSearch.reset({ Keyword: "", Trangthai: ""});
+    this.getAllLinhvuc();
+  }
+
+  /**
    * Hàm lấy danh sách dữ liệu đã chọn trên grid
    */
   public getAllDataActive() {
@@ -180,7 +188,13 @@ export class DmLinhvucListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllLinhvuc();
+        });
       }
     });
   }
@@ -192,9 +206,13 @@ export class DmLinhvucListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllLinhvuc();
+        });
       }
     });
   }
