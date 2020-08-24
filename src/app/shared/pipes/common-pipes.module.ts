@@ -6,14 +6,18 @@ import { SafeHTML } from "src/app/shared/pipes/safe-html.pipe";
 import { ConvertTimeString } from "src/app/shared/pipes/convert-time-string.pipe";
 import { GetNameFileConstantPipe } from 'src/app/shared/pipes/get-name-file-constant.pipe';
 import { GetNameNhomkhoangsanPipe } from 'src/app/shared/pipes/get-name-nhomkhoangsan.pipe';
+import { GetNameLinhVucPipe } from 'src/app/shared/pipes/get-name-linhvuc.pipe';
+import { GetNameCapQuanLyPipe } from 'src/app/shared/pipes/get-name-capquanly.pipe';
 
 @NgModule({
-  declarations: [		
+  declarations: [
     GetFieldValueFromArrayObjectPipe,
     ConvertTimeString,
     SafeHTML,
     GetNameFileConstantPipe,
-    GetNameNhomkhoangsanPipe
+    GetNameNhomkhoangsanPipe,
+    GetNameLinhVucPipe,
+    GetNameCapQuanLyPipe
    ],
   imports: [CommonModule],
   exports: [
@@ -21,7 +25,9 @@ import { GetNameNhomkhoangsanPipe } from 'src/app/shared/pipes/get-name-nhomkhoa
     ConvertTimeString,
     SafeHTML,
     GetNameFileConstantPipe,
-    GetNameNhomkhoangsanPipe
+    GetNameNhomkhoangsanPipe,
+    GetNameLinhVucPipe,
+    GetNameCapQuanLyPipe
   ],
 })
 export class CommonPipesModule { }

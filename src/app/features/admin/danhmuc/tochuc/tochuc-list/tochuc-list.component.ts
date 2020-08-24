@@ -97,14 +97,14 @@ export class DmTochucListComponent implements OnInit {
     // Khởi tạo form
     this.formInit();
     // Lấy danh sách Tỉnh
-    this.showDvhcTinh();
+    await this.showDvhcTinh();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-
+    // Gọi hàm thiêt lập hiển thị nút check box trên Grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
@@ -150,9 +150,13 @@ export class DmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu Tổ chức
    */
   async getAllToChuc() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber = 1;
+    searchModel.PageSize = -1;
+
     const listData: any = await this.dmFacadeService
       .getDmToChucService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((tochuc, index) => {
         tochuc.serialNumber = index + 1;
@@ -224,12 +228,6 @@ export class DmTochucListComponent implements OnInit {
     }
   }
 
-  /**
-   * Tìm kiếm nâng cao
-   */
-  public searchAdvance() {
-    const dataSearch = this.formSearch.value;
-  }
 
   /**
    * Hàm lấy danh sách dữ liệu đã chọn trên grid

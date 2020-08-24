@@ -81,7 +81,7 @@ export class DmLinhvucListComponent implements OnInit {
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-
+    // Thiết lập hiển thị checkbox trên grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
@@ -137,9 +137,13 @@ export class DmLinhvucListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllLinhvuc() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber = 1;
+    searchModel.PageSize = -1;
+
     const listData: any = await this.dmFacadeService
       .getDmLinhvucService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((linhvuc, index) => {
         linhvuc.serialNumber = index + 1;
@@ -148,9 +152,9 @@ export class DmLinhvucListComponent implements OnInit {
     this.listLinhvuc = listData.items;
   }
 
-   /**
-    * Hàm lấy danh sách dữ liệu đã chọn trên grid
-    */
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
   public getAllDataActive() {
     this.listDataSelect = this.gridLinhVuc.getSelectedRecords();
 
