@@ -25,4 +25,14 @@ export class DmNguongocmoService extends RepositoryEloquentService {
     return "ok";
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusArrayItem(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.NGUONGOCMO + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
 }
