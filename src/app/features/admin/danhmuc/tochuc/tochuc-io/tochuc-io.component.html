@@ -1,29 +1,29 @@
 <div class="pt-3 pb-4">
   <form [formGroup]="tochucIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.tochuc.tentochuc" | translate }}
+      <label class="col-sm-3 col-form-label text-right">{{ "DANHMUC.tochuc.tentochuc" | translate }}
         <small>(*)</small></label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="tentochuc" placeholder="{{'DANHMUC.tochuc.tentochucPlaceholder' | translate}}" />
         <span *ngIf="formErrors.tentochuc" class="alert-danger">{{formErrors.tentochuc}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.diachi" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.diachi" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="diachi" placeholder="{{'DANHMUC.tochuc.diachiPlaceholder' | translate}}" />
         <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.loaigiayto" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.loaigiayto" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="col-sm-12">
             <mat-select class="form-control" placeholder="{{ 'DANHMUC.tochuc.chonLoaiGiayTo' | translate }}" formControlName="loaigiayto" *ngIf="dataTranslate">
               <mat-option value="">
                 {{ "DANHMUC.tochuc.chonLoaiGiayTo" | translate }}
@@ -33,47 +33,45 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-sm-6">
-          </div>
         </div>
         <span *ngIf="formErrors.loaigiayto" class="alert-danger">{{formErrors.loaigiayto}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.sogiayto" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.sogiayto" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'DANHMUC.tochuc.sogiaytoPlaceholder' | translate}}" />
         <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.ngaycap" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.ngaycap" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <input class="form-control" formControlName="ngaycap" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" placeholder="{{'DANHMUC.tochuc.ngaycapPlaceholder' | translate}}" />
         <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
         <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.noicap" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.noicap" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="noicap" placeholder="{{'DANHMUC.tochuc.noicapPlaceholder' | translate}}" />
         <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.tochuc.loaitochuc" | translate }}
+      <label class="col-sm-3 col-form-label text-right">{{ "DANHMUC.tochuc.loaitochuc" | translate }}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" placeholder="{{ 'DANHMUC.tochuc.chonLoaiToChuc' | translate }}" formControlName="idloaitochuc" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'tenloaitochuc'" [array]="listLoaiToChucFilter" (filteredReturn)="listLoaiToChuc = $event">
               </mat-select-filter>
@@ -85,45 +83,45 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}"></div>
         </div>
         <span *ngIf="formErrors.idloaitochuc" class="alert-danger">{{formErrors.idloaitochuc}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.fax" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.fax" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="fax" placeholder="{{'DANHMUC.tochuc.faxPlaceholder' | translate}}" />
         <span *ngIf="formErrors.fax" class="alert-danger">{{formErrors.fax}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.website" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.website" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="website"  placeholder="{{'DANHMUC.tochuc.websitePlaceholder' | translate}}" />
         <span *ngIf="formErrors.website" class="alert-danger">{{formErrors.website}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.dienthoai" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.dienthoai" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="dienthoai" placeholder="{{'DANHMUC.tochuc.dienthoaiPlaceholder' | translate}}" />
         <span *ngIf="formErrors.dienthoai" class="alert-danger">{{formErrors.dienthoai}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.email" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.email" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="email" placeholder="{{'DANHMUC.tochuc.emailPlaceholder' | translate}}" />
         <span *ngIf="formErrors.email" class="alert-danger">{{formErrors.email}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
+      <label class="col-sm-3 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
         <small>(*)</small></label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="matinh" [compareWith]="compareTinh"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}"
               (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'ten'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
@@ -136,17 +134,17 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}"></div>
         </div>
         <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
+      <label class="col-sm-3 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
         <small>(*)</small></label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen"  placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"
               (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'ten'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
@@ -159,18 +157,18 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}"></div>
         </div>
         <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"COMMON.default.maxa" | translate}}
+      <label class="col-sm-3 col-form-label text-right">{{"COMMON.default.maxa" | translate}}
         <small>(*)</small>
       </label>
-      <div class="col-sm-8">
+      <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-6">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="maxa" [compareWith]="compareXa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'ten'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
               </mat-select-filter>
@@ -182,14 +180,14 @@
               </mat-option>
             </mat-select>
           </div>
-          <div class="col-sm-6"></div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}"></div>
         </div>
         <span *ngIf="formErrors.maxa" class="alert-danger">{{formErrors.maxa}}</span>
       </div>
     </div>
     <!-- <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.trangthai" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.trangthai" | translate}}</label>
+      <div class="col-sm-9">
         <mat-select class="form-control" placeholder="{{ 'DANHMUC.tochuc.chonTrangthai' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.tochuc.chonTrangthai" | translate }}
@@ -202,8 +200,8 @@
       </div>
     </div> -->
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.tochuc.thutu" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.tochuc.thutu" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.tochuc.thutuPlaceholder' | translate}}" />
         <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
       </div>

@@ -170,6 +170,14 @@ export class DmTochucListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+    this.formSearch.reset({ Keyword: "", Idtinh: "", Idhuyen: "", Idxa: "", Trangthai: ""});
+    this.getAllToChuc();
+  }
+
+  /**
    * Form innit
    */
   public formInit() {
@@ -227,7 +235,7 @@ export class DmTochucListComponent implements OnInit {
     ) {
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.formSearch.value.Idhuyen);
+        .getByid(this.formSearch.value.Idhuyen).toPromise();
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -257,7 +265,13 @@ export class DmTochucListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.tochuc.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllToChuc();
+        });
       }
     });
   }
@@ -269,9 +283,13 @@ export class DmTochucListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.tochuc.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
+          this.getAllToChuc();
+        });
       }
     });
   }
