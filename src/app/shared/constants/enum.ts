@@ -12,3 +12,8 @@ export enum TrangThaiEnum {
   Active = 1,
   NoActive = 2
 }
+
+export enum Paging {
+  PageNumber = 1,
+  PageSize = -1
+}

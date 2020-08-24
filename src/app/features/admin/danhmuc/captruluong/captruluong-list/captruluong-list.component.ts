@@ -15,7 +15,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { DmCaptruluongIoComponent } from "src/app/features/admin/danhmuc/captruluong/captruluong-io/captruluong-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-captruluong-list',
@@ -141,7 +141,10 @@ export class DmCaptruluongListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
  public searchAdvance() {
-  const dataSearch = this.formSearch.value;
+  let dataSearch = this.formSearch.value;
+  dataSearch['PageNumber'] = Paging.PageNumber;
+  dataSearch['PageSize'] = Paging.PageSize;
+  this.getAllCapTruLuong(dataSearch);
 }
 
 /**
@@ -212,10 +215,10 @@ public deleteArrayItem() {
   /**
    * Hàm lấy dữ liệu Cấp trữ lượng
    */
-  async getAllCapTruLuong() {
+  async getAllCapTruLuong(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.dmFacadeService
       .getDmCapTruLuongService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(param);
     if (listData.items) {
       listData.items.map((truluong, index) => {
         truluong.serialNumber = index + 1;

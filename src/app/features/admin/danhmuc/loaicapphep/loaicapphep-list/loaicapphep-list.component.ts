@@ -15,7 +15,9 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { DmLoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { ThuTucHanhChinh } from "src/app/shared/constants/thutuchanhchinh-constants";
 
 @Component({
   selector: 'app-loaicapphep-list',
@@ -62,6 +64,12 @@ export class DmLoaicapphepListComponent implements OnInit {
   // disable unactive button
   public disableUnActiveButton = false;
 
+  // Chứa dữ liệu Nhóm loại cấp phép
+  public nhomLoaiCapPhep = NhomLoaiCapPhep;
+
+  // Chứa dữ liệu thủ tục hành chính
+  public thuTucHanhChinh = ThuTucHanhChinh;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -71,7 +79,7 @@ export class DmLoaicapphepListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-     public formBuilder: FormBuilder
+    public formBuilder: FormBuilder
   ) { }
 
   async ngOnInit() {
@@ -115,10 +123,10 @@ export class DmLoaicapphepListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu Loại cấp phép
    */
-  async getAllLoaiCapPhep() {
+  async getAllLoaiCapPhep(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll(param);
     if (listData.items) {
       listData.items.map((loaiCP, index) => {
         loaiCP.serialNumber = index + 1;
@@ -145,6 +153,8 @@ export class DmLoaicapphepListComponent implements OnInit {
   public formInit() {
     this.formSearch = this.formBuilder.group({
       Keyword: [""],
+      Idthutuchanhchinh: [""],
+      Nhomloaicapphep: [""],
       Trangthai: [""]
     });
   }
@@ -153,7 +163,10 @@ export class DmLoaicapphepListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
  public searchAdvance() {
-  const dataSearch = this.formSearch.value;
+  let dataSearch = this.formSearch.value;
+  dataSearch['PageNumber'] = Paging.PageNumber;
+  dataSearch['PageSize'] = Paging.PageSize;
+  this.getAllLoaiCapPhep(dataSearch);
 }
 
 /**

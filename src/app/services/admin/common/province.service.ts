@@ -17,7 +17,7 @@ export class ProvinceService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDmDvhcModel(),
       outputModelName: new OutputDmDvhcModel(),
-      apiUrl: environment.apiCategoryURL + ServiceName.PROVINCE,
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + "/GetAllTinh",
     });
   }
   public checkBeDeleted(id: number) {
