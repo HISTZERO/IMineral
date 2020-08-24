@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from "@angular/core/testing";
+import { DmCanhanIoComponent } from "./canhan-io.component";
 
-import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io.component";
+
 
 describe("CanhanIoComponent", () => {
   let component: DmCanhanIoComponent;
