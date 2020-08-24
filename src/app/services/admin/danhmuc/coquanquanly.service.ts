@@ -21,6 +21,28 @@ export class DmCoquanquanlyService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsCoQuanQuanLy(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.COQUANQUANLY + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsCoQuanQuanLy(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.COQUANQUANLY + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

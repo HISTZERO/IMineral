@@ -21,6 +21,27 @@ export class DmLoaicapphepService extends RepositoryEloquentService {
     });
   }
 
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItemsLoaiCapPhep(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAICAPPHEP + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteItemsLoaiCapPhep(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAICAPPHEP + '/removelist'
+    });
+    return this.deleteItem(params);
+  }
   public checkBeDeleted(id: string) {
     return "ok";
   }

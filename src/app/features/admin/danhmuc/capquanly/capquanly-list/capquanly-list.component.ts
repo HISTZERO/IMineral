@@ -59,8 +59,8 @@ export class DmCapquanlyListComponent implements OnInit {
   // disable active button
   public disableActiveButton = false;
 
-   // disable unactive button
-   public disableUnActiveButton = false;
+  // disable unactive button
+  public disableUnActiveButton = false;
 
   // Contructor
   constructor(
@@ -99,7 +99,6 @@ export class DmCapquanlyListComponent implements OnInit {
   /**
    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
    */
-
   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
       this.settingsCommon.selectionOptions = { persistSelection: true };
@@ -135,6 +134,20 @@ export class DmCapquanlyListComponent implements OnInit {
   }
 
   /**
+   * Hàm load lại dữ liệu và reset form
+   */
+  public reloadDataGrid(){
+    if (this.listCapQuanLy.length > 0) {
+      this.gridCapQuanLy.clearSelection();
+    }
+    this.formSearch.reset({
+      Keyword: "",
+      Trangthai: ""
+    });
+    this.getAllCapQuanLy();
+  }
+
+  /**
    * Hàm lấy dữ liệu Cấp quản lý
    */
   async getAllCapQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
@@ -163,10 +176,13 @@ export class DmCapquanlyListComponent implements OnInit {
     await this.matSidenavService.open();
   }
 
-   /**
+  /**
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
+    if (this.listCapQuanLy.length > 0) {
+      this.gridCapQuanLy.clearSelection();
+    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -197,7 +213,13 @@ export class DmCapquanlyListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.capquanly.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.NoActive
+        };
+        this.dmFacadeService.getDmCapQuanLyService().updateStatusItemsCapQuanLy(dataParam).subscribe(res => {
+          this.getAllCapQuanLy();
+        });
       }
     });
   }
@@ -209,9 +231,13 @@ export class DmCapquanlyListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.capquanly.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        if (this.listDataSelect.length === 0) {
-
-        }
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmCapQuanLyService().updateStatusItemsCapQuanLy(dataParam).subscribe(res => {
+          this.getAllCapQuanLy();
+        });
       }
     });
   }

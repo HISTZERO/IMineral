@@ -41,7 +41,7 @@
                                 'COMMON.default.numericalOrder' | translate
                               }}"></e-column>
                             <e-column field="ten" headerText="{{
-                                'DANHMUC.dvhc.tentinh' | translate
+                                'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="id" headerText="{{
                                 'COMMON.default.action' | translate
@@ -50,12 +50,12 @@
                                 <div class="btn-group">
                                   <button class="btn btn-sm btn-primary" title="{{
                                       'COMMON.default.edit' | translate
-                                    }}" (click)="openDvhcEditProvince($event)" [disabled]="!editTinhAction">
+                                    }}" (click)="openDvhcEditProvince(data)" [disabled]="!editTinhAction">
                                     <i class="fal fa-edit"></i>
                                   </button>
                                   <button class="btn btn-sm btn-danger" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemProvince($event)" [disabled]="!deleteTinhAction">
+                                    }}" (click)="deleteItemProvince(data)" [disabled]="!deleteTinhAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                   <button class="btn btn-sm btn-info" title="{{
@@ -98,26 +98,26 @@
                                 'COMMON.default.numericalOrder' | translate
                               }}"></e-column>
                             <e-column field="ten" headerText="{{
-                                'DANHMUC.dvhc.ten' | translate
+                                'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="id" headerText="{{
                                 'COMMON.default.action' | translate
                               }}" class="dvhcthaotac">
-                              <ng-template #template>
+                              <ng-template #template let-data>
                                 <div class="btn-group">
                                   <button class="btn btn-sm btn-primary" title="{{
                                       'COMMON.default.edit' | translate
-                                    }}" (click)="openDvhcEditDistrict($event)" [disabled]="!editHuyenAction">
+                                    }}" (click)="openDvhcEditDistrict(data)" [disabled]="!editHuyenAction">
                                     <i class="fal fa-edit"></i>
                                   </button>
-                                  <button class="btn btn-sm btn-danger mr-2" title="{{
+                                  <button class="btn btn-sm btn-danger" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemDistrict($event)" [disabled]="!deleteHuyenAction">
+                                    }}" (click)="deleteItemDistrict(data)" [disabled]="!deleteHuyenAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                   <button class="btn btn-sm btn-info" title="{{
                                       'DANHMUC.dvhc.under' | translate
-                                    }}" (click)="childDistrict($event)" [disabled]="!listXaAction">
+                                    }}" (click)="childDistrict(data)" [disabled]="!listXaAction">
                                     <i class="fal fa-arrow-circle-right"></i>
                                   </button>
                                 </div>
@@ -154,21 +154,21 @@
                                 'COMMON.default.numericalOrder' | translate
                               }}"></e-column>
                             <e-column field="ten" headerText="{{
-                                'DANHMUC.dvhc.ten' | translate
+                                'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="id" headerText="{{
                                 'COMMON.default.action' | translate
                               }}">
-                              <ng-template #template>
+                              <ng-template #template let-data>
                                 <div class="btn-group">
                                   <button class="btn btn-sm btn-primary" title="{{
                                       'COMMON.default.edit' | translate
-                                    }}" (click)="openDvhcEditWard($event)" [disabled]="!editXaAction">
+                                    }}" (click)="openDvhcEditWard(data)" [disabled]="!editXaAction">
                                     <i class="fal fa-edit"></i>
                                   </button>
                                   <button class="btn btn-sm btn-danger mr-2" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemWard($event)" [disabled]="!deleteXaAction">
+                                    }}" (click)="deleteItemWard(data)" [disabled]="!deleteXaAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                 </div>

@@ -9,7 +9,7 @@
           <div class="col-12 px-0">
             <div class="card border">
               <div class="card-body">
-                <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
+                <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"DANHMUC.capquanly.trangthai" | translate}}:</label>
@@ -58,7 +58,7 @@
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
-                      <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllCapQuanLy()">
+                      <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="reloadDataGrid()">
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
