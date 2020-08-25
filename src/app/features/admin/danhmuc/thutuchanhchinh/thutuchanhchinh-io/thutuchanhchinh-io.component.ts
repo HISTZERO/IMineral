@@ -53,6 +53,9 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     // Chứa dữ liệu translate
     public dataTranslate: any;
 
+    // Chứa trạng thái hiển thị của combobox trên layout
+    public classColWithFiftyPercentForCombobox  = false;
+
     // error message
     validationErrorMessages = {};
 
@@ -160,6 +163,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
      */
     formOnEdit() {
       if (this.obj && this.purpose === 'edit') {
+        this.classColWithFiftyPercentForCombobox = true;
         this.thuTucHanhChinhIOForm.setValue({
           mathutuc: this.obj.mathutuc,
           tenthutuc: this.obj.tenthutuc,

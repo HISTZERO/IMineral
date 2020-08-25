@@ -69,6 +69,7 @@ export class DmTochucIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa trạng thái hiển thị của combobox trên layout
   public classColWithFiftyPercentForCombobox  = false;
 
   // error message
