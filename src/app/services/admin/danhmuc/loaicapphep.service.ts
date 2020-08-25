@@ -40,8 +40,9 @@ export class DmLoaicapphepService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.LOAICAPPHEP + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
+  
   public checkBeDeleted(id: string) {
     return "ok";
   }

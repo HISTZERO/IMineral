@@ -40,7 +40,7 @@ export class DmCaptainguyenService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.CAPTAINGUYEN + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
 
   public checkBeDeleted(id: number) {

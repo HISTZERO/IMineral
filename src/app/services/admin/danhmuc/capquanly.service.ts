@@ -40,7 +40,7 @@ export class DmCapquanlyService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.CAPQUANLY + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
 
   public checkBeDeleted(id: number) {

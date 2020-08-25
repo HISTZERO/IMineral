@@ -130,6 +130,9 @@ export class DmLoaigiayphepListComponent implements OnInit {
    * Hàm lấy dữ liệu Loại giấy phép
    */
   async getAllLoaiGiayPhep(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listLoaiGiayPhep != null && this.listLoaiGiayPhep.length > 0) {
+      this.gridLoaiGiayPhep.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmLoaiGiayPhepService()
       .getFetchAll(param);
@@ -155,9 +158,6 @@ export class DmLoaigiayphepListComponent implements OnInit {
   * Hàm load lại dữ liệu và reset form tìm kiếm
   */
   public reloadDataGrid() {
-    if (this.listLoaiGiayPhep.length > 0) {
-      this.gridLoaiGiayPhep.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Idthutuchanhchinh: "",
@@ -195,9 +195,6 @@ export class DmLoaigiayphepListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    if (this.listLoaiGiayPhep.length > 0) {
-      this.gridLoaiGiayPhep.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -261,6 +258,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -272,8 +270,29 @@ export class DmLoaigiayphepListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaigiayphep.nameofobject + " (" + data.tenloaigiayphep + ") " + this.dataTranslate.DANHMUC.loaigiayphep.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.loaigiayphep.informedDialogTitle,
           );
+        } else {
+            this.listDataSelect.map(res => {
+              idItems.push(res.idloaigiayphep);
+            });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+            const dataBody: any = {
+              listId: idItems,
+            };
+
+            this.dmFacadeService.getDmLoaiGiayPhepService()
+            .deleteItemsLoaiGiayPhep(dataBody)
+            .subscribe(
+              () => {
+                this.getAllLoaiGiayPhep();
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+            ));
         }
       }
     });
@@ -346,20 +365,30 @@ export class DmLoaigiayphepListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmLoaiGiayPhepService()
-          .deleteItem({ id: this.selectedItem.idloaigiayphep })
-          .subscribe(
-            () => this.getAllLoaiGiayPhep(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaigiayphep.nameofobject + " (" + data.tenloaigiayphep + ") " + this.dataTranslate.DANHMUC.loaigiayphep.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaigiayphep.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+            .getDmLoaiGiayPhepService()
+            .deleteItem({ id: this.selectedItem.idloaigiayphep })
+            .subscribe(
+              () => this.getAllLoaiGiayPhep(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
+        }
       }
     });
   }
