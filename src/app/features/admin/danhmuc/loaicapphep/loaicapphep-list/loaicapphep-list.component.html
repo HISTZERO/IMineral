@@ -9,7 +9,7 @@
           <div class="col-12 px-0">
             <div class="card border">
               <div class="card-body">
-                <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
+                <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}:</label>
@@ -17,8 +17,8 @@
                       <mat-option value="">
                         {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
                       </mat-option>
-                      <mat-option *ngFor="let thutuc of thuTucHanhChinh" [value]="thutuc.id">
-                        {{ thutuc.name }}
+                      <mat-option *ngFor="let thutuc of listThuTucHanhChinh" [value]="thutuc.idthutuchanhchinh">
+                        * {{ thutuc.tenthutuc }}
                       </mat-option>
                     </mat-select>
                   </div>
@@ -29,7 +29,7 @@
                         {{ "DANHMUC.loaicapphep.chonNhomloaicapphep" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let nhomLCP of nhomLoaiCapPhep" [value]="nhomLCP.id">
-                        {{ nhomLCP.name }}
+                        * {{ nhomLCP.name }}
                       </mat-option>
                     </mat-select>
                   </div>
@@ -40,7 +40,7 @@
                         {{ "DANHMUC.loaicapphep.chonTrangthai" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
-                          {{ tt.name }}
+                        {{ tt.name }}
                       </mat-option>
                     </mat-select>
                   </div>
@@ -80,7 +80,7 @@
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
-                      <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllLoaiCapPhep()">
+                      <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
@@ -108,10 +108,7 @@
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.tenloaicapphep' | translate }}"></e-column>
-                    <e-column field="idthutuchanhchinh" headerText="{{ 'DANHMUC.loaicapphep.thutuchanhchinh' | translate }}">
-                      <ng-template #template let-data>
-                        {{ data.idthutuchanhchinh | getNameFileConstant: thuTucHanhChinh}}
-                      </ng-template>
+                    <e-column field="tenthutuchanhchinh" headerText="{{ 'DANHMUC.loaicapphep.thutuchanhchinh' | translate }}">
                     </e-column>
                     <e-column field="nhomloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.nhomloaicapphep' | translate }}">
                       <ng-template #template let-data>
@@ -146,7 +143,7 @@
         </div>
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 600px;">
+        style="width: 700px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeLoaiCapPhepIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>

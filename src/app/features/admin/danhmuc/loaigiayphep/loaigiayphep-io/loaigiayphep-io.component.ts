@@ -10,7 +10,6 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { NhomLoaiGiayPhep } from "src/app/shared/constants/nhomloaigiayphep-constants";
-import { ThuTucHanhChinh } from "src/app/shared/constants/thutuchanhchinh-constants";
 
 @Component({
   selector: 'app-loaigiayphep-io',
@@ -41,10 +40,13 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   public nhomLoaiGiayPhep = NhomLoaiGiayPhep;
 
   // Chứa dữ liệu thủ tục hành chính
-  public thuTucHanhChinh = ThuTucHanhChinh;
+  public listThuTucHanhChinh: any;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
+  // Chứa kiểu boolean hiển thị thuộc tính column
+  public classColDvhc: boolean = false;
 
   // error message
   validationErrorMessages = {};
@@ -69,6 +71,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    // Lấy dữ liệu thủ tục hành chính
+    this.getAllThuTucHanhChinh();
     // Khởi tạo form
     await this.formInit();
     //Khởi tạo form theo dạng add or edit
@@ -101,6 +105,16 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   }
 
   /**
+   * Hàm lấy dữ liệu Thủ tục hành chính
+   */
+  async getAllThuTucHanhChinh() {
+    const listData: any = await this.dmFacadeService
+      .getDmThuTucHanhChinhService()
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+    this.listThuTucHanhChinh = listData.items;
+  }
+
+  /**
     * Hàm khởi tạo form theo dạng edit
     */
   bindingConfigAddOrUpdate() {
@@ -129,11 +143,12 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.classColDvhc = true;
       this.loaiGiayPhepIOForm.setValue({
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
-        idthutuchanhchinh: +this.obj.idthutuchanhchinh,
+        idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
       });

@@ -312,6 +312,14 @@ span.e-headertext {
   z-index: 0 !important;
 }
 
+.mat-select-panel mat-option.mat-option {
+  height: unset;
+}
+
+.mat-option-text.mat-option-text {
+  white-space: normal;
+}
+
 /*.e-columnheader .e-headercell:first-child div span {*/
 /*  text-align: center;*/
 /*}*/

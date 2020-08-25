@@ -5,7 +5,6 @@ import { HttpErrorResponse } from "@angular/common/http";
 
 import { InputDmLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { ThuTucHanhChinh } from "src/app/shared/constants/thutuchanhchinh-constants";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -41,10 +40,13 @@ export class DmLoaicapphepIoComponent implements OnInit {
   public nhomLoaiCapPhep = NhomLoaiCapPhep;
 
   // Chứa dữ liệu thủ tục hành chính
-  public thuTucHanhChinh = ThuTucHanhChinh;
+  public listThuTucHanhChinh: any;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
+  // Chứa kiểu boolean hiển thị thuộc tính column
+  public classColDvhc: boolean = false;
 
   // error message
   validationErrorMessages = {};
@@ -75,7 +77,8 @@ export class DmLoaicapphepIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
+    // Lấy dữ liệu thủ tục hành chính
+    this.getAllThuTucHanhChinh();
   }
 
   /**
@@ -129,16 +132,27 @@ export class DmLoaicapphepIoComponent implements OnInit {
     */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.classColDvhc = true;
       this.loaiCapPhepIOForm.setValue({
         maloaicapphep: this.obj.maloaicapphep,
         tenloaicapphep: this.obj.tenloaicapphep,
         nhomloaicapphep: +this.obj.nhomloaicapphep,
-        idthutuchanhchinh: +this.obj.idthutuchanhchinh,
+        idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
       });
     }
     this.editMode = true;
+  }
+
+  /**
+   * Hàm lấy dữ liệu Thủ tục hành chính
+   */
+  async getAllThuTucHanhChinh() {
+    const listData: any = await this.dmFacadeService
+      .getDmThuTucHanhChinhService()
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+    this.listThuTucHanhChinh = listData.items;
   }
 
   /**
