@@ -72,6 +72,11 @@ export class DmTochucIoComponent implements OnInit {
   // Chứa trạng thái hiển thị của combobox trên layout
   public classColWithFiftyPercentForCombobox  = false;
 
+  // chứa thông tin combobox được backup trong trường hợp update
+  public dataComboboxModel: any;
+
+  public tenLoaiToChuc: string;
+
   // error message
   validationErrorMessages = {};
 
@@ -182,6 +187,7 @@ export class DmTochucIoComponent implements OnInit {
       ngaycap: ["", Validators.required],
       noicap: ["", Validators.required],
       idloaitochuc: ["", Validators.required],
+      idloaitochuccombobox: [""],
       fax: [""],
       website: [""],
       dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
@@ -208,6 +214,7 @@ export class DmTochucIoComponent implements OnInit {
         ngaycap: this.obj.ngaycap,
         noicap: this.obj.noicap,
         idloaitochuc: this.obj.idloaitochuc,
+        idloaitochuccombobox: this.obj.idloaitochuc,
         fax: this.obj.fax,
         website: this.obj.website,
         dienthoai: this.obj.dienthoai,
@@ -218,6 +225,19 @@ export class DmTochucIoComponent implements OnInit {
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
+
+      this.dataComboboxModel = {
+                                  idloaitochuc: this.obj.idloaitochuc,
+                                  tenloaitochuc: this.obj.tenloaitochuc,
+                                  idtinh: this.obj.idtinh,
+                                  tentinh: this.obj.tentinh,
+                                  idhuyen: this.obj.idhuyen,
+                                  tenhuyen: this.obj.tenhuyen,
+                                  idxa: this.obj.idxa,
+                                  tenxa: this.obj.tenxa
+                                };
+
+      this.tenLoaiToChuc = this.obj.tenloaitochuc;
       this.showDvhcHuyen();
       this.showDvhcXa();
     }
