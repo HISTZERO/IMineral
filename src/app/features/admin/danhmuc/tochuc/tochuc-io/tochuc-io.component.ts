@@ -13,6 +13,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
 import { OutputDmLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
+import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 
 @Component({
   selector: 'app-tochuc-io',
@@ -75,7 +76,10 @@ export class DmTochucIoComponent implements OnInit {
   // chứa thông tin combobox được backup trong trường hợp update
   public dataComboboxModel: any;
 
-  public tenLoaiToChuc: string;
+  public tenLoaiToChucDisplay: string;
+  public tenTinhDisplay: string;
+  public tenHuyenDisplay: string;
+  public tenXaDisplay: string;
 
   // error message
   validationErrorMessages = {};
@@ -93,9 +97,9 @@ export class DmTochucIoComponent implements OnInit {
     idloaitochuc: "",
     dienthoai: "",
     email: "",
-    matinh: "",
-    mahuyen: "",
-    maxa: "",
+    tinh: "",
+    huyen: "",
+    xa: "",
     trangthai: "",
     thutu: "",
   };
@@ -112,13 +116,11 @@ export class DmTochucIoComponent implements OnInit {
 
   async ngOnInit() {
     // Khởi tạo form
-    await this.formInit();
+    this.formInit();
     // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    // Lấy dữ liệu loại tổ chức
-    this.getAllLoaiToChuc();
   }
 
   /**
@@ -146,9 +148,9 @@ export class DmTochucIoComponent implements OnInit {
      noicap: { required: this.dataTranslate.DANHMUC.tochuc.noicapRequired },
      idloaitochuc: { required: this.dataTranslate.DANHMUC.tochuc.loaitochucRequired },
      dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber},
-     matinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
-     mahuyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
-     maxa: { required: this.dataTranslate.DANHMUC.tochuc.maxaRequired },
+     tinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
+     huyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
+     xa: { required: this.dataTranslate.DANHMUC.tochuc.maxaRequired },
      thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber },
      email: { email: this.dataTranslate.DANHMUC.tochuc.emailCheck}
     };
@@ -160,19 +162,20 @@ export class DmTochucIoComponent implements OnInit {
   async getAllLoaiToChuc() {
     const listData: any = await this.dmFacadeService
       .getDmLoaiToChucService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
     this.listLoaiToChuc = listData.items;
   }
 
   /**
    * Hàm khởi tạo form theo dạng edit
    */
-  bindingConfigAddOrUpdate() {
-    this.showDvhcTinh();
+  async bindingConfigAddOrUpdate() {
+    await this.showDvhcTinh();
     this.editMode = false;
     this.inputModel = new InputDmToChucModel();
     // check edit
-    this.formOnEdit();
+    await this.formOnEdit();
+    this.getAllLoaiToChuc();
   }
 
   /**
@@ -187,14 +190,17 @@ export class DmTochucIoComponent implements OnInit {
       ngaycap: ["", Validators.required],
       noicap: ["", Validators.required],
       idloaitochuc: ["", Validators.required],
-      idloaitochuccombobox: [""],
+      loaitochuccombobox: [""],
       fax: [""],
       website: [""],
       dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
       email: ["", Validators.email],
-      matinh: ["", Validators.required],
-      mahuyen: ["", Validators.required],
-      maxa: ["",  Validators.required],
+      tinh: ["", Validators.required],
+      tinhcombobox: [""],
+      huyen: ["", Validators.required],
+      huyencombobox: [""],
+      xa: ["",  Validators.required],
+      xacombobox: [""],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
@@ -203,7 +209,7 @@ export class DmTochucIoComponent implements OnInit {
   /**
    * hàm set value cho form
    */
-  formOnEdit() {
+  async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.classColWithFiftyPercentForCombobox = true;
       this.tochucIOForm.setValue({
@@ -214,14 +220,17 @@ export class DmTochucIoComponent implements OnInit {
         ngaycap: this.obj.ngaycap,
         noicap: this.obj.noicap,
         idloaitochuc: this.obj.idloaitochuc,
-        idloaitochuccombobox: this.obj.idloaitochuc,
+        loaitochuccombobox: {idloaitochuc: this.obj.idloaitochuc, tenloaitochuc: this.obj.tenloaitochuc},
         fax: this.obj.fax,
         website: this.obj.website,
         dienthoai: this.obj.dienthoai,
         email: this.obj.email,
-        matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
-        mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
-        maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
+        tinhcombobox: {idtinh: this.obj.idtinh, matinh: this.obj.matinh, tentinh: this.obj.tentinh},
+        tinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
+        huyencombobox: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen, tenhuyen: this.obj.tenhuyen},
+        huyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
+        xacombobox: {idxa: this.obj.idxa, maxa: this.obj.maxa, tenxa: this.obj.tenxa},
+        xa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
@@ -230,18 +239,40 @@ export class DmTochucIoComponent implements OnInit {
                                   idloaitochuc: this.obj.idloaitochuc,
                                   tenloaitochuc: this.obj.tenloaitochuc,
                                   idtinh: this.obj.idtinh,
+                                  matinh: this.obj.matinh,
                                   tentinh: this.obj.tentinh,
                                   idhuyen: this.obj.idhuyen,
+                                  mahuyen: this.obj.mahuyen,
                                   tenhuyen: this.obj.tenhuyen,
                                   idxa: this.obj.idxa,
+                                  maxa: this.obj.maxa,
                                   tenxa: this.obj.tenxa
                                 };
 
-      this.tenLoaiToChuc = this.obj.tenloaitochuc;
-      this.showDvhcHuyen();
-      this.showDvhcXa();
+      this.tenLoaiToChucDisplay = this.obj.tenloaitochuc;
+      await this.showDvhcHuyen();
+      await this.showDvhcXa();
+      this.selectXa();
     }
     this.editMode = true;
+  }
+
+  /**
+   * Hàm lấy loại tổ chức hiện tại tử commbobox
+   */
+  async selectLoaiToChuc() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.tochucIOForm.value.loaitochuccombobox) {
+        this.tochucIOForm.controls["idloaitochuc"].setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
+        this.tenLoaiToChucDisplay = this.tochucIOForm.value.loaitochuccombobox.tenloaitochuc;
+      } else {
+        this.tochucIOForm.controls["idloaitochuc"].setValue(this.dataComboboxModel.idloaitochuc);
+        this.tenLoaiToChucDisplay = this.dataComboboxModel.tenloaitochuc;
+      }
+    } else {
+      this.tochucIOForm.controls["idloaitochuc"].setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
+      this.tenLoaiToChucDisplay = "";
+    }
   }
 
   /**
@@ -259,50 +290,154 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.tochucIOForm.value.matinh === true) {
+    if (!this.tochucIOForm.value.tinhcombobox === true) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.tochucIOForm.controls["mahuyen"].setValue("");
+        this.tochucIOForm.controls["huyencombobox"].setValue("");
       }
     }
-    if (!this.tochucIOForm.value.matinh === false) {
+    if (!this.tochucIOForm.value.tinhcombobox === false) {
       if (this.editMode === true) {
-        this.tochucIOForm.controls["mahuyen"].setValue("");
+        this.tochucIOForm.controls["huyencombobox"].setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.tochucIOForm.value.matinh.idtinh).toPromise();
+        .getByid(this.tochucIOForm.value.tinhcombobox.idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
+
+    this.selectTinh();
   }
 
   /**
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.tochucIOForm.value.mahuyen === true) {
+    if (!this.tochucIOForm.value.huyencombobox === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.tochucIOForm.controls["maxa"].setValue("");
+        this.tochucIOForm.controls["xacombobox"].setValue("");
       }
     }
     if (
-      !this.tochucIOForm.value.matinh === false &&
-      !this.tochucIOForm.value.mahuyen === false
+      !this.tochucIOForm.value.tinhcombobox === false &&
+      !this.tochucIOForm.value.huyencombobox === false
     ) {
       if (this.editMode === true) {
-        this.tochucIOForm.controls["maxa"].setValue("");
+        this.tochucIOForm.controls["xacombobox"].setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.tochucIOForm.value.mahuyen.idhuyen).toPromise();
+        .getByid(this.tochucIOForm.value.huyencombobox.idhuyen).toPromise();
       this.dvhcWardFilters = this.allXa;
+    }
+
+    this.selectHuyen();
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectTinh() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.tochucIOForm.value.tinhcombobox !== "") {
+        this.tochucIOForm.controls["tinh"].setValue({
+                                                      idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
+                                                      matinh: this.tochucIOForm.value.tinhcombobox.matinh
+                                                    });
+        this.tenTinhDisplay = this.tochucIOForm.value.tinhcombobox.tentinh;
+        this.tochucIOForm.controls["huyen"].setValue("");
+        this.tenHuyenDisplay = "";
+        this.tochucIOForm.controls["xa"].setValue("");
+        this.tenXaDisplay = "";
+      } else {
+        this.tochucIOForm.controls["tinh"].setValue({
+                                                      idtinh: this.dataComboboxModel.idtinh,
+                                                      matinh: this.dataComboboxModel.matinh
+                                                    });
+        this.tenTinhDisplay = this.dataComboboxModel.tentinh;
+        this.selectHuyen();
+      }
+    } else {
+      this.tochucIOForm.controls["tinh"].setValue({
+                                                    idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
+                                                    matinh: this.tochucIOForm.value.tinhcombobox.matinh
+                                                  });
+      this.tenTinhDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectHuyen() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.tochucIOForm.value.huyencombobox !== "") {
+        this.tochucIOForm.controls["huyen"].setValue({
+                                                      idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
+                                                      mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
+                                                    });
+        this.tenHuyenDisplay = this.tochucIOForm.value.huyencombobox.tenhuyen;
+        this.tochucIOForm.controls["xa"].setValue("");
+        this.tenXaDisplay = "";
+      } else {
+        if (this.tochucIOForm.value.tinhcombobox !== "") {
+          this.tochucIOForm.controls["huyen"].setValue("");
+          this.tenHuyenDisplay = "";
+        } else {
+          this.tochucIOForm.controls["huyen"].setValue({
+            idhuyen: this.dataComboboxModel.idhuyen,
+            mahuyen: this.dataComboboxModel.mahuyen
+          });
+          this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
+        }
+        this.tochucIOForm.controls["xacombobox"].setValue("");
+        this.selectXa();
+      }
+    } else {
+      this.tochucIOForm.controls["huyen"].setValue({
+                                                    idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
+                                                    mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
+                                                  });
+      this.tenHuyenDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectXa() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.tochucIOForm.value.xacombobox !== "") {
+        this.tochucIOForm.controls["xa"].setValue({
+                                                      idxa: this.tochucIOForm.value.xacombobox.idxa,
+                                                      maxa: this.tochucIOForm.value.xacombobox.maxa
+                                                    });
+        this.tenXaDisplay = this.tochucIOForm.value.xacombobox.tenxa;
+      } else {
+        if (this.tochucIOForm.value.tinhcombobox !== "" || this.tochucIOForm.value.huyencombobox !== "") {
+          this.tochucIOForm.controls["xa"].setValue("");
+          this.tenXaDisplay = "";
+        } else {
+          this.tochucIOForm.controls["xa"].setValue({
+            idxa: this.dataComboboxModel.idxa,
+            maxa: this.dataComboboxModel.maxa
+          });
+          this.tenXaDisplay = this.dataComboboxModel.tenxa;
+        }
+      }
+    } else {
+      this.tochucIOForm.controls["xa"].setValue({
+                                                    idxa: this.tochucIOForm.value.xacombobox.idxa,
+                                                    maxa: this.tochucIOForm.value.xacombobox.maxa
+                                                  });
+      this.tenXaDisplay = "";
     }
   }
 
@@ -312,13 +447,13 @@ export class DmTochucIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const dmFacadeService = this.dmFacadeService.getDmToChucService();
     // Gán dữ liệu input vào model
-    const idtinh = this.tochucIOForm.value.matinh.idtinh;
-    const idhuyen = this.tochucIOForm.value.mahuyen.idhuyen;
-    const idxa =  this.tochucIOForm.value.maxa.idxa;
+    const idtinh = this.tochucIOForm.value.tinh.idtinh;
+    const idhuyen = this.tochucIOForm.value.huyen.idhuyen;
+    const idxa =  this.tochucIOForm.value.xa.idxa;
     this.inputModel = this.tochucIOForm.value;
-    this.inputModel.matinh = this.tochucIOForm.value.matinh.matinh;
-    this.inputModel.mahuyen = this.tochucIOForm.value.mahuyen.mahuyen;
-    this.inputModel.maxa = this.tochucIOForm.value.maxa.maxa;
+    this.inputModel.matinh = this.tochucIOForm.value.tinh.matinh;
+    this.inputModel.mahuyen = this.tochucIOForm.value.huyen.mahuyen;
+    this.inputModel.maxa = this.tochucIOForm.value.xa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
@@ -402,7 +537,7 @@ export class DmTochucIoComponent implements OnInit {
     if(item1.matinh === item2.matinh) {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -413,7 +548,7 @@ export class DmTochucIoComponent implements OnInit {
     if(item1.mahuyen === item2.mahuyen) {
       return true;
     } else {
-      return false
+      return false;
     }
   }
 
@@ -424,7 +559,18 @@ export class DmTochucIoComponent implements OnInit {
     if(item1.maxa === item2.maxa) {
       return true;
     } else {
-      return false
+      return false;
+    }
+  }
+
+   /**
+    * Hàm check giá trị trong seletec option Tỉnh
+    */
+  public compareLoaiToChuc(item1: any, item2: any) {
+    if(item1.idloaitochuc === item2.idloaitochuc) {
+      return true;
+    } else {
+      return false;
     }
   }
 
