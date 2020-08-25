@@ -207,9 +207,20 @@ export class DmLoaitailieuListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmLoaiTaiLieuService().updateStatusItemsLoaiTaiLieu(dataParam).subscribe(res => {
-          this.getAllLoaiTaiLieu();
-        });
+        this.dmFacadeService.getDmLoaiTaiLieuService()
+            .updateStatusItemsLoaiTaiLieu(dataParam)
+            .subscribe(
+              () => {
+                  this.getAllLoaiTaiLieu();
+                },
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.updateStatusSuccess,
+                    2000)
+              );
       }
     });
   }
@@ -225,9 +236,20 @@ export class DmLoaitailieuListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmLoaiTaiLieuService().updateStatusItemsLoaiTaiLieu(dataParam).subscribe(res => {
-          this.getAllLoaiTaiLieu();
-        });
+        this.dmFacadeService.getDmLoaiTaiLieuService()
+            .updateStatusItemsLoaiTaiLieu(dataParam)
+            .subscribe(
+              () => {
+                  this.getAllLoaiTaiLieu();
+                },
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.updateStatusSuccess,
+                    2000)
+              );
       }
     });
   }

@@ -84,7 +84,7 @@
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
             <label class="m-0">{{"COMMON.default.tentinhdangdung" | translate}}:</label><br>
-            <span><b>Tỉnh Hà Giang</b></span>
+            <span><b>{{obj?.tentinh}}</b></span>
           </div>
         </div>
         <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
@@ -109,7 +109,7 @@
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
             <label class="m-0">{{"COMMON.default.tenhuyendangdung" | translate}}:</label><br>
-            <span><b>Tỉnh Hà Giang</b></span>
+            <span><b>{{obj?.tenhuyen}}</b></span>
           </div>
         </div>
         <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
@@ -133,7 +133,7 @@
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
             <label class="m-0">{{"COMMON.default.tenxadangdung" | translate}}:</label><br>
-            <span><b>Tỉnh Hà Giang</b></span>
+            <span><b>{{obj?.tenxa}}</b></span>
           </div>
         </div>
       </div>

@@ -218,9 +218,20 @@ export class DmCapquanlyListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmCapQuanLyService().updateStatusItemsCapQuanLy(dataParam).subscribe(res => {
-          this.getAllCapQuanLy();
-        });
+        this.dmFacadeService.getDmCapQuanLyService()
+            .updateStatusItemsCapQuanLy(dataParam)
+            .subscribe(
+              () => {
+                this.getAllCapQuanLy();
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.updateStatusSuccess,
+                  2000)
+            );
       }
     });
   }
@@ -236,9 +247,20 @@ export class DmCapquanlyListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmCapQuanLyService().updateStatusItemsCapQuanLy(dataParam).subscribe(res => {
-          this.getAllCapQuanLy();
-        });
+        this.dmFacadeService.getDmCapQuanLyService()
+            .updateStatusItemsCapQuanLy(dataParam)
+            .subscribe(
+              () => {
+                this.getAllCapQuanLy();
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.updateStatusSuccess,
+                  2000)
+            );
       }
     });
   }

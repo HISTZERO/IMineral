@@ -49,7 +49,8 @@
     "tenhuyendangdung": "Tên huyện đang dùng",
     "tenxadangdung": "Tên xã đang dùng",
     "tenthutucdangdung": "Thủ tục hành chính đang dùng",
-    "tennhomkhoangsandangdung": "Nhóm khoáng sản đang dùng "
+    "tennhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "updateStatusSuccess": "Thay đổi trạng thái thành công"
   },
   "dulieutram": {
     "thongtinchung": "THÔNG TIN CHUNG",
