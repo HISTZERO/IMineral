@@ -27,9 +27,9 @@
     "chooseImage": "Chọn ảnh",
     "matinh": "Tên tỉnh",
     "chonTinh": "---Chọn tỉnh---",
-    "mahuyen": "Tên huyện",
+    "mahuyen": "Tên quận/huyện",
     "chonHuyen": "---Chọn huyện---",
-    "maxa": "Tên xã",
+    "maxa": "Tên phường/xã",
     "chonXa": "---Chọn xã---",
     "action": "Thao tác",
     "numericalOrder": "STT",
@@ -46,11 +46,12 @@
     "titleActiveDialog": "Bạn có chắc chắn muốn Active? ",
     "timkiemnangcao": "Tìm kiếm nâng cao",
     "tentinhdangdung": "Tên tỉnh đang dùng",
-    "tenhuyendangdung": "Tên huyện đang dùng",
-    "tenxadangdung": "Tên xã đang dùng",
+    "tenhuyendangdung": "Tên quận/huyện đang dùng",
+    "tenxadangdung": "Tên phường/xã đang dùng",
     "tenthutucdangdung": "Thủ tục hành chính đang dùng",
     "tennhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
-    "updateStatusSuccess": "Thay đổi trạng thái thành công"
+    "updateStatusSuccess": "Thay đổi trạng thái thành công",
+    "tenloaitochucdangdung": "Loại tổ chức đang dùng "
   },
   "dulieutram": {
     "thongtinchung": "THÔNG TIN CHUNG",

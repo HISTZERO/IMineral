@@ -11,6 +11,7 @@ export class OutputDmToChucModel {
     email: string;
     website: string;
     idloaitochuc: string;
+    tenloaitochuc: string;
     matinh: string;
     mahuyen: string;
     maxa: string;
