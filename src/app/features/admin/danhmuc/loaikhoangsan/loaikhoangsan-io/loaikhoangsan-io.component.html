@@ -17,16 +17,24 @@
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaikhoangsan.idnhomkhoangsan" | translate }}</label>
       <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaikhoangsan.chonNhomkhoangsan' | translate }}" formControlName="idnhomkhoangsan" *ngIf="dataTranslate">
-          <mat-select-filter [displayMember]="'tendvhc'" [array]="listNhomKhoangSanFilter" (filteredReturn)="listNhomKhoangSan = $event">
-          </mat-select-filter>
-          <mat-option value="">
-            {{ "DANHMUC.loaikhoangsan.chonNhomkhoangsan" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let tinh of listNhomKhoangSan" [value]="tinh.idnhomkhoangsan">
-            {{ tinh.tennhomkhoangsan }}
-          </mat-option>
-        </mat-select>
+        <div class="row">
+          <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaikhoangsan.chonNhomkhoangsan' | translate }}" formControlName="idnhomkhoangsan" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'tendvhc'" [array]="listNhomKhoangSanFilter" (filteredReturn)="listNhomKhoangSan = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "DANHMUC.loaikhoangsan.chonNhomkhoangsan" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let tinh of listNhomKhoangSan" [value]="tinh.idnhomkhoangsan">
+                {{ tinh.tennhomkhoangsan }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
+            <label class="m-0">{{"COMMON.default.tennhomkhoangsandangdung" | translate}}:</label><br>
+            <span><b>{{ obj?.tennhomkhoangsan}}</b></span>
+          </div>
+        </div>
         <span *ngIf="formErrors.idnhomkhoangsan" class="alert-danger">{{formErrors.idnhomkhoangsan}}</span>
       </div>
     </div>
