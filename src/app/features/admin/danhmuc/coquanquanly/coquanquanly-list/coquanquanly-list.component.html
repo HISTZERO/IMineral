@@ -118,10 +118,8 @@
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid #gridCoQuanQuanLy *ngIf="listCoQuanQuanLy" [dataSource]="listCoQuanQuanLy"
-                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                  [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
+                <ejs-grid #gridCoQuanQuanLy *ngIf="listCoQuanQuanLy" [dataSource]="listCoQuanQuanLy" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
+                [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tencoquanquanly" headerText="{{ 'DANHMUC.coquanquanly.tencoquanquanly' | translate }}"></e-column>

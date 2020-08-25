@@ -179,7 +179,12 @@ export class DmCaptruluongIoComponent implements OnInit {
       */
     public onFormReset() {
       // Hàm .reset sẽ xóa trắng mọi control trên form
-      this.capTruLuongIOForm.reset();
+      this.capTruLuongIOForm.reset({
+        macaptruluong: "",
+        tencaptruluong: "",
+        mota: "",
+        thutu: "",
+      });
     }
 
     /**

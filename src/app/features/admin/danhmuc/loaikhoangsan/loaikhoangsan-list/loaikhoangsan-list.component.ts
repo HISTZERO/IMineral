@@ -90,7 +90,7 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Content' };
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -235,7 +235,7 @@ export class DmLoaikhoangsanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmLoaiGiayPhepService().updateStatusItemsLoaiGiayPhep(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmLoaiKhoangSanService().updateStatusItemsLoaiKhoangSan(dataParam).subscribe(res => {
           this.getAllLoaiKhoangSan();
         });
       }

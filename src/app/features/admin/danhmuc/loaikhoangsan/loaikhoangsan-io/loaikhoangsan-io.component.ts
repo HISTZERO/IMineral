@@ -205,7 +205,13 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.loaiKhoangSanIOForm.reset();
+    this.loaiKhoangSanIOForm.reset({
+      maloaikhoangsan: "",
+      tenloaikhoangsan: "",
+      mota: "",
+      thutu: "",
+      idnhomkhoangsan: ""
+    });
   }
 
   /**

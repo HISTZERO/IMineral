@@ -208,7 +208,14 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.loaiGiayPhepIOForm.reset();
+    this.loaiGiayPhepIOForm.reset({
+      maloaigiayphep: "",
+      tenloaigiayphep: "",
+      nhomloaigiayphep: "",
+      idthutuchanhchinh: "",
+      mota: "",
+      thutu: "",
+    });
   }
 
   /**

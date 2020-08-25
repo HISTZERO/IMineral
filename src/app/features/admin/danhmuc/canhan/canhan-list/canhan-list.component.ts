@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -80,8 +80,11 @@ export class DmCanhanListComponent implements OnInit {
   // disable active button
   public disableActiveButton = false;
 
-   // disable unactive button
-   public disableUnActiveButton = false;
+  // disable unactive button
+  public disableUnActiveButton = false;
+
+   // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
 
   // Contructor
   constructor(
@@ -102,6 +105,8 @@ export class DmCanhanListComponent implements OnInit {
     this.showDvhcTinh();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
