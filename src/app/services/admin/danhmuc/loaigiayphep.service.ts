@@ -40,7 +40,7 @@ export class DmLoaigiayphepService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.LOAIGIAYPHEP + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
 
   public checkBeDeleted(id: string) {

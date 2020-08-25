@@ -26,7 +26,7 @@
                 {{ "DANHMUC.loaikhoangsan.chonNhomkhoangsan" | translate }}
               </mat-option>
               <mat-option *ngFor="let tinh of listNhomKhoangSan" [value]="tinh.idnhomkhoangsan">
-                {{ tinh.tennhomkhoangsan }}
+                * {{ tinh.tennhomkhoangsan }}
               </mat-option>
             </mat-select>
           </div>

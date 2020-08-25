@@ -141,9 +141,6 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form
    */
   public reloadDataGrid(){
-    if (this.listCapQuanLy.length > 0) {
-      this.gridCapQuanLy.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Trangthai: ""
@@ -155,6 +152,9 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp quản lý
    */
   async getAllCapQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listCapQuanLy != null && this.listCapQuanLy.length > 0) {
+      this.gridCapQuanLy.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmCapQuanLyService()
       .getFetchAll(param);
@@ -184,9 +184,6 @@ export class DmCapquanlyListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    if (this.listCapQuanLy.length > 0) {
-      this.gridCapQuanLy.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -250,6 +247,7 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -261,8 +259,30 @@ export class DmCapquanlyListComponent implements OnInit {
             this.dataTranslate.DANHMUC.capquanly.nameofobject + " (" + data.tencapquanly + ") " + this.dataTranslate.DANHMUC.capquanly.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.capquanly.informedDialogTitle,
           );
+        } else {
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          this.listDataSelect.map(res => {
+            idItems.push(res.idcapquanly);
+          });
+
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmCapQuanLyService()
+          .deleteItemsCapQuanLy(dataBody)
+          .subscribe(
+            () => {
+              this.getAllCapQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -322,20 +342,30 @@ export class DmCapquanlyListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmCapQuanLyService()
-          .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
-          .subscribe(
-            () => this.getAllCapQuanLy(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.capquanly.nameofobject + " (" + data.tencapquanly + ") " + this.dataTranslate.DANHMUC.capquanly.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.capquanly.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+              .getDmCapQuanLyService()
+              .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
+              .subscribe(
+                () => this.getAllCapQuanLy(),
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.successDelete,
+                    2000
+                  )
+              );
+        }
       }
     });
   }

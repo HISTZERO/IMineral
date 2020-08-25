@@ -37,3 +37,7 @@ export class InputDmCanhanModel {
   trangthai: number;
   thutu: number;
 }
+
+export class InputDmCaNhanDeleteItemsModel {
+  listId: string[];
+}

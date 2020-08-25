@@ -40,7 +40,7 @@ export class DmLoaibaocaoService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.LOAIBAOCAO + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
 
   public checkBeDeleted(id: number) {

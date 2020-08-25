@@ -120,6 +120,9 @@ export class DmLoaitailieuListComponent implements OnInit {
     * Hàm lấy dữ liệu loại tài liệu
     */
   async getAllLoaiTaiLieu(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listLoaitaiLieu != null && this.listLoaitaiLieu.length > 0) {
+      this.gridLoaiTaiLieu.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmLoaiTaiLieuService()
       .getFetchAll(param);
@@ -135,9 +138,6 @@ export class DmLoaitailieuListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form tìm kiếm
    */
   public reloadDataGrid() {
-    if (this.listLoaitaiLieu.length > 0) {
-      this.gridLoaiTaiLieu.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Trangthai: "",
@@ -173,9 +173,6 @@ export class DmLoaitailieuListComponent implements OnInit {
     * Tìm kiếm nâng cao
     */
   public searchAdvance() {
-    if (this.listLoaitaiLieu.length > 0) {
-      this.gridLoaiTaiLieu.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -239,6 +236,7 @@ export class DmLoaitailieuListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -250,8 +248,29 @@ export class DmLoaitailieuListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaitailieu.nameofobject + " (" + data.tenloaitailieu + ") " + this.dataTranslate.DANHMUC.loaitailieu.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.loaitailieu.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idloaitailieu);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmLoaiTaiLieuService()
+          .deleteItemsLoaiTaiLieu(dataBody)
+          .subscribe(
+            () => {
+              this.getAllLoaiTaiLieu();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -324,20 +343,30 @@ export class DmLoaitailieuListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmLoaiTaiLieuService()
-          .deleteItem({ id: this.selectedItem.idloaitailieu })
-          .subscribe(
-            () => this.getAllLoaiTaiLieu(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaitailieu.nameofobject + " (" + data.tenloaitailieu + ") " + this.dataTranslate.DANHMUC.loaitailieu.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaitailieu.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+            .getDmLoaiTaiLieuService()
+            .deleteItem({ id: this.selectedItem.idloaitailieu })
+            .subscribe(
+              () => this.getAllLoaiTaiLieu(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
+        }
       }
     });
   }
