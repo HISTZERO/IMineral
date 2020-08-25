@@ -179,7 +179,12 @@ export class DmCapquanlyIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.capQuanLyIOForm.reset();
+    this.capQuanLyIOForm.reset({
+      macapquanly: "",
+      tencapquanly: "",
+      mota: "",
+      thutu: "",
+    });
   }
 
   /**

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -66,6 +66,9 @@ export class DmLoaicapphepListComponent implements OnInit {
   // Chứa dữ liệu Nhóm loại cấp phép
   public nhomLoaiCapPhep = NhomLoaiCapPhep;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
   // Chứa dữ liệu thủ tục hành chính
   public listThuTucHanhChinh: any;
 
@@ -89,6 +92,8 @@ export class DmLoaicapphepListComponent implements OnInit {
     await this.getDataTranslate();
     // Lấy dữ liệu thủ tục hành chính
     this.getAllThuTucHanhChinh();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize

@@ -93,7 +93,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
     // Lấy dữ liệu thủ tục hành chính
     this.getAllThuTucHanhChinh();
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Content' };
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
