@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -62,6 +62,10 @@ export class DmLoaibaocaoListComponent implements OnInit {
   // disable unactive button
   public disableUnActiveButton = false;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -80,6 +84,8 @@ export class DmLoaibaocaoListComponent implements OnInit {
     this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -116,6 +122,9 @@ export class DmLoaibaocaoListComponent implements OnInit {
   * Hàm lấy dữ liệu Loại báo cáo
   */
   async getAllLoaiBaoCao(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listLoaiBaoCao != null && this.listLoaiBaoCao.length > 0) {
+      this.gridLoaiBaoCao.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmLoaiBaoCaoService()
       .getFetchAll(param);
@@ -132,9 +141,6 @@ export class DmLoaibaocaoListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form tìm kiếm
    */
   public reloadDataGrid() {
-    if (this.listLoaiBaoCao.length > 0) {
-      this.gridLoaiBaoCao.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Trangthai: ""
@@ -168,9 +174,6 @@ export class DmLoaibaocaoListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    if (this.listLoaiBaoCao.length > 0) {
-      this.gridLoaiBaoCao.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -234,6 +237,7 @@ export class DmLoaibaocaoListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -245,8 +249,29 @@ export class DmLoaibaocaoListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaibaocao.nameofobject + " (" + data.tenloaibaocao + ") " + this.dataTranslate.DANHMUC.loaibaocao.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.loaibaocao.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idloaibaocao);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmLoaiBaoCaoService()
+          .deleteItemsLoaiBaoCao(dataBody)
+          .subscribe(
+            () => {
+              this.getAllLoaiBaoCao();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -319,20 +344,30 @@ export class DmLoaibaocaoListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmLoaiBaoCaoService()
-          .deleteItem({ idLoaibaocao: this.selectedItem.idloaibaocao })
-          .subscribe(
-            () => this.getAllLoaiBaoCao(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaibaocao.nameofobject + " (" + data.tenloaibaocao + ") " + this.dataTranslate.DANHMUC.loaibaocao.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaibaocao.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+            .getDmLoaiBaoCaoService()
+            .deleteItem({ idLoaibaocao: this.selectedItem.idloaibaocao })
+            .subscribe(
+              () => this.getAllLoaiBaoCao(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
+        }
       }
     });
   }

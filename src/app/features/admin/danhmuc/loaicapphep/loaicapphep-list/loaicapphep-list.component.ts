@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -66,6 +66,9 @@ export class DmLoaicapphepListComponent implements OnInit {
   // Chứa dữ liệu Nhóm loại cấp phép
   public nhomLoaiCapPhep = NhomLoaiCapPhep;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
   // Chứa dữ liệu thủ tục hành chính
   public listThuTucHanhChinh: any;
 
@@ -89,6 +92,8 @@ export class DmLoaicapphepListComponent implements OnInit {
     await this.getDataTranslate();
     // Lấy dữ liệu thủ tục hành chính
     this.getAllThuTucHanhChinh();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -125,6 +130,9 @@ export class DmLoaicapphepListComponent implements OnInit {
    * Hàm lấy dữ liệu Loại cấp phép
    */
   async getAllLoaiCapPhep(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listLoaiCapPhep != null && this.listLoaiCapPhep.length > 0) {
+      this.gridLoaiCapPhep.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
       .getFetchAll(param);
@@ -150,9 +158,6 @@ export class DmLoaicapphepListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form tìm kiếm
    */
   public reloadDataGrid() {
-    if (this.listLoaiCapPhep.length > 0) {
-      this.gridLoaiCapPhep.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Idthutuchanhchinh: "",
@@ -189,9 +194,6 @@ export class DmLoaicapphepListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    if (this.listLoaiCapPhep.length > 0) {
-      this.gridLoaiCapPhep.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -255,6 +257,7 @@ export class DmLoaicapphepListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -266,8 +269,29 @@ export class DmLoaicapphepListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaicapphep.nameofobject + " (" + data.tenloaicapphep + ") " + this.dataTranslate.DANHMUC.loaicapphep.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.loaicapphep.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idloaicapphep);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmLoaiCapPhepService()
+          .deleteItemsLoaiCapPhep(dataBody)
+          .subscribe(
+            () => {
+              this.getAllLoaiCapPhep();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -340,20 +364,30 @@ export class DmLoaicapphepListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmLoaiCapPhepService()
-          .deleteItem({ idLoaicapphep: this.selectedItem.idloaicapphep })
-          .subscribe(
-            () => this.getAllLoaiCapPhep(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaicapphep.nameofobject + " (" + data.tenloaicapphep + ") " + this.dataTranslate.DANHMUC.loaicapphep.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaicapphep.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+            .getDmLoaiCapPhepService()
+            .deleteItem({ idLoaicapphep: this.selectedItem.idloaicapphep })
+            .subscribe(
+              () => this.getAllLoaiCapPhep(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
+        }
       }
     });
   }

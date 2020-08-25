@@ -304,7 +304,20 @@ export class DmCoquanquanlyIoComponent implements OnInit {
     */
    public onFormReset() {
      // Hàm .reset sẽ xóa trắng mọi control trên form
-     this.coQuanQuanLyIOForm.reset();
+     this.coQuanQuanLyIOForm.reset({
+      tencoquanquanly: "",
+      diachi: "",
+      macoquanquanly: "",
+      fax: "",
+      website: "",
+      mota: "",
+      dienthoai: "",
+      email: "",
+      matinh: "",
+      mahuyen: "",
+      maxa: "",
+      thutu: "",
+     });
    }
  
    /**

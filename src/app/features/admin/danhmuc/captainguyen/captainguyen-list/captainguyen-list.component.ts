@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -68,6 +68,9 @@ export class DmCaptainguyenListComponent implements OnInit {
 
   // disable unactive button
   public disableUnActiveButton = false;
+  
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
 
   // Contructor
   constructor(
@@ -87,6 +90,8 @@ export class DmCaptainguyenListComponent implements OnInit {
     this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -146,9 +151,6 @@ export class DmCaptainguyenListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form tìm kiếm
    */
   public reloadDataGrid() {
-    if (this.listCapTaiNguyen.length > 0) {
-      this.gridCapTaiNguyen.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Nhomcaptainguyen: "",
@@ -161,6 +163,9 @@ export class DmCaptainguyenListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp tài nguyên
    */
   async getAllCapTaiNguyen(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listCapTaiNguyen != null && this.listCapTaiNguyen.length > 0) {
+      this.gridCapTaiNguyen.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmCapTaiNguyenService()
       .getFetchAll(param);
@@ -176,9 +181,6 @@ export class DmCaptainguyenListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    if (this.listCapTaiNguyen.length > 0) {
-      this.gridCapTaiNguyen.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -242,6 +244,7 @@ export class DmCaptainguyenListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -253,8 +256,29 @@ export class DmCaptainguyenListComponent implements OnInit {
             this.dataTranslate.DANHMUC.captainguyen.nameofobject + " (" + data.tencaptainguyen + ") " + this.dataTranslate.DANHMUC.captainguyen.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.captainguyen.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idcaptainguyen);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmCapTaiNguyenService()
+          .deleteItemsCapTaiNguyen(dataBody)
+          .subscribe(
+            () => {
+              this.getAllCapTaiNguyen();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -327,20 +351,30 @@ export class DmCaptainguyenListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmCapTaiNguyenService()
-          .deleteItem({ idCaptainguyen: this.selectedItem.idcaptainguyen })
-          .subscribe(
-            () => this.getAllCapTaiNguyen(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.captainguyen.nameofobject + " (" + data.tencaptainguyen + ") " + this.dataTranslate.DANHMUC.captainguyen.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.captainguyen.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+              .getDmCapTaiNguyenService()
+              .deleteItem({ idCaptainguyen: this.selectedItem.idcaptainguyen })
+              .subscribe(
+                () => this.getAllCapTaiNguyen(),
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.successDelete,
+                    2000
+                  )
+              );
+        }
       }
     });
   }

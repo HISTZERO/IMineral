@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { TranslateService } from "@ngx-translate/core";
 import { MatSidenav } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -65,6 +65,9 @@ export class DmCaptruluongListComponent implements OnInit {
   // disable unactive button
   public disableUnActiveButton = false;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -83,6 +86,8 @@ export class DmCaptruluongListComponent implements OnInit {
     this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -103,9 +108,6 @@ export class DmCaptruluongListComponent implements OnInit {
    * Hàm load lại dữ liệu và reset form tìm kiếm
    */
   public reloadDataGrid() {
-    if (this.listCapTruLuong.length > 0) {
-      this.gridCapTruLuong.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Trangthai: ""
@@ -155,9 +157,6 @@ export class DmCaptruluongListComponent implements OnInit {
   * Tìm kiếm nâng cao
   */
   public searchAdvance() {
-    if (this.listCapTruLuong.length > 0) {
-      this.gridCapTruLuong.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -221,6 +220,7 @@ export class DmCaptruluongListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -232,8 +232,29 @@ export class DmCaptruluongListComponent implements OnInit {
             this.dataTranslate.DANHMUC.captruluong.nameofobject + " (" + data.tencaptruluong + ") " + this.dataTranslate.DANHMUC.captruluong.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.captruluong.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idcaptruluong);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmCapTruLuongService()
+          .deleteItemsCapTruLuong(dataBody)
+          .subscribe(
+            () => {
+              this.getAllCapTruLuong();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -243,6 +264,9 @@ export class DmCaptruluongListComponent implements OnInit {
    * Hàm lấy dữ liệu Cấp trữ lượng
    */
   async getAllCapTruLuong(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listCapTruLuong != null && this.listCapTruLuong.length > 0) {
+      this.gridCapTruLuong.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmCapTruLuongService()
       .getFetchAll(param);
@@ -321,7 +345,16 @@ export class DmCaptruluongListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.captruluong.nameofobject + " (" + data.tencaptruluong + ") " + this.dataTranslate.DANHMUC.captruluong.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.captruluong.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmCapTruLuongService()
           .deleteItem({ idCaptruluong: this.selectedItem.idcaptruluong })
           .subscribe(
@@ -335,6 +368,7 @@ export class DmCaptruluongListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }

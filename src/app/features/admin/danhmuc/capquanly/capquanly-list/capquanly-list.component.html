@@ -11,7 +11,7 @@
               <div class="card-body">
                 <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
-                  <div class="col-lg-2 col-md-3 col-sm-4 form-group">
+                  <div class="col-lg-3 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"DANHMUC.capquanly.trangthai" | translate}}:</label>
                     <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.capquanly.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
@@ -80,9 +80,7 @@
               </div>
               <div class="card-body">
                 <ejs-grid #gridCapQuanLy *ngIf="listCapQuanLy" [dataSource]="listCapQuanLy" [allowSelection]="true"
-                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                  [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
+                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tencapquanly" headerText="{{ 'DANHMUC.capquanly.tencapquanly' | translate }}"></e-column>

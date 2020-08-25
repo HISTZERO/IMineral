@@ -2,11 +2,11 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmCanhanModel, InputDmCaNhanDeleteItemsModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
@@ -80,8 +80,11 @@ export class DmCanhanListComponent implements OnInit {
   // disable active button
   public disableActiveButton = false;
 
-   // disable unactive button
-   public disableUnActiveButton = false;
+  // disable unactive button
+  public disableUnActiveButton = false;
+
+   // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
 
   // Contructor
   constructor(
@@ -102,6 +105,8 @@ export class DmCanhanListComponent implements OnInit {
     this.showDvhcTinh();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -151,9 +156,6 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    if (this.listCanhan.length > 0) {
-      this.gridCaNhan.clearSelection();
-    }
     this.formSearch.reset({
       Keyword: "",
       Idtinh: "",
@@ -168,6 +170,9 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllCanhan(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listCanhan != null && this.listCanhan.length > 0) {
+      this.gridCaNhan.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmCanhanService()
       .getFetchAll(param);
@@ -250,9 +255,6 @@ export class DmCanhanListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    if (this.listCanhan.length > 0) {
-      this.gridCaNhan.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -322,6 +324,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.canhan.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -336,7 +339,26 @@ export class DmCanhanListComponent implements OnInit {
 
           informationDialogRef.afterClosed().subscribe(() => {});
         } else {
-          
+          this.listDataSelect.map(res => {
+            idItems.push(res.idcanhan);
+          });
+          const dataBody: any = {
+            listId: idItems,
+          };
+          this.dmFacadeService.getDmCanhanService()
+          .deleteArrayItem(dataBody)
+          .subscribe(
+            () => {
+              this.getAllCanhan();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -410,20 +432,32 @@ export class DmCanhanListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmCanhanService()
-          .deleteItem({ idCanhan: this.selectedItem.idcanhan })
-          .subscribe(
-            () => this.getAllCanhan(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.canhan.nameofobject + " (" + data.hovaten + ") " + this.dataTranslate.DANHMUC.canhan.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.canhan.informedDialogTitle,
           );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        } else {
+            await this.dmFacadeService
+              .getDmCanhanService()
+              .deleteItem({ idCanhan: this.selectedItem.idcanhan })
+              .subscribe(
+                () => this.getAllCanhan(),
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.successDelete,
+                    2000
+                  )
+              );
+        }
       }
     });
   }

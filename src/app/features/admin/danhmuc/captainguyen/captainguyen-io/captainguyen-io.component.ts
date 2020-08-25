@@ -186,7 +186,13 @@ export class DmCaptainguyenIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.capTaiNguyenIOForm.reset();
+    this.capTaiNguyenIOForm.reset({
+      macaptainguyen: "",
+      tencaptainguyen: "",
+      nhomcaptainguyen: "",
+      mota: "",
+      thutu: "",
+    });
   }
 
   /**

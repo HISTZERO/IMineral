@@ -40,7 +40,7 @@ export class DmLoaikhoangsanService extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.LOAIKHOANGSAN + '/removelist'
     });
-    return this.deleteItem(params);
+    return this.updateItem(params);
   }
 
   public checkBeDeleted(id: number) {

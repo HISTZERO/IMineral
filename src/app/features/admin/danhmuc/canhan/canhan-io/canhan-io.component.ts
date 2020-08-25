@@ -315,7 +315,20 @@ export class DmCanhanIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.canhanIOForm.reset();
+    this.canhanIOForm.reset({
+      hovaten: "",
+      diachi: "",
+      sogiayto: "",
+      loaigiayto: "",
+      ngaycap: "",
+      noicap: "",
+      dienthoai: "",
+      email: "",
+      matinh: "",
+      mahuyen: "",
+      maxa: "",
+      thutu: "",
+    });
   }
 
   /**

@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -80,6 +80,9 @@ export class DmCoquanquanlyListComponent implements OnInit {
 
   // Filter Đơn vị hành chính Xã
   public dvhcWardFilters: OutputDmDvhcModel[];
+
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
  
   // Contructor
   constructor(
@@ -100,6 +103,8 @@ export class DmCoquanquanlyListComponent implements OnInit {
     this.showDvhcTinh();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
@@ -137,6 +142,9 @@ export class DmCoquanquanlyListComponent implements OnInit {
   * Hàm lấy dữ liệu Cơ Quan Quản Lý
   */
   async getAllCoQuanQuanLy(param: any = { PageNumber: 1, PageSize: -1 }) {
+    if (this.listCoQuanQuanLy != null && this.listCoQuanQuanLy.length > 0) {
+      this.gridCoQuanQuanLy.clearSelection();
+    }
     const listData: any = await this.dmFacadeService
       .getDmCoQuanQuanLyService()
       .getFetchAll(param);
@@ -152,17 +160,14 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-  if (this.listCoQuanQuanLy.length > 0) {
-    this.gridCoQuanQuanLy.clearSelection();
-  }
-  this.formSearch.reset({
-    Keyword: "",
-    Idtinh: "",
-    Idhuyen: "",
-    Idxa: "",
-    Trangthai: ""
-  });
-  this.getAllCoQuanQuanLy();
+    this.formSearch.reset({
+      Keyword: "",
+      Idtinh: "",
+      Idhuyen: "",
+      Idxa: "",
+      Trangthai: ""
+    });
+    this.getAllCoQuanQuanLy();
   }
 
   /**
@@ -193,9 +198,6 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    if (this.listCoQuanQuanLy.length > 0) {
-      this.gridCoQuanQuanLy.clearSelection();
-    }
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
     dataSearch['PageSize'] = Paging.PageSize;
@@ -258,6 +260,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    let idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -269,8 +272,29 @@ export class DmCoquanquanlyListComponent implements OnInit {
             this.dataTranslate.DANHMUC.coquanquanly.nameofobject + " (" + data.tencoquanquanly + ") " + this.dataTranslate.DANHMUC.coquanquanly.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.coquanquanly.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idcoquanquanly);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmCoQuanQuanLyService()
+          .deleteItemsCoQuanQuanLy(dataBody)
+          .subscribe(
+            () => {
+              this.getAllCoQuanQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+            ));
         }
       }
     });
@@ -397,20 +421,30 @@ export class DmCoquanquanlyListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
-          .getDmCoQuanQuanLyService()
-          .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
-          .subscribe(
-            () => this.getAllCoQuanQuanLy(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.coquanquanly.nameofobject + " (" + data.tencoquanquanly + ") " + this.dataTranslate.DANHMUC.coquanquanly.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.coquanquanly.informedDialogTitle,
           );
+        } else {
+            await this.dmFacadeService
+            .getDmCoQuanQuanLyService()
+            .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
+            .subscribe(
+              () => this.getAllCoQuanQuanLy(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
+        }
       }
     });
   }
