@@ -1,57 +1,65 @@
 <div class="pt-3 pb-4">
   <form [formGroup]="loaiCapPhepIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{ "DANHMUC.loaicapphep.maloaicapphep" | translate }}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{ "DANHMUC.loaicapphep.maloaicapphep" | translate }}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="maloaicapphep" placeholder="{{'DANHMUC.loaicapphep.maloaicapphepPlaceholder' | translate}}" />
         <span *ngIf="formErrors.maloaicapphep" class="alert-danger">{{formErrors.maloaicapphep}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.tenloaicapphep" | translate}} <small>(*)</small></label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.loaicapphep.tenloaicapphep" | translate}} <small>(*)</small></label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="tenloaicapphep" placeholder="{{'DANHMUC.loaicapphep.tenloaicapphepPlaceholder' | translate}}" />
         <span *ngIf="formErrors.tenloaicapphep" class="alert-danger">{{formErrors.tenloaicapphep}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.nhomloaicapphep" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.loaicapphep.nhomloaicapphep" | translate}}</label>
+      <div class="col-sm-9">
         <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonNhomloaicapphep' | translate }}" formControlName="nhomloaicapphep" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "DANHMUC.loaicapphep.chonNhomloaicapphep" | translate }}
           </mat-option>
           <mat-option *ngFor="let nhomLCP of nhomLoaiCapPhep" [value]="nhomLCP.id">
-            {{ nhomLCP.name }}
+            * {{ nhomLCP.name }}
           </mat-option>
         </mat-select>
         <span *ngIf="formErrors.nhomloaicapphep" class="alert-danger">{{formErrors.nhomloaicapphep}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}</label>
-      <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="idthutuchanhchinh" *ngIf="dataTranslate">
-          <mat-option value="">
-            {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
-          </mat-option>
-          <mat-option *ngFor="let thutuc of thuTucHanhChinh" [value]="thutuc.id">
-            {{ thutuc.name }}
-          </mat-option>
-        </mat-select>
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}</label>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="idthutuchanhchinh" *ngIf="dataTranslate">
+              <mat-option value="">
+                {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let thutuc of listThuTucHanhChinh" [value]="thutuc.idthutuchanhchinh">
+                * {{ thutuc.tenthutuc }}
+              </mat-option>
+            </mat-select>
+          </div>
+          <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
+            <label class="m-0">{{"COMMON.default.tenthutucdangdung" | translate}}:</label><br>
+            <span><b>{{ obj?.tenthutuchanhchinh}}</b></span>
+          </div>
+        </div>
         <span *ngIf="formErrors.idthutuchanhchinh" class="alert-danger">{{formErrors.idthutuchanhchinh}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.thutu" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.loaicapphep.thutu" | translate}}</label>
+      <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.loaicapphep.thutuPlaceholder' | translate}}" />
         <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.loaicapphep.mota" | translate}}</label>
-      <div class="col-sm-8">
+      <label class="col-sm-3 col-form-label text-right">{{"DANHMUC.loaicapphep.mota" | translate}}</label>
+      <div class="col-sm-9">
         <textarea class="form-control" formControlName="mota" placeholder="{{'DANHMUC.loaicapphep.motaPlaceholder' | translate}}"></textarea>
         <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
       </div>
