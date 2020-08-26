@@ -156,7 +156,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
-        thutuchanhchinh: {idthuctuc: this.obj.idthutuchanhchinh, tenthutuc: this.obj.tenthutuchanhchinh},
+        thutuchanhchinh: {idthutuc: this.obj.idthutuchanhchinh, tenthutuc: this.obj.tenthutuchanhchinh},
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
@@ -166,6 +166,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         idthutuc: this.obj.idthutuchanhchinh,
         tenthutuc: this.obj.tenthutuchanhchinh,
       }
+      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh
     }
     this.editMode = true;
   }
@@ -242,6 +243,19 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
+    }
+  }
+
+  /**
+   * Hàm so sánh giá trị thuu tục hành chính combobox
+   * @param item1 
+   * @param item2 
+   */
+  compareThuTucHanhChinh(item1: any, item2: any) {
+    if (item1.idthutuc === item2.idthutuchanhchinh) {
+      return true;
+    } else {
+      return false;
     }
   }
 
