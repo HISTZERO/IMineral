@@ -33,7 +33,7 @@
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="thutuchanhchinh" *ngIf="dataTranslate">
+            <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="thutuchanhchinh" [compareWith]="compareThuTucHanhChinh" *ngIf="dataTranslate">
               <mat-option value="">
                 {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
               </mat-option>
