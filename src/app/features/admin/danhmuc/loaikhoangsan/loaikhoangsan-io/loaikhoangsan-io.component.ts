@@ -10,6 +10,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-loaikhoangsan-io',
@@ -51,13 +52,20 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   // error message
   validationErrorMessages = {};
 
+  // Tên thủ tục hành chính hiển thị
+  public tenNhomKhoangSanDisplay: string;
+
+  // chứa thông tin combobox được backup trong trường hợp update
+  public dataComboboxModel: any;
+
   // form errors
   formErrors = {
     maloaikhoangsan: "",
     tenloaikhoangsan: "",
     mota: "",
     thutu: "",
-    idnhomkhoangsan: ""
+    idnhomkhoangsan: "",
+    nhomkhoangsan: ""
   };
 
   // Contructor
@@ -70,14 +78,15 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   ) {}
 
   async ngOnInit() {
+    // Lấy dữ liệu nhóm khoáng sản
+    this.getAllNhomKhoangSan();
     // Khởi tạo form
     await this.formInit();
     //Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    // Lấy dữ liệu nhóm khoáng sản
-    this.getAllNhomKhoangSan();
+    
     
   }
 
@@ -99,6 +108,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tenloaikhoangsan: { required: this.dataTranslate.DANHMUC.loaikhoangsan.tenloaikhoangsanRequired },
+      idnhomkhoangsan: { required: this.dataTranslate.DANHMUC.loaikhoangsan.nhomkhoangsanRequired },
       thutu: { pattern: this.dataTranslate.DANHMUC.loaikhoangsan.thutuIsNumber }
     };
   }
@@ -109,7 +119,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   async getAllNhomKhoangSan() {
   const listData: any = await this.dmFacadeService
     .getDmNhomKhoangSanService()
-    .getFetchAll({ PageNumber: 1, PageSize: -1 });
+    .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
   this.listNhomKhoangSan = listData.items;
 }
 
@@ -132,7 +142,8 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
       tenloaikhoangsan: ["", Validators.required],
       mota: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
-      idnhomkhoangsan: [""]
+      idnhomkhoangsan: ["", Validators.required],
+      nhomkhoangsan: [""]
     });
   }
 
@@ -147,8 +158,16 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
         tenloaikhoangsan: this.obj.tenloaikhoangsan,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
+        nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
         idnhomkhoangsan: this.obj.idnhomkhoangsan
       });
+      
+      this.dataComboboxModel = {
+        idnhomkhoangsan: this.obj.idnhomkhoangsan,
+        tennhomkhoangsan: this.obj.tennhomkhoangsan
+      };
+
+      this.tenNhomKhoangSanDisplay = this.obj.tennhomkhoangsan;
     }
     this.editMode = true;
   }
@@ -210,7 +229,8 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
       tenloaikhoangsan: "",
       mota: "",
       thutu: "",
-      idnhomkhoangsan: ""
+      idnhomkhoangsan: "",
+      nhomkhoangsan: ""
     });
   }
 
@@ -236,6 +256,37 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
+  }
+
+  /**
+   * Hàm chuyển đổi dữ liệu thủ thục combobox khi select
+   */
+  public selectNhomKhoangSan() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.loaiKhoangSanIOForm.value.nhomkhoangsan) {
+        this.loaiKhoangSanIOForm.controls["idnhomkhoangsan"].setValue(this.loaiKhoangSanIOForm.value.nhomkhoangsan.idnhomkhoangsan);
+        this.tenNhomKhoangSanDisplay = this.loaiKhoangSanIOForm.value.nhomkhoangsan.tennhomkhoangsan;
+      } else {
+        this.loaiKhoangSanIOForm.controls["idnhomkhoangsan"].setValue(this.dataComboboxModel.idnhomkhoangsan);
+        this.tenNhomKhoangSanDisplay = this.dataComboboxModel.tennhomkhoangsan;
+      }
+    } else {
+      this.loaiKhoangSanIOForm.controls["idnhomkhoangsan"].setValue(this.loaiKhoangSanIOForm.value.nhomkhoangsan.idnhomkhoangsan);
+      this.tenNhomKhoangSanDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm so sánh giá trị thuu tục hành chính combobox
+   * @param item1 
+   * @param item2 
+   */
+  public compareNhomKhoangSan(item1: any, item2: any) {
+    if (item1.idnhomkhoangsan === item2.idnhomkhoangsan) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

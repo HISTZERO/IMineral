@@ -7,7 +7,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { GlobalVar } from "src/app/shared/constants/global-var";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { TranslateService } from "@ngx-translate/core";
-import { translateConstants } from "src/app/shared/constants/translate-constants";
+
 
 @Component({
   selector: "app-dvhc-io",
@@ -33,10 +33,11 @@ export class DmDvhcIoComponent implements OnInit {
 
   // form errors
   public formErrors = {
-    tendvhc: "",
+    ten: "",
     matinh: "",
     mahuyen: "",
     maxa: "",
+    thutu: ""
   };
 
   // Các biến translate
@@ -77,11 +78,12 @@ export class DmDvhcIoComponent implements OnInit {
     this.InputDmDvhcModel = new InputDmDvhcModel();
     // declare fields, validate
     this.dvhcIOForm = this.formBuilder.group({
-      id: [0],
-      tendvhc: ["", Validators.required],
+      id: [""],
+      ten: ["", Validators.required],
       matinh: [""],
       mahuyen: [""],
       maxa: [""],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
       tentinh: [{ value: "", disabled: true }],
       tenhuyen: [{ value: "", disabled: true }],
     });
@@ -116,9 +118,10 @@ export class DmDvhcIoComponent implements OnInit {
     if (this.purpose === "editProvince" && this.editMode === true && this.obj) {
       this.dvhcIOForm.setValue({
         id: this.obj.id,
-        tendvhc: this.obj.ten,
+        ten: this.obj.ten,
         matinh: this.obj.matinh,
-        tentinh: this.obj.tentinh,
+        tentinh: this.obj.ten,
+        thutu: this.obj.thutu,
         tenhuyen: "",
         mahuyen: "",
         maxa: "",
@@ -129,9 +132,10 @@ export class DmDvhcIoComponent implements OnInit {
       this.hiddenProvineName = false;
       this.dvhcIOForm.setValue({
         id: this.obj.id,
-        tendvhc: this.obj.ten,
+        ten: this.obj.ten,
         mahuyen: this.obj.mahuyen,
-        tenhuyen: this.obj.tenhuyen,
+        tenhuyen: this.obj.ten,
+        thutu: this.obj.thutu,
         maxa: "",
         matinh: "",
         tentinh: GlobalVar.provinceSelected,
@@ -143,8 +147,9 @@ export class DmDvhcIoComponent implements OnInit {
         (this.hiddenProvineName = false),
         this.dvhcIOForm.setValue({
           id: this.obj.id,
-          tendvhc: this.obj.ten,
+          ten: this.obj.ten,
           maxa: this.obj.maxa,
+          thutu: this.obj.thutu,
           mahuyen: "",
           matinh: "",
           tentinh: GlobalVar.provinceSelected,
@@ -191,7 +196,7 @@ export class DmDvhcIoComponent implements OnInit {
     this.InputDmDvhcModel = this.dvhcIOForm.value;
     if (operMode === "newProvince") {
       this.dmFacadeSv
-        .getProvinceService()
+        .getDmDvhcService()
         .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("getAllProvince"),

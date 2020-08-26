@@ -71,23 +71,25 @@
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}" formControlName="matinh" [compareWith]="compareTinh" (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
-              <mat-select-filter [displayMember]="'ten'"  [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+            <mat-select class="form-control" formControlName="tinhcombobox" [compareWith]="compareTinh"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}"
+              (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "COMMON.default.chonTinh" | translate }}
               </mat-option>
-              <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh}">
+              <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh, tentinh: tinh.ten}">
                 {{ tinh.ten }}
-              </mat-option> 
+              </mat-option>
             </mat-select>
+            <input type="hidden" class="form-control" formControlName="tinh">
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
-            <label class="m-0">{{"COMMON.default.tentinhdangdung" | translate}}:</label><br>
-            <span><b>{{obj?.tentinh}}</b></span>
+            <label *ngIf="tenTinhDisplay" class="m-0">{{"COMMON.default.tentinhdangdung" | translate}}:</label><br>
+            <span><b>{{ tenTinhDisplay}}</b></span>
           </div>
         </div>
-        <span *ngIf="formErrors.matinh" class="alert-danger">{{formErrors.matinh}}</span>
+        <span *ngIf="formErrors.tinh" class="alert-danger">{{formErrors.tinh}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
@@ -96,46 +98,53 @@
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="mahuyen" [compareWith]="compareHuyen" placeholder="{{ 'COMMON.default.chonHuyen' | translate }}" (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+            <mat-select class="form-control" formControlName="huyencombobox" [compareWith]="compareHuyen"  placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"
+              (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'ten'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "COMMON.default.chonHuyen" | translate }}
               </mat-option>
-              <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen}">
+              <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen, tenhuyen: huyen.ten}">
                 {{ huyen.ten }}
               </mat-option>
             </mat-select>
+            <input type="hidden" class="form-control" formControlName="huyen">
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
-            <label class="m-0">{{"COMMON.default.tenhuyendangdung" | translate}}:</label><br>
-            <span><b>{{obj?.tenhuyen}}</b></span>
+            <label *ngIf="tenHuyenDisplay" class="m-0">{{"COMMON.default.tenhuyendangdung" | translate}}:</label><br>
+            <span><b>{{ tenHuyenDisplay}}</b></span>
           </div>
         </div>
-        <span *ngIf="formErrors.mahuyen" class="alert-danger">{{formErrors.mahuyen}}</span>
+        <span *ngIf="formErrors.huyen" class="alert-danger">{{formErrors.huyen}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right">{{"COMMON.default.maxa" | translate}}</label>
+      <label class="col-sm-3 col-form-label text-right">{{"COMMON.default.maxa" | translate}}
+        <small>(*)</small>
+      </label>
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColDvhc ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="maxa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" [compareWith]="compareXa"  *ngIf="dataTranslate">
+            <mat-select class="form-control" formControlName="xacombobox" [compareWith]="compareXa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" *ngIf="dataTranslate"
+            (selectionChange) ="selectXa()">
               <mat-select-filter [displayMember]="'ten'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "COMMON.default.chonXa" | translate }}
               </mat-option>
-              <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa}">
+              <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa, tenxa: xa.ten}">
                 {{ xa.ten }}
               </mat-option>
             </mat-select>
+            <input type="hidden" class="form-control" formControlName="xa">
           </div>
           <div *ngIf="classColDvhc" class="{{classColDvhc ? 'col-sm-6' : ''}}">
-            <label class="m-0">{{"COMMON.default.tenxadangdung" | translate}}:</label><br>
-            <span><b>{{obj?.tenxa}}</b></span>
+            <label *ngIf="tenXaDisplay" class="m-0">{{"COMMON.default.tenxadangdung" | translate}}:</label><br>
+            <span><b>{{ tenXaDisplay}}</b></span>
           </div>
         </div>
+        <span *ngIf="formErrors.xa" class="alert-danger">{{formErrors.xa}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">

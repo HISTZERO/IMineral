@@ -1,0 +1,25 @@
+.style-action {
+    width: 130px;
+}
+.style-action-header {
+    width: 130px;
+    padding-left: 15px !important;
+}
+.style-checkbox-header {
+    width: 70px;
+    padding-top: 8px;
+    line-height: 0 !important;
+    .e-headercelldiv .e-headerchkcelldiv {
+        height: 20px !important;
+    }
+    .e-checkbox-wrapper {
+        height: 20px !important;
+    }
+}
+.style-checkbox {
+    width: 70px;
+}
+.style-stt {
+    width: 80px !important;
+    padding-right: 0;
+}

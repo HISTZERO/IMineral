@@ -83,7 +83,7 @@ export class DmCanhanListComponent implements OnInit {
   // disable unactive button
   public disableUnActiveButton = false;
 
-   // Chứa kiểu wrap text trên grid
+  // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
   // Contructor
