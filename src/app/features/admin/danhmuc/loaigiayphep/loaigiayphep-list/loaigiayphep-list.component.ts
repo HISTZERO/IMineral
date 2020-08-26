@@ -231,7 +231,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
         };
         this.dmFacadeService.getDmLoaiGiayPhepService()
             .updateStatusItemsLoaiGiayPhep(dataParam)
-            .subscribe(
+            .subscribe( 
               () => {
                   this.getAllLoaiGiayPhep();
                 },
