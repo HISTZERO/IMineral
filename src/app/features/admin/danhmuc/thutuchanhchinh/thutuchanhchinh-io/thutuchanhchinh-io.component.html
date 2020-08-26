@@ -28,7 +28,7 @@
               <mat-option value="">
                 {{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}
               </mat-option>
-              <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="linhVuc.idlinhvuc">
+              <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="idlinhvuc: linhVuc.idlinhvuc, tenlinhvuc: linhVuc.tenlinhvuc">
                 {{ linhVuc.tenlinhvuc }}
               </mat-option>
             </mat-select>
@@ -56,8 +56,8 @@
               <mat-option value="">
                 {{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}
               </mat-option>
-              <mat-option *ngFor="let cap of listCapQuanLy" [value]="cap.idcapquanly">
-                {{ cap.tencapquanly }}
+              <mat-option *ngFor="let capthuchien of listCapQuanLy" [value]="idcapthuchien: capthuchien.idcapthuchien, tencapthuchien: capthuchien.tencapthuchien">
+                {{ capthuchien.tencapquanly }}
               </mat-option>
             </mat-select>
             <input type="hidden" class="form-control" formControlName="idcapthuchien">
