@@ -26,5 +26,9 @@ export const NhomLoaiGiayPhep = [
     {
         id: 7,
         name: "Đóng cửa mỏ, khoáng sản"
+    },
+    {
+        id: 8,
+        name: "Tính tiền cấp quyền"
     }
 ]

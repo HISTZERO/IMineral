@@ -150,4 +150,27 @@ export const NhomCapTaiNguyen = [
         id: 2,
         name: "Cấp tài nguyên khoáng sản rắn dự báo"
     }
+];
+
+export const NhomBaoCao = [
+    {
+        id: 1,
+        name: "Quy hoạch"
+    },
+    {
+        id: 2,
+        name: "Báo cáo điều tra khảo sát"
+    },
+    {
+        id: 3,
+        name: "Báo cáo hoạt động"
+    },
+    {
+        id: 4,
+        name: "Bản đồ"
+    },
+    {
+        id: 5,
+        name: "Thông tin tư liệu"
+    }
 ]

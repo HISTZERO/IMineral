@@ -14,6 +14,9 @@ export class OutputDmCanhanModel {
   idtinh: string;
   idhuyen: string;
   idxa: string;
+  tentinh: string;
+  tenhuyen: string;
+  tenxa: string;
   trangthai: number;
   thutu: number;
 }
@@ -36,8 +39,4 @@ export class InputDmCanhanModel {
   idxa: string;
   trangthai: number;
   thutu: number;
-}
-
-export class InputDmCaNhanDeleteItemsModel {
-  listId: string[];
 }

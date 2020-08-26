@@ -320,6 +320,10 @@ span.e-headertext {
   white-space: normal;
 }
 
+.width-checkbox {
+  width: 120px;
+}
+
 /*.e-columnheader .e-headercell:first-child div span {*/
 /*  text-align: center;*/
 /*}*/

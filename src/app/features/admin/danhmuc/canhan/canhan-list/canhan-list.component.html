@@ -130,7 +130,7 @@
                         {{ data.trangthai | getNameFileConstant: trangthai}}
                       </ng-template>
                     </e-column>
-                    <e-column *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
+                    <e-column field="check" *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
                     <e-column field="idcanhan"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
