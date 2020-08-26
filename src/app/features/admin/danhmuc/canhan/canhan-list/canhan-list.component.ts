@@ -2,11 +2,11 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel, QueryCellInfoEventArgs } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDmCanhanModel, InputDmCaNhanDeleteItemsModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DmCanhanIoComponent } from "src/app/features/admin/danhmuc/canhan/canhan-io/canhan-io.component";
@@ -295,9 +295,20 @@ export class DmCanhanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmCanhanService().updateStatusArrayItem(dataParam).subscribe(res => {
-          this.getAllCanhan();
-        });
+        this.dmFacadeService.getDmCanhanService()
+            .updateStatusArrayItem(dataParam)
+            .subscribe(
+              () => {
+                this.getAllCanhan();
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showeNotiResult(error.message, 2000);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.updateStatusSuccess,
+                  2000
+              ));
       }
     });
   }
@@ -313,9 +324,20 @@ export class DmCanhanListComponent implements OnInit {
             listStatus: this.listDataSelect,
             status: TrangThaiEnum.Active
           };
-          this.dmFacadeService.getDmCanhanService().updateStatusArrayItem(dataParam).subscribe(res => {
-            this.getAllCanhan();
-          });
+          this.dmFacadeService.getDmCanhanService()
+              .updateStatusArrayItem(dataParam)
+              .subscribe(
+                () => {
+                    this.getAllCanhan();
+                  },
+                  (error: HttpErrorResponse) => {
+                    this.commonService.showeNotiResult(error.message, 2000);
+                  },
+                  () =>
+                    this.commonService.showeNotiResult(
+                      this.dataTranslate.COMMON.default.updateStatusSuccess,
+                      2000
+                ));
       }
     });
   }
@@ -461,6 +483,15 @@ export class DmCanhanListComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Customize style grid
+   */
+  // customiseCell(args: QueryCellInfoEventArgs) {
+  //   if (args.column.field === 'check') {
+  //       args.cell.classList.add('width-checkbox');
+  //   }
+  // }
 
   /**
    * Hàm thông báo không thể xóa

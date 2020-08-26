@@ -214,9 +214,20 @@ export class DmLoaikhoangsanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmLoaiKhoangSanService().updateStatusItemsLoaiKhoangSan(dataParam).subscribe(res => {
-          this.getAllLoaiKhoangSan();
-        });
+        this.dmFacadeService.getDmLoaiKhoangSanService()
+            .updateStatusItemsLoaiKhoangSan(dataParam)
+            .subscribe(
+              () => {
+                  this.getAllLoaiKhoangSan();
+                },
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.updateStatusSuccess,
+                    2000)
+              );
       }
     });
   }
@@ -232,9 +243,20 @@ export class DmLoaikhoangsanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmLoaiKhoangSanService().updateStatusItemsLoaiKhoangSan(dataParam).subscribe(res => {
-          this.getAllLoaiKhoangSan();
-        });
+        this.dmFacadeService.getDmLoaiKhoangSanService()
+            .updateStatusItemsLoaiKhoangSan(dataParam)
+            .subscribe(
+              () => {
+                  this.getAllLoaiKhoangSan();
+                },
+                (error: HttpErrorResponse) => {
+                  this.commonService.showeNotiResult(error.message, 2000);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.updateStatusSuccess,
+                    2000)
+              );
       }
     });
   }
