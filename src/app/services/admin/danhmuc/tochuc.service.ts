@@ -35,4 +35,11 @@ export class DmTochucService extends RepositoryEloquentService {
     });
     return this.updateItem(params);
   }
+
+  public deleteItemsToChuc(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.TOCHUC + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }

@@ -62,6 +62,11 @@ export class CommonServiceShared {
     }
   }
 
+  // show error
+  public showErrorWithContentText(contentText: string, duration: number) {
+      this.showeNotiResult(contentText, duration);
+  }
+
   // transforName
   public transforName(text: string) {
     let data = this.titlecasePipe.transform(text);

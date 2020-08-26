@@ -38,4 +38,10 @@ export class DmLinhvucService extends RepositoryEloquentService {
     return this.updateItem(params);
   }
 
+  public deleteItemsLinhVuc(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LINHVUC + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }

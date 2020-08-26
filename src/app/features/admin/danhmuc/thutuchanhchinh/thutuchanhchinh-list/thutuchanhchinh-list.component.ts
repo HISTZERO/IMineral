@@ -239,9 +239,18 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllThuTucHanhChinh();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -257,9 +266,18 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllThuTucHanhChinh();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -268,6 +286,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.thutuchanhchinh.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -276,11 +295,32 @@ export class DmThutuchanhchinhListComponent implements OnInit {
         if (data !== null) {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
-            this.dataTranslate.DANHMUC.thutuchanhchinh.nameofobject + " (" + data.tenlinhvuc + ") " + this.dataTranslate.DANHMUC.thutuchanhchinh.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.thutuchanhchinh.nameofobject + " (" + data.tenthutuchanhchinh + ") " + this.dataTranslate.DANHMUC.thutuchanhchinh.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.thutuchanhchinh.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idthutuchanhchinh);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmThuTucHanhChinhService()
+          .deleteItemsThuTucHanhChinh(dataBody)
+          .subscribe(
+            () => {
+              this.getAllThuTucHanhChinh();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -353,13 +393,22 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.thutuchanhchinh.nameofobject + " (" + data.tenthutuchanhchinh + ") " + this.dataTranslate.DANHMUC.thutuchanhchinh.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.thutuchanhchinh.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmThuTucHanhChinhService()
           .deleteItem({ id: this.selectedItem.idthutuchanhchinh })
           .subscribe(
             () => this.getAllThuTucHanhChinh(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -367,6 +416,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }

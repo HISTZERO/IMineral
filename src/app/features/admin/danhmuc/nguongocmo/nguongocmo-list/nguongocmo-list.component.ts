@@ -193,9 +193,18 @@ export class DmNguongocmoListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllnguonGocMo();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -211,9 +220,18 @@ export class DmNguongocmoListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllnguonGocMo();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -222,6 +240,7 @@ export class DmNguongocmoListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.nguongocmo.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -233,8 +252,29 @@ export class DmNguongocmoListComponent implements OnInit {
             this.dataTranslate.DANHMUC.nguongocmo.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.nguongocmo.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.nguongocmo.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idnguongocmo);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmNguonGocMoService()
+          .deleteItemsNguonGocMo(dataBody)
+          .subscribe(
+            () => {
+              this.getAllnguonGocMo();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -307,13 +347,22 @@ export class DmNguongocmoListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.nguongocmo.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.nguongocmo.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.nguongocmo.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmNguonGocMoService()
           .deleteItem({ id: this.selectedItem.idnguongocmo })
           .subscribe(
             () => this.getAllnguonGocMo(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -321,6 +370,7 @@ export class DmNguongocmoListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }

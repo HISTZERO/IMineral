@@ -269,9 +269,17 @@ export class DmTochucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllToChuc();
-        });
+          },(error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -287,9 +295,18 @@ export class DmTochucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmToChucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllToChuc();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -298,6 +315,7 @@ export class DmTochucListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.tochuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -311,6 +329,29 @@ export class DmTochucListComponent implements OnInit {
           );
 
           informationDialogRef.afterClosed().subscribe(() => {});
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idtochuc);
+          });
+
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmToChucService()
+          .deleteItemsToChuc(dataBody)
+          .subscribe(
+            () => {
+              this.getAllToChuc();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -383,13 +424,24 @@ export class DmTochucListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>(this.listDataSelect, "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.tochuc.nameofobject + " (" + data.tentochuc + ") " + this.dataTranslate.DANHMUC.tochuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.tochuc.informedDialogTitle,
+          );
+
+          informationDialogRef.afterClosed().subscribe(() => {});
+        } else {
+          await this.dmFacadeService
           .getDmToChucService()
           .deleteItem({ id: this.selectedItem.idtochuc })
           .subscribe(
             () => this.getAllToChuc(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -397,6 +449,7 @@ export class DmTochucListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }

@@ -194,9 +194,18 @@ export class DmNhomkhoangsanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllNhomKhoangSan();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -212,9 +221,18 @@ export class DmNhomkhoangsanListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmNhomKhoangSanService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllNhomKhoangSan();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -223,6 +241,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.nhomkhoangsan.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -231,11 +250,32 @@ export class DmNhomkhoangsanListComponent implements OnInit {
         if (data !== null) {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
-            this.dataTranslate.DANHMUC.linhvuc.nameofobject + " (" + data.tennhomkhoangsan + ") " + this.dataTranslate.DANHMUC.nhomkhoangsan.informedContentOfUnDeletedDialog,
-            this.dataTranslate.DANHMUC.linhvuc.informedDialogTitle,
+            this.dataTranslate.DANHMUC.nhomkhoangsan.nameofobject + " (" + data.tennhomkhoangsan + ") " + this.dataTranslate.DANHMUC.nhomkhoangsan.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.nhomkhoangsan.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idnhomkhoangsan);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmNhomKhoangSanService()
+          .deleteItemsNhomKhoangSan(dataBody)
+          .subscribe(
+            () => {
+              this.getAllNhomKhoangSan();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -256,8 +296,8 @@ export class DmNhomkhoangsanListComponent implements OnInit {
   }
 
   /**
-  * Hàm mở sidenav chức năng thêm mới
-  */
+   * Hàm mở sidenav chức năng thêm mới
+   */
   public openNhomKhoangSanIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.nhomkhoangsan.titleAdd);
     this.matSidenavService.setContentComp( DmNhomkhoangsanIoComponent, "new");
@@ -265,16 +305,16 @@ export class DmNhomkhoangsanListComponent implements OnInit {
   }
 
   /**
-  * Hàm đóng sidenav
-  */
+   * Hàm đóng sidenav
+   */
   public closeNhomKhoangSanIOSidenav() {
     this.matSidenavService.close();
   }
 
 
   /**
-  *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  */
+   *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
+   */
   async deleteItemNhomKhoangSan(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
@@ -287,9 +327,9 @@ export class DmNhomkhoangsanListComponent implements OnInit {
   }
 
   /**
-  * Hàm check điều kiện xóa bản ghi
-  * @param sMsg
-  */
+   * Hàm check điều kiện xóa bản ghi
+   * @param sMsg
+   */
   public canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
       this.confirmDeleteDiaLog();
@@ -299,8 +339,8 @@ export class DmNhomkhoangsanListComponent implements OnInit {
   }
 
   /**
-  * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
-  */
+   * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
+   */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.DANHMUC.nhomkhoangsan.contentDelete,
@@ -308,13 +348,22 @@ export class DmNhomkhoangsanListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.nhomkhoangsan.nameofobject + " (" + data.tennhomkhoangsan + ") " + this.dataTranslate.DANHMUC.nhomkhoangsan.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.nhomkhoangsan.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmNhomKhoangSanService()
           .deleteItem({ id: this.selectedItem.idnhomkhoangsan })
           .subscribe(
             () => this.getAllNhomKhoangSan(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -322,13 +371,14 @@ export class DmNhomkhoangsanListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }
 
   /**
-  * Hàm thông báo không thể xóa
-  */
+   * Hàm thông báo không thể xóa
+   */
   cantDeleteDialog(sMsg: string) {
     this.commonService.canDeleteDialogService(sMsg);
   }
