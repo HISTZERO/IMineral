@@ -71,7 +71,7 @@ export class DmTochucIoComponent implements OnInit {
   public dataTranslate: any;
 
   // Chứa trạng thái hiển thị của combobox trên layout
-  public classColWithFiftyPercentForCombobox  = false;
+  public classColWithFiftyPercentForCombobox = false;
 
   // chứa thông tin combobox được backup trong trường hợp update
   public dataComboboxModel: any;
@@ -112,7 +112,7 @@ export class DmTochucIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public datePipe: DatePipe
-  ) {}
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -129,8 +129,8 @@ export class DmTochucIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -140,19 +140,19 @@ export class DmTochucIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-     tentochuc: { required: this.dataTranslate.DANHMUC.tochuc.tentochucRequired },
-     diachi: { required: this.dataTranslate.DANHMUC.tochuc.diachitochucRequired },
-     sogiayto: { required: this.dataTranslate.DANHMUC.tochuc.sogiaytoRequired },
-     loaigiayto: { required: this.dataTranslate.DANHMUC.tochuc.loaigiaytoRequired },
-     ngaycap: { required: this.dataTranslate.DANHMUC.tochuc.ngaycapRequired },
-     noicap: { required: this.dataTranslate.DANHMUC.tochuc.noicapRequired },
-     idloaitochuc: { required: this.dataTranslate.DANHMUC.tochuc.loaitochucRequired },
-     dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber},
-     tinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
-     huyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
-     xa: { required: this.dataTranslate.DANHMUC.tochuc.maxaRequired },
-     thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber },
-     email: { email: this.dataTranslate.DANHMUC.tochuc.emailCheck}
+      tentochuc: { required: this.dataTranslate.DANHMUC.tochuc.tentochucRequired },
+      diachi: { required: this.dataTranslate.DANHMUC.tochuc.diachitochucRequired },
+      sogiayto: { required: this.dataTranslate.DANHMUC.tochuc.sogiaytoRequired },
+      loaigiayto: { required: this.dataTranslate.DANHMUC.tochuc.loaigiaytoRequired },
+      ngaycap: { required: this.dataTranslate.DANHMUC.tochuc.ngaycapRequired },
+      noicap: { required: this.dataTranslate.DANHMUC.tochuc.noicapRequired },
+      idloaitochuc: { required: this.dataTranslate.DANHMUC.tochuc.loaitochucRequired },
+      dienthoai: { pattern: this.dataTranslate.DANHMUC.tochuc.dienthoaiIsNumber },
+      tinh: { required: this.dataTranslate.DANHMUC.tochuc.matinhRequired },
+      huyen: { required: this.dataTranslate.DANHMUC.tochuc.mahuyenRequired },
+      xa: { required: this.dataTranslate.DANHMUC.tochuc.maxaRequired },
+      thutu: { pattern: this.dataTranslate.DANHMUC.tochuc.thutuIsNumber },
+      email: { email: this.dataTranslate.DANHMUC.tochuc.emailCheck }
     };
   }
 
@@ -162,7 +162,7 @@ export class DmTochucIoComponent implements OnInit {
   async getAllLoaiToChuc() {
     const listData: any = await this.dmFacadeService
       .getDmLoaiToChucService()
-      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
     this.listLoaiToChuc = listData.items;
   }
 
@@ -199,7 +199,7 @@ export class DmTochucIoComponent implements OnInit {
       tinhcombobox: [""],
       huyen: ["", Validators.required],
       huyencombobox: [""],
-      xa: ["",  Validators.required],
+      xa: ["", Validators.required],
       xacombobox: [""],
       trangthai: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
@@ -220,34 +220,34 @@ export class DmTochucIoComponent implements OnInit {
         ngaycap: this.obj.ngaycap,
         noicap: this.obj.noicap,
         idloaitochuc: this.obj.idloaitochuc,
-        loaitochuccombobox: {idloaitochuc: this.obj.idloaitochuc, tenloaitochuc: this.obj.tenloaitochuc},
+        loaitochuccombobox: { idloaitochuc: this.obj.idloaitochuc, tenloaitochuc: this.obj.tenloaitochuc },
         fax: this.obj.fax,
         website: this.obj.website,
         dienthoai: this.obj.dienthoai,
         email: this.obj.email,
-        tinhcombobox: {idtinh: this.obj.idtinh, matinh: this.obj.matinh, tentinh: this.obj.tentinh},
-        tinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
-        huyencombobox: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen, tenhuyen: this.obj.tenhuyen},
-        huyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
-        xacombobox: {idxa: this.obj.idxa, maxa: this.obj.maxa, tenxa: this.obj.tenxa},
-        xa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
+        tinhcombobox: { idtinh: this.obj.idtinh, matinh: this.obj.matinh, tentinh: this.obj.tentinh },
+        tinh: { idtinh: this.obj.idtinh, matinh: this.obj.matinh },
+        huyencombobox: { idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen, tenhuyen: this.obj.tenhuyen },
+        huyen: { idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen },
+        xacombobox: { idxa: this.obj.idxa, maxa: this.obj.maxa, tenxa: this.obj.tenxa },
+        xa: { idxa: this.obj.idxa, maxa: this.obj.maxa },
         trangthai: this.obj.trangthai,
         thutu: this.obj.thutu,
       });
 
       this.dataComboboxModel = {
-                                  idloaitochuc: this.obj.idloaitochuc,
-                                  tenloaitochuc: this.obj.tenloaitochuc,
-                                  idtinh: this.obj.idtinh,
-                                  matinh: this.obj.matinh,
-                                  tentinh: this.obj.tentinh,
-                                  idhuyen: this.obj.idhuyen,
-                                  mahuyen: this.obj.mahuyen,
-                                  tenhuyen: this.obj.tenhuyen,
-                                  idxa: this.obj.idxa,
-                                  maxa: this.obj.maxa,
-                                  tenxa: this.obj.tenxa
-                                };
+        idloaitochuc: this.obj.idloaitochuc,
+        tenloaitochuc: this.obj.tenloaitochuc,
+        idtinh: this.obj.idtinh,
+        matinh: this.obj.matinh,
+        tentinh: this.obj.tentinh,
+        idhuyen: this.obj.idhuyen,
+        mahuyen: this.obj.mahuyen,
+        tenhuyen: this.obj.tenhuyen,
+        idxa: this.obj.idxa,
+        maxa: this.obj.maxa,
+        tenxa: this.obj.tenxa
+      };
 
       this.tenLoaiToChucDisplay = this.obj.tenloaitochuc;
       await this.showDvhcHuyen();
@@ -348,9 +348,9 @@ export class DmTochucIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.tinhcombobox !== "") {
         this.tochucIOForm.controls["tinh"].setValue({
-                                                      idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
-                                                      matinh: this.tochucIOForm.value.tinhcombobox.matinh
-                                                    });
+          idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
+          matinh: this.tochucIOForm.value.tinhcombobox.matinh
+        });
         this.tenTinhDisplay = this.tochucIOForm.value.tinhcombobox.tentinh;
         this.tochucIOForm.controls["huyen"].setValue("");
         this.tenHuyenDisplay = "";
@@ -358,17 +358,17 @@ export class DmTochucIoComponent implements OnInit {
         this.tenXaDisplay = "";
       } else {
         this.tochucIOForm.controls["tinh"].setValue({
-                                                      idtinh: this.dataComboboxModel.idtinh,
-                                                      matinh: this.dataComboboxModel.matinh
-                                                    });
+          idtinh: this.dataComboboxModel.idtinh,
+          matinh: this.dataComboboxModel.matinh
+        });
         this.tenTinhDisplay = this.dataComboboxModel.tentinh;
         this.selectHuyen();
       }
     } else {
       this.tochucIOForm.controls["tinh"].setValue({
-                                                    idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
-                                                    matinh: this.tochucIOForm.value.tinhcombobox.matinh
-                                                  });
+        idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
+        matinh: this.tochucIOForm.value.tinhcombobox.matinh
+      });
       this.tenTinhDisplay = "";
     }
   }
@@ -380,9 +380,9 @@ export class DmTochucIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.huyencombobox !== "") {
         this.tochucIOForm.controls["huyen"].setValue({
-                                                      idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
-                                                      mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
-                                                    });
+          idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
+          mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
+        });
         this.tenHuyenDisplay = this.tochucIOForm.value.huyencombobox.tenhuyen;
         this.tochucIOForm.controls["xa"].setValue("");
         this.tenXaDisplay = "";
@@ -402,9 +402,9 @@ export class DmTochucIoComponent implements OnInit {
       }
     } else {
       this.tochucIOForm.controls["huyen"].setValue({
-                                                    idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
-                                                    mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
-                                                  });
+        idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
+        mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
+      });
       this.tenHuyenDisplay = "";
     }
   }
@@ -416,9 +416,9 @@ export class DmTochucIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.xacombobox !== "") {
         this.tochucIOForm.controls["xa"].setValue({
-                                                      idxa: this.tochucIOForm.value.xacombobox.idxa,
-                                                      maxa: this.tochucIOForm.value.xacombobox.maxa
-                                                    });
+          idxa: this.tochucIOForm.value.xacombobox.idxa,
+          maxa: this.tochucIOForm.value.xacombobox.maxa
+        });
         this.tenXaDisplay = this.tochucIOForm.value.xacombobox.tenxa;
       } else {
         if (this.tochucIOForm.value.tinhcombobox !== "" || this.tochucIOForm.value.huyencombobox !== "") {
@@ -434,9 +434,9 @@ export class DmTochucIoComponent implements OnInit {
       }
     } else {
       this.tochucIOForm.controls["xa"].setValue({
-                                                    idxa: this.tochucIOForm.value.xacombobox.idxa,
-                                                    maxa: this.tochucIOForm.value.xacombobox.maxa
-                                                  });
+        idxa: this.tochucIOForm.value.xacombobox.idxa,
+        maxa: this.tochucIOForm.value.xacombobox.maxa
+      });
       this.tenXaDisplay = "";
     }
   }
@@ -449,7 +449,7 @@ export class DmTochucIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     const idtinh = this.tochucIOForm.value.tinh.idtinh;
     const idhuyen = this.tochucIOForm.value.huyen.idhuyen;
-    const idxa =  this.tochucIOForm.value.xa.idxa;
+    const idxa = this.tochucIOForm.value.xa.idxa;
     this.inputModel = this.tochucIOForm.value;
     this.inputModel.matinh = this.tochucIOForm.value.tinh.matinh;
     this.inputModel.mahuyen = this.tochucIOForm.value.huyen.mahuyen;
@@ -457,7 +457,7 @@ export class DmTochucIoComponent implements OnInit {
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
-    this.inputModel.ngaycap = this.datePipe.transform( this.tochucIOForm.value.ngaycap, "yyyy-MM-dd");
+    this.inputModel.ngaycap = this.datePipe.transform(this.tochucIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllToChuc"),
@@ -534,7 +534,7 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Tỉnh
    */
   public compareTinh(item1: any, item2: any) {
-    if(item1.matinh === item2.matinh) {
+    if (item1.matinh === item2.matinh) {
       return true;
     } else {
       return false;
@@ -545,7 +545,7 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Huyện
    */
   public compareHuyen(item1: any, item2: any) {
-    if(item1.mahuyen === item2.mahuyen) {
+    if (item1.mahuyen === item2.mahuyen) {
       return true;
     } else {
       return false;
@@ -556,18 +556,18 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Xã
    */
   public compareXa(item1: any, item2: any) {
-    if(item1.maxa === item2.maxa) {
+    if (item1.maxa === item2.maxa) {
       return true;
     } else {
       return false;
     }
   }
 
-   /**
-    * Hàm check giá trị trong seletec option Tỉnh
-    */
+  /**
+   * Hàm check giá trị trong seletec option Tỉnh
+   */
   public compareLoaiToChuc(item1: any, item2: any) {
-    if(item1.idloaitochuc === item2.idloaitochuc) {
+    if (item1.idloaitochuc === item2.idloaitochuc) {
       return true;
     } else {
       return false;
