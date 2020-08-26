@@ -49,7 +49,10 @@
     "tenhuyendangdung": "Tên quận/huyện đang dùng",
     "tenxadangdung": "Tên phường/xã đang dùng",
     "tenthutucdangdung": "Thủ tục hành chính đang dùng",
-    "tennhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "tennhomkhoangsandangdung": "Nhóm khoáng sản đang dùng ",
+    "tenloaitochucdangdung": "Loại tổ chức đang dùng ",
+    "tenlinhvucdangdung": "Lĩnh vực đang dùng ",
+    "tencapquanlydangdung": "Cấp quản lý đang dùng "
     "updateStatusSuccess": "Thay đổi trạng thái thành công",
     "tenloaitochucdangdung": "Loại tổ chức đang dùng "
   },
