@@ -10,6 +10,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { NhomLoaiGiayPhep } from "src/app/shared/constants/nhomloaigiayphep-constants";
+import { TrangThaiEnum } from "../../../../../shared/constants/enum";
 
 @Component({
   selector: 'app-loaigiayphep-io',
@@ -47,6 +48,12 @@ export class DmLoaigiayphepIoComponent implements OnInit {
 
   // Chứa kiểu boolean hiển thị thuộc tính column
   public classColDvhc: boolean = false;
+
+  // Tên thủ tục hành chính hiển thị
+  public tenThuTucDisplay: string;
+
+  // chứa thông tin combobox được backup trong trường hợp update
+  public dataComboboxModel: any;
 
   // error message
   validationErrorMessages = {};
@@ -110,7 +117,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   async getAllThuTucHanhChinh() {
     const listData: any = await this.dmFacadeService
       .getDmThuTucHanhChinhService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
     this.listThuTucHanhChinh = listData.items;
   }
 
@@ -131,8 +138,9 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     this.loaiGiayPhepIOForm = this.formBuilder.group({
       maloaigiayphep: [""],
       tenloaigiayphep: ["", Validators.required],
-      nhomloaigiayphep: [""],
-      idthutuchanhchinh: [""],
+      nhomloaigiayphep: ["", Validators.required],
+      thutuchanhchinh: [""],
+      idthutuchanhchinh: ["", Validators.required],
       mota: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
@@ -148,10 +156,17 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
+        thutuchanhchinh: {idthutuc: this.obj.idthutuchanhchinh, tenthutuc: this.obj.tenthutuchanhchinh},
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
       });
+
+      this.dataComboboxModel = {
+        idthutuc: this.obj.idthutuchanhchinh,
+        tenthutuc: this.obj.tenthutuchanhchinh,
+      }
+      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh
     }
     this.editMode = true;
   }
@@ -228,6 +243,19 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
+    }
+  }
+
+  /**
+   * Hàm so sánh giá trị thuu tục hành chính combobox
+   * @param item1 
+   * @param item2 
+   */
+  compareThuTucHanhChinh(item1: any, item2: any) {
+    if (item1.idthutuc === item2.idthutuchanhchinh) {
+      return true;
+    } else {
+      return false;
     }
   }
 
