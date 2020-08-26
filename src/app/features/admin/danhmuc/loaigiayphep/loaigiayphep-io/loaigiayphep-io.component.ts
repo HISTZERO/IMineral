@@ -10,7 +10,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { NhomLoaiGiayPhep } from "src/app/shared/constants/nhomloaigiayphep-constants";
-import { TrangThaiEnum } from "../../../../../shared/constants/enum";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-loaigiayphep-io',
@@ -64,6 +64,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     tenloaigiayphep: "",
     nhomloaigiayphep: "",
     idthutuchanhchinh: "",
+    thutuchanhchinh: "",
     mota: "",
     thutu: "",
   };
@@ -107,6 +108,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tenloaigiayphep: { required: this.dataTranslate.DANHMUC.loaigiayphep.tenloaigiayphepRequired },
+      idthutuchanhchinh: { required: this.dataTranslate.DANHMUC.loaigiayphep.thutuchanhchinhRequired },
+      nhomloaigiayphep: { required: this.dataTranslate.DANHMUC.loaigiayphep.nhomloaigiayphepRequired },
       thutu: { pattern: this.dataTranslate.DANHMUC.loaigiayphep.thutuIsNumber }
     };
   }
@@ -156,7 +159,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
-        thutuchanhchinh: {idthutuc: this.obj.idthutuchanhchinh, tenthutuc: this.obj.tenthutuchanhchinh},
+        thutuchanhchinh: {idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh},
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
@@ -228,6 +231,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       tenloaigiayphep: "",
       nhomloaigiayphep: "",
       idthutuchanhchinh: "",
+      thutuchanhchinh: "",
       mota: "",
       thutu: "",
     });
@@ -247,12 +251,30 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   }
 
   /**
+   * Hàm chuyển đổi dữ liệu thủ thục combobox khi select
+   */
+  public selectThuTucHanhChinh() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.loaiGiayPhepIOForm.value.thutuchanhchinh) {
+        this.loaiGiayPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiGiayPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+        this.tenThuTucDisplay = this.loaiGiayPhepIOForm.value.thutuchanhchinh.tenthutuchanhchinh;
+      } else {
+        this.loaiGiayPhepIOForm.controls["idthutuchanhchinh"].setValue(this.dataComboboxModel.idthutuc);
+        this.tenThuTucDisplay = this.dataComboboxModel.tenthutuc;
+      }
+    } else {
+      this.loaiGiayPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiGiayPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+      this.tenThuTucDisplay = "";
+    }
+  }
+
+  /**
    * Hàm so sánh giá trị thuu tục hành chính combobox
    * @param item1 
    * @param item2 
    */
-  compareThuTucHanhChinh(item1: any, item2: any) {
-    if (item1.idthutuc === item2.idthutuchanhchinh) {
+  public compareThuTucHanhChinh(item1: any, item2: any) {
+    if (item1.idthutuchanhchinh === item2.idthutuchanhchinh) {
       return true;
     } else {
       return false;
