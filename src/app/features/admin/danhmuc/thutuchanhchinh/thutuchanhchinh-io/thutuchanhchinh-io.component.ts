@@ -102,9 +102,9 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       // Lấy dữ liệu translate
       await this.getDataTranslate();
       // Lấy dữ liệu Cấp quản lý
-      this.getAllCapQuanLy();
+      await this.getAllCapQuanLy();
       // Gọi hàm lấy dữ liệu Lĩnh Vực
-      await this.getLinhVuc();
+      await this.geAlltLinhVuc();
     }
 
     /**
@@ -137,7 +137,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
      * Hàm check giá trị trong seletect option Lĩnh Vực
      */
     public compareLinhVuc(item1: any, item2: any) {
-      if(item1.idlinhvuc === item2.idlinhvuc) {
+      if (item1.idlinhvuc === item2.idlinhvuc) {
         return true;
       } else {
         return false;
@@ -148,7 +148,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
      * Hàm check giá trị trong seletect option Cấp Quản Lý
      */
     public compareCapQuanLy(item1: any, item2: any) {
-      if(item1.idcapquanly === item2.idcapquanly) {
+      if (item1.idcapquanly === item2.idcapquanly) {
         return true;
       } else {
         return false;
@@ -203,7 +203,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
           idlinhvuc: this.obj.idlinhvuc,
           linhvuccombobox: {idlinhvuc: this.obj.idlinhvuc, tenlinhvuc: this.obj.tenlinhvuc},
           idcapthuchien: this.obj.idcapthuchien,
-          capthuchiencombobox: {idcapthuchien: this.obj.idcapthuchien, tencapthuchien: this.obj.tencapthuchien},
+          capthuchiencombobox: {idcapquanly: this.obj.idcapthuchien, tencapquanly: this.obj.tencapthuchien},
           doituongthuchien: this.obj.doituongthuchien,
           coquanthuchien: this.obj.coquanthuchien,
           ketquathuchien: this.obj.ketquathuchien,
@@ -225,7 +225,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
         };
 
         this.tenLinhVucDisplay = this.obj.tenlinhvuc;
-        this.tenCapQuanLyDisplay = this.obj.tencapquanly;
+        this.tenCapQuanLyDisplay = this.obj.tencapthuchien;
       }
       this.editMode = true;
     }
@@ -233,7 +233,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     /**
      * Hàm lấy danh sách Lĩnh Vực
      */
-    async getLinhVuc() {
+    async geAlltLinhVuc() {
       const allLinhVucData: any = await this.dmFacadeService
         .getDmLinhvucService()
         .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
@@ -276,15 +276,15 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     async selectCapThucHien() {
       if (this.obj && this.purpose === 'edit') {
         if (this.thuTucHanhChinhIOForm.value.capthuchiencombobox) {
-          this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.thuTucHanhChinhIOForm.value.capthuchiencombobox.idcapthuchien);
-          this.tenLinhVucDisplay = this.thuTucHanhChinhIOForm.value.capthuchiencombobox.tencapthuchien;
+          this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.thuTucHanhChinhIOForm.value.capthuchiencombobox.idcapquanly);
+          this.tenCapQuanLyDisplay = this.thuTucHanhChinhIOForm.value.capthuchiencombobox.tencapquanly;
         } else {
-          this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.dataComboboxModel.idlinhvuc);
-          this.tenLinhVucDisplay = this.dataComboboxModel.tencapthuchien;
+          this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.dataComboboxModel.idcapthuchien);
+          this.tenCapQuanLyDisplay = this.dataComboboxModel.tencapthuchien;
         }
       } else {
-        this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.thuTucHanhChinhIOForm.value.capthuchiencombobox.idcapthuchien);
-        this.tenLinhVucDisplay = "";
+        this.thuTucHanhChinhIOForm.controls["idcapthuchien"].setValue(this.thuTucHanhChinhIOForm.value.capthuchiencombobox.idcapquanly);
+        this.tenCapQuanLyDisplay = "";
       }
     }
 

@@ -22,13 +22,13 @@
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="linhvuccombobox" placeholder="{{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}"  *ngIf="dataTranslate"
-              [compareWith] = "compareLinhVuc()" (selectionChange) = "selectLinhVuc()">
+              [compareWith] = "compareLinhVuc" (selectionChange) = "selectLinhVuc()">
               <mat-select-filter [displayMember]="'tenlinhvuc'" [array]="linhVucFilters" (filteredReturn)="allLinhVuc = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{'DANHMUC.thutuchanhchinh.chonLinhVucPlaceholder' | translate}}
               </mat-option>
-              <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="linhVuc.idlinhvuc">
+              <mat-option *ngFor="let linhVuc of allLinhVuc" [value]="{idlinhvuc: linhVuc.idlinhvuc, tenlinhvuc: linhVuc.tenlinhvuc}">
                 {{ linhVuc.tenlinhvuc }}
               </mat-option>
             </mat-select>
@@ -50,14 +50,14 @@
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="capthuchiencombobox" placeholder="{{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}"  *ngIf="dataTranslate"
-              [compareWith] = "compareCapQuanLy()" (selectionChange) = "selectCapThucHien()">
+              [compareWith] = "compareCapQuanLy" (selectionChange) = "selectCapThucHien()">
               <mat-select-filter [displayMember]="'tencapquanly'" [array]="listCapQuanLyFilter" (filteredReturn)="listCapQuanLy = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{'DANHMUC.thutuchanhchinh.capthuchienPlaceholder' | translate}}
               </mat-option>
-              <mat-option *ngFor="let cap of listCapQuanLy" [value]="cap.idcapquanly">
-                {{ cap.tencapquanly }}
+              <mat-option *ngFor="let capthuchien of listCapQuanLy" [value]="{idcapquanly: capthuchien.idcapquanly, tencapquanly: capthuchien.tencapquanly}">
+                {{ capthuchien.tencapquanly }}
               </mat-option>
             </mat-select>
             <input type="hidden" class="form-control" formControlName="idcapthuchien">

@@ -192,9 +192,18 @@ export class DmLinhvucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllLinhvuc();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -210,9 +219,18 @@ export class DmLinhvucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmLinhvucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllLinhvuc();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -221,6 +239,7 @@ export class DmLinhvucListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.linhvuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -232,8 +251,29 @@ export class DmLinhvucListComponent implements OnInit {
             this.dataTranslate.DANHMUC.linhvuc.nameofobject + " (" + data.tenlinhvuc + ") " + this.dataTranslate.DANHMUC.linhvuc.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.linhvuc.informedDialogTitle,
           );
+        } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idlinhvuc);
+          });
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmLinhvucService()
+          .deleteItemsLinhVuc(dataBody)
+          .subscribe(
+            () => {
+              this.getAllLinhvuc();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -269,7 +309,7 @@ export class DmLinhvucListComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-    /**
+  /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
   async deleteItemLinhvuc(data) {
@@ -283,7 +323,7 @@ export class DmLinhvucListComponent implements OnInit {
     this.canBeDeletedCheck(canDelete);
   }
 
-    /**
+  /**
    * Hàm check điều kiện xóa bản ghi
    * @param sMsg
    */
@@ -295,7 +335,7 @@ export class DmLinhvucListComponent implements OnInit {
     }
   }
 
-   /**
+  /**
    * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
    */
   confirmDeleteDiaLog() {
@@ -305,13 +345,22 @@ export class DmLinhvucListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.linhvuc.nameofobject + " (" + data.tenlinhvuc + ") " + this.dataTranslate.DANHMUC.linhvuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.linhvuc.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmLinhvucService()
           .deleteItem({ idlinhvuc: this.selectedItem.idlinhvuc })
           .subscribe(
             () => this.getAllLinhvuc(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -319,6 +368,7 @@ export class DmLinhvucListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }

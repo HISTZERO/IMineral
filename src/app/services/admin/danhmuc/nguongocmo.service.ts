@@ -35,4 +35,11 @@ export class DmNguongocmoService extends RepositoryEloquentService {
     });
     return this.updateItem(params);
   }
+
+  public deleteItemsNguonGocMo(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.NGUONGOCMO + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }
