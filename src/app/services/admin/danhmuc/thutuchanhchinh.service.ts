@@ -35,4 +35,11 @@ export class DmThutuchanhchinhService extends RepositoryEloquentService {
     });
     return this.updateItem(params);
   }
+
+  public deleteItemsThuTucHanhChinh(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.THUTUCHANHCHINH + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }

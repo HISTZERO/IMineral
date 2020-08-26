@@ -35,4 +35,11 @@ export class DmNhomkhoangsanService extends RepositoryEloquentService {
     });
     return this.updateItem(params);
   }
+
+  public deleteItemsNhomKhoangSan(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.NHOMKHOANGSAN + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }

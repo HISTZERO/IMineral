@@ -36,4 +36,10 @@ export class DmLoaitochucService extends RepositoryEloquentService {
     return this.updateItem(params);
   }
 
+  public deleteItemsLoaiToChuc(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.LOAITOCHUC + '/removelist'
+    });
+    return this.updateItem(params);
+  }
 }

@@ -193,9 +193,18 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
-          this.getAllLoaiToChuc();
-        });
+        this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
+            this.getAllLoaiToChuc();
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -211,9 +220,18 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam).subscribe(res => {
+        this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam)
+        .subscribe(res => {
           this.getAllLoaiToChuc();
-        });
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showError(error);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000)
+        );
       }
     });
   }
@@ -222,6 +240,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem() {
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.loaitochuc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -230,13 +249,32 @@ export class DmLoaiDmTochucListComponent implements OnInit {
         if (data !== null) {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
-            this.dataTranslate.DANHMUC.loaitochuc.nameofobject + " (" + data.tennguongocmo + ") " + this.dataTranslate.DANHMUC.loaitochuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaitochuc.nameofobject + " (" + data.tenloaitochuc + ") " + this.dataTranslate.DANHMUC.loaitochuc.informedContentOfUnDeletedDialog,
             this.dataTranslate.DANHMUC.loaitochuc.informedDialogTitle,
           );
-
-          informationDialogRef.afterClosed().subscribe(() => {});
         } else {
+          this.listDataSelect.map(res => {
+            idItems.push(res.idloaitochuc);
+          });
 
+          const dataBody: any = {
+            listId: idItems,
+          };
+
+          this.dmFacadeService.getDmLoaiToChucService()
+          .deleteItemsLoaiToChuc(dataBody)
+          .subscribe(
+            () => {
+              this.getAllLoaiToChuc();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showError(error);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+          ));
         }
       }
     });
@@ -309,13 +347,22 @@ export class DmLoaiDmTochucListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dmFacadeService
+        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
+
+        if (data !== null) {
+          const informationDialogRef = this.commonService.informationDiaLogService(
+            "",
+            this.dataTranslate.DANHMUC.loaitochuc.nameofobject + " (" + data.tenloaitochuc + ") " + this.dataTranslate.DANHMUC.loaitochuc.informedContentOfUnDeletedDialog,
+            this.dataTranslate.DANHMUC.loaitochuc.informedDialogTitle,
+          );
+        } else {
+          await this.dmFacadeService
           .getDmLoaiToChucService()
           .deleteItem({ id: this.selectedItem.idloaitochuc })
           .subscribe(
             () => this.getAllLoaiToChuc(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.commonService.showError(error);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -323,6 +370,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
                 2000
               )
           );
+        }
       }
     });
   }
