@@ -77,8 +77,11 @@ export class DmTochucIoComponent implements OnInit {
   public dataComboboxModel: any;
 
   public tenLoaiToChucDisplay: string;
+
   public tenTinhDisplay: string;
+
   public tenHuyenDisplay: string;
+
   public tenXaDisplay: string;
 
   // error message
@@ -346,7 +349,7 @@ export class DmTochucIoComponent implements OnInit {
    */
   selectTinh() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.tochucIOForm.value.tinhcombobox !== "") {
+      if (this.tochucIOForm.value.tinhcombobox) {
         this.tochucIOForm.controls["tinh"].setValue({
                                                       idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
                                                       matinh: this.tochucIOForm.value.tinhcombobox.matinh
@@ -378,7 +381,7 @@ export class DmTochucIoComponent implements OnInit {
    */
   selectHuyen() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.tochucIOForm.value.huyencombobox !== "") {
+      if (this.tochucIOForm.value.huyencombobox) {
         this.tochucIOForm.controls["huyen"].setValue({
                                                       idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
                                                       mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
@@ -387,7 +390,7 @@ export class DmTochucIoComponent implements OnInit {
         this.tochucIOForm.controls["xa"].setValue("");
         this.tenXaDisplay = "";
       } else {
-        if (this.tochucIOForm.value.tinhcombobox !== "") {
+        if (this.tochucIOForm.value.tinhcombobox) {
           this.tochucIOForm.controls["huyen"].setValue("");
           this.tenHuyenDisplay = "";
         } else {
@@ -414,14 +417,14 @@ export class DmTochucIoComponent implements OnInit {
    */
   selectXa() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.tochucIOForm.value.xacombobox !== "") {
+      if (this.tochucIOForm.value.xacombobox) {
         this.tochucIOForm.controls["xa"].setValue({
                                                       idxa: this.tochucIOForm.value.xacombobox.idxa,
                                                       maxa: this.tochucIOForm.value.xacombobox.maxa
                                                     });
         this.tenXaDisplay = this.tochucIOForm.value.xacombobox.tenxa;
       } else {
-        if (this.tochucIOForm.value.tinhcombobox !== "" || this.tochucIOForm.value.huyencombobox !== "") {
+        if (this.tochucIOForm.value.tinhcombobox || this.tochucIOForm.value.huyencombobox) {
           this.tochucIOForm.controls["xa"].setValue("");
           this.tenXaDisplay = "";
         } else {
@@ -564,7 +567,7 @@ export class DmTochucIoComponent implements OnInit {
   }
 
    /**
-    * Hàm check giá trị trong seletec option Tỉnh
+    * Hàm check giá trị trong seletec option Loại Tổ Chức
     */
   public compareLoaiToChuc(item1: any, item2: any) {
     if(item1.idloaitochuc === item2.idloaitochuc) {
