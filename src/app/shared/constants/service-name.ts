@@ -17,7 +17,9 @@ export class ServiceName {
   public static THUTUCHANHCHINH = "thutuchanhchinh";
   public static TOCHUC = "tochuc";
   public static LINHVUC = "linhvuc";
+  // Khu vực khoáng sản
   public static KHUVUCDAUGIA = "khuvucdaugia";
+  public static KHUVUCCAMTAMCAM = "khuvuccamtamcam";
 
 
   public static NHOMTHAMSO = "nhomthamso";
