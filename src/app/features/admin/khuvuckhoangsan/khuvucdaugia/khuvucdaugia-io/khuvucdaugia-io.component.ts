@@ -108,8 +108,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvucRequired },
-      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.linhvuc.diadiemRequired },
-      dientich: { pattern: this.dataTranslate.DANHMUC.linhvuc.dientichIsNumber }
+      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.diadiemRequired },
+      dientich: { pattern: this.dataTranslate.DANHMUC.khuvucdaugia.dientichIsNumber }
     };
   }
 
@@ -228,7 +228,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeCanhanIOSidenav() {
+  public closeKhuVucDauGiaIOSidenav() {
     this.matSidenavService.close();
   }
 
