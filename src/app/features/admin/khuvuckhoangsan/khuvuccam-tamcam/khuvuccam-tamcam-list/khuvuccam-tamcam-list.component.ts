@@ -6,25 +6,26 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { OutputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
+import { MenuKhuVucCamTamCam } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuccam-tamcam";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import { OutputKhuVucKhoangSanDocHaiModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhoangsandochai.model";
-import { MenuKhuVucKhoangSanDocHai } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsandochai";
-import { KhuvuckhoangsandochaiIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-io/khuvuckhoangsandochai-io.component";
+import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
+
 
 @Component({
-  selector: 'app-khuvuckhoangsandochai-list',
-  templateUrl: './khuvuckhoangsandochai-list.component.html',
-  styleUrls: ['./khuvuckhoangsandochai-list.component.scss']
+  selector: 'app-khuvuccam-tamcam-list',
+  templateUrl: './khuvuccam-tamcam-list.component.html',
+  styleUrls: ['./khuvuccam-tamcam-list.component.scss']
 })
-export class KhuvuckhoangsandochaiListComponent implements OnInit {
+export class KhuvuccamTamcamListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridKvKhoangSanDocHai", { static: false }) public gridKvKhoangSanDocHai: GridComponent;
+  @ViewChild("gridKvCamTamCam", { static: false }) public gridKvCamTamCam: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compKvKhoangSanDocHaiIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   // Chứa thuộc tính form
   public formSearch: FormGroup;
@@ -32,17 +33,17 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-  // Chứa danh sách Khu vực Khoáng sản độc hại
-  public listKvKhoangSanDocHai: OutputKhuVucKhoangSanDocHaiModel[];
+  // Chứa danh sách Khu vực cấm tạm cấm
+  public listKvCamTamCam: OutputKhuVucCamTamCamModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputKhuVucKhoangSanDocHaiModel;
+  public selectedItem: OutputKhuVucCamTamCamModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
   // Chứa menu item trên subheader
-  public navArray = MenuKhuVucKhoangSanDocHai;
+  public navArray = MenuKhuVucCamTamCam;
 
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
@@ -94,8 +95,8 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu khu vực khoáng sản độc hại
-    await this.getAllKhuVucKhoangSanDocHai();
+    // Gọi hàm lấy dữ liệu khu vực cấm/tạm cấm
+    await this.getAllKhuVucCamTamCam();
   }
 
   /**
@@ -105,14 +106,14 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     this.formSearch.reset({
       Keyword: "",
     });
-    this.getAllKhuVucKhoangSanDocHai();
+    this.getAllKhuVucCamTamCam();
   }
 
   /**
-   * Hàm lấy dữ liệu khu vực khoáng sản độc hại
+   * Hàm lấy dữ liệu khu vực cấm/tạm cấm
    */
-  async getAllKhuVucKhoangSanDocHai(param: any = { PageNumber: 1, PageSize: -1 }) {
-    this.listKvKhoangSanDocHai = [];
+  async getAllKhuVucCamTamCam(param: any = { PageNumber: 1, PageSize: -1 }) {
+    this.listKvCamTamCam = [];
     // const listData: any = await this.dmFacadeService
     //   .getDmCanhanService()
     //   .getFetchAll(param);
@@ -145,29 +146,29 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemKhuVucKhoangSanDocHai(id: any) {
-    // Lấy dữ liệu khu vực khoáng sản độc hại theo id
+  async editItemKhuVucCamTamCam(id: any) {
+    // Lấy dữ liệu khu vực cấm/ tạm cấm theo id
     const dataItem: any = await this.khuvuckhoangsanFacadeService
-      .getKhuVucKhoangSanDocHaiService()
+      .getKhuVucCamTamCamService()
       .getByid(id).toPromise();
-    await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleEdit);
-    await this.matSidenavService.setContentComp(KhuvuckhoangsandochaiIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.titleEdit);
+    await this.matSidenavService.setContentComp(KhuvuccamTamcamIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openKhuVucKhoangSanDocHaiIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleAdd);
-    this.matSidenavService.setContentComp(KhuvuckhoangsandochaiIoComponent, "new");
+  public openKhuVucCamTamCamIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.titleAdd);
+    this.matSidenavService.setContentComp(KhuvuccamTamcamIoComponent, "new");
     this.matSidenavService.open();
   }
 
   /**
    * Hàm đóng sidenav
    */
-  public closeKhuVucKhoangSanDocHaiIOSidenav() {
+  public closeKhuVucCamTamCamIOSidenav() {
     this.matSidenavService.close();
   }
 
@@ -175,13 +176,13 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemKhuVucKhoangSanDocHai(data) {
+  async deleteItemKhuVucCamTamCam(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.khuvuckhoangsanFacadeService
-      .getKhuVucKhoangSanDocHaiService()
+      .getKhuVucCamTamCamService()
       .checkBeDeleted(this.selectedItem.idkhuvuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -203,16 +204,16 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.contentDelete,
+      this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.contentDelete,
       this.selectedItem.tenkhuvuc
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
           await this.khuvuckhoangsanFacadeService
-            .getKhuVucKhoangSanDocHaiService()
+            .getKhuVucCamTamCamService()
             .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
             .subscribe(
-              () => this.getAllKhuVucKhoangSanDocHai(),
+              () => this.getAllKhuVucCamTamCam(),
               (error: HttpErrorResponse) => {
                 this.commonService.showeNotiResult(error.message, 2000);
               },

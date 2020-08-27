@@ -4,21 +4,21 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
 
+import { InputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { InputKhuVucKhoangSanDocHaiModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhoangsandochai.model";
 
 @Component({
-  selector: 'app-khuvuckhoangsandochai-io',
-  templateUrl: './khuvuckhoangsandochai-io.component.html',
-  styleUrls: ['./khuvuckhoangsandochai-io.component.scss']
+  selector: 'app-khuvuccam-tamcam-io',
+  templateUrl: './khuvuccam-tamcam-io.component.html',
+  styleUrls: ['./khuvuccam-tamcam-io.component.scss']
 })
-export class KhuvuckhoangsandochaiIoComponent implements OnInit {
+export class KhuvuccamTamcamIoComponent implements OnInit {
 
-  // Chứa dữ liệu Form khu vực khoáng sản độc hại
-  public kvKhoangSanDocHaiIOForm: FormGroup;
+  // Chứa dữ liệu Form khu vực cấm - tạm cấm
+  public kvCamTamCamIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -30,7 +30,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputKhuVucKhoangSanDocHaiModel;
+  public inputModel: InputKhuVucCamTamCamModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -47,10 +47,15 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     dientich: "",
     donvidientich: "",
     mota: "",
-    doituongloaihinh: "",
+    maloaihinh: "",
+    loaihinhcam: "",
+    lydocam: "",
     loaikhoangsan: "",
     soquyetdinh: "",
     ngayquyetdinh: "",
+    thoihancam: "",
+    ngaybd: "",
+    ngaykt: "",
   };
 
   // Contructor
@@ -97,7 +102,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.inputModel = new InputKhuVucKhoangSanDocHaiModel();
+    this.inputModel = new InputKhuVucCamTamCamModel();
     // check edit
     this.formOnEdit();
   }
@@ -106,17 +111,22 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.kvKhoangSanDocHaiIOForm = this.formBuilder.group({
+    this.kvCamTamCamIOForm = this.formBuilder.group({
       sohieu: [""],
       tenkhuvuc: [""],
       diadiem: [""],
       dientich: [""],
       donvidientich: [""],
       mota: [""],
-      doituongloaihinh: [""],
+      maloaihinh: [""],
+      loaihinhcam: [""],
+      lydocam: [""],
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
+      thoihancam: [""],
+      ngaybd: [""],
+      ngaykt: [""],
     });
   }
 
@@ -125,17 +135,23 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
-      this.kvKhoangSanDocHaiIOForm.setValue({
+      this.kvCamTamCamIOForm.setValue({
         sohieu: this.obj.sohieu,
         tenkhuvuc: this.obj.tenkhuvuc,
         diadiem: this.obj.diadiem,
         dientich: this.obj.dientich,
         donvidientich: this.obj.donvidientich,
         mota: this.obj.mota,
-        doituongloaihinh: this.obj.doituongloaihinh,
+        maloaihinh: this.obj.maloaihinh,
+        loaihinhcam: this.obj.loaihinhcam,
+        lydocam: this.obj.lydocam,
         loaikhoangsan: this.obj.loaikhoangsan,
         soquyetdinh: this.obj.soquyetdinh,
         ngayquyetdinh: this.obj.ngayquyetdinh,
+        thoihancam: this.obj.thoihancam,
+        ngaybd: this.obj.ngaybd,
+        ngaykt: this.obj.ngaykt,
+        hequychieu: this.obj.hequychieu,
       });
     }
   }
@@ -144,12 +160,12 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucKhoangSanDocHaiService();
-    this.inputModel = this.kvKhoangSanDocHaiIOForm.value;
+    const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucCamTamCamService();
+    this.inputModel = this.kvCamTamCamIOForm.value;
     // this.inputModel.ngaycap = this.datePipe.transform(this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhoangSanDocHai"),
+        (res) => this.matSidenavService.doParentFunction("getAllKhuVucCamTamCam"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -162,7 +178,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idkhuvuc = this.obj.idkhuvuc;
       kvKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhoangSanDocHai"),
+        (res) => this.matSidenavService.doParentFunction("getAllKhuVucCamTamCam"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -181,7 +197,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.kvKhoangSanDocHaiIOForm.valid === true) {
+    if (this.kvCamTamCamIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -192,17 +208,22 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.kvKhoangSanDocHaiIOForm.reset({
+    this.kvCamTamCamIOForm.reset({
       sohieu: "",
       tenkhuvuc: "",
       diadiem: "",
       dientich: "",
       donvidientich: "",
       mota: "",
-      doituongloaihinh: "",
+      maloaihinh: "",
+      loaihinhcam: "",
+      lydocam: "",
       loaikhoangsan: "",
       soquyetdinh: "",
       ngayquyetdinh: "",
+      thoihancam: "",
+      ngaybd: "",
+      ngaykt: "",
     });
   }
 
@@ -212,7 +233,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.kvKhoangSanDocHaiIOForm.valid === true) {
+    if (this.kvCamTamCamIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -224,7 +245,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.kvKhoangSanDocHaiIOForm,
+      this.kvCamTamCamIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -233,7 +254,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeKhuVucKhoangSanIOSidenav() {
+  public closeKhuVucCamTamCamIOSidenav() {
     this.matSidenavService.close();
   }
 
