@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { KhuVucDauGiaService } from "src/app/services/admin/khuvuckhoangsan/khuvucdaugia.service";
 import { KhuVucKhongDauGiaService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhongdaugia.service";
 import { KhuvuccamTamcamService } from "src/app/services/admin/khuvuckhoangsan/khuvuccam-tamcam.service";
+import { KhuvuckhoangsandochaiService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsandochai.service";
 
 @Injectable({
   providedIn: "root",
@@ -25,5 +26,10 @@ export class KhuVucKhoangSanFacadeService {
   // Khu vực cấm tạm cấm
   public getKhuVucCamTamCamService() {
     return new KhuvuccamTamcamService(this.httpClient);
+  }
+
+  // Khu vực khoáng sản độc hại
+  public getKhuVucKhoangSanDocHaiService() {
+    return new KhuvuckhoangsandochaiService(this.httpClient);
   }
 }

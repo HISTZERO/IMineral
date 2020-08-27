@@ -1,4 +1,4 @@
-export class OutputKhuVucCamTamCamModel {
+export class OutputKhuVucKhoangSanDocHaiModel {
     idkhuvuc: string;
     objectid: number;
     sohieu: string;
@@ -7,22 +7,17 @@ export class OutputKhuVucCamTamCamModel {
     dientich: number;
     donvidientich: string;
     mota: string;
-    maloaihinh: number;
-    loaihinhcam: string;
-    lydocam: string;
+    doituongloaihinh: number;
     loaikhoangsan: string;
     soquyetdinh: string;
     ngayquyetdinh: string;
-    thoihancam: string;
-    ngaybd: string;
-    ngaykt: string;
     geom: string;
     geovn: string;
     geowgs: string;
     hequychieu: string;
 }
 
-export class InputKhuVucCamTamCamModel {
+export class InputKhuVucKhoangSanDocHaiModel {
     idkhuvuc: string;
     objectid: number;
     sohieu: string;
@@ -31,15 +26,10 @@ export class InputKhuVucCamTamCamModel {
     dientich: number;
     donvidientich: string;
     mota: string;
-    maloaihinh: number;
-    loaihinhcam: string;
-    lydocam: string;
+    doituongloaihinh: number;
     loaikhoangsan: string;
     soquyetdinh: string;
     ngayquyetdinh: string;
-    thoihancam: string;
-    ngaybd: string;
-    ngaykt: string;
     geom: string;
     geovn: string;
     geowgs: string;

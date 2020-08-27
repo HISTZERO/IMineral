@@ -9,7 +9,7 @@ import { ServiceName } from "src/app/shared/constants/service-name";
 @Injectable({
   providedIn: 'root'
 })
-export class KhuvuccamTamcamService extends RepositoryEloquentService {
+export class KhuvuckhoangsandochaiService extends RepositoryEloquentService {
 
   constructor(public httpClient: HttpClient) {
     super();
