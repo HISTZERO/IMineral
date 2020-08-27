@@ -1,4 +1,4 @@
-export class OutputKhuVucCamTamCam {
+export class OutputKhuVucCamTamCamModel {
     idkhuvuc: string;
     objectid: number;
     sohieu: string;
@@ -22,7 +22,7 @@ export class OutputKhuVucCamTamCam {
     hequychieu: string;
 }
 
-export class InputKhuVucCamTamCam {
+export class InputKhuVucCamTamCamModel {
     idkhuvuc: string;
     objectid: number;
     sohieu: string;

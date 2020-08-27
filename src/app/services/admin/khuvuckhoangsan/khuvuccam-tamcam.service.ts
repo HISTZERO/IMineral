@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import { InputKhuVucCamTamCam, OutputKhuVucCamTamCam } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
+import { InputKhuVucCamTamCamModel, OutputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 
@@ -15,13 +15,13 @@ export class KhuvuccamTamcamService extends RepositoryEloquentService {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputKhuVucCamTamCam(),
-      outputModelName: new OutputKhuVucCamTamCam(),
+      inputModelName: new InputKhuVucCamTamCamModel(),
+      outputModelName: new OutputKhuVucCamTamCamModel(),
       apiUrl: environment.apiIMineral + ServiceName.KHUVUCDAUGIA
     });
   }
 
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 
