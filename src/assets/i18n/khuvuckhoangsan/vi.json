@@ -2,7 +2,7 @@
   "khuvucdaugia": {
     "titleList": "Danh sách khu vực dấu giá",
     "titleAdd": "Thêm mới khu vực đấu giá",
-    "titleEdit": "Sửa dữ khu vực đấu giá",
+    "titleEdit": "Sửa dữ liệu khu vực đấu giá",
     "contentDelete": "Khu vực đấu giá: ",
     "sohieu": "Số hiệu",
     "tenkhuvuc": "Tên khu vực",
@@ -36,7 +36,7 @@
   "khuvuccamtamcam": {
     "titleList": "Danh sách khu vực cấm & tạm cấm",
     "titleAdd": "Thêm mới khu vực cấm & tạm cấm",
-    "titleEdit": "Sửa dữ khu vực cấm & tạm cấm",
+    "titleEdit": "Sửa dữ liệu khu vực cấm & tạm cấm",
     "contentDelete": "Khu vực cấm & tạm cấm: ",
     "sohieu": "Số hiệu",
     "tenkhuvuc": "Tên khu vực",
@@ -53,7 +53,6 @@
     "thoihancam": "Thời hạn cấm",
     "ngaybd": "Ngày bắt đầu",
     "ngaykt": "Ngày kết thúc",
-    "hequychieu": "Hệ quy chiếu",
     "sohieuPlaceholder": "Nhập số hiệu",
     "tenkhuvucPlaceholder": "Nhập tên khu vực",
     "diadiemPlaceholder": "Nhập địa điểm",
@@ -70,5 +69,31 @@
     "ngaybdPlaceholder": "DD-MM-YYY",
     "ngayktPlaceholder": "DD-MM-YYY",
     "hequychieuPlaceholder": "Hệ quy chiếu"
+  },
+  "khuvuckhoangsandochai": {
+    "titleList": "Danh sách khu vực khoáng sản độc hại",
+    "titleAdd": "Thêm mới khu vực khoáng sản độc hại",
+    "titleEdit": "Sửa dữ liệu khu vực khoáng sản độc hại",
+    "contentDelete": "Khu vực khoáng sản độc hại: ",
+    "sohieu": "Số hiệu",
+    "tenkhuvuc": "Tên khu vực",
+    "diadiem": "Địa điểm",
+    "dientich": "Diện tích",
+    "donvidientich": "Đơn vị diện tích",
+    "mota": "Mô tả",
+    "doituongloaihinh": "Đối tượng loại hình",
+    "loaikhoangsan": "Loại khoáng sản",
+    "soquyetdinh": "Số quyết định",
+    "ngayquyetdinh": "Ngày quyết định",
+    "sohieuPlaceholder": "Nhập số hiệu",
+    "tenkhuvucPlaceholder": "Nhập tên khu vực",
+    "diadiemPlaceholder": "Nhập địa điểm",
+    "dientichPlaceholder": "Nhập diện tích",
+    "donvidientichPlaceholder": "Nhập đơn vị diện tích",
+    "motaPlaceholder": "Mô tả",
+    "doituongloaihinhPlaceholder": "---Chọn đối tượng loại hình---",
+    "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
+    "soquyetdinhPlaceholder": "Nhập số quyết định",
+    "ngayquyetdinhPlaceholder": "DD-MM-YYY"
   }
 }

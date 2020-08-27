@@ -23,7 +23,7 @@ import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangs
 export class KhuvuccamTamcamListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridKvCamTamCam", { static: false }) public gridCaNhan: GridComponent;
+  @ViewChild("gridKvCamTamCam", { static: false }) public gridKvCamTamCam: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -95,7 +95,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu cá nhân
+    // Gọi hàm lấy dữ liệu khu vực cấm/tạm cấm
     await this.getAllKhuVucCamTamCam();
   }
 
