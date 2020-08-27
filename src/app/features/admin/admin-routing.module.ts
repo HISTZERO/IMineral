@@ -24,6 +24,13 @@ const adminRoutes: Routes = [
           ),
       },
       {
+        path: AdminRoutingName.khuvuckhoangsanUri,
+        loadChildren: () =>
+          import("src/app/features/admin/khuvuckhoangsan/khuvuckhoangsan.module").then(
+            (mod) => mod.KhuvuckhoangsanModule
+          ),
+      },
+      {
         path: AdminRoutingName.mapUri,
         loadChildren: () =>
           import("src/app/features/admin/map/map.module").then(

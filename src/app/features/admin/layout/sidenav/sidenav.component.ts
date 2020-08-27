@@ -132,24 +132,24 @@ export class SidenavComponent implements OnInit {
       link: "",
       items: [
         {
-          label: "Khu vực cấm",
+          label: "Khu vực cấm/tạm cấm",
           faIcon: "",
-          link: ""
-        },
-        {
-          label: "Khu vực tạm cấm",
-          faIcon: "",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuccamtamcamUri}`,
         },
         {
           label: "Khu vực đấu giá",
           faIcon: "",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdaugiaUri}`,
         },
         {
           label: "Khu vực khoáng sản độc hại",
           faIcon: "",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuckhoangsandochaiUri}`,
+        },
+        {
+          label: "Khu vực không đấu giá",
+          faIcon: "",
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuckhongdaugiaUri}`
         },
       ]
     },
