@@ -3,7 +3,7 @@ export class AdminRoutingName {
   public static danhmucUri = "danhmuc";
   public static adminUri = "admin";
   public static mapUri = "map";
-
+  public static khuvuckhoangsanUri = "khuvuckhoangsan";
 
 
   public static baocaoUri = "baocao";
@@ -85,4 +85,10 @@ export class AdminRoutingName {
   public static addTinTuc = "them";
   public static editTinTuc = "sua";
   public static reviewTinTuc = "xem";
+
+  // 1.11 Routes phần khu vực khoáng sản
+  public static khuvuccamtamcamUri = "khuvuccam-tamcam";
+  public static khuvucdaugiaUri = "khuvucdaugia";
+  public static khuvuckhoangsandochaiUri = "khuvuckhoangsandochai";
+  public static khuvuckhongdaugiaUri = "khuvuckhongdaugia";
 }
