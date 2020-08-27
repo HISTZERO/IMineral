@@ -304,9 +304,9 @@ span.e-headertext {
   text-align: center;
 }
 
-/* .e-columnheader .e-headercell:last-child .e-headercelldiv {
+.e-columnheader .e-headercell:last-child .e-headercelldiv {
   padding-left: 15px !important;
-} */
+}
 
 .mat-slide-toggle-thumb-container {
   z-index: 0 !important;
