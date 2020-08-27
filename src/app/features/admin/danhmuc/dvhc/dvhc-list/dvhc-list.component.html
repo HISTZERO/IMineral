@@ -40,16 +40,16 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                          <div *ngIf="disableButtonProvice" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectProvice, 'provice')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectProvice, 'provice')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;">
+                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectProvice, 'provice')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -58,10 +58,10 @@
 
                       </div>
                       <div class="card-body">
-                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true"
+                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true" [allowSelection]="true"
                           [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
                           [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
-                          [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
+                          (rowSelected)="getAllDataSelectProvice($event)" (rowDeselected)="getAllDataSelectProvice($event)" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
                           (queryCellInfo)="customiseCell($event)" *ngIf="dataTranslate">
                           <e-columns>
                             <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" class="dvhc"
@@ -112,7 +112,7 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control"
+                            <mat-select class="form-control" (selectionChange)="refreshGridDistrict()"
                               placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
@@ -122,16 +122,16 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                          <div *ngIf="disableButtonDistrict" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectDistrict, 'district')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectDistrict, 'district')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;">
+                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectDistrict, 'district')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -139,10 +139,10 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <ejs-grid #gridDvhcHuyen [dataSource]="listDatadvhcDistrict"
+                        <ejs-grid #gridDvhcHuyen [dataSource]="listDatadvhcDistrict" [allowSelection]="true"
                           [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                           [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
-                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
+                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectDistrict($event)" (rowDeselected)="getAllDataSelectDistrict($event)"
                           *ngIf="dataTranslate">
                           <e-columns>
                             <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
@@ -196,7 +196,7 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control"
+                            <mat-select class="form-control" (selectionChange)="refreshGridWard()"
                               placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
@@ -206,16 +206,16 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                          <div *ngIf="disableButtonWard" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectWard, 'ward')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;">
+                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -223,10 +223,10 @@
                         </div>
                       </div>
                       <div class="card-body">
-                        <ejs-grid #gridDvhcXa [dataSource]="listDatadvhcWard"
+                        <ejs-grid #gridDvhcXa [dataSource]="listDatadvhcWard" [allowSelection]="true"
                           [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                           [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
-                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
+                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectWard($event)" (rowDeselected)="getAllDataSelectWard($event)"
                           *ngIf="dataTranslate">
                           <e-columns>
                             <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
