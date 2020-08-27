@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { QueryCellInfoEventArgs } from "@syncfusion/ej2-angular-grids";
+import { QueryCellInfoEventArgs, TextWrapSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
 
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
@@ -15,6 +15,7 @@ import { _addTinhAction, _listTinhAction, _editTinhAction, _deleteTinhAction, _a
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { MenuDanhMucDVHC } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/dvhc-io.component";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 
 @Component({
   selector: "app-dvhc-list",
@@ -22,14 +23,49 @@ import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/d
   styleUrls: ["./dvhc-list.component.scss"],
 })
 export class DmDvhcListComponent implements OnInit {
+  // Viewchild template
+  @ViewChild("gridDvhcTinh", { static: false }) public gridDvhcTinh: GridComponent;
+  @ViewChild("gridDvhcHuyen", { static: false }) public gridDvhcHuyen: GridComponent;
+  @ViewChild("gridDvhcXa", { static: false }) public gridDvhcXa: GridComponent;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("componentdvhcio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // Danh sách dvhc Tỉnh
   listDataDvhcProvince: OutputDmDvhcModel[];
+
+  // Danh sách dvhc Huyện
   listDatadvhcDistrict: OutputDmDvhcModel[];
+
+  // Danh sách dvhc Xã
   listDatadvhcWard: OutputDmDvhcModel[];
+
+  // Chứa item được chọn
   selectedItem: OutputDmDvhcModel;
+
+  // Biến ẩn Tỉnh
   disabledDistrict = true;
+
+  // Biến ẩn Huyện
   disabledWard = true;
+
+  // Chứa tên xóa
   deleteName: string;
+
+  // Chứa mảng menu item trên subheader
   navArray = MenuDanhMucDVHC;
+
+  // Chứa trạng thái
+  public trangthai = TrangThai;
+
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
+  // Các biến translate
+  public dataTranslate: any;
+  
+  // Chứa setting dùng chung
+  settingsCommon = new SettingsCommon();
+ 
 
   // Danh sách các quyền
   addTinhAction = _addTinhAction;
@@ -45,15 +81,7 @@ export class DmDvhcListComponent implements OnInit {
   editXaAction = _editXaAction;
   deleteXaAction = _deleteXaAction;
 
-  // Các biến translate
-  public dataTranslate: any;
-
-  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("componentdvhcio", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
-
-  settingsCommon = new SettingsCommon();
-
+ 
   constructor(
     public dmFacadeSv: DmFacadeService,
     public matsidenavService: MatsidenavService,
@@ -64,6 +92,8 @@ export class DmDvhcListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -229,12 +259,22 @@ export class DmDvhcListComponent implements OnInit {
 
   // set id in coloumn
   customiseCell(args: QueryCellInfoEventArgs) {
+    if (args.column.field === 'check') {
+      args.cell.classList.add('style-checkbox');
+    }
+    if (args.column.field === 'id') {
+      args.cell.classList.add('style-action');
+    }
+    if (args.column.field === 'serialNumber') {
+      args.cell.classList.add('style-stt');
+    }
     if (
       args.column.field === ServiceName.ID_DVHC ||
       args.column.field === ServiceName.TEN_DVHC
     ) {
       args.cell.id = args.data[ServiceName.ID_DVHC];
     }
+    
   }
 
   doFunction(methodName) {

@@ -16,36 +16,61 @@
               </div>
               <div class="card-body">
                 <div class="row">
-                  <div class="col-xl-4 col-md-6 col-sm-12">
+                  <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card">
                       <div class="card-header">
                         <h5 class="mt-0">
-                          <span>{{
-                            "DANHMUC.dvhc.titleCity" | translate
-                          }}</span>
+                          <span>{{"DANHMUC.dvhc.titleCity" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;"
                             (click)="openDvhcProvinceIOSidebar()" [disabled]="!addTinhAction">
                             <i class="fal fa-plus-square"></i>
                             {{ "COMMON.default.add" | translate }}
                           </button>
                         </h5>
+                        <div class="row mt-2">
+                          <div class="col-xl-4 col-lg-12">
+                            <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                            <mat-select class="form-control"
+                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                              <mat-option value="">
+                                {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                              </mat-option>
+                              <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+                                {{ tt.name }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                              <i class="far fa-trash"></i>
+                              {{ "COMMON.default.delete" | translate }}
+                            </button>
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                              <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                              {{ "COMMON.default.unActive" | translate }}
+                            </button>
+                            <button class="btn btn-outline-primary " style="float: right;">
+                              <i class="fas fa-check"></i>
+                              {{ "COMMON.default.active" | translate }}
+                            </button>
+                          </div>
+                        </div>
+
                       </div>
                       <div class="card-body">
-                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince"
-                          [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                          [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
-                          class="table-striped" [allowResizing]="true" (queryCellInfo)="customiseCell($event)"
-                          *ngIf="dataTranslate">
+                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true"
+                          [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
+                          [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
+                          [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
+                          (queryCellInfo)="customiseCell($event)" *ngIf="dataTranslate">
                           <e-columns>
-                            <e-column field="serialNumber" class="dvhc" headerText="{{
-                                'COMMON.default.numericalOrder' | translate
-                              }}"></e-column>
-                            <e-column field="ten" headerText="{{
-                                'DANHMUC.dvhc.tendvhc' | translate
-                              }}"></e-column>
-                            <e-column field="id" headerText="{{
-                                'COMMON.default.action' | translate
-                              }}">
+                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" class="dvhc"
+                              headerText="{{'COMMON.default.numericalOrder' | translate}}"></e-column>
+                            <e-column field="ten" headerText="{{'DANHMUC.dvhc.tendvhc' | translate}}"></e-column>
+                            <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
+                              type='checkbox'></e-column>
+                            <e-column field="id" [customAttributes]="{class: 'style-action-header'}"
+                              headerText="{{'COMMON.default.action' | translate}}">
                               <ng-template #template let-data>
                                 <div class="btn-group">
                                   <button class="btn btn-sm btn-primary" title="{{
@@ -72,13 +97,11 @@
                     </div>
                   </div>
 
-                  <div class="col-xl-4 col-md-6 col-sm-12">
+                  <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card">
                       <div class="card-header">
                         <h5 class="mt-0">
-                          <span>{{
-                            "DANHMUC.dvhc.titleDistrict" | translate
-                          }}</span>
+                          <span>{{"DANHMUC.dvhc.titleDistrict" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;"
                             [class.disabled]="disabledDistrict" (click)="openDvhcDistrictIOSidebar()"
                             [disabled]="!addHuyenAction">
@@ -86,6 +109,34 @@
                             {{ "COMMON.default.add" | translate }}
                           </button>
                         </h5>
+                        <div class="row mt-2">
+                          <div class="col-xl-4 col-lg-12">
+                            <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                            <mat-select class="form-control"
+                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                              <mat-option value="">
+                                {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                              </mat-option>
+                              <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+                                {{ tt.name }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                              <i class="far fa-trash"></i>
+                              {{ "COMMON.default.delete" | translate }}
+                            </button>
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                              <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                              {{ "COMMON.default.unActive" | translate }}
+                            </button>
+                            <button class="btn btn-outline-primary " style="float: right;">
+                              <i class="fas fa-check"></i>
+                              {{ "COMMON.default.active" | translate }}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                       <div class="card-body">
                         <ejs-grid #gridDvhcHuyen [dataSource]="listDatadvhcDistrict"
@@ -94,13 +145,15 @@
                           class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
                           *ngIf="dataTranslate">
                           <e-columns>
-                            <e-column field="serialNumber" headerText="{{
+                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
                                 'COMMON.default.numericalOrder' | translate
                               }}"></e-column>
                             <e-column field="ten" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
-                            <e-column field="id" headerText="{{
+                            <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
+                              type='checkbox'></e-column>
+                            <e-column field="id" [customAttributes]="{class: 'style-action-header'}" headerText="{{
                                 'COMMON.default.action' | translate
                               }}" class="dvhcthaotac">
                               <ng-template #template let-data>
@@ -129,19 +182,45 @@
                     </div>
                   </div>
 
-                  <div class="col-xl-4 col-md-6 col-sm-12">
+                  <div class="col-xl-4 col-lg-6 col-md-12">
                     <div class="card">
                       <div class="card-header">
                         <h5 class="mt-0">
-                          <span>{{
-                            "DANHMUC.dvhc.titleTown" | translate
-                          }}</span>
+                          <span>{{"DANHMUC.dvhc.titleTown" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;" [class.disabled]="disabledWard"
                             (click)="openDvhcWardIOSidebar()" [disabled]="!addXaAction">
                             <i class="fal fa-plus-square"></i>
                             {{ "COMMON.default.add" | translate }}
                           </button>
                         </h5>
+                        <div class="row mt-2">
+                          <div class="col-xl-4 col-lg-12">
+                            <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
+                            <mat-select class="form-control"
+                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                              <mat-option value="">
+                                {{ "DANHMUC.canhan.chonTrangthai" | translate }}
+                              </mat-option>
+                              <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
+                                {{ tt.name }}
+                              </mat-option>
+                            </mat-select>
+                          </div>
+                          <div class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;">
+                              <i class="far fa-trash"></i>
+                              {{ "COMMON.default.delete" | translate }}
+                            </button>
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;">
+                              <i class="far fa-times-circle" style="font-size: 14px;"></i>
+                              {{ "COMMON.default.unActive" | translate }}
+                            </button>
+                            <button class="btn btn-outline-primary " style="float: right;">
+                              <i class="fas fa-check"></i>
+                              {{ "COMMON.default.active" | translate }}
+                            </button>
+                          </div>
+                        </div>
                       </div>
                       <div class="card-body">
                         <ejs-grid #gridDvhcXa [dataSource]="listDatadvhcWard"
@@ -150,13 +229,15 @@
                           class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
                           *ngIf="dataTranslate">
                           <e-columns>
-                            <e-column field="serialNumber" headerText="{{
+                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
                                 'COMMON.default.numericalOrder' | translate
                               }}"></e-column>
                             <e-column field="ten" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
-                            <e-column field="id" headerText="{{
+                            <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
+                              type='checkbox'></e-column>
+                            <e-column field="id" [customAttributes]="{class: 'style-action-header'}" headerText="{{
                                 'COMMON.default.action' | translate
                               }}">
                               <ng-template #template let-data>

@@ -48,6 +48,12 @@ export class DmLoaicapphepIoComponent implements OnInit {
   // Chứa kiểu boolean hiển thị thuộc tính column
   public classColDvhc: boolean = false;
 
+  // Tên thủ tục hành chính hiển thị
+  public tenThuTucDisplay: string;
+
+  // chứa thông tin combobox được backup trong trường hợp update
+  public dataComboboxModel: any;
+
   // error message
   validationErrorMessages = {};
 
@@ -57,6 +63,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
     tenloaicapphep: "",
     nhomloaicapphep: "",
     idthutuchanhchinh: "",
+    thutuchanhchinh: "",
     mota: "",
     thutu: "",
   };
@@ -99,7 +106,9 @@ export class DmLoaicapphepIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tenloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.tenloaicapphepRequired},
-      thutu: { pattern: this.dataTranslate.DANHMUC.loaicapphep.thutuIsNumber }
+      thutu: { pattern: this.dataTranslate.DANHMUC.loaicapphep.thutuIsNumber },
+      idthutuchanhchinh: { required: this.dataTranslate.DANHMUC.loaicapphep.thutuchanhchinhRequired },
+      nhomloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.nhomloaicapphepRequired }
     };
   }
 
@@ -120,8 +129,9 @@ export class DmLoaicapphepIoComponent implements OnInit {
     this.loaiCapPhepIOForm = this.formBuilder.group({
       maloaicapphep: [""],
       tenloaicapphep: ["", Validators.required],
-      nhomloaicapphep: [""],
-      idthutuchanhchinh: [""],
+      nhomloaicapphep: ["", Validators.required],
+      idthutuchanhchinh: ["", Validators.required],
+      thutuchanhchinh: [""],
       mota: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
@@ -137,10 +147,16 @@ export class DmLoaicapphepIoComponent implements OnInit {
         maloaicapphep: this.obj.maloaicapphep,
         tenloaicapphep: this.obj.tenloaicapphep,
         nhomloaicapphep: +this.obj.nhomloaicapphep,
+        thutuchanhchinh: {idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh},
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
       });
+      this.dataComboboxModel = {
+        idthutuc: this.obj.idthutuchanhchinh,
+        tenthutuc: this.obj.tenthutuchanhchinh,
+      }
+      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh
     }
     this.editMode = true;
   }
@@ -212,9 +228,41 @@ export class DmLoaicapphepIoComponent implements OnInit {
       tenloaicapphep: "",
       nhomloaicapphep: "",
       idthutuchanhchinh: "",
+      thutuchanhchinh: "",
       mota: "",
       thutu: "",
     });
+  }
+
+  /**
+   * Hàm chuyển đổi dữ liệu thủ thục combobox khi select
+   */
+  public selectThuTucHanhChinh() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.loaiCapPhepIOForm.value.thutuchanhchinh) {
+        this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+        this.tenThuTucDisplay = this.loaiCapPhepIOForm.value.thutuchanhchinh.tenthutuchanhchinh;
+      } else {
+        this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.dataComboboxModel.idthutuc);
+        this.tenThuTucDisplay = this.dataComboboxModel.tenthutuc;
+      }
+    } else {
+      this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+      this.tenThuTucDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm so sánh giá trị thuu tục hành chính combobox
+   * @param item1 
+   * @param item2 
+   */
+  public compareThuTucHanhChinh(item1: any, item2: any) {
+    if (item1.idthutuchanhchinh === item2.idthutuchanhchinh) {
+      return true;
+    } else {
+      return false;
+    }
   }
 
   /**

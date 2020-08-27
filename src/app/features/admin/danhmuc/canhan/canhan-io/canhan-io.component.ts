@@ -42,7 +42,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   // Chứa danh sách Dvhc Xã
   public allXa: any;
-  
+
   // Filter Đơn vị hành chính Tỉnh
   public dvhcProvinceFilters: OutputDmDvhcModel[];
 
@@ -51,7 +51,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   // Filter Đơn vị hành chính Xã
   public dvhcWardFilters: OutputDmDvhcModel[];
-  
+
   // Chứa dữ liệu loại giấy tờ
   public loaigiayto = LoaiGiayTo;
 
@@ -67,6 +67,18 @@ export class DmCanhanIoComponent implements OnInit {
   // error message
   validationErrorMessages = {};
 
+  // Chứa thông tin combobox được backup trong trường hợp update
+  public dataComboboxModel: any;
+
+  // Chứa tên hiển thị dvhc Tỉnh
+  public tenTinhDisplay: string;
+
+  // Chứa tên hiển thị dvhc Huyện
+  public tenHuyenDisplay: string;
+
+  // Chứa tên hiển thị dvhc Xã
+  public tenXaDisplay: string;
+
   // form errors
   formErrors = {
     hovaten: "",
@@ -77,9 +89,12 @@ export class DmCanhanIoComponent implements OnInit {
     noicap: "",
     dienthoai: "",
     email: "",
-    matinh: "",
-    mahuyen: "",
-    maxa: "",
+    tinh: "",
+    huyen: "",
+    xa: "",
+    tinhcombobox: "",
+    huyencombobox: "",
+    xacombobox: "",
     thutu: "",
   };
 
@@ -91,7 +106,7 @@ export class DmCanhanIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public datePipe: DatePipe
-  ) {}
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -100,7 +115,7 @@ export class DmCanhanIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
+
   }
 
   /**
@@ -109,8 +124,8 @@ export class DmCanhanIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -121,14 +136,17 @@ export class DmCanhanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       hovaten: { required: this.dataTranslate.DANHMUC.canhan.hovatenRequired },
-      dienthoai: { 
+      dienthoai: {
         required: this.dataTranslate.DANHMUC.canhan.dienthoaiRequired,
-        pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber},
-      matinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
-      mahuyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
-      email: { 
+        pattern: this.dataTranslate.DANHMUC.canhan.dienthoaiIsNumber
+      },
+      tinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
+      huyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
+      xa: { required: this.dataTranslate.DANHMUC.canhan.maxaRequired},
+      email: {
         required: this.dataTranslate.DANHMUC.canhan.emailRequired,
-        email: this.dataTranslate.DANHMUC.canhan.emailCheck},
+        email: this.dataTranslate.DANHMUC.canhan.emailCheck
+      },
       thutu: { pattern: this.dataTranslate.DANHMUC.canhan.thutuIsNumber }
     };
   }
@@ -157,9 +175,12 @@ export class DmCanhanIoComponent implements OnInit {
       noicap: [""],
       dienthoai: ["", [Validators.required, Validators.pattern("^[0-9-+]+$")]],
       email: ["", [Validators.required, Validators.email]],
-      matinh: ["", Validators.required],
-      mahuyen: ["", Validators.required],
-      maxa: [""],
+      tinh: ["", Validators.required],
+      tinhcombobox: [""],
+      huyen: ["", Validators.required],
+      huyencombobox: [""],
+      xa: ["", Validators.required],
+      xacombobox: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
@@ -167,7 +188,7 @@ export class DmCanhanIoComponent implements OnInit {
   /**
    * hàm set value cho form
    */
-  formOnEdit() {
+  async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.classColDvhc = true;
       this.canhanIOForm.setValue({
@@ -179,13 +200,30 @@ export class DmCanhanIoComponent implements OnInit {
         noicap: this.obj.noicap,
         dienthoai: this.obj.dienthoai,
         email: this.obj.email,
-        matinh: {idtinh: this.obj.idtinh, matinh: this.obj.matinh},
-        mahuyen: {idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen},
-        maxa: {idxa: this.obj.idxa, maxa: this.obj.maxa},
+        tinhcombobox: { idtinh: this.obj.idtinh, matinh: this.obj.matinh, tentinh: this.obj.tentinh },
+        tinh: { idtinh: this.obj.idtinh, matinh: this.obj.matinh },
+        huyencombobox: { idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen, tenhuyen: this.obj.tenhuyen },
+        huyen: { idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen },
+        xacombobox: { idxa: this.obj.idxa, maxa: this.obj.maxa, tenxa: this.obj.tenxa },
+        xa: { idxa: this.obj.idxa, maxa: this.obj.maxa },
         thutu: this.obj.thutu,
       });
-      this.showDvhcHuyen();
-      this.showDvhcXa();
+
+      this.dataComboboxModel = {
+        idtinh: this.obj.idtinh,
+        matinh: this.obj.matinh,
+        tentinh: this.obj.tentinh,
+        idhuyen: this.obj.idhuyen,
+        mahuyen: this.obj.mahuyen,
+        tenhuyen: this.obj.tenhuyen,
+        idxa: this.obj.idxa,
+        maxa: this.obj.maxa,
+        tenxa: this.obj.tenxa
+      };
+
+      await this.showDvhcHuyen();
+      await this.showDvhcXa();
+      this.selectXa();
     }
     this.editMode = true;
   }
@@ -205,50 +243,154 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.canhanIOForm.value.matinh === true) {
+    if (!this.canhanIOForm.value.tinhcombobox === true) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.canhanIOForm.controls["mahuyen"].setValue("");
+        this.canhanIOForm.controls["huyencombobox"].setValue("");
       }
     }
-    if (!this.canhanIOForm.value.matinh === false) {
+    if (!this.canhanIOForm.value.tinhcombobox === false) {
       if (this.editMode === true) {
-        this.canhanIOForm.controls["mahuyen"].setValue("");
+        this.canhanIOForm.controls["huyencombobox"].setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.canhanIOForm.value.matinh.idtinh).toPromise();
+        .getByid(this.canhanIOForm.value.tinhcombobox.idtinh).toPromise();
       this.dvhcDistrictFilters = this.allHuyen;
     }
+
+    this.selectTinh();
   }
 
   /**
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.canhanIOForm.value.mahuyen === true) {
+    if (!this.canhanIOForm.value.huyencombobox === true) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.canhanIOForm.controls["maxa"].setValue("");
+        this.canhanIOForm.controls["xacombobox"].setValue("");
       }
     }
     if (
-      !this.canhanIOForm.value.matinh === false &&
-      !this.canhanIOForm.value.mahuyen === false
+      !this.canhanIOForm.value.tinhcombobox === false &&
+      !this.canhanIOForm.value.huyencombobox === false
     ) {
       if (this.editMode === true) {
-        this.canhanIOForm.controls["maxa"].setValue("");
+        this.canhanIOForm.controls["xacombobox"].setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.canhanIOForm.value.mahuyen.idhuyen).toPromise();
+        .getByid(this.canhanIOForm.value.huyencombobox.idhuyen).toPromise();
       this.dvhcWardFilters = this.allXa;
+    }
+
+    this.selectHuyen();
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectTinh() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.canhanIOForm.value.tinhcombobox) {
+        this.canhanIOForm.controls["tinh"].setValue({
+          idtinh: this.canhanIOForm.value.tinhcombobox.idtinh,
+          matinh: this.canhanIOForm.value.tinhcombobox.matinh
+        });
+        this.tenTinhDisplay = this.canhanIOForm.value.tinhcombobox.tentinh;
+        this.canhanIOForm.controls["huyen"].setValue("");
+        this.tenHuyenDisplay = "";
+        this.canhanIOForm.controls["xa"].setValue("");
+        this.tenXaDisplay = "";
+      } else {
+        this.canhanIOForm.controls["tinh"].setValue({
+          idtinh: this.dataComboboxModel.idtinh,
+          matinh: this.dataComboboxModel.matinh
+        });
+        this.tenTinhDisplay = this.dataComboboxModel.tentinh;
+        this.selectHuyen();
+      }
+    } else {
+      this.canhanIOForm.controls["tinh"].setValue({
+        idtinh: this.canhanIOForm.value.tinhcombobox.idtinh,
+        matinh: this.canhanIOForm.value.tinhcombobox.matinh
+      });
+      this.tenTinhDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectHuyen() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.canhanIOForm.value.huyencombobox) {
+        this.canhanIOForm.controls["huyen"].setValue({
+          idhuyen: this.canhanIOForm.value.huyencombobox.idhuyen,
+          mahuyen: this.canhanIOForm.value.huyencombobox.mahuyen
+        });
+        this.tenHuyenDisplay = this.canhanIOForm.value.huyencombobox.tenhuyen;
+        this.canhanIOForm.controls["xa"].setValue("");
+        this.tenXaDisplay = "";
+      } else {
+        if (this.canhanIOForm.value.tinhcombobox) {
+          this.canhanIOForm.controls["huyen"].setValue("");
+          this.tenHuyenDisplay = "";
+        } else {
+          this.canhanIOForm.controls["huyen"].setValue({
+            idhuyen: this.dataComboboxModel.idhuyen,
+            mahuyen: this.dataComboboxModel.mahuyen
+          });
+          this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
+        }
+        this.canhanIOForm.controls["xacombobox"].setValue("");
+        this.selectXa();
+      }
+    } else {
+      this.canhanIOForm.controls["huyen"].setValue({
+        idhuyen: this.canhanIOForm.value.huyencombobox.idhuyen,
+        mahuyen: this.canhanIOForm.value.huyencombobox.mahuyen
+      });
+      this.tenHuyenDisplay = "";
+    }
+  }
+
+  /**
+   * Hàm lấy tỉnh hiện tại
+   */
+  selectXa() {
+    if (this.obj && this.purpose === 'edit') {
+      if (this.canhanIOForm.value.xacombobox) {
+        this.canhanIOForm.controls["xa"].setValue({
+          idxa: this.canhanIOForm.value.xacombobox.idxa,
+          maxa: this.canhanIOForm.value.xacombobox.maxa
+        });
+        this.tenXaDisplay = this.canhanIOForm.value.xacombobox.tenxa;
+      } else {
+        if (this.canhanIOForm.value.tinhcombobox || this.canhanIOForm.value.huyencombobox) {
+          this.canhanIOForm.controls["xa"].setValue("");
+          this.tenXaDisplay = "";
+        } else {
+          this.canhanIOForm.controls["xa"].setValue({
+            idxa: this.dataComboboxModel.idxa,
+            maxa: this.dataComboboxModel.maxa
+          });
+          this.tenXaDisplay = this.dataComboboxModel.tenxa;
+        }
+      }
+    } else {
+      this.canhanIOForm.controls["xa"].setValue({
+        idxa: this.canhanIOForm.value.xacombobox.idxa,
+        maxa: this.canhanIOForm.value.xacombobox.maxa
+      });
+      this.tenXaDisplay = "";
     }
   }
 
@@ -257,18 +399,18 @@ export class DmCanhanIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     // Gán dữ liệu input vào model
-    const idtinh = this.canhanIOForm.value.matinh.idtinh;
-    const idhuyen = this.canhanIOForm.value.mahuyen.idhuyen;
-    const idxa =  this.canhanIOForm.value.maxa.idxa;
+    const idtinh = this.canhanIOForm.value.tinh.idtinh;
+    const idhuyen = this.canhanIOForm.value.huyen.idhuyen;
+    const idxa = this.canhanIOForm.value.xa.idxa;
     const dmFacadeService = this.dmFacadeService.getDmCanhanService();
     this.inputModel = this.canhanIOForm.value;
-    this.inputModel.matinh = this.canhanIOForm.value.matinh.matinh;
-    this.inputModel.mahuyen = this.canhanIOForm.value.mahuyen.mahuyen;
-    this.inputModel.maxa = this.canhanIOForm.value.maxa.maxa;
+    this.inputModel.matinh = this.canhanIOForm.value.tinh.matinh;
+    this.inputModel.mahuyen = this.canhanIOForm.value.huyen.mahuyen;
+    this.inputModel.maxa = this.canhanIOForm.value.xa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
-    this.inputModel.ngaycap = this.datePipe.transform( this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
+    this.inputModel.ngaycap = this.datePipe.transform(this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
@@ -359,7 +501,7 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Tỉnh
    */
   public compareTinh(item1: any, item2: any) {
-    if(item1.matinh === item2.matinh) {
+    if (item1.matinh === item2.matinh) {
       return true;
     } else {
       return false
@@ -370,7 +512,7 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Huyện
    */
   public compareHuyen(item1: any, item2: any) {
-    if(item1.mahuyen === item2.mahuyen) {
+    if (item1.mahuyen === item2.mahuyen) {
       return true;
     } else {
       return false
@@ -381,13 +523,13 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm check giá trị trong seletec option Xã
    */
   public compareXa(item1: any, item2: any) {
-    if(item1.maxa === item2.maxa) {
+    if (item1.maxa === item2.maxa) {
       return true;
     } else {
       return false
     }
   }
-  
+
   /**
    * Hàm close sidenav
    */

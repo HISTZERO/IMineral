@@ -45,7 +45,7 @@ export class DmFacadeService {
   }
 
   // get all dvhc service
-  public getAllDmDvhcService() {
+  public getDmDvhcService() {
     return new DmDvhcService(this.httpClient);
   }
 
