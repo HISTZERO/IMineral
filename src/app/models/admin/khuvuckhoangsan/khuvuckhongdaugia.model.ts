@@ -1,4 +1,4 @@
-export class OutputKhuVucDauGiaModel {
+export class OutputKhuVucKhongDauGiaModel {
   idkhuvuc: number;
   objectid: number;
   sohieu: string;
@@ -19,7 +19,7 @@ export class OutputKhuVucDauGiaModel {
   prjzone: string;
 }
 
-export class InputKhuVucDauGiaModel {
+export class InputKhuVucKhongDauGiaModel {
   idkhuvuc: number;
   objectid: number;
   sohieu: string;

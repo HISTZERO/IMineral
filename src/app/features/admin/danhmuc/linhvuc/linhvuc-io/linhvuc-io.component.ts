@@ -60,7 +60,7 @@ export class DmLinhvucIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-    //Khởi tạo form theo dạng add or edit
+    // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
