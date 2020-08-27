@@ -19,6 +19,28 @@ export class DmDvhcService extends RepositoryEloquentService {
       apiUrl: environment.apiIMineral + ServiceName.DVHC,
     });
   }
+
+  /**
+   * Hàm update status
+   * @param params
+   */
+  public updateStatusItems(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/updateliststatus'
+    });
+    return this.updateItem(params);
+  }
+
+  /**
+   * Hàm delete array item
+   * @param params
+   */
+  public deleteArrayItems(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/removelist'
+    });
+    return this.updateItem(params);
+  }
   public checkBeDeleted(id: number) {
     return "ok";
   }

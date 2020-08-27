@@ -67,7 +67,12 @@
     "inputMatinh": "Nhập mã tỉnh/thành phố",
     "inputMahuyen": "Nhập mã quận/huyện/thị xã",
     "inputMaxa": "Nhập mã xã/phường/thị trấn",
-    "tendvhcRequired": "Tên dvhc không được trống"
+    "tendvhcRequired": "Tên dvhc không được trống",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Đơn vị hành chính",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "capquanly": {
     "titleList": "Danh sách cấp quản lý",

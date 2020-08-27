@@ -75,11 +75,11 @@
               <i class="far fa-save"></i>
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
-            <button class="btn btn-outline-primary float-right mr-3" [disabled]="!dvhcIOForm.valid">
+            <button *ngIf="purpose === 'newProvince' || purpose === 'newDistrict' || purpose === 'newWard'" class="btn btn-outline-primary float-right mr-3" [disabled]="!dvhcIOForm.valid">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>
-            <button class="btn btn-outline-info float-right mr-3" (click)="onFormReset()">
+            <button  *ngIf="purpose === 'newProvince' || purpose === 'newDistrict' || purpose === 'newWard'" class="btn btn-outline-info float-right mr-3" (click)="onFormReset()">
               <i class="far fa-sync-alt"></i>
               {{ "COMMON.default.refresh" | translate }}
             </button>
