@@ -15,6 +15,8 @@ export class OutputKhuVucDauGiaModel {
   soquyetdinh: string;
   ngayquyetdinh: Date;
   hequychieu: string;
+  meridian: string;
+  prjzone: string;
 }
 
 export class InputKhuVucDauGiaModel {
@@ -32,7 +34,6 @@ export class InputKhuVucDauGiaModel {
   geovn: string;
   geowgs: string;
   soquyetdinh: string;
-  kinhtuyentruc: string;
   meridian: string;
   prjzone: string;
   ngayquyetdinh: Date;

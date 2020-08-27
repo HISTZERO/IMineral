@@ -38,10 +38,10 @@
                 <h3>
                   <div class="row">
                     <div class="col-md-4 mb-sm-1">
-                      <span class="title">{{ "DANHMUC.linhvuc.titleList" | translate }}</span>
+                      <span class="title">{{ "KHUVUCKHOANGSAN.khuvucdaugia.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
-                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openLinhvucIOSidenav()">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openKhuVucDauGiaIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
@@ -49,46 +49,31 @@
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
-                      <button *ngIf="disableActiveButton" class="btn btn-outline-primary mr-2" style="float: right;" (click)="activeArrayItem()">
-                        <i class="fas fa-check"></i>
-                        {{ "COMMON.default.active" | translate }}
-                      </button>
-                      <button *ngIf="disableUnActiveButton" class="btn btn-outline-secondary mr-2" style="float: right;" (click)="unActiveArrayItem()">
-                        <i class="far fa-times-circle" style="font-size: 14px;"></i>
-                        {{ "COMMON.default.unActive" | translate }}
-                      </button>
-                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
-                        <i class="far fa-trash"></i>
-                        {{ "COMMON.default.delete" | translate }}
-                      </button>
                     </div>
                   </div>
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid #gridLinhVuc *ngIf="listLinhvuc" [dataSource]="listLinhvuc"
+                <ejs-grid #gridKhuVucDauGia *ngIf="listKhuVucDauGia" [dataSource]="listKhuVucDauGia | async"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                  [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                  [allowResizing]="true" [selectionSettings]="settingsCommon.selectionOptions" (rowDeselected) = "getAllDataActive($event)" (rowSelected)="getAllDataActive($event)">
+                  [pageSettings]="settingsCommon.pageSettings" class="table-striped"
+                  [allowResizing]="true"  (dataStateChange)="dataStateChange($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                    <e-column field="malinhvuc" headerText="{{ 'DANHMUC.linhvuc.malinhvuc' | translate }}"></e-column>
-                    <e-column field="tenlinhvuc" headerText="{{ 'DANHMUC.linhvuc.tenlinhvuc' | translate }}"></e-column>
-                    <e-column field="trangthai" headerText="{{ 'DANHMUC.linhvuc.trangthai' | translate }}">
-                      <ng-template #template let-data>
-                        {{ data.trangthai | getNameFileConstant: trangthai}}
-                      </ng-template>
-                    </e-column>
-                    <e-column *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
-                    <e-column field="idlinhvuc" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                    <e-column field="sohieu" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.sohieu' | translate }}"></e-column>
+                    <e-column field="tenkhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvuc' | translate }}"></e-column>
+                    <e-column field="diadiem" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.diadiem' | translate }}"></e-column>
+                    <e-column field="soquyetdinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.soquyetdinh' | translate }}"></e-column>
+                    <e-column field="ngayquyetdinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}"></e-column>
+                    <e-column field="idkhuvuc" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                           (click)="editItemLinhvuc(data.idlinhvuc)">
+                           (click)="editItemKhuVucDauGia(data.idkhuvuc)">
                             <i class="far fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                            (click)="deleteItemLinhvuc(data)">
+                            (click)="deleteItemKhuVucDauGia(data)">
                             <i class="far fa-trash"></i>
                           </button>
                         </div>
@@ -104,13 +89,13 @@
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
         style="width: 600px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
-          <button class="btn btn-sm btn-light" (click)="closeLinhvucIOSidenav()">
+          <button class="btn btn-sm btn-light" (click)="closeKhuVucDauGiaIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
           <span style="vertical-align: middle;"
             class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
-        <template #complinhvucio> </template>
+        <template #compkhuvucdaugiaio> </template>
       </mat-sidenav>
     </mat-sidenav-content>
   </mat-sidenav-container>
