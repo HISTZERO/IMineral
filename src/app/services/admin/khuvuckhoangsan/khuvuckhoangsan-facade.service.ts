@@ -7,7 +7,7 @@ import { KhuVucDauGiaService } from "src/app/services/admin/khuvuckhoangsan/khuv
   providedIn: "root",
 })
 
-export class KhuVucKhoangSangFacadeService {
+export class KhuVucKhoangSanFacadeService {
   constructor(private httpClient: HttpClient) {}
 
   // cá nhân service
