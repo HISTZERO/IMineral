@@ -73,7 +73,7 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
     modules: [
       { moduleName: "danhmuc", baseTranslateUrl },
       { moduleName: "khuvuckhoangsan", baseTranslateUrl },
-      { moduleName: "diemquang-moquang", baseTranslateUrl },
+      { moduleName: "diemquangmoquang", baseTranslateUrl },
       { moduleName: "common", baseTranslateUrl },
       { moduleName: "thietlap", baseTranslateUrl },
       { moduleName: "share", baseTranslateUrl },
