@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel, DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
 import { MatSidenav } from "@angular/material";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -13,6 +13,10 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
+import { AdminRoutingName } from "../../../../../routes/admin-routes-name";
+import { keyKhuVucKhoangSan } from "../../../../../shared/constants/khuvuckhoangsan-constants";
 
 
 @Component({
@@ -34,7 +38,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Khu vực cấm tạm cấm
-  public listKvCamTamCam: OutputKhuVucCamTamCamModel[];
+  public listKvCamTamCam: Observable<DataStateChangeEventArgs>;
 
   // Chứa dữ liệu đã chọn
   public selectedItem: OutputKhuVucCamTamCamModel;
@@ -48,6 +52,12 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
+  // Chứa pagesize
+  public pageSize: number;
+
+  // Biến để chứa service
+  public khuVucCamTamCamService: any;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -57,7 +67,10 @@ export class KhuvuccamTamcamListComponent implements OnInit {
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-  ) { }
+    public router: Router
+  ) {
+    this.khuVucCamTamCamService = this.khuvuckhoangsanFacadeService.getKhuVucCamTamCamService();
+   }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -89,7 +102,8 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   async getDataPageSize() {
     const pageSize: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
+      .getSettingKey({ key: ThietLapHeThong.listPageSize });
+    this.pageSize = pageSize;
     if (pageSize) {
       this.settingsCommon.pageSettings.pageSize = +pageSize;
     } else {
@@ -112,24 +126,25 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu khu vực cấm/tạm cấm
    */
-  async getAllKhuVucCamTamCam(param: any = { PageNumber: 1, PageSize: -1 }) {
-    this.listKvCamTamCam = [];
-    // const listData: any = await this.dmFacadeService
-    //   .getDmCanhanService()
-    //   .getFetchAll(param);
-    // if (listData.items) {
-    //   listData.items.map((canhan, index) => {
-    //     canhan.serialNumber = index + 1;
-    //   });
-    // }
-    // this.listCanhan = listData.items;
+  async getAllKhuVucCamTamCam() {
+    this.listKvCamTamCam = this.khuVucCamTamCamService;
+    this.khuVucCamTamCamService.getDataFromServer({skip: 0, take: this.pageSize}, this.formSearch.value);
   }
+
+  /**
+   * Hàm lấy về danh sách khu vực cấm, tạm cấm (phân trang bên server) khi click vào pagination trên grid
+   * @param state
+   */
+  public dataStateChange(state: DataStateChangeEventArgs): void {
+    this.khuVucCamTamCamService.getDataFromServer(state, this.formSearch.value);
+  }
+
 
   /**
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-
+    this.getAllKhuVucCamTamCam();
   }
 
   /**
@@ -141,6 +156,16 @@ export class KhuvuccamTamcamListComponent implements OnInit {
       Maloaihinh: [""]
     });
   }
+
+  /**
+   * Hàm điều hướng đến trang thông tin chung của Điểm khai thác
+   * @param id
+   */
+  public detailItem(id) {
+    this.router.navigate([
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucCamTamCam}});
+  }
+
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
@@ -209,22 +234,22 @@ export class KhuvuccamTamcamListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-          await this.khuvuckhoangsanFacadeService
-            .getKhuVucCamTamCamService()
-            .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
-            .subscribe(
-              () => this.getAllKhuVucCamTamCam(),
-              (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.successDelete,
-                  2000
-                )
-            );
-        }
-      });
+        await this.khuvuckhoangsanFacadeService
+          .getKhuVucCamTamCamService()
+          .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
+          .subscribe(
+            () => this.getAllKhuVucCamTamCam(),
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+      }
+    });
   }
 
   /**

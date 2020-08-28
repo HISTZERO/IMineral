@@ -298,15 +298,15 @@ span.e-headertext {
 
 .e-headercell:last-child,
 .e-row .e-rowcell:last-child {
-  width: 130px;
-  padding-left: 5px !important;
+  width: 150px;
+  /* padding-left: 5px !important;
   padding-right: 5px !important;
-  text-align: center;
+  text-align: center; */
 }
 
-.e-columnheader .e-headercell:last-child .e-headercelldiv {
+/* .e-columnheader .e-headercell:last-child .e-headercelldiv {
   padding-left: 15px !important;
-}
+} */
 
 .mat-slide-toggle-thumb-container {
   z-index: 0 !important;

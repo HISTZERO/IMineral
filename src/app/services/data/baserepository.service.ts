@@ -110,13 +110,13 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
         }
 
         // Xử lý tìm kiếm
-        if (state.action.requestType === "searching") {
-          if (state.search && state.search.length > 0) {
-            this.Keyword = state.search[0].key;
-          } else {
-            this.Keyword = "";
-          }
-        }
+        // if (state.action.requestType === "searching") {
+        //   if (state.search && state.search.length > 0) {
+        //     this.Keyword = state.search[0].key;
+        //   } else {
+        //     this.Keyword = "";
+        //   }
+        // }
       }
 
       // Get query string
@@ -126,7 +126,7 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
         PageNumber: state.skip / state.take + 1,
         orderColumn: this.orderColumn,
         orderValue: this.orderValue,
-        Keyword: this.Keyword,
+        // Keyword: this.Keyword,
       });
 
       // Get data

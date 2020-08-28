@@ -24,11 +24,9 @@ import { KhuvuctoadoIoComponent } from 'src/app/features/admin/khuvuckhoangsan/k
 import { KhuvuctoadoListComponent } from 'src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-list/khuvuctoado-list.component';
 import { KhuvuccamTamcamListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-list/khuvuccam-tamcam-list.component";
 import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
-import { KhuvuccamTamcamDulieuComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-dulieu/khuvuccam-tamcam-dulieu.component";
-import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-dulieu/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
-import { KhuvuckhoangsandochaiDulieuComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-dulieu/khuvuckhoangsandochai-dulieu.component";
-import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-dulieu/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
 import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuckhoangsan/thongtinkhuvuckhoangsan/thongtinkhuvuckhoangsan.component";
+import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
+import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
 
 
 @NgModule({
@@ -36,13 +34,11 @@ import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuck
     KhuvuckhoangsanComponent,
     KhuvuccamTamcamListComponent,
     KhuvuccamTamcamIoComponent,
-    KhuvuccamTamcamDulieuComponent,
     KhuvuccamTamcamChitietComponent,
     KhuvucdaugiaListComponent,
     KhuvucdaugiaIoComponent,
     KhuvuckhoangsandochaiIoComponent,
     KhuvuckhoangsandochaiListComponent,
-    KhuvuckhoangsandochaiDulieuComponent,
     KhuvuckhoangsandochaiChitietComponent,
     KhuvuckhongdaugiaIoComponent,
     KhuvuckhongdaugiaListComponent,
@@ -50,7 +46,9 @@ import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuck
     KhuvuctoadoListComponent,
     ThongtinkhuvuckhoangsanComponent
   ],
-  exports: [],
+  exports: [
+    KhuvuccamTamcamChitietComponent
+  ],
   imports: [
     CommonModule,
     KhuvuckhoangsanRoutingModule,
@@ -66,6 +64,9 @@ import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuck
     KhuvuckhoangsandochaiIoComponent,
     KhuvuckhongdaugiaIoComponent,
     KhuvuctoadoIoComponent,
+    KhuvuccamTamcamChitietComponent,
+    KhuvuckhoangsandochaiChitietComponent,
+    ThongtinkhuvuckhoangsanComponent
   ],
   providers: [
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },

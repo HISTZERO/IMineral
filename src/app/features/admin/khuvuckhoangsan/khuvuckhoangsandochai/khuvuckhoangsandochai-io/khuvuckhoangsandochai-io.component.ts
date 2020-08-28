@@ -51,6 +51,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     loaikhoangsan: "",
     soquyetdinh: "",
     ngayquyetdinh: "",
+    hequychieu: ""
   };
 
   // Contructor
@@ -117,6 +118,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
+      hequychieu: [""]
     });
   }
 
@@ -136,6 +138,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
         loaikhoangsan: this.obj.loaikhoangsan,
         soquyetdinh: this.obj.soquyetdinh,
         ngayquyetdinh: this.obj.ngayquyetdinh,
+        hequychieu: this.obj.hequychieu
       });
     }
   }
@@ -203,6 +206,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
       loaikhoangsan: "",
       soquyetdinh: "",
       ngayquyetdinh: "",
+      hequychieu: ""
     });
   }
 

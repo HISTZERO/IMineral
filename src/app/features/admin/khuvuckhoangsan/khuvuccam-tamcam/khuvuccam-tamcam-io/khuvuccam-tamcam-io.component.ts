@@ -9,6 +9,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-khuvuccam-tamcam-io',
@@ -35,6 +36,9 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa dữ liệu mã loại hình
+  public maLoaiHinh = MaLoaiHinh;
+
   // error message
   validationErrorMessages = {};
 
@@ -56,6 +60,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     thoihancam: "",
     ngaybd: "",
     ngaykt: "",
+    hequychieu: ""
   };
 
   // Contructor
@@ -127,6 +132,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
       thoihancam: [""],
       ngaybd: [""],
       ngaykt: [""],
+      hequychieu: [""]
     });
   }
 
@@ -224,6 +230,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
       thoihancam: "",
       ngaybd: "",
       ngaykt: "",
+      hequychieu: ""
     });
   }
 

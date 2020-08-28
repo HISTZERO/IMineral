@@ -97,6 +97,7 @@
     "thoihancam": "Thời hạn cấm",
     "ngaybd": "Ngày bắt đầu",
     "ngaykt": "Ngày kết thúc",
+    "hequychieu": "Hệ quy chiếu",
     "sohieuPlaceholder": "Nhập số hiệu",
     "tenkhuvucPlaceholder": "Nhập tên khu vực",
     "diadiemPlaceholder": "Nhập địa điểm",
@@ -112,7 +113,7 @@
     "thoihancamPlaceholder": "Nhập thời hạn cấm",
     "ngaybdPlaceholder": "DD-MM-YYY",
     "ngayktPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "Hệ quy chiếu"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
   },
   "khuvuckhoangsandochai": {
     "titleList": "Danh sách khu vực khoáng sản độc hại",
@@ -129,6 +130,7 @@
     "loaikhoangsan": "Loại khoáng sản",
     "soquyetdinh": "Số quyết định",
     "ngayquyetdinh": "Ngày quyết định",
+    "hequychieu": "Hệ quy chiếu",
     "sohieuPlaceholder": "Nhập số hiệu",
     "tenkhuvucPlaceholder": "Nhập tên khu vực",
     "diadiemPlaceholder": "Nhập địa điểm",
@@ -138,6 +140,7 @@
     "doituongloaihinhPlaceholder": "---Chọn đối tượng loại hình---",
     "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
     "soquyetdinhPlaceholder": "Nhập số quyết định",
-    "ngayquyetdinhPlaceholder": "DD-MM-YYY"
+    "ngayquyetdinhPlaceholder": "DD-MM-YYY",
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
   }
 }
