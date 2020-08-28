@@ -73,7 +73,7 @@
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.chonkinhtuyentruc' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.chonkinhtuyentruc' | translate }}" formControlName="meridian" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "KHUVUCKHOANGSAN.khuvucdaugia.chonkinhtuyentruc" | translate }}
           </mat-option>
@@ -89,7 +89,7 @@
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.chonmuichieu' | translate }}" formControlName="trangthai" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.chonmuichieu' | translate }}" formControlName="prjzone" *ngIf="dataTranslate">
           <mat-option value="">
             {{ "KHUVUCKHOANGSAN.khuvucdaugia.chonmuichieu" | translate }}
           </mat-option>
@@ -124,7 +124,7 @@
               <i class="far fa-sync-alt"></i>
               {{ "COMMON.default.refresh" | translate }}
             </button>
-            <button class="btn btn-danger float-right mr-3" (click)="closeCanhanIOSidenav()">
+            <button class="btn btn-danger float-right mr-3" (click)="closeKhuVucDauGiaIOSidenav()">
               <i class="far fa-times-circle"></i>
               {{ "COMMON.default.cancel" | translate }}
             </button>
