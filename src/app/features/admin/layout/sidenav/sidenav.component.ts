@@ -161,13 +161,13 @@ export class SidenavComponent implements OnInit {
         {
           label: "Điểm quặng",
           faIcon: "",
-          link: ""
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.diemquangmoquangUri}/${AdminRoutingName.diemquangUri}`
         },
-        {
-          label: "Mỏ quặng",
-          faIcon: "",
-          link: ""
-        },
+        // {
+        //   label: "Mỏ quặng",
+        //   faIcon: "",
+        //   link: ""
+        // },
       ]
     },
     {
