@@ -21,7 +21,8 @@ export class ServiceName {
   public static KHUVUCDAUGIA = "khuvucdaugia";
   public static KHUVUCKHONGDAUGIA = "khuvuckhongdaugia";
   public static KHUVUCCAMTAMCAM = "khuvuccamtamcam";
-
+  // Điểm quặng - mỏ quặng
+  public static DIEMMO = "diemmo";
 
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
