@@ -190,7 +190,7 @@ export class DiemquangListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.linhvuc.contentDelete,
+      this.dataTranslate.DIEMQUANGMOQUANG.diemmo.contentDelete,
       this.selectedItem.tenmo
     );
     dialogRef.afterClosed().subscribe(async (result) => {
