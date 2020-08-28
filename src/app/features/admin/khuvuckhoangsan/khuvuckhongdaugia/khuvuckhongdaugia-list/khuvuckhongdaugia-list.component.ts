@@ -124,7 +124,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openKhuVucDauGiaIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleAdd);
     this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "new");
     this.matSidenavService.open();
   }
@@ -138,7 +138,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
     const dataItem: any = await this.khuVucKhoangSanFacadeService
     .getKhuVucKhongDauGiaService()
     .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.titleEdit );
+    await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleEdit );
     await this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -188,7 +188,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.linhvuc.contentDelete,
+      this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.contentDelete,
       this.selectedItem.tenkhuvuc
     );
     dialogRef.afterClosed().subscribe(async (result) => {
