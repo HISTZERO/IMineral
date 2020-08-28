@@ -69,35 +69,19 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhongdaugia.kinhtuyentruc" | translate}}
+      <label class="col-sm-4 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhongdaugia.hequychieu" | translate}}
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvuckhongdaugia.chonkinhtuyentruc' | translate }}" formControlName="meridian" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvuckhongdaugia.chonhequychieu' | translate }}" formControlName="hequychieu" *ngIf="dataTranslate">
           <mat-option value="">
-            {{ "KHUVUCKHOANGSAN.khuvuckhongdaugia.chonkinhtuyentruc" | translate }}
+            {{ "KHUVUCKHOANGSAN.khuvuckhongdaugia.chonhequychieu" | translate }}
           </mat-option>
           <mat-option *ngFor="" [value]="">
             {{""}}
           </mat-option>
         </mat-select>
-        <span *ngIf="formErrors.meridian" class="alert-danger">{{formErrors.meridian}}</span>
-      </div>
-    </div>
-    <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhongdaugia.muichieu" | translate}}
-        <small>(*)</small>
-      </label>
-      <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvuckhongdaugia.chonmuichieu' | translate }}" formControlName="prjzone" *ngIf="dataTranslate">
-          <mat-option value="">
-            {{ "KHUVUCKHOANGSAN.khuvuckhongdaugia.chonmuichieu" | translate }}
-          </mat-option>
-          <mat-option *ngFor="" [value]="">
-            {{""}}
-          </mat-option>
-        </mat-select>
-        <span *ngIf="formErrors.prjzone" class="alert-danger">{{formErrors.prjzone}}</span>
+        <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">

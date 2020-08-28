@@ -49,8 +49,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     loaikhoangsan: "",
     soquyetdinh: "",
     ngayquyetdinh: "",
-    meridian: "",
-    prjzone: ""
+    hequychieu: ""
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -84,8 +83,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
-      meridian: ["", Validators.required],
-      prjzone: ["", Validators.required],
+      hequychieu:  ["", Validators.required]
     });
   }
 
@@ -109,7 +107,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvucRequired },
       diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.diadiemRequired },
-      dientich: { pattern: this.dataTranslate.DANHMUC.khuvucdaugia.dientichIsNumber }
+      dientich: { pattern: this.dataTranslate.DANHMUC.khuvucdaugia.dientichIsNumber },
+      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.hequychieuRequired }
     };
   }
 
@@ -139,8 +138,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
         soquyetdinh: this.obj.soquyetdinh,
         ngayquyetdinh: this.obj.ngayquyetdinh,
         mota: this.obj.mota,
-        meridian: this.obj.meridian,
-        prjzone: this.obj.prjzone,
+        hequychieu: this.obj.hequychieu
       });
     }
     this.editMode = true;
