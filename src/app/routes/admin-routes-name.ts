@@ -91,4 +91,5 @@ export class AdminRoutingName {
   public static khuvucdaugiaUri = "khuvucdaugia";
   public static khuvuckhoangsandochaiUri = "khuvuckhoangsandochai";
   public static khuvuckhongdaugiaUri = "khuvuckhongdaugia";
+  public static thongtinkhuvuckhoangsanUri = "thongtinkhuvuckhoangsan";
 }
