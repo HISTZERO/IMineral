@@ -173,4 +173,15 @@ export const NhomBaoCao = [
         id: 5,
         name: "Thông tin tư liệu"
     }
+];
+
+export const MaLoaiHinh = [
+    {
+        id: 1,
+        name: "Khu vực cấm"
+    },
+    {
+        id: 2,
+        name: "Khu vực tạm cấm"
+    }
 ]

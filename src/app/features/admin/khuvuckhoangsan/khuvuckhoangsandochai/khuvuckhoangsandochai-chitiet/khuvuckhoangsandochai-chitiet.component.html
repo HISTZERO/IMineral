@@ -1,0 +1,103 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <div class="row pt-3" style="margin: 0px">
+      <div class="col-md-12">
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <button class="btn btn-sm btn-primary float-right" (click)="toEditMode()">
+                <i class="fal fa-edit"></i> {{'COMMON.default.edit' | translate}}
+              </button>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row" *ngIf="obj">
+              <div style="width: 100%">
+                <img *ngIf="obj.imgLink" class="mb-1" [src]="obj.imgLink"
+                  style="width: 100%;height: 22vw; box-shadow: 0 2px 4px 2px rgba(0, 0, 0, 0.05);border: 2px solid #e2dede;" />
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.tenkhuvuc' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.tenkhuvuc }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.sohieu' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.sohieu }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.diadiem' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.diadiem }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.dientich' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.dientich }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.donvidientich' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.donvidientich }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieu' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.hequychieu }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.maloaihinh }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.loaihinhcam' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.loaihinhcam }}</strong></label>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.lydocam' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.lydocam}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.loaikhoangsan' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.loaikhoangsan }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.soquyetdinh' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj.soquyetdinh}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngayquyetdinh' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.ngayquyetdinh}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.thoihancam' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.thoihancam }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngaybd' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.ngaybd }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngaykt' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.ngaykt }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.mota' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{ obj.mota }}</strong></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end" style="width: 600px">
+      <div class="p-2 bg-primary text-white mat-sidenav-title">
+        <button class="btn btn-sm btn-light" (click)="closeKhuVucCamTamCamIOSidebar()">
+          <i class="fad fa-chevron-double-right"></i>
+        </button>
+        <span style="vertical-align: middle;" class="ml-3">{{matSidenavService.sidenavTitle}}</span>
+      </div>
+      <template #compTramKttvIO></template>
+    </mat-sidenav>
+  </mat-sidenav-content>
+</mat-sidenav-container>
