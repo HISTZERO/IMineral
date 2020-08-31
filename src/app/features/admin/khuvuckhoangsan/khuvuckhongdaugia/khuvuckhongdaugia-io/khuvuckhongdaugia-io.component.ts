@@ -9,7 +9,7 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 
 @Component({
