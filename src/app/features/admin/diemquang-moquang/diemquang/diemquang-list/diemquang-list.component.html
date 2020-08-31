@@ -16,7 +16,7 @@
                     <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
-                    <button class="btn btn-success" style="position: absolute; bottom: 0;">
+                    <button class="btn btn-success" style="position: absolute; bottom: 0;" (click) = "getAllDiemMo()">
                       {{"COMMON.default.search" | translate}}
                     </button>
                   </div>
@@ -38,7 +38,7 @@
                 <h3>
                   <div class="row">
                     <div class="col-md-4 mb-sm-1">
-                      <span class="title">{{ "KHUVUCKHOANGSAN.khuvucdaugia.titleList" | translate }}</span>
+                      <span class="title">{{ "DIEMQUANGMOQUANG.diemmo.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
                       <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openDiemMoIOSidenav()">
@@ -60,11 +60,11 @@
                   [allowResizing]="true"  (dataStateChange)="dataStateChange($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                    <e-column field="sohieumo" headerText="{{ 'DIEMQUANGMOQUANG.khuvucdaugia.sohieumo' | translate }}"></e-column>
-                    <e-column field="tenmo" headerText="{{ 'DIEMQUANGMOQUANG.khuvucdaugia.tenmo' | translate }}"></e-column>
-                    <e-column field="diadiem" headerText="{{ 'DIEMQUANGMOQUANG.khuvucdaugia.diadiem' | translate }}"></e-column>
-                    <e-column field="loaikhoangsan" headerText="{{ 'DIEMQUANGMOQUANG.khuvucdaugia.loaikhoangsan' | translate }}"></e-column>
-                    <e-column field="nguongocmo" headerText="{{ 'DIEMQUANGMOQUANG.khuvucdaugia.nguongocmo' | translate }}"></e-column>
+                    <e-column field="sohieumo" headerText="{{ 'DIEMQUANGMOQUANG.diemmo.sohieumo' | translate }}"></e-column>
+                    <e-column field="tenmo" headerText="{{ 'DIEMQUANGMOQUANG.diemmo.tenmo' | translate }}"></e-column>
+                    <e-column field="diadiem" headerText="{{ 'DIEMQUANGMOQUANG.diemmo.diadiem' | translate }}"></e-column>
+                    <e-column field="loaikhoangsan" headerText="{{ 'DIEMQUANGMOQUANG.diemmo.loaikhoangsan' | translate }}"></e-column>
+                    <e-column field="nguongocmo" headerText="{{ 'DIEMQUANGMOQUANG.diemmo.nguongocmo' | translate }}"></e-column>
                     <e-column field="idmo" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
