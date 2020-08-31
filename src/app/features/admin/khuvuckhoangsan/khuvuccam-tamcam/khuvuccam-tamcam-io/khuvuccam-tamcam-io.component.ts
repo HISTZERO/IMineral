@@ -10,6 +10,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
+import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
 
 @Component({
   selector: 'app-khuvuccam-tamcam-io',
@@ -38,6 +39,9 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
 
   // Chứa dữ liệu mã loại hình
   public maLoaiHinh = MaLoaiHinh;
+
+  // Chứa danh sách hệ quy chiếu
+  public heQuyChieu: any;
 
   // error message
   validationErrorMessages = {};
@@ -70,10 +74,12 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public datePipe: DatePipe,
+    public commonFacadeService: CommonFacadeService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
   ) { }
 
   async ngOnInit() {
+    this.getDataHeQuyChieu();
     // Khởi tạo form
     await this.formInit();
     //Khởi tạo form theo dạng add or edit
@@ -101,6 +107,16 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
     };
+  }
+
+  /**
+   * Hàm lấy dữ liệu hệ quy chiếu
+   */
+  async getDataHeQuyChieu() {
+    const data: any = await this.commonFacadeService
+      .getHeQuyChieuService()
+      .getFetchAll();
+    this.heQuyChieu = data.items;
   }
 
   /**
