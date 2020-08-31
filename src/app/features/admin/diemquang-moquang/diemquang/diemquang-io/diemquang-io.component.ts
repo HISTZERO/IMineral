@@ -4,20 +4,20 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
 
-import { InputKhuVucKhongDauGiaModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhongdaugia.model";
-import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
+import { InputDiemMoModel } from "src/app/models/admin/diemquang-moquang/diemmo.model";
+import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-moquang/diemquang-moquang-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 
 @Component({
-  selector: 'app-khuvuckhongdaugia-io',
-  templateUrl: './khuvuckhongdaugia-io.component.html',
-  styleUrls: ['./khuvuckhongdaugia-io.component.scss']
+  selector: 'app-diemquang-io',
+  templateUrl: './diemquang-io.component.html',
+  styleUrls: ['./diemquang-io.component.scss']
 })
-export class KhuvuckhongdaugiaIoComponent implements OnInit {
+export class DiemquangIoComponent implements OnInit {
   // Chứa dữ liệu Form
-  public khuvuckhongdaugiaIOForm: FormGroup;
+  public diemmoIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -29,7 +29,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputKhuVucKhongDauGiaModel;
+  public inputModel: InputDiemMoModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -39,21 +39,32 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    sohieu: "",
-    tenkhuvuc: "",
+    sohieumo: "",
+    tenmo: "",
     diadiem: "",
-    dientich: "",
-    donvidientich: "",
-    mota: "",
-    doituongloaihinh: "",
     loaikhoangsan: "",
-    soquyetdinh: "",
-    ngayquyetdinh: "",
+    nguongocmo: "",
+    tobando: "",
+    dientich: "",
+    truluong: "",
+    chieudaytu: "",
+    chieudayden: "",
+    donvitruluong: "",
+    donvidientich: "",
+    captainguyen: "",
+    dacdiem: "",
+    quymo: "",
+    mucdodieutra: "",
+    hientrang: "",
+    thanhphankhoangvat: "",
+    dieukienkhaithac: "",
     hequychieu: "",
+    toadox: "",
+    toadoy: ""
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
               private translate: TranslateService,
@@ -72,17 +83,28 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.khuvuckhongdaugiaIOForm = this.formBuilder.group({
-      sohieu: [""],
-      tenkhuvuc: ["", Validators.required],
+    this.diemmoIOForm = this.formBuilder.group({
+      sohieumo: [""],
+      tenmo: ["", Validators.required],
       diadiem: ["", Validators.required],
+      loaikhoangsan:  [""],
+      nguongocmo:  [""],
+      tobando:  [""],
       dientich: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
-      donvidientich: [""],
-      mota: [""],
-      doituongloaihinh: [""],
-      loaikhoangsan: [""],
-      soquyetdinh: [""],
-      ngayquyetdinh: [""],
+      truluong: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      chieudaytu: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      chieudayden: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      donvitruluong: ["", Validators.required],
+      donvidientich: ["", Validators.required],
+      captainguyen: [""],
+      dacdiem: [""],
+      quymo: [""],
+      mucdodieutra: [""],
+      hientrang: [""],
+      thanhphankhoangvat: [""],
+      dieukienkhaithac: [""],
+      toadox: ["", Validators.pattern("^[0-9-+]+$")],
+      toadoy: ["", Validators.pattern("^[0-9-+]+$")],
       hequychieu: ["", Validators.required]
     });
   }
@@ -105,10 +127,17 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.tenkhuvucRequired },
-      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.diadiemRequired },
-      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.dientichIsNumber },
-      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.hequychieuRequired }
+      tenmo: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.tenmoRequired },
+      diadiem: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.diadiem },
+      dientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichIsNumber },
+      truluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongIsNumber },
+      chieudaytu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuIsNumber },
+      chieudayden: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenIsNumber },
+      donvitruluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvitruluongRequired },
+      donvidientich:  { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvidientichRequired },
+      toadox: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxIsNumber },
+      toadoy: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyIsNumber },
+      hequychieu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.hequychieuRequired },
     };
   }
 
@@ -117,7 +146,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   bindingConfigAddOrUpdate() {
     this.editMode = false;
-    this.inputModel = new InputKhuVucKhongDauGiaModel();
+    this.inputModel = new InputDiemMoModel();
     // check edit
     this.formOnEdit();
   }
@@ -127,18 +156,29 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
-      this.khuvuckhongdaugiaIOForm.setValue({
-        sohieu: this.obj.sohieu,
-        tenkhuvuc: this.obj.tenkhuvuc,
+      this.diemmoIOForm.setValue({
+        sohieumo: this.obj.sohieumo,
+        tenmo: this.obj.tenmo,
         diadiem: this.obj.diadiem,
-        dientich: this.obj.dientich,
-        donvidientich: this.obj.donvidientich,
-        doituongloaihinh: this.obj.doituongloaihinh,
         loaikhoangsan: this.obj.loaikhoangsan,
-        soquyetdinh: this.obj.soquyetdinh,
-        ngayquyetdinh: this.obj.ngayquyetdinh,
-        mota: this.obj.mota,
-        hequychieu: this.obj.hequychieu
+        nguongocmo: this.obj.nguongocmo,
+        tobando: this.obj.tobando,
+        dientich: this.obj.dientich,
+        truluong: this.obj.truluong,
+        chieudaytu: this.obj.chieudaytu,
+        chieudayden: this.obj.chieudayden,
+        donvitruluong: this.obj.donvitruluong,
+        donvidientich: this.obj.donvidientich,
+        captainguyen: this.obj.captainguyen,
+        dacdiem: this.obj.dacdiem,
+        quymo: this.obj.quymo,
+        mucdodieutra: this.obj.mucdodieutra,
+        hientrang: this.obj.hientrang,
+        thanhphankhoangvat: this.obj.thanhphankhoangvat,
+        dieukienkhaithac: this.obj.dieukienkhaithac,
+        hequychieu: this.obj.hequychieu,
+        toadox: this.obj.toadox,
+        toadoy: this.obj.toadoy
       });
     }
     this.editMode = true;
@@ -149,11 +189,11 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     // Gán dữ liệu input vào model
-    const khuVucKhoangSanFacadeService = this.khuVucKhoangSanFacadeService.getKhuVucKhongDauGiaService();
-    this.inputModel = this.khuvuckhongdaugiaIOForm.value;
+    const diemQuangMoQuangFacadeService = this.diemQuangMoQuangFacadeService.getDiemMoService();
+    this.inputModel = this.diemmoIOForm.value;
     if (operMode === "new") {
-      khuVucKhoangSanFacadeService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhongDauGia"),
+      diemQuangMoQuangFacadeService.addItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -164,9 +204,9 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      this.inputModel.idkhuvuc = this.obj.idkhuvuc;
-      khuVucKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhongDauGia"),
+      this.inputModel.idmo = this.obj.idmo;
+      diemQuangMoQuangFacadeService.updateItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -185,7 +225,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.khuvuckhongdaugiaIOForm.valid === true) {
+    if (this.diemmoIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -196,7 +236,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.khuvuckhongdaugiaIOForm.reset();
+    this.diemmoIOForm.reset();
   }
 
   /**
@@ -205,7 +245,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.khuvuckhongdaugiaIOForm.valid === true) {
+    if (this.diemmoIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -217,7 +257,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.khuvuckhongdaugiaIOForm,
+      this.diemmoIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -226,7 +266,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeKhuVucKhongDauGiaIOSidenav() {
+  public closediemmoIOSidenav() {
     this.matSidenavService.close();
   }
 
@@ -238,5 +278,4 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   doFunction(methodName) {
     this[methodName]();
   }
-
 }

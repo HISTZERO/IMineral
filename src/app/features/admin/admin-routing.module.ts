@@ -31,6 +31,13 @@ const adminRoutes: Routes = [
           ),
       },
       {
+        path: AdminRoutingName.diemquangmoquangUri,
+        loadChildren: () =>
+          import("src/app/features/admin/diemquang-moquang/diemquang-moquang.module").then(
+            (mod) => mod.DiemquangMoquangModule
+          ),
+      },
+      {
         path: AdminRoutingName.mapUri,
         loadChildren: () =>
           import("src/app/features/admin/map/map.module").then(

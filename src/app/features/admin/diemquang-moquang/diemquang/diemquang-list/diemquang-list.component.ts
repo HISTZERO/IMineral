@@ -1,31 +1,31 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { Observable } from "rxjs";
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
-import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
+import { MenuDiemMo } from "src/app/shared/constants/sub-menus/diemquang-moquang/diemquang-moquang";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputKhuVucKhongDauGiaModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhongdaugia.model";
+import { OutputDiemMoModel } from "src/app/models/admin/diemquang-moquang/diemmo.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import { KhuvucdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-io/khuvucdaugia-io.component";
+import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-moquang/diemquang-moquang-facade.service";
+import { DiemquangIoComponent } from "src/app/features/admin/diemquang-moquang/diemquang/diemquang-io/diemquang-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 @Component({
-  selector: 'app-khuvuckhongdaugia-list',
-  templateUrl: './khuvuckhongdaugia-list.component.html',
-  styleUrls: ['./khuvuckhongdaugia-list.component.scss']
+  selector: 'app-diemquang-list',
+  templateUrl: './diemquang-list.component.html',
+  styleUrls: ['./diemquang-list.component.scss']
 })
-export class KhuvuckhongdaugiaListComponent implements OnInit {
+export class DiemquangListComponent implements OnInit {
   // Viewchild template
-  @ViewChild("gridKhuVucDauGia", { static: false }) public gridKhuVucDauGia: GridComponent;
+  @ViewChild("gridDiemMo", { static: false }) public gridDiemMo: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compkhuvuckhongdaugiaio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("compdiemoio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   // Chứa thuộc tính form
   public formSearch: FormGroup;
@@ -34,27 +34,29 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách lĩnh vực
-  public listKhuVucDauGia: Observable<DataStateChangeEventArgs>;
+  public listDiemMo: Observable<DataStateChangeEventArgs>;
 
   // Paging
   public state: DataStateChangeEventArgs;
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputKhuVucKhongDauGiaModel;
+  public selectedItem: OutputDiemMoModel;
 
   // Chứa menu item trên subheader
-  public navArray = MenuKhuVucDauGia;
+  public navArray = MenuDiemMo;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
-              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
               public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService) { }
+              public generalClientService: GeneralClientService
+            ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -99,33 +101,33 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
 
-    this.getAllKhuVucKhongDauGia();
+    this.getAllDiemMo();
   }
 
   /**
    * Hàm lấy dữ liệu Cá nhân
    */
-  async getAllKhuVucKhongDauGia() {
+  async getAllDiemMo() {
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucKhongDauGiaService()
+    this.diemQuangMoQuangFacadeService
+      .getDiemMoService()
       .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucKhongDauGiaService()
+    this.diemQuangMoQuangFacadeService
+      .getDiemMoService()
       .getDataFromServer(state, searchModel);
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openKhuVucDauGiaIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleAdd);
-    this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "new");
+  public openDiemMoIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.DIEMQUANGMOQUANG.diemmo.titleAdd);
+    this.matSidenavService.setContentComp(DiemquangIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -133,13 +135,13 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-   async editItemKhuVucDauGia(id: any) {
+  async editItemDiemMo(id: any) {
     // Lấy dữ liệu cá nhân theo id
-    const dataItem: any = await this.khuVucKhoangSanFacadeService
-    .getKhuVucKhongDauGiaService()
+    const dataItem: any = await this.diemQuangMoQuangFacadeService
+    .getDiemMoService()
     .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleEdit );
-    await this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle( this.dataTranslate.DIEMQUANGMOQUANG.diemmo.titleEdit );
+    await this.matSidenavService.setContentComp(DiemquangIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -153,21 +155,21 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
   /**
    * Hàm đóng sidenav
    */
-  public closeKhuVucDauGiaIOSidenav() {
+  public closeDiemMoIOSidenav() {
     this.matSidenavService.close();
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemKhuVucDauGia(data) {
+  async deleteItemDiemMo(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
-    const canDelete: string = this.khuVucKhoangSanFacadeService
-      .getKhuVucKhongDauGiaService()
-      .checkBeDeleted(this.selectedItem.idkhuvuc);
+    const canDelete: string = this.diemQuangMoQuangFacadeService
+      .getDiemMoService()
+      .checkBeDeleted(this.selectedItem.idmo);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -188,16 +190,16 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.contentDelete,
-      this.selectedItem.tenkhuvuc
+      this.dataTranslate.DIEMQUANGMOQUANG.diemmo.contentDelete,
+      this.selectedItem.tenmo
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.khuVucKhoangSanFacadeService
-          .getKhuVucKhongDauGiaService()
-          .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
+        await this.diemQuangMoQuangFacadeService
+          .getDiemMoService()
+          .deleteItem({ idmo: this.selectedItem.idmo })
           .subscribe(
-            () => this.getAllKhuVucKhongDauGia(),
+            () => this.getAllDiemMo(),
             (error: HttpErrorResponse) => {
               this.commonService.showError(error);
             },

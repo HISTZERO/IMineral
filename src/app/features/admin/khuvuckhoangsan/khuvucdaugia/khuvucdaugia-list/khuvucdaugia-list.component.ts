@@ -189,7 +189,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.linhvuc.contentDelete,
+      this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.contentDelete,
       this.selectedItem.tenkhuvuc
     );
     dialogRef.afterClosed().subscribe(async (result) => {

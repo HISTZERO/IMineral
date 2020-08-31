@@ -4,7 +4,7 @@ export class AdminRoutingName {
   public static adminUri = "admin";
   public static mapUri = "map";
   public static khuvuckhoangsanUri = "khuvuckhoangsan";
-
+  public static diemquangmoquangUri = "diemquangmoquang";
 
   public static baocaoUri = "baocao";
   public static thietlapUri = "thietlap";
@@ -92,4 +92,6 @@ export class AdminRoutingName {
   public static khuvuckhoangsandochaiUri = "khuvuckhoangsandochai";
   public static khuvuckhongdaugiaUri = "khuvuckhongdaugia";
   public static thongtinkhuvuckhoangsanUri = "thongtinkhuvuckhoangsan";
+  // 1.12 Routes phần điểm quặng/mỏ quặng
+  public static diemquangUri = "diemquang";
 }
