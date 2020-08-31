@@ -25,8 +25,6 @@ export class ServiceName {
   public static KHUVUCKHOANGSANDOCHAI = "khuvuckhoangsandochai";
   // Điểm quặng - mỏ quặng
   public static DIEMMO = "diemmo";
-  // Common
-  public static HEQUYCHIEU = "hequychieu";
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
   public static PROVINCE = "tinh";
