@@ -21,7 +21,7 @@ export class ThietlaphethongService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputThietLapHeThongModel(),
       outputModelName: new OutputThietLapHeThongModel(),
-      apiUrl: environment.apiCommonURL + ServiceName.THIETLAPHETHONG
+      apiUrl: environment.apiIMineral + ServiceName.THIETLAPHETHONG
     });
   }
 
@@ -38,7 +38,7 @@ export class ThietlaphethongService extends RepositoryEloquentService {
         // Nếu thời gian tồn tại của biến localStorage dã hết thì chạy lại từ đầu sét lại biến setTime 4 tiếng
         localStorage.setItem('getTimePageSize', JSON.stringify(this.now.getTime() + 14400000));
         this.setServiceInfo({
-          apiUrl: environment.apiCommonURL + ServiceName.THIETLAPHETHONG + '/key'
+          apiUrl: environment.apiIMineral + ServiceName.THIETLAPHETHONG + '/key'
         });
         const valueKey: any = await this.getFetchAll(param);
         localStorage.setItem(param.key, valueKey);
@@ -48,7 +48,7 @@ export class ThietlaphethongService extends RepositoryEloquentService {
       // Khi bắt đầu chạy chương trình setTime để cài thời gian tồn tại của biến localStorage là 4 tiếng
       localStorage.setItem('getTimePageSize', JSON.stringify(this.now.getTime() + 14400000));
       this.setServiceInfo({
-        apiUrl: environment.apiCommonURL + ServiceName.THIETLAPHETHONG + '/key'
+        apiUrl: environment.apiIMineral + ServiceName.THIETLAPHETHONG + '/key'
       });
       const valueKey: any = await this.getFetchAll(param);
       localStorage.setItem(param.key, valueKey);
