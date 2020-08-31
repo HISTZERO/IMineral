@@ -36,7 +36,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
-// Chứa danh sách Lĩnh Vực
+  // Chứa danh sách Lĩnh Vực
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
   // Filter Lĩnh Vực

@@ -10,7 +10,7 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { OutputKhuVucKhongDauGiaModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhongdaugia.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import { KhuvucdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-io/khuvucdaugia-io.component";
+import { KhuvuckhongdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhongdaugia/khuvuckhongdaugia-io/khuvuckhongdaugia-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
@@ -23,7 +23,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 })
 export class KhuvuckhongdaugiaListComponent implements OnInit {
   // Viewchild template
-  @ViewChild("gridKhuVucDauGia", { static: false }) public gridKhuVucDauGia: GridComponent;
+  @ViewChild("gridKhuVucKhongDauGia", { static: false }) public gridKhuVucKhongDauGia: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compkhuvuckhongdaugiaio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -34,7 +34,10 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách lĩnh vực
-  public listKhuVucDauGia: Observable<DataStateChangeEventArgs>;
+  public listKhuVucKhongDauGia: Observable<DataStateChangeEventArgs>;
+
+  // Service
+  public itemService: any;
 
   // Paging
   public state: DataStateChangeEventArgs;
@@ -54,7 +57,9 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
               public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService) { }
+              public generalClientService: GeneralClientService) {
+    this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucKhongDauGiaService();
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -106,18 +111,15 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllKhuVucKhongDauGia() {
+    this.listKhuVucKhongDauGia = this.itemService;
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucKhongDauGiaService()
-      .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucKhongDauGiaService()
-      .getDataFromServer(state, searchModel);
+    this.itemService.getDataFromServer(state, searchModel);
   }
 
   /**
@@ -125,7 +127,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    */
   public openKhuVucDauGiaIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleAdd);
-    this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "new");
+    this.matSidenavService.setContentComp(KhuvuckhongdaugiaIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -139,7 +141,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
     .getKhuVucKhongDauGiaService()
     .getByid(id).toPromise();
     await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhongdaugia.titleEdit );
-    await this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp(KhuvuckhongdaugiaIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -148,6 +150,7 @@ export class KhuvuckhongdaugiaListComponent implements OnInit {
    */
   public reloadDataGrid() {
     this.formSearch.reset({ Keyword: ""});
+    this.getAllKhuVucKhongDauGia();
   }
 
   /**

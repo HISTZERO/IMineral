@@ -16,7 +16,7 @@
                     <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
-                    <button class="btn btn-success" style="position: absolute; bottom: 0;">
+                    <button class="btn btn-success" style="position: absolute; bottom: 0;" (click)="getAllKhuVucKhongDauGia()">
                       {{"COMMON.default.search" | translate}}
                     </button>
                   </div>
@@ -54,7 +54,7 @@
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid #gridKhuVucDauGia *ngIf="listKhuVucDauGia" [dataSource]="listKhuVucDauGia | async"
+                <ejs-grid #gridKhuVucKhongDauGia *ngIf="listKhuVucKhongDauGia" [dataSource]="listKhuVucKhongDauGia | async"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                   [pageSettings]="settingsCommon.pageSettings" class="table-striped"
                   [allowResizing]="true"  (dataStateChange)="dataStateChange($event)">

@@ -121,9 +121,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucDauGiaService()
-      .getDataFromServer(state, searchModel);
+    this.itemService.getDataFromServer(state, searchModel);
   }
 
   /**
@@ -154,6 +152,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
    */
   public reloadDataGrid() {
     this.formSearch.reset({ Keyword: ""});
+    this.getAllKhuVucDauGia();
   }
 
   /**
