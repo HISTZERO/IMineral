@@ -77,8 +77,8 @@
           <mat-option value="">
             {{ "KHUVUCKHOANGSAN.khuvucdaugia.chonhequychieu" | translate }}
           </mat-option>
-          <mat-option *ngFor="" [value]="">
-            {{""}}
+          <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
+            {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
           </mat-option>
         </mat-select>
         <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>

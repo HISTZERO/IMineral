@@ -39,7 +39,7 @@ import {
   OWL_DATE_TIME_LOCALE,
   OWL_DATE_TIME_FORMATS,
 } from "ng-pick-datetime";
-import { MomentDateTimeAdapter } from "ng-pick-datetime-moment";
+import { MomentDateTimeAdapter, OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
 import { HeaderComponent } from "src/app/features/admin/layout/header/header.component";
 import { PheduyetDulieuComponent } from "src/app/shared/components/pheduyet-dulieu/pheduyet-dulieu.component";
 
@@ -112,12 +112,13 @@ export const MY_CUSTOM_FORMATS = {
     GroupService,
     ToolbarService,
     ResizeService,
-    { provide: OWL_DATE_TIME_LOCALE, useValue: "vi" },
-    {
-      provide: DateTimeAdapter,
-      useClass: MomentDateTimeAdapter,
-      deps: [OWL_DATE_TIME_LOCALE],
-    },
+    { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    // { provide: OWL_DATE_TIME_LOCALE, useValue: "vi" },
+    // {
+    //   provide: DateTimeAdapter,
+    //   useClass: MomentDateTimeAdapter,
+    //   deps: [OWL_DATE_TIME_LOCALE],
+    // },
     { provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS },
     DatePipe,
   ],

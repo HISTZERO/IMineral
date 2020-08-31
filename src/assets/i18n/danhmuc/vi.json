@@ -519,5 +519,9 @@
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
     "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạn thái sử dụng các đối tượng vừa chọn không?",
     "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạn thái không sử dụng các đối tượng vừa chọn không?"
+  },
+  "hequychieu": {
+    "meridian": "Kinh tuyến trục",
+    "prjzone": "Múi chiếu"
   }
 }

@@ -17,6 +17,7 @@ export class ServiceName {
   public static THUTUCHANHCHINH = "thutuchanhchinh";
   public static TOCHUC = "tochuc";
   public static LINHVUC = "linhvuc";
+  public static HEQUYCHIEU = "hequychieu";
   // Khu vực khoáng sản
   public static KHUVUCDAUGIA = "khuvucdaugia";
   public static KHUVUCKHONGDAUGIA = "khuvuckhongdaugia";
@@ -25,8 +26,6 @@ export class ServiceName {
   public static KHUVUCDUTRUKHOANGSAN = "khuvucdutrukhoangsan";
   // Điểm quặng - mỏ quặng
   public static DIEMMO = "diemmo";
-  // Common
-  public static HEQUYCHIEU = "hequychieu";
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
   public static PROVINCE = "tinh";

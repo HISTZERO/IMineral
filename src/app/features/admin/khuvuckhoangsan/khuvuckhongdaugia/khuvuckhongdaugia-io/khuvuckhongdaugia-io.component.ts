@@ -9,6 +9,8 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 
 @Component({
   selector: 'app-khuvuckhongdaugia-io',
@@ -34,6 +36,12 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa danh sách Lĩnh Vực
+  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
+
+  // Filter Lĩnh Vực
+  public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+
   // error message
   validationErrorMessages = {};
 
@@ -57,6 +65,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
               private translate: TranslateService,
+              public dmFacadeService: DmFacadeService,
               public datePipe: DatePipe) { }
 
   async ngOnInit() {
@@ -66,6 +75,8 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+    // Lấy dữ liệu hệ quy chiếu
+    await this.geAllHeQuyChieu();
   }
 
   /**
@@ -76,7 +87,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
       sohieu: [""],
       tenkhuvuc: ["", Validators.required],
       diadiem: ["", Validators.required],
-      dientich: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      dientich: ["", Validators.pattern("^[0-9]+\.{0,1}\d{0,2}$")],
       donvidientich: [""],
       mota: [""],
       doituongloaihinh: [""],
@@ -87,6 +98,16 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
     });
   }
 
+  /**
+   * Hàm lấy danh sách Lĩnh Vực
+   */
+  async geAllHeQuyChieu() {
+    const allHeQuyChieuData: any = await this.dmFacadeService
+      .getDmHeQuyChieuService()
+      .getFetchAll({PageNumber: 1, PageSize: -1 });
+    this.allHeQuyChieu = allHeQuyChieuData.items;
+    this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
 
   /**
    * hàm lấy dữ liệu translate
