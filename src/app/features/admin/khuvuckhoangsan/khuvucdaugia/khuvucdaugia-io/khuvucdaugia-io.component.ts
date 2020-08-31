@@ -87,8 +87,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
       sohieu: [""],
       tenkhuvuc: ["", Validators.required],
       diadiem: ["", Validators.required],
-      dientich: ["", Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
-      donvidientich: [""],
+      dientich: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      donvidientich: ["", Validators.required],
       mota: [""],
       doituongloaihinh: [""],
       loaikhoangsan: [""],
@@ -129,7 +129,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvucRequired },
       diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.diadiemRequired },
-      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichIsNumber },
+      dientich: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichFormat },
+      donvidientich:  { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.donvidientichRequired },
       hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.hequychieuRequired }
     };
   }
