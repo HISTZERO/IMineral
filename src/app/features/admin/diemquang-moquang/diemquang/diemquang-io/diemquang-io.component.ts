@@ -9,7 +9,8 @@ import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-
+import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
+import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 @Component({
   selector: 'app-diemquang-io',
   templateUrl: './diemquang-io.component.html',
@@ -33,6 +34,12 @@ export class DiemquangIoComponent implements OnInit {
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
+  // Chứa danh sách Lĩnh Vực
+  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
+
+  // Filter Lĩnh Vực
+  public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
 
   // error message
   validationErrorMessages = {};
@@ -67,6 +74,7 @@ export class DiemquangIoComponent implements OnInit {
               public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
+              public dmFacadeService: DmFacadeService,
               private translate: TranslateService,
               public datePipe: DatePipe) { }
 
@@ -77,6 +85,8 @@ export class DiemquangIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+    // Lấy dữ liệu hệ quy chiếu
+    await this.geAllHeQuyChieu();
   }
 
   /**
@@ -90,10 +100,10 @@ export class DiemquangIoComponent implements OnInit {
       loaikhoangsan:  [""],
       nguongocmo:  [""],
       tobando:  [""],
-      dientich: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
-      truluong: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
-      chieudaytu: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
-      chieudayden: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      dientich: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      truluong: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      chieudaytu: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      chieudayden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       donvitruluong: ["", Validators.required],
       donvidientich: ["", Validators.required],
       captainguyen: [""],
@@ -103,12 +113,22 @@ export class DiemquangIoComponent implements OnInit {
       hientrang: [""],
       thanhphankhoangvat: [""],
       dieukienkhaithac: [""],
-      toadox: ["", Validators.pattern("^[0-9-+]+$")],
-      toadoy: ["", Validators.pattern("^[0-9-+]+$")],
+      toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       hequychieu: ["", Validators.required]
     });
   }
 
+  /**
+   * Hàm lấy danh sách Lĩnh Vực
+   */
+  async geAllHeQuyChieu() {
+    const allHeQuyChieuData: any = await this.dmFacadeService
+      .getDmHeQuyChieuService()
+      .getFetchAll({PageNumber: 1, PageSize: -1 });
+    this.allHeQuyChieu = allHeQuyChieuData.items;
+    this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
 
   /**
    * hàm lấy dữ liệu translate
@@ -128,15 +148,15 @@ export class DiemquangIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tenmo: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.tenmoRequired },
-      diadiem: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.diadiem },
-      dientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichIsNumber },
-      truluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongIsNumber },
-      chieudaytu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuIsNumber },
-      chieudayden: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenIsNumber },
+      diadiem: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.diadiemRequired },
+      dientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichRequired , pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichFormat },
+      truluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongFormat },
+      chieudaytu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuFormat },
+      chieudayden: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenFormat },
       donvitruluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvitruluongRequired },
       donvidientich:  { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvidientichRequired },
-      toadox: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxIsNumber },
-      toadoy: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyIsNumber },
+      toadox: {required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxFormat },
+      toadoy: {required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyFormat },
       hequychieu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.hequychieuRequired },
     };
   }

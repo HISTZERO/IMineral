@@ -36,6 +36,9 @@ export class DiemquangListComponent implements OnInit {
   // Chứa danh sách lĩnh vực
   public listDiemMo: Observable<DataStateChangeEventArgs>;
 
+  // Service
+  public itemService: any;
+
   // Paging
   public state: DataStateChangeEventArgs;
 
@@ -56,7 +59,9 @@ export class DiemquangListComponent implements OnInit {
               private translate: TranslateService,
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService
-            ) { }
+            ) {
+    this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService();
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -108,18 +113,16 @@ export class DiemquangListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllDiemMo() {
+    this.listDiemMo = this.itemService;
     const searchModel = this.formSearch.value;
-    this.diemQuangMoQuangFacadeService
-      .getDiemMoService()
+    this.itemService
       .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = this.formSearch.value;
-    this.diemQuangMoQuangFacadeService
-      .getDiemMoService()
-      .getDataFromServer(state, searchModel);
+    this.itemService.getDataFromServer(state, searchModel);
   }
 
   /**
@@ -150,6 +153,7 @@ export class DiemquangListComponent implements OnInit {
    */
   public reloadDataGrid() {
     this.formSearch.reset({ Keyword: ""});
+    this.getAllDiemMo();
   }
 
   /**

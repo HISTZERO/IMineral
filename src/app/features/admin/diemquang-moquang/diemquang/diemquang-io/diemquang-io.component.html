@@ -83,6 +83,24 @@
       </div>
     </div>
     <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DIEMQUANGMOQUANG.diemmo.chieudaytu" | translate}}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="chieudaytu" placeholder="{{'DIEMQUANGMOQUANG.diemmo.chieudaytuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.chieudaytu" class="alert-danger">{{formErrors.chieudaytu}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DIEMQUANGMOQUANG.diemmo.chieudaytu" | translate}}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="chieudayden" placeholder="{{'DIEMQUANGMOQUANG.diemmo.chieudaydenPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.chieudayden" class="alert-danger">{{formErrors.chieudayden}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DIEMQUANGMOQUANG.diemmo.captainguyen" | translate}}</label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="captainguyen" placeholder="{{'DIEMQUANGMOQUANG.diemmo.captainguyenPlaceholder' | translate}}" />
@@ -156,10 +174,10 @@
       <div class="col-sm-8">
         <mat-select class="form-control" placeholder="{{ 'DIEMQUANGMOQUANG.diemmo.chonhequychieu' | translate }}" formControlName="hequychieu" *ngIf="dataTranslate">
           <mat-option value="">
-            {{ "DIEMQUANGMOQUANG.diemmo.chonhequychieu" | translate }}
+            {{ "KHUVUCKHOANGSAN.khuvucdaugia.chonhequychieu" | translate }}
           </mat-option>
-          <mat-option *ngFor="" [value]="">
-            {{""}}
+          <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
+            {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
           </mat-option>
         </mat-select>
         <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
