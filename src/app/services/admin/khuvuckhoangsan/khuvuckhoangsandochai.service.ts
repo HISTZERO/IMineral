@@ -17,7 +17,7 @@ export class KhuvuckhoangsandochaiService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputKhuVucCamTamCamModel(),
       outputModelName: new OutputKhuVucCamTamCamModel(),
-      apiUrl: environment.apiIMineral + ServiceName.KHUVUCCAMTAMCAM
+      apiUrl: environment.apiIMineral + ServiceName.KHUVUCKHOANGSANDOCHAI
     });
   }
 

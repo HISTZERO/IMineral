@@ -106,11 +106,11 @@ export class DmLoaibaocaoListComponent implements OnInit {
   * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
   */
   async getDataPageSize() {
-    const pageSize: any = await this.thietlapFacadeService
-    .getThietLapHeThongService()
-    .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-    if (pageSize) {
-      this.settingsCommon.pageSettings.pageSize = +pageSize;
+    const dataSetting: any = await this.thietlapFacadeService
+      .getThietLapHeThongService()
+      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+    if (dataSetting) {
+      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
