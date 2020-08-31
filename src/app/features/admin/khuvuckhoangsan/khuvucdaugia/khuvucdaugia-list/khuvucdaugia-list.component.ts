@@ -35,6 +35,9 @@ export class KhuvucdaugiaListComponent implements OnInit {
   // Chứa danh sách lĩnh vực
   public listKhuVucDauGia: Observable<DataStateChangeEventArgs>;
 
+  // Service
+  public itemService: any;
+
   // Paging
   public state: DataStateChangeEventArgs;
 
@@ -55,7 +58,10 @@ export class KhuvucdaugiaListComponent implements OnInit {
               private translate: TranslateService,
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService
-            ) { }
+            ) {
+
+    this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -107,18 +113,15 @@ export class KhuvucdaugiaListComponent implements OnInit {
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllKhuVucDauGia() {
+    this.listKhuVucDauGia = this.itemService;
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucDauGiaService()
-      .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = this.formSearch.value;
-    this.khuVucKhoangSanFacadeService
-      .getKhuVucDauGiaService()
-      .getDataFromServer(state, searchModel);
+    this.itemService.getDataFromServer(state, searchModel);
   }
 
   /**
@@ -149,6 +152,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
    */
   public reloadDataGrid() {
     this.formSearch.reset({ Keyword: ""});
+    this.getAllKhuVucDauGia();
   }
 
   /**

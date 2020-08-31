@@ -73,12 +73,12 @@
         <small>(*)</small>
       </label>
       <div class="col-sm-8">
-        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvuckhongdaugia.chonhequychieu' | translate }}" formControlName="hequychieu" *ngIf="dataTranslate">
+        <mat-select class="form-control" placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.chonhequychieu' | translate }}" formControlName="hequychieu" *ngIf="dataTranslate">
           <mat-option value="">
-            {{ "KHUVUCKHOANGSAN.khuvuckhongdaugia.chonhequychieu" | translate }}
+            {{ "KHUVUCKHOANGSAN.khuvucdaugia.chonhequychieu" | translate }}
           </mat-option>
-          <mat-option *ngFor="" [value]="">
-            {{""}}
+          <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
+            {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
           </mat-option>
         </mat-select>
         <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
