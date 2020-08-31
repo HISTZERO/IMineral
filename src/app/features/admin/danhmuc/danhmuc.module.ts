@@ -6,7 +6,7 @@ import {
 import { CommonModule } from "@angular/common";
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE, OwlDateTimeModule } from "ng-pick-datetime";
-import { MomentDateTimeAdapter } from "ng-pick-datetime-moment";
+import { MomentDateTimeAdapter, OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
 import { TranslateModule } from "@ngx-translate/core";
 
 import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex-component-factory-resolver.service";
@@ -117,8 +117,9 @@ import { DmLinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/l
     DmLinhvucIoComponent
   ],
   providers: [
-    { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
-    { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
+    { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    // { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
+    // { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
     { provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS },
   ]
 })

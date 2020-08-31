@@ -6,7 +6,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE, OwlDateTimeModule } from "ng-pick-datetime";
-import { MomentDateTimeAdapter } from "ng-pick-datetime-moment";
+import { MomentDateTimeAdapter, OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
 import { MY_CUSTOM_FORMATS } from "src/app/features/admin/admin-shared.module";
 import { TranslateModule } from "@ngx-translate/core";
 
@@ -55,6 +55,7 @@ import { KhuvuckhoangsandochaiChitietComponent } from "./khuvuckhoangsandochai/k
     NgbModule,
     AdminSharedModule,
     OwlDateTimeModule,
+    OwlMomentDateTimeModule,
     TranslateModule
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -69,8 +70,9 @@ import { KhuvuckhoangsandochaiChitietComponent } from "./khuvuckhoangsandochai/k
     ThongtinkhuvuckhoangsanComponent
   ],
   providers: [
-    { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
-    { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
+    { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
+    // { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
+    // { provide: DateTimeAdapter, useClass: MomentDateTimeAdapter, deps: [OWL_DATE_TIME_LOCALE] },
     { provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS },
   ]
 })

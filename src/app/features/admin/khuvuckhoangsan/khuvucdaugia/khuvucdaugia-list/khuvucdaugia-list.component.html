@@ -64,7 +64,11 @@
                     <e-column field="tenkhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvuc' | translate }}"></e-column>
                     <e-column field="diadiem" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.diadiem' | translate }}"></e-column>
                     <e-column field="soquyetdinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.soquyetdinh' | translate }}"></e-column>
-                    <e-column field="ngayquyetdinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}"></e-column>
+                    <e-column field="ngayquyetdinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}">
+                      <ng-template #template let-data>
+                        {{data.ngayquyetdinh | date: 'dd/MM/yyyy'}}
+                      </ng-template>
+                    </e-column>
                     <e-column field="idkhuvuc" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
