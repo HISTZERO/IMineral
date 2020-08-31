@@ -42,7 +42,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     public listCapQuanLyFilter: OutputDmCapQuanLyModel[];
 
      // Chứa danh sách Lĩnh Vực
-    public allLinhVuc: OutputDmLinhvucModel;
+    public allLinhVuc: OutputDmLinhvucModel[];
 
     // Filter Lĩnh Vực
     public linhVucFilters: OutputDmLinhvucModel[];
@@ -104,7 +104,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       // Lấy dữ liệu Cấp quản lý
       await this.getAllCapQuanLy();
       // Gọi hàm lấy dữ liệu Lĩnh Vực
-      await this.geAlltLinhVuc();
+      await this.geAllLinhVuc();
     }
 
     /**
@@ -233,7 +233,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     /**
      * Hàm lấy danh sách Lĩnh Vực
      */
-    async geAlltLinhVuc() {
+    async geAllLinhVuc() {
       const allLinhVucData: any = await this.dmFacadeService
         .getDmLinhvucService()
         .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });

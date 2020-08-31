@@ -76,7 +76,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
       sohieu: [""],
       tenkhuvuc: ["", Validators.required],
       diadiem: ["", Validators.required],
-      dientich: ["", Validators.pattern("/^\d+\.\d{0,2}$/")],
+      dientich: ["", Validators.pattern("^[0-9]+\.{0,1}\d{0,2}$")],
       donvidientich: [""],
       mota: [""],
       doituongloaihinh: [""],
