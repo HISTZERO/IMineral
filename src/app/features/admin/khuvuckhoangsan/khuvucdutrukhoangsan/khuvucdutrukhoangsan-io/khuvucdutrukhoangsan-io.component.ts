@@ -9,6 +9,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { InputKhuVucDuTruKhoangSanModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdutrukhoangsan.model";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 
 @Component({
   selector: 'app-khuvucdutrukhoangsan-io',
@@ -34,6 +36,9 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+  
+  // Chứa danh sách Hệ quy chiếu
+  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
   // error message
   validationErrorMessages = {};
@@ -61,10 +66,13 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public datePipe: DatePipe,
+    public dmFacadeService: DmFacadeService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
   ) { }
 
   async ngOnInit() {
+    // Lấy dữ liệu hệ quy chiếu
+    this.getAllHeQuyChieu();
     // Khởi tạo form
     await this.formInit();
     //Khởi tạo form theo dạng add or edit
@@ -92,6 +100,16 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
     };
+  }
+
+  /**
+   * Hàm lấy danh sách Hệ quy chiếu
+   */
+  async getAllHeQuyChieu() {
+    const allHeQuyChieuData: any = await this.dmFacadeService
+      .getDmHeQuyChieuService()
+      .getFetchAll({PageNumber: 1, PageSize: -1 });
+    this.allHeQuyChieu = allHeQuyChieuData.items;
   }
 
   /**

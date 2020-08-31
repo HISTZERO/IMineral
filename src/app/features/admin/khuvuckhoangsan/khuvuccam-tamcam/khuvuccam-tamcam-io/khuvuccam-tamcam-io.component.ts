@@ -10,7 +10,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
-import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 
 @Component({
   selector: 'app-khuvuccam-tamcam-io',
@@ -41,7 +42,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   public maLoaiHinh = MaLoaiHinh;
 
   // Chứa danh sách hệ quy chiếu
-  public heQuyChieu: any;
+  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
   // error message
   validationErrorMessages = {};
@@ -74,12 +75,13 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public datePipe: DatePipe,
-    public commonFacadeService: CommonFacadeService,
+    public dmFacadeService: DmFacadeService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
   ) { }
 
   async ngOnInit() {
-    this.getDataHeQuyChieu();
+    // Lấy dữ liệu hệ quy chiếu
+    this.getAllHeQuyChieu();
     // Khởi tạo form
     await this.formInit();
     //Khởi tạo form theo dạng add or edit
@@ -110,14 +112,15 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   }
 
   /**
-   * Hàm lấy dữ liệu hệ quy chiếu
+   * Hàm lấy danh sách Hệ quy chiếu
    */
-  async getDataHeQuyChieu() {
-    const data: any = await this.commonFacadeService
-      .getHeQuyChieuService()
-      .getFetchAll();
-    this.heQuyChieu = data.items;
+  async getAllHeQuyChieu() {
+    const allHeQuyChieuData: any = await this.dmFacadeService
+      .getDmHeQuyChieuService()
+      .getFetchAll({PageNumber: 1, PageSize: -1 });
+    this.allHeQuyChieu = allHeQuyChieuData.items;
   }
+
 
   /**
    * Hàm khởi tạo form theo dạng edit

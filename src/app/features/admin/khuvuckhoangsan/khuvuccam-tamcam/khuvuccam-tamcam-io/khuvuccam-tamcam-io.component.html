@@ -48,16 +48,18 @@
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieu" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieu" | translate}}
+                <small>(*)</small>
+            </label>
             <div class="col-sm-9">
                 <mat-select class="form-control"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuPlaceholder' | translate}}"
+                    placeholder="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuPlaceholder' | translate }}"
                     formControlName="hequychieu" *ngIf="dataTranslate">
                     <mat-option value="">
                         {{ "KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuPlaceholder" | translate }}
                     </mat-option>
-                    <mat-option *ngFor="let loai of heQuyChieu" [value]="loai.srid">
-                        {{ loai.prjname }}
+                    <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
+                        {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
                     </mat-option>
                 </mat-select>
                 <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
