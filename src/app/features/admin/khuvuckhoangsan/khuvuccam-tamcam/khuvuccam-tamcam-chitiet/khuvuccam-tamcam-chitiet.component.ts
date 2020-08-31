@@ -34,13 +34,15 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
     public commonFacadeService: CommonFacadeService,
     private translate: TranslateService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
-    ) { }
+  ) { }
 
   async ngOnInit() {
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+    console.log(this.idKhuVuc);
+    this.getDataKhuVucCamTamCamById();
   }
 
   /**
@@ -48,10 +50,10 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
    */
   async getDataKhuVucCamTamCamById() {
     await this.khuvuckhoangsanFacadeService
-              .getKhuVucCamTamCamService()
-              .getByid(this.idKhuVuc).subscribe(res => {
-                this.obj = res;
-              });
+      .getKhuVucCamTamCamService()
+      .getByid(this.idKhuVuc).subscribe(res => {
+        this.obj = res;
+      });
   }
 
   /**

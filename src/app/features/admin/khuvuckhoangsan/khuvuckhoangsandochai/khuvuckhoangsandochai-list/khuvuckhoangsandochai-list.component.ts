@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel, DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
 import { MatSidenav } from "@angular/material";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -13,6 +13,7 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
 import { OutputKhuVucKhoangSanDocHaiModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhoangsandochai.model";
 import { MenuKhuVucKhoangSanDocHai } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsandochai";
 import { KhuvuckhoangsandochaiIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-io/khuvuckhoangsandochai-io.component";
+import { Observable } from "rxjs";
 
 @Component({
   selector: 'app-khuvuckhoangsandochai-list',
@@ -33,7 +34,10 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách Khu vực Khoáng sản độc hại
-  public listKvKhoangSanDocHai: OutputKhuVucKhoangSanDocHaiModel[];
+  public listKvKhoangSanDocHai: Observable<DataStateChangeEventArgs>;
+
+  // Chứa service khu vực khoáng sản độc hại
+  public khuVucKhoangSanDocHai: any;
 
   // Chứa dữ liệu đã chọn
   public selectedItem: OutputKhuVucKhoangSanDocHaiModel;
@@ -47,6 +51,9 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
+  // CHứa pageSize
+  public pageSize: any;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -56,7 +63,9 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-  ) { }
+  ) {
+    this.khuVucKhoangSanDocHai = this.khuvuckhoangsanFacadeService.getKhuVucKhoangSanDocHaiService();
+   }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -90,6 +99,7 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
       .getThietLapHeThongService()
       .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
     if (pageSize) {
+      this.pageSize = +pageSize;
       this.settingsCommon.pageSettings.pageSize = +pageSize;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
@@ -112,16 +122,9 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    * Hàm lấy dữ liệu khu vực khoáng sản độc hại
    */
   async getAllKhuVucKhoangSanDocHai(param: any = { PageNumber: 1, PageSize: -1 }) {
-    this.listKvKhoangSanDocHai = [];
-    // const listData: any = await this.dmFacadeService
-    //   .getDmCanhanService()
-    //   .getFetchAll(param);
-    // if (listData.items) {
-    //   listData.items.map((canhan, index) => {
-    //     canhan.serialNumber = index + 1;
-    //   });
-    // }
-    // this.listCanhan = listData.items;
+    const valueSearch: any = this.formSearch.value;
+    this.listKvKhoangSanDocHai = this.khuVucKhoangSanDocHai;
+    this.khuVucKhoangSanDocHai.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
   }
 
   /**

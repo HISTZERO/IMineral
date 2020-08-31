@@ -4,6 +4,8 @@ import { MatSidenav } from "@angular/material";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
+import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
@@ -13,10 +15,9 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
-import { Observable } from "rxjs";
-import { Router } from "@angular/router";
-import { AdminRoutingName } from "../../../../../routes/admin-routes-name";
-import { keyKhuVucKhoangSan } from "../../../../../shared/constants/khuvuckhoangsan-constants";
+import { AdminRoutingName } from "src/app/routes/admin-routes-name";
+import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
 
 
 @Component({
@@ -57,6 +58,9 @@ export class KhuvuccamTamcamListComponent implements OnInit {
 
   // Biến để chứa service
   public khuVucCamTamCamService: any;
+
+  // Chứa dữ liệu loại hình
+  public loaiHinh = MaLoaiHinh;
 
   // Contructor
   constructor(
@@ -119,6 +123,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   public reloadDataGrid() {
     this.formSearch.reset({
       Keyword: "",
+      Maloaihinh: ""
     });
     this.getAllKhuVucCamTamCam();
   }
@@ -127,8 +132,9 @@ export class KhuvuccamTamcamListComponent implements OnInit {
    * Hàm lấy dữ liệu khu vực cấm/tạm cấm
    */
   async getAllKhuVucCamTamCam() {
+    const valueSearch: any = this.formSearch.value;
     this.listKvCamTamCam = this.khuVucCamTamCamService;
-    this.khuVucCamTamCamService.getDataFromServer({skip: 0, take: this.pageSize}, this.formSearch.value);
+    this.khuVucCamTamCamService.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
   }
 
   /**

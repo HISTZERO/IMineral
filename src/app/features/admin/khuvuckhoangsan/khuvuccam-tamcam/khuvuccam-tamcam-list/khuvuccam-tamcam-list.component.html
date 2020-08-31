@@ -17,7 +17,9 @@
                       <mat-option value="">
                         {{ "KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhPlaceholder" | translate }}
                       </mat-option>
-                      
+                      <mat-option *ngFor="let lh of loaiHinh" [value]="lh.id">
+                        {{lh.name}}
+                      </mat-option>
                     </mat-select>
                   </div>
                   <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 form-group">
@@ -48,10 +50,10 @@
               <div class="card-header">
                 <h3>
                   <div class="row">
-                    <div class="col-md-4 mb-sm-1">
+                    <div class="col-md-6 mb-sm-1">
                       <span class="title">{{ "KHUVUCKHOANGSAN.khuvuccamtamcam.titleList" | translate }}</span>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-6">
                       <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openKhuVucCamTamCamIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
@@ -66,13 +68,17 @@
               </div>
               <div class="card-body" >
                 <ejs-grid #gridKvCamTamCam *ngIf="listKvCamTamCam" [dataSource]="listKvCamTamCam | async"
-                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
+                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings"  class="table-striped" [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenkhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.tenkhuvuc' | translate }}"></e-column>
                     <e-column field="sohieu" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.sohieu' | translate }}"></e-column>
                     <e-column field="diadiem" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.diadiem' | translate }}"></e-column>
-                    <e-column field="maloaihinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh' | translate }}"></e-column>
+                    <e-column field="maloaihinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.maloaihinh | getNameFileConstant: loaiHinh}}
+                      </ng-template>
+                    </e-column>
                     <e-column field="idkhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">

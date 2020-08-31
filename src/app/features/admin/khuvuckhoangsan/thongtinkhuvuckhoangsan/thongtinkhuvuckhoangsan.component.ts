@@ -1,17 +1,19 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { KhuvuccamTamcamChitietComponent } from "../khuvuccam-tamcam/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
 import { ActivatedRoute } from "@angular/router";
 import { detailComponentKhuVucKhoangSan } from "../../../../shared/constants/khuvuckhoangsan-constants";
 import { KhuVucKhoangSanFacadeService } from "../../../../services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
+import { MatTabGroup } from "@angular/material";
 
 @Component({
   selector: 'app-thongtinkhuvuckhoangsan',
   templateUrl: './thongtinkhuvuckhoangsan.component.html',
   styleUrls: ['./thongtinkhuvuckhoangsan.component.scss']
 })
-export class ThongtinkhuvuckhoangsanComponent implements OnInit {
-  @ViewChild('detailComponent', {static: true, read: ViewContainerRef}) public detailComponent: ViewContainerRef;
+export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
+  @ViewChild("tab",{static: true}) tab: MatTabGroup;
+  @ViewChild('detailComponent', { static: true, read: ViewContainerRef }) public detailComponent: ViewContainerRef;
 
   public entryComponentFactory: any;
 
@@ -39,31 +41,31 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
   constructor(
     public khuVucKhoangSanFacedeService: KhuVucKhoangSanFacadeService,
     public cfr: ComponentFactoryResolver,
-    private activatedRoute: ActivatedRoute 
+    private activatedRoute: ActivatedRoute
   ) { }
 
   ngOnInit() {
-    this.getDataFromUrl();
+    this.activatedRoute.queryParamMap.subscribe((param: any) => {
+      this.keyKhuVuc = param.params.keykhuvuc;
+      this.idKhuVuc = param.params.idkhuvuc;
+      this.showViewDetailComponent();
+    });
+
   }
 
-  /**
-   * Hàm lấy dữ liệu trên url
-   */
-  async getDataFromUrl() {
-    this.keyKhuVuc = await this.activatedRoute.snapshot.queryParamMap.get('keykhuvuc');
-    this.idKhuVuc = await this.activatedRoute.snapshot.queryParamMap.get('idkhuvuc');
-    await this.showViewDetailComponent();
+  ngAfterViewInit() {
+    
   }
+
 
   /**
    * Hàm hiển thị content component chi tiết các khu vực
    */
   public showViewDetailComponent() {
-    if(this.entryComponentFactory) {
-      this.entryComponentFactory.destroy();
-    }
-    const factory = this.cfr.resolveComponentFactory(detailComponentKhuVucKhoangSan[this.keyKhuVuc]);
+    if (this.entryComponentFactory) this.entryComponentFactory.destroy();
+
+    const factory = this.cfr.resolveComponentFactory(KhuvuccamTamcamChitietComponent);
     this.entryComponentFactory = this.detailComponent.createComponent(factory);
-    this.entryComponentFactory.instance.idKhuVuc = this.idKhuVuc; 
+    this.entryComponentFactory.instance.idKhuVuc = this.idKhuVuc;
   }
 }
