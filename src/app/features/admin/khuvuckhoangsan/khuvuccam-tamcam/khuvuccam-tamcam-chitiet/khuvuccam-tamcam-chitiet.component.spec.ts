@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { KhuvuckhoangsandochaiDulieuComponent } from './khuvuckhoangsandochai-dulieu.component';
+import { KhuvuccamTamcamChitietComponent } from './khuvuccam-tamcam-chitiet.component';
 
-describe('KhuvuckhoangsandochaiDulieuComponent', () => {
-  let component: KhuvuckhoangsandochaiDulieuComponent;
-  let fixture: ComponentFixture<KhuvuckhoangsandochaiDulieuComponent>;
+describe('KhuvuccamTamcamChitietComponent', () => {
+  let component: KhuvuccamTamcamChitietComponent;
+  let fixture: ComponentFixture<KhuvuccamTamcamChitietComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ KhuvuckhoangsandochaiDulieuComponent ]
+      declarations: [ KhuvuccamTamcamChitietComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(KhuvuckhoangsandochaiDulieuComponent);
+    fixture = TestBed.createComponent(KhuvuccamTamcamChitietComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
