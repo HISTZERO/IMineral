@@ -95,13 +95,14 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
-    const pageSize: any = await this.thietlapFacadeService
+    const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-    if (pageSize) {
-      this.pageSize = +pageSize;
-      this.settingsCommon.pageSettings.pageSize = +pageSize;
+      .getByid(ThietLapHeThong.listPageSize ).toPromise();
+    if (dataSetting) {
+      this.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
+      this.pageSize = 10;
       this.settingsCommon.pageSettings.pageSize = 10;
     }
     // Gọi hàm lấy dữ liệu khu vực khoáng sản độc hại
@@ -125,6 +126,14 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     const valueSearch: any = this.formSearch.value;
     this.listKvKhoangSanDocHai = this.khuVucKhoangSanDocHai;
     this.khuVucKhoangSanDocHai.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
+  }
+
+  /**
+   * Hàm lấy về danh sách khu vực cấm, tạm cấm (phân trang bên server) khi click vào pagination trên grid
+   * @param state
+   */
+  public dataStateChange(state: DataStateChangeEventArgs): void {
+    this.khuVucKhoangSanDocHai.getDataFromServer(state, this.formSearch.value);
   }
 
   /**

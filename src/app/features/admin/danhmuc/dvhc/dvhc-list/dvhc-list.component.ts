@@ -138,10 +138,14 @@ export class DmDvhcListComponent implements OnInit {
   // Cài đặt số phân trang trên gird
   async getPageSize() {
     // Get settings
-    const pageSize: any = await this.thietlapFacadeService
+    const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-    this.settingsCommon.pageSettings.pageSize = +pageSize;
+      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+    if (dataSetting) {
+      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+    } else {
+      this.settingsCommon.pageSettings.pageSize = 10;
+    }
   }
 
   // binding config
