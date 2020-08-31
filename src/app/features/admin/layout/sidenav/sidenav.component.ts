@@ -151,6 +151,11 @@ export class SidenavComponent implements OnInit {
           faIcon: "",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuckhongdaugiaUri}`
         },
+        {
+          label: "Khu vực dự trữ khoáng sản",
+          faIcon: "",
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdutrukhoangsanUri}`
+        },
       ]
     },
     {

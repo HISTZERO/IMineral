@@ -76,16 +76,8 @@
             <label
                 class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinh" | translate}}</label>
             <div class="col-sm-9">
-                <mat-select class="form-control"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinhPlaceholder' | translate}}"
-                    formControlName="doituongloaihinh" *ngIf="dataTranslate">
-                    <mat-option value="">
-                        {{ "KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinhPlaceholder" | translate }}
-                    </mat-option>
-                    <!-- <mat-option *ngFor="let loai of doituongloaihinh" [value]="loai.id">
-              {{ loai.name }}
-            </mat-option> -->
-                </mat-select>
+                <input class="form-control" type="text" formControlName="doituongloaihinh"
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinhPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.doituongloaihinh" class="alert-danger">{{formErrors.doituongloaihinh}}</span>
             </div>
         </div>

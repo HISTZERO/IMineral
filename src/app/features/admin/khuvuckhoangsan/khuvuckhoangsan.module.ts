@@ -27,6 +27,8 @@ import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangs
 import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuckhoangsan/thongtinkhuvuckhoangsan/thongtinkhuvuckhoangsan.component";
 import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
 import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
+import { KhuvucdutrukhoangsanListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-list/khuvucdutrukhoangsan-list.component";
+import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
 
 
 @NgModule({
@@ -44,7 +46,9 @@ import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/kh
     KhuvuckhongdaugiaListComponent,
     KhuvuctoadoIoComponent,
     KhuvuctoadoListComponent,
-    ThongtinkhuvuckhoangsanComponent
+    ThongtinkhuvuckhoangsanComponent,
+    KhuvucdutrukhoangsanListComponent,
+    KhuvucdutrukhoangsanIoComponent
   ],
   exports: [
     KhuvuccamTamcamChitietComponent,
@@ -67,7 +71,8 @@ import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/kh
     KhuvuctoadoIoComponent,
     KhuvuccamTamcamChitietComponent,
     KhuvuckhoangsandochaiChitietComponent,
-    ThongtinkhuvuckhoangsanComponent
+    ThongtinkhuvuckhoangsanComponent,
+    KhuvucdutrukhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_DATE_TIME_LOCALE, useValue: 'vi' },
