@@ -56,9 +56,9 @@
                     <mat-option value="">
                         {{ "KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuPlaceholder" | translate }}
                     </mat-option>
-                    <!-- <mat-option *ngFor="let loai of hequychieu" [value]="loai.id">
-          {{ loai.name }}
-        </mat-option> -->
+                    <mat-option *ngFor="let loai of heQuyChieu" [value]="loai.srid">
+                        {{ loai.prjname }}
+                    </mat-option>
                 </mat-select>
                 <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
             </div>

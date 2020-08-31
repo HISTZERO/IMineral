@@ -12,10 +12,10 @@
             </h3>
           </div>
           <div class="card-body">
-            <mat-tab-group mat-stretch-tabs [animationDuration]="0">
+            <mat-tab-group mat-stretch-tabs [animationDuration]="0" #tab>
               <mat-tab label="Thông tin chung">
-                <ng-template matTabContent #detailComponent>
-                  
+                <ng-template matTabContent >
+                  <div #detailComponent></div>
                 </ng-template>
               </mat-tab>
               <mat-tab label="Tọa độ">

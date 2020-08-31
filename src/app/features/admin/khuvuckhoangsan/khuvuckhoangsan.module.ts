@@ -26,7 +26,7 @@ import { KhuvuccamTamcamListComponent } from "src/app/features/admin/khuvuckhoan
 import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
 import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuckhoangsan/thongtinkhuvuckhoangsan/thongtinkhuvuckhoangsan.component";
 import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
-import { KhuvuckhoangsandochaiChitietComponent } from "./khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
+import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
 
 
 @NgModule({
@@ -47,7 +47,8 @@ import { KhuvuckhoangsandochaiChitietComponent } from "./khuvuckhoangsandochai/k
     ThongtinkhuvuckhoangsanComponent
   ],
   exports: [
-    KhuvuccamTamcamChitietComponent
+    KhuvuccamTamcamChitietComponent,
+    KhuvuckhoangsandochaiChitietComponent,
   ],
   imports: [
     CommonModule,

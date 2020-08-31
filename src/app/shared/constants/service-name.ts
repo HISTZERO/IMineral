@@ -24,7 +24,8 @@ export class ServiceName {
   public static KHUVUCCAMTAMCAM = "khuvuccamtamcam";
   // Điểm quặng - mỏ quặng
   public static DIEMMO = "diemmo";
-
+  // Common
+  public static HEQUYCHIEU = "hequychieu";
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
   public static PROVINCE = "tinh";
@@ -61,7 +62,7 @@ export class ServiceName {
   public static MAPLAYERGROUP = "maplayergroup";
   public static MCATEGORY = "categories";
   public static PROJECTION = "projection";
-  public static THIETLAPHETHONG = "setting";
+  public static THIETLAPHETHONG = "settings";
   public static OBJKEY = "objkey";
   public static OBJTYPES = "ObjTypes";
   public static OTYPEOPT = "otypeOpts";
