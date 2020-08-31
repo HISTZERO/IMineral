@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { MenuDanhMucToChuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
@@ -13,8 +16,6 @@ import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochu
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {TrangThaiEnum} from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 
 @Component({
@@ -134,11 +135,11 @@ export class DmTochucListComponent implements OnInit {
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
-    const pageSize: any = await this.thietlapFacadeService
-    .getThietLapHeThongService()
-    .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
-    if (pageSize) {
-      this.settingsCommon.pageSettings.pageSize = +pageSize;
+    const dataSetting: any = await this.thietlapFacadeService
+      .getThietLapHeThongService()
+      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+    if (dataSetting) {
+      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }

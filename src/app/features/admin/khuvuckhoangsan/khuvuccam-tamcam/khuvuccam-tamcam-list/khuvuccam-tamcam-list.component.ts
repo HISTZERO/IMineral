@@ -104,13 +104,14 @@ export class KhuvuccamTamcamListComponent implements OnInit {
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
-    const pageSize: any = await this.thietlapFacadeService
+    const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.listPageSize });
-    this.pageSize = pageSize;
-    if (pageSize) {
-      this.settingsCommon.pageSettings.pageSize = +pageSize;
+      .getByid(ThietLapHeThong.listPageSize ).toPromise();
+    if (dataSetting) {
+      this.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
+      this.pageSize = 10;
       this.settingsCommon.pageSettings.pageSize = 10;
     }
     // Gọi hàm lấy dữ liệu khu vực cấm/tạm cấm
