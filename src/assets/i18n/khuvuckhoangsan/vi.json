@@ -189,5 +189,12 @@
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
     "diadiemRequired": "Địa điểm không được để trống",
     "dientichIsNumber": "Diện tích phải là kiểu số"
+  },
+  "khuvuctoado": {
+    "titleList": "Danh sách tọa độ",
+    "sohieu": "Số hiệu",
+    "toadox": "Tọa độ x",
+    "toadoy": "Tọa độ y",
+    "loaikhuvuc": "Loại khu vực"
   }
 }
