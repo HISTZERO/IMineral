@@ -140,7 +140,14 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
+    this.getAllKhuVucDuTruKhoangSan();
+  }
 
+  /**
+   * CHuyển hướng đến trang chi tiết
+   */
+  public detailItem() {
+    
   }
 
   /**

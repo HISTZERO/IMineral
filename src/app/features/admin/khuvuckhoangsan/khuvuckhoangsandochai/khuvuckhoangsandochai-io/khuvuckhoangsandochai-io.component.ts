@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
@@ -99,6 +99,10 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvucRequired},
+      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiemRequired},
+      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieuRequired},
+      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientichIsNumber},
     };
   }
 
@@ -127,16 +131,16 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
   formInit() {
     this.kvKhoangSanDocHaiIOForm = this.formBuilder.group({
       sohieu: [""],
-      tenkhuvuc: [""],
-      diadiem: [""],
-      dientich: [""],
+      tenkhuvuc: ["", Validators.required],
+      diadiem: ["", Validators.required],
+      dientich: ["", Validators.pattern("^[0-9-+]+$")],
       donvidientich: [""],
       mota: [""],
       doituongloaihinh: [""],
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
-      hequychieu: [""]
+      hequychieu: ["", Validators.required]
     });
   }
 

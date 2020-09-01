@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
@@ -108,6 +108,11 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.tenkhuvucRequired},
+      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.diadiemRequired},
+      maloaihinh: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhRequired},
+      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuRequired},
+      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.dientichIsNumber},
     };
   }
 
@@ -137,12 +142,12 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   formInit() {
     this.kvCamTamCamIOForm = this.formBuilder.group({
       sohieu: [""],
-      tenkhuvuc: [""],
-      diadiem: [""],
-      dientich: [""],
+      tenkhuvuc: ["", Validators.required],
+      diadiem: ["", Validators.required],
+      dientich: ["", Validators.pattern("^[0-9-+]+$")],
       donvidientich: [""],
       mota: [""],
-      maloaihinh: [""],
+      maloaihinh: ["", Validators.required],
       loaihinhcam: [""],
       lydocam: [""],
       loaikhoangsan: [""],
@@ -151,7 +156,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
       thoihancam: [""],
       ngaybd: [""],
       ngaykt: [""],
-      hequychieu: [""]
+      hequychieu: ["", Validators.required]
     });
   }
 

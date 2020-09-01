@@ -29,6 +29,7 @@ import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckh
 import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
 import { KhuvucdutrukhoangsanListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-list/khuvucdutrukhoangsan-list.component";
 import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
+import { KhuvucdutrukhoangsanChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-chitiet/khuvucdutrukhoangsan-chitiet.component";
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckh
     KhuvuctoadoListComponent,
     ThongtinkhuvuckhoangsanComponent,
     KhuvucdutrukhoangsanListComponent,
-    KhuvucdutrukhoangsanIoComponent
+    KhuvucdutrukhoangsanIoComponent,
+    KhuvucdutrukhoangsanChitietComponent
   ],
   exports: [
     KhuvuccamTamcamChitietComponent,

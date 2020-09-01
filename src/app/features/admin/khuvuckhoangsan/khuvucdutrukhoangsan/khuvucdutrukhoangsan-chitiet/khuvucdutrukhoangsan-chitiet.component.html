@@ -14,46 +14,46 @@
             <div class="row" *ngIf="obj">
               <div class="col-lg-6 col-sm-12">
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvuc' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvuc' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.tenkhuvuc }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.sohieu' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.sohieu' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.sohieu }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiem' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiem' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.diadiem }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientich' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientich' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.dientich }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.donvidientich' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.donvidientich' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.donvidientich }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieu' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieu' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.hequychieu }}</strong></label>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12">
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.loaikhoangsan' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsan' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.loaikhoangsan }}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label
-                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.soquyetdinh' | translate}}:</label>
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.soquyetdinh' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{obj.soquyetdinh}}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.ngayquyetdinh' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.ngayquyetdinh' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.ngayquyetdinh}}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.mota' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.mota' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.mota }}</strong></label>
                 </div>
               </div>
@@ -64,12 +64,12 @@
     </div>
     <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end" style="width: 600px">
       <div class="p-2 bg-primary text-white mat-sidenav-title">
-        <button class="btn btn-sm btn-light" (click)="closeKhuVucKhoangSanDocHaiIOSidebar()">
+        <button class="btn btn-sm btn-light" (click)="closeKhuVucDuTruKhoangSanIOSidebar()">
           <i class="fad fa-chevron-double-right"></i>
         </button>
         <span style="vertical-align: middle;" class="ml-3">{{matSidenavService.sidenavTitle}}</span>
       </div>
-      <template #compKvKhoangSanDocHaiIO></template>
+      <template #compKvDuTruKhoangSanIO></template>
     </mat-sidenav>
   </mat-sidenav-content>
 </mat-sidenav-container>

@@ -71,6 +71,10 @@
                            (click)="editItemKhuVucDuTruKhoangSan(data.idkhuvuc)">
                             <i class="far fa-edit"></i>
                           </button>
+                          <button class="btn btn-sm btn-info" title="{{ 'COMMON.default.detail' | translate }}"
+                            (click)="detailItem(data.idkhuvuc)">
+                            <i class="fal fa-ellipsis-h"></i>
+                          </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
                             (click)="deleteItemKhuVucDuTruKhoangSan(data)">
                             <i class="far fa-trash"></i>

@@ -5,8 +5,8 @@ import { TranslateService } from "@ngx-translate/core";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
 import { KhuvuccamTamcamIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-io/khuvuccam-tamcam-io.component";
-import { OutputKhuVucCamTamCamModel } from "../../../../../models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
-import { KhuVucKhoangSanFacadeService } from "../../../../../services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
+import { OutputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
+import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 
 @Component({
   selector: 'app-khuvuccam-tamcam-chitiet',

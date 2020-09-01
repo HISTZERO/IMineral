@@ -111,7 +111,12 @@
     "thoihancamPlaceholder": "Nhập thời hạn cấm",
     "ngaybdPlaceholder": "DD-MM-YYY",
     "ngayktPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "maloaihinhRequired": "Loại hình không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   },
   "khuvuckhoangsandochai": {
     "titleList": "Danh sách khu vực khoáng sản độc hại",
@@ -139,7 +144,11 @@
     "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
     "soquyetdinhPlaceholder": "Nhập số quyết định",
     "ngayquyetdinhPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   },
   "khuvucdutrukhoangsan": {
     "titleList": "Danh sách khu vực dự trữ khoáng sản",
@@ -167,6 +176,10 @@
     "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
     "soquyetdinhPlaceholder": "Nhập số quyết định",
     "ngayquyetdinhPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   }
 }
