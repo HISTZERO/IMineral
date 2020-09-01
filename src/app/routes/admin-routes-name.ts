@@ -92,6 +92,8 @@ export class AdminRoutingName {
   public static khuvuckhoangsandochaiUri = "khuvuckhoangsandochai";
   public static khuvuckhongdaugiaUri = "khuvuckhongdaugia";
   public static thongtinkhuvuckhoangsanUri = "thongtinkhuvuckhoangsan";
+  public static khuvucdutrukhoangsanUri = "khuvucdutrukhoangsan";
+
   // 1.12 Routes phần điểm quặng/mỏ quặng
   public static diemquangUri = "diemquang";
 }

@@ -11,21 +11,21 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import { OutputKhuVucKhoangSanDocHaiModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhoangsandochai.model";
-import { MenuKhuVucKhoangSanDocHai } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsandochai";
-import { KhuvuckhoangsandochaiIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-io/khuvuckhoangsandochai-io.component";
+import { OutputKhuVucDuTruKhoangSanModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdutrukhoangsan.model";
+import { MenuKhuVucDuTruKhoangSan } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvucdutrukhoangsan";
+import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
 
 @Component({
-  selector: 'app-khuvuckhoangsandochai-list',
-  templateUrl: './khuvuckhoangsandochai-list.component.html',
-  styleUrls: ['./khuvuckhoangsandochai-list.component.scss']
+  selector: 'app-khuvucdutrukhoangsan-list',
+  templateUrl: './khuvucdutrukhoangsan-list.component.html',
+  styleUrls: ['./khuvucdutrukhoangsan-list.component.scss']
 })
-export class KhuvuckhoangsandochaiListComponent implements OnInit {
+export class KhuvucdutrukhoangsanListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridKvKhoangSanDocHai", { static: false }) public gridKvKhoangSanDocHai: GridComponent;
+  @ViewChild("gridKvDuTruKhoangSan", { static: false }) public gridKvDuTruKhoangSan: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compKvKhoangSanDocHaiIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("compKvDuTruKhoangSanIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   // Chứa thuộc tính form
   public formSearch: FormGroup;
@@ -33,20 +33,20 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-  // Chứa danh sách Khu vực Khoáng sản độc hại
-  public listKvKhoangSanDocHai: Observable<DataStateChangeEventArgs>;
+  // Chứa danh sách Khu vực dự trữ khoáng sản
+  public listKvDuTruKhoangSan: Observable<DataStateChangeEventArgs>;
 
-  // Chứa service khu vực khoáng sản độc hại
-  public khuVucKhoangSanDocHai: any;
+  // Chứa service khu vực dự trữ khoáng sản
+  public khuVucDuTruKhoangSan: any;
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputKhuVucKhoangSanDocHaiModel;
+  public selectedItem: OutputKhuVucDuTruKhoangSanModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
   // Chứa menu item trên subheader
-  public navArray = MenuKhuVucKhoangSanDocHai;
+  public navArray = MenuKhuVucDuTruKhoangSan;
 
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
@@ -64,7 +64,7 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     private translate: TranslateService,
     public formBuilder: FormBuilder,
   ) {
-    this.khuVucKhoangSanDocHai = this.khuvuckhoangsanFacadeService.getKhuVucKhoangSanDocHaiService();
+    this.khuVucDuTruKhoangSan = this.khuvuckhoangsanFacadeService.getKhuVucDuTruKhoangSanService();
    }
 
   async ngOnInit() {
@@ -105,8 +105,8 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
       this.pageSize = 10;
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu khu vực khoáng sản độc hại
-    await this.getAllKhuVucKhoangSanDocHai();
+    // Gọi hàm lấy dữ liệu khu vực dự trữ khoáng sản
+    await this.getAllKhuVucDuTruKhoangSan();
   }
 
   /**
@@ -116,16 +116,16 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     this.formSearch.reset({
       Keyword: "",
     });
-    this.getAllKhuVucKhoangSanDocHai();
+    this.getAllKhuVucDuTruKhoangSan();
   }
 
   /**
-   * Hàm lấy dữ liệu khu vực khoáng sản độc hại
+   * Hàm lấy dữ liệu khu vực dự trữ khoáng sản
    */
-  async getAllKhuVucKhoangSanDocHai(param: any = { PageNumber: 1, PageSize: -1 }) {
+  async getAllKhuVucDuTruKhoangSan(param: any = { PageNumber: 1, PageSize: -1 }) {
     const valueSearch: any = this.formSearch.value;
-    this.listKvKhoangSanDocHai = this.khuVucKhoangSanDocHai;
-    this.khuVucKhoangSanDocHai.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
+    this.listKvDuTruKhoangSan = this.khuVucDuTruKhoangSan;
+    this.khuVucDuTruKhoangSan.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
   }
 
   /**
@@ -133,18 +133,18 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    * @param state
    */
   public dataStateChange(state: DataStateChangeEventArgs): void {
-    this.khuVucKhoangSanDocHai.getDataFromServer(state, this.formSearch.value);
+    this.khuVucDuTruKhoangSan.getDataFromServer(state, this.formSearch.value);
   }
 
   /**
    * Tìm kiếm nâng cao
    */
   public searchAdvance() {
-    this.getAllKhuVucKhoangSanDocHai();
+    this.getAllKhuVucDuTruKhoangSan();
   }
 
   /**
-   * Chuyển hướng đến trang chi tiết
+   * CHuyển hướng đến trang chi tiết
    */
   public detailItem() {
     
@@ -163,29 +163,29 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemKhuVucKhoangSanDocHai(id: any) {
-    // Lấy dữ liệu khu vực khoáng sản độc hại theo id
+  async editItemKhuVucDuTruKhoangSan(id: any) {
+    // Lấy dữ liệu khu vực dự trữ khoáng sản theo id
     const dataItem: any = await this.khuvuckhoangsanFacadeService
-      .getKhuVucKhoangSanDocHaiService()
+      .getKhuVucDuTruKhoangSanService()
       .getByid(id).toPromise();
-    await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleEdit);
-    await this.matSidenavService.setContentComp(KhuvuckhoangsandochaiIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.titleEdit);
+    await this.matSidenavService.setContentComp(KhuvucdutrukhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openKhuVucKhoangSanDocHaiIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleAdd);
-    this.matSidenavService.setContentComp(KhuvuckhoangsandochaiIoComponent, "new");
+  public openKhuVucDuTruKhoangSanIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.titleAdd);
+    this.matSidenavService.setContentComp(KhuvucdutrukhoangsanIoComponent, "new");
     this.matSidenavService.open();
   }
 
   /**
    * Hàm đóng sidenav
    */
-  public closeKhuVucKhoangSanDocHaiIOSidenav() {
+  public closeKhuVucDuTruKhoangSanIOSidenav() {
     this.matSidenavService.close();
   }
 
@@ -193,13 +193,13 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemKhuVucKhoangSanDocHai(data) {
+  async deleteItemKhuVucDuTruKhoangSan(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.khuvuckhoangsanFacadeService
-      .getKhuVucKhoangSanDocHaiService()
+      .getKhuVucDuTruKhoangSanService()
       .checkBeDeleted(this.selectedItem.idkhuvuc);
     this.canBeDeletedCheck(canDelete);
   }
@@ -221,16 +221,16 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.contentDelete,
+      this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.contentDelete,
       this.selectedItem.tenkhuvuc
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
           await this.khuvuckhoangsanFacadeService
-            .getKhuVucKhoangSanDocHaiService()
+            .getKhuVucDuTruKhoangSanService()
             .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
             .subscribe(
-              () => this.getAllKhuVucKhoangSanDocHai(),
+              () => this.getAllKhuVucDuTruKhoangSan(),
               (error: HttpErrorResponse) => {
                 this.commonService.showeNotiResult(error.message, 2000);
               },

@@ -4,21 +4,19 @@ import { TranslateService } from "@ngx-translate/core";
 
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
-import { KhuvuckhoangsandochaiIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-io/khuvuckhoangsandochai-io.component";
+import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
 
 @Component({
-  selector: 'app-khuvuckhoangsandochai-chitiet',
-  templateUrl: './khuvuckhoangsandochai-chitiet.component.html',
-  styleUrls: ['./khuvuckhoangsandochai-chitiet.component.scss']
+  selector: 'app-khuvucdutrukhoangsan-chitiet',
+  templateUrl: './khuvucdutrukhoangsan-chitiet.component.html',
+  styleUrls: ['./khuvucdutrukhoangsan-chitiet.component.scss']
 })
-export class KhuvuckhoangsandochaiChitietComponent implements OnInit {
+export class KhuvucdutrukhoangsanChitietComponent implements OnInit {
 
   @Input() public obj: any;
   @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compKvKhoangSanDocHaiIO", { read: ViewContainerRef, static: true })
-
-  public content: ViewContainerRef;
+  @ViewChild("compKvDuTruKhoangSanIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   public dvqlData: any;
   public dvql: any;
   public tenHeToaDo: any;
@@ -36,28 +34,28 @@ export class KhuvuckhoangsandochaiChitietComponent implements OnInit {
   }
 
   async ngOnInit() {
-     // Get all langs
-     this.dataTranslate = await this.translate
-     .getTranslation(this.translate.getDefaultLang())
-     .toPromise();
+    // Get all langs
+    this.dataTranslate = await this.translate
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
 
-   }
+  }
 
   /**
    * hàm chuyển đến chế độ sửa
    */
   toEditMode() {
     // Cấu hình sidenav io
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleEdit);
-    this.matSidenavService.setContentComp( KhuvuckhoangsandochaiIoComponent,"edit", this.obj );
+    this.matSidenavService.setContentComp(KhuvucdutrukhoangsanIoComponent, "edit", this.obj);
     this.matSidenavService.open();
   }
 
   /**
-   * Hàm close SideNav khu vực khoáng sản độc hại
+   * Hàm close SideNav khu vực dự trữ khoáng sản
    */
-  public closeKhuVucKhoangSanDocHaiIOSidebar() {
+  public closeKhuVucDuTruKhoangSanIOSidebar() {
     this.matSidenavService.close();
   }
 
