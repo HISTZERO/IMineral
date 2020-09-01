@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild, EventEmitter, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Output, ViewChild, EventEmitter, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -14,6 +14,10 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
   styleUrls: ['./khuvuccam-tamcam-chitiet.component.scss']
 })
 export class KhuvuccamTamcamChitietComponent implements OnInit {
+  @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  
   // Chứa id khu vực cấm, tạm cấm
   public idKhuVuc: string;
 
@@ -53,4 +57,23 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
         this.obj = res;
       });
   }
+
+  /**
+   * hàm chuyển đến chế độ sửa
+   */
+  toEditMode() {
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.titleEdit);
+    this.matSidenavService.setContentComp( KhuvuccamTamcamIoComponent,"edit", this.obj );
+    this.matSidenavService.open();
+  }
+
+  /**
+   * Hàm close SideNav khu vực cấm tạm cấm
+   */
+  public closeKhuVucCamTamCamIOSidebar() {
+    this.matSidenavService.close();
+  }
+
 }

@@ -13,14 +13,14 @@
           </div>
           <div class="card-body">
             <mat-tab-group mat-stretch-tabs [animationDuration]="" [selectedIndex] = "selectedDefaultTab" #khuVucKhoangSanTab (selectedIndexChange)="khuVucKhoangSanTabChange($event)">
-              <mat-tab label="Thông tin chung">
+              <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.thongtinchung' | translate }}">
                 <ng-template matTabContent >
                   <div #detailComponent></div>
                 </ng-template>
               </mat-tab>
-              <mat-tab label="Tọa độ">
+              <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.toado' | translate }}">
                 <ng-template matTabContent>
-                  <app-dkt-hosoktct></app-dkt-hosoktct>
+                  <app-khuvuctoado-list></app-khuvuctoado-list>
                 </ng-template>
               </mat-tab>
             </mat-tab-group>

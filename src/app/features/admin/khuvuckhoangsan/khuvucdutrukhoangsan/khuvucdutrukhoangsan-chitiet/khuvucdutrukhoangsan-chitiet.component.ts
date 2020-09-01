@@ -16,9 +16,7 @@ export class KhuvucdutrukhoangsanChitietComponent implements OnInit {
   @Input() public obj: any;
   @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compKvDuTruKhoangSanIO", { read: ViewContainerRef, static: true })
-
-  public content: ViewContainerRef;
+  @ViewChild("compKvDuTruKhoangSanIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   public dvqlData: any;
   public dvql: any;
   public tenHeToaDo: any;
@@ -36,21 +34,21 @@ export class KhuvucdutrukhoangsanChitietComponent implements OnInit {
   }
 
   async ngOnInit() {
-     // Get all langs
-     this.dataTranslate = await this.translate
-     .getTranslation(this.translate.getDefaultLang())
-     .toPromise();
+    // Get all langs
+    this.dataTranslate = await this.translate
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
 
-   }
+  }
 
   /**
    * hàm chuyển đến chế độ sửa
    */
   toEditMode() {
     // Cấu hình sidenav io
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.titleEdit);
-    this.matSidenavService.setContentComp( KhuvucdutrukhoangsanIoComponent,"edit", this.obj );
+    this.matSidenavService.setContentComp(KhuvucdutrukhoangsanIoComponent, "edit", this.obj);
     this.matSidenavService.open();
   }
 

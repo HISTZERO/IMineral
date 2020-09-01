@@ -1,4 +1,8 @@
 {
+  "default": {
+    "thongtinchung": "THÔNG TIN CHUNG",
+    "toado": "TỌA ĐỘ"
+  },
   "khuvucdaugia": {
     "titleList": "Danh sách khu vực dấu giá",
     "titleAdd": "Thêm mới khu vực đấu giá",
