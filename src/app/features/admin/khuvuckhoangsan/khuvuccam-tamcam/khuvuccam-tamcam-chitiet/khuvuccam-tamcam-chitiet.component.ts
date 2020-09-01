@@ -14,11 +14,6 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
   styleUrls: ['./khuvuccam-tamcam-chitiet.component.scss']
 })
 export class KhuvuccamTamcamChitietComponent implements OnInit {
-
-  @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
-  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compTramKttvIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
   // Chứa id khu vực cấm, tạm cấm
   public idKhuVuc: string;
 
@@ -34,9 +29,12 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
     public commonFacadeService: CommonFacadeService,
     private translate: TranslateService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
-  ) { }
+  ) {
+    console.log("constructor - khuvuccam-tamcam-chitiet");
+  }
 
   async ngOnInit() {
+    console.log("ngOnInit - khuvuccam-tamcam-chitiet");
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -46,7 +44,7 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
   }
 
   /**
-   * Lấy dữ liệu 
+   * Lấy dữ liệu
    */
   async getDataKhuVucCamTamCamById() {
     await this.khuvuckhoangsanFacadeService
@@ -55,40 +53,4 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
         this.obj = res;
       });
   }
-
-  /**
-   * hàm chuyển đến chế độ sửa
-   */
-  toEditMode() {
-    // Cấu hình sidenav io
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.titleEdit);
-    this.matSidenavService.setContentComp(KhuvuccamTamcamIoComponent, "edit");
-    this.matSidenavService.open();
-  }
-
-  /**
-   * Hàm close SideNav khu vực cấm tạm cấm
-   */
-  public closeKhuVucCamTamCamIOSidebar() {
-    this.matSidenavService.close();
-  }
-
-
-  /**
-   * Hàm refresh lại dữ liệu công trình
-   */
-  public refreshData() {
-    this.getInformation.emit();
-  }
-
-  /**
-   * Call method
-   * @param methodName
-   */
-  doFunction(methodName) {
-    this[methodName]();
-  }
-
-
 }
