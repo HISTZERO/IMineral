@@ -1,60 +1,60 @@
 <div class="pt-3 pb-4">
-    <form [formGroup]="kvKhoangSanDocHaiIOForm" class="pt-toolbar">
+    <form [formGroup]="kvDuTruKhoangSanIOForm" class="pt-toolbar">
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{ "KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvuc" | translate }}
+                class="col-sm-3 col-form-label text-right">{{ "KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvuc" | translate }}
                 <small>(*)</small></label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="tenkhuvuc"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvucPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvucPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.tenkhuvuc" class="alert-danger">{{formErrors.tenkhuvuc}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.sohieu" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.sohieu" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="sohieu"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.sohieuPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.sohieuPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.sohieu" class="alert-danger">{{formErrors.sohieu}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiem" | translate}} <small>(*)</small></label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiem" | translate}} <small>(*)</small></label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="diadiem"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiemPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiemPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.diadiem" class="alert-danger">{{formErrors.diadiem}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientich" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientich" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="dientich"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientichPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientichPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.dientich" class="alert-danger">{{formErrors.dientich}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.donvidientich" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.donvidientich" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="donvidientich"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.donvidientichPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.donvidientichPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieu" | translate}} <small>(*)</small></label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieu" | translate}} <small>(*)</small></label>
             <div class="col-sm-9">
                 <mat-select class="form-control"
-                    placeholder="{{ 'KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieuPlaceholder' | translate }}"
+                    placeholder="{{ 'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieuPlaceholder' | translate }}"
                     formControlName="hequychieu" *ngIf="dataTranslate">
                     <mat-option value="">
-                        {{ "KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieuPlaceholder" | translate }}
+                        {{ "KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieuPlaceholder" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
                         {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
@@ -65,47 +65,47 @@
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.mota" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.mota" | translate}}</label>
             <div class="col-sm-9">
                 <textarea class="form-control" formControlName="mota"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.motaPlaceholder' | translate}}"></textarea>
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.motaPlaceholder' | translate}}"></textarea>
                 <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinh" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.doituongloaihinh" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="doituongloaihinh"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.doituongloaihinhPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.doituongloaihinhPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.doituongloaihinh" class="alert-danger">{{formErrors.doituongloaihinh}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.loaikhoangsan" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsan" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="loaikhoangsan"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.loaikhoangsanPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsanPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.loaikhoangsan" class="alert-danger">{{formErrors.loaikhoangsan}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.soquyetdinh" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.soquyetdinh" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="soquyetdinh"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.soquyetdinhPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.soquyetdinhPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.soquyetdinh" class="alert-danger">{{formErrors.soquyetdinh}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuckhoangsandochai.ngayquyetdinh" | translate}}</label>
+                class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvucdutrukhoangsan.ngayquyetdinh" | translate}}</label>
             <div class="col-sm-9">
                 <input class="form-control" formControlName="ngayquyetdinh" [owlDateTimeTrigger]="dt1"
                     [owlDateTime]="dt1"
-                    placeholder="{{'KHUVUCKHOANGSAN.khuvuckhoangsandochai.ngayquyetdinhPlaceholder' | translate}}" />
+                    placeholder="{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.ngayquyetdinhPlaceholder' | translate}}" />
                 <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
                 <span *ngIf="formErrors.ngayquyetdinh" class="alert-danger">{{formErrors.ngayquyetdinh}}</span>
             </div>
@@ -128,7 +128,7 @@
                             <i class="far fa-sync-alt"></i>
                             {{ "COMMON.default.refresh" | translate }}
                         </button>
-                        <button class="btn btn-danger float-right mr-3" (click)="closeKhuVucKhoangSanIOSidenav()">
+                        <button class="btn btn-danger float-right mr-3" (click)="closeKhuVucDuTruKhoangSanIOSidenav()">
                             <i class="far fa-times-circle"></i>
                             {{ "COMMON.default.cancel" | translate }}
                         </button>

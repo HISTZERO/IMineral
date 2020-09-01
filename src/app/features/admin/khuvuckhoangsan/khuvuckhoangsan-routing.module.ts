@@ -6,7 +6,8 @@ import { KhuvucdaugiaListComponent } from 'src/app/features/admin/khuvuckhoangsa
 import { KhuvuckhongdaugiaListComponent } from 'src/app/features/admin/khuvuckhoangsan/khuvuckhongdaugia/khuvuckhongdaugia-list/khuvuckhongdaugia-list.component';
 import { KhuvuckhoangsandochaiListComponent } from 'src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-list/khuvuckhoangsandochai-list.component';
 import { KhuvuccamTamcamListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-list/khuvuccam-tamcam-list.component";
-import { ThongtinkhuvuckhoangsanComponent } from "./thongtinkhuvuckhoangsan/thongtinkhuvuckhoangsan.component";
+import { ThongtinkhuvuckhoangsanComponent } from "src/app/features/admin/khuvuckhoangsan/thongtinkhuvuckhoangsan/thongtinkhuvuckhoangsan.component";
+import { KhuvucdutrukhoangsanListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-list/khuvucdutrukhoangsan-list.component";
 
 
 const routes: Routes = [
@@ -21,6 +22,7 @@ const routes: Routes = [
           {path: AdminRoutingName.khuvuckhongdaugiaUri, component: KhuvuckhongdaugiaListComponent},
           {path: AdminRoutingName.khuvuckhoangsandochaiUri, component: KhuvuckhoangsandochaiListComponent},
           {path: AdminRoutingName.thongtinkhuvuckhoangsanUri, component: ThongtinkhuvuckhoangsanComponent},
+          {path: AdminRoutingName.khuvucdutrukhoangsanUri, component: KhuvucdutrukhoangsanListComponent},
         ]
       }
     ]

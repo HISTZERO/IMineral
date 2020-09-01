@@ -5,7 +5,6 @@ import { ObjkeyService } from "src/app/services/admin/common/objkey.service";
 import { GmediaService } from "src/app/services/admin/common/gmedia.service";
 import { HighchartService } from "src/app/services/admin/common/highchart.service";
 import { ObjOptValueService } from "src/app/services/admin/common/obj-opt-value.service";
-import { HequychieuService } from "src/app/services/admin/common/hequychieu.service";
 
 @Injectable({
   providedIn: "root"
@@ -29,9 +28,5 @@ export class CommonFacadeService {
 
   public getObjOptValueService() {
     return new ObjOptValueService(this.httpClient);
-  }
-
-  public getHeQuyChieuService() {
-    return new HequychieuService(this.httpClient);
   }
 }

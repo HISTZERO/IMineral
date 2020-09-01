@@ -11,18 +11,7 @@
               <div class="card-body">
                 <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
-                  <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh" | translate}}:</label>
-                    <mat-select class="form-control" formControlName="Maloaihinh" placeholder="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhPlaceholder' | translate }}" *ngIf="dataTranslate">
-                      <mat-option value="">
-                        {{ "KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhPlaceholder" | translate }}
-                      </mat-option>
-                      <mat-option *ngFor="let lh of loaiHinh" [value]="lh.id">
-                        {{lh.name}}
-                      </mat-option>
-                    </mat-select>
-                  </div>
-                  <div class="col-xl-2 col-lg-3 col-md-3 col-sm-4 form-group">
+                  <div class="col-xl-3 col-lg-3 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"COMMON.default.key" | translate}}:</label>
                     <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
                   </div>
@@ -51,10 +40,10 @@
                 <h3>
                   <div class="row">
                     <div class="col-md-6 mb-sm-1">
-                      <span class="title">{{ "KHUVUCKHOANGSAN.khuvuccamtamcam.titleList" | translate }}</span>
+                      <span class="title">{{ "KHUVUCKHOANGSAN.khuvucdutrukhoangsan.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-6">
-                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openKhuVucCamTamCamIOSidenav()">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openKhuVucDuTruKhoangSanIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
@@ -67,23 +56,19 @@
                 </h3>
               </div>
               <div class="card-body" >
-                <ejs-grid #gridKvCamTamCam *ngIf="listKvCamTamCam" [dataSource]="listKvCamTamCam | async"
+                <ejs-grid #gridKvDuTruKhoangSan *ngIf="listKvDuTruKhoangSan" [dataSource]="listKvDuTruKhoangSan | async"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings"  class="table-striped" [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                    <e-column field="tenkhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.tenkhuvuc' | translate }}"></e-column>
-                    <e-column field="diadiem" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.diadiem' | translate }}"></e-column>
-                    <e-column field="loaikhoangsan" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.loaikhoangsan' | translate }}"></e-column>
-                    <e-column field="maloaihinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh' | translate }}">
-                      <ng-template #template let-data>
-                        {{ data.maloaihinh | getNameFileConstant: loaiHinh}}
-                      </ng-template>
-                    </e-column>
+                    <e-column field="tenkhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvuc' | translate }}"></e-column>
+                    <e-column field="diadiem" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiem' | translate }}"></e-column>
+                    <e-column field="loaikhoangsan" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsan' | translate }}"></e-column>
+                    <e-column field="doituongloaihinh" headerText="{{ 'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.doituongloaihinh' | translate }}"></e-column>
                     <e-column field="idkhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                           (click)="editItemKhuVucCamTamCam(data.idkhuvuc)">
+                           (click)="editItemKhuVucDuTruKhoangSan(data.idkhuvuc)">
                             <i class="far fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-info" title="{{ 'COMMON.default.detail' | translate }}"
@@ -91,7 +76,7 @@
                             <i class="fal fa-ellipsis-h"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                            (click)="deleteItemKhuVucCamTamCam(data)">
+                            (click)="deleteItemKhuVucDuTruKhoangSan(data)">
                             <i class="far fa-trash"></i>
                           </button>
                         </div>
@@ -107,15 +92,16 @@
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
         style="width: 700px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
-          <button class="btn btn-sm btn-light" (click)="closeKhuVucCamTamCamIOSidenav()">
+          <button class="btn btn-sm btn-light" (click)="closeKhuVucDuTruKhoangSanIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
           <span style="vertical-align: middle;"
             class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
-        <template #compKvCamTamCamIO> </template>
+        <template #compKvDuTruKhoangSanIO> </template>
       </mat-sidenav>
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
+
 

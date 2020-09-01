@@ -5,6 +5,7 @@ import { KhuVucDauGiaService } from "src/app/services/admin/khuvuckhoangsan/khuv
 import { KhuVucKhongDauGiaService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhongdaugia.service";
 import { KhuvuccamTamcamService } from "src/app/services/admin/khuvuckhoangsan/khuvuccam-tamcam.service";
 import { KhuvuckhoangsandochaiService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsandochai.service";
+import { KhuvucdutrukhoangsanService } from "src/app/services/admin/khuvuckhoangsan/khuvucdutrukhoangsan.service";
 
 @Injectable({
   providedIn: "root",
@@ -31,5 +32,10 @@ export class KhuVucKhoangSanFacadeService {
   // Khu vực khoáng sản độc hại
   public getKhuVucKhoangSanDocHaiService() {
     return new KhuvuckhoangsandochaiService(this.httpClient);
+  }
+
+  // Khu vực dữ trữ khoáng sản 
+  public getKhuVucDuTruKhoangSanService() {
+    return new KhuvucdutrukhoangsanService(this.httpClient);
   }
 }

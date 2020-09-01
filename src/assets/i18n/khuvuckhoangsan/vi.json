@@ -1,4 +1,8 @@
 {
+  "default": {
+    "thongtinchung": "THÔNG TIN CHUNG",
+    "toado": "TỌA ĐỘ"
+  },
   "khuvucdaugia": {
     "titleList": "Danh sách khu vực dấu giá",
     "titleAdd": "Thêm mới khu vực đấu giá",
@@ -115,7 +119,12 @@
     "thoihancamPlaceholder": "Nhập thời hạn cấm",
     "ngaybdPlaceholder": "DD-MM-YYY",
     "ngayktPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "maloaihinhRequired": "Loại hình không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   },
   "khuvuckhoangsandochai": {
     "titleList": "Danh sách khu vực khoáng sản độc hại",
@@ -139,10 +148,46 @@
     "dientichPlaceholder": "Nhập diện tích",
     "donvidientichPlaceholder": "Nhập đơn vị diện tích",
     "motaPlaceholder": "Mô tả",
-    "doituongloaihinhPlaceholder": "---Chọn đối tượng loại hình---",
+    "doituongloaihinhPlaceholder": "Nhập đối tượng loại hình",
     "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
     "soquyetdinhPlaceholder": "Nhập số quyết định",
     "ngayquyetdinhPlaceholder": "DD-MM-YYY",
-    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---"
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
+  },
+  "khuvucdutrukhoangsan": {
+    "titleList": "Danh sách khu vực dự trữ khoáng sản",
+    "titleAdd": "Thêm mới khu vực dự trữ khoáng sản",
+    "titleEdit": "Sửa dữ liệu khu vực dự trữ khoáng sản",
+    "contentDelete": "Khu vực dự trữ khoáng sản: ",
+    "sohieu": "Số hiệu",
+    "tenkhuvuc": "Tên khu vực",
+    "diadiem": "Địa điểm",
+    "dientich": "Diện tích",
+    "donvidientich": "Đơn vị diện tích",
+    "mota": "Mô tả",
+    "doituongloaihinh": "Đối tượng loại hình",
+    "loaikhoangsan": "Loại khoáng sản",
+    "soquyetdinh": "Số quyết định",
+    "ngayquyetdinh": "Ngày quyết định",
+    "hequychieu": "Hệ quy chiếu",
+    "sohieuPlaceholder": "Nhập số hiệu",
+    "tenkhuvucPlaceholder": "Nhập tên khu vực",
+    "diadiemPlaceholder": "Nhập địa điểm",
+    "dientichPlaceholder": "Nhập diện tích",
+    "donvidientichPlaceholder": "Nhập đơn vị diện tích",
+    "motaPlaceholder": "Mô tả",
+    "doituongloaihinhPlaceholder": "Nhập đối tượng loại hình",
+    "loaikhoangsanPlaceholder": "Nhập loại khoáng sản",
+    "soquyetdinhPlaceholder": "Nhập số quyết định",
+    "ngayquyetdinhPlaceholder": "DD-MM-YYY",
+    "hequychieuPlaceholder": "---Chọn hệ quy chiếu---",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   }
 }

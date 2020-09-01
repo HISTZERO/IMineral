@@ -4,24 +4,23 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
 
-import { InputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
+import { InputKhuVucDuTruKhoangSanModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdutrukhoangsan.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 
 @Component({
-  selector: 'app-khuvuccam-tamcam-io',
-  templateUrl: './khuvuccam-tamcam-io.component.html',
-  styleUrls: ['./khuvuccam-tamcam-io.component.scss']
+  selector: 'app-khuvucdutrukhoangsan-io',
+  templateUrl: './khuvucdutrukhoangsan-io.component.html',
+  styleUrls: ['./khuvucdutrukhoangsan-io.component.scss']
 })
-export class KhuvuccamTamcamIoComponent implements OnInit {
+export class KhuvucdutrukhoangsanIoComponent implements OnInit {
 
-  // Chứa dữ liệu Form khu vực cấm - tạm cấm
-  public kvCamTamCamIOForm: FormGroup;
+  // Chứa dữ liệu Form khu vực dự trữ khoáng sản
+  public kvDuTruKhoangSanIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -33,15 +32,12 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputKhuVucCamTamCamModel;
+  public inputModel: InputKhuVucDuTruKhoangSanModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
-
-  // Chứa dữ liệu mã loại hình
-  public maLoaiHinh = MaLoaiHinh;
-
-  // Chứa danh sách hệ quy chiếu
+  
+  // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
   // error message
@@ -56,15 +52,10 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     dientich: "",
     donvidientich: "",
     mota: "",
-    maloaihinh: "",
-    loaihinhcam: "",
-    lydocam: "",
+    doituongloaihinh: "",
     loaikhoangsan: "",
     soquyetdinh: "",
     ngayquyetdinh: "",
-    thoihancam: "",
-    ngaybd: "",
-    ngaykt: "",
     hequychieu: ""
   };
 
@@ -108,11 +99,10 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.tenkhuvucRequired},
-      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.diadiemRequired},
-      maloaihinh: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhRequired},
-      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieuRequired},
-      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuccamtamcam.dientichIsNumber},
+      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvucRequired},
+      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiemRequired},
+      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieuRequired},
+      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientichIsNumber},
     };
   }
 
@@ -126,12 +116,11 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     this.allHeQuyChieu = allHeQuyChieuData.items;
   }
 
-
   /**
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.inputModel = new InputKhuVucCamTamCamModel();
+    this.inputModel = new InputKhuVucDuTruKhoangSanModel();
     // check edit
     this.formOnEdit();
   }
@@ -140,22 +129,17 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.kvCamTamCamIOForm = this.formBuilder.group({
+    this.kvDuTruKhoangSanIOForm = this.formBuilder.group({
       sohieu: [""],
       tenkhuvuc: ["", Validators.required],
       diadiem: ["", Validators.required],
       dientich: ["", Validators.pattern("^[0-9-+]+$")],
       donvidientich: [""],
       mota: [""],
-      maloaihinh: ["", Validators.required],
-      loaihinhcam: [""],
-      lydocam: [""],
+      doituongloaihinh: [""],
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
-      thoihancam: [""],
-      ngaybd: [""],
-      ngaykt: [""],
       hequychieu: ["", Validators.required]
     });
   }
@@ -165,23 +149,18 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
-      this.kvCamTamCamIOForm.setValue({
+      this.kvDuTruKhoangSanIOForm.setValue({
         sohieu: this.obj.sohieu,
         tenkhuvuc: this.obj.tenkhuvuc,
         diadiem: this.obj.diadiem,
         dientich: this.obj.dientich,
         donvidientich: this.obj.donvidientich,
         mota: this.obj.mota,
-        maloaihinh: this.obj.maloaihinh,
-        loaihinhcam: this.obj.loaihinhcam,
-        lydocam: this.obj.lydocam,
+        doituongloaihinh: this.obj.doituongloaihinh,
         loaikhoangsan: this.obj.loaikhoangsan,
         soquyetdinh: this.obj.soquyetdinh,
         ngayquyetdinh: this.obj.ngayquyetdinh,
-        thoihancam: this.obj.thoihancam,
-        ngaybd: this.obj.ngaybd,
-        ngaykt: this.obj.ngaykt,
-        hequychieu: this.obj.hequychieu,
+        hequychieu: this.obj.hequychieu
       });
     }
   }
@@ -190,12 +169,12 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucCamTamCamService();
-    this.inputModel = this.kvCamTamCamIOForm.value;
+    const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucDuTruKhoangSanService();
+    this.inputModel = this.kvDuTruKhoangSanIOForm.value;
     // this.inputModel.ngaycap = this.datePipe.transform(this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucCamTamCam"),
+        (res) => this.matSidenavService.doParentFunction("getAllKhuVucDuTruKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -208,7 +187,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idkhuvuc = this.obj.idkhuvuc;
       kvKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucCamTamCam"),
+        (res) => this.matSidenavService.doParentFunction("getAllKhuVucDuTruKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -227,7 +206,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.kvCamTamCamIOForm.valid === true) {
+    if (this.kvDuTruKhoangSanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -238,22 +217,17 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.kvCamTamCamIOForm.reset({
+    this.kvDuTruKhoangSanIOForm.reset({
       sohieu: "",
       tenkhuvuc: "",
       diadiem: "",
       dientich: "",
       donvidientich: "",
       mota: "",
-      maloaihinh: "",
-      loaihinhcam: "",
-      lydocam: "",
+      doituongloaihinh: "",
       loaikhoangsan: "",
       soquyetdinh: "",
       ngayquyetdinh: "",
-      thoihancam: "",
-      ngaybd: "",
-      ngaykt: "",
       hequychieu: ""
     });
   }
@@ -264,7 +238,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.kvCamTamCamIOForm.valid === true) {
+    if (this.kvDuTruKhoangSanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -276,7 +250,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.kvCamTamCamIOForm,
+      this.kvDuTruKhoangSanIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -285,7 +259,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeKhuVucCamTamCamIOSidenav() {
+  public closeKhuVucDuTruKhoangSanIOSidenav() {
     this.matSidenavService.close();
   }
 
