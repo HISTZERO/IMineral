@@ -201,7 +201,7 @@ export class DiemquangListComponent implements OnInit {
       if (result === "confirm") {
         await this.diemQuangMoQuangFacadeService
           .getDiemMoService()
-          .deleteItem({ idmo: this.selectedItem.idmo })
+          .deleteItem({ iddiemmo: this.selectedItem.idmo })
           .subscribe(
             () => this.getAllDiemMo(),
             (error: HttpErrorResponse) => {
