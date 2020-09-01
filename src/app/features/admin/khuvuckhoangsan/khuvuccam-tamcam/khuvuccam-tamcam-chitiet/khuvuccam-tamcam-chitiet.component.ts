@@ -17,7 +17,7 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
   @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-  
+
   // Chứa id khu vực cấm, tạm cấm
   public idKhuVuc: string;
 
@@ -44,17 +44,18 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
     console.log(this.idKhuVuc);
-    this.getDataKhuVucCamTamCamById();
+    this.getAllKhuVucCamTamCam();
   }
 
   /**
    * Lấy dữ liệu
    */
-  async getDataKhuVucCamTamCamById() {
+  async getAllKhuVucCamTamCam() {
     await this.khuvuckhoangsanFacadeService
       .getKhuVucCamTamCamService()
       .getByid(this.idKhuVuc).subscribe(res => {
         this.obj = res;
+        this.getInformation.emit(res.tenkhuvuc);
       });
   }
 
@@ -75,5 +76,11 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
   public closeKhuVucCamTamCamIOSidebar() {
     this.matSidenavService.close();
   }
+
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName) {
+    this[methodName]();
+  }
+
 
 }
