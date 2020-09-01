@@ -29,17 +29,17 @@
       </div>
     </div> -->
     <div class="form-group row mx-0">
-      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.nguongocmo.thutu" | translate}}</label>
-      <div class="col-sm-8">
-        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.nguongocmo.thutuPlaceholder' | translate}}" />
-        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
-      </div>
-    </div>
-    <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.nguongocmo.mota" | translate}}</label>
       <div class="col-sm-8">
         <textarea class="form-control" formControlName="mota" placeholder="{{'DANHMUC.nguongocmo.motaPlaceholder' | translate}}"></textarea>
         <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-4 col-form-label text-right">{{"DANHMUC.nguongocmo.thutu" | translate}}</label>
+      <div class="col-sm-8">
+        <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANHMUC.nguongocmo.thutuPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
       </div>
     </div>
     <div class="toolbar-container py-2">
