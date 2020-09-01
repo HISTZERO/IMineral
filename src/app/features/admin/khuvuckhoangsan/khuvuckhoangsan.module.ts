@@ -68,7 +68,6 @@ import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/kh
     KhuvuctoadoIoComponent,
     KhuvuccamTamcamChitietComponent,
     KhuvuckhoangsandochaiChitietComponent,
-    ThongtinkhuvuckhoangsanComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

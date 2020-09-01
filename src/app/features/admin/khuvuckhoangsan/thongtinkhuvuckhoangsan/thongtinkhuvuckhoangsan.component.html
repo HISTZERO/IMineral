@@ -12,7 +12,7 @@
             </h3>
           </div>
           <div class="card-body">
-            <mat-tab-group mat-stretch-tabs [animationDuration]="0" #tab>
+            <mat-tab-group mat-stretch-tabs [animationDuration]="" [selectedIndex] = "selectedDefaultTab" #khuVucKhoangSanTab (selectedIndexChange)="khuVucKhoangSanTabChange($event)">
               <mat-tab label="Thông tin chung">
                 <ng-template matTabContent >
                   <div #detailComponent></div>

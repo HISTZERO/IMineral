@@ -6,14 +6,19 @@ import { detailComponentKhuVucKhoangSan } from "../../../../shared/constants/khu
 import { KhuVucKhoangSanFacadeService } from "../../../../services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { MatTabGroup } from "@angular/material";
 
+enum TabEnum {
+  ThongTinChung = 0,
+  ToaDo = 1
+}
+
 @Component({
   selector: 'app-thongtinkhuvuckhoangsan',
   templateUrl: './thongtinkhuvuckhoangsan.component.html',
   styleUrls: ['./thongtinkhuvuckhoangsan.component.scss']
 })
 export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
-  @ViewChild("tab",{static: true}) tab: MatTabGroup;
-  @ViewChild('detailComponent', { static: true, read: ViewContainerRef }) public detailComponent: ViewContainerRef;
+  @ViewChild("tab", {static: true}) khuVucKhoangSanTab: MatTabGroup;
+  @ViewChild('detailComponent', { static: false, read: ViewContainerRef }) public detailComponent: ViewContainerRef;
 
   public entryComponentFactory: any;
 
@@ -25,6 +30,8 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
 
   // Chứa dữ liệu khu vực khoáng sản
   public dataKhuVuc: any;
+
+  public selectedDefaultTab: number;
 
   // Chứa dữ liệu menu item trên subheader
   public navArray = [
@@ -42,19 +49,35 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
     public khuVucKhoangSanFacedeService: KhuVucKhoangSanFacadeService,
     public cfr: ComponentFactoryResolver,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+    console.log("constructor - thongtinkhuvuckhoangsan");
+  }
 
   ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
       this.keyKhuVuc = param.params.keykhuvuc;
       this.idKhuVuc = param.params.idkhuvuc;
-      this.showViewDetailComponent();
     });
 
+    this.selectedDefaultTab = TabEnum.ThongTinChung;
+    console.log("ngOnInit - thongtinkhuvuckhoangsan");
   }
 
   ngAfterViewInit() {
-    
+    console.log("ngAfterViewInit - thongtinkhuvuckhoangsan");
+    if (this.selectedDefaultTab === TabEnum.ThongTinChung) {
+      setTimeout(() => {
+        this.showViewDetailComponent();
+      });
+    }
+  }
+
+  public khuVucKhoangSanTabChange(index: number) {
+    if (index === TabEnum.ThongTinChung) {
+      setTimeout(() => {
+        this.showViewDetailComponent();
+      });
+    }
   }
 
 
@@ -62,8 +85,11 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
    * Hàm hiển thị content component chi tiết các khu vực
    */
   public showViewDetailComponent() {
-    if (this.entryComponentFactory) this.entryComponentFactory.destroy();
+    if (this.entryComponentFactory) {
+      this.entryComponentFactory.destroy();
+    }
 
+    // this.detailComponent.clear();
     const factory = this.cfr.resolveComponentFactory(KhuvuccamTamcamChitietComponent);
     this.entryComponentFactory = this.detailComponent.createComponent(factory);
     this.entryComponentFactory.instance.idKhuVuc = this.idKhuVuc;
