@@ -36,6 +36,7 @@ import { MyAlertDialogComponent } from "./components/my-alert-dialog/my-alert-di
 import { LayerTreeComponent } from "src/app/shared/components/layer-tree/layer-tree.component";
 import { MapListPopupComponent } from "src/app/shared/components/map/map-list-popup/map-list-popup.component";
 import { LayerListPopupComponent } from "src/app/shared/components/map/layer-list-popup/layer-list-popup.component";
+import { ContentContainerDirective } from './directives/content-container/content-container.directive';
 
 // @ts-ignore
 @NgModule({
@@ -45,7 +46,8 @@ import { LayerListPopupComponent } from "src/app/shared/components/map/layer-lis
     MapListPopupComponent,
     LayerTreeComponent,
     FooterComponent,
-    BrandComponent
+    BrandComponent,
+    ContentContainerDirective
   ],
   imports: [
     TreeGridModule,
@@ -88,7 +90,8 @@ import { LayerListPopupComponent } from "src/app/shared/components/map/layer-lis
     LayerTreeComponent,
     CommonPipesModule,
     FooterComponent,
-    BrandComponent
+    BrandComponent,
+    ContentContainerDirective
   ],
 })
 export class SharedModule { }
