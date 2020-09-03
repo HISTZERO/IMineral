@@ -30,6 +30,8 @@ import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/kh
 import { KhuvucdutrukhoangsanListComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-list/khuvucdutrukhoangsan-list.component";
 import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
 import { KhuvucdutrukhoangsanChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-chitiet/khuvucdutrukhoangsan-chitiet.component";
+import { KhuvucdaugiaChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-chitiet/khuvucdaugia-chitiet.component";
+import { KhuvuckhongdaugiaChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhongdaugia/khuvuckhongdaugia-chitiet/khuvuckhongdaugia-chitiet.component";
 
 
 @NgModule({
@@ -50,12 +52,11 @@ import { KhuvucdutrukhoangsanChitietComponent } from "src/app/features/admin/khu
     ThongtinkhuvuckhoangsanComponent,
     KhuvucdutrukhoangsanListComponent,
     KhuvucdutrukhoangsanIoComponent,
-    KhuvucdutrukhoangsanChitietComponent
+    KhuvucdutrukhoangsanChitietComponent,
+    KhuvucdaugiaChitietComponent,
+    KhuvuckhongdaugiaChitietComponent
   ],
-  exports: [
-    KhuvuccamTamcamChitietComponent,
-    KhuvuckhoangsandochaiChitietComponent,
-  ],
+  exports: [],
   imports: [
     CommonModule,
     KhuvuckhoangsanRoutingModule,
@@ -74,7 +75,9 @@ import { KhuvucdutrukhoangsanChitietComponent } from "src/app/features/admin/khu
     KhuvuctoadoIoComponent,
     KhuvuccamTamcamChitietComponent,
     KhuvuckhoangsandochaiChitietComponent,
-    KhuvucdutrukhoangsanIoComponent
+    KhuvucdutrukhoangsanIoComponent,
+    KhuvucdaugiaChitietComponent,
+    KhuvuckhongdaugiaChitietComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

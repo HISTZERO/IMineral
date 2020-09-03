@@ -1,3 +1,5 @@
+import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+
 export class AdminRoutingName {
   // Các routes cấp 1
   public static danhmucUri = "danhmuc";
@@ -87,12 +89,12 @@ export class AdminRoutingName {
   public static reviewTinTuc = "xem";
 
   // 1.11 Routes phần khu vực khoáng sản
-  public static khuvuccamtamcamUri = "khuvuccam-tamcam";
-  public static khuvucdaugiaUri = "khuvucdaugia";
-  public static khuvuckhoangsandochaiUri = "khuvuckhoangsandochai";
-  public static khuvuckhongdaugiaUri = "khuvuckhongdaugia";
+  public static khuvuccamtamcamUri = keyKhuVucKhoangSan.KhuVucCamTamCam;
+  public static khuvucdaugiaUri = keyKhuVucKhoangSan.KhuVucDauGia;
+  public static khuvuckhoangsandochaiUri = keyKhuVucKhoangSan.KhuVucKhoangSanDocHai;
+  public static khuvuckhongdaugiaUri = keyKhuVucKhoangSan.KhuVucKhongDauGia;
+  public static khuvucdutrukhoangsanUri = keyKhuVucKhoangSan.KhuVucDuTruKhoangSan;
   public static thongtinkhuvuckhoangsanUri = "thongtinkhuvuckhoangsan";
-  public static khuvucdutrukhoangsanUri = "khuvucdutrukhoangsan";
 
   // 1.12 Routes phần điểm quặng/mỏ quặng
   public static diemquangUri = "diemquang";
