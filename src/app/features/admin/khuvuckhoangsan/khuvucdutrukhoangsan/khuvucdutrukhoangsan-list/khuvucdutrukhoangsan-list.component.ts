@@ -5,6 +5,7 @@ import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { Observable } from "rxjs";
+import { Router } from "@angular/router";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -14,6 +15,8 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
 import { OutputKhuVucDuTruKhoangSanModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdutrukhoangsan.model";
 import { MenuKhuVucDuTruKhoangSan } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvucdutrukhoangsan";
 import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
+import { AdminRoutingName } from "src/app/routes/admin-routes-name";
+import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
 
 @Component({
   selector: 'app-khuvucdutrukhoangsan-list',
@@ -63,6 +66,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
+    public router: Router
   ) {
     this.khuVucDuTruKhoangSan = this.khuvuckhoangsanFacadeService.getKhuVucDuTruKhoangSanService();
    }
@@ -146,8 +150,9 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
   /**
    * CHuyển hướng đến trang chi tiết
    */
-  public detailItem() {
-    
+  public detailItem(id: string) {
+    this.router.navigate([
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDuTruKhoangSan}});
   }
 
   /**

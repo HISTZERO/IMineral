@@ -1,6 +1,8 @@
 import { KhuvuccamTamcamChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuccam-tamcam/khuvuccam-tamcam-chitiet/khuvuccam-tamcam-chitiet.component";
 import { KhuvuckhoangsandochaiChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-chitiet/khuvuckhoangsandochai-chitiet.component";
 import { KhuvucdutrukhoangsanChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-chitiet/khuvucdutrukhoangsan-chitiet.component";
+import { KhuvucdaugiaChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-chitiet/khuvucdaugia-chitiet.component";
+import { KhuvuckhongdaugiaChitietComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhongdaugia/khuvuckhongdaugia-chitiet/khuvuckhongdaugia-chitiet.component";
 
 
 
@@ -23,5 +25,7 @@ export const nameKhuVucKhoangSan: any = {
 export const detailComponentKhuVucKhoangSan: any = {
     [keyKhuVucKhoangSan.KhuVucCamTamCam]: KhuvuccamTamcamChitietComponent,
     [keyKhuVucKhoangSan.KhuVucKhoangSanDocHai]: KhuvuckhoangsandochaiChitietComponent,
-    [keyKhuVucKhoangSan.KhuVucDuTruKhoangSan]: KhuvucdutrukhoangsanChitietComponent
+    [keyKhuVucKhoangSan.KhuVucDuTruKhoangSan]: KhuvucdutrukhoangsanChitietComponent,
+    [keyKhuVucKhoangSan.KhuVucDauGia]: KhuvucdaugiaChitietComponent,
+    [keyKhuVucKhoangSan.KhuVucKhongDauGia]: KhuvuckhongdaugiaChitietComponent
 }

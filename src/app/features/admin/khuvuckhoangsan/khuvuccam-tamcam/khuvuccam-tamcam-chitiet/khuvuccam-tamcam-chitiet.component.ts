@@ -14,7 +14,6 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
   styleUrls: ['./khuvuccam-tamcam-chitiet.component.scss']
 })
 export class KhuvuccamTamcamChitietComponent implements OnInit {
-  @Output("getInformation") getInformation: EventEmitter<any> = new EventEmitter();
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -34,11 +33,9 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
     private translate: TranslateService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
   ) {
-    console.log("constructor - khuvuccam-tamcam-chitiet");
   }
 
   async ngOnInit() {
-    console.log("ngOnInit - khuvuccam-tamcam-chitiet");
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -55,7 +52,6 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
       .getKhuVucCamTamCamService()
       .getByid(this.idKhuVuc).subscribe(res => {
         this.obj = res;
-        this.getInformation.emit(res.tenkhuvuc);
       });
   }
 

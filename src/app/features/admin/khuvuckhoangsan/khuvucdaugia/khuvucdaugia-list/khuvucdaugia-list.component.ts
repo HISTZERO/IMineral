@@ -1,11 +1,14 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { Observable } from "rxjs";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { Router } from "@angular/router";
+import { FormGroup, FormBuilder } from "@angular/forms";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputKhuVucDauGiaModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdaugia.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -14,7 +17,9 @@ import { KhuvucdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { AdminRoutingName } from "src/app/routes/admin-routes-name";
+import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+
 @Component({
   selector: 'app-khuvucdaugia-list',
   templateUrl: './khuvucdaugia-list.component.html',
@@ -50,6 +55,9 @@ export class KhuvucdaugiaListComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
               public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
@@ -57,7 +65,8 @@ export class KhuvucdaugiaListComponent implements OnInit {
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
               public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService
+              public generalClientService: GeneralClientService,
+              public router: Router
             ) {
 
     this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
@@ -147,6 +156,14 @@ export class KhuvucdaugiaListComponent implements OnInit {
     await this.matSidenavService.open();
   }
 
+  /**
+   * CHuyển hướng đến trang chi tiết
+   */
+  public detailItem(id: string) {
+    this.router.navigate([
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDauGia}});
+  }
+  
   /**
    * Hàm load lại dữ liệu grid
    */
