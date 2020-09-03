@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
 import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
@@ -16,7 +16,7 @@ import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoan
 import { KhuvucdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-io/khuvucdaugia-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
 
@@ -59,15 +59,15 @@ export class KhuvucdaugiaListComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
 
   constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService,
-              public router: Router
-            ) {
+    public cfr: ComponentFactoryResolver,
+    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService,
+    public router: Router
+  ) {
 
     this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
   }
@@ -78,7 +78,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -98,8 +98,8 @@ export class KhuvucdaugiaListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -108,7 +108,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.listPageSize ).toPromise();
+      .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -146,12 +146,12 @@ export class KhuvucdaugiaListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-   async editItemKhuVucDauGia(id: any) {
+  async editItemKhuVucDauGia(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.khuVucKhoangSanFacadeService
-    .getKhuVucDauGiaService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.titleEdit );
+      .getKhuVucDauGiaService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.titleEdit);
     await this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -161,14 +161,14 @@ export class KhuvucdaugiaListComponent implements OnInit {
    */
   public detailItem(id: string) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDauGia}});
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], { queryParams: { idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDauGia } });
   }
-  
+
   /**
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({ Keyword: ""});
+    this.formSearch.reset({ Keyword: "" });
     this.getAllKhuVucDauGia();
   }
 

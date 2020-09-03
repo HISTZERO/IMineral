@@ -10,7 +10,7 @@ import { GetNameLinhVucPipe } from 'src/app/shared/pipes/get-name-linhvuc.pipe';
 import { GetNameCapQuanLyPipe } from 'src/app/shared/pipes/get-name-capquanly.pipe';
 
 @NgModule({
-  declarations: [
+  declarations: [	
     GetFieldValueFromArrayObjectPipe,
     ConvertTimeString,
     SafeHTML,
