@@ -69,7 +69,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
     public router: Router
   ) {
     this.khuVucDuTruKhoangSan = this.khuvuckhoangsanFacadeService.getKhuVucDuTruKhoangSanService();
-   }
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -101,7 +101,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.listPageSize ).toPromise();
+      .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
       this.pageSize = dataSetting.settingValue;
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
@@ -129,7 +129,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
   async getAllKhuVucDuTruKhoangSan(param: any = { PageNumber: 1, PageSize: -1 }) {
     const valueSearch: any = this.formSearch.value;
     this.listKvDuTruKhoangSan = this.khuVucDuTruKhoangSan;
-    this.khuVucDuTruKhoangSan.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
+    this.khuVucDuTruKhoangSan.getDataFromServer({ skip: 0, take: this.pageSize }, valueSearch);
   }
 
   /**
@@ -152,7 +152,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
    */
   public detailItem(id: string) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDuTruKhoangSan}});
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], { queryParams: { idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucDuTruKhoangSan } });
   }
 
   /**
@@ -231,22 +231,22 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-          await this.khuvuckhoangsanFacadeService
-            .getKhuVucDuTruKhoangSanService()
-            .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
-            .subscribe(
-              () => this.getAllKhuVucDuTruKhoangSan(),
-              (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.successDelete,
-                  2000
-                )
-            );
-        }
-      });
+        await this.khuvuckhoangsanFacadeService
+          .getKhuVucDuTruKhoangSanService()
+          .deleteItem({ idkhuvuc: this.selectedItem.idkhuvuc })
+          .subscribe(
+            () => this.getAllKhuVucDuTruKhoangSan(),
+            (error: HttpErrorResponse) => {
+              this.commonService.showeNotiResult(error.message, 2000);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+      }
+    });
   }
 
   /**

@@ -61,12 +61,12 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-              public dmFacadeService: DmFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService,
-              public datePipe: DatePipe) { }
+    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+    public dmFacadeService: DmFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService,
+    public datePipe: DatePipe) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -94,7 +94,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
       loaikhoangsan: [""],
       soquyetdinh: [""],
       ngayquyetdinh: [""],
-      hequychieu:  ["", Validators.required]
+      hequychieu: ["", Validators.required]
     });
   }
 
@@ -105,7 +105,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -116,8 +116,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -129,8 +129,8 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.tenkhuvucRequired },
       diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.diadiemRequired },
-      dientich: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichFormat },
-      donvidientich:  { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.donvidientichRequired },
+      dientich: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichRequired, pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.dientichFormat },
+      donvidientich: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.donvidientichRequired },
       hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.hequychieuRequired }
     };
   }
@@ -176,7 +176,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     this.inputModel = this.khuvucdaugiaIOForm.value;
     if (operMode === "new") {
       khuVucKhoangSanFacadeService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucDauGia"),
+        (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -189,7 +189,7 @@ export class KhuvucdaugiaIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idkhuvuc = this.obj.idkhuvuc;
       khuVucKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucDauGia"),
+        (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },

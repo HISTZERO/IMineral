@@ -1,4 +1,3 @@
-
 <mat-sidenav-container class="sidenav-container">
   <mat-sidenav-content>
     <div class="row pt-3" style="margin: 0px">
@@ -42,12 +41,14 @@
                 <div class="row mx-0">
                   <label
                     class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.hequychieu' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.hequychieu }}</strong></label>
+                  <label class="col-sm-6 col-form-label"><strong *ngIf="heQuyChieu">
+                      {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + heQuyChieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + heQuyChieu.prjzone}}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label
                     class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinh' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.maloaihinh }}</strong></label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{obj && obj.maloaihinh | getNameFileConstant: maLoaiHinh }}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label
@@ -74,7 +75,8 @@
                 <div class="row mx-0">
                   <label
                     class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngayquyetdinh' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.ngayquyetdinh}}</strong></label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{obj && obj.ngayquyetdinh | date: 'dd-MM-yyyy'}}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label
@@ -84,12 +86,14 @@
                 <div class="row mx-0">
                   <label
                     class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngaybd' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.ngaybd }}</strong></label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{obj && obj.ngaybd | date: 'dd-MM-yyyy'}}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label
                     class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvuccamtamcam.ngaykt' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.ngaykt }}</strong></label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{obj && obj.ngaykt | date: 'dd-MM-yyyy'}}</strong></label>
                 </div>
                 <div class="row mx-0">
                   <label

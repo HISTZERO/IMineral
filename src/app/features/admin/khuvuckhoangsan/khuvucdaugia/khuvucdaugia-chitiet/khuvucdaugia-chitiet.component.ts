@@ -7,6 +7,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { KhuvucdaugiaIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdaugia/khuvucdaugia-io/khuvucdaugia-io.component";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 
 @Component({
   selector: 'app-khuvucdaugia-chitiet',
@@ -27,12 +28,16 @@ export class KhuvucdaugiaChitietComponent implements OnInit {
   // Chứa dữ liệu khu vực đấu giá
   public obj: OutputKhuVucDauGiaModel;
 
+  // Chứa dữ liệu hệ quy chiếu
+  public heQuyChieu: any;
+
   constructor(
     public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
     public commonFacadeService: CommonFacadeService,
     private translate: TranslateService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
+    public dmFacadeService: DmFacadeService
   ) {
   }
 
@@ -41,28 +46,47 @@ export class KhuvucdaugiaChitietComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
-    await this.getAllKhuVucDauGia();
+    await this.getKhuVucDauGiaById();
   }
 
   /**
-   * Lấy dữ liệu
+   * Lấy dữ liệu khu vực đấu giá theo id
    */
-  async getAllKhuVucDauGia() {
+  async getKhuVucDauGiaById() {
     await this.khuvuckhoangsanFacadeService
-      .getKhuVucCamTamCamService()
+      .getKhuVucDauGiaService()
       .getByid(this.idKhuVuc).subscribe(res => {
         this.obj = res;
+        this.getHeQuyChieuBySrid(res.hequychieu);
       });
   }
 
   /**
-   * hàm chuyển đến chế độ sửa
+   * Hàm lấy dữ liệu Hệ quy chiếu theo id
+   */
+  async getHeQuyChieuBySrid(srid: number) {
+    if (srid) {
+      this.heQuyChieu = await this.dmFacadeService
+        .getDmHeQuyChieuService()
+        .getByid(srid).toPromise();
+    }
+  }
+
+  /**
+   * Hàm load lại dữ liệu
+   */
+  public reloadDataGrid() {
+    this.getKhuVucDauGiaById();
+  }
+
+  /**
+   * Hàm chuyển đến chế độ sửa
    */
   toEditMode() {
     // Cấu hình sidenav io
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvucdaugia.titleEdit);
-    this.matSidenavService.setContentComp( KhuvucdaugiaIoComponent,"edit", this.obj );
+    this.matSidenavService.setContentComp(KhuvucdaugiaIoComponent, "edit", this.obj);
     this.matSidenavService.open();
   }
 

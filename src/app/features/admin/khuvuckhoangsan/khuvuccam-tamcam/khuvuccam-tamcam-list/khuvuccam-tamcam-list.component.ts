@@ -74,20 +74,19 @@ export class KhuvuccamTamcamListComponent implements OnInit {
     public router: Router
   ) {
     this.khuVucCamTamCamService = this.khuvuckhoangsanFacadeService.getKhuVucCamTamCamService();
-   }
+  }
 
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    // Gọi hàm lấy dữ liệu pagesize
+    await this.getDataPageSize();
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Gọi hàm lấy dữ liệu pagesize
-    await this.getDataPageSize();
-
   }
 
   /**
@@ -106,7 +105,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.listPageSize ).toPromise();
+      .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
       this.pageSize = dataSetting.settingValue;
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
@@ -135,7 +134,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
   async getAllKhuVucCamTamCam() {
     const valueSearch: any = this.formSearch.value;
     this.listKvCamTamCam = this.khuVucCamTamCamService;
-    this.khuVucCamTamCamService.getDataFromServer({skip: 0, take: this.pageSize}, valueSearch);
+    this.khuVucCamTamCamService.getDataFromServer({ skip: 0, take: this.pageSize }, valueSearch);
   }
 
   /**
@@ -170,7 +169,7 @@ export class KhuvuccamTamcamListComponent implements OnInit {
    */
   public detailItem(id) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], {queryParams: {idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucCamTamCam}});
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.thongtinkhuvuckhoangsanUri}`], { queryParams: { idkhuvuc: id, keykhuvuc: keyKhuVucKhoangSan.KhuVucCamTamCam } });
   }
 
 
