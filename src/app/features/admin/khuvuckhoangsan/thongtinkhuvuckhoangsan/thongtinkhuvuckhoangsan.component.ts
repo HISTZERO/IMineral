@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ComponentFactoryResolver, AfterViewInit } from '@angular/core';
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { ActivatedRoute } from "@angular/router";
 import { MatTabGroup } from "@angular/material";

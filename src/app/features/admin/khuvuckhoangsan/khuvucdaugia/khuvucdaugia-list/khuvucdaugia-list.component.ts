@@ -8,6 +8,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
+import { MatDialog } from "@angular/material";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputKhuVucDauGiaModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdaugia.model";
@@ -19,6 +20,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-khuvucdaugia-list',
@@ -66,7 +68,8 @@ export class KhuvucdaugiaListComponent implements OnInit {
     private translate: TranslateService,
     public formBuilder: FormBuilder,
     public generalClientService: GeneralClientService,
-    public router: Router
+    public router: Router,
+    public modalDialog: MatDialog
   ) {
 
     this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
@@ -221,7 +224,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
           .subscribe(
             () => this.getAllKhuVucDauGia(),
             (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
+              this.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -231,6 +234,17 @@ export class KhuvucdaugiaListComponent implements OnInit {
           );
       }
     });
+  }
+
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -17,6 +17,7 @@ import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-gr
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaikhoangsan-list',
@@ -78,7 +79,8 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -92,10 +94,10 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
-  
+
   }
 
   /**
@@ -104,8 +106,8 @@ export class DmLoaikhoangsanListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -114,7 +116,7 @@ export class DmLoaikhoangsanListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -207,7 +209,7 @@ export class DmLoaikhoangsanListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaikhoangsan.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaikhoangsan.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
@@ -215,19 +217,19 @@ export class DmLoaikhoangsanListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmLoaiKhoangSanService()
-            .updateStatusItemsLoaiKhoangSan(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllLoaiKhoangSan();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsLoaiKhoangSan(dataParam)
+          .subscribe(
+            () => {
+              this.getAllLoaiKhoangSan();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -244,19 +246,19 @@ export class DmLoaikhoangsanListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmLoaiKhoangSanService()
-            .updateStatusItemsLoaiKhoangSan(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllLoaiKhoangSan();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsLoaiKhoangSan(dataParam)
+          .subscribe(
+            () => {
+              this.getAllLoaiKhoangSan();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -278,28 +280,28 @@ export class DmLoaikhoangsanListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaikhoangsan.informedDialogTitle,
           );
         } else {
-            this.listDataSelect.map(res => {
-              idItems.push(res.idloaikhoangsan);
-            });
+          this.listDataSelect.map(res => {
+            idItems.push(res.idloaikhoangsan);
+          });
 
-            const dataBody: any = {
-              listId: idItems,
-            };
+          const dataBody: any = {
+            listId: idItems,
+          };
 
-            this.dmFacadeService.getDmLoaiKhoangSanService()
+          this.dmFacadeService.getDmLoaiKhoangSanService()
             .deleteItemsLoaiKhoangSan(dataBody)
             .subscribe(
               () => {
                 this.getAllLoaiKhoangSan();
               },
               (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
+                this.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
                   this.dataTranslate.COMMON.default.successDelete,
                   2000
-            ));
+                ));
         }
       }
     });
@@ -322,10 +324,10 @@ export class DmLoaikhoangsanListComponent implements OnInit {
   async editItemLoaiKhoangSan(id: string) {
     // Lấy dữ liệu loại khoáng sản theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmLoaiKhoangSanService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaikhoangsan.titleEdit );
-    await this.matSidenavService.setContentComp( DmLoaikhoangsanIoComponent, "edit", dataItem);
+      .getDmLoaiKhoangSanService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaikhoangsan.titleEdit);
+    await this.matSidenavService.setContentComp(DmLoaikhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -334,7 +336,7 @@ export class DmLoaikhoangsanListComponent implements OnInit {
     */
   public openLoaiKhoangSanIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaikhoangsan.titleAdd);
-    this.matSidenavService.setContentComp( DmLoaikhoangsanIoComponent, "new");
+    this.matSidenavService.setContentComp(DmLoaikhoangsanIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -391,13 +393,13 @@ export class DmLoaikhoangsanListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaikhoangsan.informedDialogTitle,
           );
         } else {
-            await this.dmFacadeService
+          await this.dmFacadeService
             .getDmLoaiKhoangSanService()
             .deleteItem({ id: this.selectedItem.idloaikhoangsan })
             .subscribe(
               () => this.getAllLoaiKhoangSan(),
               (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
+                this.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -408,6 +410,17 @@ export class DmLoaikhoangsanListComponent implements OnInit {
         }
       }
     });
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**
