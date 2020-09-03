@@ -77,6 +77,7 @@ import { KhuvuckhongdaugiaChitietComponent } from "src/app/features/admin/khuvuc
     KhuvuckhoangsandochaiChitietComponent,
     KhuvucdutrukhoangsanIoComponent,
     KhuvucdaugiaChitietComponent,
+    KhuvucdutrukhoangsanChitietComponent,
     KhuvuckhongdaugiaChitietComponent
   ],
   providers: [
