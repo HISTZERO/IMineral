@@ -1,4 +1,4 @@
-<app-sub-header [menuItems]="navArray"></app-sub-header>
+<app-sub-header [menuItems]="navArray" [buttonItems]="btnArr"></app-sub-header>
 <div class="content pt-3">
   <div class="container-fluid">
     <div class="row">
@@ -12,9 +12,10 @@
             </h3>
           </div>
           <div class="card-body">
-            <mat-tab-group mat-stretch-tabs [animationDuration]="" [selectedIndex] = "selectedDefaultTab" #khuVucKhoangSanTab>
+            <mat-tab-group mat-stretch-tabs [animationDuration]="" [selectedIndex]="selectedDefaultTab"
+              #khuVucKhoangSanTab>
               <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.thongtinchung' | translate }}">
-                <ng-template appContentContainer >
+                <ng-template appContentContainer>
                 </ng-template>
               </mat-tab>
               <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.toado' | translate }}">

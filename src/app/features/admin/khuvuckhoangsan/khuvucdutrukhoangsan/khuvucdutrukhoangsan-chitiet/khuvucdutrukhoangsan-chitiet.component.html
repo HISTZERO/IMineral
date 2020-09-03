@@ -14,33 +14,41 @@
             <div class="row" *ngIf="obj">
               <div class="col-lg-6 col-sm-12">
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvuc' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.tenkhuvuc' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.tenkhuvuc }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.sohieu' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.sohieu' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.sohieu }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiem' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.diadiem' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.diadiem }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientich' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.dientich' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.dientich }}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.donvidientich' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.donvidientich' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.donvidientich }}</strong></label>
-                </div>
-                <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieu' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{ obj.hequychieu }}</strong></label>
                 </div>
               </div>
               <div class="col-lg-6 col-sm-12">
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsan' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.hequychieu' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong *ngIf="heQuyChieu">
+                      {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + heQuyChieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + heQuyChieu.prjzone}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.loaikhoangsan' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.loaikhoangsan }}</strong></label>
                 </div>
                 <div class="row mx-0">
@@ -49,11 +57,14 @@
                   <label class="col-sm-6 col-form-label"><strong>{{obj.soquyetdinh}}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.ngayquyetdinh' | translate}}:</label>
-                  <label class="col-sm-6 col-form-label"><strong>{{ obj.ngayquyetdinh}}</strong></label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.ngayquyetdinh' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{ obj.ngayquyetdinh | date: 'dd-MM-yyyy'}}</strong></label>
                 </div>
                 <div class="row mx-0">
-                  <label class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.mota' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'KHUVUCKHOANGSAN.khuvucdutrukhoangsan.mota' | translate}}:</label>
                   <label class="col-sm-6 col-form-label"><strong>{{ obj.mota }}</strong></label>
                 </div>
               </div>

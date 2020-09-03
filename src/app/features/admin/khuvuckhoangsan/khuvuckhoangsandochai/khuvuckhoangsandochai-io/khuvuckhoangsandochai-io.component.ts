@@ -99,10 +99,10 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvucRequired},
-      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiemRequired},
-      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieuRequired},
-      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientichIsNumber},
+      tenkhuvuc: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.tenkhuvucRequired },
+      diadiem: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.diadiemRequired },
+      hequychieu: { required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.hequychieuRequired },
+      dientich: { pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuckhoangsandochai.dientichIsNumber },
     };
   }
 
@@ -121,7 +121,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
   async getAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
   }
 
@@ -171,10 +171,9 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucKhoangSanDocHaiService();
     this.inputModel = this.kvKhoangSanDocHaiIOForm.value;
-    // this.inputModel.ngaycap = this.datePipe.transform(this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhoangSanDocHai"),
+        (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
@@ -187,7 +186,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idkhuvuc = this.obj.idkhuvuc;
       kvKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllKhuVucKhoangSanDocHai"),
+        (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
           this.commonService.showError(error);
         },
