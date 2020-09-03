@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -13,11 +13,12 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmThutuchanhchinhIoComponent } from "src/app/features/admin/danhmuc/thutuchanhchinh/thutuchanhchinh-io/thutuchanhchinh-io.component";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { OutputDmCapQuanLyModel } from 'src/app/models/admin/danhmuc/capquanly.model';
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-thutuchanhchinh-list',
@@ -37,8 +38,8 @@ export class DmThutuchanhchinhListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-   // Chứa danh sách item đã chọn
-   public listDataSelect: any[];
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
 
   // Chứa danh sách Thủ tục hành chính
   public listThuTucHanhChinh: OutputDmThuTucHanhChinhModel[];
@@ -69,13 +70,13 @@ export class DmThutuchanhchinhListComponent implements OnInit {
   // Chứa danh sách Lĩnh Vực
   public allLinhVuc: OutputDmLinhvucModel;
 
-   // Filter Lĩnh Vực
+  // Filter Lĩnh Vực
   public linhVucFilters: OutputDmLinhvucModel[];
 
   // Chứa danh sách cấp quản lý
   public allCapQuanLy: OutputDmCapQuanLyModel;
 
-   // Filter cấp quản lý
+  // Filter cấp quản lý
   public capQuanLyFilters: OutputDmCapQuanLyModel[];
 
   // Contructor
@@ -87,7 +88,8 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService
+    public generalClientService: GeneralClientService,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -100,7 +102,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     // Gọi hàm thiêt lập hiển thị nút check box trên Grid
@@ -126,8 +128,8 @@ export class DmThutuchanhchinhListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -136,7 +138,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -146,9 +148,9 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     await this.getAllThuTucHanhChinh();
   }
 
-   /**
-    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
-    */
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
 
   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
@@ -203,11 +205,11 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     this.listThuTucHanhChinh = listData.items;
   }
 
-   /**
-    * Hàm load lại dữ liệu grid
-    */
+  /**
+   * Hàm load lại dữ liệu grid
+   */
   public reloadDataGrid() {
-    this.formSearch.reset({Capthuchien: "", Linhvuc: "",  Keyword: "", Trangthai: ""});
+    this.formSearch.reset({ Capthuchien: "", Linhvuc: "", Keyword: "", Trangthai: "" });
     this.getAllThuTucHanhChinh();
   }
 
@@ -241,17 +243,17 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
-          this.getAllThuTucHanhChinh();
+          .subscribe(res => {
+            this.getAllThuTucHanhChinh();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -268,17 +270,17 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmThuTucHanhChinhService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
-          this.getAllThuTucHanhChinh();
+          .subscribe(res => {
+            this.getAllThuTucHanhChinh();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -309,19 +311,19 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmThuTucHanhChinhService()
-          .deleteItemsThuTucHanhChinh(dataBody)
-          .subscribe(
-            () => {
-              this.getAllThuTucHanhChinh();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-          ));
+            .deleteItemsThuTucHanhChinh(dataBody)
+            .subscribe(
+              () => {
+                this.getAllThuTucHanhChinh();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -334,10 +336,10 @@ export class DmThutuchanhchinhListComponent implements OnInit {
   async editItemThuTucHanhChinh(id: string) {
     // Lấy dữ liệu nhóm khoáng sản theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmThuTucHanhChinhService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.thutuchanhchinh.titleEdit );
-    await this.matSidenavService.setContentComp( DmThutuchanhchinhIoComponent, "edit", dataItem);
+      .getDmThuTucHanhChinhService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.thutuchanhchinh.titleEdit);
+    await this.matSidenavService.setContentComp(DmThutuchanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -346,7 +348,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
    */
   public openThuTucHanhChinhIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.thutuchanhchinh.titleAdd);
-    this.matSidenavService.setContentComp( DmThutuchanhchinhIoComponent, "new");
+    this.matSidenavService.setContentComp(DmThutuchanhchinhIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -404,22 +406,33 @@ export class DmThutuchanhchinhListComponent implements OnInit {
           );
         } else {
           await this.dmFacadeService
-          .getDmThuTucHanhChinhService()
-          .deleteItem({ id: this.selectedItem.idthutuchanhchinh })
-          .subscribe(
-            () => this.getAllThuTucHanhChinh(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
-          );
+            .getDmThuTucHanhChinhService()
+            .deleteItem({ id: this.selectedItem.idthutuchanhchinh })
+            .subscribe(
+              () => this.getAllThuTucHanhChinh(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

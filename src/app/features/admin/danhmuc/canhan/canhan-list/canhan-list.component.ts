@@ -1,8 +1,9 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent, TextWrapSettingsModel, QueryCellInfoEventArgs } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { MatDialog } from "@angular/material";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -15,8 +16,9 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { MenuDanhMucCaNhan } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {TrangThaiEnum, Paging} from "src/app/shared/constants/enum";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: "app-canhan-list",
@@ -95,7 +97,8 @@ export class DmCanhanListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService
+    public generalClientService: GeneralClientService,
+    private modalDialog: MatDialog,
   ) { }
 
   async ngOnInit() {
@@ -108,7 +111,7 @@ export class DmCanhanListComponent implements OnInit {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
 
@@ -121,8 +124,8 @@ export class DmCanhanListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -142,7 +145,7 @@ export class DmCanhanListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -246,7 +249,7 @@ export class DmCanhanListComponent implements OnInit {
       this.formSearch.controls["Idxa"].setValue("");
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid( this.formSearch.value.Idhuyen ).toPromise();
+        .getByid(this.formSearch.value.Idhuyen).toPromise();
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -288,7 +291,7 @@ export class DmCanhanListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
@@ -296,18 +299,18 @@ export class DmCanhanListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmCanhanService()
-            .updateStatusArrayItem(dataParam)
-            .subscribe(
-              () => {
-                this.getAllCanhan();
-              },
-              (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.updateStatusSuccess,
-                  2000
+          .updateStatusArrayItem(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCanhan();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000
               ));
       }
     });
@@ -320,24 +323,24 @@ export class DmCanhanListComponent implements OnInit {
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.canhan.confirmedContentOfActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-          const dataParam: any = {
-            listStatus: this.listDataSelect,
-            status: TrangThaiEnum.Active
-          };
-          this.dmFacadeService.getDmCanhanService()
-              .updateStatusArrayItem(dataParam)
-              .subscribe(
-                () => {
-                    this.getAllCanhan();
-                  },
-                  (error: HttpErrorResponse) => {
-                    this.commonService.showeNotiResult(error.message, 2000);
-                  },
-                  () =>
-                    this.commonService.showeNotiResult(
-                      this.dataTranslate.COMMON.default.updateStatusSuccess,
-                      2000
-                ));
+        const dataParam: any = {
+          listStatus: this.listDataSelect,
+          status: TrangThaiEnum.Active
+        };
+        this.dmFacadeService.getDmCanhanService()
+          .updateStatusArrayItem(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCanhan();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000
+              ));
       }
     });
   }
@@ -359,7 +362,7 @@ export class DmCanhanListComponent implements OnInit {
             this.dataTranslate.DANHMUC.canhan.informedDialogTitle,
           );
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          informationDialogRef.afterClosed().subscribe(() => { });
         } else {
           this.listDataSelect.map(res => {
             idItems.push(res.idcanhan);
@@ -368,19 +371,19 @@ export class DmCanhanListComponent implements OnInit {
             listId: idItems,
           };
           this.dmFacadeService.getDmCanhanService()
-          .deleteArrayItem(dataBody)
-          .subscribe(
-            () => {
-              this.getAllCanhan();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-            ));
+            .deleteArrayItem(dataBody)
+            .subscribe(
+              () => {
+                this.getAllCanhan();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -394,10 +397,10 @@ export class DmCanhanListComponent implements OnInit {
   async editItemCanhan(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmCanhanService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.canhan.titleEdit );
-    await this.matSidenavService.setContentComp( DmCanhanIoComponent, "edit", dataItem);
+      .getDmCanhanService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleEdit);
+    await this.matSidenavService.setContentComp(DmCanhanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -463,35 +466,37 @@ export class DmCanhanListComponent implements OnInit {
             this.dataTranslate.DANHMUC.canhan.informedDialogTitle,
           );
 
-          informationDialogRef.afterClosed().subscribe(() => {});
+          informationDialogRef.afterClosed().subscribe(() => { });
         } else {
-            await this.dmFacadeService
-              .getDmCanhanService()
-              .deleteItem({ idCanhan: this.selectedItem.idcanhan })
-              .subscribe(
-                () => this.getAllCanhan(),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
+          await this.dmFacadeService
+            .getDmCanhanService()
+            .deleteItem({ idCanhan: this.selectedItem.idcanhan })
+            .subscribe(
+              () => this.getAllCanhan(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
   }
 
   /**
-   * Customize style grid
+   * Hàm hiển thị cảnh báo error
    */
-  // customiseCell(args: QueryCellInfoEventArgs) {
-  //   if (args.column.field === 'check') {
-  //       args.cell.classList.add('width-checkbox');
-  //   }
-  // }
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
 
   /**
    * Hàm thông báo không thể xóa

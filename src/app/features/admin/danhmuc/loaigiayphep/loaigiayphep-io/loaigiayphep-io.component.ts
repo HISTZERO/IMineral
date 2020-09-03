@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { MatDialog } from "@angular/material";
 
 import { InputDmLoaiGiayPhepModel } from "src/app/models/admin/danhmuc/loaigiayphep.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
@@ -11,6 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { NhomLoaiGiayPhep } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaigiayphep-io',
@@ -75,8 +77,9 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    public modalDialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     // Lấy dữ liệu thủ tục hành chính
@@ -87,7 +90,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
+
   }
 
   /**
@@ -96,8 +99,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -120,7 +123,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   async getAllThuTucHanhChinh() {
     const listData: any = await this.dmFacadeService
       .getDmThuTucHanhChinhService()
-      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
     this.listThuTucHanhChinh = listData.items;
   }
 
@@ -159,7 +162,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
         maloaigiayphep: this.obj.maloaigiayphep,
         tenloaigiayphep: this.obj.tenloaigiayphep,
         nhomloaigiayphep: +this.obj.nhomloaigiayphep,
-        thutuchanhchinh: {idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh},
+        thutuchanhchinh: { idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh },
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
@@ -184,7 +187,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiGiayPhep"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
+
         },
         () =>
           this.commonService.showeNotiResult(
@@ -198,7 +202,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiGiayPhep"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
+
         },
         () =>
           this.commonService.showeNotiResult(
@@ -299,7 +304,16 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-
+  /**
+    * Hàm hiển thị cảnh báo error
+    */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
   /**
     *  Hàm gọi từ function con gọi vào chạy function cha
     * @param methodName

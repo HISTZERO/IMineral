@@ -1,11 +1,14 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
-import { MenuDiemMo } from "src/app/shared/constants/sub-menus/diemquang-moquang/diemquang-moquang";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { MatDialog } from "@angular/material";
+
+import { MenuDiemMo } from "src/app/shared/constants/sub-menus/diemquang-moquang/diemquang-moquang";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDiemMoModel } from "src/app/models/admin/diemquang-moquang/diemmo.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -13,8 +16,8 @@ import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-
 import { DiemquangIoComponent } from "src/app/features/admin/diemquang-moquang/diemquang/diemquang-io/diemquang-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-diemquang-list',
@@ -52,14 +55,15 @@ export class DiemquangListComponent implements OnInit {
   public dataTranslate: any;
 
   constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService
-            ) {
+    public cfr: ComponentFactoryResolver,
+    public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService,
+    public modalDialog: MatDialog
+  ) {
     this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService();
   }
 
@@ -69,7 +73,7 @@ export class DiemquangListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -89,8 +93,8 @@ export class DiemquangListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -98,8 +102,8 @@ export class DiemquangListComponent implements OnInit {
    */
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
-    .getThietLapHeThongService()
-    .getByid(ThietLapHeThong.listPageSize ).toPromise();
+      .getThietLapHeThongService()
+      .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -141,9 +145,9 @@ export class DiemquangListComponent implements OnInit {
   async editItemDiemMo(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.diemQuangMoQuangFacadeService
-    .getDiemMoService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DIEMQUANGMOQUANG.diemmo.titleEdit );
+      .getDiemMoService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DIEMQUANGMOQUANG.diemmo.titleEdit);
     await this.matSidenavService.setContentComp(DiemquangIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -152,7 +156,7 @@ export class DiemquangListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({ Keyword: ""});
+    this.formSearch.reset({ Keyword: "" });
     this.getAllDiemMo();
   }
 
@@ -205,7 +209,7 @@ export class DiemquangListComponent implements OnInit {
           .subscribe(
             () => this.getAllDiemMo(),
             (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
+              this.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -215,6 +219,17 @@ export class DiemquangListComponent implements OnInit {
           );
       }
     });
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

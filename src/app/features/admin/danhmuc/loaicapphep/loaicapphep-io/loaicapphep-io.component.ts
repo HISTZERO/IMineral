@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { MatDialog } from "@angular/material";
 
 import { InputDmLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
@@ -10,6 +11,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaicapphep-io',
@@ -74,8 +76,9 @@ export class DmLoaicapphepIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    public modalDialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -94,8 +97,8 @@ export class DmLoaicapphepIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -105,7 +108,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
     */
   setValidation() {
     this.validationErrorMessages = {
-      tenloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.tenloaicapphepRequired},
+      tenloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.tenloaicapphepRequired },
       thutu: { pattern: this.dataTranslate.DANHMUC.loaicapphep.thutuIsNumber },
       idthutuchanhchinh: { required: this.dataTranslate.DANHMUC.loaicapphep.thutuchanhchinhRequired },
       nhomloaicapphep: { required: this.dataTranslate.DANHMUC.loaicapphep.nhomloaicapphepRequired }
@@ -147,7 +150,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
         maloaicapphep: this.obj.maloaicapphep,
         tenloaicapphep: this.obj.tenloaicapphep,
         nhomloaicapphep: +this.obj.nhomloaicapphep,
-        thutuchanhchinh: {idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh},
+        thutuchanhchinh: { idthutuchanhchinh: this.obj.idthutuchanhchinh, tenthutuchanhchinh: this.obj.tenthutuchanhchinh },
         idthutuchanhchinh: this.obj.idthutuchanhchinh,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
@@ -181,7 +184,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiCapPhep"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -195,7 +198,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiCapPhep"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -296,6 +299,16 @@ export class DmLoaicapphepIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
+  /**
+     * Hàm hiển thị cảnh báo error
+     */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
 
   /**
     *  Hàm gọi từ function con gọi vào chạy function cha

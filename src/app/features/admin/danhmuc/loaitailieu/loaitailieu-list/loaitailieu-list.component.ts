@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
@@ -17,6 +17,7 @@ import { NhomLoaiTaiLieu } from "src/app/shared/constants/nhomloaitailieu";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaitailieu-list',
@@ -50,7 +51,7 @@ export class DmLoaitailieuListComponent implements OnInit {
 
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
-  
+
   //Chứa data Trạng thái
   public trangthai = TrangThai;
 
@@ -75,7 +76,8 @@ export class DmLoaitailieuListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -85,7 +87,7 @@ export class DmLoaitailieuListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -96,8 +98,8 @@ export class DmLoaitailieuListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -106,7 +108,7 @@ export class DmLoaitailieuListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -169,9 +171,9 @@ export class DmLoaitailieuListComponent implements OnInit {
     });
   }
 
-    /**
-    * Tìm kiếm nâng cao
-    */
+  /**
+  * Tìm kiếm nâng cao
+  */
   public searchAdvance() {
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
@@ -200,7 +202,7 @@ export class DmLoaitailieuListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.loaitailieu.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.loaitailieu.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
@@ -208,19 +210,19 @@ export class DmLoaitailieuListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmLoaiTaiLieuService()
-            .updateStatusItemsLoaiTaiLieu(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllLoaiTaiLieu();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsLoaiTaiLieu(dataParam)
+          .subscribe(
+            () => {
+              this.getAllLoaiTaiLieu();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -237,19 +239,19 @@ export class DmLoaitailieuListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmLoaiTaiLieuService()
-            .updateStatusItemsLoaiTaiLieu(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllLoaiTaiLieu();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsLoaiTaiLieu(dataParam)
+          .subscribe(
+            () => {
+              this.getAllLoaiTaiLieu();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -280,24 +282,24 @@ export class DmLoaitailieuListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmLoaiTaiLieuService()
-          .deleteItemsLoaiTaiLieu(dataBody)
-          .subscribe(
-            () => {
-              this.getAllLoaiTaiLieu();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-          ));
+            .deleteItemsLoaiTaiLieu(dataBody)
+            .subscribe(
+              () => {
+                this.getAllLoaiTaiLieu();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
   }
-  
+
   /**
     * Hàm mở sidenav chức năng sửa dữ liệu
     * @param id
@@ -305,10 +307,10 @@ export class DmLoaitailieuListComponent implements OnInit {
   async editItemLoaiTaiLieu(id: string) {
     // Lấy dữ liệu loại tài liệu theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmLoaiTaiLieuService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaitailieu.titleEdit );
-    await this.matSidenavService.setContentComp( DmLoaitailieuIoComponent, "edit", dataItem);
+      .getDmLoaiTaiLieuService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaitailieu.titleEdit);
+    await this.matSidenavService.setContentComp(DmLoaitailieuIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -317,7 +319,7 @@ export class DmLoaitailieuListComponent implements OnInit {
     */
   public openLoaiTaiLieuIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaitailieu.titleAdd);
-    this.matSidenavService.setContentComp( DmLoaitailieuIoComponent, "new");
+    this.matSidenavService.setContentComp(DmLoaitailieuIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -374,13 +376,13 @@ export class DmLoaitailieuListComponent implements OnInit {
             this.dataTranslate.DANHMUC.loaitailieu.informedDialogTitle,
           );
         } else {
-            await this.dmFacadeService
+          await this.dmFacadeService
             .getDmLoaiTaiLieuService()
             .deleteItem({ id: this.selectedItem.idloaitailieu })
             .subscribe(
               () => this.getAllLoaiTaiLieu(),
               (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
+                this.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -391,6 +393,17 @@ export class DmLoaitailieuListComponent implements OnInit {
         }
       }
     });
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

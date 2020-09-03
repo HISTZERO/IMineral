@@ -1,8 +1,11 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
+import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { FormGroup, FormBuilder } from "@angular/forms";
+
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
@@ -14,7 +17,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { MenuDanhMucLinhVuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {TrangThaiEnum} from "src/app/shared/constants/enum";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-linhvuc-list',
@@ -70,7 +73,8 @@ export class DmLinhvucListComponent implements OnInit {
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
               public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService) { }
+              public generalClientService: GeneralClientService,
+              public modalDialog: MatDialog) { }
 
   async ngOnInit(){
     // Khởi tạo form
@@ -197,7 +201,7 @@ export class DmLinhvucListComponent implements OnInit {
           this.getAllLinhvuc();
           },
           (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
+            this.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -224,7 +228,7 @@ export class DmLinhvucListComponent implements OnInit {
           this.getAllLinhvuc();
           },
           (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
+            this.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -267,7 +271,7 @@ export class DmLinhvucListComponent implements OnInit {
               this.getAllLinhvuc();
             },
             (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
+              this.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -360,7 +364,7 @@ export class DmLinhvucListComponent implements OnInit {
           .subscribe(
             () => this.getAllLinhvuc(),
             (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
+              this.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -380,6 +384,17 @@ export class DmLinhvucListComponent implements OnInit {
     this.commonService.canDeleteDialogService(sMsg);
   }
 
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
+  
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName) {
     this[methodName]();

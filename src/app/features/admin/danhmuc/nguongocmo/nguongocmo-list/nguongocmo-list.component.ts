@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
@@ -13,9 +13,10 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmNguongocmoIoComponent } from "src/app/features/admin/danhmuc/nguongocmo/nguongocmo-io/nguongocmo-io.component";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-nguongocmo-list',
@@ -24,7 +25,7 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 })
 export class DmNguongocmoListComponent implements OnInit {
 
-   // Viewchild template
+  // Viewchild template
   @ViewChild("gridNguonGocMo", { static: false }) public gridNguonGocMo: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compNguonGocMoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
@@ -71,7 +72,8 @@ export class DmNguongocmoListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService
+    public generalClientService: GeneralClientService,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -80,16 +82,16 @@ export class DmNguongocmoListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     // Thiết lập hiển thị checkbox trên grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
 
-   /**
-    * Form innit
-    */
+  /**
+   * Form innit
+   */
   public formInit() {
     this.formSearch = this.formBuilder.group({
       Keyword: [""],
@@ -97,15 +99,15 @@ export class DmNguongocmoListComponent implements OnInit {
     });
   }
 
-   /**
-    * Hàm lấy dữ liệu translate
-    */
-   async getDataTranslate() {
-     // Get all langs
-     this.dataTranslate = await this.translate
-     .getTranslation(this.translate.getDefaultLang())
-     .toPromise();
-   }
+  /**
+   * Hàm lấy dữ liệu translate
+   */
+  async getDataTranslate() {
+    // Get all langs
+    this.dataTranslate = await this.translate
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
+  }
 
   /**
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
@@ -113,7 +115,7 @@ export class DmNguongocmoListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -123,9 +125,9 @@ export class DmNguongocmoListComponent implements OnInit {
     await this.getAllnguonGocMo();
   }
 
-   /**
-    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
-    */
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
 
   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
@@ -152,7 +154,7 @@ export class DmNguongocmoListComponent implements OnInit {
       .getFetchAll(searchModel);
     if (listData.items) {
       listData.items.map((nguongocmo, index) => {
-      nguongocmo.serialNumber = index + 1;
+        nguongocmo.serialNumber = index + 1;
       });
     }
     this.listNguonGocMo = listData.items;
@@ -162,7 +164,7 @@ export class DmNguongocmoListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({ Keyword: "", Trangthai: ""});
+    this.formSearch.reset({ Keyword: "", Trangthai: "" });
     this.getAllnguonGocMo();
   }
 
@@ -195,17 +197,17 @@ export class DmNguongocmoListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
-          this.getAllnguonGocMo();
+          .subscribe(res => {
+            this.getAllnguonGocMo();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -222,17 +224,17 @@ export class DmNguongocmoListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmNguonGocMoService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
-          this.getAllnguonGocMo();
+          .subscribe(res => {
+            this.getAllnguonGocMo();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -263,19 +265,19 @@ export class DmNguongocmoListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmNguonGocMoService()
-          .deleteItemsNguonGocMo(dataBody)
-          .subscribe(
-            () => {
-              this.getAllnguonGocMo();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-          ));
+            .deleteItemsNguonGocMo(dataBody)
+            .subscribe(
+              () => {
+                this.getAllnguonGocMo();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -288,10 +290,10 @@ export class DmNguongocmoListComponent implements OnInit {
   async editItemNguonGocMo(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmNguonGocMoService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.nguongocmo.titleEdit );
-    await this.matSidenavService.setContentComp( DmNguongocmoIoComponent, "edit", dataItem);
+      .getDmNguonGocMoService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.nguongocmo.titleEdit);
+    await this.matSidenavService.setContentComp(DmNguongocmoIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -358,22 +360,33 @@ export class DmNguongocmoListComponent implements OnInit {
           );
         } else {
           await this.dmFacadeService
-          .getDmNguonGocMoService()
-          .deleteItem({ id: this.selectedItem.idnguongocmo })
-          .subscribe(
-            () => this.getAllnguonGocMo(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
-          );
+            .getDmNguonGocMoService()
+            .deleteItem({ id: this.selectedItem.idnguongocmo })
+            .subscribe(
+              () => this.getAllnguonGocMo(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**
