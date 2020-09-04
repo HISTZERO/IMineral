@@ -94,7 +94,17 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
    * Hàm hiển thị content component chi tiết các khu vực
    */
   showViewDetailComponent() {
-    const factory = this.cfr.resolveComponentFactory(detailComponentKhuVucKhoangSan[this.keyKhuVuc]);
+    if (this.idKhuVuc === null || this.idKhuVuc === undefined) {
+      return;
+    }
+
+    const comp = detailComponentKhuVucKhoangSan[this.keyKhuVuc];
+
+    if (comp === null || comp === undefined) {
+      return;
+    }
+
+    const factory = this.cfr.resolveComponentFactory(comp);
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idKhuVuc = this.idKhuVuc;
