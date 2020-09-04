@@ -212,7 +212,7 @@ export class KhuvuctoadoListComponent implements OnInit {
       await this.matSidenavService.setContentComp( KhuvuctoadoIoComponent, "edit", dataItem);
       await this.matSidenavService.open();
     } else {
-      this.commonService.showeNotiResult(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkhoangsankhongtontaiInform, 2000);
+      this.commonService.showDialogWarning(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkhoangsankhongtontaiInform);
     }
   }
 
@@ -226,7 +226,7 @@ export class KhuvuctoadoListComponent implements OnInit {
       this.matSidenavService.setContentComp(KhuvuctoadoIoComponent, "new", dataItem);
       this.matSidenavService.open();
     } else {
-      this.commonService.showeNotiResult(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkhoangsankhongtontaiInform, 2000);
+      this.commonService.showDialogWarning(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkhoangsankhongtontaiInform);
     }
   }
 
@@ -323,7 +323,7 @@ export class KhuvuctoadoListComponent implements OnInit {
               .subscribe(
                 () => this.getAllToaDo(),
                 (error: HttpErrorResponse) => {
-                  this.commonService.showError(error);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -344,7 +344,7 @@ export class KhuvuctoadoListComponent implements OnInit {
               .subscribe(
                 () => this.getAllToaDo(),
                 (error: HttpErrorResponse) => {
-                  this.commonService.showError(error);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(

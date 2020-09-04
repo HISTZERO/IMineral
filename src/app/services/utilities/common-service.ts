@@ -196,6 +196,14 @@ export class CommonServiceShared {
     dialogRef.componentInstance.headerColor = 'red';
   }
 
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
+
   // get select item by id
   public getByEvent(event, lisData: any) {
     const target = event.currentTarget;
