@@ -348,7 +348,7 @@ export class KhuvuctoadoListComponent implements OnInit {
                 },
                 () =>
                   this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
+                    this.dataTranslate.COMMON.default.successSave,
                     2000
                   )
               );
