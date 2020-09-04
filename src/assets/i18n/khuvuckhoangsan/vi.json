@@ -192,6 +192,7 @@
   },
   "khuvuctoado": {
     "titleList": "Danh sách tọa độ",
+    "contentDelete": "Khu vực tọa độ: ",
     "sohieu": "Số hiệu",
     "toadox": "Tọa độ x",
     "toadoy": "Tọa độ y",
@@ -203,6 +204,7 @@
     "toadoxFormat": "Tọa độ X chưa đúng định dạng yêu cầu",
     "toadoyRequired": "Tọa độ Y không được để trống",
     "toadoyFormat": "Tọa độ Y chưa đúng định dạng yêu cầu",
-    "thongtinkhoangsankhongtontaiInform": "Thông tin khoáng sản không tồn tại"
+    "thongtinkhoangsankhongtontaiInform": "Thông tin khoáng sản không tồn tại",
+    "thongtinkiemtrasoluongkhuvuctoado": "Số lượng khu vục tọa độ phải >= 3, hoặc = 0"
   }
 }

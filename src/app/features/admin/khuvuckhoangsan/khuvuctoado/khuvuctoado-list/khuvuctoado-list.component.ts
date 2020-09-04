@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -11,8 +11,10 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { KhuVucKhoangSanFacadeService } from "../../../../../services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { ActivatedRoute } from "@angular/router";
-import {KhuVucKhoangSanEnum, MaLoaiHinhEnum, keyKhuVucKhoangSan} from "src/app/shared/constants/khuvuckhoangsan-constants";
+import {KhuVucKhoangSanEnum, MaLoaiHinhEnum, keyKhuVucKhoangSan, KhuVucKhoangSan} from "src/app/shared/constants/khuvuckhoangsan-constants";
 import { OutputKhuVucToaDoModel } from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import { SequenceModel } from 'src/app/models/admin/common/sequence.model';
 
 @Component({
   selector: 'app-khuvuctoado-list',
@@ -25,6 +27,9 @@ export class KhuvuctoadoListComponent implements OnInit {
   @ViewChild("gridToaDo", { static: false }) public gridToaDo: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compToaDoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // tslint:disable-next-line: no-input-rename
+  @Input("allowAutoInit") allowAutoInit = true;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -56,7 +61,11 @@ export class KhuvuctoadoListComponent implements OnInit {
   // Chứa id khu vực khoáng sản
   public idKhuVuc: string;
 
-  public loaikhuvuc: number;
+  public loaiKhuVuc: number;
+
+  public loaiKhuVucKhoangSan = KhuVucKhoangSan;
+
+  private squencekhuVucToaDoId: SequenceModel = new SequenceModel();
 
   // Contructor
   constructor(
@@ -68,13 +77,23 @@ export class KhuvuctoadoListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
+    if (this.allowAutoInit) {
+      await this.manualInit();
+    }
+  }
+
+  async manualInit() {
+    this.squencekhuVucToaDoId.setDefaultValue(1);
+
     await this.activatedRoute.queryParamMap.subscribe((param: any) => {
       this.keyKhuVuc = param.params.keykhuvuc;
       this.idKhuVuc = param.params.idkhuvuc;
     });
+
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Setting wrap mode
@@ -87,6 +106,8 @@ export class KhuvuctoadoListComponent implements OnInit {
 
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
+
+    return true;
   }
 
   /**
@@ -134,38 +155,38 @@ export class KhuvuctoadoListComponent implements OnInit {
         ) || this.idKhuVuc == null || this.idKhuVuc === undefined) {
       this.thongTinKhuVucKhoangSan = null;
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucCamTamCam) {
-      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucCamTamCamService().getByid(this.idKhuVuc);
+      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucCamTamCamService().getByid(this.idKhuVuc).toPromise();
 
       if (this.thongTinKhuVucKhoangSan) {
         if (this.thongTinKhuVucKhoangSan.maloaihinh === MaLoaiHinhEnum.KhuVucCam) {
-          this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucCam;
+          this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucCam;
         } else if (this.thongTinKhuVucKhoangSan.maloaihinh === MaLoaiHinhEnum.KhuVucTamCam) {
-          this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucTamCam;
+          this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucTamCam;
         }
       }
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucDauGia) {
-      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucDauGiaService().getByid(this.idKhuVuc);
+      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucDauGiaService().getByid(this.idKhuVuc).toPromise();
 
       if (this.thongTinKhuVucKhoangSan) {
-        this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucDauGia;
+        this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucDauGia;
       }
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucKhongDauGia) {
-      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucKhongDauGiaService().getByid(this.idKhuVuc);
+      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucKhongDauGiaService().getByid(this.idKhuVuc).toPromise();
 
       if (this.thongTinKhuVucKhoangSan) {
-        this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucKhongDauGia;
+        this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucKhongDauGia;
       }
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucKhoangSanDocHai) {
-      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucKhoangSanDocHaiService().getByid(this.idKhuVuc);
+      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucKhoangSanDocHaiService().getByid(this.idKhuVuc).toPromise();
 
       if (this.thongTinKhuVucKhoangSan) {
-        this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucKhoangSanDocHai;
+        this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucKhoangSanDocHai;
       }
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucDuTruKhoangSan) {
-      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucDuTruKhoangSanService().getByid(this.idKhuVuc);
+      this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucDuTruKhoangSanService().getByid(this.idKhuVuc).toPromise();
 
       if (this.thongTinKhuVucKhoangSan) {
-        this.loaikhuvuc = KhuVucKhoangSanEnum.KhuVucDuTruKhoangSan;
+        this.loaiKhuVuc = KhuVucKhoangSanEnum.KhuVucDuTruKhoangSan;
       }
     }
   }
@@ -175,13 +196,8 @@ export class KhuvuctoadoListComponent implements OnInit {
   async getAllToaDo() {
     const listData: any = await this.kvKhoangSanFacadeSv
       .getKhuVucToaDoService()
-      .getFetchAll({idKhuvuc: this.idKhuVuc});
-    if (listData) {
-      listData.map((khuvuctoado, index) => {
-        khuvuctoado.serialNumber = index + 1;
-      });
-    }
-    this.listToaDo = listData;
+      .getFetchAll({idKhuvuc: this.idKhuVuc}) as OutputKhuVucToaDoModel[];
+    this.listToaDo = this.generalClientService.generateOrderOf(listData, "serialNumber", 1);
   }
 
   /**
@@ -205,7 +221,7 @@ export class KhuvuctoadoListComponent implements OnInit {
    */
   openKhuVucToaDoIOSidenav() {
     if (this.thongTinKhuVucKhoangSan !== null) {
-      const dataItem: any = {idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaikhuvuc};
+      const dataItem: any = {idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaiKhuVuc};
       this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.titleAdd);
       this.matSidenavService.setContentComp(KhuvuctoadoIoComponent, "new", dataItem);
       this.matSidenavService.open();
@@ -219,12 +235,16 @@ export class KhuvuctoadoListComponent implements OnInit {
    */
   addOrUpdateGrid(input: any) {
     if (input.purpose === 'new') {
+      input.data.idkhuvuctoado = this.squencekhuVucToaDoId.getNextVal();
       this.listToaDo.unshift(input.data);
-      this.gridToaDo.refresh();
-      this.commonService.showeNotiResult(this.dataTranslate.COMMON.default.successDelete, 2000);
+      this.commonService.showeNotiResult(this.dataTranslate.COMMON.default.successAdd, 2000);
     } else if (input.purpose === 'edit') {
-
+      this.listToaDo = this.generalClientService.updateDataToList<OutputKhuVucToaDoModel>(this.listToaDo, input.data, "idkhuvuctoado");
+      this.commonService.showeNotiResult(this.dataTranslate.COMMON.default.successEdit, 2000);
     }
+
+    this.listToaDo = this.generalClientService.generateOrderOf<OutputKhuVucToaDoModel>(this.listToaDo, "serialNumber", 1);
+    this.gridToaDo.refresh();
   }
 
   /**
@@ -240,10 +260,10 @@ export class KhuvuctoadoListComponent implements OnInit {
    */
   async deleteItemKhuVucToaDo(data) {
     this.selectedItem = data;
-    // const canDelete: string = this.dmFacadeService
-    //   .getDmCanhanService()
-    //   .checkBeDeleted(this.selectedItem.idcanhan);
-    // this.canBeDeletedCheck(canDelete);
+    const canDelete: string = this.kvKhoangSanFacadeSv
+      .getKhuVucToaDoService()
+      .checkBeDeleted(this.selectedItem.idkhuvuctoado);
+    this.canBeDeletedCheck(canDelete);
   }
 
   /**
@@ -262,30 +282,81 @@ export class KhuvuctoadoListComponent implements OnInit {
    * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
    */
   confirmDeleteDiaLog() {
-    // const dialogRef = this.commonService.confirmDeleteDiaLogService(
-    //   this.dataTranslate.DANHMUC.canhan.contentDelete,
-    //   this.selectedItem.hovaten
-    // );
-    // dialogRef.afterClosed().subscribe(async (result) => {
-    //   if (result === "confirm") {
-    //         await this.dmFacadeService
-    //           .getDmCanhanService()
-    //           .deleteItem({ idCanhan: this.selectedItem.idcanhan })
-    //           .subscribe(
-    //             () => this.getAllToaDo(),
-    //             (error: HttpErrorResponse) => {
-    //               this.commonService.showeNotiResult(error.message, 2000);
-    //             },
-    //             () =>
-    //               this.commonService.showeNotiResult(
-    //                 this.dataTranslate.COMMON.default.successDelete,
-    //                 2000
-    //               )
-    //           );
-    //   }
-    // });
+    let content = this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.sohieu + ": " + this.selectedItem.sohieu + ", ";
+    content += this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadox + ": " + this.selectedItem.toadox + ", ";
+    content += this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoy + ": " + this.selectedItem.toadoy;
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(
+      this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.contentDelete,
+      content
+    );
+
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        const index = this.listToaDo.findIndex(d => d.idkhuvuctoado === this.selectedItem.idkhuvuctoado);
+        this.listToaDo.splice(index, 1);
+        this.listToaDo = this.generalClientService.generateOrderOf<OutputKhuVucToaDoModel>(this.listToaDo, "serialNumber", 1);
+        this.gridToaDo.refresh();
+        this.commonService.showeNotiResult(
+          this.dataTranslate.COMMON.default.successDelete,
+          2000
+        );
+      }
+    });
   }
 
+  /* save
+   * Save dữ liệu tọa độ theo khu vực
+   */
+  async saveData() {
+    /*
+      Kiểm tra dữ liệu tọa độ trên grid.
+        - Nếu không tồn tại. Gọi xóa dữ liệu tọa độ trên DB theo idkhuvuc
+        - Nếu dữ liệu tọa độ trên Grid ít hơn 3 thì gửi thông báo
+        - Nếu dữ liêu trên grid lớn hơn 3 cập nhật dữ liệu vào DB theo idkhuvuc
+     */
+    const dialogRef = this.commonService.confirmSaveDiaLogService("", "");
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        if ((this.listToaDo === null || this.listToaDo.length === 0) && this.idKhuVuc !== null && this.idKhuVuc !== undefined) {
+          await this.kvKhoangSanFacadeSv.getKhuVucToaDoService()
+              .deleteItem({idkhuvuc: this.idKhuVuc})
+              .subscribe(
+                () => this.getAllToaDo(),
+                (error: HttpErrorResponse) => {
+                  this.commonService.showError(error);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.successDelete,
+                    2000
+                  )
+              );
+        } else {
+          if (this.listToaDo.length < 3) {
+            const informationDialogRef = this.commonService.informationDiaLogService(
+              "",
+              this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkiemtrasoluongkhuvuctoado,
+              this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.informedDialogTitle,
+            );
+          } else {
+            await this.kvKhoangSanFacadeSv.getKhuVucToaDoService()
+              .updateItem({list: this.listToaDo})
+              .subscribe(
+                () => this.getAllToaDo(),
+                (error: HttpErrorResponse) => {
+                  this.commonService.showError(error);
+                },
+                () =>
+                  this.commonService.showeNotiResult(
+                    this.dataTranslate.COMMON.default.successDelete,
+                    2000
+                  )
+              );
+          }
+        }
+      }
+    });
+  }
   /**
    * Hàm thông báo không thể xóa
    */
@@ -294,8 +365,8 @@ export class KhuvuctoadoListComponent implements OnInit {
   }
 
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
-  doFunction(methodName) {
-    this[methodName]();
+  doFunction(methodName, obj) {
+    this[methodName](obj);
   }
 
 }

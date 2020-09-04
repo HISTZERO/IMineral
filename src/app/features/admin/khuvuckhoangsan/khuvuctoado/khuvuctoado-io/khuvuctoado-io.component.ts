@@ -78,7 +78,7 @@ export class KhuvuctoadoIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       toadox: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoxRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoxFormat },
-      t0adoy: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyFormat }
+      toadoy: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyFormat }
     };
   }
 
@@ -98,8 +98,8 @@ export class KhuvuctoadoIoComponent implements OnInit {
   formInit() {
     this.khuvuctoadoIOForm = this.formBuilder.group({
       sohieu: [""],
-      toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\.{0,1}\d{0,2}$")]],
-      toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\.{0,1}\d{0,2}$")]],
+      toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       loaikhuvuc: ["", Validators.required],
       idkhuvuc: ["", Validators.required]
     });
@@ -137,15 +137,11 @@ export class KhuvuctoadoIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     this.inputModel = this.khuvuctoadoIOForm.value;
     if (operMode === "new") {
-      this.inputModel.idkhuvuc = this.obj.idkhuvuc;
-      this.inputModel.loaikhuvuc = this.obj.loaikhuvuc;
-      const inputData = {data: this.inputModel, purpose: 'new'};
+      const inputData = {data: this.inputModel, purpose: this.purpose};
       this.matSidenavService.doParentFunction("addOrUpdateGrid", inputData);
     } else if (operMode === "edit") {
       this.inputModel.idkhuvuctoado = this.obj.idkhuvuctoado;
-      this.inputModel.idkhuvuc = this.obj.idkhuvuc;
-      this.inputModel.loaikhuvuc = this.obj.loaikhuvuc;
-      const inputData = {data: this.inputModel, purpose: 'edit'};
+      const inputData = {data: this.inputModel, purpose: this.purpose};
       this.matSidenavService.doParentFunction("addOrUpdateGrid", inputData);
     }
   }
@@ -192,6 +188,16 @@ export class KhuvuctoadoIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.khuvuctoadoIOForm.reset();
+
+    if (this.obj && this.purpose === 'new') {
+      this.khuvuctoadoIOForm.setValue({
+        sohieu: "",
+        toadox: "",
+        toadoy: "",
+        loaikhuvuc: this.obj.loaikhuvuc,
+        idkhuvuc: this.obj.idkhuvuc
+      });
+    }
   }
 
   /**

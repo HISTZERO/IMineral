@@ -17,7 +17,7 @@
                                 <i class="fal fa-plus-square"></i>
                                 {{ "COMMON.default.add" | translate }}
                               </button>
-                              <button class="btn btn-primary mr-2" style="float: right;" (click)="openKhuVucToaDoIOSidenav()">
+                              <button class="btn btn-primary mr-2" style="float: right;" (click)="saveData()">
                                 <i class="fal fa-save"></i>
                                 {{ "COMMON.default.save" | translate }}
                               </button>
@@ -37,12 +37,16 @@
                     <e-column field="sohieu" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.sohieu' | translate }}"></e-column>
                     <e-column field="toadox" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadox' | translate }}"></e-column>
                     <e-column field="toadoy" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadoy' | translate }}"></e-column>
-                    <e-column field="loaikhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.loaikhuvuc' | translate }}"></e-column>
-                    <e-column field="idkhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                    <e-column field="loaikhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.loaikhuvuc' | translate }}">
+                      <ng-template #template let-data>
+                        {{ data.loaikhuvuc | getNameLoaiKhuVucKhoangSanPipe: loaiKhuVucKhoangSan}}
+                      </ng-template>
+                    </e-column>
+                    <e-column field="idkhuvuctoado"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                           (click)="editItemKhuVucToaDo(data.idcanhan)">
+                           (click)="editItemKhuVucToaDo(data.idkhuvuctoado)">
                             <i class="far fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
