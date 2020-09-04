@@ -13,15 +13,13 @@
           </div>
           <div class="card-body">
             <mat-tab-group mat-stretch-tabs [animationDuration]="" [selectedIndex]="selectedDefaultTab"
-              #khuVucKhoangSanTab>
+              #khuVucKhoangSanTab (selectedIndexChange)="tabChange($event)">
               <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.thongtinchung' | translate }}">
                 <ng-template appContentContainer>
                 </ng-template>
               </mat-tab>
               <mat-tab label="{{ 'KHUVUCKHOANGSAN.default.toado' | translate }}">
-                <ng-template matTabContent>
-                  <app-khuvuctoado-list></app-khuvuctoado-list>
-                </ng-template>
+                  <app-khuvuctoado-list [allowAutoInit]="false" #khuVucToaDoListComp></app-khuvuctoado-list>
               </mat-tab>
             </mat-tab-group>
           </div>

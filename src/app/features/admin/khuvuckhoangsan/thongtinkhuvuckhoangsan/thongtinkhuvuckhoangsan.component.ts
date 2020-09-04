@@ -6,8 +6,9 @@ import { MatTabGroup } from "@angular/material";
 import { detailComponentKhuVucKhoangSan, nameKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { ContentContainerDirective } from "src/app/shared/directives/content-container/content-container.directive";
+import { KhuvuctoadoListComponent } from '../khuvuctoado/khuvuctoado-list/khuvuctoado-list.component';
 
-enum TabEnum {
+enum ThongTinKhoangSanTabEnum {
   ThongTinChung = 0,
   ToaDo = 1
 }
@@ -20,6 +21,12 @@ enum TabEnum {
 export class ThongtinkhuvuckhoangsanComponent implements OnInit {
   @ViewChild("tab", { static: true }) khuVucKhoangSanTab: MatTabGroup;
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
+  @ViewChild("khuVucToaDoListComp", { static: false }) khuVucToaDoListComp: KhuvuctoadoListComponent;
+
+  public loadedTabState: any = {
+    [ThongTinKhoangSanTabEnum.ThongTinChung]: false,
+    [ThongTinKhoangSanTabEnum.ToaDo]: false
+  };
 
   public entryComponentFactory: any;
 
@@ -79,18 +86,23 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
         },
 
       ]
-    this.selectedDefaultTab = TabEnum.ThongTinChung;
+    this.selectedDefaultTab = ThongTinKhoangSanTabEnum.ThongTinChung;
     this.showViewDetailComponent();
   }
 
   /**
    * Hàm hiển thị content component chi tiết các khu vực
    */
-  public showViewDetailComponent() {
+  showViewDetailComponent() {
     const factory = this.cfr.resolveComponentFactory(detailComponentKhuVucKhoangSan[this.keyKhuVuc]);
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idKhuVuc = this.idKhuVuc;
   }
 
+  async tabChange(index: any) {
+    if (index === ThongTinKhoangSanTabEnum.ToaDo && !this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo]) {
+      this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo] = await this.khuVucToaDoListComp.manualInit();
+    }
+  }
 }
