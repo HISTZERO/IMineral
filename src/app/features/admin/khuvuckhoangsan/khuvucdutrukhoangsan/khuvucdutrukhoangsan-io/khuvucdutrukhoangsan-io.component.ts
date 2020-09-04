@@ -3,6 +3,7 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
+import { MatDialog } from "@angular/material";
 
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -11,6 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { InputKhuVucDuTruKhoangSanModel } from "src/app/models/admin/khuvuckhoangsan/khuvucdutrukhoangsan.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-khuvucdutrukhoangsan-io',
@@ -68,6 +70,7 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
     public datePipe: DatePipe,
     public dmFacadeService: DmFacadeService,
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -176,7 +179,7 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -189,7 +192,7 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
       kvKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -243,6 +246,17 @@ export class KhuvucdutrukhoangsanIoComponent implements OnInit {
       this.onFormReset();
       this.purpose = "new";
     }
+  }
+
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

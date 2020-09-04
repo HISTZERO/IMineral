@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
+import { MatDialog } from "@angular/material";
 
 import { InputDiemMoModel } from "src/app/models/admin/diemquang-moquang/diemmo.model";
 import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-moquang/diemquang-moquang-facade.service";
@@ -11,6 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 @Component({
   selector: 'app-diemquang-io',
   templateUrl: './diemquang-io.component.html',
@@ -71,12 +73,14 @@ export class DiemquangIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              public dmFacadeService: DmFacadeService,
-              private translate: TranslateService,
-              public datePipe: DatePipe) { }
+    public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    public dmFacadeService: DmFacadeService,
+    private translate: TranslateService,
+    public datePipe: DatePipe,
+    public modalDialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -97,9 +101,9 @@ export class DiemquangIoComponent implements OnInit {
       sohieumo: [""],
       tenmo: ["", Validators.required],
       diadiem: ["", Validators.required],
-      loaikhoangsan:  [""],
-      nguongocmo:  [""],
-      tobando:  [""],
+      loaikhoangsan: [""],
+      nguongocmo: [""],
+      tobando: [""],
       dientich: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       truluong: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       chieudaytu: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
@@ -125,7 +129,7 @@ export class DiemquangIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -136,8 +140,8 @@ export class DiemquangIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -149,14 +153,14 @@ export class DiemquangIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenmo: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.tenmoRequired },
       diadiem: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.diadiemRequired },
-      dientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichRequired , pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichFormat },
+      dientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.dientichFormat },
       truluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.truluongFormat },
       chieudaytu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaytuFormat },
       chieudayden: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.chieudaydenFormat },
       donvitruluong: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvitruluongRequired },
-      donvidientich:  { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvidientichRequired },
-      toadox: {required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxFormat },
-      toadoy: {required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyFormat },
+      donvidientich: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.donvidientichRequired },
+      toadox: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoxFormat },
+      toadoy: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyRequired, pattern: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.toadoyFormat },
       hequychieu: { required: this.dataTranslate.DIEMQUANGMOQUANG.diemmo.hequychieuRequired },
     };
   }
@@ -215,7 +219,7 @@ export class DiemquangIoComponent implements OnInit {
       diemQuangMoQuangFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -228,7 +232,7 @@ export class DiemquangIoComponent implements OnInit {
       diemQuangMoQuangFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -270,6 +274,17 @@ export class DiemquangIoComponent implements OnInit {
       this.onFormReset();
       this.purpose = "new";
     }
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+import { MatDialog } from "@angular/material";
 
 import { InputDmLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
@@ -11,6 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 import { TrangThaiEnum } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaikhoangsan-io',
@@ -48,7 +50,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
 
   // Chứa kiểu boolean hiển thị thuộc tính column
   public classColDvhc: boolean = false;
- 
+
   // error message
   validationErrorMessages = {};
 
@@ -74,8 +76,9 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    public modalDialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     // Lấy dữ liệu nhóm khoáng sản
@@ -86,8 +89,8 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
-    
+
+
   }
 
   /**
@@ -96,8 +99,8 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -117,11 +120,11 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   * Hàm lấy dữ liệu Nhóm khoáng sản
   */
   async getAllNhomKhoangSan() {
-  const listData: any = await this.dmFacadeService
-    .getDmNhomKhoangSanService()
-    .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
-  this.listNhomKhoangSan = listData.items;
-}
+    const listData: any = await this.dmFacadeService
+      .getDmNhomKhoangSanService()
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
+    this.listNhomKhoangSan = listData.items;
+  }
 
   /**
   * Hàm khởi tạo form theo dạng edit
@@ -158,10 +161,10 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
         tenloaikhoangsan: this.obj.tenloaikhoangsan,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
-        nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
+        nhomkhoangsan: { idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan },
         idnhomkhoangsan: this.obj.idnhomkhoangsan
       });
-      
+
       this.dataComboboxModel = {
         idnhomkhoangsan: this.obj.idnhomkhoangsan,
         tennhomkhoangsan: this.obj.tennhomkhoangsan
@@ -182,7 +185,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -196,7 +199,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -296,6 +299,16 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
 
   /**
   *  Hàm gọi từ function con gọi vào chạy function cha

@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -16,6 +16,7 @@ import { DmCaptruluongIoComponent } from "src/app/features/admin/danhmuc/captrul
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-captruluong-list',
@@ -52,7 +53,7 @@ export class DmCaptruluongListComponent implements OnInit {
 
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
-  
+
   //Chứa data Trạng thái
   public trangthai = TrangThai;
 
@@ -77,7 +78,8 @@ export class DmCaptruluongListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -89,7 +91,7 @@ export class DmCaptruluongListComponent implements OnInit {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -100,8 +102,8 @@ export class DmCaptruluongListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -121,7 +123,7 @@ export class DmCaptruluongListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -184,16 +186,24 @@ export class DmCaptruluongListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.captruluong.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.captruluong.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.NoActive
         };
-        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(res => {
-          this.getAllCapTruLuong();
-        });
+        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(
+          () => this.getAllCapTruLuong(),
+          (error: HttpErrorResponse) => {
+            this.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000
+            )
+        );
       }
     });
   }
@@ -209,9 +219,17 @@ export class DmCaptruluongListComponent implements OnInit {
           listStatus: this.listDataSelect,
           status: TrangThaiEnum.Active
         };
-        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(res => {
-          this.getAllCapTruLuong();
-        });
+        this.dmFacadeService.getDmCapTruLuongService().updateStatusItemsCapTruLuong(dataParam).subscribe(
+          () => this.getAllCapTruLuong(),
+          (error: HttpErrorResponse) => {
+            this.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.updateStatusSuccess,
+              2000
+            )
+        );
       }
     });
   }
@@ -242,19 +260,19 @@ export class DmCaptruluongListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmCapTruLuongService()
-          .deleteItemsCapTruLuong(dataBody)
-          .subscribe(
-            () => {
-              this.getAllCapTruLuong();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-            ));
+            .deleteItemsCapTruLuong(dataBody)
+            .subscribe(
+              () => {
+                this.getAllCapTruLuong();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -285,10 +303,10 @@ export class DmCaptruluongListComponent implements OnInit {
   async editItemCapTruLuong(id: string) {
     // Lấy dữ liệu cấp trữ lượng theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmCapTruLuongService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.captruluong.titleEdit );
-    await this.matSidenavService.setContentComp( DmCaptruluongIoComponent, "edit", dataItem);
+      .getDmCapTruLuongService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.captruluong.titleEdit);
+    await this.matSidenavService.setContentComp(DmCaptruluongIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -297,7 +315,7 @@ export class DmCaptruluongListComponent implements OnInit {
    */
   public openCapTruLuongIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.captruluong.titleAdd);
-    this.matSidenavService.setContentComp( DmCaptruluongIoComponent, "new");
+    this.matSidenavService.setContentComp(DmCaptruluongIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -355,22 +373,33 @@ export class DmCaptruluongListComponent implements OnInit {
           );
         } else {
           await this.dmFacadeService
-          .getDmCapTruLuongService()
-          .deleteItem({ idCaptruluong: this.selectedItem.idcaptruluong })
-          .subscribe(
-            () => this.getAllCapTruLuong(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
-          );
+            .getDmCapTruLuongService()
+            .deleteItem({ idCaptruluong: this.selectedItem.idcaptruluong })
+            .subscribe(
+              () => this.getAllCapTruLuong(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
+  }
+
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

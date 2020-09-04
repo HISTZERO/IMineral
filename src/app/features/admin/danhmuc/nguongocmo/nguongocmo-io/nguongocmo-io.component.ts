@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
+import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 
 import { InputDmNguonGocMoModel } from "src/app/models/admin/danhmuc/nguongocmo.model";
@@ -9,6 +10,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-nguongocmo-io',
@@ -56,8 +58,9 @@ export class DmNguongocmoIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService
-  ) {}
+    private translate: TranslateService,
+    public modalDialog: MatDialog
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -74,8 +77,8 @@ export class DmNguongocmoIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -85,7 +88,7 @@ export class DmNguongocmoIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tennguongocmo: { required: this.dataTranslate.DANHMUC.nguongocmo.tennguongocmoRequired},
+      tennguongocmo: { required: this.dataTranslate.DANHMUC.nguongocmo.tennguongocmoRequired },
       thutu: { pattern: this.dataTranslate.DANHMUC.nguongocmo.thutuIsNumber }
     };
   }
@@ -139,7 +142,7 @@ export class DmNguongocmoIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllnguonGocMo"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -152,7 +155,7 @@ export class DmNguongocmoIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllnguonGocMo"),
         (error: HttpErrorResponse) => {
-          this.commonService.showError(error);
+          this.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -205,6 +208,17 @@ export class DmNguongocmoIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
+  }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

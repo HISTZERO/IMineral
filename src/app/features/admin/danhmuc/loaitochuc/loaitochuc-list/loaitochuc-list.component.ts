@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -13,9 +13,10 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmLoaiDmTochucIoComponent } from "src/app/features/admin/danhmuc/loaitochuc/loaitochuc-io/loaitochuc-io.component";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-loaitochuc-list',
@@ -71,7 +72,8 @@ export class DmLoaiDmTochucListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService
+    public generalClientService: GeneralClientService,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -80,7 +82,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     // Thiết lập hiển thị checkbox trên grid
@@ -90,7 +92,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
   /**
    * Form innit
    */
-   public formInit() {
+  public formInit() {
     this.formSearch = this.formBuilder.group({
       Keyword: [""],
       Trangthai: [""]
@@ -101,7 +103,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
    */
 
-   async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
     if (status) {
       this.settingsCommon.selectionOptions = { persistSelection: true };
     } else {
@@ -115,8 +117,8 @@ export class DmLoaiDmTochucListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -125,7 +127,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -162,7 +164,7 @@ export class DmLoaiDmTochucListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({ Keyword: "", Trangthai: ""});
+    this.formSearch.reset({ Keyword: "", Trangthai: "" });
     this.getAllLoaiToChuc();
   }
 
@@ -195,17 +197,17 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
+          .subscribe(res => {
             this.getAllLoaiToChuc();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -222,17 +224,17 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmLoaiToChucService().updateStatusArrayItem(dataParam)
-        .subscribe(res => {
-          this.getAllLoaiToChuc();
+          .subscribe(res => {
+            this.getAllLoaiToChuc();
           },
-          (error: HttpErrorResponse) => {
-            this.commonService.showError(error);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.updateStatusSuccess,
-              2000)
-        );
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -263,19 +265,19 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmLoaiToChucService()
-          .deleteItemsLoaiToChuc(dataBody)
-          .subscribe(
-            () => {
-              this.getAllLoaiToChuc();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-          ));
+            .deleteItemsLoaiToChuc(dataBody)
+            .subscribe(
+              () => {
+                this.getAllLoaiToChuc();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -288,10 +290,10 @@ export class DmLoaiDmTochucListComponent implements OnInit {
   async editItemLoaiToChuc(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmLoaiToChucService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaitochuc.titleEdit );
-    await this.matSidenavService.setContentComp( DmLoaiDmTochucIoComponent, "edit", dataItem);
+      .getDmLoaiToChucService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaitochuc.titleEdit);
+    await this.matSidenavService.setContentComp(DmLoaiDmTochucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -358,23 +360,35 @@ export class DmLoaiDmTochucListComponent implements OnInit {
           );
         } else {
           await this.dmFacadeService
-          .getDmLoaiToChucService()
-          .deleteItem({ id: this.selectedItem.idloaitochuc })
-          .subscribe(
-            () => this.getAllLoaiToChuc(),
-            (error: HttpErrorResponse) => {
-              this.commonService.showError(error);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-              )
-          );
+            .getDmLoaiToChucService()
+            .deleteItem({ id: this.selectedItem.idloaitochuc })
+            .subscribe(
+              () => this.getAllLoaiToChuc(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
   }
+
+  /**
+  * Hàm hiển thị cảnh báo error
+  */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
+
 
   /**
    * Hàm thông báo không thể xóa

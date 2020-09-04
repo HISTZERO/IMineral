@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import { GridComponent, TextWrapSettingsModel, DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
@@ -17,6 +17,7 @@ import { MenuKhuVucKhoangSanDocHai } from "src/app/shared/constants/sub-menus/kh
 import { KhuvuckhoangsandochaiIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuckhoangsandochai/khuvuckhoangsandochai-io/khuvuckhoangsandochai-io.component";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-khuvuckhoangsandochai-list',
@@ -66,7 +67,8 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public router: Router
+    public router: Router,
+    public modalDialog: MatDialog
   ) {
     this.khuVucKhoangSanDocHai = this.khuvuckhoangsanFacadeService.getKhuVucKhoangSanDocHaiService();
   }
@@ -237,7 +239,7 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
           .subscribe(
             () => this.getAllKhuVucKhoangSanDocHai(),
             (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
+              this.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -249,6 +251,18 @@ export class KhuvuckhoangsandochaiListComponent implements OnInit {
     });
   }
 
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
+  }
+
+  
   /**
    * Hàm thông báo không thể xóa
    */

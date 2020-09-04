@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder } from "@angular/forms";
@@ -16,6 +16,7 @@ import { MenuDanhMucCapQuanLy } from "src/app/shared/constants/sub-menus/danhmuc
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 
 @Component({
   selector: 'app-capquanly-list',
@@ -74,7 +75,8 @@ export class DmCapquanlyListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder
+    public formBuilder: FormBuilder,
+    public modalDialog: MatDialog
   ) { }
 
   async ngOnInit() {
@@ -84,7 +86,7 @@ export class DmCapquanlyListComponent implements OnInit {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     await this.setDisplayOfCheckBoxkOnGrid(true);
@@ -96,8 +98,8 @@ export class DmCapquanlyListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -127,7 +129,7 @@ export class DmCapquanlyListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -140,7 +142,7 @@ export class DmCapquanlyListComponent implements OnInit {
   /**
    * Hàm load lại dữ liệu và reset form
    */
-  public reloadDataGrid(){
+  public reloadDataGrid() {
     this.formSearch.reset({
       Keyword: "",
       Trangthai: ""
@@ -173,10 +175,10 @@ export class DmCapquanlyListComponent implements OnInit {
   async editItemCapQuanLy(id: string) {
     // Lấy dữ liệu cấp quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmCapQuanLyService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.capquanly.titleEdit );
-    await this.matSidenavService.setContentComp( DmCapquanlyIoComponent, "edit", dataItem);
+      .getDmCapQuanLyService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.capquanly.titleEdit);
+    await this.matSidenavService.setContentComp(DmCapquanlyIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -211,7 +213,7 @@ export class DmCapquanlyListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.capquanly.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.capquanly.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
@@ -219,19 +221,19 @@ export class DmCapquanlyListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmCapQuanLyService()
-            .updateStatusItemsCapQuanLy(dataParam)
-            .subscribe(
-              () => {
-                this.getAllCapQuanLy();
-              },
-              (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.updateStatusSuccess,
-                  2000)
-            );
+          .updateStatusItemsCapQuanLy(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCapQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -248,19 +250,19 @@ export class DmCapquanlyListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmCapQuanLyService()
-            .updateStatusItemsCapQuanLy(dataParam)
-            .subscribe(
-              () => {
-                this.getAllCapQuanLy();
-              },
-              (error: HttpErrorResponse) => {
-                this.commonService.showeNotiResult(error.message, 2000);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.updateStatusSuccess,
-                  2000)
-            );
+          .updateStatusItemsCapQuanLy(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCapQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -292,19 +294,19 @@ export class DmCapquanlyListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmCapQuanLyService()
-          .deleteItemsCapQuanLy(dataBody)
-          .subscribe(
-            () => {
-              this.getAllCapQuanLy();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showeNotiResult(error.message, 2000);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-            ));
+            .deleteItemsCapQuanLy(dataBody)
+            .subscribe(
+              () => {
+                this.getAllCapQuanLy();
+              },
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
@@ -373,23 +375,34 @@ export class DmCapquanlyListComponent implements OnInit {
             this.dataTranslate.DANHMUC.capquanly.informedDialogTitle,
           );
         } else {
-            await this.dmFacadeService
-              .getDmCapQuanLyService()
-              .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
-              .subscribe(
-                () => this.getAllCapQuanLy(),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showeNotiResult(error.message, 2000);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
+          await this.dmFacadeService
+            .getDmCapQuanLyService()
+            .deleteItem({ idCapquanly: this.selectedItem.idcapquanly })
+            .subscribe(
+              () => this.getAllCapQuanLy(),
+              (error: HttpErrorResponse) => {
+                this.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
+  }
+
+  /**
+   * Hàm hiển thị cảnh báo error
+   */
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

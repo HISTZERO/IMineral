@@ -54,7 +54,8 @@
     "tenloaitochucdangdung": "Loại tổ chức đang dùng",
     "tenlinhvucdangdung": "Lĩnh vực đang dùng",
     "tencapquanlydangdung": "Cấp quản lý đang dùng",
-    "updateStatusSuccess": "Thay đổi trạng thái thành công"
+    "updateStatusSuccess": "Thay đổi trạng thái thành công",
+    "warnings": "Cảnh báo?"
   },
   "dulieutram": {
     "thongtinchung": "THÔNG TIN CHUNG",
