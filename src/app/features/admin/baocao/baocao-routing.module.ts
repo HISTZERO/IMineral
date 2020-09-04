@@ -2,7 +2,6 @@ import { Routes, RouterModule } from "@angular/router";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { BaocaoComponent } from "./baocao.component";
 import { NgModule } from "@angular/core";
-import { NgchartsComponent } from "./ngcharts/ngcharts.component";
 
 const baocaoRoutes: Routes = [
   {
@@ -12,7 +11,6 @@ const baocaoRoutes: Routes = [
         path: "",
         children: [
           { path: "", component: BaocaoComponent },
-          { path: AdminRoutingName.chartsUri, component: NgchartsComponent },
         ],
       },
     ],

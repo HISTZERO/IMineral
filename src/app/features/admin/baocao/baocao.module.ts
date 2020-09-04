@@ -1,16 +1,12 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-import { BaocaoComponent } from './baocao.component';
-import { BaocaoRoutingModule } from './baocao-routing.module';
-import { NgchartsComponent } from './ngcharts/ngcharts.component';
-import { SimpleMapComponent } from './ngcharts/simple-map/simple-map.component';
+import { BaocaoComponent } from 'src/app/features/admin/baocao/baocao.component';
+import { BaocaoRoutingModule } from 'src/app/features/admin/baocao/baocao-routing.module';
 
 @NgModule({
   declarations: [
     BaocaoComponent,
-    NgchartsComponent,
-    SimpleMapComponent
   ],
   imports: [
     CommonModule,
