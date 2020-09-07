@@ -18,6 +18,8 @@ import { BaocaoDieutrakhaosatIoComponent } from "src/app/features/admin/baocao/b
 import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 import { idNhomBaoCao, nameNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { OutputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
 
 @Component({
   selector: 'app-baocao-dieutrakhaosat-list',
@@ -39,6 +41,9 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
 
   // Chứa danh sách Báo cáo
   public listBaoCao: Observable<DataStateChangeEventArgs>;
+
+  // Chứa danh sách Loại Báo Cáo
+  public listLoaiBaoCao: OutputDmLoaiBaoCaoModel[];
 
   // Chứa dữ liệu đã chọn
   public selectedItem: OutputBaoCaoModel;
@@ -78,12 +83,16 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
     public formBuilder: FormBuilder,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public modalDialog: MatDialog
+    public modalDialog: MatDialog,
+    public dmFacadeService: DmFacadeService
   ) {
     this.baocaoService = this.baocaoFacadeService.getBaoCaoService();
   }
 
   async ngOnInit() {
+    // Lấy dữ liệu laoij báo cáo
+    this.getAllLoaiBaoCao();
+    // Lấy dữ liệu từ url
     await this.getKeyBaoCaoByUrl();
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
@@ -126,6 +135,16 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
       // Gọi hàm lấy dữ liệu pagesize
       this.getDataPageSize();
     })
+  }
+
+  /**
+  * Hàm lấy dữ liệu Loại báo cáo
+  */
+  async getAllLoaiBaoCao(param: any = { PageNumber: 1, PageSize: -1 }) {
+    const listData: any = await this.dmFacadeService
+      .getDmLoaiBaoCaoService()
+      .getFetchAll(param);
+    this.listLoaiBaoCao = listData.items;
   }
 
   /**
@@ -214,7 +233,7 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
     const dataItem: any = await this.baocaoFacadeService
       .getBaoCaoService()
       .getByid(id).toPromise();
-    await this.matSidenavService.setTitle(this.dataTranslate.BAOCAO.baocao.titleEdit + " " +  nameNhomBaoCao[this.keyBaoCao]);
+    await this.matSidenavService.setTitle(this.dataTranslate.BAOCAO.baocao.titleEdit + " " + nameNhomBaoCao[this.keyBaoCao]);
     await this.matSidenavService.setContentComp(BaocaoDieutrakhaosatIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }

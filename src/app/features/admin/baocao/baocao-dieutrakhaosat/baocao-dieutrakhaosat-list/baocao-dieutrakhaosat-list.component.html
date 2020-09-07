@@ -12,6 +12,17 @@
                 <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
+                    <label class="col-form-label text-right">{{"BAOCAO.baocao.loaibaocao" | translate}}:</label>
+                    <mat-select class="form-control" formControlName="Idloaibaocao" placeholder="{{ 'BAOCAO.baocao.loaibaocaoPlaceholder' | translate }}" *ngIf="dataTranslate">
+                      <mat-option value="">
+                        {{ "BAOCAO.baocao.loaibaocaoPlaceholder" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let loaiBC of listLoaiBaoCao " [value]="loaiBC.idloaibaocao">
+                          {{ loaiBC.tenloaibaocao }}
+                      </mat-option>
+                    </mat-select>
+                  </div>
+                  <div class="col-lg-3 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"BAOCAO.baocao.doituongbaocao" | translate}}:</label>
                     <mat-select class="form-control" formControlName="Doituongbaocao" placeholder="{{ 'BAOCAO.baocao.doituongbaocaoPlaceholder' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
