@@ -81,7 +81,7 @@
             <div class="col-sm-9">
                 <mat-select class="form-control"
                     placeholder="{{'KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhPlaceholder' | translate}}"
-                    formControlName="maloaihinh" *ngIf="dataTranslate">
+                    formControlName="maloaihinh" *ngIf="dataTranslate" #selectedMaLoaiHinh>
                     <mat-option value="">
                         {{ "KHUVUCKHOANGSAN.khuvuccamtamcam.maloaihinhPlaceholder" | translate }}
                     </mat-option>
@@ -92,7 +92,7 @@
                 <span *ngIf="formErrors.maloaihinh" class="alert-danger">{{formErrors.maloaihinh}}</span>
             </div>
         </div>
-        <div class="form-group row mx-0">
+        <!-- <div class="form-group row mx-0">
             <label
                 class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuccamtamcam.loaihinhcam" | translate}}</label>
             <div class="col-sm-9">
@@ -100,7 +100,7 @@
                     placeholder="{{'KHUVUCKHOANGSAN.khuvuccamtamcam.loaihinhcamPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.loaihinhcam" class="alert-danger">{{formErrors.loaihinhcam}}</span>
             </div>
-        </div>
+        </div> -->
         <div class="form-group row mx-0">
             <label
                 class="col-sm-3 col-form-label text-right">{{"KHUVUCKHOANGSAN.khuvuccamtamcam.lydocam" | translate}}</label>
