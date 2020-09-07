@@ -13,7 +13,7 @@ const baocaoRoutes: Routes = [
         path: "",
         children: [
           { path: "", component: BaocaoComponent },
-          { path: ":key", component: BaocaoDieutrakhaosatListComponent}
+          { path:  AdminRoutingName.danhsach +"/:key", component: BaocaoDieutrakhaosatListComponent}
         ],
       },
     ],

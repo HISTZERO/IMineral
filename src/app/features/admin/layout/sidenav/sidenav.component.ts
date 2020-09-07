@@ -217,12 +217,12 @@ export class SidenavComponent implements OnInit {
         {
           label: "Báo cáo điều tra khảo sát khoáng sản",
           faIcon: "",
-          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.dieutrakhaosatUri}`
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.dieutrakhaosatUri}`
         },
         {
           label: "Báo cáo định kỳ hoạt động khoáng sản",
           faIcon: "",
-          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.baocaohoatdongdinhkyUri}`
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.baocaohoatdongdinhkyUri}`
         },
         {
           label: "Giám sát hoạt động khoáng sản",
