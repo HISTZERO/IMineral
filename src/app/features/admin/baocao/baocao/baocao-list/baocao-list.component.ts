@@ -14,19 +14,19 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
 import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { BaocaoDieutrakhaosatIoComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-io/baocao-dieutrakhaosat-io.component";
 import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 import { idNhomBaoCao, nameNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
+import { BaocaoIoComponent } from "../baocao-io/baocao-io.component";
 
 @Component({
-  selector: 'app-baocao-dieutrakhaosat-list',
-  templateUrl: './baocao-dieutrakhaosat-list.component.html',
-  styleUrls: ['./baocao-dieutrakhaosat-list.component.scss']
+  selector: 'app-baocao-list',
+  templateUrl: './baocao-list.component.html',
+  styleUrls: ['./baocao-list.component.scss']
 })
-export class BaocaoDieutrakhaosatListComponent implements OnInit {
+export class BaocaoListComponent implements OnInit {
 
   // Viewchild template
   @ViewChild("gridBaoCao", { static: false }) public gridBcDieuTraKhaoSat: GridComponent;
@@ -234,7 +234,7 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
       .getBaoCaoService()
       .getByid(id).toPromise();
     await this.matSidenavService.setTitle(this.dataTranslate.BAOCAO.baocao.titleEdit + " " + nameNhomBaoCao[this.keyBaoCao]);
-    await this.matSidenavService.setContentComp(BaocaoDieutrakhaosatIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp(BaocaoIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
@@ -243,7 +243,7 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
    */
   public openBaoCaoIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.BAOCAO.baocao.titleAdd + " " + nameNhomBaoCao[this.keyBaoCao]);
-    this.matSidenavService.setContentComp(BaocaoDieutrakhaosatIoComponent, "new");
+    this.matSidenavService.setContentComp(BaocaoIoComponent, "new");
     this.matSidenavService.open();
   }
 
@@ -331,4 +331,5 @@ export class BaocaoDieutrakhaosatListComponent implements OnInit {
   doFunction(methodName) {
     this[methodName]();
   }
+
 }

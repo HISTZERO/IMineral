@@ -3,21 +3,21 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 import { By } from '@angular/platform-browser';
 import { DebugElement } from '@angular/core';
 
-import { BaocaoDieutrakhaosatListComponent } from './baocao-dieutrakhaosat-list.component';
+import { BaocaoListComponent } from './baocao-list.component';
 
-describe('BaocaoDieutrakhaosatListComponent', () => {
-  let component: BaocaoDieutrakhaosatListComponent;
-  let fixture: ComponentFixture<BaocaoDieutrakhaosatListComponent>;
+describe('BaocaoListComponent', () => {
+  let component: BaocaoListComponent;
+  let fixture: ComponentFixture<BaocaoListComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ BaocaoDieutrakhaosatListComponent ]
+      declarations: [ BaocaoListComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(BaocaoDieutrakhaosatListComponent);
+    fixture = TestBed.createComponent(BaocaoListComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

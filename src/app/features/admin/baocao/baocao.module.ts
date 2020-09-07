@@ -6,17 +6,15 @@ import { OwlMomentDateTimeModule } from "ng-pick-datetime-moment";
 
 import { BaocaoComponent } from 'src/app/features/admin/baocao/baocao.component';
 import { BaocaoRoutingModule } from 'src/app/features/admin/baocao/baocao-routing.module';
-import { BaocaoDieutrakhaosatListComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-list/baocao-dieutrakhaosat-list.component";
-import { BaocaoDieutrakhaosatIoComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-io/baocao-dieutrakhaosat-io.component";
-import { BaocaoDieutrakhaosatDetailComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-detail/baocao-dieutrakhaosat-detail.component";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
+import { BaocaoListComponent } from "src/app/features/admin/baocao/baocao/baocao-list/baocao-list.component";
+import { BaocaoIoComponent } from "src/app/features/admin/baocao/baocao/baocao-io/baocao-io.component";
 
 @NgModule({
   declarations: [
     BaocaoComponent,
-    BaocaoDieutrakhaosatListComponent,
-    BaocaoDieutrakhaosatIoComponent,
-    BaocaoDieutrakhaosatDetailComponent
+    BaocaoListComponent,
+    BaocaoIoComponent
   ],
   imports: [
     CommonModule,
@@ -27,7 +25,7 @@ import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
     TranslateModule
   ],
   entryComponents: [
-    BaocaoDieutrakhaosatIoComponent
+    BaocaoIoComponent
   ]
 })
 export class BaocaoModule { }
