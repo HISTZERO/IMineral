@@ -154,6 +154,11 @@ export class SidenavComponent implements OnInit {
           faIcon: "",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdutrukhoangsanUri}`
         },
+        {
+          label: "Khu vực thăm dò khoáng sản",
+          faIcon: "",
+          link: ``
+        },
       ]
     },
     {
@@ -162,15 +167,15 @@ export class SidenavComponent implements OnInit {
       link: "",
       items: [
         {
-          label: "Điểm quặng",
+          label: "Quản lý mỏ khoáng sản",
+          faIcon: "",
+          link: ``
+        },
+        {
+          label: "Quản lý điểm quặng",
           faIcon: "",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.diemquangmoquangUri}/${AdminRoutingName.diemquangUri}`
         },
-        // {
-        //   label: "Mỏ quặng",
-        //   faIcon: "",
-        //   link: ""
-        // },
       ]
     },
     {
@@ -227,8 +232,13 @@ export class SidenavComponent implements OnInit {
         {
           label: "Giám sát hoạt động khoáng sản",
           faIcon: "",
-          link: ""
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.giamsathoatdongUri}`
         },
+        {
+          label: "Thông tin tư liệu khoáng sản",
+          faIcon: "",
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.thongtintulieuUri}`
+        }
       ]
     },
     {

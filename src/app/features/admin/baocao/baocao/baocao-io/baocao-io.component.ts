@@ -83,6 +83,7 @@ export class BaocaoIoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.getDataByUrl();
     // Lấy dữ liệu loại báo cáo
     this.getAllLoaiBaoCao();
     // Khởi tạo form
@@ -119,6 +120,7 @@ export class BaocaoIoComponent implements OnInit {
    */
   public getDataByUrl() {
     this.keyBaoCao = this.activatedRoute.snapshot.paramMap.get('key');
+
   }
 
   /**
@@ -200,6 +202,7 @@ export class BaocaoIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idbaocao = this.obj.idbaocao;
+      this.inputModel.nhombaocao = this.obj.nhombaocao;
       baoCaoFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {

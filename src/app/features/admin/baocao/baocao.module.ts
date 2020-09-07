@@ -9,12 +9,16 @@ import { BaocaoRoutingModule } from 'src/app/features/admin/baocao/baocao-routin
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { BaocaoListComponent } from "src/app/features/admin/baocao/baocao/baocao-list/baocao-list.component";
 import { BaocaoIoComponent } from "src/app/features/admin/baocao/baocao/baocao-io/baocao-io.component";
+import { BaocaoInfoComponent } from "src/app/features/admin/baocao/baocao/baocao-info/baocao-info.component";
+import { BaocaoDetailComponent } from "src/app/features/admin/baocao/baocao/baocao-info/baocao-detail/baocao-detail.component";
 
 @NgModule({
   declarations: [
     BaocaoComponent,
     BaocaoListComponent,
-    BaocaoIoComponent
+    BaocaoIoComponent,
+    BaocaoInfoComponent,
+    BaocaoDetailComponent
   ],
   imports: [
     CommonModule,

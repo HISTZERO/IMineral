@@ -293,7 +293,7 @@ export class BaocaoListComponent implements OnInit {
       if (result === "confirm") {
         await this.baocaoFacadeService
           .getBaoCaoService()
-          .deleteItem({ idkhuvuc: this.selectedItem.idbaocao })
+          .deleteItem({ idbaocao: this.selectedItem.idbaocao })
           .subscribe(
             () => this.getAllBaoCao(),
             (error: HttpErrorResponse) => {
