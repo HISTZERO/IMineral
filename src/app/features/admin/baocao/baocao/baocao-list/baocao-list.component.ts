@@ -14,7 +14,6 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
 import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { BaocaoDieutrakhaosatIoComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-io/baocao-dieutrakhaosat-io.component";
 import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
 import { idNhomBaoCao, nameNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
