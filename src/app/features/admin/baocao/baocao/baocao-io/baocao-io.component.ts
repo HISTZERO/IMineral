@@ -18,11 +18,11 @@ import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
 import { idNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 
 @Component({
-  selector: 'app-baocao-dieutrakhaosat-io',
-  templateUrl: './baocao-dieutrakhaosat-io.component.html',
-  styleUrls: ['./baocao-dieutrakhaosat-io.component.scss']
+  selector: 'app-baocao-io',
+  templateUrl: './baocao-io.component.html',
+  styleUrls: ['./baocao-io.component.scss']
 })
-export class BaocaoDieutrakhaosatIoComponent implements OnInit {
+export class BaocaoIoComponent implements OnInit {
 
   // Chứa dữ liệu Form báo cáo
   public baoCaoIOForm: FormGroup;
@@ -294,6 +294,4 @@ export class BaocaoDieutrakhaosatIoComponent implements OnInit {
   doFunction(methodName) {
     this[methodName]();
   }
-
-
 }

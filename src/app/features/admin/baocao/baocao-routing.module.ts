@@ -3,7 +3,7 @@ import { NgModule } from "@angular/core";
 
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { BaocaoComponent } from "src/app/features/admin/baocao/baocao.component";
-import { BaocaoDieutrakhaosatListComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-list/baocao-dieutrakhaosat-list.component";
+import { BaocaoListComponent } from "src/app/features/admin/baocao/baocao/baocao-list/baocao-list.component";
 
 const baocaoRoutes: Routes = [
   {
@@ -13,7 +13,7 @@ const baocaoRoutes: Routes = [
         path: "",
         children: [
           { path: "", component: BaocaoComponent },
-          { path:  AdminRoutingName.danhsach +"/:key", component: BaocaoDieutrakhaosatListComponent}
+          { path:  AdminRoutingName.danhsach +"/:key", component: BaocaoListComponent}
         ],
       },
     ],
