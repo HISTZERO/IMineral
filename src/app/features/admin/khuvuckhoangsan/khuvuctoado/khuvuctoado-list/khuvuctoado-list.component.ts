@@ -65,6 +65,8 @@ export class KhuvuctoadoListComponent implements OnInit {
 
   public loaiKhuVucKhoangSan = KhuVucKhoangSan;
 
+  public minimumNumberOfKhuVucToaDoRecord = 3;
+
   private squencekhuVucToaDoId: SequenceModel = new SequenceModel();
 
   // Contructor
@@ -332,7 +334,7 @@ export class KhuvuctoadoListComponent implements OnInit {
                   )
               );
         } else {
-          if (this.listToaDo.length < 3) {
+          if (this.listToaDo.length < this.minimumNumberOfKhuVucToaDoRecord) {
             const informationDialogRef = this.commonService.informationDiaLogService(
               "",
               this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkiemtrasoluongkhuvuctoado,
