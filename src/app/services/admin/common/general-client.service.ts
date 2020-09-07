@@ -15,7 +15,7 @@ export class GeneralClientService {
     const arrKeys: any[] = Object.keys(data[0]);
     const keyResult = arrKeys.find(key => key === keyName);
 
-    if (keyResult === null) {
+    if (keyResult === null || keyResult === undefined) {
       return data;
     }
 
@@ -38,7 +38,7 @@ export class GeneralClientService {
     const arrKeys: any[] = Object.keys(data[0]);
     const keyResult = arrKeys.find(key => key === keyName);
 
-    if (keyResult === null) {
+    if (keyResult === null || keyResult === undefined) {
       return null;
     }
 
@@ -61,10 +61,98 @@ export class GeneralClientService {
 
     const result = data.find(key => key === keyName);
 
-    if (result === null) {
+    if (result === null || result === undefined) {
       return false;
     }
 
     return true;
+  }
+
+  updateDataToList<T>(list: T[], data: T, keyPar: string): T[] {
+    if (keyPar === null || keyPar === undefined) {
+      return list;
+    }
+
+    let arrKeys: any[] = Object.keys(list[0]);
+    let keyResult = arrKeys.find(key => key === keyPar);
+
+    if (keyResult === null || keyResult === undefined) {
+      return list;
+    }
+
+    arrKeys = Object.keys(data);
+    keyResult = arrKeys.find(key => key === keyPar);
+
+    if (keyResult === null || keyResult === undefined) {
+      return list;
+    }
+
+    list.map((item, index) => {
+      if (item[keyPar] === data[keyPar]) {
+        list[index] = data;
+        return list;
+      }
+    });
+
+    return list;
+  }
+
+  generateIndex<T>(list: T[], keyName: string, startAt: number): T[] {
+    if (keyName === null || keyName === undefined) {
+      return list;
+    }
+
+    if (list == null || list.length === 0) {
+      return list;
+    }
+
+    const arrKeys: any[] = Object.keys(list[0]);
+    const keyResult = arrKeys.find(key => key === keyName);
+
+    if (keyResult === null || keyResult === undefined) {
+      return list;
+    }
+
+    if (typeof list[0][keyName] !== "number") {
+      return list;
+    }
+
+    list.map((item, index) => {
+      item[keyName] = startAt + index;
+    });
+
+    return list;
+  }
+
+  generateOrderOf<T>(list: T[], keyName: string, startAt: number): any[] {
+    if (keyName === null || keyName === undefined) {
+      return list;
+    }
+
+    if (list == null || list.length === 0) {
+      return list;
+    }
+
+    const arrKeys: any[] = Object.keys(list[0]);
+    const keyResult = arrKeys.find(key => key === keyName);
+
+    if (keyResult === null || keyResult === undefined) {
+      const listData = list as any[];
+      listData.map((item, index) => {
+        item[keyName] = startAt + index;
+      });
+
+      return listData;
+    }
+
+    if (typeof list[0][keyName] !== "number") {
+      return list;
+    }
+
+    list.map((item, index) => {
+      item[keyName] = startAt + index;
+    });
+
+    return list;
   }
 }

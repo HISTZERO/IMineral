@@ -161,10 +161,22 @@ export class CommonServiceShared {
     return dialogRef;
   }
 
+  // confirm delete dialog
+  public confirmSaveDiaLogService(titleText: string, nameObj: string, titleHeader?: string) {
+    const dialogRef = this.modalDialog.open(MyAlertDialogComponent);
+    dialogRef.componentInstance.header = titleHeader ? titleHeader : this.dataTranslate.COMMON.default.saveSub;
+    dialogRef.componentInstance.content = titleText + ' <b>' + nameObj + '</b>';
+    dialogRef.componentInstance.okeButton = this.dataTranslate.COMMON.default.success;
+    dialogRef.componentInstance.cancelButton = this.dataTranslate.COMMON.default.cancel;
+    dialogRef.componentInstance.visibleOkButton = true;
+    dialogRef.componentInstance.visibleCancelButton = true;
+    return dialogRef;
+  }
+
   // information dialog
   public informationDiaLogService(titleText: string, nameObj: string, titleHeader?: string) {
     const dialogRef = this.modalDialog.open(MyAlertDialogComponent);
-    dialogRef.componentInstance.header = titleHeader ? titleHeader : this.dataTranslate.COMMON.default.deleteSub;
+    dialogRef.componentInstance.header = titleHeader ? titleHeader : "";
     dialogRef.componentInstance.content = titleText + ' <b>' + nameObj + '</b>';
     dialogRef.componentInstance.okeButton = this.dataTranslate.COMMON.default.success;
     dialogRef.componentInstance.cancelButton = this.dataTranslate.COMMON.default.cancel;
@@ -182,6 +194,14 @@ export class CommonServiceShared {
     dialogRef.componentInstance.visibleOkButton = false;
     dialogRef.componentInstance.visibleCancelButton = true;
     dialogRef.componentInstance.headerColor = 'red';
+  }
+
+  public showDialogWarning(error: any) {
+    const dialog = this.modalDialog.open(MyAlertDialogComponent);
+    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
+    dialog.componentInstance.content =
+      "<b>" + error + "</b>";
+    dialog.componentInstance.visibleOkButton = false;
   }
 
   // get select item by id

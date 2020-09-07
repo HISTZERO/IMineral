@@ -1,9 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
-import { MatDialog } from "@angular/material";
+import { MatDialog, MatSelect } from "@angular/material";
 
 import { InputKhuVucCamTamCamModel } from "src/app/models/admin/khuvuckhoangsan/khuvuccamtamcam.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -21,6 +21,8 @@ import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialo
   styleUrls: ['./khuvuccam-tamcam-io.component.scss']
 })
 export class KhuvuccamTamcamIoComponent implements OnInit {
+
+  @ViewChild("selectedMaLoaiHinh", { static: false }) selectedMaLoaiHinh: MatSelect;
 
   // Chứa dữ liệu Form khu vực cấm - tạm cấm
   public kvCamTamCamIOForm: FormGroup;
@@ -87,7 +89,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
     this.getAllHeQuyChieu();
     // Khởi tạo form
     await this.formInit();
-    //Khởi tạo form theo dạng add or edit
+    // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
@@ -195,6 +197,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
   private addOrUpdate(operMode: string) {
     const kvKhoangSanFacadeService = this.khuvuckhoangsanFacadeService.getKhuVucCamTamCamService();
     this.inputModel = this.kvCamTamCamIOForm.value;
+    this.inputModel.loaihinhcam = this.selectedMaLoaiHinh._elementRef.nativeElement.firstElementChild.innerText.trim();
     // this.inputModel.ngaycap = this.datePipe.transform(this.canhanIOForm.value.ngaycap, "yyyy-MM-dd");
     if (operMode === "new") {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
@@ -226,7 +229,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -263,7 +266,7 @@ export class KhuvuccamTamcamIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
