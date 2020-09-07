@@ -1,8 +1,9 @@
 import { Routes, RouterModule } from "@angular/router";
-import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { BaocaoComponent } from "./baocao.component";
 import { NgModule } from "@angular/core";
-import { NgchartsComponent } from "./ngcharts/ngcharts.component";
+
+import { AdminRoutingName } from "src/app/routes/admin-routes-name";
+import { BaocaoComponent } from "src/app/features/admin/baocao/baocao.component";
+import { BaocaoDieutrakhaosatListComponent } from "src/app/features/admin/baocao/baocao-dieutrakhaosat/baocao-dieutrakhaosat-list/baocao-dieutrakhaosat-list.component";
 
 const baocaoRoutes: Routes = [
   {
@@ -12,7 +13,7 @@ const baocaoRoutes: Routes = [
         path: "",
         children: [
           { path: "", component: BaocaoComponent },
-          { path: AdminRoutingName.chartsUri, component: NgchartsComponent },
+          { path: ":key", component: BaocaoDieutrakhaosatListComponent}
         ],
       },
     ],

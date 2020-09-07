@@ -75,6 +75,7 @@ export function moduleHttpLoaderFactory(http: HttpClient) {
       { moduleName: "khuvuckhoangsan", baseTranslateUrl },
       { moduleName: "diemquangmoquang", baseTranslateUrl },
       { moduleName: "common", baseTranslateUrl },
+      { moduleName: "baocao", baseTranslateUrl },
       { moduleName: "thietlap", baseTranslateUrl },
       { moduleName: "share", baseTranslateUrl },
       { moduleName: "map", baseTranslateUrl },

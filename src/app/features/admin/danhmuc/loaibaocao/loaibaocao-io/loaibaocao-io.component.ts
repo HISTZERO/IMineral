@@ -11,6 +11,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+import { NhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 
 @Component({
   selector: 'app-loaibaocao-io',
@@ -40,6 +41,9 @@ export class DmLoaibaocaoIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa dữ liệu Nhóm báo cáo
+  public nhomBaoCao = NhomBaoCao;
+
   // error message
   validationErrorMessages = {};
 
@@ -47,6 +51,7 @@ export class DmLoaibaocaoIoComponent implements OnInit {
   formErrors = {
     maloaibaocao: "",
     tenloaibaocao: "",
+    nhombaocao: "",
     mota: "",
     thutu: "",
   };
@@ -89,7 +94,8 @@ export class DmLoaibaocaoIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       thutu: { pattern: this.dataTranslate.DANHMUC.loaibaocao.thutuIsNumber },
-      tenloaibaocao: { required: this.dataTranslate.DANHMUC.loaibaocao.tenloaibaocaoRequired }
+      tenloaibaocao: { required: this.dataTranslate.DANHMUC.loaibaocao.tenloaibaocaoRequired },
+      nhombaocao: { required: this.dataTranslate.DANHMUC.loaibaocao.nhombaocaoRequired }
     };
   }
 
@@ -110,6 +116,7 @@ export class DmLoaibaocaoIoComponent implements OnInit {
     this.loaiBaoCaoIOForm = this.formBuilder.group({
       maloaibaocao: [""],
       tenloaibaocao: ["", Validators.required],
+      nhombaocao: ["", Validators.required],
       mota: [""],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
@@ -123,6 +130,7 @@ export class DmLoaibaocaoIoComponent implements OnInit {
       this.loaiBaoCaoIOForm.setValue({
         maloaibaocao: this.obj.maloaibaocao,
         tenloaibaocao: this.obj.tenloaibaocao,
+        nhombaocao: this.obj.nhombaocao,
         mota: this.obj.mota,
         thutu: this.obj.thutu,
       });
@@ -185,6 +193,7 @@ export class DmLoaibaocaoIoComponent implements OnInit {
     this.loaiBaoCaoIOForm.reset({
       maloaibaocao: "",
       tenloaibaocao: "",
+      nhombaocao: "",
       mota: "",
       thutu: "",
     });
