@@ -19,5 +19,16 @@ export enum Paging {
 }
 
 export enum NhomBaoCaoEnum {
-  
+
+}
+
+export enum NhomLoaiCapPhep {
+  ThamDoKhoangSan = 1,
+  PheDuyetTruLuong = 2,
+  DauGiaQuyenKhaiThac = 3,
+  KhaiThacKhoangSan = 4,
+  TanThuKhoangSan = 5,
+  TraLaiGiayPhep = 6,
+  DongCuaMo = 7,
+  ChuyenNhuongThamDoKhaiThac = 8
 }

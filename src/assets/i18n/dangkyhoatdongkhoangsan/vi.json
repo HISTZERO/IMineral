@@ -1,0 +1,26 @@
+{
+  "thamdokhoangsan": {
+    "titleList": "Danh sách hồ sơ đăng ký thăm dò khoáng sản"
+  },
+  "hoso": {
+    "titleList": "Danh sách hồ sơ",
+    "titleAdd": "Thêm mới hồ sơ",
+    "titleEdit": "Sửa dữ liệu hồ sơ",
+    "tungay": "Từ ngày",
+    "denngay": "Đến ngày",
+    "loaicapphep": "Loại cấp phép",
+    "mahoso": "Mã hồ sơ",
+    "mabiennhan": "Mã biên nhận",
+    "thutuchanhchinh": "thủ tục hành chính",
+    "coquantiepnhan": "Cơ quan tiếp nhận",
+    "tungayPlaceholder": "Nhập từ ngày",
+    "denngayPlaceholder": "Nhập đến ngày",
+    "chonloaicapphep": "---Chọn loại cấp phép---",
+    "informedDialogTitle": "Thông báo",
+    "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
+    "nameofobject": "Hồ sơ",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
+  }
+}
