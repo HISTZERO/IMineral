@@ -28,7 +28,7 @@ export class SidenavComponent implements OnInit {
   // Menu
   public QuantriList: any[] = [
     {
-      label: "ĐĂNG KÝ HOẠT ĐỘNG KHOÁNG SẢN",
+      label: "ĐĂNG KÝ HOẠT ĐỘNG",
       faIcon: "",
       items: [
         {
@@ -74,7 +74,7 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
-      label: "CẤP PHÉP HOẠT ĐỘNG KHOÁNG SẢN",
+      label: "CẤP PHÉP HOẠT ĐỘNG",
       faIcon: "",
       items: [
         {
@@ -120,12 +120,12 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
-      label: "TÍNH TIỀN CẤP QUYỀN KHAI THÁC KHOÁNG SẢN",
+      label: "TÍNH TIỀN CẤP QUYỀN",
       faIcon: "",
       link: ""
     },
     {
-      label: "QUẢN LÝ KHU VỰC KHOÁNG SẢN",
+      label: "KHU VỰC KHOÁNG SẢN",
       faIcon: "",
       link: "",
       items: [
@@ -154,23 +154,28 @@ export class SidenavComponent implements OnInit {
           faIcon: "",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdutrukhoangsanUri}`
         },
+        {
+          label: "Khu vực thăm dò khoáng sản",
+          faIcon: "",
+          link: ``
+        },
       ]
     },
     {
-      label: "QUẢN LÝ ĐIỂM QUẶNG / MỎ QUẶNG",
+      label: "MỎ QUẶNG,ĐIỂM QUẶNG",
       faIcon: "",
       link: "",
       items: [
         {
-          label: "Điểm quặng",
+          label: "Quản lý mỏ khoáng sản",
+          faIcon: "",
+          link: ``
+        },
+        {
+          label: "Quản lý điểm quặng",
           faIcon: "",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.diemquangmoquangUri}/${AdminRoutingName.diemquangUri}`
         },
-        // {
-        //   label: "Mỏ quặng",
-        //   faIcon: "",
-        //   link: ""
-        // },
       ]
     },
     {
@@ -227,8 +232,13 @@ export class SidenavComponent implements OnInit {
         {
           label: "Giám sát hoạt động khoáng sản",
           faIcon: "",
-          link: ""
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.giamsathoatdongUri}`
         },
+        {
+          label: "Thông tin tư liệu khoáng sản",
+          faIcon: "",
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.thongtintulieuUri}`
+        }
       ]
     },
     {

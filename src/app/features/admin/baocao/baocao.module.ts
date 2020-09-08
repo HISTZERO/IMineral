@@ -9,12 +9,20 @@ import { BaocaoRoutingModule } from 'src/app/features/admin/baocao/baocao-routin
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { BaocaoListComponent } from "src/app/features/admin/baocao/baocao/baocao-list/baocao-list.component";
 import { BaocaoIoComponent } from "src/app/features/admin/baocao/baocao/baocao-io/baocao-io.component";
+import { BaocaoInfoComponent } from "src/app/features/admin/baocao/baocao/baocao-info/baocao-info.component";
+import { BaocaoDetailComponent } from "src/app/features/admin/baocao/baocao/baocao-info/baocao-detail/baocao-detail.component";
+import { TailieudinhkemListComponent } from "src/app/features/admin/baocao/baocao/tailieudinhkem/tailieudinhkem-list/tailieudinhkem-list.component";
+import { TailieudinhkemIoComponent } from "src/app/features/admin/baocao/baocao/tailieudinhkem/tailieudinhkem-io/tailieudinhkem-io.component";
 
 @NgModule({
   declarations: [
     BaocaoComponent,
     BaocaoListComponent,
-    BaocaoIoComponent
+    BaocaoIoComponent,
+    BaocaoInfoComponent,
+    BaocaoDetailComponent,
+    TailieudinhkemListComponent,
+    TailieudinhkemIoComponent
   ],
   imports: [
     CommonModule,
@@ -25,7 +33,8 @@ import { BaocaoIoComponent } from "src/app/features/admin/baocao/baocao/baocao-i
     TranslateModule
   ],
   entryComponents: [
-    BaocaoIoComponent
+    BaocaoIoComponent,
+    TailieudinhkemIoComponent
   ]
 })
 export class BaocaoModule { }

@@ -11,7 +11,7 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
+import { OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao.model";
 import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
@@ -90,6 +90,8 @@ export class BaocaoListComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Khởi tạo form
+    await this.formInit();
     // Lấy dữ liệu laoij báo cáo
     this.getAllLoaiBaoCao();
     // Lấy dữ liệu từ url
@@ -128,13 +130,19 @@ export class BaocaoListComponent implements OnInit {
           url: "",
         },
       ]
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      this.getDataTranslate();
-      // Gọi hàm lấy dữ liệu pagesize
-      this.getDataPageSize();
+      // Gọi hàm tổng hợp các function
+      this.initComponent();
     })
+  }
+
+  /**
+   * Hàm tổng hợp các function khi load componet
+   */
+  async initComponent() {
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Gọi hàm lấy dữ liệu pagesize
+    await this.getDataPageSize();
   }
 
   /**
@@ -220,7 +228,7 @@ export class BaocaoListComponent implements OnInit {
    */
   public detailItem(id) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.khuvucdutrukhoangsanUri}`], { queryParams: { idkhuvuc: id } });
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.thongtin}/${this.keyBaoCao}/${id}`]);
   }
 
 
@@ -293,7 +301,7 @@ export class BaocaoListComponent implements OnInit {
       if (result === "confirm") {
         await this.baocaoFacadeService
           .getBaoCaoService()
-          .deleteItem({ idkhuvuc: this.selectedItem.idbaocao })
+          .deleteItem({ idbaocao: this.selectedItem.idbaocao })
           .subscribe(
             () => this.getAllBaoCao(),
             (error: HttpErrorResponse) => {
