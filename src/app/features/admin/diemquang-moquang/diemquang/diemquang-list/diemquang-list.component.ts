@@ -36,7 +36,7 @@ export class DiemquangListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-  // Chứa danh sách lĩnh vực
+  // Chứa danh sách điểm mỏ
   public listDiemMo: Observable<DataStateChangeEventArgs>;
 
   // Service

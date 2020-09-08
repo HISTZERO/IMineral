@@ -29,7 +29,8 @@ export class ServiceName {
   public static DIEMMO = "diemmo";
   // Báo cáo thống kê
   public static BAOCAO = "baocao";
-
+  // Hồ sơ
+  public static HOSO = "hoso";
 
 
 

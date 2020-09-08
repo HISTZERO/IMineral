@@ -1,0 +1,64 @@
+export class OutputHoSoModel {
+  idhoso: string;
+  mahoso: string;
+  mabiennhan: string;
+  soden: string;
+  ngaynop: Date;
+  ngaytiepnhan: Date;
+  ngaytraketqua: Date;
+  loaidoituong: number;
+  idthutuchanhchinh: string;
+  tenthutuchanhchinh: string;
+  nhomloaicapphep: number;
+  loaicapphep: string;
+  tenloaicapphep: string;
+  trangthaihoso: number;
+  hinhthucnophoso: number;
+  hinhthucnhanketqua: number;
+  idcoquantiepnhan: string;
+  tencoquantiepnhan: string;
+  idcanhantochuc: string;
+  tencanhantochuc: string;
+  sogiayto: string;
+  loaigiayto: number;
+  ngaycap: Date;
+  noicap: string;
+  diachi: string;
+  dienthoai: string;
+  fax: string;
+  email: string;
+  website: string;
+  dangkysms: number;
+  siteid: string;
+}
+
+export class InputHoSoModel {
+  idhoso: string;
+  mahoso: string;
+  mabiennhan: string;
+  soden: string;
+  ngaynop: Date;
+  ngaytiepnhan: Date;
+  ngaytraketqua: Date;
+  loaidoituong: number;
+  idthutuchanhchinh: string;
+  nhomloaicapphep: number;
+  loaicapphep: string;
+  trangthaihoso: number;
+  hinhthucnophoso: number;
+  hinhthucnhanketqua: number;
+  idcoquantiepnhan: string;
+  idcanhantochuc: string;
+  tencanhantochuc: string;
+  sogiayto: string;
+  loaigiayto: number;
+  ngaycap: Date;
+  noicap: string;
+  diachi: string;
+  dienthoai: string;
+  fax: string;
+  email: string;
+  website: string;
+  dangkysms: number;
+  siteid: string;
+}
