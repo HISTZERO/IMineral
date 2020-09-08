@@ -16,7 +16,7 @@ import { DmNhomkhoangsanIoComponent } from "src/app/features/admin/danhmuc/nhomk
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-nhomkhoangsan-list',
@@ -72,8 +72,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public modalDialog: MatDialog
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
@@ -202,7 +201,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
             this.getAllNhomKhoangSan();
           },
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -229,7 +228,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
             this.getAllNhomKhoangSan();
           },
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -272,7 +271,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
                 this.getAllNhomKhoangSan();
               },
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -366,7 +365,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
             .subscribe(
               () => this.getAllNhomKhoangSan(),
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -379,16 +378,7 @@ export class DmNhomkhoangsanListComponent implements OnInit {
     });
   }
 
-  /**
-  * Hàm hiển thị cảnh báo error
-  */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * Hàm thông báo không thể xóa

@@ -4,13 +4,14 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { KhuvuctoadoIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-io/khuvuctoado-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { KhuVucKhoangSanFacadeService } from "../../../../../services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import { ActivatedRoute } from "@angular/router";
+import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import {KhuVucKhoangSanEnum, MaLoaiHinhEnum, keyKhuVucKhoangSan, KhuVucKhoangSan} from "src/app/shared/constants/khuvuckhoangsan-constants";
 import { OutputKhuVucToaDoModel } from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";

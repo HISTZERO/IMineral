@@ -183,7 +183,7 @@ export class TailieudinhkemListComponent implements OnInit {
           .subscribe(
             () => this.getAllTaiLieuById(),
             (error: HttpErrorResponse) => {
-              
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(

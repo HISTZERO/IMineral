@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
-import { MatDialog } from "@angular/material";
 
 import { InputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
@@ -13,7 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 import { TrangThaiEnum } from "src/app/shared/constants/enum";
 
 @Component({
@@ -108,8 +107,7 @@ export class DmCanhanIoComponent implements OnInit {
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
     private translate: TranslateService,
-    public datePipe: DatePipe,
-    public modalDialog: MatDialog
+    public datePipe: DatePipe
   ) { }
 
   async ngOnInit() {
@@ -419,7 +417,7 @@ export class DmCanhanIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -433,7 +431,7 @@ export class DmCanhanIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCanhan"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -541,16 +539,7 @@ export class DmCanhanIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

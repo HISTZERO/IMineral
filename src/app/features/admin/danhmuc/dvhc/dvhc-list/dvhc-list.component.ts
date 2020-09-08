@@ -2,7 +2,6 @@ import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRe
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { MatDialog } from "@angular/material";
 import { QueryCellInfoEventArgs, TextWrapSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
 
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
@@ -19,7 +18,7 @@ import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/d
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: "app-dvhc-list",
@@ -119,8 +118,7 @@ export class DmDvhcListComponent implements OnInit {
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
-    public generalClientService: GeneralClientService,
-    public modalDialog: MatDialog
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
@@ -396,7 +394,7 @@ export class DmDvhcListComponent implements OnInit {
               .subscribe(
                 () => this.getAllProvince(),
                 (error: HttpErrorResponse) => {
-                  this.showDialogWarning(error.error.errors);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -412,7 +410,7 @@ export class DmDvhcListComponent implements OnInit {
               .subscribe(
                 () => this.getDistrict(this.selectedItem.matinh),
                 (error: HttpErrorResponse) => {
-                  this.showDialogWarning(error.error.errors);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -428,7 +426,7 @@ export class DmDvhcListComponent implements OnInit {
               .subscribe(
                 () => this.getWard(this.selectedItem.mahuyen),
                 (error: HttpErrorResponse) => {
-                  this.showDialogWarning(error.error.errors);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -539,7 +537,7 @@ export class DmDvhcListComponent implements OnInit {
               }
             },
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -592,7 +590,7 @@ export class DmDvhcListComponent implements OnInit {
                 }
               },
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -604,14 +602,5 @@ export class DmDvhcListComponent implements OnInit {
     });
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 }

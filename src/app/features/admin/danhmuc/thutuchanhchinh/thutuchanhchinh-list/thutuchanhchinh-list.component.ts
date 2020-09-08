@@ -18,7 +18,7 @@ import { TrangThaiEnum } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmLinhvucModel } from "src/app/models/admin/danhmuc/linhvuc.model";
 import { OutputDmCapQuanLyModel } from 'src/app/models/admin/danhmuc/capquanly.model';
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-thutuchanhchinh-list',
@@ -88,8 +88,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public modalDialog: MatDialog
+    public generalClientService: GeneralClientService
   ) { }
 
   async ngOnInit() {
@@ -247,7 +246,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
             this.getAllThuTucHanhChinh();
           },
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -274,7 +273,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
             this.getAllThuTucHanhChinh();
           },
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -317,7 +316,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
                 this.getAllThuTucHanhChinh();
               },
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -411,7 +410,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
             .subscribe(
               () => this.getAllThuTucHanhChinh(),
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -424,16 +423,7 @@ export class DmThutuchanhchinhListComponent implements OnInit {
     });
   }
 
-  /**
-  * Hàm hiển thị cảnh báo error
-  */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * Hàm thông báo không thể xóa
