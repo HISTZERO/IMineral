@@ -1,0 +1,85 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav-content>
+    <div class="row pt-3" style="margin: 0px">
+      <div class="col-md-12">
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <button class="btn btn-sm btn-primary float-right" (click)="toEditMode()">
+                <i class="fal fa-edit"></i> {{'COMMON.default.edit' | translate}}
+              </button>
+            </h3>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-lg-6 col-sm-12" *ngIf="obj">
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.tenbaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.tenbaocao }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.sobaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.sobaocao }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.diadiem' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.diadiem }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.ngaybaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.ngaybaocao | date: 'dd-MM-yyyy'}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.loaibaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.tenLoaiBaoCao }}</strong></label>
+                </div>
+              </div>
+              <div class="col-lg-6 col-sm-12">
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.nhombaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.nhombaocao | getNameFileConstant: nhomBaoCao}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.baocaonam' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.baocaonam}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.donvibaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.donvibaocao }}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.doituongbaocao' | translate}}:</label>
+                  <label class="col-sm-6 col-form-label"><strong>{{obj && obj.doituongbaocao | getNameFileConstant: doiTuongBaoCao}}</strong></label>
+                </div>
+                <div class="row mx-0">
+                  <label
+                    class="col-sm-6 col-form-label text-right">{{'BAOCAO.baocao.ghichu' | translate}}:</label>
+                  <label
+                    class="col-sm-6 col-form-label"><strong>{{obj && obj.ghichu}}</strong></label>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end" style="width: 600px">
+      <div class="p-2 bg-primary text-white mat-sidenav-title">
+        <button class="btn btn-sm btn-light" (click)="closeBaoCaoIOSidebar()">
+          <i class="fad fa-chevron-double-right"></i>
+        </button>
+        <span style="vertical-align: middle;" class="ml-3">{{matSidenavService.sidenavTitle}}</span>
+      </div>
+      <template #compBaoCaoIO></template>
+    </mat-sidenav>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -4,7 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
-import { InputBaoCaoModel, OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
+import { InputBaoCaoModel, OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao.model";
 
 @Injectable({
     providedIn: 'root'

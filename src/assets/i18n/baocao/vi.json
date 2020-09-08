@@ -22,6 +22,24 @@
         "ghichuPlaceholder": "Nhập ghi chú",
         "doituongbaocaoPlaceholder": "---Chọn đối tượng báo cáo---",
         "donvibaocaoPlaceHolder": "Nhập đơn vị báo cáo",
-        "diadiemPlaceHolder": "Nhập địa điểm"
+        "diadiemPlaceHolder": "Nhập địa điểm",
+        "titleInfo": "Báo cáo: ",
+        "thongtinchung": "THÔNG TIN CHUNG",
+        "tailieudinhkem": "TÀI LIỆU ĐÍNH KÈM"
+    },
+    "tailieudinhkem": {
+        "titleList": "Danh sách tài liệu đính kèm",
+        "titleAdd": "Thêm mới tài liệu đính kèm",
+        "titleEdit": "Sửa dữ liệu tài liệu đính kèm",
+        "contentDelete": "Tài liệu: ",
+        "tentailieu": "Tên tài liệu",
+        "filedinhkem": "File đính kèm",
+        "duongdan": "Đường dẫn",
+        "thutu": "Thứ tự",
+        "dungluong": "Dung lượng",
+        "dinhdang": "Định dạng",
+        "tentailieuPlaceholder": "Nhập tên tài liệu",
+        "filedinhkemPlaceholder": "File đính kèm",
+        "thutuPlaceHolder": "Nhập thứ tự"
     }
 }

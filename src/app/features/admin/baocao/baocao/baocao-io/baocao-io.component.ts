@@ -6,7 +6,7 @@ import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 
-import { InputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
+import { InputBaoCaoModel } from "src/app/models/admin/baocao/baocao.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -83,6 +83,7 @@ export class BaocaoIoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    this.getDataByUrl();
     // Lấy dữ liệu loại báo cáo
     this.getAllLoaiBaoCao();
     // Khởi tạo form
@@ -119,6 +120,7 @@ export class BaocaoIoComponent implements OnInit {
    */
   public getDataByUrl() {
     this.keyBaoCao = this.activatedRoute.snapshot.paramMap.get('key');
+
   }
 
   /**
@@ -200,6 +202,7 @@ export class BaocaoIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idbaocao = this.obj.idbaocao;
+      this.inputModel.nhombaocao = this.obj.nhombaocao;
       baoCaoFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {

@@ -29,7 +29,12 @@ export class ServiceName {
   public static DIEMMO = "diemmo";
   // Báo cáo thống kê
   public static BAOCAO = "baocao";
-
+  public static BCTAILIEU = "bctailieu";
+  // File
+  public static FILE = "files";
+  public static UPLOADFILE = "ftpuploadfile";
+  public static DOWNFILE = "​ftpdownloadfile";
+  public static DELETEFILE = "ftpdeletefile";
 
 
 
