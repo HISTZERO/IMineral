@@ -38,6 +38,13 @@ const adminRoutes: Routes = [
           ),
       },
       {
+        path: AdminRoutingName.dangkyhoatdongkhoangsanUri,
+        loadChildren: () =>
+          import("src/app/features/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan.module").then(
+            (mod) => mod.DangkyhoatdongkhoangsanModule
+          ),
+      },
+      {
         path: AdminRoutingName.mapUri,
         loadChildren: () =>
           import("src/app/features/admin/map/map.module").then(
