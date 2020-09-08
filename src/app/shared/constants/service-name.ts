@@ -35,6 +35,8 @@ export class ServiceName {
   public static UPLOADFILE = "ftpuploadfile";
   public static DOWNFILE = "​ftpdownloadfile";
   public static DELETEFILE = "ftpdeletefile";
+  // Hồ sơ
+  public static HOSO = "hoso";
 
 
 
