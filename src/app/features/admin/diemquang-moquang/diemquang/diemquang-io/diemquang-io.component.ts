@@ -3,7 +3,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
-import { MatDialog } from "@angular/material";
 
 import { InputDiemMoModel } from "src/app/models/admin/diemquang-moquang/diemmo.model";
 import { DiemQuangMoQuangFacadeService } from "src/app/services/admin/diemquang-moquang/diemquang-moquang-facade.service";
@@ -12,7 +11,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 @Component({
   selector: 'app-diemquang-io',
   templateUrl: './diemquang-io.component.html',
@@ -78,8 +77,7 @@ export class DiemquangIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     public dmFacadeService: DmFacadeService,
     private translate: TranslateService,
-    public datePipe: DatePipe,
-    public modalDialog: MatDialog
+    public datePipe: DatePipe
   ) { }
 
   async ngOnInit() {
@@ -219,7 +217,7 @@ export class DiemquangIoComponent implements OnInit {
       diemQuangMoQuangFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -232,7 +230,7 @@ export class DiemquangIoComponent implements OnInit {
       diemQuangMoQuangFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDiemMo"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -276,16 +274,7 @@ export class DiemquangIoComponent implements OnInit {
     }
   }
 
-  /**
-  * Hàm hiển thị cảnh báo error
-  */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * hàm kiểm tra validation form

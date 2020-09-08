@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { DatePipe } from "@angular/common";
 import { TranslateService } from "@ngx-translate/core";
-import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 
@@ -12,7 +11,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 import { OutputDmLoaiBaoCaoModel } from "src/app/models/admin/danhmuc/loaibaocao.model";
 import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
 import { idNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
@@ -78,7 +77,6 @@ export class BaocaoIoComponent implements OnInit {
     public datePipe: DatePipe,
     public dmFacadeService: DmFacadeService,
     public baoCaoFacadeService: BaocaoFacadeService,
-    public modalDialog: MatDialog,
     public activatedRoute: ActivatedRoute,
   ) { }
 
@@ -192,7 +190,7 @@ export class BaocaoIoComponent implements OnInit {
       baoCaoFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -206,7 +204,7 @@ export class BaocaoIoComponent implements OnInit {
       baoCaoFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -279,16 +277,7 @@ export class BaocaoIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

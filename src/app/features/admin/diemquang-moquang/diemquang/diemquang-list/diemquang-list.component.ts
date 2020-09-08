@@ -6,7 +6,6 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
-import { MatDialog } from "@angular/material";
 
 import { MenuDiemMo } from "src/app/shared/constants/sub-menus/diemquang-moquang/diemquang-moquang";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -17,7 +16,7 @@ import { DiemquangIoComponent } from "src/app/features/admin/diemquang-moquang/d
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-diemquang-list',
@@ -61,10 +60,9 @@ export class DiemquangListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public modalDialog: MatDialog
+    public generalClientService: GeneralClientService
   ) {
-    this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService();
+    this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService(); 
   }
 
   async ngOnInit() {
@@ -209,7 +207,7 @@ export class DiemquangListComponent implements OnInit {
           .subscribe(
             () => this.getAllDiemMo(),
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -221,16 +219,7 @@ export class DiemquangListComponent implements OnInit {
     });
   }
 
-  /**
-  * Hàm hiển thị cảnh báo error
-  */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * Hàm thông báo không thể xóa

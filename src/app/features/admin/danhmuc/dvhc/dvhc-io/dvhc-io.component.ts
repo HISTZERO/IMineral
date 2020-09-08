@@ -2,14 +2,13 @@ import { Component, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
 
 import { InputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { GlobalVar } from "src/app/shared/constants/global-var";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 
 @Component({
@@ -51,8 +50,7 @@ export class DmDvhcIoComponent implements OnInit {
     private matSidenavService: MatsidenavService,
     private dmFacadeSv: DmFacadeService,
     private commonService: CommonServiceShared,
-    private translate: TranslateService,
-    public modalDialog: MatDialog
+    private translate: TranslateService
   ) {
     this.matSidenavService.okCallBackFunction = null;
     this.matSidenavService.cancelCallBackFunction = null;
@@ -245,7 +243,7 @@ export class DmDvhcIoComponent implements OnInit {
           (res) =>
             this.matSidenavService.doParentFunction("refreshGridDistrict"),
           (error: HttpErrorResponse) => {
-            this.showDialogWarning(error.error.errors);
+            this.commonService.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -265,7 +263,7 @@ export class DmDvhcIoComponent implements OnInit {
           (res) =>
             this.matSidenavService.doParentFunction("refreshGridDistrict"),
           (error: HttpErrorResponse) => {
-            this.showDialogWarning(error.error.errors);
+            this.commonService.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -287,7 +285,7 @@ export class DmDvhcIoComponent implements OnInit {
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
           (error: HttpErrorResponse) => {
-            this.showDialogWarning(error.error.errors);
+            this.commonService.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -307,7 +305,7 @@ export class DmDvhcIoComponent implements OnInit {
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
           (error: HttpErrorResponse) => {
-            this.showDialogWarning(error.error.errors);
+            this.commonService.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -328,14 +326,5 @@ export class DmDvhcIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 }

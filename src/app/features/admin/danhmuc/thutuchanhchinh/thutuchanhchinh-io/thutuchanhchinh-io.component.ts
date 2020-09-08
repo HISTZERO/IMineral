@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { MatDialog } from "@angular/material";
 
 import { InputDmThuTucHanhChinhModel } from "src/app/models/admin/danhmuc/thutuchanhchinh.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
@@ -13,7 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { OutputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { OutputDmLinhvucModel } from 'src/app/models/admin/danhmuc/linhvuc.model';
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-thutuchanhchinh-io',
@@ -93,8 +92,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService,
-    public modalDialog: MatDialog
+    private translate: TranslateService
   ) { }
 
   async ngOnInit() {
@@ -301,7 +299,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllThuTucHanhChinh"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -314,7 +312,7 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllThuTucHanhChinh"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -367,17 +365,6 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
-  }
-
-  /**
-* Hàm hiển thị cảnh báo error
-*/
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
-import { MatDialog } from "@angular/material";
 
 import { InputDmCapQuanLyModel } from "src/app/models/admin/danhmuc/capquanly.model";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
@@ -10,7 +9,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-capquanly-io',
@@ -57,8 +56,7 @@ export class DmCapquanlyIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService,
-    public modalDialog: MatDialog
+    private translate: TranslateService
   ) {}
 
   async ngOnInit() {
@@ -140,7 +138,7 @@ export class DmCapquanlyIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapQuanLy"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -154,7 +152,7 @@ export class DmCapquanlyIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllCapQuanLy"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -221,16 +219,7 @@ export class DmCapquanlyIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha
