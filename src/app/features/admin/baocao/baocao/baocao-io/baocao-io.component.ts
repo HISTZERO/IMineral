@@ -6,7 +6,7 @@ import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 
-import { InputBaoCaoModel } from "src/app/models/admin/baocao/baocao-dieutrakhaosat.model";
+import { InputBaoCaoModel } from "src/app/models/admin/baocao/baocao.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";

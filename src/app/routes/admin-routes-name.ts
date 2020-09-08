@@ -47,6 +47,7 @@ export class AdminRoutingName {
 
   // 1.3 Routes báo cáo
   public static danhsach = "danhsach";
+  public static thongtin = "thongtin";
   public static dieutrakhaosatUri = keyNhomBaoCao.BaoCaoDieuTraKhaoSat;
   public static baocaohoatdongdinhkyUri = keyNhomBaoCao.BaoCaoHoatDong;
   public static giamsathoatdongUri = keyNhomBaoCao.BaoCaoGiamSatHoatDong;

@@ -28,7 +28,7 @@ export class SidenavComponent implements OnInit {
   // Menu
   public QuantriList: any[] = [
     {
-      label: "ĐĂNG KÝ HOẠT ĐỘNG KHOÁNG SẢN",
+      label: "ĐĂNG KÝ HOẠT ĐỘNG",
       faIcon: "",
       items: [
         {
@@ -74,7 +74,7 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
-      label: "CẤP PHÉP HOẠT ĐỘNG KHOÁNG SẢN",
+      label: "CẤP PHÉP HOẠT ĐỘNG",
       faIcon: "",
       items: [
         {
@@ -120,12 +120,12 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
-      label: "TÍNH TIỀN CẤP QUYỀN KHAI THÁC KHOÁNG SẢN",
+      label: "TÍNH TIỀN CẤP QUYỀN",
       faIcon: "",
       link: ""
     },
     {
-      label: "QUẢN LÝ KHU VỰC KHOÁNG SẢN",
+      label: "KHU VỰC KHOÁNG SẢN",
       faIcon: "",
       link: "",
       items: [
@@ -162,7 +162,7 @@ export class SidenavComponent implements OnInit {
       ]
     },
     {
-      label: "QUẢN LÝ ĐIỂM QUẶNG / MỎ QUẶNG",
+      label: "MỎ QUẶNG,ĐIỂM QUẶNG",
       faIcon: "",
       link: "",
       items: [

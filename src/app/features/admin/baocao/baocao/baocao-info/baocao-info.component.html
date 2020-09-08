@@ -1,3 +1,32 @@
-<p>
-  baocao-info works!
-</p>
+<app-sub-header [menuItems]="navArray" [buttonItems]="btnArray"></app-sub-header>
+<div class="content pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <span class="title">
+                {{ "BAOCAO.baocao.titleInfo" | translate }}
+                <strong>{{ tenBaoCao ? tenBaoCao : ""}}</strong></span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <mat-tab-group mat-stretch-tabs [animationDuration]="0" *ngIf="databaoCao" [selectedIndex]="selectTab">
+              <mat-tab label="{{ 'BAOCAO.baocao.thongtinchung' | translate }}">
+                <ng-template matTabContent>
+                  <app-baocao-detail [obj]="databaoCao" (getDataBaoCao)="getDataByUrl()"></app-baocao-detail>
+                </ng-template>
+              </mat-tab>
+              <mat-tab label="{{ 'BAOCAO.baocao.tailieudinhkem' | translate }}">
+                <ng-template matTabContent>
+                  <app-tailieudinhkem-list></app-tailieudinhkem-list>
+                </ng-template>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
