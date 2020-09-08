@@ -97,7 +97,7 @@ export class GeneralClientService {
     return list;
   }
 
-  generateIndex<T>(list: T[], keyName: string, startAt: number): T[] {
+  generateOrderOfObject<T>(list: T[], keyName: string, startAt: number): T[] {
     if (keyName === null || keyName === undefined) {
       return list;
     }
@@ -154,5 +154,42 @@ export class GeneralClientService {
     });
 
     return list;
+  }
+
+  clone<T>(object: T): T {
+    return JSON.parse(JSON.stringify(object));
+  }
+
+  cloneObject<T>(object: T): T {
+    if (object === null) {
+      return object;
+    }
+
+    if (object instanceof Date) {
+      return new Date(object.getTime()) as any;
+    }
+
+    if (typeof object === 'object') {
+      if (typeof object[(Symbol as any).iterator] === 'function') {
+        const cp = [] as any[];
+        if ((object as any as any[]).length > 0) {
+          for (const arrayMember of object as any as any[]) {
+            cp.push(this.cloneObject(arrayMember));
+          }
+        }
+        return cp as any as T;
+      } else {
+        const targetKeys = Object.keys(object);
+        const cp = {};
+        if (targetKeys.length > 0) {
+          for (const key of targetKeys) {
+            cp[key] = this.cloneObject(object[key]);
+          }
+        }
+        return cp as T;
+      }
+    }
+
+    return object;
   }
 }
