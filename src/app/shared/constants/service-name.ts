@@ -27,6 +27,12 @@ export class ServiceName {
   public static KHUVUCTOADO = "khuvuctoado";
   // Điểm quặng - mỏ quặng
   public static DIEMMO = "diemmo";
+  // Báo cáo thống kê
+  public static BAOCAO = "baocao";
+
+
+
+
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";
   public static PROVINCE = "tinh";

@@ -1,4 +1,5 @@
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
+import { keyNhomBaoCao } from "../shared/constants/nhombaocao-constants";
 
 export class AdminRoutingName {
   // Các routes cấp 1
@@ -7,17 +8,14 @@ export class AdminRoutingName {
   public static mapUri = "map";
   public static khuvuckhoangsanUri = "khuvuckhoangsan";
   public static diemquangmoquangUri = "diemquangmoquang";
-
   public static baocaoUri = "baocao";
   public static thietlapUri = "thietlap";
   public static thuvienUri = "thuvien";
-  public static kttvUri = "kttv";
-  public static enUri = "moitruong";
-  public static hethongUri = "hethong";
   public static tinbaiUri = "tinbai";
+
+
+  public static hethongUri = "hethong";
   public static quantrac = "quantrac";
-  public static seUri = "moitruongbien";
-  public static wrUri = "tnnuoc";
   public static danhsachtram = "danhsachtram";
 
   // Các routes cấp 2
@@ -40,55 +38,41 @@ export class AdminRoutingName {
   public static tochucUri = "tochuc";
   public static linhvucUri = "linhvuc";
 
-
-  public static congtyUri = "congty";
-  public static coquanUri = "coquan";
-  public static tangchuanuocUri = "tangchuanuoc";
-  public static tieuchuanUri = "tieuchuan";
-  public static thamsoUri = "thamso";
-  public static tcclUri = "tccl";
-  public static duanUri = "duan";
-  public static loaisolieuUri = "loaisolieu";
-  public static donvidoUri = "donvido";
-  public static huonggioUri = "huonggio";
-  public static nhomthamsoUri = "nhomthamso";
-  public static thietbiquantracUri = "thietbiquantrac";
-
-  // 1.3 Routes phần dữ liệu bản đồ
+  // 1.2 Routes phần dữ liệu bản đồ
   public static lopbandoUri = "lopbando";
   public static nhomlopbandoUri = "nhomlopbando";
   public static nhombandoUri = "nhombando";
   public static hetoadoUri = "hetoado";
   public static bandoUri = "bando";
 
-  // 1.4 Routes báo cáo
-  public static chartsUri = "charts";
+  // 1.3 Routes báo cáo
+  public static danhsach = "danhsach";
+  public static dieutrakhaosatUri = keyNhomBaoCao.BaoCaoDieuTraKhaoSat;
+  public static baocaohoatdongdinhkyUri = keyNhomBaoCao.BaoCaoHoatDong;
 
-  // 1.5 Routes thiết lập
+  // 1.4 Routes thiết lập
   public static ThietLapHeThong = "thietlaphethong";
   public static ThietLapTram = "thietlaptram";
   public static ThietLapDuLieu = "thietlapdulieu";
   public static DoiTuongTram = "doituongtram";
-  // 1.6 Routes hệ thống
+  // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
 
-  // 1.8 Phê duyệt
-  // 1.8.1 Phê duyệt dữ liệu
+  // 1.6 Phê duyệt
   public static PheDuyetDuLieu = "pheduyetdulieu";
 
-  // 1.9 Dashboard
+  // 1.7 Dashboard
   public static dashboard = "dashboard";
 
-  // 1.10 Routes phần Tin bài
+  // 1.8 Routes phần Tin bài
   public static chuDe = "chude";
   public static tinTuc = "tintuc";
-
-  // 1.10.1 Routes trang thêm, sửa dữ liệu và xem trước tin tức
+  // 1.8.1 Routes trang thêm, sửa dữ liệu và xem trước tin tức
   public static addTinTuc = "them";
   public static editTinTuc = "sua";
   public static reviewTinTuc = "xem";
 
-  // 1.11 Routes phần khu vực khoáng sản
+  // 1.9 Routes phần khu vực khoáng sản
   public static khuvuccamtamcamUri = keyKhuVucKhoangSan.KhuVucCamTamCam;
   public static khuvucdaugiaUri = keyKhuVucKhoangSan.KhuVucDauGia;
   public static khuvuckhoangsandochaiUri = keyKhuVucKhoangSan.KhuVucKhoangSanDocHai;
@@ -96,6 +80,8 @@ export class AdminRoutingName {
   public static khuvucdutrukhoangsanUri = keyKhuVucKhoangSan.KhuVucDuTruKhoangSan;
   public static thongtinkhuvuckhoangsanUri = "thongtinkhuvuckhoangsan";
 
-  // 1.12 Routes phần điểm quặng/mỏ quặng
+  // 1.10 Routes phần điểm quặng/mỏ quặng
   public static diemquangUri = "diemquang";
+
+  
 }

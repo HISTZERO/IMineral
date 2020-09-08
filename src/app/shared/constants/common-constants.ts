@@ -152,28 +152,7 @@ export const NhomCapTaiNguyen = [
     }
 ];
 
-export const NhomBaoCao = [
-    {
-        id: 1,
-        name: "Quy hoạch"
-    },
-    {
-        id: 2,
-        name: "Báo cáo điều tra khảo sát"
-    },
-    {
-        id: 3,
-        name: "Báo cáo hoạt động"
-    },
-    {
-        id: 4,
-        name: "Bản đồ"
-    },
-    {
-        id: 5,
-        name: "Thông tin tư liệu"
-    }
-];
+
 
 export const MaLoaiHinh = [
     {
@@ -183,5 +162,16 @@ export const MaLoaiHinh = [
     {
         id: 2,
         name: "Khu vực tạm cấm"
+    }
+]
+
+export const DoiTuongBaoCao = [
+    {
+        id: 1,
+        name: "Cơ quan nhà nước"
+    },
+    {
+        id: 2,
+        name: "Cá nhân, tổ chức"
     }
 ]

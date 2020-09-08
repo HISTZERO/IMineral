@@ -16,20 +16,20 @@ let authConfig = {
 
 // Api
 let ipAddress = "http://10.159.21.212";
+let ipIMinerals = "http://10.159.21.211";
 
 export const environment = {
   ...authConfig,
-  production: true,
+  production: false,
   appName: "iWaterGIS",
+  apiIMineral: `${ipIMinerals}:8086/api/`,
+  apiSwURL: `${ipAddress}:5007/api/`,
   apiWrUrl: `${ipAddress}:5004/api/`,
-  apiKttvUrl: `${ipAddress}:5006/api/`,
-  apiSwUrl: `${ipAddress}:5007/api/`,
+  apiDataURL: `${ipAddress}:5008/api/`,
   apiCategoryURL: `${ipAddress}:5002/api/`,
   apiCommonURL: `${ipAddress}:5003/api/`,
   apiSearchURL: `${ipAddress}:5003/`,
   apiMapURL: `${ipAddress}:5005/api/`,
-  apiDataURL: `${ipAddress}:5008/api/`,
-  apiSwURL: `${ipAddress}:5007/api/`,
   apiLogRequestURL: "http://10.159.21.211:5500/",
   apiUserRoleURL: "http://10.159.21.211:5500/api/"
 };

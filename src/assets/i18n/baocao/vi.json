@@ -1,0 +1,27 @@
+{
+    "baocao": {
+        "titleList": "Danh sách ",
+        "titleAdd": "Thêm mới ",
+        "titleEdit": "Sửa dữ liệu ",
+        "contentDelete": "Báo cáo: ",
+        "sobaocao": "Số báo cáo",
+        "tenbaocao": "Tên báo cáo",
+        "diadiem": "Địa điểm",
+        "ngaybaocao": "Ngày báo cáo",
+        "loaibaocao": "Loại báo cáo",
+        "ghichu": "Ghi chú",
+        "nhombaocao": "Nhóm báo cáo",
+        "baocaonam": "Báo cáo năm",
+        "donvibaocao": "Đơn vị báo cáo",
+        "doituongbaocao": "Đối tượng báo cáo",
+        "sobaocaoPlaceholder": "Nhập số báo cáo",
+        "tenbaocaoPlaceholder": "Nhập tên báo cáo",
+        "ngaybaocaoPlaceholder": "DD-MM-YYYY",
+        "loaibaocaoPlaceholder": "---Chọn loại báo cáo---",
+        "baocaonamPlaceholder": "Nhập năm",
+        "ghichuPlaceholder": "Nhập ghi chú",
+        "doituongbaocaoPlaceholder": "---Chọn đối tượng báo cáo---",
+        "donvibaocaoPlaceHolder": "Nhập đơn vị báo cáo",
+        "diadiemPlaceHolder": "Nhập địa điểm"
+    }
+}

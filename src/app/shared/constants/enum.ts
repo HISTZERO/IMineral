@@ -17,3 +17,7 @@ export enum Paging {
   PageNumber = 1,
   PageSize = -1
 }
+
+export enum NhomBaoCaoEnum {
+  
+}

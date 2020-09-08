@@ -4,8 +4,6 @@ import { Component, OnInit } from "@angular/core";
 
 import { AuthService } from "src/app/services/auth/auth.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { ObjKey } from "src/app/shared/constants/objkey-constants";
-import { CallFunctionService } from "src/app/services/utilities/call-function.service";
 import { SlideInOutAnimation } from "src/app/shared/constants/animations/slide-in-out";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 
@@ -219,12 +217,12 @@ export class SidenavComponent implements OnInit {
         {
           label: "Báo cáo điều tra khảo sát khoáng sản",
           faIcon: "",
-          link: ""
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.dieutrakhaosatUri}`
         },
         {
           label: "Báo cáo định kỳ hoạt động khoáng sản",
           faIcon: "",
-          link: ""
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.baocaohoatdongdinhkyUri}`
         },
         {
           label: "Giám sát hoạt động khoáng sản",

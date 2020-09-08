@@ -119,7 +119,7 @@
               </div>
               <div class="card-body" >
                 <ejs-grid #gridCaNhan *ngIf="listCanhan" [dataSource]="listCanhan" [allowSelection]="true"
-                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
+                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" (rowSelected)='getAllDataActive()' (rowDeselected)="getAllDataActive()">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="hovaten" headerText="{{ 'DANHMUC.canhan.hovaten' | translate }}"></e-column>

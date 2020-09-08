@@ -102,7 +102,7 @@
               </div>
               <div class="card-body">
                 <ejs-grid #gridLoaiCapPhep *ngIf="listLoaiCapPhep" [dataSource]="listLoaiCapPhep" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                [allowResizing]="true" (rowSelected)='getAllDataActive($event)' (rowDeselected)="getAllDataActive($event)">
+                [allowResizing]="true" (rowSelected)='getAllDataActive()' (rowDeselected)="getAllDataActive()">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                     <e-column field="tenloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.tenloaicapphep' | translate }}"></e-column>
