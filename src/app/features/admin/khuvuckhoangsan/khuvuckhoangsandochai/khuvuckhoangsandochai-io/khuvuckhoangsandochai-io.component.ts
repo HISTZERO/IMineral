@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
-import { MatDialog } from "@angular/material";
 
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -12,7 +11,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { InputKhuVucKhoangSanDocHaiModel } from "src/app/models/admin/khuvuckhoangsan/khuvuckhoangsandochai.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-khuvuckhoangsandochai-io',
@@ -69,8 +68,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     private translate: TranslateService,
     public datePipe: DatePipe,
     public dmFacadeService: DmFacadeService,
-    public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
-    public modalDialog: MatDialog
+    public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService
   ) { }
 
   async ngOnInit() {
@@ -178,7 +176,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
       kvKhoangSanFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -191,7 +189,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
       kvKhoangSanFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -265,16 +263,7 @@ export class KhuvuckhoangsandochaiIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
 
   /**

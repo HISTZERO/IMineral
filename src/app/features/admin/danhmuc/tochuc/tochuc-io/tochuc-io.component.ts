@@ -3,7 +3,6 @@ import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { DatePipe } from "@angular/common";
-import { MatDialog } from "@angular/material";
 
 import { InputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
@@ -15,7 +14,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { LoaiGiayTo } from "src/app/shared/constants/loaigiayto-constants";
 import { OutputDmLoaiToChucModel } from "src/app/models/admin/danhmuc/loaitochuc.model";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-tochuc-io',
@@ -116,8 +115,7 @@ export class DmTochucIoComponent implements OnInit {
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
     private translate: TranslateService,
-    public datePipe: DatePipe,
-    public modalDialog: MatDialog
+    public datePipe: DatePipe
   ) { }
 
   async ngOnInit() {
@@ -468,7 +466,7 @@ export class DmTochucIoComponent implements OnInit {
       dmFacadeService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllToChuc"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -481,7 +479,7 @@ export class DmTochucIoComponent implements OnInit {
       dmFacadeService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllToChuc"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(
@@ -587,16 +585,7 @@ export class DmTochucIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  /**
-  * Hàm hiển thị cảnh báo error
-  */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

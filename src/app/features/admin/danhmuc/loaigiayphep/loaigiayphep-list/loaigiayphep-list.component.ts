@@ -17,7 +17,7 @@ import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { NhomLoaiGiayPhep } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-loaigiayphep-list',
@@ -82,8 +82,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder,
-    public modalDialog: MatDialog
+    public formBuilder: FormBuilder
   ) { }
 
   async ngOnInit() {
@@ -238,7 +237,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
                   this.getAllLoaiGiayPhep();
                 },
                 (error: HttpErrorResponse) => {
-                  this.showDialogWarning(error.error.errors);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -267,7 +266,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
                   this.getAllLoaiGiayPhep();
                 },
                 (error: HttpErrorResponse) => {
-                  this.showDialogWarning(error.error.errors);
+                  this.commonService.showDialogWarning(error.error.errors);
                 },
                 () =>
                   this.commonService.showeNotiResult(
@@ -310,7 +309,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
                 this.getAllLoaiGiayPhep();
               },
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -404,7 +403,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
             .subscribe(
               () => this.getAllLoaiGiayPhep(),
               (error: HttpErrorResponse) => {
-                this.showDialogWarning(error.error.errors);
+                this.commonService.showDialogWarning(error.error.errors);
               },
               () =>
                 this.commonService.showeNotiResult(
@@ -417,16 +416,7 @@ export class DmLoaigiayphepListComponent implements OnInit {
     });
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
   
   /**
    * Hàm thông báo không thể xóa

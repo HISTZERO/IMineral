@@ -11,11 +11,12 @@ import { MY_CUSTOM_FORMATS } from "src/app/features/admin/admin-shared.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex-component-factory-resolver.service";
-import { DangkyhoatdongkhoangsanRoutingModule } from './dangkyhoatdongkhoangsan-routing.module';
-import { HosoListComponent } from './hoso/hoso-list/hoso-list.component';
-import { HosoIoComponent } from './hoso/hoso-io/hoso-io.component';
-import { ThamdokhoangsanIoComponent } from './thamdokhoangsan/thamdokhoangsan-io/thamdokhoangsan-io.component';
-import { ThamdokhoangsanListComponent } from './thamdokhoangsan/thamdokhoangsan-list/thamdokhoangsan-list.component';
+import { DangkyhoatdongkhoangsanRoutingModule } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-routing.module';
+import { HosoListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-list/hoso-list.component';
+import { HosoIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-io/hoso-io.component';
+import { ThamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thamdokhoangsan-io/thamdokhoangsan-io.component';
+import { ThamdokhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thamdokhoangsan-list/thamdokhoangsan-list.component';
+import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan.component";
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ThamdokhoangsanListComponent } from './thamdokhoangsan/thamdokhoangsan-
   HosoListComponent,
   HosoIoComponent,
   ThamdokhoangsanIoComponent,
-  ThamdokhoangsanListComponent
+  ThamdokhoangsanListComponent,
+  DangkyhoatdongkhoangsanComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

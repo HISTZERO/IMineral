@@ -14,7 +14,7 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { OutputBaoCaoModel } from "src/app/models/admin/baocao/baocao.model";
 import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 import { idNhomBaoCao, nameNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 import { DoiTuongBaoCao } from "src/app/shared/constants/common-constants";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -83,7 +83,6 @@ export class BaocaoListComponent implements OnInit {
     public formBuilder: FormBuilder,
     public router: Router,
     public activatedRoute: ActivatedRoute,
-    public modalDialog: MatDialog,
     public dmFacadeService: DmFacadeService
   ) {
     this.baocaoService = this.baocaoFacadeService.getBaoCaoService();
@@ -305,7 +304,7 @@ export class BaocaoListComponent implements OnInit {
           .subscribe(
             () => this.getAllBaoCao(),
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -317,16 +316,7 @@ export class BaocaoListComponent implements OnInit {
     });
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * Hàm thông báo không thể xóa

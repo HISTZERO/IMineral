@@ -1,13 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { InputTaiLieuModel } from "../../../../../../models/admin/baocao/tailieudinhkem.model";
-import { MatsidenavService } from "../../../../../../services/utilities/matsidenav.service";
-import { CommonServiceShared } from "../../../../../../services/utilities/common-service";
 import { TranslateService } from "@ngx-translate/core";
-import { BaocaoFacadeService } from "../../../../../../services/admin/baocao/baocao-facade.service";
+import { FormGroup, FormBuilder } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
-import { validationAllErrorMessagesService } from "../../../../../../services/utilities/validatorService";
-import { CommonFacadeService } from "../../../../../../services/admin/common/common-facade.service";
+import { ActivatedRoute } from "@angular/router";
+
+import { InputTaiLieuModel } from "src/app/models/admin/baocao/tailieudinhkem.model";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { CommonFacadeService } from "src/app/services/admin/common/common-facade.service";
 
 @Component({
   selector: 'app-tailieudinhkem-io',
@@ -54,7 +56,8 @@ export class TailieudinhkemIoComponent implements OnInit {
     public commonService: CommonServiceShared,
     private translate: TranslateService,
     public baoCaoFacadeService: BaocaoFacadeService,
-    public commonFacadeService: CommonFacadeService
+    public commonFacadeService: CommonFacadeService,
+    public activatedRoute: ActivatedRoute
   ) { }
 
   async ngOnInit() {
@@ -123,7 +126,8 @@ export class TailieudinhkemIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   async addOrUpdate(operMode: string) {
-    const baoCaoFacadeService = this.baoCaoFacadeService.getTaiLieuDinhKemService();
+    const idbaocao: string = this.activatedRoute.snapshot.paramMap.get('id');
+    const tailieuService = this.baoCaoFacadeService.getTaiLieuDinhKemService();
     const fileService = this. commonFacadeService.getFileService();
     this.inputModel = this.tailieuIOForm.value;
     if (operMode === "new") {
@@ -135,11 +139,12 @@ export class TailieudinhkemIoComponent implements OnInit {
         this.inputModel.dinhdang = res.dinhdang;
         this.inputModel.dungluong = res.dungluong;
         this.inputModel.duongdan = res.duongdan
+        this.inputModel.idbaocao = idbaocao;
         // gọi api thêm item vào bảng tailieu
-        baoCaoFacadeService.addItem(this.inputModel).subscribe(
+        tailieuService.addItem(this.inputModel).subscribe(
           (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
           (error: HttpErrorResponse) => {
-            this.showDialogWarning(error.error.errors);
+            this.commonService.showDialogWarning(error.error.errors);
           },
           () =>
             this.commonService.showeNotiResult(
@@ -153,10 +158,10 @@ export class TailieudinhkemIoComponent implements OnInit {
       });
     } else if (operMode === "edit") {
       this.inputModel.idtailieu = this.obj.idtailieu;
-      baoCaoFacadeService.updateItem(this.inputModel).subscribe(
+      tailieuService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
-          this.showDialogWarning(error.error.errors);
+          this.commonService.showDialogWarning(error.error.errors);
         },
         () =>
           this.commonService.showeNotiResult(

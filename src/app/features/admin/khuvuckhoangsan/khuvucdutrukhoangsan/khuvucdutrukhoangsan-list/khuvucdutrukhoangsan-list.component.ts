@@ -17,7 +17,7 @@ import { MenuKhuVucDuTruKhoangSan } from "src/app/shared/constants/sub-menus/khu
 import { KhuvucdutrukhoangsanIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvucdutrukhoangsan/khuvucdutrukhoangsan-io/khuvucdutrukhoangsan-io.component";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
-import { MyAlertDialogComponent } from "src/app/shared/components/my-alert-dialog/my-alert-dialog.component";
+
 
 @Component({
   selector: 'app-khuvucdutrukhoangsan-list',
@@ -67,8 +67,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
     public khuvuckhoangsanFacadeService: KhuVucKhoangSanFacadeService,
     private translate: TranslateService,
     public formBuilder: FormBuilder,
-    public router: Router,
-    public modalDialog: MatDialog
+    public router: Router
   ) {
     this.khuVucDuTruKhoangSan = this.khuvuckhoangsanFacadeService.getKhuVucDuTruKhoangSanService();
   }
@@ -239,7 +238,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
           .subscribe(
             () => this.getAllKhuVucDuTruKhoangSan(),
             (error: HttpErrorResponse) => {
-              this.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error.errors);
             },
             () =>
               this.commonService.showeNotiResult(
@@ -251,16 +250,7 @@ export class KhuvucdutrukhoangsanListComponent implements OnInit {
     });
   }
 
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    dialog.componentInstance.content =
-      "<b>" + error + "</b>";
-    dialog.componentInstance.visibleOkButton = false;
-  }
+  
 
   /**
    * Hàm thông báo không thể xóa
