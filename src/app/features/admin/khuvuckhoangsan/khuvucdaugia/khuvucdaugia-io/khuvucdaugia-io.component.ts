@@ -63,13 +63,13 @@ export class KhuvucdaugiaIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-    public dmFacadeService: DmFacadeService,
-    private formBuilder: FormBuilder,
-    public commonService: CommonServiceShared,
-    private translate: TranslateService,
-    public modalDialog: MatDialog,
-    public datePipe: DatePipe) { }
+              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              public dmFacadeService: DmFacadeService,
+              private formBuilder: FormBuilder,
+              public commonService: CommonServiceShared,
+              private translate: TranslateService,
+              public modalDialog: MatDialog,
+              public datePipe: DatePipe) { }
 
   async ngOnInit() {
     // Khởi tạo form

@@ -33,6 +33,7 @@ import { ThamdokhoangsanListComponent } from './thamdokhoangsan/thamdokhoangsan-
     NgbModule,
     AdminSharedModule,
     OwlDateTimeModule,
+    OwlMomentDateTimeModule,
     TranslateModule
   ],
   entryComponents: [

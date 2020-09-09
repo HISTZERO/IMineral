@@ -61,15 +61,15 @@ export class KhuvucdaugiaListComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
 
   constructor(public matSidenavService: MatsidenavService,
-    public cfr: ComponentFactoryResolver,
-    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-    public commonService: CommonServiceShared,
-    public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService,
-    public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public router: Router,
-    public modalDialog: MatDialog
+              public cfr: ComponentFactoryResolver,
+              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              public commonService: CommonServiceShared,
+              public thietlapFacadeService: ThietlapFacadeService,
+              private translate: TranslateService,
+              public formBuilder: FormBuilder,
+              public generalClientService: GeneralClientService,
+              public router: Router,
+              public modalDialog: MatDialog
   ) {
 
     this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
