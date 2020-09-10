@@ -66,6 +66,15 @@ export class BaocaoInfoComponent implements OnInit, AfterViewInit {
           url: ``,
         }
       ];
+      this.btnArray = [
+        {
+          title: `${nameNhomBaoCao[this.keyBaoCao]}`,
+          icon: "fad fa-chevron-double-left",
+          color: "btn-primary",
+          url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${this.keyBaoCao}`
+        },
+
+      ];
       this.getDataBaoCao(res.params.id);
     });
   }
