@@ -23,4 +23,4 @@ export const LoaiGiayTo = [
       id: 6,
       name: "Chứng nhận đầu tư"
     }
-  ]
+  ];

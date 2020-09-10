@@ -32,3 +32,25 @@ export enum NhomLoaiCapPhep {
   DongCuaMo = 7,
   ChuyenNhuongThamDoKhaiThac = 8
 }
+
+export enum LoaiDoiTuongEnum {
+  CaNhan = 1,
+  ToChuc = 2
+}
+
+export enum HoSoActionEnum {
+  Add = 1,
+  Edit = 2
+}
+
+export enum ThongTinKhoangSanTabEnum {
+  ThongTinChung = 0,
+  ToaDo = 1
+}
+
+export enum ThamDoKhoangSanTabEnum {
+  ThongTinHoSo = 0,
+  TaiLieuHoSoDinhKem = 1,
+  TaiLieuXuLyHoSoDinhKem = 2,
+  ThongTinDangKy = 3
+}

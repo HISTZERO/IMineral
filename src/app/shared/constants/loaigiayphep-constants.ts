@@ -91,4 +91,4 @@ export const LoaiGiayPhep = [
         id: 23,
         name: "Quyết định phê duyệt tính tiền cấp quyền"
     },
-]
+];
