@@ -8,7 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import * as cloneDeep from 'lodash/cloneDeep';
+import * as cloneDeep from 'lodash.cloneDeep';
 import {
   TreeGridComponent,
   RowDDService,
@@ -138,7 +138,7 @@ export class LayerTreeComponent implements OnInit, OnChanges {
   async action(rowData: any, eventName: string, event: Event) {
     if (event) event.stopPropagation();
 
-    // Return 
+    // Return
     await this.nextDataBound({
       rowData: rowData,
       eventName: eventName,

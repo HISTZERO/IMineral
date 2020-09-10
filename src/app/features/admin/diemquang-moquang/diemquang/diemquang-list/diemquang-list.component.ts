@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import {DataStateChangeEventArgs, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -53,6 +53,9 @@ export class DiemquangListComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+
   constructor(public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
     public diemQuangMoQuangFacadeService: DiemQuangMoQuangFacadeService,
@@ -62,7 +65,7 @@ export class DiemquangListComponent implements OnInit {
     public formBuilder: FormBuilder,
     public generalClientService: GeneralClientService
   ) {
-    this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService(); 
+    this.itemService = this.diemQuangMoQuangFacadeService.getDiemMoService();
   }
 
   async ngOnInit() {
@@ -82,6 +85,8 @@ export class DiemquangListComponent implements OnInit {
   public formInit() {
     this.formSearch = this.formBuilder.group({
       Keyword: [""],
+      GTEqualTruluong: [""],
+      LTEqualTruluong: [""],
     });
   }
 
@@ -219,7 +224,7 @@ export class DiemquangListComponent implements OnInit {
     });
   }
 
-  
+
 
   /**
    * Hàm thông báo không thể xóa
