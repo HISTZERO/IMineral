@@ -1,1 +1,38 @@
-<p>thamdokhoangsan-io works!</p>
+<app-sub-header [menuItems]="navArray"></app-sub-header>
+<div class="content pt-3">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <span class="title" *ngIf="currentAction === ActionType.Add">
+                {{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.titleAdd' | translate}}
+              </span>
+              <span class="title" *ngIf="currentAction === ActionType.Edit">
+                {{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.titleEdit' | translate}}
+              </span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <mat-tab-group mat-stretch-tabs [animationDuration]="">
+              <mat-tab [disabled]="!loadedTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
+                <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"></app-hoso-io>
+              </mat-tab>
+              <mat-tab [disabled]="!loadedTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
+
+              </mat-tab>
+              <mat-tab [disabled]="!loadedTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
+
+              </mat-tab>
+              <mat-tab [disabled]="!loadedTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thonTinDangKyTabTitle' | translate }}">
+
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
