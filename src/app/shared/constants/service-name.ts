@@ -37,6 +37,8 @@ export class ServiceName {
   public static DELETEFILE = "ftpdeletefile";
   // Hồ sơ
   public static HOSO = "hoso";
+  // Thiết lập
+  public static CoQuanTiepNhan = "coquantiepnhan";
 
 
 

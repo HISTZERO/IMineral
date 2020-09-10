@@ -6,6 +6,7 @@ import { LoaiDoiTuongEnum, TrangThaiEnum, Paging } from 'src/app/shared/constant
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coquantiepnhan.model';
 
 @Component({
   selector: 'app-hoso-io',
@@ -36,6 +37,9 @@ export class HosoIoComponent implements OnInit {
   // Chứa dữ liệu loại cấp phép
   public loaiCapPhepList: OutputDmLoaiCapPhepModel[];
   public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
+  // Chứa dữ liệu cơ quan tiếp nhận
+  public coQuanTiepNhanList: OutputHsCoQuanTiepNhanModel[];
+  public coQuanTiepNhanFilters: OutputHsCoQuanTiepNhanModel[];
   // error message
   validationErrorMessages = {};
 
@@ -84,6 +88,8 @@ export class HosoIoComponent implements OnInit {
     await this.getDataTranslate();
     // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
+    // Lấy dữ liệu cơ quan tiếp nhận
+    await this.getCoQuanTiepNhanAll();
   }
 
   /**
@@ -159,5 +165,13 @@ export class HosoIoComponent implements OnInit {
       .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, TrangThai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
     this.loaiCapPhepList = listData.items;
     this.loaiCapPhepFilters = listData.items;
+  }
+
+  async getCoQuanTiepNhanAll() {
+    const listData: any = await this.dmFacadeService
+      .getDmCoQuanQuanLyService()
+      .getFetchAll({PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+    this.coQuanTiepNhanList = listData.items;
+    this.coQuanTiepNhanFilters = listData.items;
   }
 }
