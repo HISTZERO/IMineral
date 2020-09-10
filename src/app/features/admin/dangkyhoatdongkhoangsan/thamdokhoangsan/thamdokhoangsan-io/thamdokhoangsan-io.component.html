@@ -17,7 +17,9 @@
           <div class="card-body">
             <mat-tab-group mat-stretch-tabs [animationDuration]="">
               <mat-tab [disabled]="!loadedTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
-                <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"></app-hoso-io>
+                <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"
+                  [insertedState]="insertedState.SaveAndRefresh">
+                </app-hoso-io>
               </mat-tab>
               <mat-tab [disabled]="!loadedTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
 

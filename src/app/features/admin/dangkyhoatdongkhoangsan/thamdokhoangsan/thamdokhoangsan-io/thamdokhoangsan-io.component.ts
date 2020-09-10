@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { ActivatedRoute } from '@angular/router';
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhep } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhep, InsertedState } from 'src/app/shared/constants/enum';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -19,6 +19,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   public ActionType = HoSoActionEnum;
 
   private idhoso: string;
+
+  public insertedState = InsertedState;
 
   public nhomLoaiCapPhepEnum = NhomLoaiCapPhep;
 

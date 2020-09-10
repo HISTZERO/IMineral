@@ -1,4 +1,8 @@
 import { TrangThai } from "./trangthai-constants";
+export enum InsertedState {
+  SaveAndRefresh = 1,
+  SaveAndEdit = 2
+}
 
 export enum donvido {
   m = 0,
