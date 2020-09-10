@@ -1,4 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import {DatePipe} from '@angular/common';
 import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
 import { Observable } from "rxjs";
 import { MatSidenav, MatDialog } from "@angular/material";
@@ -15,7 +16,9 @@ import { GeneralClientService } from "src/app/services/admin/common/general-clie
 import {NhomLoaiCapPhep} from 'src/app/shared/constants/enum';
 
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-
+import { Router } from "@angular/router";
+import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
+import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 
 @Component({
   selector: 'app-hoso-list',
@@ -44,6 +47,12 @@ export class HosoListComponent implements OnInit {
   // Chứa dữ liệu đã chọn
   public selectedItem: OutputHoSoModel;
 
+  // Chứa danh sách loại cấp phép
+  public allLoaiCapPhep: OutputDmLoaiCapPhepModel[];
+
+   // Filter Lĩnh Vực
+   public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
+
   // Service
   public itemService: any;
 
@@ -58,8 +67,11 @@ export class HosoListComponent implements OnInit {
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
+              public router: Router,
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService,
+              public dmFacadeService: DmFacadeService,
+              public datePipe: DatePipe,
               public modalDialog: MatDialog) {
     this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
   }
@@ -70,6 +82,8 @@ export class HosoListComponent implements OnInit {
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
       await this.getDataTranslate();
+      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
+      await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
       await this.getDataPageSize();
     }
@@ -80,8 +94,9 @@ export class HosoListComponent implements OnInit {
    */
   public formInit() {
     this.formSearch = this.formBuilder.group({
-      gtequalngaytiepnhan: [""],
-      ltequalngaytiepnhan: [""],
+      GTEqualNgaytiepnhan: [""],
+      LTEqualNgaytiepnhan: [""],
+      Loaicapphep:  [""],
       Keyword: [""],
     });
   }
@@ -109,15 +124,36 @@ export class HosoListComponent implements OnInit {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
 
-    this.getAllHoSo();
+    await this.getAllHoSo();
   }
 
   /**
-   * Hàm lấy dữ liệu Cá nhân
+   * Hàm lấy dữ liệu loại cấp phép
+   */
+  async getAllLoaiCapPhep() {
+    if (this.nhomLoaiCapPhep === null || this.nhomLoaiCapPhep === undefined) {
+      this.nhomLoaiCapPhep = -1;
+    }
+
+    const listData: any = await this.dmFacadeService
+      .getDmLoaiCapPhepService()
+      .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1 });
+    this.loaiCapPhepFilters = listData.items;
+    this.allLoaiCapPhep =  listData.items;
+  }
+
+  /**
+   * Hàm lấy dữ liệu hồ sơ
    */
   async getAllHoSo() {
     this.listHoSo = this.itemService;
-    const searchModel = this.formSearch.value;
+    const searchModel = {
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      Loaicapphep: this.formSearch.controls.Loaicapphep.value,
+      Keyword: this.formSearch.controls.Keyword.value,
+    };
+
     this.itemService
       .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
@@ -126,7 +162,13 @@ export class HosoListComponent implements OnInit {
    * When page item clicked
    */
   public dataStateChange(state: DataStateChangeEventArgs): void {
-    const searchModel = this.formSearch.value;
+    const searchModel = {
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      Loaicapphep: this.formSearch.controls.Loaicapphep.value,
+      Keyword: this.formSearch.controls.Keyword.value,
+    };
+
     this.itemService.getDataFromServer(state, searchModel);
   }
 
@@ -142,7 +184,8 @@ export class HosoListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public addItemHoSo() {
-
+    this.router.navigate([
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`]);
   }
 
   /**
@@ -150,7 +193,9 @@ export class HosoListComponent implements OnInit {
    * @param id
    */
   async editItemHoSo(id: any) {
-
+    this.router.navigate([
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`],
+        { queryParams: { idhoso: id}});
   }
 
   /**
@@ -158,5 +203,56 @@ export class HosoListComponent implements OnInit {
    */
   async deleteItemHoSo(data) {
     this.selectedItem = data;
+    const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
+      .getHoSoService()
+      .checkBeDeleted(this.selectedItem.idhoso);
+    this.canBeDeletedCheck(canDelete);
+  }
+
+  /**
+   * Hàm check điều kiện xóa bản ghi
+   * @param sMsg
+   */
+  public canBeDeletedCheck(sMsg: string) {
+    if (sMsg === "ok") {
+      this.confirmDeleteDiaLog();
+    } else {
+      this.cantDeleteDialog(sMsg);
+    }
+  }
+
+  /**
+   * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
+   */
+  confirmDeleteDiaLog() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.contentDelete,
+      this.selectedItem.mahoso
+    );
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        await this.dangKyHoatDongKhoangSanFacadeService
+          .getHoSoService()
+          .deleteItem({ idhoso: this.selectedItem.idhoso })
+          .subscribe(
+            () => this.getAllHoSo(),
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+      }
+    });
+  }
+
+  /**
+   * Hàm thông báo không thể xóa
+   */
+  cantDeleteDialog(sMsg: string) {
+    this.commonService.canDeleteDialogService(sMsg);
   }
 }

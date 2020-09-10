@@ -35,6 +35,7 @@ import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyh
     NgbModule,
     AdminSharedModule,
     OwlDateTimeModule,
+    OwlMomentDateTimeModule,
     TranslateModule
   ],
   entryComponents: [
