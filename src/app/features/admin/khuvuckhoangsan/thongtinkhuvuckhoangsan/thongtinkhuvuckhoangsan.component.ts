@@ -76,16 +76,16 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
         title: `Chi tiết`,
         url: ``
       }
-    ],
-      this.btnArr = [
-        {
-          title: `${nameKhuVucKhoangSan[this.keyKhuVuc]}`,
-          icon: "fad fa-chevron-double-left",
-          color: "btn-primary",
-          url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${this.keyKhuVuc}`
-        },
+    ];
+    this.btnArr = [
+      {
+        title: `${nameKhuVucKhoangSan[this.keyKhuVuc]}`,
+        icon: "fad fa-chevron-double-left",
+        color: "btn-primary",
+        url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${this.keyKhuVuc}`
+      },
 
-      ]
+    ];
     this.selectedDefaultTab = ThongTinKhoangSanTabEnum.ThongTinChung;
     this.showViewDetailComponent();
   }
