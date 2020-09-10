@@ -72,6 +72,8 @@
     "hinhthucnhanketquaRequired": "Hình thức nhận kết quả không được để trống",
     "idcoquantiepnhanRequired": "Cơ quan tiếp nhận không được để trống",
     "tencanhantochucRequired": "Tên cá nhân tổ chức không được để trống",
+    "ngaytiepnhanRequired": "Ngày tiếp nhận không được để trống",
+    "ngaynopRequired": "Ngày nộp không được để trống",
     "loaigiaytoRequired": "Loại giấy tờ không được để trống",
     "sogiaytoRequired": "Số giấy tờ không được để trống",
     "ngaycapRequired": "Ngày cấp không được để trống",
