@@ -70,6 +70,8 @@
     "nameofobject": "Điểm mỏ",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
     "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
-    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
+    "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?",
+    "greaterQualTruluong" :"Trữ lượng từ",
+    "littlerQualTruluong" :"Trữ lượng đến"
   }
 }

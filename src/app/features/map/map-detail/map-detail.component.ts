@@ -1,7 +1,7 @@
 import { SplitComponent } from "angular-split";
 import { MatAccordion } from "@angular/material";
 import { MatDialog } from "@angular/material/dialog";
-import * as cloneDeep from "lodash/cloneDeep";
+import * as cloneDeep from "lodash.cloneDeep";
 import { TranslateService } from "@ngx-translate/core";
 import {
   Component,
