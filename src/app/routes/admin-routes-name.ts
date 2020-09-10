@@ -56,9 +56,7 @@ export class AdminRoutingName {
 
   // 1.4 Routes thiết lập
   public static ThietLapHeThong = "thietlaphethong";
-  public static ThietLapTram = "thietlaptram";
-  public static ThietLapDuLieu = "thietlapdulieu";
-  public static DoiTuongTram = "doituongtram";
+  public static CauHinhTaiLieu = "cauhinhtailieu";
   // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
 

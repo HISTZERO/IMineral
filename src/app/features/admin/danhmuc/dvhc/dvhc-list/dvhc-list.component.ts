@@ -319,7 +319,6 @@ export class DmDvhcListComponent implements OnInit {
     ) {
       args.cell.id = args.data[ServiceName.ID_DVHC];
     }
-
   }
 
   doFunction(methodName) {
