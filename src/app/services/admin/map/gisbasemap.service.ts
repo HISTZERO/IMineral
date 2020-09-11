@@ -45,7 +45,7 @@ export class GisBaseMapService extends RepositoryEloquentService {
     // Symbol, Thuộc tính bản đồ, base url
     this.defaultSymbol = SimpleSymbol;
     this.mapProperties = { layers: [], basemap: BaseMap.name };
-    this.baseApiUrl = `${environment.apiMapURL}${ServiceName.MAPLAYER}`;
+    this.baseApiUrl = `${environment.apiIMineral}${ServiceName.MAPLAYER}`;
 
     // Thuộc tính view
     this.spatialReference = new SpatialReference({ wkid: this.srid });

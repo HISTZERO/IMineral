@@ -86,7 +86,7 @@ export class ThietlaphethongListComponent implements OnInit {
   async getPagesize() {
     this.pageSize = await this.thietLapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
+      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
     this.settingsCommon.pageSettings["pageSize"] = +this.pageSize;
     this.getAllThietLapHeThong();
   }

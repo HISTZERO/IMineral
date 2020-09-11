@@ -222,7 +222,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll({Trangthai: TrangThaiEnum.Active});
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active });
     this.allTinh = allTinhData;
     this.dvhcProvinceFilters = allTinhData;
   }
@@ -248,7 +248,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.coQuanQuanLyIOForm.value.tinhcombobox.idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.coQuanQuanLyIOForm.value.tinhcombobox.idtinh, Trangthai: TrangThaiEnum.Active });
       this.dvhcDistrictFilters = this.allHuyen;
     }
 
@@ -275,7 +275,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.coQuanQuanLyIOForm.value.huyencombobox.idhuyen).toPromise();
+        .getFetchAll({ IdHuyen: this.coQuanQuanLyIOForm.value.huyencombobox.idhuyen, Trangthai: TrangThaiEnum.Active });
       this.dvhcWardFilters = this.allXa;
     }
 
@@ -523,7 +523,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

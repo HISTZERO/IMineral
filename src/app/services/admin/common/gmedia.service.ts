@@ -17,7 +17,7 @@ export class GmediaService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: InputGmediaModel,
       outputModelName: OutputGmediaModel,
-      apiUrl: environment.apiCommonURL + ServiceName.GMEDIA
+      apiUrl: environment.apiIMineral + ServiceName.GMEDIA
     });
   }
 
@@ -31,7 +31,7 @@ export class GmediaService extends RepositoryEloquentService {
    */
   public deleteArrayItem(body) {
     this.setServiceInfo({
-      apiUrl: environment.apiCommonURL + ServiceName.GMEDIA + '/delete'
+      apiUrl: environment.apiIMineral + ServiceName.GMEDIA + '/delete'
     });
     return this.addItem(body);
   }
@@ -42,7 +42,7 @@ export class GmediaService extends RepositoryEloquentService {
    */
   public searchItem(params) {
     this.setServiceInfo({
-      apiUrl: environment.apiCommonURL + ServiceName.GMEDIA + '/search'
+      apiUrl: environment.apiIMineral + ServiceName.GMEDIA + '/search'
     });
     return this.getAll(params);
   }

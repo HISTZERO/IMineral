@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolve
 import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
@@ -67,6 +67,9 @@ export class DmLoaitailieuListComponent implements OnInit {
   // Chứa danh sách nhóm loại tài liệu
   public listNhomloaitailieu = NhomLoaiTaiLieu;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
+  
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -80,6 +83,8 @@ export class DmLoaitailieuListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo form
     this.formInit();
     this.setDisplayOfCheckBoxkOnGrid(true);
@@ -109,7 +114,8 @@ export class DmLoaitailieuListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      console.log(dataSetting);
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }

@@ -20,14 +20,14 @@ export class CategoryService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputCategoryModel(),
       outputModelName: new OutputCategoryModel(),
-      apiUrl: environment.apiMapURL + ServiceName.MCATEGORY
+      apiUrl: environment.apiIMineral + ServiceName.MCATEGORY
     });
   }
 
   // Get all categories
   public getTreeCategories() {
     this.setServiceInfo({
-      apiUrl: `${environment.apiMapURL + ServiceName.MCATEGORY}/get-tree-categories`
+      apiUrl: `${environment.apiIMineral + ServiceName.MCATEGORY}/get-tree-categories`
     });
     return this.getFetchAll();
   }

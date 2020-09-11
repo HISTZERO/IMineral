@@ -19,7 +19,7 @@ export class TbTintucService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputTintucModel(),
       outputModelName: new OutputTintucModel(),
-      apiUrl: environment.apiCommonURL + ServiceName.TINTUC,
+      apiUrl: environment.apiIMineral + ServiceName.TINTUC,
     });
   }
 

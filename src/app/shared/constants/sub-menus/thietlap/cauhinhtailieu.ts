@@ -1,13 +1,13 @@
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 
-export const MenuThietLapDuLieu = [
+export const MenuCauHinhTaiLieu = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
     title: "Thiết lập",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}`,
   },
   {
-    title: "Thiết lập dữ liệu",
+    title: "Cấu hình tài liệu",
     url: "",
   },
 ];
