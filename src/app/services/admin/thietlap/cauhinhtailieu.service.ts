@@ -24,11 +24,11 @@ export class CauhinhtailieuService extends RepositoryEloquentService {
   /**
    * Lấy về danh sách loại cấp phép theo trạng thái
    */
-  public getAllStatusCauHinhTaiLieu(param: any) {
+  public getAllStatusCauHinhTaiLieu() {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.CAUHINHTAILIEU + "/" + ServiceName.STATUSCAUHINHTAILIEU
     });
-    return this.getFetchAll(param);
+    return this.getFetchAll();
   }
 
   public checkBeDeleted(id: number) {

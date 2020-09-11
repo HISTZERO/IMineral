@@ -15,7 +15,7 @@ export class PublicSearchService extends RepositoryEloquentService {
       httpClient,
       inputModelName: null,
       outputModelName: null,
-      apiUrl: environment.apiSearchURL + ServiceName.SEARCH
+      apiUrl: environment.apiIMineral + ServiceName.SEARCH
     });
   }
   // get search data

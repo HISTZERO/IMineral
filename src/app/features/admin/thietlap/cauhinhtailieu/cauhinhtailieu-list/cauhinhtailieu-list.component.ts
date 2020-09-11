@@ -1,23 +1,22 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav } from "@angular/material";
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDmLoaiCapPhepModel } from "src/app/models/admin/danhmuc/loaicapphep.model";
-import { MenuDanhMucLoaiCapPhep } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DmLoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TrangThaiEnum, Paging } from "src/app/shared/constants/enum";
+import { TrangThaiEnum, Paging, TrangThaiCauHinh } from "src/app/shared/constants/enum";
 import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-constants";
-import { OutputCauHinhTaiLieuModel } from "../../../../../models/admin/thietlap/cauhinhtailieu.model";
+import { OutputCauHinhTaiLieuModel } from "src/app/models/admin/thietlap/cauhinhtailieu.model";
+import { MenuCauHinhTaiLieu } from "src/app/shared/constants/sub-menus/thietlap/cauhinhtailieu";
+import { MatdialogService } from "../../../../../services/utilities/matdialog.service";
+import { CauhinhtailieuIoComponent } from "../cauhinhtailieu-io/cauhinhtailieu-io.component";
 
 @Component({
   selector: 'app-cauhinhtailieu-list',
@@ -34,7 +33,7 @@ export class CauhinhtailieuListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-  // Chứa danh sách cấu hìn
+  // Chứa danh sách loại cấp phép chứa trạng thái cấu hình
   public listLoaiCapPhep: OutputCauHinhTaiLieuModel[];
 
   // Chứa dữ liệu đã chọn 
@@ -44,7 +43,7 @@ export class CauhinhtailieuListComponent implements OnInit {
   public dataTranslate: any;
 
   // Chứa menu item trên subheader
-  public navArray = MenuDanhMucLoaiCapPhep;
+  public navArray = MenuCauHinhTaiLieu;
 
   // Chứa thuộc tính form
   public formSearch: FormGroup;
@@ -61,30 +60,36 @@ export class CauhinhtailieuListComponent implements OnInit {
   // Chứa dữ liệu thủ tục hành chính
   public listThuTucHanhChinh: any;
 
+  // Chứa trạng thái cấu hình
+  public trangThaiCauHinh = TrangThaiCauHinh;
+
+  // Chứa service dialog
+  public mDialog: any;
+
   // Contructor
   constructor(
-    public matSidenavService: MatsidenavService,
-    public cfr: ComponentFactoryResolver,
     public commonService: CommonServiceShared,
-    public dmFacadeService: DmFacadeService,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
-    public generalClientService: GeneralClientService,
-    public formBuilder: FormBuilder
-  ) { }
+    public formBuilder: FormBuilder,
+    public dmFacadeService: DmFacadeService,
+    private imDialog: MatDialog,
+    public imDialogService: MatdialogService,
+  ) {
+    this.mDialog = imDialogService;
+    this.mDialog.initDialg(imDialog);
+
+  }
 
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
-    this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Lấy dữ liệu thủ tục hành chính
     this.getAllThuTucHanhChinh();
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -95,17 +100,17 @@ export class CauhinhtailieuListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
-    const dataSetting: any = await this.thietlapFacadeService
+    let dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -121,13 +126,13 @@ export class CauhinhtailieuListComponent implements OnInit {
   async getAllLoaiCapPhep(param: any = { PageNumber: 1, PageSize: -1 }) {
     const listData: any = await this.thietlapFacadeService
       .getCauHinhTaiLieuService()
-      .getAllStatusCauHinhTaiLieu(param);
-    if (listData.items) {
-      listData.items.map((loaiCP, index) => {
+      .getAllStatusCauHinhTaiLieu();
+    if (listData) {
+      listData.map((loaiCP, index) => {
         loaiCP.serialNumber = index + 1;
       });
     }
-    this.listLoaiCapPhep = listData.items;
+    this.listLoaiCapPhep = listData;
   }
 
   /**
@@ -154,17 +159,6 @@ export class CauhinhtailieuListComponent implements OnInit {
   }
 
   /**
-   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
-   */
-  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
-    if (status) {
-      this.settingsCommon.selectionOptions = { persistSelection: true };
-    } else {
-      this.settingsCommon.selectionOptions = null;
-    }
-  }
-
-  /**
    * Form innit
    */
   public formInit() {
@@ -187,109 +181,20 @@ export class CauhinhtailieuListComponent implements OnInit {
   }
 
   /**
-   * Hàm mở sidenav chức năng sửa dữ liệu
-   * @param id
-   */
-  async editItemLoaiCapPhep(id: string) {
-    // Lấy dữ liệu loại cấp phép theo id
-    const dataItem: any = await this.dmFacadeService
-    .getDmLoaiCapPhepService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.loaicapphep.titleEdit );
-    await this.matSidenavService.setContentComp( DmLoaicapphepIoComponent, "edit", dataItem);
-    await this.matSidenavService.open();
+     * Hàm mở dialog
+     */
+  public showMatDialog() {
+    this.mDialog.setDialog(this, CauhinhtailieuIoComponent, "", "closeMatDialog", "", "75%");
+    this.mDialog.open();
   }
 
   /**
-   * Hàm mở sidenav chức năng thêm mới
+   * Hàm đóng mat dialog
    */
-  public openLoaiCapPhepIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.loaicapphep.titleAdd);
-    this.matSidenavService.setContentComp(DmLoaicapphepIoComponent, "new");
-    this.matSidenavService.open();
+  closeMatDialog() {
+    this.imDialog.closeAll();
   }
 
-  /**
-   * Hàm đóng sidenav
-   */
-  public closeLoaiCapPhepIOSidenav() {
-    this.matSidenavService.close();
-  }
-
-
-  /**
-   *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-   */
-  async deleteItemLoaiCapPhep(data) {
-    this.selectedItem = data;
-    // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
-    // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
-    // Nếu đồng ý xóa
-    const canDelete: string = this.dmFacadeService
-      .getDmLoaiCapPhepService()
-      .checkBeDeleted(this.selectedItem.idloaicapphep);
-    this.canBeDeletedCheck(canDelete);
-  }
-
-  /**
-   * Hàm check điều kiện xóa bản ghi
-   * @param sMsg 
-   */
-  public canBeDeletedCheck(sMsg: string) {
-    if (sMsg === "ok") {
-      this.confirmDeleteDiaLog();
-    } else {
-      this.cantDeleteDialog(sMsg);
-    }
-  }
-
-  /** 
-   * Hàm thực hiện chức năng xóa bản ghi và thông báo xóa thành công
-   */
-  confirmDeleteDiaLog() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.loaicapphep.contentDelete,
-      this.selectedItem.tenloaicapphep
-    );
-    dialogRef.afterClosed().subscribe(async (result) => {
-      if (result === "confirm") {
-        const data = this.generalClientService.findByKeyName<any>([this.selectedItem], "trangthai", TrangThaiEnum.Active);
-
-        if (data !== null) {
-          const informationDialogRef = this.commonService.informationDiaLogService(
-            "",
-            this.dataTranslate.DANHMUC.loaicapphep.nameofobject + " (" + data.tenloaicapphep + ") " + this.dataTranslate.DANHMUC.loaicapphep.informedContentOfUnDeletedDialog,
-            this.dataTranslate.DANHMUC.loaicapphep.informedDialogTitle,
-          );
-        } else {
-            await this.dmFacadeService
-            .getDmLoaiCapPhepService()
-            .deleteItem({ idLoaicapphep: this.selectedItem.idloaicapphep })
-            .subscribe(
-              () => this.getAllLoaiCapPhep(),
-              (error: HttpErrorResponse) => {
-                this.commonService.showDialogWarning(error.error.errors);
-              },
-              () =>
-                this.commonService.showeNotiResult(
-                  this.dataTranslate.COMMON.default.successDelete,
-                  2000
-                )
-            );
-        }
-      }
-    });
-  }
-
-  
-  
-  
-  /**
-   * Hàm thông báo không thể xóa
-   */
-  cantDeleteDialog(sMsg: string) {
-    this.commonService.canDeleteDialogService(sMsg);
-  }
 
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName) {

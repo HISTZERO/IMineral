@@ -59,7 +59,7 @@ export class SearchResultDataComponent implements OnInit, OnChanges {
 
   async ngOnInit() {
     this.getPagesize();
-    this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
+    // this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
   }
 
   async ngOnChanges() {

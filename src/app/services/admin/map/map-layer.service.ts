@@ -14,7 +14,7 @@ import { RepositoryEloquentService } from "src/app/services/data/baserepository.
 })
 export class MapLayerService extends RepositoryEloquentService {
   // Api url
-  public mapLayerApiUrl: string = `${environment.apiMapURL}${ServiceName.MAPLAYER}`;
+  public mapLayerApiUrl: string = `${environment.apiIMineral}${ServiceName.MAPLAYER}`;
 
   constructor(public httpClient: HttpClient) {
     super();
@@ -22,7 +22,7 @@ export class MapLayerService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputMapLayerModel(),
       outputModelName: new OutputMapLayerModel(),
-      apiUrl: environment.apiMapURL + ServiceName.MAPLAYER,
+      apiUrl:environment.apiIMineral + ServiceName.MAPLAYER,
     });
   }
 

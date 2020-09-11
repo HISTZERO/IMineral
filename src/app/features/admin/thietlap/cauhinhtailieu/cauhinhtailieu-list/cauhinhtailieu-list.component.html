@@ -4,7 +4,7 @@
 <div class="content pt-3">
   <mat-sidenav-container class="sidenav-container">
     <mat-sidenav-content>
-     <div class="container-fluid">
+      <div class="container-fluid">
         <div class="row">
           <div class="col-12 px-0">
             <div class="card border">
@@ -12,10 +12,13 @@
                 <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
                 <div class="row" [formGroup]="formSearch">
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.thutuchanhchinh" | translate}}:</label>
-                    <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonThutuchanhchinh' | translate }}" formControlName="Idthutuchanhchinh" *ngIf="dataTranslate">
+                    <label
+                      class="col-form-label text-right">{{"THIETLAP.cauhinhtailieu.thutuchanhchinh" | translate}}:</label>
+                    <mat-select class="form-control"
+                      placeholder="{{ 'THIETLAP.cauhinhtailieu.chonThutuchanhchinh' | translate }}"
+                      formControlName="Idthutuchanhchinh" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.loaicapphep.chonThutuchanhchinh" | translate }}
+                        {{ "THIETLAP.cauhinhtailieu.chonThutuchanhchinh" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let thutuc of listThuTucHanhChinh" [value]="thutuc.idthutuchanhchinh">
                         * {{ thutuc.tenthutuc }}
@@ -23,10 +26,13 @@
                     </mat-select>
                   </div>
                   <div class="col-lg-3 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.nhomloaicapphep" | translate}}:</label>
-                    <mat-select class="form-control" placeholder="{{ 'DANHMUC.loaicapphep.chonNhomloaicapphep' | translate }}" formControlName="Nhomloaicapphep" *ngIf="dataTranslate">
+                    <label
+                      class="col-form-label text-right">{{"THIETLAP.cauhinhtailieu.nhomloaicapphep" | translate}}:</label>
+                    <mat-select class="form-control"
+                      placeholder="{{ 'THIETLAP.cauhinhtailieu.chonNhomloaicapphep' | translate }}"
+                      formControlName="Nhomloaicapphep" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.loaicapphep.chonNhomloaicapphep" | translate }}
+                        {{ "THIETLAP.cauhinhtailieu.chonNhomloaicapphep" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let nhomLCP of nhomLoaiCapPhep" [value]="nhomLCP.id">
                         * {{ nhomLCP.name }}
@@ -34,10 +40,12 @@
                     </mat-select>
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                    <label class="col-form-label text-right">{{"DANHMUC.loaicapphep.trangthai" | translate}}:</label>
-                    <mat-select class="form-control" formControlName="Trangthai" placeholder="{{ 'DANHMUC.loaicapphep.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                    <label
+                      class="col-form-label text-right">{{"THIETLAP.cauhinhtailieu.trangthai" | translate}}:</label>
+                    <mat-select class="form-control" formControlName="Trangthai"
+                      placeholder="{{ 'THIETLAP.cauhinhtailieu.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                       <mat-option value="">
-                        {{ "DANHMUC.loaicapphep.chonTrangthai" | translate }}
+                        {{ "THIETLAP.cauhinhtailieu.chonTrangthai" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let tt of trangthai" [value]="tt.id">
                         {{ tt.name }}
@@ -46,14 +54,15 @@
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group">
                     <label class="col-form-label text-right">{{"COMMON.default.key" | translate}}:</label>
-                    <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
+                    <input type="text" formControlName="Keyword" class="form-control"
+                      placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
                   </div>
                   <div class="col-lg-2 col-md-3 col-sm-4 form-group d-flex" style="align-items: flex-end;">
                     <div>
-                    <button class="btn btn-success" (click)="searchAdvance()">
-                      {{"COMMON.default.search" | translate}}
-                    </button>
-                  </div>
+                      <button class="btn btn-success" (click)="searchAdvance()">
+                        {{"COMMON.default.search" | translate}}
+                      </button>
+                    </div>
                   </div>
                 </div>
               </div>
@@ -73,13 +82,9 @@
                 <h3>
                   <div class="row">
                     <div class="col-md-4 mb-sm-1">
-                      <span class="title">{{ "DANHMUC.loaicapphep.titleList" | translate }}</span>
+                      <span class="title">{{ "THIETLAP.cauhinhtailieu.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
-                      <button class="btn btn-primary" style="float: right;" (click)="openLoaiCapPhepIOSidenav()">
-                        <i class="fal fa-plus-square"></i>
-                        {{ "COMMON.default.add" | translate }}
-                      </button>
                       <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
@@ -89,34 +94,37 @@
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid #gridCauHinhTaiLieu *ngIf="listLoaiCapPhep" [dataSource]="listLoaiCapPhep" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
-                [allowResizing]="true">
+                <ejs-grid #gridCauHinhTaiLieu *ngIf="listLoaiCapPhep" [dataSource]="listLoaiCapPhep"
+                  [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
+                  [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
+                  [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true">
                   <e-columns>
-                    <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                    <e-column field="tenloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.tenloaicapphep' | translate }}"></e-column>
-                    <e-column field="tenthutuchanhchinh" headerText="{{ 'DANHMUC.loaicapphep.thutuchanhchinh' | translate }}">
+                    <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
                     </e-column>
-                    <e-column field="nhomloaicapphep" headerText="{{ 'DANHMUC.loaicapphep.nhomloaicapphep' | translate }}">
+                    <e-column field="tenloaicapphep"
+                      headerText="{{ 'THIETLAP.cauhinhtailieu.tenloaicapphep' | translate }}"></e-column>
+                    <e-column field="tenthutuchanhchinh"
+                      headerText="{{ 'THIETLAP.cauhinhtailieu.thutuchanhchinh' | translate }}">
+                    </e-column>
+                    <e-column field="nhomloaicapphep"
+                      headerText="{{ 'THIETLAP.cauhinhtailieu.nhomloaicapphep' | translate }}">
                       <ng-template #template let-data>
                         {{ data.nhomloaicapphep | getNameFileConstant: nhomLoaiCapPhep}}
                       </ng-template>
                     </e-column>
-                    <e-column field="trangthai" headerText="{{ 'DANHMUC.loaicapphep.trangthai' | translate }}">
+                    <e-column field="trangthaicauhinh"
+                      headerText="{{ 'THIETLAP.cauhinhtailieu.thaotaccauhinh' | translate }}">
                       <ng-template #template let-data>
-                        {{ data.trangthai | getNameFileConstant: trangthai}}
+                        <span>{{ data.trangthaicauhinh === trangThaiCauHinh.DaCauHinh ? 'Đã cấu hình' : 'Chưa cấu hình'}}</span>
                       </ng-template>
                     </e-column>
-                    <e-column *ngIf="settingsCommon.selectionOptions" type='checkbox'></e-column>
                     <e-column field="idloaicapphep" headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
-                          <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                           (click)="editItemLoaiCapPhep(data.idloaicapphep)">
-                            <i class="far fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                            (click)="deleteItemLoaiCapPhep(data)">
-                            <i class="far fa-trash"></i>
+                          <button class="btn btn-sm btn-primary"
+                            title="{{ 'THIETLAP.cauhinhtailieu.thaotaccauhinh' | translate }} "
+                            (click)="showMatDialog()">
+                            <i class="far fa-cog"></i>
                           </button>
                         </div>
                       </ng-template>
@@ -128,7 +136,7 @@
           </div>
         </div>
       </div>
-      <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+      <!-- <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
         style="width: 700px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeLoaiCapPhepIOSidenav()">
@@ -138,7 +146,7 @@
             class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #compLoaiCapPhepIO> </template>
-      </mat-sidenav>
+      </mat-sidenav> -->
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>

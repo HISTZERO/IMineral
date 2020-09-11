@@ -20,14 +20,14 @@ export class LayerService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputLayerModel(),
       outputModelName: new OutputLayerModel(),
-      apiUrl: environment.apiMapURL + ServiceName.LAYER
+      apiUrl:environment.apiIMineral + ServiceName.LAYER
     });
   }
 
   // Get all layers select id and name
   public getAllIdName() {
     this.setServiceInfo({
-      apiUrl: environment.apiMapURL + ServiceName.LAYER + '/get-all-id-name'
+      apiUrl:environment.apiIMineral + ServiceName.LAYER + '/get-all-id-name'
     });
     return this.getFetchAll();
   }

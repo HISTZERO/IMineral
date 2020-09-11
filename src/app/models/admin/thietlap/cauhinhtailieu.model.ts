@@ -5,17 +5,16 @@ export class OutputCauHinhTaiLieuModel {
     nhomloaicapphep: number;
     idthutuchanhchinh: string;
     mota: string;
-    trangthai: number;
+    tenthutuchanhchinh: string;
     thutu: number;
+    trangthaicauhinh: number;
 }
 
 export class InputCauHinhTaiLieuModel {
-    idloaicapphep: string;
-    maloaicapphep: number;
-    tenloaicapphep: string;
-    nhomloaicapphep: number;
-    idthutuchanhchinh: string;
-    mota: string;
-    trangthai: number;
+    idcauhinhtailieu: string;
+    loaicapphep: number;
+    idloaitailieu: string;
+    sobanchinh: number;
+    sobansao: number;
     thutu: number;
 }
