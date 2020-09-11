@@ -72,4 +72,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       }
     }
   }
+
+  public getHoSoIoFormState(action: number) {
+    this.currentAction = action;
+  }
 }
