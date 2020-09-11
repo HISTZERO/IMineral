@@ -311,7 +311,7 @@ export class DmTochucIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.tochucIOForm.value.tinhcombobox.idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.tochucIOForm.value.tinhcombobox.idtinh, Trangthai: TrangThaiEnum.Active });
       this.dvhcDistrictFilters = this.allHuyen;
     }
 
@@ -338,7 +338,7 @@ export class DmTochucIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.tochucIOForm.value.huyencombobox.idhuyen).toPromise();
+        .getFetchAll({ IdHuyen: this.tochucIOForm.value.huyencombobox.idhuyen, Tranthai: TrangThaiEnum.Active });
       this.dvhcWardFilters = this.allXa;
     }
 
@@ -585,7 +585,7 @@ export class DmTochucIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

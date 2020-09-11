@@ -204,7 +204,7 @@ export class DmCanhanListComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll();
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active });
     this.allTinh = allTinhData;
     this.dvhcProvinceFilters = allTinhData;
   }
@@ -226,7 +226,7 @@ export class DmCanhanListComponent implements OnInit {
       this.formSearch.controls["Idhuyen"].setValue("");
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.formSearch.value.Idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.formSearch.value.Idtinh});
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -247,7 +247,7 @@ export class DmCanhanListComponent implements OnInit {
       this.formSearch.controls["Idxa"].setValue("");
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.formSearch.value.Idhuyen).toPromise();
+        .getFetchAll({ IdHuyen: this.formSearch.value.Idhuyen});
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -485,7 +485,7 @@ export class DmCanhanListComponent implements OnInit {
     });
   }
 
-  
+
 
   /**
    * Hàm thông báo không thể xóa

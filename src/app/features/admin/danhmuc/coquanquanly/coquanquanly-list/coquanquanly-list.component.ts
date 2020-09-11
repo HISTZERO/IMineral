@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { MatSidenav, MatDialog } from "@angular/material";
+import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
@@ -51,7 +51,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
 
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
-  
+
   //Chứa data Trạng thái
   public trangthai = TrangThai;
 
@@ -84,7 +84,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
 
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
- 
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -96,7 +96,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
     public generalClientService: GeneralClientService,
     public formBuilder: FormBuilder
   ) { }
- 
+
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
@@ -107,20 +107,20 @@ export class DmCoquanquanlyListComponent implements OnInit {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     await this.setDisplayOfCheckBoxkOnGrid(true);
   }
- 
+
   /**
   * Hàm lấy dữ liệu translate
   */
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -129,7 +129,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
     } else {
@@ -181,7 +181,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
       this.settingsCommon.selectionOptions = null;
     }
   }
-  
+
   /**
   * Form innit
   */
@@ -225,7 +225,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
    * Hàm unActive mảng item đã chọn
    */
   public unActiveArrayItem() {
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "",  this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfUnActiveDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", "", this.dataTranslate.DANHMUC.coquanquanly.confirmedContentOfUnActiveDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         const dataParam: any = {
@@ -233,19 +233,19 @@ export class DmCoquanquanlyListComponent implements OnInit {
           status: TrangThaiEnum.NoActive
         };
         this.dmFacadeService.getDmCoQuanQuanLyService()
-            .updateStatusItemsCoQuanQuanLy(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllCoQuanQuanLy();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsCoQuanQuanLy(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCoQuanQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -262,19 +262,19 @@ export class DmCoquanquanlyListComponent implements OnInit {
           status: TrangThaiEnum.Active
         };
         this.dmFacadeService.getDmCoQuanQuanLyService()
-            .updateStatusItemsCoQuanQuanLy(dataParam)
-            .subscribe(
-              () => {
-                  this.getAllCoQuanQuanLy();
-                },
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.updateStatusSuccess,
-                    2000)
-              );
+          .updateStatusItemsCoQuanQuanLy(dataParam)
+          .subscribe(
+            () => {
+              this.getAllCoQuanQuanLy();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.updateStatusSuccess,
+                2000)
+          );
       }
     });
   }
@@ -305,31 +305,31 @@ export class DmCoquanquanlyListComponent implements OnInit {
           };
 
           this.dmFacadeService.getDmCoQuanQuanLyService()
-          .deleteItemsCoQuanQuanLy(dataBody)
-          .subscribe(
-            () => {
-              this.getAllCoQuanQuanLy();
-            },
-            (error: HttpErrorResponse) => {
-              this.commonService.showDialogWarning(error.error.errors);
-            },
-            () =>
-              this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete,
-                2000
-            ));
+            .deleteItemsCoQuanQuanLy(dataBody)
+            .subscribe(
+              () => {
+                this.getAllCoQuanQuanLy();
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                ));
         }
       }
     });
   }
-  
+
   /**
    * Hàm lấy danh sách Dvhc Tỉnh
    */
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll();
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active });
     this.allTinh = allTinhData;
     this.dvhcProvinceFilters = allTinhData;
   }
@@ -351,7 +351,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
       this.formSearch.controls["Idhuyen"].setValue("");
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.formSearch.value.Idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.formSearch.value.Idtinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -372,7 +372,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
       this.formSearch.controls["Idxa"].setValue("");
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid( this.formSearch.value.Idhuyen ).toPromise();
+        .getFetchAll({ IdHuyen: this.formSearch.value.Idhuyen});
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -384,30 +384,30 @@ export class DmCoquanquanlyListComponent implements OnInit {
   async editItemCoQuanQuanLy(id: string) {
     // Lấy dữ liệu cơ quan quản lý theo id
     const dataItem: any = await this.dmFacadeService
-    .getDmCoQuanQuanLyService()
-    .getByid(id).toPromise();
-    await this.matSidenavService.setTitle( this.dataTranslate.DANHMUC.coquanquanly.titleEdit );
-    await this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "edit", dataItem);
+      .getDmCoQuanQuanLyService()
+      .getByid(id).toPromise();
+    await this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.coquanquanly.titleEdit);
+    await this.matSidenavService.setContentComp(DmCoquanquanlyIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
- 
+
   /**
   * Hàm mở sidenav chức năng thêm mới
   */
   public openCoQuanQuanLyIOSidenav() {
     this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.coquanquanly.titleAdd);
-    this.matSidenavService.setContentComp( DmCoquanquanlyIoComponent, "new");
+    this.matSidenavService.setContentComp(DmCoquanquanlyIoComponent, "new");
     this.matSidenavService.open();
   }
- 
+
   /**
   * Hàm đóng sidenav
   */
   public closeCoQuanQuanLyIOSidenav() {
     this.matSidenavService.close();
   }
- 
- 
+
+
   /**
   *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
   */
@@ -421,7 +421,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
       .checkBeDeleted(+this.selectedItem.idcoquanquanly);
     this.canBeDeletedCheck(canDelete);
   }
- 
+
   /**
   * Hàm check điều kiện xóa bản ghi
   * @param sMsg 
@@ -453,7 +453,7 @@ export class DmCoquanquanlyListComponent implements OnInit {
             this.dataTranslate.DANHMUC.coquanquanly.informedDialogTitle,
           );
         } else {
-            await this.dmFacadeService
+          await this.dmFacadeService
             .getDmCoQuanQuanLyService()
             .deleteItem({ idCoquanquanly: this.selectedItem.idcoquanquanly })
             .subscribe(
@@ -472,8 +472,8 @@ export class DmCoquanquanlyListComponent implements OnInit {
     });
   }
 
-  
-  
+
+
   /**
   * Hàm thông báo không thể xóa
   */

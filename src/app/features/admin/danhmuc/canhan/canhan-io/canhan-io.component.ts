@@ -144,7 +144,7 @@ export class DmCanhanIoComponent implements OnInit {
       },
       tinh: { required: this.dataTranslate.DANHMUC.canhan.matinhRequired },
       huyen: { required: this.dataTranslate.DANHMUC.canhan.mahuyenRequired },
-      xa: { required: this.dataTranslate.DANHMUC.canhan.maxaRequired},
+      xa: { required: this.dataTranslate.DANHMUC.canhan.maxaRequired },
       email: {
         required: this.dataTranslate.DANHMUC.canhan.emailRequired,
         email: this.dataTranslate.DANHMUC.canhan.emailCheck
@@ -236,7 +236,7 @@ export class DmCanhanIoComponent implements OnInit {
   async showDvhcTinh() {
     const allTinhData: any = await this.dmFacadeService
       .getProvinceService()
-      .getFetchAll({Trangthai: TrangThaiEnum.Active});
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active });
     this.allTinh = allTinhData;
     this.dvhcProvinceFilters = allTinhData;
   }
@@ -262,7 +262,7 @@ export class DmCanhanIoComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.canhanIOForm.value.tinhcombobox.idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.canhanIOForm.value.tinhcombobox.idtinh, Trangthai: TrangThaiEnum.Active });
       this.dvhcDistrictFilters = this.allHuyen;
     }
 
@@ -289,7 +289,7 @@ export class DmCanhanIoComponent implements OnInit {
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.canhanIOForm.value.huyencombobox.idhuyen).toPromise();
+        .getFetchAll({ IdHuyen: this.canhanIOForm.value.huyencombobox.idhuyen, Trangthai: TrangThaiEnum.Active });
       this.dvhcWardFilters = this.allXa;
     }
 
@@ -539,7 +539,7 @@ export class DmCanhanIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

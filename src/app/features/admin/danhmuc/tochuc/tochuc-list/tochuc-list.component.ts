@@ -218,7 +218,7 @@ export class DmTochucListComponent implements OnInit {
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getByid(this.formSearch.value.Idtinh).toPromise();
+        .getFetchAll({ IdTinh: this.formSearch.value.Idtinh });
       this.dvhcDistrictFilters = this.allHuyen;
     }
   }
@@ -237,7 +237,7 @@ export class DmTochucListComponent implements OnInit {
     ) {
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getByid(this.formSearch.value.Idhuyen).toPromise();
+        .getFetchAll({ IdHuyen: this.formSearch.value.Idhuyen });
       this.dvhcWardFilters = this.allXa;
     }
   }
@@ -456,7 +456,7 @@ export class DmTochucListComponent implements OnInit {
     });
   }
 
-  
+
 
   /**
    * Hàm thông báo không thể xóa
