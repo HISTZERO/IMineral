@@ -4,6 +4,11 @@ export enum InsertedState {
   SaveAndEdit = 2
 }
 
+export enum SelectedOptionType {
+  Popup = 1,
+  NoPopup = 2
+}
+
 export enum donvido {
   m = 0,
   cm ,

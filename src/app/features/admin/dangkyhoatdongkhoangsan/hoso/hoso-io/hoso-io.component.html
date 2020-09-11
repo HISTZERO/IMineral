@@ -183,7 +183,7 @@
                         <small>(*)</small>
                       </label>
                       <div class="col-lg-8 col-md-8 col-sm-8">
-                        <mat-select class="form-control" formControlName="loaidoituong"
+                        <mat-select class="form-control" formControlName="loaidoituong" (selectionChange)="selectLoaiDoiTuongChange()"
                           *ngIf="dataTranslate">
                           <mat-option *ngFor="let loaiDoiTuong of loaiDoiTuongList" [value]="loaiDoiTuong.id">
                             {{ loaiDoiTuong.name }}
@@ -198,7 +198,7 @@
                       </label>
                       <div class="col-lg-6 col-md-6 col-sm-6">
                         <input class="form-control" type="text" formControlName="tencanhantochuc" placeholder="{{'DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucPlaceholder' | translate}}" />
-                        <span *ngIf="formErrors.tencanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc}}</span>
+                        <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc}}</span>
                       </div>
                       <div class="col-lg-2 col-md-2 col-sm-2">
                         <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openIOSidenav()">

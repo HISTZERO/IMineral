@@ -1,5 +1,5 @@
 export class OutputDmCanhanModel {
-  idcanhan: number;
+  idcanhan: string;
   hovaten: string;
   diachi: string;
   sogiayto: string;
@@ -22,7 +22,7 @@ export class OutputDmCanhanModel {
 }
 
 export class InputDmCanhanModel {
-  idcanhan: number;
+  idcanhan: string;
   hovaten: string;
   diachi: string;
   sogiayto: string;

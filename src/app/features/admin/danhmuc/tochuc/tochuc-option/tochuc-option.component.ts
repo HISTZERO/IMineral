@@ -1,56 +1,54 @@
-import { Component, OnInit, ViewChild, EventEmitter, Output, Input } from "@angular/core";
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Output, EventEmitter, Input } from '@angular/core';
+import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { HttpErrorResponse } from "@angular/common/http";
 import { FormGroup, FormBuilder } from "@angular/forms";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
+import { MenuDanhMucToChuc } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { Paging, SelectedOptionType } from 'src/app/shared/constants/enum';
-import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { TrangThaiEnum, Paging, SelectedOptionType } from "src/app/shared/constants/enum";
+import { TrangThai } from "src/app/shared/constants/trangthai-constants";
+import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 
 @Component({
-  selector: 'app-canhan-option',
-  templateUrl: './canhan-option.component.html',
-  styleUrls: ['./canhan-option.component.scss']
+  selector: 'app-tochuc-option',
+  templateUrl: './tochuc-option.component.html',
+  styleUrls: ['./tochuc-option.component.scss']
 })
-export class DmCanhanOptionComponent implements OnInit {
+export class DmTochucOptionComponent implements OnInit {
   // Viewchild template
-  @ViewChild("gridCaNhan", { static: false }) public gridCaNhan: GridComponent;
+  @ViewChild("gridToChuc", { static: false }) public gridToChuc: GridComponent;
   // tslint:disable-next-line: no-output-rename
-  @Output("selectItemCaNhanEvent") selectItemCaNhanEvent: EventEmitter<OutputDmCanhanModel> = new EventEmitter();
+  @Output("selectItemToChucEvent") selectItemToChucEvent: EventEmitter<OutputDmToChucModel> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("selectedOptionType") selectedOptionType = SelectedOptionType.Popup;
-  // Chứa dữ liệu đối tượng truyền từ list comp
-  public obj: any;
-
-  // Chứa kiểu form
-  public purpose: string;
-
   // Chứa thuộc tính form
   public formSearch: FormGroup;
-
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
 
-  // Chứa danh sách Cá nhân
-  public listCanhan: OutputDmCanhanModel[];
+  // Chứa danh sách Tổ chức
+  public listToChuc: OutputDmToChucModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDmCanhanModel;
+  public selectedItem: OutputDmToChucModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
-
-  // Chứa kiểu wrap text trên grid
-  public wrapSettings: TextWrapSettingsModel;
 
   constructor(public dmFacadeService: DmFacadeService,
               public commonService: CommonServiceShared,
@@ -62,10 +60,8 @@ export class DmCanhanOptionComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
-    // Lấy danh sách Tỉnh
+    // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
   }
@@ -92,34 +88,16 @@ export class DmCanhanOptionComponent implements OnInit {
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu cá nhân
-    await this.getAllCanhan();
+    // Gọi hàm lấy dữ liệu Tổ chức
+    await this.getAllToChuc();
   }
 
   /**
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({
-      Keyword: "",
-    });
-    this.getAllCanhan();
-  }
-
-  /**
-   * Hàm lấy dữ liệu Cá nhân
-   */
-  async getAllCanhan(param: any = { PageNumber: 1, PageSize: -1 }) {
-    const listData: any = await this.dmFacadeService
-      .getDmCanhanService()
-      .getFetchAll(param);
-    if (listData.items) {
-      listData.items.map((canhan, index) => {
-        canhan.serialNumber = index + 1;
-      });
-    }
-
-    this.listCanhan = listData.items;
+    this.formSearch.reset({ Keyword: ""});
+    this.getAllToChuc();
   }
 
   /**
@@ -132,34 +110,42 @@ export class DmCanhanOptionComponent implements OnInit {
   }
 
   /**
-   * Tìm kiếm nâng cao
+   * Hàm lấy dữ liệu Tổ chức
    */
-  public searchAdvance() {
-    const dataSearch = this.formSearch.value;
-    dataSearch.PageNumber = Paging.PageNumber;
-    dataSearch.PageSize = Paging.PageSize;
-    this.getAllCanhan(dataSearch);
+  async getAllToChuc() {
+    const searchModel = this.formSearch.value;
+    searchModel.PageNumber =  Paging.PageNumber;
+    searchModel.PageSize = Paging.PageSize;
+
+    const listData: any = await this.dmFacadeService
+      .getDmToChucService()
+      .getFetchAll(searchModel);
+    if (listData.items) {
+      listData.items.map((tochuc, index) => {
+        tochuc.serialNumber = index + 1;
+      });
+    }
+    this.listToChuc = listData.items;
   }
 
   /**
    *  chọn item cá nhân trong danh sách
    */
-  public selectItemCaNhan(id: string) {
-    const itemCaNhan = this.listCanhan.find(item => item.idcanhan === id);
+  public selectItemToChuc(id: string) {
+    const itemToChuc = this.listToChuc.find(item => item.idtochuc === id);
 
     if (this.selectedOptionType === SelectedOptionType.NoPopup) {
-      this.selectItemCaNhanEvent.emit(itemCaNhan);
+      this.selectItemToChucEvent.emit(itemToChuc);
     } else if (this.selectedOptionType === SelectedOptionType.Popup) {
-      this.matSidenavService.doParentFunction("selectItemCaNhan", itemCaNhan);
-      this.closeCanhanIOSidenav();
+      this.matSidenavService.doParentFunction("selectItemToChuc", itemToChuc);
+      this.closeToChucIOSidenav();
     }
   }
 
   /**
    * Hàm close sidenav
    */
-  public closeCanhanIOSidenav() {
+  public closeToChucIOSidenav() {
     this.matSidenavService.close();
   }
-
 }
