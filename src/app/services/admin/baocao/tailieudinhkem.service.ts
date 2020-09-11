@@ -21,6 +21,13 @@ export class TailieudinhkemService extends RepositoryEloquentService {
     });
 }
 
+public getAllTaiLieuByIdBaoCao(idbaocao: string) {
+  this.setServiceInfo({
+    apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU + "/getbctailieubyidbaocao"
+  });
+  return this.getByid(idbaocao);
+}
+
 public checkBeDeleted(id: string) {
     return "ok";
 }
