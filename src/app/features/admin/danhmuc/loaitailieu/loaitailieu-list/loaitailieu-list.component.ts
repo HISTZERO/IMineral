@@ -109,7 +109,8 @@ export class DmLoaitailieuListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      console.log(dataSetting);
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }

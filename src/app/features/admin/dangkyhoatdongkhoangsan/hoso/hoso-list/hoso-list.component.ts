@@ -119,7 +119,7 @@ export class HosoListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }

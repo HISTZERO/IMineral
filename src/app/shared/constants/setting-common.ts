@@ -8,7 +8,7 @@ import {
 export class SettingsCommon {
   public editSettings: EditSettingsModel;
   public toolbar: ToolbarItems[] = ["Search"];
-  public pageSettings: PageSettingsModel = { pageSize: 40, pageCount: 5 };
+  public pageSettings: PageSettingsModel = { pageSize: 20, pageCount: 5 };
   public selectionOptions: SelectionSettingsModel;
 }
 

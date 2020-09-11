@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormGroup, FormBuilder } from "@angular/forms";
 
@@ -9,14 +8,13 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { DmLoaicapphepIoComponent } from "src/app/features/admin/danhmuc/loaicapphep/loaicapphep-io/loaicapphep-io.component";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { TrangThaiEnum, Paging, TrangThaiCauHinh } from "src/app/shared/constants/enum";
+import { Paging, TrangThaiCauHinh } from "src/app/shared/constants/enum";
 import { NhomLoaiCapPhep } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { OutputCauHinhTaiLieuModel } from "src/app/models/admin/thietlap/cauhinhtailieu.model";
 import { MenuCauHinhTaiLieu } from "src/app/shared/constants/sub-menus/thietlap/cauhinhtailieu";
-import { MatdialogService } from "../../../../../services/utilities/matdialog.service";
-import { CauhinhtailieuIoComponent } from "../cauhinhtailieu-io/cauhinhtailieu-io.component";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { CauhinhtailieuIoComponent } from "src/app/features/admin/thietlap/cauhinhtailieu/cauhinhtailieu-io/cauhinhtailieu-io.component";
 
 @Component({
   selector: 'app-cauhinhtailieu-list',
@@ -112,7 +110,7 @@ export class CauhinhtailieuListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
@@ -171,8 +169,8 @@ export class CauhinhtailieuListComponent implements OnInit {
   }
 
   /**
-  * Tìm kiếm nâng cao
-  */
+   * Tìm kiếm nâng cao
+   */
   public searchAdvance() {
     let dataSearch = this.formSearch.value;
     dataSearch['PageNumber'] = Paging.PageNumber;
@@ -181,10 +179,10 @@ export class CauhinhtailieuListComponent implements OnInit {
   }
 
   /**
-     * Hàm mở dialog
-     */
+   * Hàm mở dialog
+   */
   public showMatDialog() {
-    this.mDialog.setDialog(this, CauhinhtailieuIoComponent, "", "closeMatDialog", "", "75%");
+    this.mDialog.setDialog(this, CauhinhtailieuIoComponent, "", "closeMatDialog", "", "80%", "80%");
     this.mDialog.open();
   }
 
