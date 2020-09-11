@@ -1,4 +1,13 @@
 import { TrangThai } from "./trangthai-constants";
+export enum InsertedState {
+  SaveAndRefresh = 1,
+  SaveAndEdit = 2
+}
+
+export enum SelectedOptionType {
+  Popup = 1,
+  NoPopup = 2
+}
 
 export enum donvido {
   m = 0,
@@ -33,7 +42,30 @@ export enum NhomLoaiCapPhep {
   ChuyenNhuongThamDoKhaiThac = 8
 }
 
+
 export enum TrangThaiCauHinh {
   ChuaCauHinh = 0,
   DaCauHinh = 1
+}
+
+export enum LoaiDoiTuongEnum {
+  CaNhan = 1,
+  ToChuc = 2
+}
+
+export enum HoSoActionEnum {
+  Add = 1,
+  Edit = 2
+}
+
+export enum ThongTinKhoangSanTabEnum {
+  ThongTinChung = 0,
+  ToaDo = 1
+}
+
+export enum ThamDoKhoangSanTabEnum {
+  ThongTinHoSo = 0,
+  TaiLieuHoSoDinhKem = 1,
+  TaiLieuXuLyHoSoDinhKem = 2,
+  ThongTinDangKy = 3
 }

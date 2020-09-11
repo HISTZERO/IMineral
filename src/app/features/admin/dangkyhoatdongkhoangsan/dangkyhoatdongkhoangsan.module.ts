@@ -17,6 +17,9 @@ import { HosoIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/
 import { ThamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thamdokhoangsan-io/thamdokhoangsan-io.component';
 import { ThamdokhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thamdokhoangsan-list/thamdokhoangsan-list.component';
 import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan.component";
+import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
+import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
+import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 
 
 @NgModule({
@@ -25,7 +28,7 @@ import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyh
   HosoIoComponent,
   ThamdokhoangsanIoComponent,
   ThamdokhoangsanListComponent,
-  DangkyhoatdongkhoangsanComponent
+  DangkyhoatdongkhoangsanComponent,
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -36,9 +39,12 @@ import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyh
     AdminSharedModule,
     OwlDateTimeModule,
     OwlMomentDateTimeModule,
-    TranslateModule
+    TranslateModule,
+    DanhmucModule,
   ],
   entryComponents: [
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
