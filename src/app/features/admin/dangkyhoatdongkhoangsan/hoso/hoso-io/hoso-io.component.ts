@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua } from 'src/app/shared/constants/common-constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -16,10 +16,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { MatSidenav } from '@angular/material';
-import { DmCanhanOptionComponent } from '../../../danhmuc/canhan/canhan-option/canhan-option.component';
-import { DmTochucOptionComponent } from '../../../danhmuc/tochuc/tochuc-option/tochuc-option.component';
-import { OutputDmCanhanModel } from 'src/app/models/admin/danhmuc/canhan.model';
-import { OutputDmToChucModel } from 'src/app/models/admin/danhmuc/tochuc.model';
+import { DmCanhanOptionComponent } from "../../../danhmuc/canhan/canhan-option/canhan-option.component";
+import { DmTochucOptionComponent } from "../../../danhmuc/tochuc/tochuc-option/tochuc-option.component";
+import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
+import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 
 @Component({
   selector: 'app-hoso-io',
@@ -29,6 +29,8 @@ import { OutputDmToChucModel } from 'src/app/models/admin/danhmuc/tochuc.model';
 export class HosoIoComponent implements OnInit {
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -62,8 +64,6 @@ export class HosoIoComponent implements OnInit {
   private idhoso: string;
   // Action thao tác dữ liệu
   private currentAction: number;
-  // Chứa dữ liệu input
-  public inputModel: InputHoSoModel;
   // error message
   validationErrorMessages = {};
 
@@ -186,30 +186,30 @@ export class HosoIoComponent implements OnInit {
    */
   private async formOnEdit() {
     if (this.currentAction === HoSoActionEnum.Edit) {
-      this.inputModel = await this.getHoSoById(this.idhoso);
+      const inputModel = await this.getHoSoById(this.idhoso);
       this.hosoIOForm.setValue({
-        mahoso: this.inputModel.mahoso,
-        mabiennhan: this.inputModel.mabiennhan,
-        soden: this.inputModel.soden,
-        ngaynop: this.inputModel.ngaynop,
-        ngaytiepnhan: this.inputModel.ngaytiepnhan,
-        ngaytraketqua: this.inputModel.ngaytraketqua,
-        loaidoituong: this.inputModel.loaidoituong,
-        loaicapphep: this.inputModel.loaicapphep,
-        hinhthucnophoso: this.inputModel.hinhthucnophoso,
-        hinhthucnhanketqua: this.inputModel.hinhthucnhanketqua,
-        idcoquantiepnhan: this.inputModel.idcoquantiepnhan,
-        idcanhantochuc: this.inputModel.idcanhantochuc,
-        tencanhantochuc: this.inputModel.tencanhantochuc,
-        sogiayto: this.inputModel.sogiayto,
-        loaigiayto: this.inputModel.loaigiayto,
-        ngaycap: this.inputModel.ngaycap,
-        noicap: this.inputModel.noicap,
-        diachi: this.inputModel.diachi,
-        dienthoai: this.inputModel.dienthoai,
-        fax: this.inputModel.fax,
-        email: this.inputModel.email,
-        website: this.inputModel.website,
+        mahoso: inputModel.mahoso,
+        mabiennhan: inputModel.mabiennhan,
+        soden: inputModel.soden,
+        ngaynop: inputModel.ngaynop,
+        ngaytiepnhan: inputModel.ngaytiepnhan,
+        ngaytraketqua: inputModel.ngaytraketqua,
+        loaidoituong: inputModel.loaidoituong,
+        loaicapphep: inputModel.loaicapphep,
+        hinhthucnophoso: inputModel.hinhthucnophoso,
+        hinhthucnhanketqua: inputModel.hinhthucnhanketqua,
+        idcoquantiepnhan: inputModel.idcoquantiepnhan,
+        idcanhantochuc: inputModel.idcanhantochuc,
+        tencanhantochuc: inputModel.tencanhantochuc,
+        sogiayto: inputModel.sogiayto,
+        loaigiayto: inputModel.loaigiayto,
+        ngaycap: inputModel.ngaycap,
+        noicap: inputModel.noicap,
+        diachi: inputModel.diachi,
+        dienthoai: inputModel.dienthoai,
+        fax: inputModel.fax,
+        email: inputModel.email,
+        website: inputModel.website,
       });
     }
   }
@@ -273,18 +273,21 @@ export class HosoIoComponent implements OnInit {
       return;
     }
 
+    // Gán dữ liệu input vào model
+    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const inputModel = this.hosoIOForm.value;
+    const currentLoaiCapPhep = this.loaiCapPhepList.find(item => item.maloaicapphep === this.hosoIOForm.controls.loaicapphep.value);
+    inputModel.idthutuchanhchinh = currentLoaiCapPhep.idthutuchanhchinh;
+    inputModel.nhomloaicapphep = currentLoaiCapPhep.nhomloaicapphep;
+    inputModel.tencanhantochuc = this.hosoIOForm.controls.tencanhantochuc.value;
     if (this.currentAction === HoSoActionEnum.Add && (this.insertedState === InsertedState.SaveAndRefresh || this.insertedState === InsertedState.SaveAndEdit)) {
-      // Gán dữ liệu input vào model
-      const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
-      this.inputModel = this.hosoIOForm.value;
-      const currentLoaiCapPhep = this.loaiCapPhepList.find(item => item.maloaicapphep === this.hosoIOForm.controls.loaicapphep.value);
-      this.inputModel.idthutuchanhchinh = currentLoaiCapPhep.idthutuchanhchinh;
-      this.inputModel.nhomloaicapphep = currentLoaiCapPhep.nhomloaicapphep;
-      dangKyHoatDongKhoangSanFacadeService.addItem(this.inputModel).subscribe(
+      dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
         async (res) => {
           if (this.insertedState === InsertedState.SaveAndEdit) {
             this.idhoso = res.idhoso;
             this.currentAction = HoSoActionEnum.Edit;
+            await this.formOnEdit();
+            this.selectCurrentFormState();
           } else {
             this.onFormReset();
           }
@@ -299,7 +302,22 @@ export class HosoIoComponent implements OnInit {
           )
       );
     } else if (this.currentAction === HoSoActionEnum.Edit) {
-
+      inputModel.idhoso = this.idhoso;
+      inputModel.tencanhantochuc = this.hosoIOForm.controls.tencanhantochuc.value;
+      dangKyHoatDongKhoangSanFacadeService.updateItem(inputModel).subscribe(
+        async (res) => {
+          this.currentAction = HoSoActionEnum.Edit;
+          this.selectCurrentFormState();
+        },
+        (error: HttpErrorResponse) => {
+          this.commonService.showDialogWarning(error.error.errors);
+        },
+        () =>
+          this.commonService.showeNotiResult(
+            this.dataTranslate.COMMON.default.successEdit,
+            2000
+          )
+      );
     }
   }
 
@@ -379,6 +397,13 @@ export class HosoIoComponent implements OnInit {
     this.hosoIOForm.controls.tencanhantochuc.setValue("");
   }
 
+  /**
+   * select inserted state of form
+   */
+
+  private selectCurrentFormState() {
+    this.selectCurrentFormStateEvent.emit(this.currentAction);
+  }
   /**
    * Hàm đóng sidenav
    */
