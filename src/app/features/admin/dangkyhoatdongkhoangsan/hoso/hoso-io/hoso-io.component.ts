@@ -17,6 +17,9 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { MatSidenav } from '@angular/material';
 import { DmCanhanOptionComponent } from '../../../danhmuc/canhan/canhan-option/canhan-option.component';
+import { DmTochucOptionComponent } from '../../../danhmuc/tochuc/tochuc-option/tochuc-option.component';
+import { OutputDmCanhanModel } from 'src/app/models/admin/danhmuc/canhan.model';
+import { OutputDmToChucModel } from 'src/app/models/admin/danhmuc/tochuc.model';
 
 @Component({
   selector: 'app-hoso-io',
@@ -77,6 +80,7 @@ export class HosoIoComponent implements OnInit {
     hinhthucnophoso: "",
     hinhthucnhanketqua: "",
     idcoquantiepnhan: "",
+    idcanhantochuc: "",
     tencanhantochuc: "",
     sogiayto: "",
     loaigiayto: "",
@@ -149,6 +153,7 @@ export class HosoIoComponent implements OnInit {
       hinhthucnophoso: ["", Validators.required],
       hinhthucnhanketqua: ["", Validators.required],
       idcoquantiepnhan: ["", Validators.required],
+      idcanhantochuc: ["", Validators.required],
       tencanhantochuc: ["", Validators.required],
       sogiayto: ["", Validators.required],
       loaigiayto: ["", Validators.required],
@@ -160,6 +165,8 @@ export class HosoIoComponent implements OnInit {
       email: [""],
       website: [""],
     });
+
+    this.hosoIOForm.controls.tencanhantochuc.disable({onlySelf: true});
   }
 
   /**
@@ -192,6 +199,7 @@ export class HosoIoComponent implements OnInit {
         hinhthucnophoso: this.inputModel.hinhthucnophoso,
         hinhthucnhanketqua: this.inputModel.hinhthucnhanketqua,
         idcoquantiepnhan: this.inputModel.idcoquantiepnhan,
+        idcanhantochuc: this.inputModel.idcanhantochuc,
         tencanhantochuc: this.inputModel.tencanhantochuc,
         sogiayto: this.inputModel.sogiayto,
         loaigiayto: this.inputModel.loaigiayto,
@@ -324,9 +332,51 @@ export class HosoIoComponent implements OnInit {
     * Hàm mở sidenav
     */
   public openIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleSelect);
-    this.matSidenavService.setContentComp(DmCanhanOptionComponent, "select");
-    this.matSidenavService.open();
+    const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
+
+    if (loaiDoiTuong === LoaiDoiTuongEnum.CaNhan) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleSelect);
+      this.matSidenavService.setContentComp(DmCanhanOptionComponent, "select");
+      this.matSidenavService.open();
+    } else if (loaiDoiTuong === LoaiDoiTuongEnum.ToChuc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.tochuc.titleSelect);
+      this.matSidenavService.setContentComp(DmTochucOptionComponent, "select");
+      this.matSidenavService.open();
+    } else {
+      const informationDialogRef = this.commonService.informationDiaLogService(
+        "",
+        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.chonloaidoituongRequiredDialog,
+        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.informedDialogTitle,
+      );
+    }
+  }
+
+  /**
+   * lấy item dữ liệu đối tượng cá nhân từ popup
+   */
+  private selectItemCaNhan(item: OutputDmCanhanModel) {
+    if (item !== null && item !== undefined) {
+      this.hosoIOForm.controls.idcanhantochuc.setValue(item.idcanhan);
+      this.hosoIOForm.controls.tencanhantochuc.setValue(item.hovaten);
+    }
+  }
+
+  /**
+   * lấy item dữ liệu đối tượng tổ chức từ popup
+   */
+  private selectItemToChuc(item: OutputDmToChucModel) {
+    if (item !== null && item !== undefined) {
+      this.hosoIOForm.controls.idcanhantochuc.setValue(item.idtochuc);
+      this.hosoIOForm.controls.tencanhantochuc.setValue(item.tentochuc);
+    }
+  }
+
+  /**
+   * Thay đổi loại đối tượng trên form
+   */
+  public selectLoaiDoiTuongChange() {
+    this.hosoIOForm.controls.idcanhantochuc.setValue("");
+    this.hosoIOForm.controls.tencanhantochuc.setValue("");
   }
 
   /**
@@ -334,5 +384,10 @@ export class HosoIoComponent implements OnInit {
    */
   public closeIOSidenav() {
     this.matSidenavService.close();
+  }
+
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName, obj) {
+    this[methodName](obj);
   }
 }

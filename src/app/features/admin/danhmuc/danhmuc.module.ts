@@ -48,7 +48,8 @@ import { DmTochucListComponent } from "src/app/features/admin/danhmuc/tochuc/toc
 import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
 import { DmLinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-io/linhvuc-io.component";
 import { DmLinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-list/linhvuc-list.component";
-import { DmCanhanOptionComponent } from './canhan/canhan-option/canhan-option.component';
+import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
+import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 
 @NgModule({
   declarations: [
@@ -87,9 +88,13 @@ import { DmCanhanOptionComponent } from './canhan/canhan-option/canhan-option.co
     DmTochucIoComponent,
     DmLinhvucIoComponent,
     DmLinhvucListComponent,
-    DmCanhanOptionComponent
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent
   ],
-  exports: [DmCanhanOptionComponent],
+  exports: [
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent
+  ],
   imports: [
     CommonModule,
     DmRoutingModule,
