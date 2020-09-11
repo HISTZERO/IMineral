@@ -27,14 +27,14 @@ export class PublicSearchService extends RepositoryEloquentService {
   // }
   public getFetchSearchData(state, param) {
     this.setServiceInfo({
-      apiUrl: environment.apiSearchURL + ServiceName.SEARCH
+      apiUrl: environment.apiIMineral + ServiceName.SEARCH
     });
     return this.getFetchAll(param);
   }
   // get search data
   public getSearchData(state, param) {
     this.setServiceInfo({
-      apiUrl: environment.apiSearchURL + ServiceName.SEARCH
+      apiUrl: environment.apiIMineral + ServiceName.SEARCH
     });
     return this.getDataFromServer(state, param);
   }

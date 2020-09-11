@@ -20,13 +20,13 @@ export class LayerGroupService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputLayerGroupModel(),
       outputModelName: new OutputLayerGroupModel(),
-      apiUrl: environment.apiMapURL + ServiceName.LAYERGROUP
+      apiUrl: environment.apiIMineral + ServiceName.LAYERGROUP
     });
   }
 
   public getGroupIdAndGroupName() {
     this.setServiceInfo({
-      apiUrl: environment.apiMapURL + ServiceName.LAYERGROUP + '/get-groupId-groupName'
+      apiUrl: environment.apiIMineral + ServiceName.LAYERGROUP + '/get-groupId-groupName'
     });
     return this.getFetchAll();
   }

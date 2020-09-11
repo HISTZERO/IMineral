@@ -11,7 +11,7 @@ import { RepositoryEloquentService } from "src/app/services/data/baserepository.
 export class MapService extends RepositoryEloquentService {
 
   // Api url
-  public mapApiUrl: string = `${environment.apiMapURL}${ServiceName.MAP}`;
+  public mapApiUrl: string = `${environment.apiIMineral}${ServiceName.MAP}`;
 
   constructor(public httpClient: HttpClient) {
     super();
@@ -19,7 +19,7 @@ export class MapService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputMapModel(),
       outputModelName: new OutputMapModel(),
-      apiUrl: environment.apiMapURL + ServiceName.MAP,
+      apiUrl: environment.apiIMineral + ServiceName.MAP,
     });
   }
 
@@ -86,7 +86,7 @@ export class MapService extends RepositoryEloquentService {
     // Gán link api
     this.setServiceInfo({
       apiUrl:
-        environment.apiMapURL +
+        environment.apiIMineral +
         ServiceName.MAPLAYER +
         "/get-all-mapLayer-layer-by-mapId/" +
         mapId,
@@ -118,7 +118,7 @@ export class MapService extends RepositoryEloquentService {
   async getTreeLayerGroup(mapId, mapLayers) {
     // Gán link api
     this.setServiceInfo({
-      apiUrl: environment.apiMapURL + ServiceName.MAPLAYERGROUP + "/" + mapId,
+      apiUrl: environment.apiIMineral + ServiceName.MAPLAYERGROUP + "/" + mapId,
     });
 
     // Lấy danh sách các group thuộc bản đồ
