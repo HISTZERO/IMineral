@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua } from 'src/app/shared/constants/common-constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -14,6 +14,9 @@ import { InputHoSoModel, OutputHoSoModel } from 'src/app/models/admin/dangkyhoat
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { MatSidenav } from '@angular/material';
+import { DmCanhanOptionComponent } from '../../../danhmuc/canhan/canhan-option/canhan-option.component';
 
 @Component({
   selector: 'app-hoso-io',
@@ -21,6 +24,8 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   styleUrls: ['./hoso-io.component.scss']
 })
 export class HosoIoComponent implements OnInit {
+  @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -90,7 +95,9 @@ export class HosoIoComponent implements OnInit {
               private hethongFacadeService: HethongFacadeService,
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               public commonService: CommonServiceShared,
-              private activatedRoute: ActivatedRoute) { }
+              private activatedRoute: ActivatedRoute,
+              public matSidenavService: MatsidenavService,
+              public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
     if (this.allowAutoInit) {
@@ -116,6 +123,8 @@ export class HosoIoComponent implements OnInit {
     this.formInit();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
     // Lấy dữ liệu cơ quan tiếp nhận
@@ -309,5 +318,21 @@ export class HosoIoComponent implements OnInit {
     this.hosoIOForm.controls.hinhthucnophoso.setValue("");
     this.hosoIOForm.controls.hinhthucnhanketqua.setValue("");
     this.hosoIOForm.controls.idcoquantiepnhan.setValue("");
+  }
+
+   /**
+    * Hàm mở sidenav
+    */
+  public openIOSidenav() {
+    this.matSidenavService.setTitle(this.dataTranslate.DANHMUC.canhan.titleSelect);
+    this.matSidenavService.setContentComp(DmCanhanOptionComponent, "select");
+    this.matSidenavService.open();
+  }
+
+  /**
+   * Hàm đóng sidenav
+   */
+  public closeIOSidenav() {
+    this.matSidenavService.close();
   }
 }
