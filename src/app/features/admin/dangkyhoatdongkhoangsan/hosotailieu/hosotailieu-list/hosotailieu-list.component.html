@@ -1,0 +1,96 @@
+<div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
+    <mat-sidenav-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <div class="row">
+                    <div class="col-md-4 mb-sm-1">
+                      <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.tailieu.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-8">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;"
+                        (click)="openTaiLieuIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                      <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="null">
+                        <i class="far fa-trash"></i>
+                        {{ "COMMON.default.delete" | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </h3>
+              </div>
+              <div class="card-body">
+                <ejs-grid #griTaiLieu *ngIf="listTaiLieu" [dataSource]="listTaiLieu | async"
+                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"  [toolbar]="settingsCommon.toolbar"
+                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true"
+                  [textWrapSettings]='wrapSettings' [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
+                  <e-columns>
+                    <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
+                    </e-column>
+                    <e-column field="tentailieu" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.tentailieu' | translate }}">
+                    </e-column>
+                    <e-column field="sobanchinh" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.sobanchinh' | translate }}">
+                    </e-column>
+                    <e-column field="sobansao" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.sobansao' | translate }}">
+                    </e-column>
+                    <e-column field="filedinhkem"
+                      headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}">
+                      <ng-template #template let-data>
+                        <a href="javascript:void(0)">{{data.filedinhkem}}</a>
+                      </ng-template>
+                    </e-column>
+                    <e-column field="idtailieu" isPrimaryKey='true'
+                      headerText="{{ 'COMMON.default.action' | translate }}">
+                      <ng-template #template let-data>
+                        <div class="btn-group">
+                          <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.upload' | translate }}"
+                            (click)="editItemTaiLieu(data.idtailieu)">
+                            <i class="far fa-upload"></i>
+                          </button>
+                          <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.download' | translate }}"
+                          (click)="editItemTaiLieu(data.idtailieu)">
+                          <i class="far fa-download"></i>
+                        </button>
+                          <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+                            (click)="editItemTaiLieu(data.idkhuvuc)">
+                            <i class="far fa-edit"></i>
+                          </button>
+                          <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                            (click)="deleteItemTaiLieu(data)">
+                            <i class="far fa-trash"></i>
+                          </button>
+                        </div>
+                      </ng-template>
+                    </e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+        style="width: 600px;">
+        <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
+          <button class="btn btn-sm btn-light" (click)="closeTaiLieuIOSidenav()">
+            <i class="fad fa-chevron-double-right"></i>
+          </button>
+          <span style="vertical-align: middle;"
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
+        </div>
+        <template #comptailieuio> </template>
+      </mat-sidenav>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>
+
