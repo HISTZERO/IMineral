@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-5">
-      <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' class="table-striped">
+      <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSelection]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedLoaiTaiLieu()" (rowDeselected)="rowSelectedLoaiTaiLieu()" class="table-striped">
         <e-columns>
           <e-column field="serialNumber" headerText="STT"></e-column>
           <e-column field="tenloaitailieu" headerText="Loại tài liệu"></e-column>
@@ -10,26 +10,22 @@
       </ejs-grid>
     </div>
     <div class="col-1 text-center">
-      <div class="d-inline-flex flex-column">
-        <button class="btn btn-outline-secondary">
+      <div class="d-inline-flex flex-column mt-5">
+        <button class="btn btn-outline-secondary" [disabled]="disableBtnRight" (click)="btnDoubleRight()">
           <i class="fas fa-angle-double-right"></i>
         </button>
-        <button class="btn btn-outline-secondary mt-2">
-          <i class="fas fa-chevron-right"></i>
-        </button>
-        <button class="btn btn-outline-secondary mt-2">
-          <i class="fas fa-angle-left"></i>
-        </button>
-        <button class="btn btn-outline-secondary mt-2">
+        <button class="btn btn-outline-secondary mt-3" [disabled]="disableBtnLeft" (click)="btnDoubleLeft()">
           <i class="fas fa-angle-double-left"></i>
         </button>
       </div>
     </div>
     <div class="col-6">
-      <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' class="table-striped">
+      <ejs-grid #gridCauHinhTaiLieu *ngIf="listCauHinhTaiLieu" [dataSource]="listCauHinhTaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedCauHinhTaiLieu()" (rowDeselected)="rowSelectedCauHinhTaiLieu()" class="table-striped">
         <e-columns>
           <e-column field="serialNumber" headerText="STT"></e-column>
           <e-column field="tenloaitailieu" headerText="Loại tài liệu"></e-column>
+          <e-column field="" headerText="Số bản chính"></e-column>
+          <e-column field="" headerText="Số bản sao"></e-column>
           <e-column type="checkbox"></e-column>
         </e-columns>
       </ejs-grid>
