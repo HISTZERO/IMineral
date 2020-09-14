@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
 import {DatePipe} from '@angular/common';
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { Observable } from "rxjs";
 import { MatSidenav, MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -62,6 +62,8 @@ export class HosoListComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa kiểu wrap text trên grid
+  public wrapSettings: TextWrapSettingsModel;
 
   constructor(public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               public commonService: CommonServiceShared,

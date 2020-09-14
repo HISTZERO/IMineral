@@ -110,24 +110,36 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
         }
 
         // Xử lý tìm kiếm
-        // if (state.action.requestType === "searching") {
-        //   if (state.search && state.search.length > 0) {
-        //     this.Keyword = state.search[0].key;
-        //   } else {
-        //     this.Keyword = "";
-        //   }
-        // }
+        if (state.action.requestType === "searching") {
+          if (state.search && state.search.length > 0) {
+            this.Keyword = state.search[0].key;
+          } else {
+            this.Keyword = "";
+          }
+        }
       }
 
       // Get query string
-      let queryString: any = this.convertObjectToQueryString({
-        ...params,
-        PageSize: state.take,
-        PageNumber: state.skip / state.take + 1,
-        orderColumn: this.orderColumn,
-        orderValue: this.orderValue,
-        // Keyword: this.Keyword,
-      });
+      let queryString: any;
+
+      if (params.Keyword === undefined) {
+        queryString = this.convertObjectToQueryString({
+          ...params,
+          PageSize: state.take,
+          PageNumber: state.skip / state.take + 1,
+          orderColumn: this.orderColumn,
+          orderValue: this.orderValue,
+          Keyword: this.Keyword,
+        });
+      } else {
+        queryString = this.convertObjectToQueryString({
+          ...params,
+          PageSize: state.take,
+          PageNumber: state.skip / state.take + 1,
+          orderColumn: this.orderColumn,
+          orderValue: this.orderValue,
+        });
+      }
 
       // Get data
       return this.httpClient
