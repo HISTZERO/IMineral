@@ -1,23 +1,36 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, } from "@angular/core";
-import { MatSidenav } from "@angular/material/sidenav";
-import { TranslateService } from "@ngx-translate/core";
-import { HttpErrorResponse } from "@angular/common/http";
-import { QueryCellInfoEventArgs, TextWrapSettingsModel, GridComponent } from "@syncfusion/ej2-angular-grids";
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef,} from "@angular/core";
+import {MatSidenav} from "@angular/material/sidenav";
+import {TranslateService} from "@ngx-translate/core";
+import {HttpErrorResponse} from "@angular/common/http";
+import {QueryCellInfoEventArgs, TextWrapSettingsModel, GridComponent} from "@syncfusion/ej2-angular-grids";
 
-import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
-import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { ServiceName } from "src/app/shared/constants/service-name";
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { GlobalVar } from "src/app/shared/constants/global-var";
-import { _addTinhAction, _listTinhAction, _editTinhAction, _deleteTinhAction, _addHuyenAction, _listHuyenAction, _editHuyenAction, _deleteHuyenAction, _addXaAction, _listXaAction, _editXaAction, _deleteXaAction } from "src/app/shared/constants/actions/danhmuc/dvhc";
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { MenuDanhMucDVHC } from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
-import { DmDvhcIoComponent } from "src/app/features/admin/danhmuc/dvhc/dvhc-io/dvhc-io.component";
-import { TrangThai } from "src/app/shared/constants/trangthai-constants";
-import { TrangThaiEnum } from "src/app/shared/constants/enum";
-import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import {OutputDmDvhcModel} from "src/app/models/admin/danhmuc/dvhc.model";
+import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import {ServiceName} from "src/app/shared/constants/service-name";
+import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {GlobalVar} from "src/app/shared/constants/global-var";
+import {
+  _addTinhAction,
+  _listTinhAction,
+  _editTinhAction,
+  _deleteTinhAction,
+  _addHuyenAction,
+  _listHuyenAction,
+  _editHuyenAction,
+  _deleteHuyenAction,
+  _addXaAction,
+  _listXaAction,
+  _editXaAction,
+  _deleteXaAction
+} from "src/app/shared/constants/actions/danhmuc/dvhc";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {MenuDanhMucDVHC} from "src/app/shared/constants/sub-menus/danhmuc/danhmuc";
+import {DmDvhcIoComponent} from "src/app/features/admin/danhmuc/dvhc/dvhc-io/dvhc-io.component";
+import {TrangThai} from "src/app/shared/constants/trangthai-constants";
+import {TrangThaiEnum} from "src/app/shared/constants/enum";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 
 
 @Component({
@@ -27,11 +40,11 @@ import { GeneralClientService } from "src/app/services/admin/common/general-clie
 })
 export class DmDvhcListComponent implements OnInit {
   // Viewchild template
-  @ViewChild("gridDvhcTinh", { static: false }) public gridDvhcTinh: GridComponent;
-  @ViewChild("gridDvhcHuyen", { static: false }) public gridDvhcHuyen: GridComponent;
-  @ViewChild("gridDvhcXa", { static: false }) public gridDvhcXa: GridComponent;
-  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("componentdvhcio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("gridDvhcTinh", {static: false}) public gridDvhcTinh: GridComponent;
+  @ViewChild("gridDvhcHuyen", {static: false}) public gridDvhcHuyen: GridComponent;
+  @ViewChild("gridDvhcXa", {static: false}) public gridDvhcXa: GridComponent;
+  @ViewChild("aside", {static: true}) public matSidenav: MatSidenav;
+  @ViewChild("componentdvhcio", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
 
   // Danh sách dvhc Tỉnh
   public listDataDvhcProvince: OutputDmDvhcModel[];
@@ -70,7 +83,7 @@ export class DmDvhcListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa danh sách item Tỉnh đã chọn
-  public listDataSelectProvice: any[];
+  public listDataSelectProvince: any[];
 
   // Chứa danh sách item Huyện đã chọn
   public listDataSelectDistrict: any[];
@@ -79,13 +92,13 @@ export class DmDvhcListComponent implements OnInit {
   public listDataSelectWard: any[];
 
   // Chứa trạng thái của nhóm nút trạng thái
-  public disableButtonProvice: boolean = false;
+  public disableButtonProvince = false;
 
   // Chứa trạng thái của nhóm nút trạng thái
-  public disableButtonDistrict: boolean = false;
+  public disableButtonDistrict = false;
 
   // Chứa trạng thái của nhóm nút trạng thái
-  public disableButtonWard: boolean = false;
+  public disableButtonWard = false;
 
   // Chứa enum Trạng thái
   public statusEnum = TrangThaiEnum;
@@ -95,6 +108,10 @@ export class DmDvhcListComponent implements OnInit {
 
   // Chứa id Huyện
   public idHuyen: string;
+
+  public trangthaiProvince: string;
+  public trangthaiDistrict: string;
+  public trangthaiWard: string;
 
   // Danh sách các quyền
   addTinhAction = _addTinhAction;
@@ -119,11 +136,12 @@ export class DmDvhcListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public generalClientService: GeneralClientService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
+    this.wrapSettings = {wrapMode: 'Both'};
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -178,7 +196,7 @@ export class DmDvhcListComponent implements OnInit {
     }
     const listDataItems: any = await this.dmFacadeSv
       .getDistrictService()
-      .getByid(idtinh).toPromise();
+      .getFetchAll({IdTinh: this.idTinh});
     if (listDataItems) {
       listDataItems.map((huyen, index) => {
         huyen.serialNumber = index + 1;
@@ -195,7 +213,7 @@ export class DmDvhcListComponent implements OnInit {
     }
     const listDataItems: any = await this.dmFacadeSv
       .getWardService()
-      .getByid(idhuyen).toPromise();
+      .getFetchAll({IdHuyen: idhuyen});
     if (listDataItems) {
       listDataItems.map((xa, index) => {
         xa.serialNumber = index + 1;
@@ -221,6 +239,7 @@ export class DmDvhcListComponent implements OnInit {
   // get Child Province by event
   private getChildProvinceByEvent(data) {
     this.selectedItem = null;
+    this.trangthaiDistrict = "";
     this.getDistrict(data.id);
     this.selectedItem = data;
     GlobalVar.provinceSelected = data.ten;
@@ -229,6 +248,7 @@ export class DmDvhcListComponent implements OnInit {
   // get child district by event
   private getChildDistrictByEvent(data) {
     this.selectedItem = null;
+    this.trangthaiWard = "";
     this.getWard(data.id);
     this.selectedItem = data;
     GlobalVar.districtSelected = data.ten;
@@ -310,8 +330,8 @@ export class DmDvhcListComponent implements OnInit {
     if (args.column.field === 'id') {
       args.cell.classList.add('style-action');
     }
-    if (args.column.field === 'serialNumber') {
-      args.cell.classList.add('style-stt');
+    if (args.column.field === 'ten') {
+      args.cell.classList.add('style-dvhc');
     }
     if (
       args.column.field === ServiceName.ID_DVHC ||
@@ -326,38 +346,13 @@ export class DmDvhcListComponent implements OnInit {
   }
 
   // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemProvince(data: any) {
+  async deleteItem(data: any) {
     this.selectedItem = data;
-    this.deleteName = "province";
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dmFacadeSv
-      .getProvinceService()
-      .checkBeDeleted(this.selectedItem.id);
-    this.canBeDeletedCheck(canDelete);
-  }
-  // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemDistrict(data: any) {
-    this.selectedItem = data;
-    this.deleteName = "District";
-    // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
-    // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
-    // Nếu đồng ý xóa
-    const canDelete: string = this.dmFacadeSv
-      .getDistrictService()
-      .checkBeDeleted(this.selectedItem.id);
-    this.canBeDeletedCheck(canDelete);
-  }
-  // Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
-  async deleteItemWard(data: any) {
-    this.selectedItem = data;
-    this.deleteName = "Ward";
-    // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
-    // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
-    // Nếu đồng ý xóa
-    const canDelete: string = this.dmFacadeSv
-      .getWardService()
+      .getDmDvhcService()
       .checkBeDeleted(this.selectedItem.id);
     this.canBeDeletedCheck(canDelete);
   }
@@ -383,57 +378,33 @@ export class DmDvhcListComponent implements OnInit {
           const informationDialogRef = this.commonService.informationDiaLogService(
             "",
             this.dataTranslate.DANHMUC.dvhc.nameofobject + " (" + data.ten + ") " + this.dataTranslate.DANHMUC.dvhc.informedContentOfUnDeletedDialog,
-            this.dataTranslate.DANHMUC.dvhc.informedDialogTitle,
+            this.dataTranslate.DANHMUC.dvhc.informedDialogTitle
           );
         } else {
-          if (this.deleteName === "province") {
-            await this.dmFacadeSv
-              .getProvinceService()
-              .deleteItem({ id: this.selectedItem.id })
-              .subscribe(
-                () => this.getAllProvince(),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
-          }
-          if (this.deleteName === "District") {
-            await this.dmFacadeSv
-              .getDistrictService()
-              .deleteItem({ id: this.selectedItem.id })
-              .subscribe(
-                () => this.getDistrict(this.selectedItem.matinh),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
-          }
-          if (this.deleteName === "Ward") {
-            await this.dmFacadeSv
-              .getWardService()
-              .deleteItem({ id: this.selectedItem.id })
-              .subscribe(
-                () => this.getWard(this.selectedItem.mahuyen),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
-          }
+          await this.dmFacadeSv
+            .getDmDvhcService()
+            .deleteItem({idDvhc: this.selectedItem.id})
+            .subscribe(
+              () => {
+                if (this.selectedItem.parentid === null) {
+                  this.getAllProvince();
+                } else {
+                  if (this.selectedItem.maxa === '00000') {
+                    this.getDistrict(this.selectedItem.parentid);
+                  } else {
+                    this.getWard(this.selectedItem.parentid);
+                  }
+                }
+              },
+              (error: HttpErrorResponse) => {
+                this.commonService.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         }
       }
     });
@@ -446,19 +417,19 @@ export class DmDvhcListComponent implements OnInit {
   /**
    * Hàm lấy danh sách dữ liệu Dvhc Tỉnh đã chọn trên grid
    */
-  public getAllDataSelectProvice() {
-    this.listDataSelectProvice = this.gridDvhcTinh.getSelectedRecords();
-    this.checkDisableButtonProvice();
+  public getAllDataSelectProvince() {
+    this.listDataSelectProvince = this.gridDvhcTinh.getSelectedRecords();
+    this.checkDisableButtonProvince();
   }
 
   /**
    * Hàm check disable button active, unactive, delete multi items
    */
-  public checkDisableButtonProvice() {
-    if (this.listDataSelectProvice.length > 0) {
-      this.disableButtonProvice = true;
+  public checkDisableButtonProvince() {
+    if (this.listDataSelectProvince.length > 0) {
+      this.disableButtonProvince = true;
     } else {
-      this.disableButtonProvice = false;
+      this.disableButtonProvince = false;
     }
   }
 
@@ -502,12 +473,12 @@ export class DmDvhcListComponent implements OnInit {
 
   /**
    * Hàm cấu hình dữ liệu thay đổi trạng thái
-   * @param status 
+   * @param status
    */
   public changeStatus(status: any, listData: any, dvhc: string) {
     const dataParam: any = {
       listStatus: listData,
-      status: status
+      status
     };
     this.ActiveOrUnActiveArrayItem(dataParam, dvhc);
   }
@@ -523,13 +494,16 @@ export class DmDvhcListComponent implements OnInit {
           .updateStatusItems(data)
           .subscribe(
             () => {
-              if (dvhc === "provice") {
+              if (dvhc === "province") {
+                this.trangthaiProvince = "";
                 this.getAllProvince();
               } else {
                 if (dvhc === 'district') {
+                  this.trangthaiDistrict = "";
                   this.refreshGridDistrict();
                 } else {
                   if (dvhc === 'ward') {
+                    this.trangthaiWard = "";
                     this.refreshGridWard();
                   }
                 }
@@ -551,7 +525,7 @@ export class DmDvhcListComponent implements OnInit {
    * Hàm delete mảng item đã chọn
    */
   public deleteArrayItem(listData: any[], dvhc: string) {
-    let idItems: string[] = [];
+    const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANHMUC.dvhc.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -564,7 +538,8 @@ export class DmDvhcListComponent implements OnInit {
             this.dataTranslate.DANHMUC.dvhc.informedDialogTitle,
           );
 
-          informationDialogRef.afterClosed().subscribe(() => { });
+          informationDialogRef.afterClosed().subscribe(() => {
+          });
         } else {
           listData.map(res => {
             idItems.push(res.id);
@@ -576,7 +551,7 @@ export class DmDvhcListComponent implements OnInit {
             .deleteArrayItems(dataBody)
             .subscribe(
               () => {
-                if (dvhc === "provice") {
+                if (dvhc === "province") {
                   this.getAllProvince();
                 } else {
                   if (dvhc === 'district') {
@@ -601,5 +576,50 @@ export class DmDvhcListComponent implements OnInit {
     });
   }
 
-  
+  async getAllProvinceByTrangThai(event) {
+      if (this.listDataDvhcProvince != null && this.listDataDvhcProvince.length > 0) {
+        this.gridDvhcTinh.clearSelection();
+      }
+      const listData: any = await this.dmFacadeSv
+        .getProvinceService()
+        .getFetchAll({Trangthai: event.value});
+      if (listData) {
+        listData.map((tinh, index) => {
+          tinh.serialNumber = index + 1;
+        });
+      }
+      this.listDataDvhcProvince = listData;
+
+  }
+
+  async getDistrictByTrangThai(event) {
+    if (this.listDatadvhcDistrict != null && this.listDatadvhcDistrict.length > 0) {
+      this.gridDvhcHuyen.clearSelection();
+    }
+    const listDataItems: any = await this.dmFacadeSv
+      .getDistrictService()
+      .getFetchAll({IdTinh: this.idTinh, Trangthai: event.value});
+    if (listDataItems) {
+      listDataItems.map((huyen, index) => {
+        huyen.serialNumber = index + 1;
+      });
+    }
+    this.listDatadvhcDistrict = listDataItems;
+  }
+
+  async getWardByTrangThai(event) {
+
+    if (this.listDatadvhcWard != null && this.listDatadvhcWard.length > 0) {
+      this.gridDvhcXa.clearSelection();
+    }
+    const listDataItems: any = await this.dmFacadeSv
+      .getWardService()
+      .getFetchAll({IdHuyen: this.idHuyen, Trangthai: event.value});
+    if (listDataItems) {
+      listDataItems.map((xa, index) => {
+        xa.serialNumber = index + 1;
+      });
+    }
+    this.listDatadvhcWard = listDataItems;
+  }
 }
