@@ -8,7 +8,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputHoSoModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
+import { OutputHsHoSoModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
@@ -45,7 +45,7 @@ export class HosoListComponent implements OnInit {
   public listHoSo: Observable<DataStateChangeEventArgs>;
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputHoSoModel;
+  public selectedItem: OutputHsHoSoModel;
 
   // Chứa danh sách loại cấp phép
   public allLoaiCapPhep: OutputDmLoaiCapPhepModel[];
