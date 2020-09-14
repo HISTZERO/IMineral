@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "iMineral": {
+    "iMinerals": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -20,7 +20,7 @@
             "customWebpackConfig": {
               "path": "./webpack.config.js"
             },
-            "outputPath": "dist/iMineral",
+            "outputPath": "dist/iMinerals",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -79,18 +79,18 @@
         "serve": {
           "builder": "@angular-builders/custom-webpack:dev-server",
           "options": {
-            "browserTarget": "iMineral:build"
+            "browserTarget": "iMinerals:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "iMineral:build:production"
+              "browserTarget": "iMinerals:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "iMineral:build"
+            "browserTarget": "iMinerals:build"
           }
         },
         "test": {
@@ -128,18 +128,18 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "iMineral:serve"
+            "devServerTarget": "iMinerals:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "iMineral:serve:production"
+              "devServerTarget": "iMinerals:serve:production"
             }
           }
         }
       }
     }
   },
-  "defaultProject": "iMineral",
+  "defaultProject": "iMinerals",
   "cli": {
     "analytics": false
   }

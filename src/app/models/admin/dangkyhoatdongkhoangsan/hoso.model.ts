@@ -1,4 +1,4 @@
-export class OutputHoSoModel {
+export class OutputHsHoSoModel {
   idhoso: string;
   mahoso: string;
   mabiennhan: string;
@@ -32,7 +32,7 @@ export class OutputHoSoModel {
   siteid: string;
 }
 
-export class InputHoSoModel {
+export class InputHsHoSoModel {
   idhoso: string;
   mahoso: string;
   mabiennhan: string;

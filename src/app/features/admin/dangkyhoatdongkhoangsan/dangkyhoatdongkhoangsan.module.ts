@@ -20,6 +20,8 @@ import { DangkyhoatdongkhoangsanComponent } from "src/app/features/admin/dangkyh
 import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
 import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
 import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
+import { HosotailieuListComponent } from './hosotailieu/hosotailieu-list/hosotailieu-list.component';
+import { HosotailieuIoComponent } from './hosotailieu/hosotailieu-io/hosotailieu-io.component';
 
 
 @NgModule({
@@ -29,6 +31,8 @@ import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/t
   ThamdokhoangsanIoComponent,
   ThamdokhoangsanListComponent,
   DangkyhoatdongkhoangsanComponent,
+  HosotailieuListComponent,
+  HosotailieuIoComponent,
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -44,7 +48,8 @@ import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/t
   ],
   entryComponents: [
     DmCanhanOptionComponent,
-    DmTochucOptionComponent
+    DmTochucOptionComponent,
+    HosotailieuIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

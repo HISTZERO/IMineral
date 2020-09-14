@@ -87,5 +87,17 @@
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
     "confirmedContentOfActiveDialog": "Bạn có muốn chuyển trạng thái sử dụng các đối tượng vừa chọn không?",
     "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
+  },
+  "tailieu": {
+    "titleList": "Danh sách tài liệu",
+    "requiredTitleList": "Danh sách tài liệu bắt buộc",
+    "differentTitleList": "Danh sách tài liệu khác",
+    "titleAdd": "Thêm mới tài liệu",
+    "titleEdit": "Sửa dữ liệu tài liệu",
+    "contentDelete": "Tài liệu: ",
+    "tentailieu": "Tên tài liệu",
+    "sobanchinh": "Số bản chính",
+    "sobansao": "Số bản sao",
+    "filedinhkem": "File đính kèm"
   }
 }

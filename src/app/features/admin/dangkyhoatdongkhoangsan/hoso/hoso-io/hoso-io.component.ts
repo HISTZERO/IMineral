@@ -10,7 +10,7 @@ import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coqua
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputHoSoModel, OutputHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
+import { InputHsHoSoModel, OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
@@ -31,6 +31,8 @@ export class HosoIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectNewInsertedHoSoEvent") selectNewInsertedHoSoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -288,6 +290,7 @@ export class HosoIoComponent implements OnInit {
             this.currentAction = HoSoActionEnum.Edit;
             await this.formOnEdit();
             this.selectCurrentFormState();
+            this.selectNewInsertedHoSo();
           } else {
             this.onFormReset();
           }
@@ -404,6 +407,14 @@ export class HosoIoComponent implements OnInit {
   private selectCurrentFormState() {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectNewInsertedHoSo() {
+    this.selectNewInsertedHoSoEvent.emit(this.idhoso);
+  }
+
   /**
    * Hàm đóng sidenav
    */
