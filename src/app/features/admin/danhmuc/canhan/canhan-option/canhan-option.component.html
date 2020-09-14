@@ -12,10 +12,10 @@
               </div>
               <div class="col-lg-5 col-md-5 col-sm-3 form-group d-flex" style="align-items: flex-end;">
                 <div>
-                <button class="btn btn-success" (click)="searchAdvance()">
-                  {{"COMMON.default.search" | translate}}
-                </button>
-              </div>
+                  <button class="btn btn-success" (click)="searchAdvance()">
+                    {{"COMMON.default.search" | translate}}
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -34,9 +34,13 @@
                   <span class="title">{{ "DANHMUC.canhan.titleList" | translate }}</span>
                 </div>
                 <div class="col-md-8">
-                  <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                  <button class="btn btn-outline-primary" style="float: right;" (click)="reloadDataGrid()">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
+                  </button>
+                  <button class="btn btn-primary mb-sm-1 mr-2" style="float: right;" (click)="goToAddCaNhan()">
+                    <i class="fal fa-plus-square"></i>
+                    {{ "COMMON.default.add" | translate }}
                   </button>
                 </div>
               </div>
