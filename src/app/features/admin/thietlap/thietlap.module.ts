@@ -10,6 +10,8 @@ import { ThietlaphethongListComponent } from 'src/app/features/admin/thietlap/th
 import { ThietlaphethongIoComponent } from 'src/app/features/admin/thietlap/thietlaphethong/thietlaphethong-io/thietlaphethong-io.component';
 import { ThietlapRoutingModule } from "src/app/features/admin/thietlap/thietlap-routing.module";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
+import { CauhinhtailieuListComponent } from "src/app/features/admin/thietlap/cauhinhtailieu/cauhinhtailieu-list/cauhinhtailieu-list.component";
+import { CauhinhtailieuIoComponent } from "src/app/features/admin/thietlap/cauhinhtailieu/cauhinhtailieu-io/cauhinhtailieu-io.component";
 
 @NgModule({
   imports: [
@@ -25,9 +27,13 @@ import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
   declarations: [
     ThietlapComponent,
     ThietlaphethongListComponent,
-    ThietlaphethongIoComponent],
+    ThietlaphethongIoComponent,
+    CauhinhtailieuListComponent,
+    CauhinhtailieuIoComponent
+  ],
   entryComponents: [
     ThietlaphethongIoComponent,
-    ]
+    CauhinhtailieuIoComponent
+  ]
 })
 export class ThietlapModule { }

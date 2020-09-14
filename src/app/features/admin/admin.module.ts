@@ -6,7 +6,6 @@ import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex
 // Các module features thành phần của phần quản trị dữ liệu
 import { AdminComponent } from "./admin.component";
 import { ThuvienModule } from "./thuvien/thuvien.module";
-import { HethongModule } from "./hethong/hethong.module";
 import { SimplebarAngularModule } from "simplebar-angular";
 import { ThietlapModule } from "./thietlap/thietlap.module";
 import { QuantriRoutingModule } from "./admin-routing.module";
@@ -33,7 +32,6 @@ import { DanhmucModule } from "./danhmuc/danhmuc.module";
     AdminSharedModule,
     ThietlapModule,
     ThuvienModule,
-    HethongModule,
     ErrorModule,
     SimplebarAngularModule,
   ],

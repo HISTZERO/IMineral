@@ -16,7 +16,7 @@ export class FileService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: null,
       outputModelName: null,
-      apiUrl: environment.apiCommonURL + ServiceName.FILE + ServiceName.UPLOADFILE,
+      apiUrl: environment.apiIMineral + ServiceName.FILE + ServiceName.UPLOADFILE,
     });
   }
 
@@ -25,7 +25,7 @@ export class FileService extends RepositoryEloquentService {
    */
   public downloadFile() {
     this.setServiceInfo({
-      apiUrl: environment.apiCommonURL + ServiceName.FILE + ServiceName.DOWNFILE,
+      apiUrl: environment.apiIMineral + ServiceName.FILE + ServiceName.DOWNFILE,
     });
     return this.getAll();
   }
@@ -35,7 +35,7 @@ export class FileService extends RepositoryEloquentService {
    */
   public deleteFile() {
     this.setServiceInfo({
-      apiUrl: environment.apiCommonURL + ServiceName.FILE + ServiceName.DELETEFILE,
+      apiUrl: environment.apiIMineral + ServiceName.FILE + ServiceName.DELETEFILE,
     });
     return this.deleteItem();
   }

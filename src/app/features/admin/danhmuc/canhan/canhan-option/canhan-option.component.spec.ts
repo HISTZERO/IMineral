@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HethongComponent } from './hethong.component';
+import { DmCanhanOptionComponent } from './canhan-option.component';
 
-describe('HethongComponent', () => {
-  let component: HethongComponent;
-  let fixture: ComponentFixture<HethongComponent>;
+describe('CanhanOptionComponent', () => {
+  let component: DmCanhanOptionComponent;
+  let fixture: ComponentFixture<DmCanhanOptionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HethongComponent ]
+      declarations: [ DmCanhanOptionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HethongComponent);
+    fixture = TestBed.createComponent(DmCanhanOptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

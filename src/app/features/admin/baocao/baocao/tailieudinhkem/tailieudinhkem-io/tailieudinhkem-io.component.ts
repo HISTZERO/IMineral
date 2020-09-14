@@ -128,34 +128,37 @@ export class TailieudinhkemIoComponent implements OnInit {
   async addOrUpdate(operMode: string) {
     const idbaocao: string = this.activatedRoute.snapshot.paramMap.get('id');
     const tailieuService = this.baoCaoFacadeService.getTaiLieuDinhKemService();
-    const fileService = this. commonFacadeService.getFileService();
     this.inputModel = this.tailieuIOForm.value;
     if (operMode === "new") {
       let formData: FormData = new FormData();
       formData.append("File", this.fileData);
-      await fileService.addItem(formData).subscribe(res => {
-        // Gán dữ liệu vào model
-        this.inputModel.filedinhkem = res.filedinhkem;
-        this.inputModel.dinhdang = res.dinhdang;
-        this.inputModel.dungluong = res.dungluong;
-        this.inputModel.duongdan = res.duongdan
-        this.inputModel.idbaocao = idbaocao;
-        // gọi api thêm item vào bảng tailieu
-        tailieuService.addItem(this.inputModel).subscribe(
-          (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
-          (error: HttpErrorResponse) => {
-            this.commonService.showDialogWarning(error.error.errors);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.successAdd,
-              2000
-            )
-        );
-      },
-      (error: HttpErrorResponse) => {
+      formData.append("Idbaocao", idbaocao);
+      formData.append("Tentailieu", this.inputModel.tentailieu);
+      formData.append("Thutu", this.inputModel.thutu);
+      tailieuService.addItem(formData).subscribe(
+        (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
+        (error: HttpErrorResponse) => {
+          this.commonService.showDialogWarning(error.error.errors);
+        },
+        () =>
+          this.commonService.showeNotiResult(
+            this.dataTranslate.COMMON.default.successAdd,
+            2000
+          )
+      );
+      // await fileService.addItem(formData).subscribe(res => {
+      //   // Gán dữ liệu vào model
+      //   this.inputModel.filedinhkem = res.filedinhkem;
+      //   this.inputModel.dinhdang = res.dinhdang;
+      //   this.inputModel.dungluong = res.dungluong;
+      //   this.inputModel.duongdan = res.duongdan
+      //   this.inputModel.idbaocao = idbaocao;
+      //   // gọi api thêm item vào bảng tailieu
+       
+      // },
+      // (error: HttpErrorResponse) => {
 
-      });
+      // });
     } else if (operMode === "edit") {
       this.inputModel.idtailieu = this.obj.idtailieu;
       tailieuService.updateItem(this.inputModel).subscribe(

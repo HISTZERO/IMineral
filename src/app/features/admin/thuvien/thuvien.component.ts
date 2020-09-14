@@ -122,7 +122,7 @@ export class ThuvienComponent implements OnInit {
     // Get settings
     const pageSize: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.mediaPageSize });
+      .getByid(ThietLapHeThong.mediaPageSize).toPromise();
     this.pageSize = pageSize;
     this.getPageMedia();
   }

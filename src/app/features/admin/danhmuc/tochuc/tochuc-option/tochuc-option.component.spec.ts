@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { HethongLogComponent } from './hethong-log.component';
+import { DmTochucOptionComponent } from './tochuc-option.component';
 
-describe('HethongLogComponent', () => {
-  let component: HethongLogComponent;
-  let fixture: ComponentFixture<HethongLogComponent>;
+describe('TochucOptionComponent', () => {
+  let component: DmTochucOptionComponent;
+  let fixture: ComponentFixture<DmTochucOptionComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HethongLogComponent ]
+      declarations: [ DmTochucOptionComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(HethongLogComponent);
+    fixture = TestBed.createComponent(DmTochucOptionComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

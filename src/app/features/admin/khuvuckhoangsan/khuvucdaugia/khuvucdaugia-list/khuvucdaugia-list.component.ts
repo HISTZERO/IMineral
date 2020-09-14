@@ -60,14 +60,14 @@ export class KhuvucdaugiaListComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
 
   constructor(public matSidenavService: MatsidenavService,
-    public cfr: ComponentFactoryResolver,
-    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-    public commonService: CommonServiceShared,
-    public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService,
-    public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public router: Router
+              public cfr: ComponentFactoryResolver,
+              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              public commonService: CommonServiceShared,
+              public thietlapFacadeService: ThietlapFacadeService,
+              private translate: TranslateService,
+              public formBuilder: FormBuilder,
+              public generalClientService: GeneralClientService,
+              public router: Router
   ) {
 
     this.itemService = this.khuVucKhoangSanFacadeService.getKhuVucDauGiaService();
@@ -111,7 +111,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
@@ -234,7 +234,7 @@ export class KhuvucdaugiaListComponent implements OnInit {
     });
   }
 
-  
+
 
   /**
    * Hàm thông báo không thể xóa

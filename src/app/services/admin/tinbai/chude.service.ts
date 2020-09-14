@@ -19,7 +19,7 @@ export class TbChudeService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputChudeModel(),
       outputModelName: new OutputChudeModel(),
-      apiUrl: environment.apiCommonURL + ServiceName.CHUDE,
+      apiUrl: environment.apiIMineral + ServiceName.CHUDE,
     });
   }
 

@@ -103,7 +103,7 @@ export class PheduyetDulieuComponent implements OnInit {
     // Get settings
     const pageSize: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getSettingKey({ key: ThietLapHeThong.defaultPageSize });
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     this.pageSize = +pageSize;
   }
 

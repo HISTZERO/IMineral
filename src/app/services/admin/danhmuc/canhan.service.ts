@@ -45,7 +45,7 @@ export class DmCanhanService extends RepositoryEloquentService {
     return this.updateItem(params);
   }
 
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 }

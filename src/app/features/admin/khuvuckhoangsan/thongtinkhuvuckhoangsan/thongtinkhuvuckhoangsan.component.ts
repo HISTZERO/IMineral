@@ -7,11 +7,8 @@ import { detailComponentKhuVucKhoangSan, nameKhuVucKhoangSan } from "src/app/sha
 import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import { ContentContainerDirective } from "src/app/shared/directives/content-container/content-container.directive";
 import { KhuvuctoadoListComponent } from '../khuvuctoado/khuvuctoado-list/khuvuctoado-list.component';
+import { ThongTinKhoangSanTabEnum } from 'src/app/shared/constants/enum';
 
-enum ThongTinKhoangSanTabEnum {
-  ThongTinChung = 0,
-  ToaDo = 1
-}
 
 @Component({
   selector: 'app-thongtinkhuvuckhoangsan',

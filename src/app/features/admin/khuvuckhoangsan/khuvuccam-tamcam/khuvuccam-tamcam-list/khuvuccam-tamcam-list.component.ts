@@ -106,8 +106,8 @@ export class KhuvuccamTamcamListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.listPageSize).toPromise();
     if (dataSetting) {
-      this.pageSize = dataSetting.settingValue;
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.pageSize = +dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.pageSize = 10;
       this.settingsCommon.pageSettings.pageSize = 10;

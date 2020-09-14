@@ -116,7 +116,7 @@ export class DmLinhvucListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }

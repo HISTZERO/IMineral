@@ -91,7 +91,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     // Symbol, Thuộc tính bản đồ, base url
     this.defaultSymbol = SimpleSymbol;
     this.mapProperties = { layers: [], basemap: BaseMap.name };
-    this.baseApiUrl = `${environment.apiMapURL}${ServiceName.MAPLAYER}`;
+    this.baseApiUrl = `${environment.apiIMineral}${ServiceName.MAPLAYER}`;
 
     // Set service info
     this.setServiceInfo({
