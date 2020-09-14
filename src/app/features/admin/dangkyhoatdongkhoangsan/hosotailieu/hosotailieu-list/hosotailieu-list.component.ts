@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
+import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
 import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
@@ -29,7 +29,14 @@ export class HosotailieuListComponent implements OnInit {
   @ViewChild("griTaiLieu", { static: false }) public griTaiLieu: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("comptailieuio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("allowAutoInit") allowAutoInit = true;
+  // Chứa dữ liệu nhóm tài liệu
+  // tslint:disable-next-line: no-input-rename
+  @Input("nhomTaiLieu") nhomTaiLieu: number;
+  // chứa title loại tài liệu
+  // tslint:disable-next-line: no-input-rename
+  @Input("title") title: string;
   // Chứa thuộc tính form
   public formSearch: FormGroup;
 
@@ -54,6 +61,9 @@ export class HosotailieuListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
+  // Id Hồ sơ
+  public idhoso: string;
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
               public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
@@ -69,23 +79,9 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Khởi tạo form
-    this.formInit();
-    // Gọi hàm lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Gọi hàm lấy dữ liệu pagesize
-    await this.getDataPageSize();
-  }
-
-  /**
-   * Form innit
-   */
-  public formInit() {
-    this.formSearch = this.formBuilder.group({
-      Keyword: [""],
-    });
+    if (this.allowAutoInit) {
+      await this.manualInit();
+    }
   }
 
   /**
@@ -114,12 +110,26 @@ export class HosotailieuListComponent implements OnInit {
     this.getAllTaiLieu();
   }
 
+  async manualInit() {
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Gọi hàm lấy dữ liệu pagesize
+    await this.getDataPageSize();
+    return true;
+  }
+
   /**
    * Hàm lấy dữ liệu Cá nhân
    */
   async getAllTaiLieu() {
     this.listTaiLieu = this.itemService;
-    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize });
+    const searchModel = {
+      idhoso: this.idhoso,
+      nhomtailieu: this.nhomTaiLieu
+    };
+    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
@@ -154,7 +164,6 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.formSearch.reset({ Keyword: "" });
     this.getAllTaiLieu();
   }
 

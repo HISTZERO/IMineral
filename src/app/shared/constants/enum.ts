@@ -42,6 +42,11 @@ export enum NhomLoaiCapPhep {
   ChuyenNhuongThamDoKhaiThac = 8
 }
 
+export enum NhomTaiLieu {
+  TaiLieuBatBuoc = 1,
+  TaiLieuKhongBatBuoc = 2,
+  TaiLieuXuLyHoSo = 3
+}
 
 export enum TrangThaiCauHinh {
   ChuaCauHinh = 0,

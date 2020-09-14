@@ -31,6 +31,8 @@ export class HosoIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectNewInsertedHoSoEvent") selectNewInsertedHoSoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -288,6 +290,7 @@ export class HosoIoComponent implements OnInit {
             this.currentAction = HoSoActionEnum.Edit;
             await this.formOnEdit();
             this.selectCurrentFormState();
+            this.selectNewInsertedHoSo();
           } else {
             this.onFormReset();
           }
@@ -404,6 +407,14 @@ export class HosoIoComponent implements OnInit {
   private selectCurrentFormState() {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectNewInsertedHoSo() {
+    this.selectNewInsertedHoSoEvent.emit(this.idhoso);
+  }
+
   /**
    * Hàm đóng sidenav
    */
