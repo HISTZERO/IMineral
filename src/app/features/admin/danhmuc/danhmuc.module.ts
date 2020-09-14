@@ -48,6 +48,8 @@ import { DmTochucListComponent } from "src/app/features/admin/danhmuc/tochuc/toc
 import { DmTochucIoComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-io/tochuc-io.component";
 import { DmLinhvucIoComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-io/linhvuc-io.component";
 import { DmLinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/linhvuc-list/linhvuc-list.component";
+import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
+import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 
 @NgModule({
   declarations: [
@@ -85,16 +87,21 @@ import { DmLinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/l
     DmTochucListComponent,
     DmTochucIoComponent,
     DmLinhvucIoComponent,
-    DmLinhvucListComponent
+    DmLinhvucListComponent,
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent
   ],
-  exports: [],
+  exports: [
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent
+  ],
   imports: [
     CommonModule,
     DmRoutingModule,
     NgbModule,
     AdminSharedModule,
     OwlDateTimeModule,
-    TranslateModule
+    TranslateModule,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [
@@ -114,7 +121,7 @@ import { DmLinhvucListComponent } from "src/app/features/admin/danhmuc/linhvuc/l
     DmNhomkhoangsanIoComponent,
     DmThutuchanhchinhIoComponent,
     DmTochucIoComponent,
-    DmLinhvucIoComponent
+    DmLinhvucIoComponent,
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
