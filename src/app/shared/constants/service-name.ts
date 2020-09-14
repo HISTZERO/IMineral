@@ -38,8 +38,10 @@ export class ServiceName {
   // Hồ sơ
   public static HOSO = "hoso";
   // Thiết lập
+  public static THIETLAPHETHONG = "settings";
+  public static CAUHINHTAILIEU = "cauhinhtailieu";
+  public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
   public static CoQuanTiepNhan = "coquantiepnhan";
-
 
 
   public static NHOMTHAMSO = "nhomthamso";
@@ -78,7 +80,6 @@ export class ServiceName {
   public static MAPLAYERGROUP = "maplayergroup";
   public static MCATEGORY = "categories";
   public static PROJECTION = "projection";
-  public static THIETLAPHETHONG = "settings";
   public static OBJKEY = "objkey";
   public static OBJTYPES = "ObjTypes";
   public static OTYPEOPT = "otypeOpts";

@@ -85,7 +85,7 @@ export class TailieudinhkemListComponent implements OnInit {
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
-      this.settingsCommon.pageSettings.pageSize = dataSetting.settingValue;
+      this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
@@ -96,8 +96,9 @@ export class TailieudinhkemListComponent implements OnInit {
   async getAllTaiLieuById() {
     const listData: any = await this.baocaoFacadeService
     .getTaiLieuDinhKemService()
-    .getFetchAll({Idbaocao: this.idBaoCao, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize});
-    this.listTaiLieu = this.generalClientService.generateOrderOf(listData.items, "serialNumber", 1);
+    .getAllTaiLieuByIdBaoCao(this.idBaoCao).toPromise();
+    console.log(listData);
+    this.listTaiLieu = listData;
   }
 
   /**

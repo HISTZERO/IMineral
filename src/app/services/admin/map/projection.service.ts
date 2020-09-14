@@ -19,7 +19,7 @@ export class ProjectionService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputProjectionModel(),
       outputModelName: new OutputProjectionModel(),
-      apiUrl: environment.apiMapURL + ServiceName.PROJECTION,
+      apiUrl: environment.apiIMineral + ServiceName.PROJECTION,
     });
   }
 

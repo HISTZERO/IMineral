@@ -19,7 +19,7 @@ export class MapLayerGroupService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputMapLayerGroupModel(),
       outputModelName: new OutputMapLayerGroupModel(),
-      apiUrl: environment.apiMapURL + ServiceName.MAPLAYERGROUP,
+      apiUrl: environment.apiIMineral + ServiceName.MAPLAYERGROUP,
     });
   }
 

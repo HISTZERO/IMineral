@@ -163,7 +163,7 @@ export const MaLoaiHinh = [
         id: 2,
         name: "Khu vực tạm cấm"
     }
-]
+];
 
 export const DoiTuongBaoCao = [
     {
@@ -174,4 +174,4 @@ export const DoiTuongBaoCao = [
         id: 2,
         name: "Cá nhân, tổ chức"
     }
-]
+];

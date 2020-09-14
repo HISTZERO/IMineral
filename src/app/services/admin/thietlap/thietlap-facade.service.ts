@@ -2,8 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { ThietlaphethongService } from "src/app/services/admin/thietlap/thietlaphethong.service";
-import { ObjTypeService } from "src/app/services/admin/thietlap/obj-type.service";
-import { OtypeOptService } from "src/app/services/admin/thietlap/otype-opt.service";
+import { CauhinhtailieuService } from "./cauhinhtailieu.service";
 
 @Injectable({
   providedIn: 'root'
@@ -12,15 +11,13 @@ export class ThietlapFacadeService {
 
   constructor(private httpClient: HttpClient) { }
 
+  // Thiết lập hệ thống service
   public getThietLapHeThongService() {
     return new ThietlaphethongService(this.httpClient);
   }
 
-  public getObjTypeService() {
-    return new ObjTypeService(this.httpClient);
-  }
-
-  public getOtypeOptService() {
-    return new OtypeOptService(this.httpClient);
+  // Cấu hình tài liệu service
+  public getCauHinhTaiLieuService() {
+    return new CauhinhtailieuService(this.httpClient);
   }
 }

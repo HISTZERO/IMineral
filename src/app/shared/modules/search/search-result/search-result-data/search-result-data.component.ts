@@ -59,7 +59,7 @@ export class SearchResultDataComponent implements OnInit, OnChanges {
 
   async ngOnInit() {
     this.getPagesize();
-    this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
+    // this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
   }
 
   async ngOnChanges() {
@@ -96,7 +96,7 @@ export class SearchResultDataComponent implements OnInit, OnChanges {
 
   // Hàm lấy ra page size được lưu trong server
   async getPagesize() {
-    this.pageSize = await this.thietlapFacadeService.getThietLapHeThongService().getSettingKey({ key: ThietLapHeThong.listPageSize });
+    this.pageSize = await this.thietlapFacadeService.getThietLapHeThongService().getByid(ThietLapHeThong.listPageSize).toPromise();
     this.settingsCommon.pageSettings.pageSize = +this.pageSize;
 
     // Hàm gọi khi search data

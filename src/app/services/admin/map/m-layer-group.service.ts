@@ -21,19 +21,19 @@ export class MLayerGroupService extends RepositoryEloquentService {
       httpClient: httpClient,
       inputModelName: new InputMapGroupLayerModel(),
       outputModelName: new OutputMapGroupLayerModel(),
-      apiUrl: environment.apiMapURL + ServiceName.MLAYERGROUP
+      apiUrl: environment.apiIMineral + ServiceName.MLAYERGROUP
     });
   }
 
   public getTreeGroupsAndLayers() {
     this.setServiceInfo({
-      apiUrl: environment.apiMapURL + ServiceName.MLAYERGROUP + '/get-tree-layer'
+      apiUrl: environment.apiIMineral + ServiceName.MLAYERGROUP + '/get-tree-layer'
     });
     return this.getFetchAll();
   }
 
   public groupOrder(body: any): Observable<any> {
-    let apiUrl = environment.apiMapURL + ServiceName.MLAYERGROUP + '/groupOrder'
+    let apiUrl = environment.apiIMineral + ServiceName.MLAYERGROUP + '/groupOrder'
     return this.httpClient.put(apiUrl, body, {
       headers: this.headers
     });

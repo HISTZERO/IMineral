@@ -54,7 +54,7 @@ export class SearchBoxComponent implements OnInit {
   }
   // lấy danh sách loại trạm
   async showLoaitram() {
-    this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
+    // this.listDataLoaitram = await this.commonFacadeService.getObjKeyService().getFetchAll();
     this.loaitramFilters = this.listDataLoaitram;
   }
   async search() {

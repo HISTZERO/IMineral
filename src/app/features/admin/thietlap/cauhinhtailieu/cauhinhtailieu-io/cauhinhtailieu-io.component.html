@@ -1,0 +1,19 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-5">
+      <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' class="table-striped">
+        <e-columns>
+          <e-column field="serialNumber" headerText="STT"></e-column>
+          <e-column field="tenloaitailieu" headerText="Loại tài liệu"></e-column>
+          <e-column field="id" headerText="Chọn" displayAsCheckBox='true'></e-column>
+        </e-columns>
+      </ejs-grid>
+    </div>
+    <div class="col-2">
+
+    </div>
+    <div class="col-5">
+
+    </div>
+  </div>
+</div>
