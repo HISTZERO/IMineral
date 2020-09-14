@@ -174,7 +174,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * hàm lấy dữ liệu translate
    */
-  public async getDataTranslate() {
+  async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -338,7 +338,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Hàm reset form, gọi khi nhấn nút reset dữ liệu
    */
-  public onFormReset() {
+  onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.hosoIOForm.reset();
     this.hosoIOForm.controls.loaidoituong.setValue(LoaiDoiTuongEnum.ToChuc);
@@ -352,7 +352,7 @@ export class HosoIoComponent implements OnInit {
    /**
     * Hàm mở sidenav
     */
-  public openIOSidenav() {
+  openIOSidenav() {
     const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
 
     if (loaiDoiTuong === LoaiDoiTuongEnum.CaNhan) {
@@ -395,7 +395,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Thay đổi loại đối tượng trên form
    */
-  public selectLoaiDoiTuongChange() {
+  selectLoaiDoiTuongChange() {
     this.hosoIOForm.controls.idcanhantochuc.setValue("");
     this.hosoIOForm.controls.tencanhantochuc.setValue("");
   }
@@ -418,7 +418,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Hàm đóng sidenav
    */
-  public closeIOSidenav() {
+  closeIOSidenav() {
     this.matSidenavService.close();
   }
 

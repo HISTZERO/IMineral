@@ -13,6 +13,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class ThamdokhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
+  @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuThamDoKhoangSanChitiet;
 
@@ -110,12 +111,12 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     }
   }
 
-  public getHoSoIoFormState(action: number) {
+  getHoSoIoFormState(action: number) {
     this.currentAction = action;
     this.setThamDoKhoangSanDisabledTabState(this.currentAction);
   }
 
-  public getIdHoSo(id: string) {
+  getIdHoSo(id: string) {
     this.idhoso = id;
   }
 
@@ -123,11 +124,15 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     if (index === ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem]) {
       this.taiLieuBatBuocListComp.idhoso = this.idhoso;
       this.taiLieuBatBuocListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredTitleList;
-      const loadedTaiLieuBatBuocState = await this.taiLieuBatBuocListComp.manualInit();
+      const loadedTaiLieuBatBuocState =  await this.taiLieuBatBuocListComp.manualInit();
       this.taiLieuKhacListComp.idhoso = this.idhoso;
       this.taiLieuKhacListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleList;
-      const loadedTaiLieuKhacState = await this.taiLieuKhacListComp.manualInit();
+      const loadedTaiLieuKhacState =  await this.taiLieuKhacListComp.manualInit();
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = loadedTaiLieuBatBuocState || loadedTaiLieuKhacState;
+    } else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
+      this.taiLieuXuLyHoSoListComp.idhoso = this.idhoso;
+      this.taiLieuXuLyHoSoListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleList;
+      this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualInit();
     }
   }
 }
