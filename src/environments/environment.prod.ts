@@ -15,14 +15,15 @@ let authConfig = {
 };
 
 // Api
-let ipAddress = "http://10.159.21.212";
 let ipIMinerals = "http://10.159.21.211";
+let iMineralLocal = "http://10.1.90.200";
 
 export const environment = {
   ...authConfig,
   production: true,
   appName: "iMineral",
-  apiIMineral: `${ipIMinerals}:8086/api/`,
+  apiIMineral: `${ipIMinerals}:8086/api/`,  
+  apiIMineralLocal: `${iMineralLocal}:8086/api/`,  
   apiLogRequestURL: "http://10.159.21.211:5500/",
   apiUserRoleURL: "http://10.159.21.211:5500/api/"
 };
