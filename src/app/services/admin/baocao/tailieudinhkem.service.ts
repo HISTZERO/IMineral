@@ -17,7 +17,7 @@ export class TailieudinhkemService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputTaiLieuModel(),
       outputModelName: new OutputTaiLieuModel(),
-      apiUrl: environment.apiIMineralLocal + ServiceName.BCTAILIEU
+      apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU
     });
   }
 
@@ -27,7 +27,7 @@ export class TailieudinhkemService extends RepositoryEloquentService {
    */
   public getAllTaiLieuByIdBaoCao(idbaocao: string) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineralLocal + ServiceName.BCTAILIEU + "/getbctailieubyidbaocao"
+      apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU + "/getbctailieubyidbaocao"
     });
     return this.getByid(idbaocao);
   }
