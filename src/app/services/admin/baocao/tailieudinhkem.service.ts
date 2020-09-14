@@ -14,22 +14,26 @@ export class TailieudinhkemService extends RepositoryEloquentService {
   constructor(public httpClient: HttpClient) {
     super();
     this.setServiceInfo({
-        httpClient,
-        inputModelName: new InputTaiLieuModel(),
-        outputModelName: new OutputTaiLieuModel(),
-        apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU
+      httpClient,
+      inputModelName: new InputTaiLieuModel(),
+      outputModelName: new OutputTaiLieuModel(),
+      apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU
     });
-}
+  }
 
-public getAllTaiLieuByIdBaoCao(idbaocao: string) {
-  this.setServiceInfo({
-    apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU + "/getbctailieubyidbaocao"
-  });
-  return this.getByid(idbaocao);
-}
+  /**
+   * lấy danh sách tài liệu theo id báo cáo
+   * @param idbaocao 
+   */
+  public getAllTaiLieuByIdBaoCao(idbaocao: string) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.BCTAILIEU + "/getbctailieubyidbaocao"
+    });
+    return this.getByid(idbaocao);
+  }
 
-public checkBeDeleted(id: string) {
+  public checkBeDeleted(id: string) {
     return "ok";
-}
+  }
 
 }

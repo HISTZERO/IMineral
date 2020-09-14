@@ -3,7 +3,7 @@ import { DeserializableModel } from '../deserializable.model';
 export class OutputDmDvhcModel implements DeserializableModel {
   id: string;
   ten: string;
-  parentid: number;
+  parentid: string;
   matinh: string;
   mahuyen: string;
   maxa: string;

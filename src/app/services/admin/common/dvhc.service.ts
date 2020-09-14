@@ -26,7 +26,7 @@ export class DmDvhcService extends RepositoryEloquentService {
    */
   public updateStatusItems(params) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.CANHAN + '/updateliststatus'
+      apiUrl: environment.apiIMineral + ServiceName.DVHC + '/updateliststatus'
     });
     return this.updateItem(params);
   }
@@ -41,7 +41,7 @@ export class DmDvhcService extends RepositoryEloquentService {
     });
     return this.updateItem(params);
   }
-  public checkBeDeleted(id: number) {
+  public checkBeDeleted(id: string) {
     return "ok";
   }
 }
