@@ -30,7 +30,8 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control"
+                            <mat-select class="form-control" (selectionChange)="getAllProvinceByTrangThai($event)"
+                                        [(value)]="trangthaiProvince"
                               placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
@@ -40,16 +41,16 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div *ngIf="disableButtonProvice" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectProvice, 'provice')">
+                          <div *ngIf="disableButtonProvince" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectProvince, 'province')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectProvice, 'provice')">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectProvince, 'province')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectProvice, 'provice')">
+                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectProvince, 'province')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -61,12 +62,10 @@
                         <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true" [allowSelection]="true"
                           [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
                           [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
-                          (rowSelected)="getAllDataSelectProvice()" (rowDeselected)="getAllDataSelectProvice()" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
-                          (queryCellInfo)="customiseCell($event)" *ngIf="dataTranslate">
+                          (rowSelected)="getAllDataSelectProvince()" (rowDeselected)="getAllDataSelectProvince()" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
+                          (queryCellInfo)="customiseCell($event)" *ngIf="listDataDvhcProvince">
                           <e-columns>
-                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" class="dvhc"
-                              headerText="{{'COMMON.default.numericalOrder' | translate}}"></e-column>
-                            <e-column field="ten" headerText="{{'DANHMUC.dvhc.tendvhc' | translate}}"></e-column>
+                            <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}"  headerText="{{'DANHMUC.dvhc.tendvhc' | translate}}" ></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
                               type='checkbox'></e-column>
                             <e-column field="id" [customAttributes]="{class: 'style-action-header'}"
@@ -80,7 +79,7 @@
                                   </button>
                                   <button class="btn btn-sm btn-danger" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemProvince(data)" [disabled]="!deleteTinhAction">
+                                    }}" (click)="deleteItem(data)" [disabled]="!deleteTinhAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                   <button class="btn btn-sm btn-info" title="{{
@@ -112,7 +111,7 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control" (selectionChange)="refreshGridDistrict()"
+                            <mat-select class="form-control" (selectionChange)="getDistrictByTrangThai($event)" [(value)]="trangthaiDistrict"
                               placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
@@ -143,12 +142,9 @@
                           [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                           [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
                           class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectDistrict()" (rowDeselected)="getAllDataSelectDistrict()"
-                          *ngIf="dataTranslate">
+                          *ngIf="listDatadvhcDistrict">
                           <e-columns>
-                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
-                                'COMMON.default.numericalOrder' | translate
-                              }}"></e-column>
-                            <e-column field="ten" headerText="{{
+                            <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
@@ -165,7 +161,7 @@
                                   </button>
                                   <button class="btn btn-sm btn-danger" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemDistrict(data)" [disabled]="!deleteHuyenAction">
+                                    }}" (click)="deleteItem(data)" [disabled]="!deleteHuyenAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                   <button class="btn btn-sm btn-info" title="{{
@@ -196,7 +192,7 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control" (selectionChange)="refreshGridWard()"
+                            <mat-select class="form-control" (selectionChange)="getWardByTrangThai($event)" [(value)]="trangthaiWard"
                               placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
@@ -227,12 +223,9 @@
                           [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                           [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
                           class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectWard()" (rowDeselected)="getAllDataSelectWard()"
-                          *ngIf="dataTranslate">
+                          *ngIf="listDatadvhcWard">
                           <e-columns>
-                            <e-column field="serialNumber" [customAttributes]="{class: 'style-stt'}" headerText="{{
-                                'COMMON.default.numericalOrder' | translate
-                              }}"></e-column>
-                            <e-column field="ten" headerText="{{
+                            <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
@@ -249,7 +242,7 @@
                                   </button>
                                   <button class="btn btn-sm btn-danger mr-2" title="{{
                                       'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItemWard(data)" [disabled]="!deleteXaAction">
+                                    }}" (click)="deleteItem(data)" [disabled]="!deleteXaAction">
                                     <i class="far fa-trash-alt"></i>
                                   </button>
                                 </div>

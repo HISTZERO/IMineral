@@ -8,6 +8,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { GlobalVar } from "src/app/shared/constants/global-var";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {TrangThaiEnum} from "../../../../../shared/constants/enum";
 
 
 
@@ -100,7 +101,7 @@ export class DmDvhcIoComponent implements OnInit {
       this.hiddenProvineName = false;
       this.hiddenMatinh = true;
       this.hiddenMahuyen = false;
-      this.dvhcIOForm.controls.id.setValue(this.obj.id);
+      // this.dvhcIOForm.controls.id.setValue(this.obj.id);
       this.dvhcIOForm.controls.tentinh.setValue(GlobalVar.provinceSelected);
       this.dvhcIOForm.controls.matinh.setValue(this.obj.matinh);
     } else if (sideBarModeWard.indexOf(this.purpose) !== -1) {
@@ -110,7 +111,7 @@ export class DmDvhcIoComponent implements OnInit {
       this.hiddenProvineName = false;
       this.hiddenDistrictName = false;
       this.hiddenMaxa = false;
-      this.dvhcIOForm.controls.id.setValue(this.obj.id);
+      // this.dvhcIOForm.controls.id.setValue(this.obj.id);
       this.dvhcIOForm.controls.matinh.setValue(this.obj.matinh);
       this.dvhcIOForm.controls.mahuyen.setValue(this.obj.mahuyen);
       this.dvhcIOForm.controls.tentinh.setValue(GlobalVar.provinceSelected);
@@ -207,7 +208,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessAdd,
+              this.dataTranslate.COMMON.default.successAdd,
               2000
             )
         );
@@ -215,7 +216,7 @@ export class DmDvhcIoComponent implements OnInit {
       const id: string = this.obj.id;
       this.InputDmDvhcModel.id = id;
       this.dmFacadeSv
-        .getProvinceService()
+        .getDmDvhcService()
         .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("getAllProvince"),
@@ -224,7 +225,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessEdit,
+              this.dataTranslate.COMMON.default.successEdit,
               2000
             )
         );
@@ -237,7 +238,7 @@ export class DmDvhcIoComponent implements OnInit {
     if (operMode === "newDistrict") {
       this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
-        .getDistrictService()
+        .getDmDvhcService()
         .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) =>
@@ -247,7 +248,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessAdd,
+              this.dataTranslate.COMMON.default.successAdd,
               2000
             )
         );
@@ -256,8 +257,9 @@ export class DmDvhcIoComponent implements OnInit {
       this.InputDmDvhcModel.id = id;
       this.InputDmDvhcModel.matinh = this.obj.matinh;
       this.InputDmDvhcModel.parentid = this.obj.parentid;
+      this.InputDmDvhcModel.trangthai = TrangThaiEnum.Active;
       this.dmFacadeSv
-        .getDistrictService()
+        .getDmDvhcService()
         .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) =>
@@ -267,7 +269,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessEdit,
+              this.dataTranslate.COMMON.default.successEdit,
               2000
             )
         );
@@ -280,7 +282,7 @@ export class DmDvhcIoComponent implements OnInit {
     if (operMode === "newWard") {
       this.InputDmDvhcModel.parentid = this.obj.id;
       this.dmFacadeSv
-        .getWardService()
+        .getDmDvhcService()
         .addItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
@@ -289,7 +291,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessAdd,
+              this.dataTranslate.COMMON.default.successAdd,
               2000
             )
         );
@@ -299,8 +301,9 @@ export class DmDvhcIoComponent implements OnInit {
       this.InputDmDvhcModel.matinh = this.obj.matinh;
       this.InputDmDvhcModel.mahuyen = this.obj.mahuyen;
       this.InputDmDvhcModel.parentid = this.obj.parentid;
+      this.InputDmDvhcModel.trangthai = TrangThaiEnum.Active;
       this.dmFacadeSv
-        .getWardService()
+        .getDmDvhcService()
         .updateItem(this.InputDmDvhcModel)
         .subscribe(
           (res) => this.matSidenavService.doParentFunction("refreshGridWard"),
@@ -309,7 +312,7 @@ export class DmDvhcIoComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.SuccessEdit,
+              this.dataTranslate.COMMON.default.successEdit,
               2000
             )
         );
@@ -326,5 +329,5 @@ export class DmDvhcIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 }
