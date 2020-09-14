@@ -48,7 +48,8 @@ import { HosotailieuIoComponent } from './hosotailieu/hosotailieu-io/hosotailieu
   ],
   entryComponents: [
     DmCanhanOptionComponent,
-    DmTochucOptionComponent
+    DmTochucOptionComponent,
+    HosotailieuIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

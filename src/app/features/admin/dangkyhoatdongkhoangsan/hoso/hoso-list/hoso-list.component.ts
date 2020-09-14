@@ -31,7 +31,8 @@ export class HosoListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("title") title: string;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("allowAutoInit") allowAutoInit = true;
   // Viewchild template
   @ViewChild("gridHoSo", { static: false }) public gridHoSo: GridComponent;
 
@@ -79,15 +80,8 @@ export class HosoListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhep.ThamDoKhoangSan) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
-      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
-      await this.getAllLoaiCapPhep();
-      // Gọi hàm lấy dữ liệu pagesize
-      await this.getDataPageSize();
+    if (this.allowAutoInit) {
+      await this.manualInit();
     }
   }
 
@@ -111,6 +105,21 @@ export class HosoListComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+  }
+
+  async manualInit() {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhep.ThamDoKhoangSan) {
+      // Khởi tạo form
+      this.formInit();
+      // Gọi hàm lấy dữ liệu translate
+      await this.getDataTranslate();
+      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
+      await this.getAllLoaiCapPhep();
+      // Gọi hàm lấy dữ liệu pagesize
+      await this.getDataPageSize();
+    }
+
+    return true;
   }
 
   /**

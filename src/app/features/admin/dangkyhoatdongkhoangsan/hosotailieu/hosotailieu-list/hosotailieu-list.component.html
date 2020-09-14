@@ -8,7 +8,10 @@
               <div class="card-header">
                 <h3>
                   <div class="row">
-                    <div class="col-md-4 mb-sm-1">
+                    <div class="col-md-4 mb-sm-1" *ngIf="title">
+                      <span class="title">{{ title }}</span>
+                    </div>
+                    <div class="col-md-4 mb-sm-1" *ngIf="!title">
                       <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.tailieu.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
@@ -44,7 +47,7 @@
                     <e-column field="sobansao" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.sobansao' | translate }}">
                     </e-column>
                     <e-column field="filedinhkem"
-                      headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}">
+                      headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.filedinhkem' | translate }}">
                       <ng-template #template let-data>
                         <a href="javascript:void(0)">{{data.filedinhkem}}</a>
                       </ng-template>

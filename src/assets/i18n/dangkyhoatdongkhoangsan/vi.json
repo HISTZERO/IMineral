@@ -89,9 +89,11 @@
     "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "tailieu": {
-    "titleList": "Danh sách hồ sơ",
-    "titleAdd": "Thêm mới hồ sơ",
-    "titleEdit": "Sửa dữ liệu hồ sơ",
+    "titleList": "Danh sách tài liệu",
+    "requiredTitleList": "Danh sách tài liệu bắt buộc",
+    "differentTitleList": "Danh sách tài liệu khác",
+    "titleAdd": "Thêm mới tài liệu",
+    "titleEdit": "Sửa dữ liệu tài liệu",
     "contentDelete": "Tài liệu: ",
     "tentailieu": "Tên tài liệu",
     "sobanchinh": "Số bản chính",
