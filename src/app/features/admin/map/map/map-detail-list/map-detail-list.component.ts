@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
-import * as cloneDeep from "lodash/cloneDeep";
+import * as cloneDeep from "lodash.cloneDeep";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSidenav } from "@angular/material/sidenav";

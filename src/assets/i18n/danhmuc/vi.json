@@ -68,6 +68,7 @@
     "inputMahuyen": "Nhập mã quận/huyện/thị xã",
     "inputMaxa": "Nhập mã xã/phường/thị trấn",
     "tendvhcRequired": "Tên dvhc không được trống",
+    "informedDialogTitle": "Thông báo",
     "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
     "nameofobject": "Đơn vị hành chính",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
