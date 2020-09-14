@@ -1,6 +1,6 @@
 import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
-import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, QueryCellInfoEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
@@ -64,6 +64,12 @@ export class HosotailieuListComponent implements OnInit {
   // Id Hồ sơ
   public idhoso: string;
 
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
               public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
@@ -95,6 +101,18 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
+  }
+
+  /**
    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
    */
   async getDataPageSize() {
@@ -115,9 +133,24 @@ export class HosotailieuListComponent implements OnInit {
     await this.getDataTranslate();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Thiết lập hiển thị checkbox trên grid
+    await this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     return true;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.griTaiLieu.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableDeleteButton = true;
+    } else {
+      this.disableDeleteButton = false;
+    }
   }
 
   /**
@@ -129,12 +162,12 @@ export class HosotailieuListComponent implements OnInit {
       idhoso: this.idhoso,
       nhomtailieu: this.nhomTaiLieu
     };
-    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+    this.itemService.getHsTaiLieuPage({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
-    this.itemService.getDataFromServer(state);
+    this.itemService.getHsTaiLieuPage(state);
   }
 
   /**
@@ -163,14 +196,14 @@ export class HosotailieuListComponent implements OnInit {
   /**
    * Hàm load lại dữ liệu grid
    */
-  public reloadDataGrid() {
+  reloadDataGrid() {
     this.getAllTaiLieu();
   }
 
   /**
    * Hàm đóng sidenav
    */
-  public closeTaiLieuIOSidenav() {
+  closeTaiLieuIOSidenav() {
     this.matSidenavService.close();
   }
 
@@ -192,7 +225,7 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm check điều kiện xóa bản ghi
    * @param sMsg
    */
-  public canBeDeletedCheck(sMsg: string) {
+  canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
       this.confirmDeleteDiaLog();
     } else {
@@ -226,6 +259,16 @@ export class HosotailieuListComponent implements OnInit {
           );
       }
     });
+  }
+
+  // set id in coloumn
+  customiseCell(args: QueryCellInfoEventArgs) {
+    if (args.column.field === 'check') {
+      args.cell.classList.add('style-checkbox');
+    }
+    if (args.column.field === 'idtailieu') {
+      args.cell.classList.add('style-action');
+    }
   }
 
   /**

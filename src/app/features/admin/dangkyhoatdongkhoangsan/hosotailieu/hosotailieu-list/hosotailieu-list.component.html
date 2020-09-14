@@ -24,7 +24,7 @@
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
-                      <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="null">
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="null">
                         <i class="far fa-trash"></i>
                         {{ "COMMON.default.delete" | translate }}
                       </button>
@@ -35,8 +35,9 @@
               <div class="card-body">
                 <ejs-grid #griTaiLieu *ngIf="listTaiLieu" [dataSource]="listTaiLieu | async"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"  [toolbar]="settingsCommon.toolbar"
-                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true"
-                  [textWrapSettings]='wrapSettings' [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
+                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true" [selectionSettings]="settingsCommon.selectionOptions"
+                  [textWrapSettings]='wrapSettings' [allowResizing]="true" (dataStateChange)="dataStateChange($event)"
+                  (rowDeselected) = "getAllDataActive()" (rowSelected)="getAllDataActive()">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
                     </e-column>
@@ -52,7 +53,8 @@
                         <a href="javascript:void(0)">{{data.filedinhkem}}</a>
                       </ng-template>
                     </e-column>
-                    <e-column field="idtailieu" isPrimaryKey='true'
+                    <e-column field="check" *ngIf="settingsCommon.selectionOptions" [customAttributes]="{class: 'style-checkbox-header'}" type='checkbox'></e-column>
+                    <e-column field="idtailieu" isPrimaryKey='true' [customAttributes]="{class: 'style-action-header'}"
                       headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
@@ -61,9 +63,9 @@
                             <i class="far fa-upload"></i>
                           </button>
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.download' | translate }}"
-                          (click)="editItemTaiLieu(data.idtailieu)">
-                          <i class="far fa-download"></i>
-                        </button>
+                            (click)="editItemTaiLieu(data.idtailieu)">
+                            <i class="far fa-download"></i>
+                          </button>
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
                             (click)="editItemTaiLieu(data.idkhuvuc)">
                             <i class="far fa-edit"></i>
