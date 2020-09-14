@@ -9,6 +9,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { Paging, SelectedOptionType } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { Router } from '@angular/router';
+import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
 
 @Component({
   selector: 'app-canhan-option',
@@ -57,6 +59,7 @@ export class DmCanhanOptionComponent implements OnInit {
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
               public matSidenavService: MatsidenavService,
+              public router: Router,
               public formBuilder: FormBuilder) { }
 
   async ngOnInit() {
@@ -162,4 +165,10 @@ export class DmCanhanOptionComponent implements OnInit {
     this.matSidenavService.close();
   }
 
+  public goToAddCaNhan() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.canhanUri}`])
+    );
+    window.open(url, '_blank');
+  }
 }
