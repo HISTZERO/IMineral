@@ -10,7 +10,7 @@ import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coqua
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputHoSoModel, OutputHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
+import { InputHsHoSoModel, OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
