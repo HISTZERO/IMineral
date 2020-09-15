@@ -106,15 +106,23 @@ export class HosoIoComponent implements OnInit {
               public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
+    // Lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Lấy dữ liệu loại cấp phép
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
   /**
    * Khởi tạo form
    */
-  async manualInit() {
+  async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
       this.idhoso = param.params.idhoso;
     });
@@ -125,13 +133,6 @@ export class HosoIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
     }
 
-    // Khởi tạo form
-    this.formInit();
-    // Lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
     // Lấy dữ liệu cơ quan tiếp nhận
     await this.getCoQuanTiepNhanAll();
