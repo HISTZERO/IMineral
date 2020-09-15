@@ -25,15 +25,15 @@
               </mat-tab>
               <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
                 <app-hosotailieu-list #taiLieuBatBuocListComp [allowAutoInit]="false"
-                   [nhomTaiLieu]="nhomTaiLieu.TaiLieuBatBuoc">
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuBatBuoc">
                 </app-hosotailieu-list>
                 <app-hosotailieu-list #taiLieuKhacListComp [allowAutoInit]="false"
-                   [nhomTaiLieu]="nhomTaiLieu.TaiLieuKhongBatBuoc">
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuKhongBatBuoc">
                 </app-hosotailieu-list>
               </mat-tab>
               <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
                 <app-hosotailieu-list #taiLieuXuLyHoSoListComp [allowAutoInit]="false"
-                   [nhomTaiLieu]="nhomTaiLieu.TaiLieuXuLyHoSo">
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuXuLyHoSo">
                 </app-hosotailieu-list>
               </mat-tab>
               <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thonTinDangKyTabTitle' | translate }}">

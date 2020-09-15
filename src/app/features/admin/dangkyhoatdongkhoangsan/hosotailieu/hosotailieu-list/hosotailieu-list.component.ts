@@ -16,6 +16,7 @@ import { HosotailieuIoComponent } from "src/app/features/admin/dangkyhoatdongkho
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 
 
 @Component({
@@ -69,6 +70,9 @@ export class HosotailieuListComponent implements OnInit {
 
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
+
+  // nhóm tài liệu enum
+  public nhomTaiLieuEnum = NhomTaiLieuEnum;
 
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,

@@ -32,7 +32,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   public nhomLoaiCapPhepEnum = NhomLoaiCapPhepEnum;
 
-  public nhomTaiLieu = NhomTaiLieuEnum;
+  public nhomTaiLieuEnum = NhomTaiLieuEnum;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

@@ -15,7 +15,7 @@
                       <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.tailieu.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
-                      <button class="btn btn-primary mb-sm-1" style="float: right;"
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" *ngIf="nhomTaiLieu !== nhomTaiLieuEnum.TaiLieuBatBuoc"
                         (click)="openTaiLieuIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
@@ -67,7 +67,8 @@
                             <i class="far fa-download"></i>
                           </button>
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                            (click)="editItemTaiLieu(data.idkhuvuc)">
+                                *ngIf="nhomTaiLieu !== nhomTaiLieuEnum.TaiLieuBatBuoc"
+                            (click)="editItemTaiLieu(data.idtailieu)">
                             <i class="far fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
