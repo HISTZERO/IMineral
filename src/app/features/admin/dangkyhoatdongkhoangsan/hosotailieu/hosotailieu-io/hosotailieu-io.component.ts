@@ -127,12 +127,16 @@ export class HosotailieuIoComponent implements OnInit {
 
 
   /**
-   * Hàm thực thi chức năng add và edit
+   * Hàm thực thi chức năng add và edit cho nhóm tài liệu không bắt buộc và nhóm tài liệu xử lý hồ sơ
    */
   private addOrUpdate(operMode: string) {
-    if (this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuKhongBatBuoc
-        && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+    if (this.obj === null || this.obj === undefined || this.obj.idhoso === null || this.obj.idhoso === undefined) {
+      return;
+    }
 
+    if (this.obj && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuKhongBatBuoc
+        && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      return;
     }
 
     // Gán dữ liệu input vào model
