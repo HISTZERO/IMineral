@@ -98,6 +98,14 @@
     "tentailieu": "Tên tài liệu",
     "sobanchinh": "Số bản chính",
     "sobansao": "Số bản sao",
-    "filedinhkem": "File đính kèm"
+    "filedinhkem": "File đính kèm",
+    "tentailieuPlaceholder": "Nhập tên tài liệu",
+    "sobanchinhPlaceholder": "Nhập số bản chính",
+    "sobansaoPlaceholder": "Nhập số bản sao",
+    "thutuPlaceholder": "Nhập thứ tự",
+    "tentailieuRequired": "Tên tài liệu không được để trống",
+    "sobanchinhIsNumber": "Số bản chính phải là kiểu số",
+    "sobansaoIsNumber": "Số bản sao phải là kiểu số",
+    "thutuIsNumber": "Thứ tự phải là kiểu số"
   }
 }
