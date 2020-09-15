@@ -5,21 +5,26 @@
         <small>(*)</small></label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="tentailieu"
-          placeholder="{{'BAOCAO.tailieudinhkem.tentailieuPlaceholder' | translate}}" />
+               placeholder="{{'BAOCAO.tailieudinhkem.tentailieuPlaceholder' | translate}}"/>
         <span *ngIf="formErrors.tentailieu" class="alert-danger">{{formErrors.tentailieu}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
       <label class="col-sm-3 col-form-label text-right">{{"BAOCAO.tailieudinhkem.filedinhkem" | translate}}</label>
-      <div class="col-sm-9">
-        <input #fileInput type="file" id="upload" class="" (click)="fileInput.value = null" (change)="fileProgress($event)" /> 
+      <div class="custom-file col-sm-9">
+        <input #fileInput type="file" id="upload" title=" " [(ngModel)]="fileName"  class="custom-file-input" (click)="fileInput.value = null"
+               (change)="fileProgress($event)" />
+        <label class="custom-file-label file"  *ngIf="purpose === 'edit' ; else new">
+          {{fileName}}</label>
+        <ng-template #new><label class="custom-file-label file" >
+          {{fileName}}</label></ng-template>
       </div>
     </div>
     <div class="form-group row mx-0">
       <label class="col-sm-3 col-form-label text-right">{{"BAOCAO.tailieudinhkem.thutu" | translate}}</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="thutu"
-          placeholder="{{'BAOCAO.tailieudinhkem.thutuPlaceHolder' | translate}}" />
+               placeholder="{{'BAOCAO.tailieudinhkem.thutuPlaceHolder' | translate}}"/>
         <span *ngIf="formErrors.thutu" class="alert-danger">{{formErrors.thutu}}</span>
       </div>
     </div>
@@ -32,7 +37,7 @@
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
             <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
-              (click)="onContinueAdd(purpose)">
+                    (click)="onContinueAdd(purpose)">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>
