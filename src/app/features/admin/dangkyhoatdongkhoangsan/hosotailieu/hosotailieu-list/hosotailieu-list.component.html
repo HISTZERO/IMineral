@@ -20,11 +20,16 @@
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" *ngIf="nhomTaiLieu === nhomTaiLieuEnum.TaiLieuBatBuoc"
+                        (click)="updateHoSoCauHinhToHsTaiLieu()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
                       <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
-                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="null">
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
                         <i class="far fa-trash"></i>
                         {{ "COMMON.default.delete" | translate }}
                       </button>

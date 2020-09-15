@@ -35,13 +35,15 @@ export class HosotailieuIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
+  // Chứa dữ liệu file
+  public fileData: File = null;
+
   // error message
   validationErrorMessages = {};
 
   // form errors
   formErrors = {
     tentailieu: "",
-    filedinhkem: "",
     sobanchinh: "",
     sobansao: "",
     thutu: ""
@@ -103,7 +105,6 @@ export class HosotailieuIoComponent implements OnInit {
   formInit() {
     this.tailieuIOForm = this.formBuilder.group({
       tentailieu: ["", Validators.required],
-      filedinhkem: [""],
       sobanchinh: ["", Validators.pattern("^[0-9-+]+$")],
       sobansao: ["", Validators.pattern("^[0-9-+]+$")],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
@@ -117,7 +118,6 @@ export class HosotailieuIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
-        filedinhkem: this.obj.filedinhkem,
         sobanchinh: this.obj.sobanchinh,
         sobansao: this.obj.sobansao,
         thutu: this.obj.thutu,
@@ -125,6 +125,14 @@ export class HosotailieuIoComponent implements OnInit {
     }
   }
 
+  /**
+   * Hàm xử lý file
+   */
+  public fileProgress(fileInput: any) {
+    if(fileInput) {
+      this.fileData = fileInput.target.files[0];
+    }
+  }
 
   /**
    * Hàm thực thi chức năng add và edit cho nhóm tài liệu không bắt buộc và nhóm tài liệu xử lý hồ sơ
@@ -142,9 +150,18 @@ export class HosotailieuIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
     this.inputModel = this.tailieuIOForm.value;
-    this.inputModel.idhoso = this.obj.idhoso;
+
+    const formData: FormData = new FormData();
+    formData.append("File", this.fileData);
+    formData.append("Idhoso", this.obj.idhoso);
+    formData.append("Tentailieu", this.inputModel.tentailieu);
+    formData.append("Sobanchinh", this.inputModel.sobanchinh.toString());
+    formData.append("Sobansao", this.inputModel.sobanchinh.toString());
+    formData.append("Nhomtailieu", this.obj.nhomtailieu.toString());
+    formData.append("thutu", this.inputModel.thutu.toString());
+
     if (operMode === "new") {
-      dkhdksService.addItem(this.inputModel).subscribe(
+      dkhdksService.addItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllTaiLieu"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -156,13 +173,8 @@ export class HosotailieuIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      this.inputModel.idtailieu = this.obj.idtailieu;
-      this.inputModel.duongdan = this.obj.duongdan;
-      this.inputModel.idhoso = this.obj.idhoso;
-      this.inputModel.nhomtailieu = this.obj.nhomtailieu;
-      this.inputModel.dungluong = this.obj.dungluong;
-      this.inputModel.dinhdang = this.obj.dinhdang;
-      dkhdksService.updateItem(this.inputModel).subscribe(
+      formData.append("Idtailieu", this.obj.idtailieu);
+      dkhdksService.updateItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllTaiLieu"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
