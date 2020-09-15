@@ -124,15 +124,15 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     if (index === ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem]) {
       this.taiLieuBatBuocListComp.idhoso = this.idhoso;
       this.taiLieuBatBuocListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredTitleList;
-      const loadedTaiLieuBatBuocState =  await this.taiLieuBatBuocListComp.manualInit();
+      const loadedTaiLieuBatBuocState =  await this.taiLieuBatBuocListComp.manualDataInit();
       this.taiLieuKhacListComp.idhoso = this.idhoso;
       this.taiLieuKhacListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleList;
-      const loadedTaiLieuKhacState =  await this.taiLieuKhacListComp.manualInit();
+      const loadedTaiLieuKhacState =  await this.taiLieuKhacListComp.manualDataInit();
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = loadedTaiLieuBatBuocState || loadedTaiLieuKhacState;
     } else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
       this.taiLieuXuLyHoSoListComp.idhoso = this.idhoso;
       this.taiLieuXuLyHoSoListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleList;
-      this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualInit();
+      this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualDataInit();
     }
   }
 }

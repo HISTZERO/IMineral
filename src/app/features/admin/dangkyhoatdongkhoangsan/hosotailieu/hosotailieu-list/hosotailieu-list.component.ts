@@ -85,8 +85,16 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Gọi hàm lấy dữ liệu translate
+    this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Thiết lập hiển thị checkbox trên grid
+    await this.setDisplayOfCheckBoxkOnGrid(true);
+    // Gọi hàm lấy dữ liệu pagesize
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
@@ -128,14 +136,7 @@ export class HosotailieuListComponent implements OnInit {
     this.getAllTaiLieu();
   }
 
-  async manualInit() {
-    // Gọi hàm lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Thiết lập hiển thị checkbox trên grid
-    await this.setDisplayOfCheckBoxkOnGrid(true);
-    // Gọi hàm lấy dữ liệu pagesize
+  async manualDataInit() {
     await this.getDataPageSize();
     return true;
   }
@@ -167,7 +168,11 @@ export class HosotailieuListComponent implements OnInit {
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
-    this.itemService.getHsTaiLieuPage(state);
+    const searchModel = {
+      idhoso: this.idhoso,
+      nhomtailieu: this.nhomTaiLieu
+    };
+    this.itemService.getHsTaiLieuPage(state, searchModel);
   }
 
   /**

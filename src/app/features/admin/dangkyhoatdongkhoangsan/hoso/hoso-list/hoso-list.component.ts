@@ -80,8 +80,11 @@ export class HosoListComponent implements OnInit {
   }
 
   async ngOnInit() {
+    // Gọi hàm lấy dữ liệu translate
+    this.getDataTranslate();
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
@@ -107,12 +110,12 @@ export class HosoListComponent implements OnInit {
       .toPromise();
   }
 
-  async manualInit() {
+  async manualDataInit() {
     if (this.nhomLoaiCapPhep === NhomLoaiCapPhep.ThamDoKhoangSan) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
+      // await this.getDataTranslate();
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize

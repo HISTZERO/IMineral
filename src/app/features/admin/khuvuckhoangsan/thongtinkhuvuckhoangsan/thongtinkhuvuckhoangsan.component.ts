@@ -109,7 +109,7 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
 
   async tabChange(index: any) {
     if (index === ThongTinKhoangSanTabEnum.ToaDo && !this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo]) {
-      this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo] = await this.khuVucToaDoListComp.manualInit();
+      this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo] = await this.khuVucToaDoListComp.manualDataInit();
     }
   }
 }
