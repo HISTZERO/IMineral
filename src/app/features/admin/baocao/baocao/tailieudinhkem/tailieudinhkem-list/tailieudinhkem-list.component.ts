@@ -97,7 +97,12 @@ export class TailieudinhkemListComponent implements OnInit {
     const listData: any = await this.baocaoFacadeService
     .getTaiLieuDinhKemService()
     .getAllTaiLieuByIdBaoCao(this.idBaoCao).toPromise();
-    console.log(listData);
+
+    if (listData) {
+      listData.map((tailieu, index) => {
+        tailieu.serialNumber = index + 1;
+      });
+    }
     this.listTaiLieu = listData;
   }
 
