@@ -241,7 +241,7 @@ export class HosotailieuListComponent implements OnInit {
           },
           () =>
             this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.successDelete,
+              this.dataTranslate.COMMON.default.successAdd,
               2000
         ));
       }

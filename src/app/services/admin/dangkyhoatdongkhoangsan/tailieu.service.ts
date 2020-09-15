@@ -48,6 +48,14 @@ export class TaiLieuSerVice extends RepositoryEloquentService {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.TAILIEU + '/updatehscauhinhtohstailieu'
     });
-    return this.updateItem(params);
+
+    try {
+      const queryString = this.convertObjectToQueryString(params);
+      return this.httpClient.put<any>(`${this.apiUrl}?${queryString}`, null, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
   }
 }
