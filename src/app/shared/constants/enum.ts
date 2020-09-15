@@ -31,7 +31,7 @@ export enum NhomBaoCaoEnum {
 
 }
 
-export enum NhomLoaiCapPhep {
+export enum NhomLoaiCapPhepEnum {
   ThamDoKhoangSan = 1,
   PheDuyetTruLuong = 2,
   DauGiaQuyenKhaiThac = 3,
@@ -42,7 +42,7 @@ export enum NhomLoaiCapPhep {
   ChuyenNhuongThamDoKhaiThac = 8
 }
 
-export enum NhomTaiLieu {
+export enum NhomTaiLieuEnum {
   TaiLieuBatBuoc = 1,
   TaiLieuKhongBatBuoc = 2,
   TaiLieuXuLyHoSo = 3

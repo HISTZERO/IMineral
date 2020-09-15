@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { ActivatedRoute } from '@angular/router';
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhep, InsertedState, NhomTaiLieu } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { HosotailieuListComponent } from '../../hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -30,9 +30,9 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   public insertedState = InsertedState;
 
-  public nhomLoaiCapPhepEnum = NhomLoaiCapPhep;
+  public nhomLoaiCapPhepEnum = NhomLoaiCapPhepEnum;
 
-  public nhomTaiLieu = NhomTaiLieu;
+  public nhomTaiLieu = NhomTaiLieuEnum;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

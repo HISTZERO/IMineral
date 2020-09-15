@@ -13,7 +13,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import {NhomLoaiCapPhep} from 'src/app/shared/constants/enum';
+import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
 
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { Router } from "@angular/router";
@@ -111,7 +111,7 @@ export class HosoListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhep.ThamDoKhoangSan) {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
