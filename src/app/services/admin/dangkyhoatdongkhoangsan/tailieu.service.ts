@@ -37,5 +37,17 @@ export class TaiLieuSerVice extends RepositoryEloquentService {
     this.getDataFromServer(state, params);
   }
 
+  public deleteItemsTaiLieu(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.TAILIEU + '/removelisthstailieu'
+    });
+    return this.updateItem(params);
+  }
 
+  public updateHsCauHinhToHsTaiLieu(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.TAILIEU + '/updatehscauhinhtohstailieu'
+    });
+    return this.updateItem(params);
+  }
 }

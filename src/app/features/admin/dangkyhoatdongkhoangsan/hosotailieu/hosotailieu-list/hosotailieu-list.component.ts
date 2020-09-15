@@ -141,6 +141,8 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   async manualDataInit() {
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     await this.getDataPageSize();
     return true;
   }
@@ -183,8 +185,16 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openTaiLieuIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleAdd);
-    this.matSidenavService.setContentComp(HosotailieuIoComponent, "new");
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleAdd);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleAdd);
+    } else {
+      return;
+    }
+
+    const dataItem = {idhoso: this.idhoso, nhomtailieu: this.nhomTaiLieu};
+    this.matSidenavService.setContentComp(HosotailieuIoComponent, "new", dataItem);
     this.matSidenavService.open();
   }
 
@@ -197,9 +207,45 @@ export class HosotailieuListComponent implements OnInit {
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getTaiLieuService()
       .getByid(id).toPromise();
-    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleEdit);
+
+    if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
+        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      return;
+    }
+
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleEdit);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleEdit);
+    } else {
+      return;
+    }
+
     await this.matSidenavService.setContentComp(HosotailieuIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
+  }
+
+  async updateHoSoCauHinhToHsTaiLieu() {
+    const idItems: string[] = [];
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfRequiredRecordUpdateDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
+        .updateHsCauHinhToHsTaiLieu({idhoso: this.idhoso})
+        .subscribe(
+          () => {
+            this.getAllTaiLieu();
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.successDelete,
+              2000
+        ));
+      }
+    });
   }
 
   /**
@@ -207,6 +253,40 @@ export class HosotailieuListComponent implements OnInit {
    */
   reloadDataGrid() {
     this.getAllTaiLieu();
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const idItems: string[] = [];
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        this.listDataSelect.map(res => {
+          idItems.push(res.idtailieu);
+        });
+
+        const dataBody: any = {
+          list: idItems,
+        };
+
+        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
+        .deleteItemsTaiLieu(dataBody)
+        .subscribe(
+          () => {
+            this.getAllTaiLieu();
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.successDelete,
+              2000
+        ));
+      }
+    });
   }
 
   /**
