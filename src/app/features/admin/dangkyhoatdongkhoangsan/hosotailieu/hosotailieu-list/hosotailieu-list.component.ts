@@ -201,6 +201,36 @@ export class HosotailieuListComponent implements OnInit {
     this.matSidenavService.open();
   }
 
+  async uploadFileItemTaiLieu(idTaiLieu: string) {
+     // Lấy dữ liệu cá nhân theo id
+    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+      .getTaiLieuService()
+      .getByid(idTaiLieu).toPromise();
+
+    if (!dataItem) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      return;
+    }
+
+    if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
+        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      return;
+    }
+
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredUploadFile);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentUploadFile);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedUploadFile);
+    } else {
+      return;
+    }
+
+    await this.matSidenavService.setContentComp(HosotailieuIoComponent, "upload", dataItem);
+    await this.matSidenavService.open();
+  }
+
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
