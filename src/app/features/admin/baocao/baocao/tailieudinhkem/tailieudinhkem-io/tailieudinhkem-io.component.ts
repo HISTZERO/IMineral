@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 
@@ -91,6 +91,8 @@ export class TailieudinhkemIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tentailieu: { required: this.dataTranslate.BAOCAO.tailieudinhkem.tentailieuRequired },
+      thutu: { pattern: this.dataTranslate.BAOCAO.tailieudinhkem.thutuIsNumber }
     };
   }
 
@@ -109,8 +111,8 @@ export class TailieudinhkemIoComponent implements OnInit {
    */
   formInit() {
     this.tailieuIOForm = this.formBuilder.group({
-      tentailieu: [""],
-      thutu: [""],
+      tentailieu: ["", Validators.required],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 
@@ -122,7 +124,7 @@ export class TailieudinhkemIoComponent implements OnInit {
       this.fileName = this.obj.filedinhkem;
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
-        thutu: this.obj.thutu,
+        thutu: this.obj.thutu ? this.obj.thutu : "",
       });
     }
   }

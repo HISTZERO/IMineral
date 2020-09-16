@@ -25,7 +25,8 @@
         "diadiemPlaceHolder": "Nhập địa điểm",
         "titleInfo": "Báo cáo: ",
         "thongtinchung": "THÔNG TIN CHUNG",
-        "tailieudinhkem": "TÀI LIỆU ĐÍNH KÈM"
+        "tailieudinhkem": "TÀI LIỆU ĐÍNH KÈM",
+        "tenbaocaoRequired": "Tên báo cáo không được để trống"
     },
     "tailieudinhkem": {
         "titleList": "Danh sách tài liệu đính kèm",
@@ -41,6 +42,8 @@
         "tentailieuPlaceholder": "Nhập tên tài liệu",
         "filedinhkemPlaceholder": "File đính kèm",
         "thutuPlaceHolder": "Nhập thứ tự",
-        "addFile": "Chọn tài liệu đính kèm"
+        "addFile": "Chọn tài liệu đính kèm",
+        "thutuIsNumber": "Thứ tự phải là kiểu số",
+        "tentailieuRequired": "Tên tài liệu không được để trống"
     }
 }
