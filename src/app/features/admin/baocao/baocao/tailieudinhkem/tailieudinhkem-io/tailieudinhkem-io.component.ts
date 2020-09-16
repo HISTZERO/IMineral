@@ -124,7 +124,7 @@ export class TailieudinhkemIoComponent implements OnInit {
       this.fileName = this.obj.filedinhkem;
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
-        thutu: this.obj.thutu,
+        thutu: this.obj.thutu ? this.obj.thutu : "",
       });
     }
   }
