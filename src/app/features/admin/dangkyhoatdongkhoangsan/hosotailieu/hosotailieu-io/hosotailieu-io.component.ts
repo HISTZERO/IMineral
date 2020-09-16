@@ -38,6 +38,9 @@ export class HosotailieuIoComponent implements OnInit {
   // Chứa dữ liệu file
   public fileData: File = null;
 
+  // trạng thái control được disable
+  public disabled: boolean;
+
   // error message
   validationErrorMessages = {};
 
@@ -109,19 +112,24 @@ export class HosotailieuIoComponent implements OnInit {
       sobansao: ["", Validators.pattern("^[0-9-+]+$")],
       thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
+    this.disabled = false;
   }
 
   /**
    * hàm set value cho form
    */
   formOnEdit() {
-    if (this.obj && this.purpose === 'edit') {
+    if (this.obj && (this.purpose === 'edit' || this.purpose === 'upload')) {
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
         sobanchinh: this.obj.sobanchinh,
         sobansao: this.obj.sobansao,
         thutu: this.obj.thutu,
       });
+    }
+
+    if (this.obj && this.purpose === 'upload') {
+      this.disabled = true;
     }
   }
 
@@ -155,10 +163,10 @@ export class HosotailieuIoComponent implements OnInit {
     formData.append("File", this.fileData);
     formData.append("Idhoso", this.obj.idhoso);
     formData.append("Tentailieu", this.inputModel.tentailieu);
-    formData.append("Sobanchinh", this.inputModel.sobanchinh.toString());
-    formData.append("Sobansao", this.inputModel.sobanchinh.toString());
-    formData.append("Nhomtailieu", this.obj.nhomtailieu.toString());
-    formData.append("thutu", this.inputModel.thutu.toString());
+    formData.append("Sobanchinh", this.inputModel.sobanchinh ? this.inputModel.sobanchinh.toString() : "");
+    formData.append("Sobansao", this.inputModel.sobansao ? this.inputModel.sobansao.toString() : "");
+    formData.append("Nhomtailieu", this.obj.nhomtailieu ? this.obj.nhomtailieu.toString() : "");
+    formData.append("thutu", this.inputModel.thutu ? this.inputModel.thutu.toString() : "");
 
     if (operMode === "new") {
       dkhdksService.addItem(formData).subscribe(
@@ -172,7 +180,7 @@ export class HosotailieuIoComponent implements OnInit {
             2000
           )
       );
-    } else if (operMode === "edit") {
+    } else if (operMode === "edit" || operMode === "upload") {
       formData.append("Idtailieu", this.obj.idtailieu);
       dkhdksService.updateItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllTaiLieu"),

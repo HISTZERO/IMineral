@@ -25,10 +25,11 @@ export class FileService extends RepositoryEloquentService {
    */
   public downloadFile(params) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.FILE + ServiceName.DOWNFILE,
-      headers: { responseType: 'blob' }
+      apiUrl: environment.apiIMineral + ServiceName.FILE + "/" + ServiceName.DOWNFILE,
     });
-    return this.getFetchAll(params);
+
+    const queryString = this.convertObjectToQueryString(params);
+    return this.httpClient.get(`${this.apiUrl}?${queryString}`, { responseType: 'blob' });
   }
 
   /**
