@@ -184,6 +184,8 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openTaiLieuIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
@@ -211,11 +213,8 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
-    if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
-        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      return;
-    }
-
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
@@ -253,6 +252,8 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
