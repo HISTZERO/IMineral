@@ -23,11 +23,12 @@ export class FileService extends RepositoryEloquentService {
   /**
    * Hàm download file
    */
-  public downloadFile() {
+  public downloadFile(params) {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.FILE + ServiceName.DOWNFILE,
+      headers: { responseType: 'blob' }
     });
-    return this.getAll();
+    return this.getFetchAll(params);
   }
 
   /**

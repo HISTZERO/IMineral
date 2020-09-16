@@ -66,6 +66,7 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
       serviceInfo.outputModelName !== undefined
         ? serviceInfo.outputModelName
         : outputModelName;
+    this.headers = serviceInfo.headers !== undefined ? serviceInfo.headers : this.headers;
   }
 
   /**
@@ -279,7 +280,10 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
   public getFetchAll(params = {}) {
     try {
       let queryString = this.convertObjectToQueryString(params);
-      return this.httpClient.get(`${this.apiUrl}?${queryString}`).toPromise();
+      return this.httpClient.get(`${this.apiUrl}?${queryString}`,
+      {
+        headers: this.headers,
+      }).toPromise();
     } catch (error) {
 
     }
