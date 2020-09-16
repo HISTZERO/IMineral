@@ -25,20 +25,25 @@ import { MenuThietLapHeThong } from "src/app/shared/constants/sub-menus/thietlap
 })
 export class ThietlaphethongListComponent implements OnInit {
 
-  @ViewChild('grid', {static: false}) public grid: GridComponent;
+  // Viewchild tempalte
+  @ViewChild('grid', { static: false }) public grid: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compThietLapHTio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
+  // Chứa cấu hình setting grid
   public settingsCommon = new SettingsCommon();
-  public listThietLapHT: any;
-  public selectedItem: OutputThietLapHeThongModel;
-  public listData: any;
-  public pageSize: any;
 
+  // Chứa danh sách thiết lập
+  public listThietLapHT: OutputThietLapHeThongModel[];
+
+  // Chứa item đã chọn
+  public selectedItem: OutputThietLapHeThongModel;
+
+  // Chứa dữ liệu menu item trên subheader
   public navArray = MenuThietLapHeThong;
 
   // Biến dùng translate
-  dataTranslate: any;
+  public dataTranslate: any;
 
   // Hàm constructor phải bắt buộc có hai biến là MatSidenavService và ComponentFactoryResolver để Init MatsidenavService
   constructor(
@@ -53,25 +58,40 @@ export class ThietlaphethongListComponent implements OnInit {
    * Khi khởi tạo component cha phải gọi setSidenave để khỏi tạo Sidenav
    */
   async ngOnInit() {
+    // Set thuộc tính sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
     // Lấy dữ liệu biến translate để gán vào các biến trong component
+    await this.getDataTranslate();
+
+    // Lấy dữ liệu truyền vào ejs grid tạo bảng
+    await this.getPagesize();
+
+  }
+
+  /**
+   * Lấy dữ liệu translate
+   */
+  async getDataTranslate() {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
-
-    // Lấy dữ liệu truyền vào ejs grid tạo bảng
-    this.getPagesize();
-
-    this.matSidenavService.setSidenav(this.matSidenav,this,this.content,this.cfr);
   }
 
   /**
    * Lấy pageSize trong bảng setting theo defaultPageSize
    */
   async getPagesize() {
-    this.pageSize = await +this.thietLapFacadeService
+    const dataPageSize = await this.thietLapFacadeService
       .getThietLapHeThongService()
       .getByid(ThietLapHeThong.defaultPageSize).toPromise();
-    this.settingsCommon.pageSettings["pageSize"] = +this.pageSize;
+    if (dataPageSize) {
+      this.settingsCommon.pageSettings["pageSize"] = +dataPageSize.settingValue;
+    } else {
+      this.settingsCommon.pageSettings["pageSize"] = 10;
+    }
+
+    // Gọi hàm lấy dữ liệu thiết lập
     await this.getAllThietLapHeThong();
   }
 
@@ -79,16 +99,16 @@ export class ThietlaphethongListComponent implements OnInit {
    * Hàm getAll Setting để binding dữ liệu lên EJS grid
    */
   async getAllThietLapHeThong() {
-    this.listData = await this.thietLapFacadeService
+    const listData: any = await this.thietLapFacadeService
       .getThietLapHeThongService()
       .getFetchAll();
-    if (this.listData) {
-      this.listData.map((thietlap, index) => {
+    if (listData) {
+      listData.map((thietlap, index) => {
         thietlap.serialNumber = index + 1;
       });
     }
 
-    this.listThietLapHT = this.listData;
+    this.listThietLapHT = listData;
   }
 
   /**
@@ -161,11 +181,7 @@ export class ThietlaphethongListComponent implements OnInit {
   public editItemThietLapHT(data) {
     this.selectedItem = data;
     this.matSidenavService.setTitle(this.dataTranslate.THIETLAP.thietlaphethong.titleEdit);
-    this.matSidenavService.setContentComp(
-      ThietlaphethongIoComponent,
-      "edit",
-      this.selectedItem
-    );
+    this.matSidenavService.setContentComp(ThietlaphethongIoComponent, "edit", this.selectedItem);
     this.matSidenavService.open();
   }
 
