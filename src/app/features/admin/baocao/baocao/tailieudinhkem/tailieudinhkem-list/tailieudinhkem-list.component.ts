@@ -97,7 +97,12 @@ export class TailieudinhkemListComponent implements OnInit {
     const listData: any = await this.baocaoFacadeService
     .getTaiLieuDinhKemService()
     .getAllTaiLieuByIdBaoCao(this.idBaoCao).toPromise();
-    console.log(listData);
+
+    if (listData) {
+      listData.map((tailieu, index) => {
+        tailieu.serialNumber = index + 1;
+      });
+    }
     this.listTaiLieu = listData;
   }
 
@@ -145,7 +150,7 @@ export class TailieudinhkemListComponent implements OnInit {
    /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemBaoCao(data) {
+  async deleteItemTaiLieuDinhKem(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
@@ -201,5 +206,10 @@ export class TailieudinhkemListComponent implements OnInit {
    */
   cantDeleteDialog(sMsg: string) {
     this.commonService.canDeleteDialogService(sMsg);
+  }
+
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName) {
+    this[methodName]();
   }
 }
