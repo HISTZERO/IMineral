@@ -13,7 +13,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import {NhomLoaiCapPhep} from 'src/app/shared/constants/enum';
+import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
 
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { Router } from "@angular/router";
@@ -31,7 +31,8 @@ export class HosoListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("title") title: string;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("allowAutoInit") allowAutoInit = true;
   // Viewchild template
   @ViewChild("gridHoSo", { static: false }) public gridHoSo: GridComponent;
 
@@ -79,22 +80,18 @@ export class HosoListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhep.ThamDoKhoangSan) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
-      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
-      await this.getAllLoaiCapPhep();
-      // Gọi hàm lấy dữ liệu pagesize
-      await this.getDataPageSize();
+    // Gọi hàm lấy dữ liệu translate
+    this.getDataTranslate();
+
+    if (this.allowAutoInit) {
+      await this.manualDataInit();
     }
   }
 
   /**
    * Form innit
    */
-  public formInit() {
+  formInit() {
     this.formSearch = this.formBuilder.group({
       GTEqualNgaytiepnhan: [""],
       LTEqualNgaytiepnhan: [""],
@@ -111,6 +108,21 @@ export class HosoListComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+  }
+
+  async manualDataInit() {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan) {
+      // Khởi tạo form
+      this.formInit();
+      // Gọi hàm lấy dữ liệu translate
+      // await this.getDataTranslate();
+      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
+      await this.getAllLoaiCapPhep();
+      // Gọi hàm lấy dữ liệu pagesize
+      await this.getDataPageSize();
+    }
+
+    return true;
   }
 
   /**
@@ -163,7 +175,7 @@ export class HosoListComponent implements OnInit {
   /*
    * When page item clicked
    */
-  public dataStateChange(state: DataStateChangeEventArgs): void {
+  dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
       GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
       LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
@@ -177,7 +189,7 @@ export class HosoListComponent implements OnInit {
   /**
    * Hàm load lại dữ liệu grid
    */
-  public reloadDataGrid() {
+  reloadDataGrid() {
     this.formSearch.reset({ Keyword: "" });
     this.getAllHoSo();
   }
@@ -185,7 +197,7 @@ export class HosoListComponent implements OnInit {
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public addItemHoSo() {
+  addItemHoSo() {
     this.router.navigate([
       `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`]);
   }
@@ -215,7 +227,7 @@ export class HosoListComponent implements OnInit {
    * Hàm check điều kiện xóa bản ghi
    * @param sMsg
    */
-  public canBeDeletedCheck(sMsg: string) {
+  canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
       this.confirmDeleteDiaLog();
     } else {

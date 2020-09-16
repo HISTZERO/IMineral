@@ -31,6 +31,8 @@ export class HosoIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectNewInsertedHoSoEvent") selectNewInsertedHoSoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -104,15 +106,23 @@ export class HosoIoComponent implements OnInit {
               public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
+    // Lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Lấy dữ liệu loại cấp phép
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
   /**
    * Khởi tạo form
    */
-  async manualInit() {
+  async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
       this.idhoso = param.params.idhoso;
     });
@@ -123,13 +133,6 @@ export class HosoIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
     }
 
-    // Khởi tạo form
-    this.formInit();
-    // Lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
     // Lấy dữ liệu cơ quan tiếp nhận
     await this.getCoQuanTiepNhanAll();
@@ -172,7 +175,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * hàm lấy dữ liệu translate
    */
-  public async getDataTranslate() {
+  async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -288,6 +291,7 @@ export class HosoIoComponent implements OnInit {
             this.currentAction = HoSoActionEnum.Edit;
             await this.formOnEdit();
             this.selectCurrentFormState();
+            this.selectNewInsertedHoSo();
           } else {
             this.onFormReset();
           }
@@ -335,7 +339,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Hàm reset form, gọi khi nhấn nút reset dữ liệu
    */
-  public onFormReset() {
+  onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.hosoIOForm.reset();
     this.hosoIOForm.controls.loaidoituong.setValue(LoaiDoiTuongEnum.ToChuc);
@@ -349,7 +353,7 @@ export class HosoIoComponent implements OnInit {
    /**
     * Hàm mở sidenav
     */
-  public openIOSidenav() {
+  openIOSidenav() {
     const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
 
     if (loaiDoiTuong === LoaiDoiTuongEnum.CaNhan) {
@@ -392,7 +396,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Thay đổi loại đối tượng trên form
    */
-  public selectLoaiDoiTuongChange() {
+  selectLoaiDoiTuongChange() {
     this.hosoIOForm.controls.idcanhantochuc.setValue("");
     this.hosoIOForm.controls.tencanhantochuc.setValue("");
   }
@@ -404,10 +408,18 @@ export class HosoIoComponent implements OnInit {
   private selectCurrentFormState() {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectNewInsertedHoSo() {
+    this.selectNewInsertedHoSoEvent.emit(this.idhoso);
+  }
+
   /**
    * Hàm đóng sidenav
    */
-  public closeIOSidenav() {
+  closeIOSidenav() {
     this.matSidenavService.close();
   }
 

@@ -8,12 +8,20 @@
               <div class="card-header">
                 <h3>
                   <div class="row">
-                    <div class="col-md-4 mb-sm-1">
+                    <div class="col-md-4 mb-sm-1" *ngIf="title">
+                      <span class="title">{{ title }}</span>
+                    </div>
+                    <div class="col-md-4 mb-sm-1" *ngIf="!title">
                       <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.tailieu.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-8">
-                      <button class="btn btn-primary mb-sm-1" style="float: right;"
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" *ngIf="nhomTaiLieu !== nhomTaiLieuEnum.TaiLieuBatBuoc"
                         (click)="openTaiLieuIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" *ngIf="nhomTaiLieu === nhomTaiLieuEnum.TaiLieuBatBuoc"
+                        (click)="updateHoSoCauHinhToHsTaiLieu()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
@@ -21,7 +29,7 @@
                         <i class="far fa-sync-alt"></i>
                         {{ "COMMON.default.load" | translate }}
                       </button>
-                      <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="null">
+                      <button *ngIf="disableDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem()">
                         <i class="far fa-trash"></i>
                         {{ "COMMON.default.delete" | translate }}
                       </button>
@@ -32,8 +40,9 @@
               <div class="card-body">
                 <ejs-grid #griTaiLieu *ngIf="listTaiLieu" [dataSource]="listTaiLieu | async"
                   [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"  [toolbar]="settingsCommon.toolbar"
-                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true"
-                  [textWrapSettings]='wrapSettings' [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
+                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true" [selectionSettings]="settingsCommon.selectionOptions"
+                  [textWrapSettings]='wrapSettings' [allowResizing]="true" (dataStateChange)="dataStateChange($event)"
+                  (rowDeselected) = "getAllDataActive()" (rowSelected)="getAllDataActive()">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
                     </e-column>
@@ -44,12 +53,13 @@
                     <e-column field="sobansao" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.sobansao' | translate }}">
                     </e-column>
                     <e-column field="filedinhkem"
-                      headerText="{{ 'KHUVUCKHOANGSAN.khuvucdaugia.ngayquyetdinh' | translate }}">
+                      headerText="{{ 'DANGKYHOATDONGKHOANGSAN.tailieu.filedinhkem' | translate }}">
                       <ng-template #template let-data>
                         <a href="javascript:void(0)">{{data.filedinhkem}}</a>
                       </ng-template>
                     </e-column>
-                    <e-column field="idtailieu" isPrimaryKey='true'
+                    <e-column field="check" *ngIf="settingsCommon.selectionOptions" [customAttributes]="{class: 'style-checkbox-header'}" type='checkbox'></e-column>
+                    <e-column field="idtailieu" isPrimaryKey='true' [customAttributes]="{class: 'style-action-header'}"
                       headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
@@ -58,11 +68,12 @@
                             <i class="far fa-upload"></i>
                           </button>
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.download' | translate }}"
-                          (click)="editItemTaiLieu(data.idtailieu)">
-                          <i class="far fa-download"></i>
-                        </button>
+                            (click)="editItemTaiLieu(data.idtailieu)">
+                            <i class="far fa-download"></i>
+                          </button>
                           <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                            (click)="editItemTaiLieu(data.idkhuvuc)">
+                                *ngIf="nhomTaiLieu !== nhomTaiLieuEnum.TaiLieuBatBuoc"
+                            (click)="editItemTaiLieu(data.idtailieu)">
                             <i class="far fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"

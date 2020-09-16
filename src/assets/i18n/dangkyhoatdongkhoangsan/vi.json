@@ -89,13 +89,29 @@
     "confirmedContentOfUnActiveDialog": "Bạn có muốn chuyển trạng thái không sử dụng các đối tượng vừa chọn không?"
   },
   "tailieu": {
-    "titleList": "Danh sách hồ sơ",
-    "titleAdd": "Thêm mới hồ sơ",
-    "titleEdit": "Sửa dữ liệu hồ sơ",
+    "titleList": "Danh sách tài liệu",
+    "requiredTitleList": "Danh sách tài liệu bắt buộc",
+    "differentTitleList": "Danh sách tài liệu khác",
+    "processedTitleList": "Tài liệu xử lý hồ sơ",
+    "differentTitleAdd": "Thêm mới tài liệu khác",
+    "differentTitleEdit": "Sửa dữ liệu tài liệu khác",
+    "processedTitleAdd": "Thêm mới tài liệu xử lý hồ sơ",
+    "processedTitleEdit": "Sửa dữ liệu tài liệu xử lý hồ sơ",
     "contentDelete": "Tài liệu: ",
     "tentailieu": "Tên tài liệu",
     "sobanchinh": "Số bản chính",
     "sobansao": "Số bản sao",
-    "filedinhkem": "File đính kèm"
+    "filedinhkem": "File đính kèm",
+    "thutu": "Thứ tự",
+    "tentailieuPlaceholder": "Nhập tên tài liệu",
+    "sobanchinhPlaceholder": "Nhập số bản chính",
+    "sobansaoPlaceholder": "Nhập số bản sao",
+    "thutuPlaceholder": "Nhập thứ tự",
+    "tentailieuRequired": "Tên tài liệu không được để trống",
+    "sobanchinhIsNumber": "Số bản chính phải là kiểu số",
+    "sobansaoIsNumber": "Số bản sao phải là kiểu số",
+    "thutuIsNumber": "Thứ tự phải là kiểu số",
+    "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
+    "confirmedContentOfRequiredRecordUpdateDialog": "Bạn có muốn bổ sung tài liệu bắt buộc không?"
   }
 }

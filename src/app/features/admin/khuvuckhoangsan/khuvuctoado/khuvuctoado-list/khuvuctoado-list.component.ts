@@ -84,12 +84,6 @@ export class KhuvuctoadoListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    if (this.allowAutoInit) {
-      await this.manualInit();
-    }
-  }
-
-  async manualInit() {
     this.squencekhuVucToaDoId.setDefaultValue(1);
 
     await this.activatedRoute.queryParamMap.subscribe((param: any) => {
@@ -104,6 +98,12 @@ export class KhuvuctoadoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
 
+    if (this.allowAutoInit) {
+      await this.manualDataInit();
+    }
+  }
+
+  async manualDataInit() {
     // Gọi hàm lấy thông tin dữ liệu khu vực khoáng sản
     await this.getThongTinKhuVucKhoangSan();
 

@@ -15,19 +15,28 @@
             </h3>
           </div>
           <div class="card-body">
-            <mat-tab-group mat-stretch-tabs [animationDuration]="">
-              <mat-tab [disabled]="!loadedTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
+            <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="selectedDefaultTab"
+              (selectedIndexChange)="tabChange($event)">
+              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
                 <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"
-                  [insertedState]="insertedState.SaveAndEdit" (selectCurrentFormStateEvent)="getHoSoIoFormState($event)">
+                  [insertedState]="insertedState.SaveAndEdit" (selectCurrentFormStateEvent)="getHoSoIoFormState($event)"
+                  (selectNewInsertedHoSoEvent)="getIdHoSo($event)">
                 </app-hoso-io>
               </mat-tab>
-              <mat-tab [disabled]="!loadedTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
-
+              <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
+                <app-hosotailieu-list #taiLieuBatBuocListComp [allowAutoInit]="false"
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuBatBuoc">
+                </app-hosotailieu-list>
+                <app-hosotailieu-list #taiLieuKhacListComp [allowAutoInit]="false"
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuKhongBatBuoc">
+                </app-hosotailieu-list>
               </mat-tab>
-              <mat-tab [disabled]="!loadedTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
-
+              <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
+                <app-hosotailieu-list #taiLieuXuLyHoSoListComp [allowAutoInit]="false"
+                   [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuXuLyHoSo">
+                </app-hosotailieu-list>
               </mat-tab>
-              <mat-tab [disabled]="!loadedTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thonTinDangKyTabTitle' | translate }}">
+              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thonTinDangKyTabTitle' | translate }}">
 
               </mat-tab>
             </mat-tab-group>
