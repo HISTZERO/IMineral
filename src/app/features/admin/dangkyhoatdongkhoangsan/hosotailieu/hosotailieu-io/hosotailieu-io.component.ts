@@ -230,6 +230,37 @@ export class HosotailieuIoComponent implements OnInit {
   }
 
   /**
+   * Xóa file
+   */
+  removeFile() {
+    if (this.obj && this.purpose === 'edit') {
+      const dialogRef = this.commonService.confirmDeleteDiaLogService(
+        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.contentDelete,
+        this.obj.filedinhkem
+      );
+      dialogRef.afterClosed().subscribe(async (result) => {
+        if (result === "confirm") {
+          const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
+          dkhdksService.removeFileHsTaiLieu(this.obj.idtailieu).subscribe(
+            (res) => {
+              this.obj.duongdan = "";
+              this.obj.filedinhkem = "";
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+        }
+      });
+    }
+  }
+
+  /**
    * hàm kiểm tra validation form
    */
   public logAllValidationErrorMessages() {
