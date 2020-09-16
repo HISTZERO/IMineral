@@ -150,7 +150,7 @@ export class HosotailieuIoComponent implements OnInit {
       return;
     }
 
-    if (this.obj && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuKhongBatBuoc
+    if (operMode !== "upload" && this.obj && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuKhongBatBuoc
         && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuXuLyHoSo) {
       return;
     }
