@@ -150,19 +150,6 @@ export class TailieudinhkemIoComponent implements OnInit {
             2000
           )
       );
-      // await fileService.addItem(formData).subscribe(res => {
-      //   // Gán dữ liệu vào model
-      //   this.inputModel.filedinhkem = res.filedinhkem;
-      //   this.inputModel.dinhdang = res.dinhdang;
-      //   this.inputModel.dungluong = res.dungluong;
-      //   this.inputModel.duongdan = res.duongdan
-      //   this.inputModel.idbaocao = idbaocao;
-      //   // gọi api thêm item vào bảng tailieu
-
-      // },
-      // (error: HttpErrorResponse) => {
-
-      // });
     } else if (operMode === "edit") {
       const formData: FormData = new FormData();
       formData.append("File", this.fileData);
@@ -246,17 +233,6 @@ export class TailieudinhkemIoComponent implements OnInit {
       this.fileData = fileInput.target.files[0];
       this.fileName = this.fileData.name;
     }
-  }
-
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    // const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    // dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    // dialog.componentInstance.content =
-    //   "<b>" + error + "</b>";
-    // dialog.componentInstance.visibleOkButton = false;
   }
 
   /**
