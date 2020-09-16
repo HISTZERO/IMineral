@@ -32,9 +32,9 @@ export class ServiceName {
   public static BCTAILIEU = "bctailieu";
   // File
   public static FILE = "files";
-  public static UPLOADFILE = "ftpuploadfile";
-  public static DOWNFILE = "​ftpdownloadfile";
-  public static DELETEFILE = "ftpdeletefile";
+  public static UPLOADFILE = "uploadfileftp";
+  public static DOWNFILE = "downloadfileftp";
+  public static DELETEFILE = "deletefileftp";
   // Hồ sơ
   public static HOSO = "hoso";
   public static TAILIEU = "hstailieu";
