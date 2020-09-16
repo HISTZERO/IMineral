@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSidenav } from "@angular/material/sidenav";
 
@@ -15,12 +16,6 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { OutputThietLapHeThongModel } from "src/app/models/admin/thietlap/thietlap-hethong.model";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { ThietlaphethongIoComponent } from "src/app/features/admin/thietlap/thietlaphethong/thietlaphethong-io/thietlaphethong-io.component";
-import {
-  _addSettingAction,
-  _listSettingAction,
-  _editSettingAction,
-  _deleteSettingAction,
-} from "src/app/shared/constants/actions/thietlap/setting";
 import { MenuThietLapHeThong } from "src/app/shared/constants/sub-menus/thietlap/thietlaphethong";
 
 @Component({
@@ -29,23 +24,18 @@ import { MenuThietLapHeThong } from "src/app/shared/constants/sub-menus/thietlap
   styleUrls: ["./thietlaphethong-list.component.scss"],
 })
 export class ThietlaphethongListComponent implements OnInit {
+
+  @ViewChild('grid', {static: false}) public grid: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compThietLapHTio", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("compThietLapHTio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   public settingsCommon = new SettingsCommon();
-  public listThietLapHT: OutputThietLapHeThongModel[];
+  public listThietLapHT: any;
   public selectedItem: OutputThietLapHeThongModel;
   public listData: any;
   public pageSize: any;
 
   public navArray = MenuThietLapHeThong;
-
-  // Danh sách các quyền
-  addSettingAction = _addSettingAction;
-  listSettingAction = _listSettingAction;
-  editSettingAction = _editSettingAction;
-  deleteSettingAction = _deleteSettingAction;
 
   // Biến dùng translate
   dataTranslate: any;
@@ -71,24 +61,18 @@ export class ThietlaphethongListComponent implements OnInit {
     // Lấy dữ liệu truyền vào ejs grid tạo bảng
     this.getPagesize();
 
-    this.matSidenavService.setSidenav(
-      this.matSidenav,
-      this,
-      this.content,
-      this.cfr
-    );
-    this.settingsCommon.toolbar = ["Search"];
+    this.matSidenavService.setSidenav(this.matSidenav,this,this.content,this.cfr);
   }
 
   /**
    * Lấy pageSize trong bảng setting theo defaultPageSize
    */
   async getPagesize() {
-    this.pageSize = await this.thietLapFacadeService
+    this.pageSize = await +this.thietLapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     this.settingsCommon.pageSettings["pageSize"] = +this.pageSize;
-    this.getAllThietLapHeThong();
+    await this.getAllThietLapHeThong();
   }
 
   /**
@@ -103,6 +87,7 @@ export class ThietlaphethongListComponent implements OnInit {
         thietlap.serialNumber = index + 1;
       });
     }
+
     this.listThietLapHT = this.listData;
   }
 
@@ -145,7 +130,7 @@ export class ThietlaphethongListComponent implements OnInit {
       if (result === "confirm") {
         await this.thietLapFacadeService
           .getThietLapHeThongService()
-          .deleteItem({ id: this.selectedItem.id })
+          .deleteItem({ idSettings: this.selectedItem.id })
           .subscribe(
             () => this.getAllThietLapHeThong(),
             (error: HttpErrorResponse) => {
@@ -153,7 +138,7 @@ export class ThietlaphethongListComponent implements OnInit {
             },
             () =>
               this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete + this.selectedItem.settingKey,
+                this.dataTranslate.COMMON.default.successDelete + " " + this.selectedItem.settingKey,
                 2000
               )
           );
