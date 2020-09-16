@@ -17,6 +17,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { FileService } from 'src/app/services/admin/common/file.service';
+import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
 
 
 @Component({
@@ -82,6 +84,7 @@ export class HosotailieuListComponent implements OnInit {
               private translate: TranslateService,
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService,
+              public commonFacadeService: CommonFacadeService,
               public router: Router
   ) {
 
@@ -202,11 +205,11 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemTaiLieu(id: any) {
+  async editItemTaiLieu(idTaiLieu: string) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getTaiLieuService()
-      .getByid(id).toPromise();
+      .getByid(idTaiLieu).toPromise();
 
     if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
         && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
@@ -224,6 +227,10 @@ export class HosotailieuListComponent implements OnInit {
     await this.matSidenavService.setContentComp(HosotailieuIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
+
+  /**
+   * Update danh sách tài liệu bắt buộc
+   */
 
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
@@ -246,6 +253,22 @@ export class HosotailieuListComponent implements OnInit {
         ));
       }
     });
+  }
+
+  /**
+   * Download tài liệu
+   */
+  async downloadTaiLieuHoSo(idTaiLieu: string) {
+    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+      .getTaiLieuService()
+      .getByid(idTaiLieu).toPromise();
+
+    if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
+      await this.commonFacadeService.getFileService()
+                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem});
+    } else {
+      this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.confirmedNotExistedFileDialog);
+    }
   }
 
   /**
