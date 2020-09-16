@@ -234,35 +234,6 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   /**
-   * Hàm mở sidenav chức năng sửa dữ liệu
-   * @param id
-   */
-  async uploadFileItemTaiLieu(idTaiLieu: string) {
-    // Lấy dữ liệu cá nhân theo id
-    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-      .getTaiLieuService()
-      .getByid(idTaiLieu).toPromise();
-
-    if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
-      return;
-    }
-
-    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredUploadFile);
-    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentUploadFile);
-    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedUploadFile);
-    } else {
-      return;
-    }
-
-    await this.matSidenavService.setContentComp(HosotailieuIoComponent, "upload", dataItem);
-    await this.matSidenavService.open();
-  }
-
-  /**
    * Update danh sách tài liệu bắt buộc
    */
 
@@ -302,27 +273,9 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
-    if (dataItem && (dataItem.duongdan || dataItem.filedinhkem)) {
-      this.commonFacadeService.getFileService()
-                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem})
-                .subscribe(
-                  (data: any) => {
-                    const localBlobData = new Blob([data], { type: 'application/octet-stream' });
-
-                    if (data) {
-                      const localDowloadLink = document.createElement('a');
-                      const localUrl = window.URL.createObjectURL(localBlobData);
-                      localDowloadLink.href = localUrl;
-                      localDowloadLink.setAttribute('download', dataItem.filedinhkem);
-                      document.body.appendChild(localDowloadLink);
-                      localDowloadLink.click();
-                      document.body.removeChild(localDowloadLink);
-                    }
-                  },
-                  (error) => {
-                    this.commonService.showDialogWarning(error.error.error);
-                  }
-                );
+    if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
+      await this.commonFacadeService.getFileService()
+                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem});
     } else {
       this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.informedNotExistedFile);
     }

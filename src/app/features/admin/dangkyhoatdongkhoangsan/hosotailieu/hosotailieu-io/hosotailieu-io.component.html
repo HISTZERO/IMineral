@@ -28,9 +28,8 @@
       <div class="col-sm-8" style="padding-top: 5px;">
         <input type="file" #fileInput id="uploadId" (change)="fileProgress($event)"/>
         <div style="margin-top: 10px;" *ngIf="obj && obj.duongdan && obj.filedinhkem">
-          <a href="javascript:void(0)">{{obj.filedinhkem}}
-            <i class="fa fa-trash" *ngIf="purpose && purpose !== 'upload'"></i>
-          </a>
+          <a href="javascript:void(0)">{{obj.filedinhkem}}</a>&nbsp;&nbsp;
+          <a href="javascript:void(0)"><i class="fa fa-trash" *ngIf="purpose && purpose !== 'upload'"></i></a>
         </div>
       </div>
     </div>
