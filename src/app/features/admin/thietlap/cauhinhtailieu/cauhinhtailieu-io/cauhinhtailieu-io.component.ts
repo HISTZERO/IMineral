@@ -1,4 +1,6 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { HttpErrorResponse } from "@angular/common/http";
+import { Component, Inject, OnInit, ViewChild } from '@angular/core';
+import { MAT_DIALOG_DATA } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { EditService, EditSettingsModel, GridComponent, QueryCellInfoEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import * as cloneDeep from "lodash.cloneDeep";
@@ -7,6 +9,7 @@ import { OutputDmLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitaili
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { CommonServiceShared } from "../../../../../services/utilities/common-service";
 
 @Component({
   selector: 'app-cauhinhtailieu-io',
@@ -52,12 +55,15 @@ export class CauhinhtailieuIoComponent implements OnInit {
 
 
   constructor(
+    public commonService: CommonServiceShared,
     public dmFacadeService: DmFacadeService,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
+    @Inject(MAT_DIALOG_DATA) public dataGetIO: any,
   ) { }
 
   async ngOnInit() {
+    // Cấu hình chức năng edit grid
     this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch' };
 
     // Setting wrap mode
@@ -164,6 +170,7 @@ export class CauhinhtailieuIoComponent implements OnInit {
     console.log(this.listCauHinhTaiLieu);
     this.gridCauHinhTaiLieu.refresh();
     this.gridCauHinhTaiLieu.clearSelection();
+
   }
 
   /**
@@ -171,13 +178,23 @@ export class CauhinhtailieuIoComponent implements OnInit {
    */
   public getAllDataCauHinh() {
     const dataCauHinhTaiLieu: any = this.gridCauHinhTaiLieu.getBatchChanges();
+    dataCauHinhTaiLieu.changedRecords.map(value => {
+      value.loaicapphep = this.dataGetIO.model;
+    })
     let dataBody = {
-      list: [
-        dataCauHinhTaiLieu.changedRecords
-      ]
+      list: dataCauHinhTaiLieu.changedRecords
     };
-    console.log(dataBody);
-    // this.thietlapFacadeService.getCauHinhTaiLieuService().updateItem(this.gridCauHinhTaiLieu.getBatchChanges());
-    console.log(this.gridCauHinhTaiLieu.getBatchChanges())
+    this.thietlapFacadeService.getCauHinhTaiLieuService()
+      .updateItem(dataBody).subscribe(
+        res => {
+        },
+        (error: HttpErrorResponse) => {
+          this.commonService.showDialogWarning(error.error.errors);
+        },
+        () =>
+          this.commonService.showeNotiResult(
+            this.dataTranslate.COMMON.default.successEdit,
+            2000
+          ));
   }
 }

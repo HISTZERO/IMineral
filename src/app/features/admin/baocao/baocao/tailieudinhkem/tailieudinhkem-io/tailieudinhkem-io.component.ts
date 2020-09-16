@@ -40,8 +40,9 @@ export class TailieudinhkemIoComponent implements OnInit {
   public fileData: File = null;
 
   // error message
-  validationErrorMessages = {};
+  public validationErrorMessages = {};
 
+  // Chứa tên file
   public fileName: string;
 
 
