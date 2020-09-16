@@ -13,7 +13,7 @@ import { MaterialModule } from "src/app/shared/material.module";
 import {
   GridModule,
   ToolbarService,
-  ExcelExportService,
+  ExcelExportService, EditService
 } from "@syncfusion/ej2-angular-grids";
 import { AngularSplitModule } from "angular-split";
 import {
@@ -69,6 +69,7 @@ import { ContentContainerDirective } from './directives/content-container/conten
     MapListPopupComponent,
   ],
   providers: [
+    EditService,
     ValidatorToaDoService,
     FilterService,
     ExcelExportService,

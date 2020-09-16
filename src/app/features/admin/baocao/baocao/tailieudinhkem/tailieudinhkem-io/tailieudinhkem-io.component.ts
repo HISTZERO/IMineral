@@ -42,6 +42,8 @@ export class TailieudinhkemIoComponent implements OnInit {
   // error message
   validationErrorMessages = {};
 
+  public fileName: string;
+
 
   // form errors
   formErrors = {
@@ -63,7 +65,7 @@ export class TailieudinhkemIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-    //Khởi tạo form theo dạng add or edit
+    // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
@@ -80,6 +82,7 @@ export class TailieudinhkemIoComponent implements OnInit {
       .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
+    this.fileName = this.dataTranslate.BAOCAO.tailieudinhkem.addFile;
   }
 
   /**
@@ -115,6 +118,7 @@ export class TailieudinhkemIoComponent implements OnInit {
    */
   async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
+      this.fileName = this.obj.filedinhkem;
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
         thutu: this.obj.thutu,
@@ -130,7 +134,7 @@ export class TailieudinhkemIoComponent implements OnInit {
     const tailieuService = this.baoCaoFacadeService.getTaiLieuDinhKemService();
     this.inputModel = this.tailieuIOForm.value;
     if (operMode === "new") {
-      let formData: FormData = new FormData();
+      const formData: FormData = new FormData();
       formData.append("File", this.fileData);
       formData.append("Idbaocao", idbaocao);
       formData.append("Tentailieu", this.inputModel.tentailieu);
@@ -146,22 +150,14 @@ export class TailieudinhkemIoComponent implements OnInit {
             2000
           )
       );
-      // await fileService.addItem(formData).subscribe(res => {
-      //   // Gán dữ liệu vào model
-      //   this.inputModel.filedinhkem = res.filedinhkem;
-      //   this.inputModel.dinhdang = res.dinhdang;
-      //   this.inputModel.dungluong = res.dungluong;
-      //   this.inputModel.duongdan = res.duongdan
-      //   this.inputModel.idbaocao = idbaocao;
-      //   // gọi api thêm item vào bảng tailieu
-       
-      // },
-      // (error: HttpErrorResponse) => {
-
-      // });
     } else if (operMode === "edit") {
-      this.inputModel.idtailieu = this.obj.idtailieu;
-      tailieuService.updateItem(this.inputModel).subscribe(
+      const formData: FormData = new FormData();
+      formData.append("File", this.fileData);
+      formData.append("Idbaocao", idbaocao);
+      formData.append("Tentailieu", this.inputModel.tentailieu);
+      formData.append("Thutu", this.inputModel.thutu);
+      formData.append("Idtailieu", this.obj.idtailieu);
+      tailieuService.updateItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("reloadDataGrid"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -177,7 +173,7 @@ export class TailieudinhkemIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -200,7 +196,7 @@ export class TailieudinhkemIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -233,20 +229,10 @@ export class TailieudinhkemIoComponent implements OnInit {
    * Hàm xử lý file
    */
   public fileProgress(fileInput: any) {
-    if(fileInput) {
+    if (fileInput) {
       this.fileData = fileInput.target.files[0];
+      this.fileName = this.fileData.name;
     }
-  }
-
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    // const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    // dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    // dialog.componentInstance.content =
-    //   "<b>" + error + "</b>";
-    // dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

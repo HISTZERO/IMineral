@@ -249,9 +249,10 @@ export class RepositoryEloquentService extends Subject<DataStateChangeEventArgs>
    */
   public updateItem(body: any): Observable<typeof inputModelName> {
     try {
-      return this.httpClient.put<typeof inputModelName>(this.apiUrl, body, {
-        headers: this.headers,
-      });
+      const localHeader = new HttpHeaders();
+      const options = { headers: localHeader };
+      return this.httpClient.put<typeof inputModelName>(this.apiUrl, body, options
+      );
     } catch (error) {
 
     }
