@@ -58,4 +58,19 @@ export class TaiLieuSerVice extends RepositoryEloquentService {
 
     }
   }
+
+  public removeFileHsTaiLieu(params) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.TAILIEU + '/removefilehstailieu'
+    });
+
+    try {
+      const queryString = this.convertObjectToQueryString(params);
+      return this.httpClient.delete<any>(`${this.apiUrl}?${queryString}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
