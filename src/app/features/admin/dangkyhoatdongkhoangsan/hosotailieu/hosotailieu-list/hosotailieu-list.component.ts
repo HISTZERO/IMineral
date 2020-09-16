@@ -94,8 +94,6 @@ export class HosotailieuListComponent implements OnInit {
   async ngOnInit() {
     // Gọi hàm lấy dữ liệu translate
     this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Thiết lập hiển thị checkbox trên grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu pagesize
@@ -144,8 +142,6 @@ export class HosotailieuListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     await this.getDataPageSize();
     return true;
   }
@@ -188,6 +184,9 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openTaiLieuIOSidenav() {
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
       this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleAdd);
     } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
@@ -216,6 +215,9 @@ export class HosotailieuListComponent implements OnInit {
         && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
       return;
     }
+
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuBatBuoc) {
       this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredUploadFile);
@@ -250,6 +252,9 @@ export class HosotailieuListComponent implements OnInit {
         && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
       return;
     }
+
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
       this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleEdit);
@@ -305,7 +310,23 @@ export class HosotailieuListComponent implements OnInit {
 
     if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
       await this.commonFacadeService.getFileService()
-                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem});
+                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem}).subscribe(
+                  (data) => {
+                    const localBlobData = new Blob([data], { type: 'application/octet-stream' });
+                    if (data) {
+                      const localDowloadLink = document.createElement('a');
+                      const localUrl = window.URL.createObjectURL(localBlobData);
+                      localDowloadLink.href = localUrl;
+                      localDowloadLink.setAttribute('download', dataItem.filedinhkem);
+                      document.body.appendChild(localDowloadLink);
+                      localDowloadLink.click();
+                      document.body.removeChild(localDowloadLink);
+                    }
+                  },
+                  (error: HttpErrorResponse) => {
+                    this.commonService.showDialogWarning(error.error.errors);
+                  }
+                );
     } else {
       this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.informedNotExistedFile);
     }
