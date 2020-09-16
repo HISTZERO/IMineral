@@ -1,6 +1,6 @@
 <div class="pt-3 pb-4">
   <form [formGroup]="tailieuIOForm" class="pt-toolbar">
-    <div class="form-group row mx-0">
+    <div class="form-group row mx-0" *ngIf="!disabled">
       <label class="col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.tailieu.tentailieu" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-8">
@@ -8,7 +8,7 @@
         <span *ngIf="formErrors.tentailieu" class="alert-danger">{{formErrors.tentailieu}}</span>
       </div>
     </div>
-    <div class="form-group row mx-0">
+    <div class="form-group row mx-0" *ngIf="!disabled">
       <label class="col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.tailieu.sobanchinh" | translate}}
       </label>
       <div class="col-sm-8">
@@ -16,7 +16,7 @@
         <span *ngIf="formErrors.sobanchinh" class="alert-danger">{{formErrors.sobanchinh}}</span>
       </div>
     </div>
-    <div class="form-group row mx-0">
+    <div class="form-group row mx-0" *ngIf="!disabled">
       <label class="col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.tailieu.sobansao" | translate}}</label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="sobansao" placeholder="{{'DANGKYHOATDONGKHOANGSAN.tailieu.sobansaoPlaceholder' | translate}}" />
@@ -25,11 +25,16 @@
     </div>
     <div class="form-group row mx-0">
       <label class="col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.tailieu.filedinhkem" | translate}}</label>
-      <div class="col-sm-8">
+      <div class="col-sm-8" style="padding-top: 5px;">
         <input type="file" #fileInput id="uploadId" (change)="fileProgress($event)"/>
+        <div style="margin-top: 10px;" *ngIf="obj && obj.duongdan && obj.filedinhkem">
+          <a href="javascript:void(0)">{{obj.filedinhkem}}
+            <i class="fa fa-trash" *ngIf="purpose && purpose !== 'upload'"></i>
+          </a>
+        </div>
       </div>
     </div>
-    <div class="form-group row mx-0">
+    <div class="form-group row mx-0" *ngIf="!disabled">
       <label class="col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.tailieu.thutu" | translate}}</label>
       <div class="col-sm-8">
         <input class="form-control" type="text" formControlName="thutu" placeholder="{{'DANGKYHOATDONGKHOANGSAN.tailieu.thutuPlaceholder' | translate}}" />

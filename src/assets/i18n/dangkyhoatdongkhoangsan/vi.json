@@ -97,6 +97,9 @@
     "differentTitleEdit": "Sửa dữ liệu tài liệu khác",
     "processedTitleAdd": "Thêm mới tài liệu xử lý hồ sơ",
     "processedTitleEdit": "Sửa dữ liệu tài liệu xử lý hồ sơ",
+    "requiredUploadFile": "Upload file tài liệu bắt buộc",
+    "differentUploadFile": "Upload file tài liệu khác",
+    "processedUploadFile": "Upload file tài liệu xử lý hồ sơ",
     "contentDelete": "Tài liệu: ",
     "tentailieu": "Tên tài liệu",
     "sobanchinh": "Số bản chính",
@@ -111,6 +114,7 @@
     "sobanchinhIsNumber": "Số bản chính phải là kiểu số",
     "sobansaoIsNumber": "Số bản sao phải là kiểu số",
     "thutuIsNumber": "Thứ tự phải là kiểu số",
+    "informedNotExistedTaiLieu": "Tài liệu không tồn tại",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
     "confirmedContentOfRequiredRecordUpdateDialog": "Bạn có muốn bổ sung tài liệu bắt buộc không?"
   }
