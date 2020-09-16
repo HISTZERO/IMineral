@@ -1,12 +1,27 @@
-<div class="container-fluid">
+<div class="container-fluid content-wrapper">
+  <h3 class="text-center mb-3 text-bold">{{ 'THIETLAP.cauhinhtailieu.titleCauHinhTaiLieu' | translate}}</h3>
   <div class="row">
     <div class="col-5">
-      <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSelection]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedLoaiTaiLieu()" (rowDeselected)="rowSelectedLoaiTaiLieu()" class="table-striped">
-        <e-columns>
-          <e-column field="tenloaitailieu" headerText="Loại tài liệu" [customAttributes]="{class: 'gridloaitailieu-tenloaitailieu'}"></e-column>
-          <e-column type="checkbox" isPrimaryKey='true' [customAttributes]="{class: 'gridloaitailieu-checkbox'}"></e-column>
-        </e-columns>
-      </ejs-grid>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="m-0">{{ 'THIETLAP.cauhinhtailieu.titleDsLoaiTaiLieu' | translate}}</h4>
+        </div>
+        <div class="card-body">
+          <ejs-grid #gridLoaiTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listLoaitaiLieu" [allowTextWrap]="true"
+            [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true"
+            [allowSelection]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
+            [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedLoaiTaiLieu()"
+            (rowDeselected)="rowSelectedLoaiTaiLieu()" class="table-striped">
+            <e-columns>
+              <e-column field="tenloaitailieu" headerText="{{ 'THIETLAP.cauhinhtailieu.loaitailieu' | translate}}"
+                [customAttributes]="{class: 'gridloaitailieu-tenloaitailieu'}"></e-column>
+              <e-column type="checkbox" isPrimaryKey='true' [customAttributes]="{class: 'gridloaitailieu-checkbox'}">
+              </e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+
+      </div>
     </div>
     <div class="col-1 text-center">
       <div class="d-inline-flex flex-column mt-5">
@@ -19,15 +34,40 @@
       </div>
     </div>
     <div class="col-6">
-      <button (click)="getAllDataCauHinh()">Save</button>
-      <ejs-grid #gridCauHinhTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listCauHinhTaiLieu" [allowTextWrap]="true"  [textWrapSettings]='wrapSettings' [editSettings]="editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedCauHinhTaiLieu()" (rowDeselected)="rowSelectedCauHinhTaiLieu()"  class="table-striped">
-        <e-columns>
-          <e-column field="tenloaitailieu" headerText="Loại tài liệu" isPrimaryKey='true' [customAttributes]="{class: 'gridcauhinhtailieu-tenloaitailieu'}"></e-column>
-          <e-column field="sobanchinh" editType='numericedit' headerText="Số bản chính"></e-column>
-          <e-column field="sobansao" editType='numericedit' headerText="Số bản sao"></e-column>
-          <e-column type="checkbox" [allowEditing]='false' [customAttributes]="{class: 'gridcauhinhtailieu-checkbox'}"></e-column>
-        </e-columns>
-      </ejs-grid>
+      <div class="card">
+        <div class="card-header">
+          <h4 class="m-0">
+            <div class="row">
+              <div class="col-md-7 mb-sm-1">
+                <span class="title">{{ 'THIETLAP.cauhinhtailieu.titleDsCauHinhTaiLieu' | translate}}</span>
+              </div>
+              <div class="col-md-5">
+                <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="getAllDataCauHinh()">
+                  {{ 'THIETLAP.cauhinhtailieu.save' | translate}}
+                </button>
+              </div>
+            </div>
+          </h4>
+        </div>
+        <div class="card-body">
+          <ejs-grid #gridCauHinhTaiLieu *ngIf="listLoaitaiLieu" [dataSource]="listCauHinhTaiLieu" [allowTextWrap]="true"
+            [textWrapSettings]='wrapSettings' [editSettings]="editSettings" [allowPaging]="true" [allowSorting]="true"
+            [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true'
+            (rowSelected)="rowSelectedCauHinhTaiLieu()" (rowDeselected)="rowSelectedCauHinhTaiLieu()"
+            class="table-striped">
+            <e-columns>
+              <e-column field="tenloaitailieu" headerText="{{ 'THIETLAP.cauhinhtailieu.loaitailieu' | translate}}"
+                isPrimaryKey='true' [customAttributes]="{class: 'gridcauhinhtailieu-tenloaitailieu'}"></e-column>
+              <e-column field="sobanchinh" editType='numericedit'
+                headerText="{{ 'THIETLAP.cauhinhtailieu.sobanchinh' | translate}}"></e-column>
+              <e-column field="sobansao" editType='numericedit'
+                headerText="{{ 'THIETLAP.cauhinhtailieu.loaitailieu' | translate}}"></e-column>
+              <e-column type="checkbox" [allowEditing]='false'
+                [customAttributes]="{class: 'gridcauhinhtailieu-checkbox'}"></e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+      </div>
     </div>
   </div>
 </div>

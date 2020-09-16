@@ -181,8 +181,8 @@ export class CauhinhtailieuListComponent implements OnInit {
   /**
    * Hàm mở dialog
    */
-  public showMatDialog() {
-    this.mDialog.setDialog(this, CauhinhtailieuIoComponent, "", "closeMatDialog", "", "80%", "80%");
+  public showMatDialog(loaicapphep: string) {
+    this.mDialog.setDialog(this, CauhinhtailieuIoComponent, "", "closeMatDialog", loaicapphep, "80%", "80%");
     this.mDialog.open();
   }
 

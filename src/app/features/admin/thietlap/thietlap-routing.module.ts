@@ -9,7 +9,7 @@ const thietlapRoutes: Routes = [
   {
     path: "",
     children: [
-      { path: "", component: ThietlaphethongListComponent},
+      { path: AdminRoutingName.ThietLapHeThong, component: ThietlaphethongListComponent},
       { path: AdminRoutingName.CauHinhTaiLieu, component: CauhinhtailieuListComponent}
     ],
   },
