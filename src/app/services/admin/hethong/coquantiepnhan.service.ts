@@ -19,7 +19,7 @@ export class HsCoquantiepnhanService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputHsCoQuanTiepNhanModel(),
       outputModelName: new OutputHsCoQuanTiepNhanModel(),
-      apiUrl: environment.apiIMineral + ServiceName.CoQuanTiepNhan
+      apiUrl: environment.apiIMineral + ServiceName.COQUANTIEPNHAN
     });
   }
 

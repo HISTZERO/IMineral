@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav, MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
@@ -26,7 +26,6 @@ export class CauhinhtailieuListComponent implements OnInit {
   // Viewchild template
   @ViewChild("gridCauHinhTaiLieu", { static: false }) public gridCauHinhTaiLieu: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compCauHinhTaiLieuIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -191,6 +190,7 @@ export class CauhinhtailieuListComponent implements OnInit {
    */
   closeMatDialog() {
     this.imDialog.closeAll();
+    this.getAllLoaiCapPhep();
   }
 
 
