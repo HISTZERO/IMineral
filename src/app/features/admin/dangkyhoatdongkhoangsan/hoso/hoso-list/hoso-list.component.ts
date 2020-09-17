@@ -111,11 +111,12 @@ export class HosoListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan) {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan 
+        || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
-      // await this.getDataTranslate();
+      await this.getDataTranslate();
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
