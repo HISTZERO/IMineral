@@ -2,7 +2,7 @@ import { HttpErrorResponse } from "@angular/common/http";
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { EditService, EditSettingsModel, GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { EditSettingsModel, GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import * as cloneDeep from "lodash.cloneDeep";
 
 import { OutputDmLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
@@ -42,9 +42,6 @@ export class CauhinhtailieuIoComponent implements OnInit {
 
   // Chứa danh sách cấu hình tài liệu đã chọn
   public listCauHinhTaiLieuSelected: any;
-
-  // Chứa dữ liệu đã chọn 
-  public selectedItem: OutputDmLoaiTaiLieuModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

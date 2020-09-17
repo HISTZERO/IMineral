@@ -352,6 +352,11 @@ export class SidenavComponent implements OnInit {
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CauHinhTaiLieu}`,
           faIcon: "fas fa-cog",
         },
+        {
+          label: "Cấu hình cơ quan tiếp nhận",
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CoQuanTiepNhan}`,
+          faIcon: "fas fa-cog",
+        },
       ],
     },
     {
