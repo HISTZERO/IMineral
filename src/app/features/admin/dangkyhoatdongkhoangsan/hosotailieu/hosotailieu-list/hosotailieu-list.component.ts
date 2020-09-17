@@ -6,7 +6,7 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
@@ -34,6 +34,8 @@ export class HosotailieuListComponent implements OnInit {
   @ViewChild("comptailieuio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // tslint:disable-next-line: no-input-rename
+  @Input("disabledMatsidenav") disabledMatsidenav = false;
   // Chứa dữ liệu nhóm tài liệu
   // tslint:disable-next-line: no-input-rename
   @Input("nhomTaiLieu") nhomTaiLieu: number;
@@ -85,13 +87,18 @@ export class HosotailieuListComponent implements OnInit {
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService,
               public commonFacadeService: CommonFacadeService,
-              public router: Router
+              public router: Router,
+              private activatedRoute: ActivatedRoute
   ) {
 
     this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
   }
 
   async ngOnInit() {
+    this.activatedRoute.queryParamMap.subscribe((param: any) => {
+      this.idhoso = param.params.idhoso;
+    });
+
     // Gọi hàm lấy dữ liệu translate
     this.getDataTranslate();
     // Thiết lập hiển thị checkbox trên grid
@@ -184,6 +191,8 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm mở sidenav chức năng thêm mới
    */
   public openTaiLieuIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
@@ -211,11 +220,8 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
-    if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
-        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      return;
-    }
-
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
@@ -253,6 +259,8 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 

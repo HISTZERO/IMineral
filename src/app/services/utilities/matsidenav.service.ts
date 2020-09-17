@@ -24,6 +24,13 @@ export class MatsidenavService {
     this.parentComp = parentComp;
   }
 
+  public clearSidenav() {
+    this.sidenav = null;
+    this.vcf = null;
+    this.cfr = null;
+    this.parentComp = null;
+  }
+
   public open(): void {
     this.sidenav.open();
   }

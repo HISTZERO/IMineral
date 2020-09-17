@@ -1,9 +1,11 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { ActivatedRoute } from '@angular/router';
 import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { HosotailieuListComponent } from '../../hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { TranslateService } from '@ngx-translate/core';
+import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -11,6 +13,8 @@ import { TranslateService } from '@ngx-translate/core';
   styleUrls: ['./thamdokhoangsan-io.component.scss']
 })
 export class ThamdokhoangsanIoComponent implements OnInit {
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
@@ -52,7 +56,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   };
 
 
-  constructor(private activatedRoute: ActivatedRoute,
+  constructor(public matSidenavService: MatsidenavService,
+              private activatedRoute: ActivatedRoute,
               private translate: TranslateService) { }
 
   async ngOnInit() {
@@ -120,16 +125,26 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     this.idhoso = id;
   }
 
+  closeIOSidenav() {
+    this.matSidenavService.close();
+  }
+
   async tabChange(index: any) {
     if (index === ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem]) {
+      this.taiLieuBatBuocListComp.matSidenav = this.matSidenav;
+      this.taiLieuBatBuocListComp.content = this.content;
       this.taiLieuBatBuocListComp.idhoso = this.idhoso;
       this.taiLieuBatBuocListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredTitleList;
       const loadedTaiLieuBatBuocState =  await this.taiLieuBatBuocListComp.manualDataInit();
+      this.taiLieuKhacListComp.matSidenav = this.matSidenav;
+      this.taiLieuKhacListComp.content = this.content;
       this.taiLieuKhacListComp.idhoso = this.idhoso;
       this.taiLieuKhacListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleList;
       const loadedTaiLieuKhacState =  await this.taiLieuKhacListComp.manualDataInit();
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = loadedTaiLieuBatBuocState || loadedTaiLieuKhacState;
     } else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
+      this.taiLieuXuLyHoSoListComp.matSidenav = this.matSidenav;
+      this.taiLieuXuLyHoSoListComp.content = this.content;
       this.taiLieuXuLyHoSoListComp.idhoso = this.idhoso;
       this.taiLieuXuLyHoSoListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleList;
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualDataInit();
