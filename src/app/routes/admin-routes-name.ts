@@ -90,4 +90,5 @@ export class AdminRoutingName {
   // 1.11 Routes phần thăm dò khoáng sản
   public static thamdokhoangsanUri = "thamdokhoangsan";
   public static thamdokhoangsanchitietUri = "thamdokhoangsanchitiet";
+  public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
 }

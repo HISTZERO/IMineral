@@ -8,6 +8,15 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thonTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "khaithackhoangsan": {
+    "titleList": "Danh sách hồ sơ đăng ký khai thác khoáng sản",
+    "titleAdd": "Thêm mới hồ sơ đăng ký khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký khai thác khoáng sản",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
   "hoso": {
     "titleList": "Danh sách hồ sơ",
     "titleAdd": "Thêm mới hồ sơ",
