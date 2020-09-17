@@ -241,13 +241,14 @@ export class HosotailieuIoComponent implements OnInit {
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
           const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
-          dkhdksService.removeFileHsTaiLieu(this.obj.idtailieu).subscribe(
+          dkhdksService.removeFileHsTaiLieu({ idtailieu: this.obj.idtailieu }).subscribe(
             (res) => {
               this.obj.duongdan = "";
               this.obj.filedinhkem = "";
+              this.matSidenavService.doParentFunction("getAllTaiLieu");
             },
             (error: HttpErrorResponse) => {
-              this.commonService.showDialogWarning(error.error.errors);
+              this.commonService.showDialogWarning(error.error);
             },
             () =>
               this.commonService.showeNotiResult(
