@@ -1,12 +1,14 @@
-import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { DatePipe } from '@angular/common';
 import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { Observable } from "rxjs";
-import { MatSidenav, MatDialog } from "@angular/material";
+import { MatDialog } from "@angular/material";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { Router } from "@angular/router";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputHsHoSoModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -14,11 +16,10 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { Router } from "@angular/router";
 import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { RoutingNameChiTietDangKyHoatDongKS } from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-hoso-list',
@@ -210,7 +211,7 @@ export class HosoListComponent implements OnInit {
    */
   addItemHoSo() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanchitietUri}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${RoutingNameChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`]);
   }
 
   /**
@@ -219,8 +220,8 @@ export class HosoListComponent implements OnInit {
    */
   async editItemHoSo(id: any) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanchitietUri}`],
-        { queryParams: { idhoso: id}});
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${RoutingNameChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`],
+      { queryParams: { idhoso: id } });
   }
 
   /**
