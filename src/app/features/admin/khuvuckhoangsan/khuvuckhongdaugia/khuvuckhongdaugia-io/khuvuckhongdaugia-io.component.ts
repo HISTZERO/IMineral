@@ -37,10 +37,10 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
-  // Chứa danh sách Lĩnh Vực
+  // Chứa danh sách hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
-  // Filter Lĩnh Vực
+  // Filter hệ quy chiếu
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
 
   // error message
@@ -62,12 +62,12 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-    public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
-    private formBuilder: FormBuilder,
-    public commonService: CommonServiceShared,
-    private translate: TranslateService,
-    public dmFacadeService: DmFacadeService,
-    public datePipe: DatePipe
+              public khuVucKhoangSanFacadeService: KhuVucKhoangSanFacadeService,
+              private formBuilder: FormBuilder,
+              public commonService: CommonServiceShared,
+              private translate: TranslateService,
+              public dmFacadeService: DmFacadeService,
+              public datePipe: DatePipe
     ) { }
 
   async ngOnInit() {
@@ -238,7 +238,7 @@ export class KhuvuckhongdaugiaIoComponent implements OnInit {
     }
   }
 
-  
+
 
   /**
    * hàm kiểm tra validation form

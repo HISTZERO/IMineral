@@ -8,6 +8,13 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thonTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "thongtindangky": {
+    "thongTinChiTietTabTitle": "Thông tin chi tiết",
+    "donViHanhChinhTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanTabTile": "Loại khoáng sản",
+    "khuVucThamDoTabTile": "Khu vực thăm dò",
+    "congTrinhThamDoTabTitle": "Công trình thăm dò"
+  },
   "khaithackhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký khai thác khoáng sản",
     "titleAdd": "Thêm mới hồ sơ đăng ký khai thác khoáng sản",
@@ -126,5 +133,36 @@
     "informedNotExistedTaiLieu": "Tài liệu không tồn tại",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
     "confirmedContentOfRequiredRecordUpdateDialog": "Bạn có muốn bổ sung tài liệu bắt buộc không?"
+  },
+  "dangkythamdokhoangsan": {
+    "titleAdd": "Thêm mới đăng ký thăm dò khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký thăm dò khoáng sản",
+    "diadiem": "Địa điểm",
+    "dientichthamdo": "Diện tích thăm dò",
+    "chieusauthamdotu": "Chiều sâu thăm dò từ",
+    "chieusauthamdoden": "Chiều sâu thăm dò đến",
+    "thoihanthamdo": "Thời hạn thăm dò",
+    "mucdichsudungkhoangsan": "Mục đích sử dụng khoáng sản",
+    "dangkhoangsan": "Dạng khoáng sản",
+    "donvidientich": "Đơn vị diện tích",
+    "donvithoihan": "Đơn vị thời hạn",
+    "donvichieusau": "Đơn vị chiều sâu",
+    "hequychieu": "Hệ quy chiếu",
+    "chondangkhoangsan": "---Chọn dạng khoáng sản---",
+    "chonhequychieu": "---chọn hệ quy chiếu---",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichthamdoRequired": "Diện tích thăm dò không được để trống",
+    "dientichthamdoFormat": "Diện tích thăm dò chưa đúng định dạng yêu cầu",
+    "chieusauthamdotuRequired": "Chiều sâu thăm dò từ không được để trống",
+    "chieusauthamdotuFormat": "chiều sâu thăm dò từ chưa đúng định dạng yêu cầu",
+    "chieusauthamdodenRequired": "Chiều sâu thăm dò đến không được để trống",
+    "chieusauthamdodenFormat": "chiều sâu thăm dò đến chưa đúng định dạng yêu cầu",
+    "thoihanthamdoRequired": "Thời hạn thăm dò không được để trống",
+    "mucdichsudungkhoangsanRequired": "Mục đích sử dụng không được để trống",
+    "dangkhoangsanRequired": "Dạng khoáng sản không được để trống",
+    "donvidientichRequired": "Đơn vị điện tích không được để trống",
+    "donvithoihanRequired": "Đơn vị thời hạn không được để trống",
+    "donvichieusauRequired": "Đơn vị chiều sâu không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống"
   }
 }

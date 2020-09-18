@@ -31,7 +31,7 @@ export const LoaiGiayTo = [
         name: "Đăng ký kinh doanh"
     },
     {
-        id: 6, 
+        id: 6,
         name: "Chứng nhận đầu tư"
     }
 ];

@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua } from 'src/app/shared/constants/common-constants';
+import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
@@ -46,7 +46,7 @@ export class HosoIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
   // Chứa dữ liệu loại đối tượng
-  public loaiDoiTuongList = LoaiDoiTuong;
+  public dangKhoangSanList = DangKhoangSan;
   // Chứa dữ liệu loại giấy tờ
   public loaiGiayToList = LoaiGiayTo;
   public loaiGiayToFilters = LoaiGiayTo;
