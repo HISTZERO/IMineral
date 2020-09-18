@@ -155,7 +155,7 @@ export class DonvihanhchinhListComponent implements OnInit {
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemLinhvuc(data) {
+  async deleteItemDangKyThamDoDvhc(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
@@ -190,7 +190,7 @@ export class DonvihanhchinhListComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyThamDoDvhcService()
-          .deleteItem({ idlinhvuc: this.selectedItem.idthamdodvhc })
+          .deleteItem({ idthamdodvhc: this.selectedItem.idthamdodvhc })
           .subscribe(
             () => this.getAllDangKyThamDoDvhc(),
             (error: HttpErrorResponse) => {
