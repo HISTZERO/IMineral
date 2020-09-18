@@ -217,6 +217,9 @@
     "tentinh": "Tên tỉnh",
     "tenhuyen": "Tên huyện",
     "tenxa": "Tên xã",
+    "matinhRequired": "Yêu cầu phải chọn tỉnh",
+    "mahuyenRequired": "Yêu cầu phải chọn huyện",
+    "maxaRequired": "Yêu cầu phải chọn xã",
     "informedNotExistedDangKyThamDoDvhc": "Đăng ký thăm dò đợn vị hành chính không tồn tại"
   }
 }
