@@ -154,8 +154,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       this.taiLieuXuLyHoSoListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleList;
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualDataInit();
     } else if (index === ThamDoKhoangSanTabEnum.ThongTinDangKy && !this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy]) {
-      // this.thongTinDangKyComp.matSidenav = this.matSidenav;
-      // this.thongTinDangKyComp.content = this.content;
+      this.thongTinDangKyComp.matSidenav = this.matSidenav;
+      this.thongTinDangKyComp.content = this.content;
       this.thongTinDangKyComp.idhoso = this.idhoso;
       this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinDangKyComp.manualDataInit();
     }

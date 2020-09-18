@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
@@ -19,8 +19,8 @@ export const DangKyThamDoKhoangSanComponent: any = {
 })
 export class ThongtindangkyComponent implements OnInit {
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
-  // @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  // @ViewChild("comp", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ thông tin đăng ký tab

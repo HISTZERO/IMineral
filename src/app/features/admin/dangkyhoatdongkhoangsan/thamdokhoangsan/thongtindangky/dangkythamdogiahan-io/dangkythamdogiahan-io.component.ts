@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
@@ -12,6 +12,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViDienTich } from 'src/app/shared/constants/common-constants';
+import { MatSidenav } from '@angular/material';
 
 
 @Component({
@@ -20,6 +21,8 @@ import { DangKhoangSan, DonViDienTich } from 'src/app/shared/constants/common-co
   styleUrls: ['./dangkythamdogiahan-io.component.scss']
 })
 export class DangkythamdogiahanIoComponent implements OnInit {
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
