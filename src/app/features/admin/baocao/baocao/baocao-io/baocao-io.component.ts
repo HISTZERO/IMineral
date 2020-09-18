@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { DatePipe } from "@angular/common";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
@@ -110,6 +110,7 @@ export class BaocaoIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tenbaocao: { required: this.dataTranslate.BAOCAO.baocao.tenbaocaoRequired }
     };
   }
 
@@ -147,7 +148,7 @@ export class BaocaoIoComponent implements OnInit {
   formInit() {
     this.baoCaoIOForm = this.formBuilder.group({
       sobaocao: [""],
-      tenbaocao: [""],
+      tenbaocao: ["", Validators.required],
       diadiem: [""],
       ngaybaocao: [""],
       idloaibaocao: [""],
@@ -277,7 +278,7 @@ export class BaocaoIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

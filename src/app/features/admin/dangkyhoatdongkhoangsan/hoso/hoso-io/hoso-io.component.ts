@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua } from 'src/app/shared/constants/common-constants';
+import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
@@ -46,7 +46,7 @@ export class HosoIoComponent implements OnInit {
   // Chứa dữ liệu translate
   public dataTranslate: any;
   // Chứa dữ liệu loại đối tượng
-  public loaiDoiTuongList = LoaiDoiTuong;
+  public dangKhoangSanList = DangKhoangSan;
   // Chứa dữ liệu loại giấy tờ
   public loaiGiayToList = LoaiGiayTo;
   public loaiGiayToFilters = LoaiGiayTo;
@@ -106,15 +106,23 @@ export class HosoIoComponent implements OnInit {
               public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
+    // Khởi tạo form
+    this.formInit();
+    // Lấy dữ liệu translate
+    await this.getDataTranslate();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // Lấy dữ liệu loại cấp phép
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
   /**
    * Khởi tạo form
    */
-  async manualInit() {
+  async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
       this.idhoso = param.params.idhoso;
     });
@@ -125,13 +133,6 @@ export class HosoIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
     }
 
-    // Khởi tạo form
-    this.formInit();
-    // Lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
     // Lấy dữ liệu cơ quan tiếp nhận
     await this.getCoQuanTiepNhanAll();
@@ -174,7 +175,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * hàm lấy dữ liệu translate
    */
-  public async getDataTranslate() {
+  async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
@@ -338,7 +339,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Hàm reset form, gọi khi nhấn nút reset dữ liệu
    */
-  public onFormReset() {
+  onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.hosoIOForm.reset();
     this.hosoIOForm.controls.loaidoituong.setValue(LoaiDoiTuongEnum.ToChuc);
@@ -352,7 +353,7 @@ export class HosoIoComponent implements OnInit {
    /**
     * Hàm mở sidenav
     */
-  public openIOSidenav() {
+  openIOSidenav() {
     const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
 
     if (loaiDoiTuong === LoaiDoiTuongEnum.CaNhan) {
@@ -395,7 +396,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Thay đổi loại đối tượng trên form
    */
-  public selectLoaiDoiTuongChange() {
+  selectLoaiDoiTuongChange() {
     this.hosoIOForm.controls.idcanhantochuc.setValue("");
     this.hosoIOForm.controls.tencanhantochuc.setValue("");
   }
@@ -418,7 +419,7 @@ export class HosoIoComponent implements OnInit {
   /**
    * Hàm đóng sidenav
    */
-  public closeIOSidenav() {
+  closeIOSidenav() {
     this.matSidenavService.close();
   }
 

@@ -6,6 +6,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSidenav } from "@angular/material/sidenav";
 
@@ -15,12 +16,6 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { OutputThietLapHeThongModel } from "src/app/models/admin/thietlap/thietlap-hethong.model";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { ThietlaphethongIoComponent } from "src/app/features/admin/thietlap/thietlaphethong/thietlaphethong-io/thietlaphethong-io.component";
-import {
-  _addSettingAction,
-  _listSettingAction,
-  _editSettingAction,
-  _deleteSettingAction,
-} from "src/app/shared/constants/actions/thietlap/setting";
 import { MenuThietLapHeThong } from "src/app/shared/constants/sub-menus/thietlap/thietlaphethong";
 
 @Component({
@@ -29,26 +24,26 @@ import { MenuThietLapHeThong } from "src/app/shared/constants/sub-menus/thietlap
   styleUrls: ["./thietlaphethong-list.component.scss"],
 })
 export class ThietlaphethongListComponent implements OnInit {
+
+  // Viewchild tempalte
+  @ViewChild('grid', { static: false }) public grid: GridComponent;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compThietLapHTio", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("compThietLapHTio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
+  // Chứa cấu hình setting grid
   public settingsCommon = new SettingsCommon();
-  public listThietLapHT: OutputThietLapHeThongModel[];
-  public selectedItem: OutputThietLapHeThongModel;
-  public listData: any;
-  public pageSize: any;
 
+  // Chứa danh sách thiết lập
+  public listThietLapHT: OutputThietLapHeThongModel[];
+
+  // Chứa item đã chọn
+  public selectedItem: OutputThietLapHeThongModel;
+
+  // Chứa dữ liệu menu item trên subheader
   public navArray = MenuThietLapHeThong;
 
-  // Danh sách các quyền
-  addSettingAction = _addSettingAction;
-  listSettingAction = _listSettingAction;
-  editSettingAction = _editSettingAction;
-  deleteSettingAction = _deleteSettingAction;
-
   // Biến dùng translate
-  dataTranslate: any;
+  public dataTranslate: any;
 
   // Hàm constructor phải bắt buộc có hai biến là MatSidenavService và ComponentFactoryResolver để Init MatsidenavService
   constructor(
@@ -63,47 +58,57 @@ export class ThietlaphethongListComponent implements OnInit {
    * Khi khởi tạo component cha phải gọi setSidenave để khỏi tạo Sidenav
    */
   async ngOnInit() {
+    // Set thuộc tính sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
     // Lấy dữ liệu biến translate để gán vào các biến trong component
+    await this.getDataTranslate();
+
+    // Lấy dữ liệu truyền vào ejs grid tạo bảng
+    await this.getPagesize();
+
+  }
+
+  /**
+   * Lấy dữ liệu translate
+   */
+  async getDataTranslate() {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
-
-    // Lấy dữ liệu truyền vào ejs grid tạo bảng
-    this.getPagesize();
-
-    this.matSidenavService.setSidenav(
-      this.matSidenav,
-      this,
-      this.content,
-      this.cfr
-    );
-    this.settingsCommon.toolbar = ["Search"];
   }
 
   /**
    * Lấy pageSize trong bảng setting theo defaultPageSize
    */
   async getPagesize() {
-    this.pageSize = await this.thietLapFacadeService
+    const dataPageSize = await this.thietLapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
-    this.settingsCommon.pageSettings["pageSize"] = +this.pageSize;
-    this.getAllThietLapHeThong();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
+    if (dataPageSize) {
+      this.settingsCommon.pageSettings["pageSize"] = +dataPageSize.settingValue;
+    } else {
+      this.settingsCommon.pageSettings["pageSize"] = 10;
+    }
+
+    // Gọi hàm lấy dữ liệu thiết lập
+    await this.getAllThietLapHeThong();
   }
 
   /**
    * Hàm getAll Setting để binding dữ liệu lên EJS grid
    */
   async getAllThietLapHeThong() {
-    this.listData = await this.thietLapFacadeService
+    const listData: any = await this.thietLapFacadeService
       .getThietLapHeThongService()
       .getFetchAll();
-    if (this.listData) {
-      this.listData.map((thietlap, index) => {
+    if (listData) {
+      listData.map((thietlap, index) => {
         thietlap.serialNumber = index + 1;
       });
     }
-    this.listThietLapHT = this.listData;
+
+    this.listThietLapHT = listData;
   }
 
   /**
@@ -145,7 +150,7 @@ export class ThietlaphethongListComponent implements OnInit {
       if (result === "confirm") {
         await this.thietLapFacadeService
           .getThietLapHeThongService()
-          .deleteItem({ id: this.selectedItem.id })
+          .deleteItem({ idSettings: this.selectedItem.id })
           .subscribe(
             () => this.getAllThietLapHeThong(),
             (error: HttpErrorResponse) => {
@@ -153,7 +158,7 @@ export class ThietlaphethongListComponent implements OnInit {
             },
             () =>
               this.commonService.showeNotiResult(
-                this.dataTranslate.COMMON.default.successDelete + this.selectedItem.settingKey,
+                this.dataTranslate.COMMON.default.successDelete + " " + this.selectedItem.settingKey,
                 2000
               )
           );
@@ -176,11 +181,7 @@ export class ThietlaphethongListComponent implements OnInit {
   public editItemThietLapHT(data) {
     this.selectedItem = data;
     this.matSidenavService.setTitle(this.dataTranslate.THIETLAP.thietlaphethong.titleEdit);
-    this.matSidenavService.setContentComp(
-      ThietlaphethongIoComponent,
-      "edit",
-      this.selectedItem
-    );
+    this.matSidenavService.setContentComp(ThietlaphethongIoComponent, "edit", this.selectedItem);
     this.matSidenavService.open();
   }
 

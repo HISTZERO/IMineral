@@ -1,12 +1,12 @@
 import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
-import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, QueryCellInfoEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { Router } from "@angular/router";
+import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
@@ -16,6 +16,9 @@ import { HosotailieuIoComponent } from "src/app/features/admin/dangkyhoatdongkho
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { FileService } from 'src/app/services/admin/common/file.service';
+import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
 
 
 @Component({
@@ -31,6 +34,8 @@ export class HosotailieuListComponent implements OnInit {
   @ViewChild("comptailieuio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // tslint:disable-next-line: no-input-rename
+  @Input("disabledMatsidenav") disabledMatsidenav = false;
   // Chứa dữ liệu nhóm tài liệu
   // tslint:disable-next-line: no-input-rename
   @Input("nhomTaiLieu") nhomTaiLieu: number;
@@ -64,6 +69,15 @@ export class HosotailieuListComponent implements OnInit {
   // Id Hồ sơ
   public idhoso: string;
 
+  // disable delete button
+  public disableDeleteButton = false;
+
+  // Chứa danh sách item đã chọn
+  public listDataSelect: any[];
+
+  // nhóm tài liệu enum
+  public nhomTaiLieuEnum = NhomTaiLieuEnum;
+
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
               public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
@@ -72,15 +86,27 @@ export class HosotailieuListComponent implements OnInit {
               private translate: TranslateService,
               public formBuilder: FormBuilder,
               public generalClientService: GeneralClientService,
-              public router: Router
+              public commonFacadeService: CommonFacadeService,
+              public router: Router,
+              private activatedRoute: ActivatedRoute
   ) {
 
     this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
   }
 
   async ngOnInit() {
+    this.activatedRoute.queryParamMap.subscribe((param: any) => {
+      this.idhoso = param.params.idhoso;
+    });
+
+    // Gọi hàm lấy dữ liệu translate
+    this.getDataTranslate();
+    // Thiết lập hiển thị checkbox trên grid
+    await this.setDisplayOfCheckBoxkOnGrid(true);
+    // Gọi hàm lấy dữ liệu pagesize
+
     if (this.allowAutoInit) {
-      await this.manualInit();
+      await this.manualDataInit();
     }
   }
 
@@ -92,6 +118,18 @@ export class HosotailieuListComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+  }
+
+  /**
+   * Hàm thiết lập hiển thị hoặc ẩn checkbox trên grid
+   */
+
+  async setDisplayOfCheckBoxkOnGrid(status: boolean = false) {
+    if (status) {
+      this.settingsCommon.selectionOptions = { persistSelection: true };
+    } else {
+      this.settingsCommon.selectionOptions = null;
+    }
   }
 
   /**
@@ -110,14 +148,22 @@ export class HosotailieuListComponent implements OnInit {
     this.getAllTaiLieu();
   }
 
-  async manualInit() {
-    // Gọi hàm lấy dữ liệu translate
-    await this.getDataTranslate();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Gọi hàm lấy dữ liệu pagesize
+  async manualDataInit() {
     await this.getDataPageSize();
     return true;
+  }
+
+  /**
+   * Hàm lấy danh sách dữ liệu đã chọn trên grid
+   */
+  public getAllDataActive() {
+    this.listDataSelect = this.griTaiLieu.getSelectedRecords();
+
+    if (this.listDataSelect.length > 0) {
+      this.disableDeleteButton = true;
+    } else {
+      this.disableDeleteButton = false;
+    }
   }
 
   /**
@@ -129,48 +175,216 @@ export class HosotailieuListComponent implements OnInit {
       idhoso: this.idhoso,
       nhomtailieu: this.nhomTaiLieu
     };
-    this.itemService.getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+    this.itemService.getHsTaiLieuPage({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   // When page item clicked
   public dataStateChange(state: DataStateChangeEventArgs): void {
-    this.itemService.getDataFromServer(state);
+    const searchModel = {
+      idhoso: this.idhoso,
+      nhomtailieu: this.nhomTaiLieu
+    };
+    this.itemService.getHsTaiLieuPage(state, searchModel);
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
   public openTaiLieuIOSidenav() {
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleAdd);
-    this.matSidenavService.setContentComp(HosotailieuIoComponent, "new");
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleAdd);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleAdd);
+    } else {
+      return;
+    }
+
+    const dataItem = {idhoso: this.idhoso, nhomtailieu: this.nhomTaiLieu};
+    this.matSidenavService.setContentComp(HosotailieuIoComponent, "new", dataItem);
     this.matSidenavService.open();
+  }
+
+  async uploadFileItemTaiLieu(idTaiLieu: string) {
+     // Lấy dữ liệu cá nhân theo id
+    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+      .getTaiLieuService()
+      .getByid(idTaiLieu).toPromise();
+
+    if (!dataItem) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      return;
+    }
+
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredUploadFile);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentUploadFile);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedUploadFile);
+    } else {
+      return;
+    }
+
+    await this.matSidenavService.setContentComp(HosotailieuIoComponent, "upload", dataItem);
+    await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemTaiLieu(id: any) {
+  async editItemTaiLieu(idTaiLieu: string) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getTaiLieuService()
-      .getByid(id).toPromise();
-    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleEdit);
+      .getByid(idTaiLieu).toPromise();
+
+    if (!dataItem) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      return;
+    }
+
+    if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
+        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      return;
+    }
+
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+
+    if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleEdit);
+    } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleEdit);
+    } else {
+      return;
+    }
+
     await this.matSidenavService.setContentComp(HosotailieuIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
+   * Update danh sách tài liệu bắt buộc
+   */
+
+  async updateHoSoCauHinhToHsTaiLieu() {
+    const idItems: string[] = [];
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfRequiredRecordUpdateDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
+        .updateHsCauHinhToHsTaiLieu({idhoso: this.idhoso})
+        .subscribe(
+          () => {
+            this.getAllTaiLieu();
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.successAdd,
+              2000
+        ));
+      }
+    });
+  }
+
+  /**
+   * Download tài liệu
+   */
+  async downloadTaiLieuHoSo(idTaiLieu: string) {
+    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+      .getTaiLieuService()
+      .getByid(idTaiLieu).toPromise();
+
+    if (!dataItem) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      return;
+    }
+
+    if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
+      await this.commonFacadeService.getFileService()
+                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem}).subscribe(
+                  (data) => {
+                    const localBlobData = new Blob([data], { type: 'application/octet-stream' });
+                    if (data) {
+                      const localDowloadLink = document.createElement('a');
+                      const localUrl = window.URL.createObjectURL(localBlobData);
+                      localDowloadLink.href = localUrl;
+                      localDowloadLink.setAttribute('download', dataItem.filedinhkem);
+                      document.body.appendChild(localDowloadLink);
+                      localDowloadLink.click();
+                      document.body.removeChild(localDowloadLink);
+                    }
+                  },
+                  (error: HttpErrorResponse) => {
+                    this.commonService.showDialogWarning(error.error.errors);
+                  }
+                );
+    } else {
+      this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.informedNotExistedFile);
+    }
+  }
+
+  /**
    * Hàm load lại dữ liệu grid
    */
-  public reloadDataGrid() {
+  reloadDataGrid() {
     this.getAllTaiLieu();
+  }
+
+  /**
+   * Hàm delete mảng item đã chọn
+   */
+  public deleteArrayItem() {
+    const idItems: string[] = [];
+    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfDeleteDialog);
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        this.listDataSelect.map(res => {
+          idItems.push(res.idtailieu);
+        });
+
+        const dataBody: any = {
+          list: idItems,
+        };
+
+        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
+        .deleteItemsTaiLieu(dataBody)
+        .subscribe(
+          () => {
+            this.getAllTaiLieu();
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          },
+          () =>
+            this.commonService.showeNotiResult(
+              this.dataTranslate.COMMON.default.successDelete,
+              2000
+        ));
+      }
+    });
   }
 
   /**
    * Hàm đóng sidenav
    */
-  public closeTaiLieuIOSidenav() {
+  closeTaiLieuIOSidenav() {
     this.matSidenavService.close();
   }
 
@@ -192,7 +406,7 @@ export class HosotailieuListComponent implements OnInit {
    * Hàm check điều kiện xóa bản ghi
    * @param sMsg
    */
-  public canBeDeletedCheck(sMsg: string) {
+  canBeDeletedCheck(sMsg: string) {
     if (sMsg === "ok") {
       this.confirmDeleteDiaLog();
     } else {
@@ -226,6 +440,16 @@ export class HosotailieuListComponent implements OnInit {
           );
       }
     });
+  }
+
+  // set id in coloumn
+  customiseCell(args: QueryCellInfoEventArgs) {
+    if (args.column.field === 'check') {
+      args.cell.classList.add('style-checkbox');
+    }
+    if (args.column.field === 'idtailieu') {
+      args.cell.classList.add('style-action');
+    }
   }
 
   /**

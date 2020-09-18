@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from "@ngx-translate/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { ActivatedRoute } from "@angular/router";
 
@@ -40,8 +40,9 @@ export class TailieudinhkemIoComponent implements OnInit {
   public fileData: File = null;
 
   // error message
-  validationErrorMessages = {};
+  public validationErrorMessages = {};
 
+  // Chứa tên file
   public fileName: string;
 
 
@@ -65,10 +66,10 @@ export class TailieudinhkemIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-    // Khởi tạo form theo dạng add or edit
-    await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+    // Khởi tạo form theo dạng add or edit
+    await this.bindingConfigAddOrUpdate();
 
   }
 
@@ -90,6 +91,8 @@ export class TailieudinhkemIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      tentailieu: { required: this.dataTranslate.BAOCAO.tailieudinhkem.tentailieuRequired },
+      thutu: { pattern: this.dataTranslate.BAOCAO.tailieudinhkem.thutuIsNumber }
     };
   }
 
@@ -108,8 +111,8 @@ export class TailieudinhkemIoComponent implements OnInit {
    */
   formInit() {
     this.tailieuIOForm = this.formBuilder.group({
-      tentailieu: [""],
-      thutu: [""],
+      tentailieu: ["", Validators.required],
+      thutu: ["", Validators.pattern("^[0-9-+]+$")],
     });
   }
 
@@ -121,7 +124,7 @@ export class TailieudinhkemIoComponent implements OnInit {
       this.fileName = this.obj.filedinhkem;
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
-        thutu: this.obj.thutu,
+        thutu: this.obj.thutu ? this.obj.thutu : "",
       });
     }
   }
@@ -150,19 +153,6 @@ export class TailieudinhkemIoComponent implements OnInit {
             2000
           )
       );
-      // await fileService.addItem(formData).subscribe(res => {
-      //   // Gán dữ liệu vào model
-      //   this.inputModel.filedinhkem = res.filedinhkem;
-      //   this.inputModel.dinhdang = res.dinhdang;
-      //   this.inputModel.dungluong = res.dungluong;
-      //   this.inputModel.duongdan = res.duongdan
-      //   this.inputModel.idbaocao = idbaocao;
-      //   // gọi api thêm item vào bảng tailieu
-
-      // },
-      // (error: HttpErrorResponse) => {
-
-      // });
     } else if (operMode === "edit") {
       const formData: FormData = new FormData();
       formData.append("File", this.fileData);
@@ -246,17 +236,6 @@ export class TailieudinhkemIoComponent implements OnInit {
       this.fileData = fileInput.target.files[0];
       this.fileName = this.fileData.name;
     }
-  }
-
-  /**
-   * Hàm hiển thị cảnh báo error
-   */
-  public showDialogWarning(error: any) {
-    // const dialog = this.modalDialog.open(MyAlertDialogComponent);
-    // dialog.componentInstance.header = this.dataTranslate.COMMON.default.warnings;
-    // dialog.componentInstance.content =
-    //   "<b>" + error + "</b>";
-    // dialog.componentInstance.visibleOkButton = false;
   }
 
   /**

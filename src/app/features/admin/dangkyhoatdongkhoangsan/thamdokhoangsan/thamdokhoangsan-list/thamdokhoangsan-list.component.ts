@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NhomLoaiCapPhep} from 'src/app/shared/constants/enum';
+import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
 import { MenuThamDoKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
 import { TranslateService } from '@ngx-translate/core';
 
@@ -10,7 +10,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 export class ThamdokhoangsanListComponent implements OnInit {
   // nhóm loại cấp phép enum
-  NhomLoaiCapPhepType = NhomLoaiCapPhep;
+  NhomLoaiCapPhepType = NhomLoaiCapPhepEnum;
 
   // title danh sách hồ sơ
   title: string;

@@ -213,11 +213,11 @@ export class DmLinhvucIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeCanhanIOSidenav() {
+  public closeLinhVucIOSidenav() {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

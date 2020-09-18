@@ -29,158 +29,158 @@ export class SidenavComponent implements OnInit {
   public QuantriList: any[] = [
     {
       label: "ĐĂNG KÝ HOẠT ĐỘNG",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       items: [
         {
           label: "Thăm dò khoáng sản",
-          faIcon: "",
-          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanUri}`,
+          faIcon: "far fa-th-list",
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanUri}`,
         },
         {
           label: "Phê duyệt trữ lượng khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Đấu giá quyền khai thác khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Khai thác khoáng sản",
-          faIcon: "",
-          link: ""
+          faIcon: "far fa-th-list",
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkKhaithackhoangsanUri}`,
         },
         {
           label: "Tận thu khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Trả lại giấy phép thăm do, khai thác",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Đóng cửa mỏ khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Chuyển nhượng quyền thăm dò, khai thác",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         }
       ]
     },
     {
       label: "CẤP PHÉP HOẠT ĐỘNG",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       items: [
         {
           label: "Thăm dò khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Phê duyệt trữ lượng khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Đấu giá quyền khai thác khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Khai thác khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Tận thu khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Trả lại giấy phép thăm do, khai thác",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Đóng cửa mỏ khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         },
         {
           label: "Chuyển nhượng quyền thăm dò, khai thác",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ""
         }
       ]
     },
     {
       label: "TÍNH TIỀN CẤP QUYỀN",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       link: ""
     },
     {
       label: "KHU VỰC KHOÁNG SẢN",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       link: "",
       items: [
         {
           label: "Khu vực cấm/tạm cấm",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuccamtamcamUri}`,
         },
         {
           label: "Khu vực đấu giá",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdaugiaUri}`,
         },
         {
           label: "Khu vực khoáng sản độc hại",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuckhoangsandochaiUri}`,
         },
         {
           label: "Khu vực không đấu giá",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvuckhongdaugiaUri}`
         },
         {
           label: "Khu vực dự trữ khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.khuvuckhoangsanUri}/${AdminRoutingName.khuvucdutrukhoangsanUri}`
         },
         {
           label: "Khu vực thăm dò khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ``
         },
       ]
     },
     {
-      label: "MỎ QUẶNG,ĐIỂM QUẶNG",
-      faIcon: "",
+      label: "MỎ QUẶNG, ĐIỂM QUẶNG",
+      faIcon: "fal fa-newspaper",
       link: "",
       items: [
         {
           label: "Quản lý mỏ khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: ``
         },
         {
           label: "Quản lý điểm quặng",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.diemquangmoquangUri}/${AdminRoutingName.diemquangUri}`
         },
       ]
     },
     {
       label: "QUY HOẠCH KHOÁNG SẢN",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       link: ""
     },
     {
@@ -215,126 +215,126 @@ export class SidenavComponent implements OnInit {
       ],
     },
     {
-      label: "BÁO CÁO THỐNG KÊ",
-      faIcon: "",
+      label: "BÁO CÁO HOẠT ĐỘNG",
+      faIcon: "fal fa-newspaper",
       link: "",
       items: [
         {
           label: "Báo cáo điều tra khảo sát khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.dieutrakhaosatUri}`
         },
         {
           label: "Báo cáo định kỳ hoạt động khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.baocaohoatdongdinhkyUri}`
         },
         {
-          label: "Giám sát hoạt động khoáng sản",
-          faIcon: "",
+          label: "Báo cáo giám sát hoạt động khoáng sản",
+          faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.giamsathoatdongUri}`
         },
         {
           label: "Thông tin tư liệu khoáng sản",
-          faIcon: "",
+          faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.thongtintulieuUri}`
         }
       ]
     },
     {
       label: "VĂN BẢN PHÁP QUY",
-      faIcon: "",
+      faIcon: "fal fa-newspaper",
       link: ""
     },
     {
       label: "DANH MỤC",
-      faIcon: "",
+      faIcon: "far fa-clipboard",
       link: "",
       items: [
         {
           label: "Cá nhân",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.canhanUri}`,
-          faIcon: "",
+          faIcon: "far fa-user",
         },
         {
           label: "Cấp quản lý",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.capquanlyUri}`,
-          faIcon: "",
+          faIcon: "far fa-building",
         },
         {
           label: "Cấp tài nguyên",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.captainguyenUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Cấp trữ lượng",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.captruluongUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Cơ quan quản lý",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.coquanquanlyUri}`,
-          faIcon: "",
+          faIcon: "fal fa-landmark-alt",
         },
         {
           label: "Đơn vị hành chính",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.dvhcUri}`,
-          faIcon: "",
+          faIcon: "far fa-map-marked-alt",
         },
         {
           label: "Loại báo cáo",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaibaocaoUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Loại cấp phép",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaicapphepUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Loại giấy phép",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaigiayphepUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Loại khoáng sản",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaikhoangsanUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Loại tài liệu",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaitailieuUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Loại tổ chức",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.loaitochucUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Nguồn gốc mỏ",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.nguongocmoUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Nhóm khoáng sản",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.nhomkhoangsanUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Thử tục hành chính",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.thutuchanhchinhUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Tổ chức",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.tochucUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
         {
           label: "Lĩnh vực",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.linhvucUri}`,
-          faIcon: "",
+          faIcon: "far fa-th-list",
         },
       ]
     },
@@ -352,17 +352,22 @@ export class SidenavComponent implements OnInit {
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CauHinhTaiLieu}`,
           faIcon: "fas fa-cog",
         },
+        {
+          label: "Cấu hình cơ quan tiếp nhận",
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CoQuanTiepNhan}`,
+          faIcon: "fas fa-cog",
+        },
       ],
     },
     {
       label: "TIỆN ÍCH",
       link: "",
-      faIcon: "",
+      faIcon: "far fa-clipboard",
       items: [
         {
           label: "Chuyển đổi dữ liệu",
           link: "",
-          faIcon: "",
+          faIcon: "far fa-th-list",
         }
       ]
     },

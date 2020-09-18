@@ -12,7 +12,7 @@
     <div class="form-group row mx-0">
       <label class="col-sm-3 col-form-label text-right">{{"BAOCAO.tailieudinhkem.filedinhkem" | translate}}</label>
       <div class="custom-file col-sm-9">
-        <input #fileInput type="file" id="upload" title=" " [(ngModel)]="fileName"  class="custom-file-input" (click)="fileInput.value = null"
+        <input #fileInput type="file" id="upload" title=" "  class="custom-file-input" (click)="fileInput.value = null"
                (change)="fileProgress($event)" />
         <label class="custom-file-label file"  *ngIf="purpose === 'edit' ; else new">
           {{fileName}}</label>

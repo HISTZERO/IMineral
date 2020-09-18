@@ -57,6 +57,8 @@ export class AdminRoutingName {
   // 1.4 Routes thiết lập
   public static ThietLapHeThong = "thietlaphethong";
   public static CauHinhTaiLieu = "cauhinhtailieu";
+  public static CoQuanTiepNhan = "coquantiepnhan";
+
   // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
 
@@ -86,6 +88,7 @@ export class AdminRoutingName {
   public static diemquangUri = "diemquang";
 
   // 1.11 Routes phần thăm dò khoáng sản
-  public static thamdokhoangsanUri = "thamdokhoangsan";
-  public static thamdokhoangsanchitietUri = "thamdokhoangsanchitiet";
+  public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
+  public static dkthamdokhoangsanchitietUri = "dkthamdokhoangsanchitiet";
+  public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
 }

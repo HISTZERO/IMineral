@@ -32,17 +32,20 @@ export class ServiceName {
   public static BCTAILIEU = "bctailieu";
   // File
   public static FILE = "files";
-  public static UPLOADFILE = "ftpuploadfile";
-  public static DOWNFILE = "​ftpdownloadfile";
-  public static DELETEFILE = "ftpdeletefile";
+  public static UPLOADFILE = "uploadfileftp";
+  public static DOWNFILE = "downloadfileftp";
+  public static DELETEFILE = "deletefileftp";
   // Hồ sơ
   public static HOSO = "hoso";
   public static TAILIEU = "hstailieu";
+  // Đăng ký thăm dò khoáng sản
+  public static DkThamDoKhoangSan = "dangkythamdo";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
-  public static CoQuanTiepNhan = "coquantiepnhan";
+  public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
 
 
   public static NHOMTHAMSO = "nhomthamso";
