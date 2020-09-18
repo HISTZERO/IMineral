@@ -13,8 +13,8 @@ const routes: Routes = [
       {
         path: "",
         children: [
-          {path: AdminRoutingName.thamdokhoangsanUri, component: ThamdokhoangsanListComponent},
-          {path: AdminRoutingName.thamdokhoangsanchitietUri, component: ThamdokhoangsanIoComponent},
+          {path: AdminRoutingName.dkthamdokhoangsanUri, component: ThamdokhoangsanListComponent},
+          {path: AdminRoutingName.dkthamdokhoangsanchitietUri, component: ThamdokhoangsanIoComponent},
           {path: AdminRoutingName.dkKhaithackhoangsanUri, component: KhaithackhoangsanListComponent}
         ]
       }

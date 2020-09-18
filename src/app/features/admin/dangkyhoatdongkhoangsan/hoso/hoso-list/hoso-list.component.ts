@@ -111,7 +111,7 @@ export class HosoListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan 
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
         || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
       // Khởi tạo form
       this.formInit();
@@ -167,6 +167,7 @@ export class HosoListComponent implements OnInit {
       LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     };
 
     this.itemService
@@ -200,7 +201,7 @@ export class HosoListComponent implements OnInit {
    */
   addItemHoSo() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanchitietUri}`]);
   }
 
   /**
@@ -209,7 +210,7 @@ export class HosoListComponent implements OnInit {
    */
   async editItemHoSo(id: any) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`],
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanchitietUri}`],
         { queryParams: { idhoso: id}});
   }
 

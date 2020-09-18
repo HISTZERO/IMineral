@@ -20,7 +20,7 @@ export const MenuThamDoKhoangSanChitiet = [
   },
   {
     title: "Thăm dò khoáng sản",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanUri}`,
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanUri}`,
   },
   {
     title: "Chi tiết",
