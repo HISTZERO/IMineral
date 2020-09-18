@@ -26,9 +26,6 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
-  // State của Save button
-  // tslint:disable-next-line: no-input-rename
-  @Input("insertedState") insertedState = InsertedState.SaveAndRefresh;
   // Chứa dữ liệu Form
   public dangKyThamDoIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -149,7 +146,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * hàm set value cho form
    */
   private async formOnEdit(item: OutputDkThamDoKhoangSanModel) {
-    if (this.currentAction === DangKyThamDoActionEnum.Edit) {
+    if (this.currentAction === DangKyThamDoActionEnum.Edit && item) {
       this.dangKyThamDoIOForm.setValue({
         diadiem: item.diadiem,
         dientichthamdo: item.dientichthamdo,
@@ -217,16 +214,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
     const inputModel = this.dangKyThamDoIOForm.value;
     inputModel.idhoso = this.idhoso;
-    if (this.currentAction === DangKyThamDoActionEnum.Add && (this.insertedState === InsertedState.SaveAndRefresh || this.insertedState === InsertedState.SaveAndEdit)) {
+    if (this.currentAction === DangKyThamDoActionEnum.Add) {
       dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
         async (res) => {
-          if (this.insertedState === InsertedState.SaveAndEdit) {
-            this.iddangkythamdo = res.iddangkythamdo;
-            this.currentAction = DangKyThamDoActionEnum.Edit;
-            this.selectCurrentFormState();
-          } else {
-            this.onFormReset();
-          }
+          this.iddangkythamdo = res.iddangkythamdo;
+          this.currentAction = DangKyThamDoActionEnum.Edit;
+          this.selectCurrentFormState();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -265,15 +258,6 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
-  }
-
-  /**
-   * Hàm reset form, gọi khi nhấn nút reset dữ liệu
-   */
-  onFormReset() {
-    // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyThamDoIOForm.reset();
-    this.dangKyThamDoIOForm.controls.dangkhoangsan.setValue(DangKhoangSanEnum.KhoangSanRan);
   }
 
   /**

@@ -90,3 +90,7 @@ export enum DangKhoangSanEnum {
   KhoangSanRan = 1,
   KhoangSanNuocNong = 2
 }
+
+export enum DangKyThamDoKhoangSanTabEnum {
+  ThongTinChiTiet = 0
+}
