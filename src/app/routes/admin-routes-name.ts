@@ -88,7 +88,7 @@ export class AdminRoutingName {
   public static diemquangUri = "diemquang";
 
   // 1.11 Routes phần thăm dò khoáng sản
-  public static thamdokhoangsanUri = "thamdokhoangsan";
-  public static thamdokhoangsanchitietUri = "thamdokhoangsanchitiet";
+  public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
+  public static dkthamdokhoangsanchitietUri = "dkthamdokhoangsanchitiet";
   public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
 }
