@@ -29,8 +29,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   public currentAction: number;
 
-  // Chứa data select tab mặc định
-  public selectedDefaultTab: number;
+  public thamDoKhoangSanTabEnum = ThamDoKhoangSanTabEnum;
 
   public TabType = ThamDoKhoangSanTabEnum;
 
@@ -68,7 +67,9 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   async ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     // Gọi hàm lấy dữ liệu translate
@@ -81,8 +82,6 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
       this.setThamDoKhoangSanDisabledTabState(this.currentAction);
     }
-
-    this.selectedDefaultTab = ThamDoKhoangSanTabEnum.ThongTinHoSo;
   }
 
   /**

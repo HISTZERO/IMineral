@@ -126,7 +126,9 @@ export class HosoIoComponent implements OnInit {
    */
   async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     if (this.idhoso !== null && this.idhoso !== undefined) {

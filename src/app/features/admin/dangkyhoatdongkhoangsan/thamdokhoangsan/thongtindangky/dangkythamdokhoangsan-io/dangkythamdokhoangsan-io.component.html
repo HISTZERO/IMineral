@@ -16,11 +16,11 @@
           <i class="fal fa-save"></i>
           {{ "COMMON.default.save" | translate }}
         </button>
-        <!-- <button class="btn btn-outline-danger mr-2" style="float: right;"
-                (click)="">
+        <button *ngIf="disabledDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;"
+                (click)="null">
           <i class="far fa-trash"></i>
           {{ "COMMON.default.delete" | translate }}
-        </button> -->
+        </button>
       </div>
     </div>
   </div>

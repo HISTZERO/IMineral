@@ -77,6 +77,7 @@ export enum LoaiDoiTuongEnum {
 }
 
 export enum HoSoActionEnum {
+  None = 0,
   Add = 1,
   Edit = 2
 }
@@ -105,5 +106,9 @@ export enum DangKhoangSanEnum {
 }
 
 export enum DangKyThamDoKhoangSanTabEnum {
-  ThongTinChiTiet = 0
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucThamDo = 3,
+  CongTrinhThamDo = 4
 }
