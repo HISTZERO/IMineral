@@ -87,7 +87,9 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    */
   async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     let dangKyThamDo: any;
