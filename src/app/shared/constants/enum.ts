@@ -55,11 +55,6 @@ export enum LoaiCapPhepEnum {
   ThuHoiCatSoiDuAnNaoVetKhoiThong = "17"
 }
 
-export const DangKyKhaiThacKhoangSanComponent: any = {
-  [LoaiCapPhepEnum.KhaiThacKhoangSan]: DangkykhaithackhoangsanIoComponent,
-  [LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan]: DangkykhaithacgiahanIoComponent
-}
-
 export enum NhomTaiLieuEnum {
   TaiLieuBatBuoc = 1,
   TaiLieuKhongBatBuoc = 2,
