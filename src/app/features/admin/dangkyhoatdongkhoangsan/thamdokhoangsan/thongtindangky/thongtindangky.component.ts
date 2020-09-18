@@ -7,6 +7,11 @@ import { ContentContainerDirective } from 'src/app/shared/directives/content-con
 import { DangkythamdogiahanIoComponent } from './dangkythamdogiahan-io/dangkythamdogiahan-io.component';
 import { DangkythamdokhoangsanIoComponent } from './dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
 
+export const DangKyThamDoKhoangSanComponent: any = {
+  [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.ThamDoGiaHan]: DangkythamdogiahanIoComponent
+};
+
 @Component({
   selector: 'app-thongtindangky',
   templateUrl: './thongtindangky.component.html',
@@ -115,11 +120,12 @@ export class ThongtindangkyComponent implements OnInit {
     const itemHoSo = await this.getHoSoById(this.idhoso);
 
     if (itemHoSo) {
-      if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
-        factory = this.cfr.resolveComponentFactory(DangkythamdokhoangsanIoComponent);
-      } else if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-        factory = this.cfr.resolveComponentFactory(DangkythamdogiahanIoComponent);
-      }
+      factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[itemHoSo.loaicapphep]);
+      // if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
+      //   factory = this.cfr.resolveComponentFactory(DangkythamdokhoangsanIoComponent);
+      // } else if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+      //   factory = this.cfr.resolveComponentFactory(DangkythamdogiahanIoComponent);
+      // }
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
