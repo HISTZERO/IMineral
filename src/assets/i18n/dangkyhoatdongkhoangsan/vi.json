@@ -132,7 +132,8 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "informedNotExistedTaiLieu": "Tài liệu không tồn tại",
     "confirmedContentOfDeleteDialog": "Bạn có muốn xóa các đối tượng vừa chọn không?",
-    "confirmedContentOfRequiredRecordUpdateDialog": "Bạn có muốn bổ sung tài liệu bắt buộc không?"
+    "confirmedContentOfRequiredRecordUpdateDialog": "Bạn có muốn bổ sung tài liệu bắt buộc không?",
+    "informedDialogTitle": "Thông báo"
   },
   "dangkythamdokhoangsan": {
     "titleAdd": "Thêm mới đăng ký thăm dò khoáng sản",
