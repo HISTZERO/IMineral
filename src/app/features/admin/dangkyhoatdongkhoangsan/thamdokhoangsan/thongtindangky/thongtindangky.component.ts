@@ -14,14 +14,15 @@ import { DangkythamdokhoangsanIoComponent } from './dangkythamdokhoangsan-io/dan
 })
 export class ThongtindangkyComponent implements OnInit {
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
+  @ViewChild('tabGroup', { static: false }) tabGroup: any;
   // @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // @ViewChild("comp", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // Lưu trữ thông tin đăng ký tab
+  public dangKyThamDoKhoangSanTabEnum = DangKyThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
-  // Chứa data select tab mặc định
-  public selectedDefaultTab: number;
   constructor(private cfr: ComponentFactoryResolver,
               private activatedRoute: ActivatedRoute,
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
@@ -72,6 +73,5 @@ export class ThongtindangkyComponent implements OnInit {
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idhoso = itemHoSo.idhoso;
-    this.selectedDefaultTab = DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet;
   }
 }

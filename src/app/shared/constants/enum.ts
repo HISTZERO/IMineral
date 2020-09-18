@@ -92,5 +92,6 @@ export enum DangKhoangSanEnum {
 }
 
 export enum DangKyThamDoKhoangSanTabEnum {
-  ThongTinChiTiet = 0
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1
 }

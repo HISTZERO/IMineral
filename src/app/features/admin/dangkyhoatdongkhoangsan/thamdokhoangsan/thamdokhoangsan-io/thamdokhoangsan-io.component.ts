@@ -29,8 +29,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   public currentAction: number;
 
-  // Chứa data select tab mặc định
-  public selectedDefaultTab: number;
+  public thamDoKhoangSanTabEnum = ThamDoKhoangSanTabEnum;
 
   public TabType = ThamDoKhoangSanTabEnum;
 
@@ -81,8 +80,6 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
       this.setThamDoKhoangSanDisabledTabState(this.currentAction);
     }
-
-    this.selectedDefaultTab = ThamDoKhoangSanTabEnum.ThongTinHoSo;
   }
 
   /**
