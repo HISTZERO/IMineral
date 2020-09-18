@@ -49,7 +49,7 @@ export class SidenavComponent implements OnInit {
         {
           label: "Khai thác khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkKhaithackhoangsanUri}`,
         },
         {
           label: "Tận thu khoáng sản",
@@ -350,6 +350,11 @@ export class SidenavComponent implements OnInit {
         {
           label: "Cấu hình tài liệu",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CauHinhTaiLieu}`,
+          faIcon: "fas fa-cog",
+        },
+        {
+          label: "Cấu hình cơ quan tiếp nhận",
+          link: `${AdminRoutingName.adminUri}/${AdminRoutingName.thietlapUri}/${AdminRoutingName.CoQuanTiepNhan}`,
           faIcon: "fas fa-cog",
         },
       ],

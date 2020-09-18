@@ -40,6 +40,9 @@ import { KhuvuctoadoListComponent } from './thamdokhoangsan/thongtindangky/khuvu
 import { CongtrinhthamdoComponent } from './thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo.component';
 import { CongtrinhthamdoIoComponent } from './thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-io/congtrinhthamdo-io.component';
 import { CongtrinhthamdoListComponent } from './thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
+import { KhaithackhoangsanListComponent } from './khaithackhoangsan/khaithackhoangsan-list/khaithackhoangsan-list.component';
+import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoangsan-io/khaithackhoangsan-io.component';
+
 
 
 @NgModule({
@@ -69,6 +72,9 @@ import { CongtrinhthamdoListComponent } from './thamdokhoangsan/thongtindangky/c
   KhuvuctoadoListComponent,
   CongtrinhthamdoIoComponent,
   CongtrinhthamdoListComponent,
+  KhaithackhoangsanListComponent,
+  KhaithackhoangsanIoComponent,
+
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -93,6 +99,7 @@ import { CongtrinhthamdoListComponent } from './thamdokhoangsan/thongtindangky/c
     CongtrinhthamdoIoComponent,
     DangkythamdokhoangsanIoComponent,
     DangkythamdogiahanIoComponent
+    KhaithackhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

@@ -44,7 +44,8 @@ export class ServiceName {
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
-  public static CoQuanTiepNhan = "coquantiepnhan";
+  public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
 
 
   public static NHOMTHAMSO = "nhomthamso";
