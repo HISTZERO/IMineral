@@ -85,3 +85,8 @@ export enum ThamDoKhoangSanTabEnum {
   TaiLieuXuLyHoSoDinhKem = 2,
   ThongTinDangKy = 3
 }
+
+export enum DangKhoangSanEnum {
+  KhoangSanRan = 1,
+  KhoangSanNuocNong = 2
+}

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InsertedState, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
+import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
 import { ActivatedRoute } from '@angular/router';
@@ -125,7 +125,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       chieusauthamdoden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       thoihanthamdo: ["", Validators.required],
       mucdichsudungkhoangsan: ["", Validators.required],
-      dangkhoangsan: ["", Validators.required],
+      dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
       donvidientich: ["", Validators.required],
       donvithoihan: ["", Validators.required],
       donvichieusau: ["", Validators.required],
@@ -273,6 +273,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.dangKyThamDoIOForm.reset();
+    this.dangKyThamDoIOForm.controls.dangkhoangsan.setValue(DangKhoangSanEnum.KhoangSanRan);
   }
 
   /**
