@@ -67,7 +67,9 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   async ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     // Gọi hàm lấy dữ liệu translate
