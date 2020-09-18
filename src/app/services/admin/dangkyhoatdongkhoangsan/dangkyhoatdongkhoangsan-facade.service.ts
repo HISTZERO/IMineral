@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { HosoService } from "src/app/services/admin/dangkyhoatdongkhoangsan/hoso.service";
 import { TaiLieuSerVice } from 'src/app/services/admin/dangkyhoatdongkhoangsan/tailieu.service';
 import { DkThamDoKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.service';
+import { DkThamDoGiaHanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdogiahan.service';
 
 
 @Injectable({
@@ -26,5 +27,10 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký thăm dò service
   public getDangKyThamDoService() {
     return new DkThamDoKhoangSanService(this.httpClient);
+  }
+
+  // Đăng ký thăm dò service
+  public getDangKyThamDoGiaHanService() {
+    return new DkThamDoGiaHanService(this.httpClient);
   }
 }
