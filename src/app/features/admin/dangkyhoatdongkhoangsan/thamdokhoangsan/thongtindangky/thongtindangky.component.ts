@@ -2,7 +2,7 @@ import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewCont
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+import { DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
 import { DangkythamdogiahanIoComponent } from './dangkythamdogiahan-io/dangkythamdogiahan-io.component';
 import { DangkythamdokhoangsanIoComponent } from './dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
@@ -20,7 +20,8 @@ export class ThongtindangkyComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
-  private hsHoSo: any;
+  // Chứa data select tab mặc định
+  public selectedDefaultTab: number;
   constructor(private cfr: ComponentFactoryResolver,
               private activatedRoute: ActivatedRoute,
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
@@ -42,7 +43,6 @@ export class ThongtindangkyComponent implements OnInit {
       return;
     }
 
-    await this.getHoSoById(this.idhoso);
     await this.showDangKyViewComponent();
     return true;
   }
@@ -53,22 +53,25 @@ export class ThongtindangkyComponent implements OnInit {
    */
   private async getHoSoById(idHoSo: string) {
     const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
-    this.hsHoSo = await hoSoService.getByid(idHoSo).toPromise();
+    const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
+    return itemHoSo;
   }
 
-  private showDangKyViewComponent() {
+  private async showDangKyViewComponent() {
     let factory: any;
+    const itemHoSo = await this.getHoSoById(this.idhoso);
 
-    if (this.hsHoSo) {
-      if (this.hsHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
+    if (itemHoSo) {
+      if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
         factory = this.cfr.resolveComponentFactory(DangkythamdokhoangsanIoComponent);
-      } else if (this.hsHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+      } else if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
         factory = this.cfr.resolveComponentFactory(DangkythamdogiahanIoComponent);
       }
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = this.hsHoSo.idhoso;
+    componentRef.instance.idhoso = itemHoSo.idhoso;
+    this.selectedDefaultTab = DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet;
   }
 }

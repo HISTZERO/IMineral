@@ -282,7 +282,9 @@ export class HosotailieuListComponent implements OnInit {
 
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfRequiredRecordUpdateDialog);
+    const dialogRef = this.commonService.confirmSaveDiaLogService
+                              ("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
+                              this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedDialogTitle);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
