@@ -21,6 +21,8 @@ import { DangKhoangSan } from 'src/app/shared/constants/common-constants';
 export class DangkythamdokhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectNewInsertedDangKyThamDoEvent") selectNewInsertedDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -224,6 +226,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
           this.iddangkythamdo = res.iddangkythamdo;
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.selectNewInsertedDangKyThamDo();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -270,4 +273,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   private selectCurrentFormState() {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectNewInsertedDangKyThamDo() {
+    this.selectNewInsertedDangKyThamDoEvent.emit(this.iddangkythamdo);
+  }
+
 }

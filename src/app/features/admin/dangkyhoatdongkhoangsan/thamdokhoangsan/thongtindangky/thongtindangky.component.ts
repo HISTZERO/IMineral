@@ -5,8 +5,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
-import { DangkythamdogiahanIoComponent } from './dangkythamdogiahan-io/dangkythamdogiahan-io.component';
-import { DangkythamdokhoangsanIoComponent } from './dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
+import { DangkythamdogiahanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
+import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
+import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -22,6 +23,7 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ thông tin đăng ký tab
@@ -49,6 +51,8 @@ export class ThongtindangkyComponent implements OnInit {
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
+  private iddangkythamdo: string;
 
   constructor(private cfr: ComponentFactoryResolver,
               private translate: TranslateService,
@@ -123,6 +127,10 @@ export class ThongtindangkyComponent implements OnInit {
     this.setThamDoKhoangSanDisabledTabState(this.currentAction);
   }
 
+  getIdDangKyThamDo(id: string) {
+    this.iddangkythamdo = id;
+  }
+
   /**
    * Lấy dữ liệu hồ sơ theo IdHoSo
    * @param idHoSo
@@ -150,11 +158,15 @@ export class ThongtindangkyComponent implements OnInit {
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idhoso = itemHoSo.idhoso;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
+    componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getIdDangKyThamDo(event));
   }
 
   async tabChange(index: any) {
     if (index === DangKyThamDoKhoangSanTabEnum.DonViHanhChinh && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]) {
-
+      this.dangKyThamDoDvhc.matSidenav = this.matSidenav;
+      this.dangKyThamDoDvhc.content = this.content;
+      this.dangKyThamDoDvhc.iddangkythamdo = this.iddangkythamdo;
+      this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = await this.dangKyThamDoDvhc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]) {
 
     } else if (index === DangKyThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]) {
