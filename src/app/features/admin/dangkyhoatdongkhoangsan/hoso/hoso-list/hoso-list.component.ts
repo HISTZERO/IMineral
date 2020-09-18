@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import {DatePipe} from '@angular/common';
+import { DatePipe } from '@angular/common';
 import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { Observable } from "rxjs";
 import { MatSidenav, MatDialog } from "@angular/material";
@@ -13,7 +13,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { Router } from "@angular/router";
@@ -51,8 +51,8 @@ export class HosoListComponent implements OnInit {
   // Chứa danh sách loại cấp phép
   public allLoaiCapPhep: OutputDmLoaiCapPhepModel[];
 
-   // Filter Lĩnh Vực
-   public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
+  // Filter Lĩnh Vực
+  public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
 
   // Service
   public itemService: any;
@@ -67,19 +67,23 @@ export class HosoListComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
 
   constructor(public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public router: Router,
-              public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService,
-              public dmFacadeService: DmFacadeService,
-              public datePipe: DatePipe,
-              public modalDialog: MatDialog) {
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public router: Router,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService,
+    public dmFacadeService: DmFacadeService,
+    public datePipe: DatePipe,
+    public modalDialog: MatDialog) {
     this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
   }
 
   async ngOnInit() {
+
+    // Setting wrap mode
+    this.wrapSettings = { wrapMode: 'Both' };
+
     // Gọi hàm lấy dữ liệu translate
     this.getDataTranslate();
 
@@ -95,7 +99,7 @@ export class HosoListComponent implements OnInit {
     this.formSearch = this.formBuilder.group({
       GTEqualNgaytiepnhan: [""],
       LTEqualNgaytiepnhan: [""],
-      Loaicapphep:  [""],
+      Loaicapphep: [""],
       Keyword: [""],
     });
   }
@@ -111,8 +115,8 @@ export class HosoListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan 
-        || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
@@ -152,9 +156,9 @@ export class HosoListComponent implements OnInit {
 
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
-      .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1 });
+      .getFetchAll({ Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1 });
     this.loaiCapPhepFilters = listData.items;
-    this.allLoaiCapPhep =  listData.items;
+    this.allLoaiCapPhep = listData.items;
   }
 
   /**
@@ -163,8 +167,8 @@ export class HosoListComponent implements OnInit {
   async getAllHoSo() {
     this.listHoSo = this.itemService;
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
     };
@@ -178,8 +182,8 @@ export class HosoListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value , "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
     };
@@ -191,7 +195,12 @@ export class HosoListComponent implements OnInit {
    * Hàm load lại dữ liệu grid
    */
   reloadDataGrid() {
-    this.formSearch.reset({ Keyword: "" });
+    this.formSearch.reset({
+      Keyword: "",
+      GTEqualNgaytiepnhan: "",
+      LTEqualNgaytiepnhan: "",
+      Loaicapphep: "",
+    });
     this.getAllHoSo();
   }
 
@@ -210,7 +219,7 @@ export class HosoListComponent implements OnInit {
   async editItemHoSo(id: any) {
     this.router.navigate([
       `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.thamdokhoangsanchitietUri}`],
-        { queryParams: { idhoso: id}});
+      { queryParams: { idhoso: id } });
   }
 
   /**

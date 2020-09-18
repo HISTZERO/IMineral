@@ -98,7 +98,7 @@ import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoang
     DonvihanhchinhIoComponent,
     CongtrinhthamdoIoComponent,
     DangkythamdokhoangsanIoComponent,
-    DangkythamdogiahanIoComponent
+    DangkythamdogiahanIoComponent,
     KhaithackhoangsanIoComponent
   ],
   providers: [

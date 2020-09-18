@@ -73,7 +73,7 @@
           <div class="card-body">
             <ejs-grid #gridHoSo *ngIf="listHoSo" [dataSource]="listHoSo | async"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-              [pageSettings]="settingsCommon.pageSettings" class="table-striped"
+              [pageSettings]="settingsCommon.pageSettings" class="table-striped"  [allowTextWrap]="true"
               [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
