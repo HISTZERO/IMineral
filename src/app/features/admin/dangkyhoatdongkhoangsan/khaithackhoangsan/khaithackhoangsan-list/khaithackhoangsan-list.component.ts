@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
-import { MenuDkKhaiThacKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkykhaithackhoangsan";
+import { MenuDkKhaiThacKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
 
 @Component({
   selector: 'app-khaithackhoangsan-list',
