@@ -200,8 +200,8 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getDangkyThamDoByIdHoSo(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
-    const dangKyItem = await dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoByidHoSo(idHoSo).toPromise();
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
+    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByidHoSo(idHoSo).toPromise();
     return dangKyItem;
   }
 
@@ -213,11 +213,11 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
     const inputModel = this.dangKyThamDoIOForm.value;
     inputModel.idhoso = this.idhoso;
     if (this.currentAction === DangKyThamDoActionEnum.Add) {
-      dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
+      dkThamDoKhoangSanService.addItem(inputModel).subscribe(
         async (res) => {
           this.iddangkythamdo = res.iddangkythamdo;
           this.currentAction = DangKyThamDoActionEnum.Edit;
@@ -234,7 +234,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       );
     } else if (this.currentAction === DangKyThamDoActionEnum.Edit) {
       inputModel.iddangkythamdo = this.iddangkythamdo;
-      dangKyHoatDongKhoangSanFacadeService.updateItem(inputModel).subscribe(
+      dkThamDoKhoangSanService.updateItem(inputModel).subscribe(
         async (res) => {
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
