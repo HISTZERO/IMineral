@@ -1,6 +1,7 @@
 import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
@@ -46,14 +47,31 @@ export class ThongtindangkyComponent implements OnInit {
 
   public currentAction: number;
 
+  // Chứa dữ liệu translate
+  public dataTranslate: any;
+
   constructor(private cfr: ComponentFactoryResolver,
+              private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
 
   async ngOnInit() {
+    // Lấy dữ liệu translate
+    await this.getDataTranslate();
+
     if (this.allowAutoInit) {
       await this.manualDataInit();
     }
+  }
+
+  /**
+   * hàm lấy dữ liệu translate
+   */
+  async getDataTranslate() {
+    // Lấy ra biến translate của hệ thống
+    this.dataTranslate = await this.translate
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   async manualDataInit() {
