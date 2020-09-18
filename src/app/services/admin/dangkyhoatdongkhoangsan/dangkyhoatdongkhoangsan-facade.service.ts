@@ -3,6 +3,7 @@ import { HttpClient } from "@angular/common/http";
 
 import { HosoService } from "src/app/services/admin/dangkyhoatdongkhoangsan/hoso.service";
 import { TaiLieuSerVice } from 'src/app/services/admin/dangkyhoatdongkhoangsan/tailieu.service';
+import { DkThamDoKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.service';
 
 
 @Injectable({
@@ -12,13 +13,18 @@ import { TaiLieuSerVice } from 'src/app/services/admin/dangkyhoatdongkhoangsan/t
 export class DangKyHoatDongKhoangSanFacadeService {
   constructor(private httpClient: HttpClient) {}
 
-  // Diểm mỏ service
+  // Hồ sơ service
   public getHoSoService() {
     return new HosoService(this.httpClient);
   }
 
-  // Diểm mỏ service
+  // Tài liệu service
   public getTaiLieuService() {
     return new TaiLieuSerVice(this.httpClient);
+  }
+
+  // Đăng ký thăm dò service
+  public getDangKyThamDoService() {
+    return new DkThamDoKhoangSanService(this.httpClient);
   }
 }

@@ -6,6 +6,7 @@ import { HosotailieuListComponent } from '../../hosotailieu/hosotailieu-list/hos
 import { TranslateService } from '@ngx-translate/core';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { MatSidenav } from '@angular/material';
+import { ThongtindangkyComponent } from '../thongtindangky/thongtindangky.component';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -18,6 +19,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
+  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuThamDoKhoangSanChitiet;
 
@@ -148,6 +150,11 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       this.taiLieuXuLyHoSoListComp.idhoso = this.idhoso;
       this.taiLieuXuLyHoSoListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.titleList;
       this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = await this.taiLieuXuLyHoSoListComp.manualDataInit();
+    } else if (index === ThamDoKhoangSanTabEnum.ThongTinDangKy && !this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy]) {
+      // this.thongTinDangKyComp.matSidenav = this.matSidenav;
+      // this.thongTinDangKyComp.content = this.content;
+      this.thongTinDangKyComp.idhoso = this.idhoso;
+      this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinDangKyComp.manualDataInit();
     }
   }
 }
