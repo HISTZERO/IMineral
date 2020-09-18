@@ -58,8 +58,6 @@ export class HosoIoComponent implements OnInit {
   // Chứa dữ liệu hình thức nhận kết quả
   public hinhThucNhanKetQuaList = HinhThucNhanKetQua;
   public hinhThucNhanKetQuaFilters = HinhThucNhanKetQua;
-  // Lưu trữ dữ liệu loại đối tượng
-  public loaiDoiTuongList = LoaiDoiTuong;
   // Chứa dữ liệu loại cấp phép
   public loaiCapPhepList: OutputDmLoaiCapPhepModel[];
   public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
