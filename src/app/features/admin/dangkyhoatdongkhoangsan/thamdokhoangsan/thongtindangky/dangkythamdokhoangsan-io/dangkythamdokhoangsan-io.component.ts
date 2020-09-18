@@ -94,7 +94,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
 
     let dangKyThamDo: any;
     if (this.idhoso !== null && this.idhoso !== undefined) {
-      dangKyThamDo = await this.getDangkyThamDoByIdHoSo(this.idhoso);
+      dangKyThamDo = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (dangKyThamDo) {
         this.iddangkythamdo = dangKyThamDo.iddangkythamdo;
@@ -111,6 +111,8 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     await this.geAllHeQuyChieu();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit(dangKyThamDo);
+
+    return true;
   }
 
   /**
@@ -199,9 +201,9 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * Lấy dữ liệu hồ sơ theo IdHoSo
    * @param idHoSo
    */
-  private async getDangkyThamDoByIdHoSo(idHoSo: string) {
+  private async getDangKyThamDoByIdHoSo(idHoSo: string) {
     const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
-    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByidHoSo(idHoSo).toPromise();
+    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
     return dangKyItem;
   }
 

@@ -208,5 +208,15 @@
     "lydogiahanRequired": "Lý do gia hạn không được để trống",
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
     "idgiayphepRequired": "Giấy phép không được để trống"
+  },
+  "dangkythamdodvhc": {
+    "titleList": "Danh sách đơn vị hành chính",
+    "titleAdd": "Thêm mới đơn vị hành chính",
+    "titleEdit": "Sửa dữ liệu đơn vị hành chính",
+    "contentDelete": "Đơn vị hành chính: ",
+    "tentinh": "Tên tỉnh",
+    "tenhuyen": "Tên huyện",
+    "tenxa": "Tên xã",
+    "informedNotExistedDangKyThamDoDvhc": "Đăng ký thăm dò đợn vị hành chính không tồn tại"
   }
 }

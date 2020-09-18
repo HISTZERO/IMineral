@@ -25,7 +25,7 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
     return "ok";
   }
 
-  public getDangKyThamDoByidHoSo(idhoso: any) {
+  public getDangKyThamDoByIdHoSo(idhoso: any) {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHOANGSAN
     });
