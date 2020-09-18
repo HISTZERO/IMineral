@@ -1,12 +1,13 @@
 import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
-import { ActivatedRoute } from '@angular/router';
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
-import { HosotailieuListComponent } from '../../hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { TranslateService } from '@ngx-translate/core';
-import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { MatSidenav } from '@angular/material';
-import { ThongtindangkyComponent } from '../thongtindangky/thongtindangky.component';
+import { ActivatedRoute } from '@angular/router';
+
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
+import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
+import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -22,6 +23,9 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuThamDoKhoangSanChitiet;
+
+  // Chứa dữ liệu nút quay lại trên subheader
+  public btnArray = ButtonBackThamDoKhoangSan;
 
   public currentAction: number;
 
