@@ -3,7 +3,6 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { FormGroup, FormBuilder } from "@angular/forms";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { OutputDkThamDoDvhc } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -30,8 +29,8 @@ export class DonvihanhchinhListComponent implements OnInit {
   // Chứa dữ liệu danh sách đơn vị
   public listDangKyThamDoDvhc: OutputDkThamDoDvhc[];
 
-    // Chứa dữ liệu đã chọn
-    public selectedItem: OutputDkThamDoDvhc;
+  // Chứa dữ liệu đã chọn
+  public selectedItem: OutputDkThamDoDvhc;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -47,8 +46,7 @@ export class DonvihanhchinhListComponent implements OnInit {
               public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public formBuilder: FormBuilder) { }
+              private translate: TranslateService) { }
 
   async ngOnInit() {
     this.getDataTranslate();

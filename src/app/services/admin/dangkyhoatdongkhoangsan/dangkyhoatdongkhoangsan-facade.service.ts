@@ -5,7 +5,8 @@ import { HosoService } from "src/app/services/admin/dangkyhoatdongkhoangsan/hoso
 import { TaiLieuSerVice } from 'src/app/services/admin/dangkyhoatdongkhoangsan/tailieu.service';
 import { DkThamDoKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.service';
 import { DkThamDoGiaHanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdogiahan.service';
-import { DkThamDoDvhcService } from './dkthamdodvhc.service';
+import { DkThamDoDvhcService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.service';
+import { DkThamDoLoaiKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.service';
 
 
 @Injectable({
@@ -38,5 +39,10 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký thăm dò service
   public getDangKyThamDoDvhcService() {
     return new DkThamDoDvhcService(this.httpClient);
+  }
+
+  // Đăng ký thăm dò service
+  public getDangKyThamDoLoaiKhoangSanService() {
+    return new DkThamDoLoaiKhoangSanService(this.httpClient);
   }
 }

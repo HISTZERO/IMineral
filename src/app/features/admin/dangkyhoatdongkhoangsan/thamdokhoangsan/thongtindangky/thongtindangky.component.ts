@@ -8,6 +8,7 @@ import { ContentContainerDirective } from 'src/app/shared/directives/content-con
 import { DangkythamdogiahanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
 import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
 import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
+import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -24,10 +25,11 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
+  @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ thông tin đăng ký tab
-  public dangKyThamDoKhoangSanTabEnum = DangKyThamDoKhoangSanTabEnum;
+  public TabType = DangKyThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
   // Lưu trữ trạng thais tab được select
@@ -94,7 +96,7 @@ export class ThongtindangkyComponent implements OnInit {
   }
 
   setThamDoKhoangSanDisabledTabState(actionType: number) {
-    switch(actionType) {
+    switch (actionType) {
       case DangKyThamDoActionEnum.Add: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false,
@@ -168,7 +170,10 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoDvhc.iddangkythamdo = this.iddangkythamdo;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = await this.dangKyThamDoDvhc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]) {
-
+      this.dangKyThamDoLoaiKhoangSan.matSidenav = this.matSidenav;
+      this.dangKyThamDoLoaiKhoangSan.content = this.content;
+      this.dangKyThamDoLoaiKhoangSan.iddangkythamdo = this.iddangkythamdo;
+      this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = await this.dangKyThamDoLoaiKhoangSan.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]) {
 
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {

@@ -44,6 +44,8 @@ export class ServiceName {
   public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
   // Đăng ký thăm dò đơn vị hành chính
   public static DANGKYTHAMDODVHC = "dangkythamdodvhc";
+  // Đăng ký thăm dò loại khoáng sản
+  public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";

@@ -221,5 +221,18 @@
     "mahuyenRequired": "Yêu cầu phải chọn huyện",
     "maxaRequired": "Yêu cầu phải chọn xã",
     "informedNotExistedDangKyThamDoDvhc": "Đăng ký thăm dò đợn vị hành chính không tồn tại"
+  },
+  "dangkythamdoloaikhoangsan": {
+    "titleList": "Danh sách loại khoáng sản",
+    "titleAdd": "Thêm mới loại khoáng sản",
+    "titleEdit": "Sửa dữ liệu loại khoáng sản",
+    "contentDelete": "Loại khoáng sản: ",
+    "loaikhoangsan": "Loại khoáng sản",
+    "nhomkhoangsan": "Nhóm khoáng sản",
+    "chonloaikhoangsan": "---Chọn loại khoáng sản---",
+    "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
+    "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
+    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Đăng ký thăm dò loại khoáng sản không tồn tại"
   }
 }
