@@ -17,7 +17,7 @@
                 </h3>
               </div>
               <div class="card-body">
-                <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="thamDoKhoangSanTabEnum.ThongTinHoSo"
+                <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="TabType.ThongTinHoSo"
                   (selectedIndexChange)="tabChange($event)">
                   <mat-tab [disabled]="!disabledTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
                     <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"

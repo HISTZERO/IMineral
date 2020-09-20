@@ -427,6 +427,14 @@ export class DonvihanhchinhIoComponent implements OnInit {
   }
 
   /**
+   * Hàm close sidenav
+   */
+  public closeDkThamDoDvhcIOSidenav() {
+    this.matSidenavService.close();
+  }
+
+
+  /**
    * Hàm check giá trị trong seletec option Tỉnh
    */
   public compareTinh(item1: any, item2: any) {

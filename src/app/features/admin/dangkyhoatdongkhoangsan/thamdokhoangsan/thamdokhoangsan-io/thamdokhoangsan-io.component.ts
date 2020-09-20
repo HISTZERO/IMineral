@@ -29,8 +29,6 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   public currentAction: number;
 
-  public thamDoKhoangSanTabEnum = ThamDoKhoangSanTabEnum;
-
   public TabType = ThamDoKhoangSanTabEnum;
 
   public ActionType = HoSoActionEnum;
