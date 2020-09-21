@@ -11,7 +11,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan } from 'src/app/shared/constants/common-constants';
+import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
 
 @Component({
   selector: 'app-dangkythamdokhoangsan-io',
@@ -47,6 +47,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   public ActionType = DangKyThamDoActionEnum;
   // disable delete button
   public disabledDeleteButton = false;
+  // lưu dữ liệu đơn vị diện tích
+  public donViDienTichList = DonViDienTich;
+  // Lưu trữ đơn vị thời hạn
+  public donViThoiHanList = DonViThoiHan;
+  // lưu dữ liệu đơn vị diện tích
+  public donViDoSauList = DonViDoSau;
   // error message
   validationErrorMessages = {};
 

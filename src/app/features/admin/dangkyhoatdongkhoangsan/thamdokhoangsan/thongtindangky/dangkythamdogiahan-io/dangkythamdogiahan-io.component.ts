@@ -11,7 +11,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViDienTich } from 'src/app/shared/constants/common-constants';
+import { DangKhoangSan, DonViDienTich, DonViDoSau } from 'src/app/shared/constants/common-constants';
 import { MatSidenav } from '@angular/material';
 
 
