@@ -9,6 +9,7 @@ import { DangkythamdogiahanIoComponent } from 'src/app/features/admin/dangkyhoat
 import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
 import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
 import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
+import { CongtrinhthamdoListComponent } from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -26,6 +27,7 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
   @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
+  @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ thông tin đăng ký tab
@@ -149,11 +151,6 @@ export class ThongtindangkyComponent implements OnInit {
 
     if (itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[itemHoSo.loaicapphep]);
-      // if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
-      //   factory = this.cfr.resolveComponentFactory(DangkythamdokhoangsanIoComponent);
-      // } else if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-      //   factory = this.cfr.resolveComponentFactory(DangkythamdogiahanIoComponent);
-      // }
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
@@ -177,7 +174,10 @@ export class ThongtindangkyComponent implements OnInit {
     } else if (index === DangKyThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]) {
 
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
-
+      this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;
+      this.dangKyThamDoCongTrinh.content = this.content;
+      this.dangKyThamDoCongTrinh.iddangkythamdo = this.iddangkythamdo;
+      this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = await this.dangKyThamDoCongTrinh.manualDataInit();
     }
   }
 }
