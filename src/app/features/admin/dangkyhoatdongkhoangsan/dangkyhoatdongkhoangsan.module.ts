@@ -53,6 +53,10 @@ import { DongcuamoListComponent } from './dongcuamo/dongcuamo-list/dongcuamo-lis
 import { DongcuamoIoComponent } from './dongcuamo/dongcuamo-io/dongcuamo-io.component';
 import { ChuyennhuongquyenListComponent } from './chuyennhuongquyen/chuyennhuongquyen-list/chuyennhuongquyen-list.component';
 import { ChuyennhuongquyenIoComponent } from './chuyennhuongquyen/chuyennhuongquyen-io/chuyennhuongquyen-io.component';
+import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component";
+import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
+import {DaugiaquyenListComponent} from "./daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
+import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
 
 
 
@@ -95,7 +99,11 @@ import { ChuyennhuongquyenIoComponent } from './chuyennhuongquyen/chuyennhuongqu
     DongcuamoListComponent,
     DongcuamoIoComponent,
     ChuyennhuongquyenListComponent,
-    ChuyennhuongquyenIoComponent
+    ChuyennhuongquyenIoComponent,
+     PheduyettruluongkhoangsanIoComponent,
+    PheduyettruluongkhoangsanListComponent,
+    DaugiaquyenIoComponent,
+    DaugiaquyenListComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
