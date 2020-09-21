@@ -17,7 +17,7 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
       httpClient,
       inputModelName: new InputDkThamDoKhoangSanModel(),
       outputModelName: new OutputDkThamDoKhoangSanModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DkThamDoKhoangSan
+      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHOANGSAN
     });
   }
 
@@ -25,9 +25,9 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
     return "ok";
   }
 
-  public getDangKyThamDoByidHoSo(idhoso: any) {
+  public getDangKyThamDoByIdHoSo(idhoso: any) {
     this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.DkThamDoKhoangSan
+      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHOANGSAN
     });
 
     try {

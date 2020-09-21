@@ -118,6 +118,10 @@ export class HosoListComponent implements OnInit {
   async manualDataInit() {
     if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
       // Khởi tạo form

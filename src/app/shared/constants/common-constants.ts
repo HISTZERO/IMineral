@@ -134,6 +134,35 @@ export const LoaiVanBan = [
     }
 ];
 
+export const DonViDienTich = [
+  {
+      id: 1,
+      name: "km"
+  },
+  {
+      id: 2,
+      name: "m"
+  }
+];
+
+export const DonViThoiHan = [
+  {
+      id: "tháng",
+      name: "tháng"
+  },
+  {
+      id: "năm",
+      name: "năm"
+  }
+];
+
+export const DonViDoSau = [
+  {
+      id: "m",
+      name: "m"
+  }
+];
+
 export const DangKhoangSan = [
     {
         id: 1,
@@ -185,5 +214,10 @@ export const RoutingNameChiTietDangKyHoatDongKS: any = {
     [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: "dkkhaithackhoangsanchitiet",
     [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: "dkpheduyettruluongkhoangsanchitiet",
     [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: "dkdaugiaquyenchitiet",
+    [NhomLoaiCapPhepEnum.TanThuKhoangSan]: "dktanthukhoangsanchitiet",
+    [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: "dktralaigiayphepchitiet",
+    [NhomLoaiCapPhepEnum.DongCuaMo]: "dkdongcuamochitiet",
+    [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: "dkchuyennhuongquyenchitiet",
   };
+
 

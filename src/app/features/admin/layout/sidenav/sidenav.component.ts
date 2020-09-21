@@ -54,22 +54,22 @@ export class SidenavComponent implements OnInit {
         {
           label: "Tận thu khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkTanthukhoangsanUri}`
         },
         {
           label: "Trả lại giấy phép thăm do, khai thác",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkTralaigiayphepUri}`
         },
         {
           label: "Đóng cửa mỏ khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkDongcuamoUri}`
         },
         {
           label: "Chuyển nhượng quyền thăm dò, khai thác",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkChuyennhuongquyenUri}`
         }
       ]
     },

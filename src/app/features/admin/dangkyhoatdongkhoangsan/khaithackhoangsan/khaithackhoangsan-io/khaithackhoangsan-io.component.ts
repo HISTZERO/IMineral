@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
-import { ButtonBackKhaiThacKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
+import { ButtonBackKhaiThacKhoangSan, MenuDkKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
@@ -24,7 +24,7 @@ export class KhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
   @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
-  public navArray = MenuThamDoKhoangSanChitiet;
+  public navArray = MenuDkKhaiThacKhoangSanChitiet;
 
   // Chứa dữ liệu nút quay lại danh sách
   public btnArray = ButtonBackKhaiThacKhoangSan;

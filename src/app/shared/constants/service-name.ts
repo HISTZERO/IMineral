@@ -39,7 +39,15 @@ export class ServiceName {
   public static HOSO = "hoso";
   public static TAILIEU = "hstailieu";
   // Đăng ký thăm dò khoáng sản
-  public static DkThamDoKhoangSan = "dangkythamdo";
+  public static DANGKYTHAMDOKHOANGSAN = "dangkythamdo";
+  // Đăng ký thăm dò gia hạn
+  public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
+  // Đăng ký thăm dò đơn vị hành chính
+  public static DANGKYTHAMDODVHC = "dangkythamdodvhc";
+  // Đăng ký thăm dò loại khoáng sản
+  public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
+  // Đăng ký thăm dò công trình
+  public static DANGKYTHAMDOCONGTRINH = "dangkythamdocongtrinh";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
