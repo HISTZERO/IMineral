@@ -97,7 +97,8 @@ export class HosoIoComponent implements OnInit {
     website: "",
   };
 
-  constructor(private translate: TranslateService,
+  constructor(
+    private translate: TranslateService,
     private formBuilder: FormBuilder,
     private dmFacadeService: DmFacadeService,
     private hethongFacadeService: HethongFacadeService,
