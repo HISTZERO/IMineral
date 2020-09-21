@@ -117,7 +117,11 @@ export class HosoListComponent implements OnInit {
 
   async manualDataInit() {
     if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
@@ -177,6 +181,7 @@ export class HosoListComponent implements OnInit {
 
     this.itemService
       .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+    console.log(this.listHoSo);
   }
 
   /*

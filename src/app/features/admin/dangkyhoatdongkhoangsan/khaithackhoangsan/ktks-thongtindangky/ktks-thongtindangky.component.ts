@@ -2,8 +2,16 @@ import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewCont
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKyKhaiThacKhoangSanComponent, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
+import { DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from "../../../../../shared/constants/enum";
+import { DangkykhaithacgiahanIoComponent } from "./dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
+import { DangkykhaithackhoangsanIoComponent } from "./dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
+
+export const DangKyKhaiThacKhoangSanComponent: any = {
+  [LoaiCapPhepEnum.KhaiThacKhoangSan]: DangkykhaithackhoangsanIoComponent,
+  [LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan]: DangkykhaithacgiahanIoComponent
+}
 
 @Component({
   selector: 'app-ktks-thongtindangky',
@@ -62,11 +70,7 @@ export class KtksThongtindangkyComponent implements OnInit {
 
     if (itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyKhaiThacKhoangSanComponent[itemHoSo.loaicapphep]);
-      // if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
-      //   factory = this.cfr.resolveComponentFactory('');
-      // } else if (itemHoSo.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-      //   factory = this.cfr.resolveComponentFactory('');
-      // }
+      
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;

@@ -45,6 +45,14 @@ import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoang
 import { KtksThongtindangkyComponent } from "./khaithackhoangsan/ktks-thongtindangky/ktks-thongtindangky.component";
 import { DangkykhaithacgiahanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
 import { DangkykhaithackhoangsanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
+import { TanthukhoangsanListComponent } from './tanthukhoangsan/tanthukhoangsan-list/tanthukhoangsan-list.component';
+import { TanthukhoangsanIoComponent } from './tanthukhoangsan/tanthukhoangsan-io/tanthukhoangsan-io.component';
+import { TralaigiayphepListComponent } from './tralaigiayphep/tralaigiayphep-list/tralaigiayphep-list.component';
+import { TralaigiayphepIoComponent } from './tralaigiayphep/tralaigiayphep-io/tralaigiayphep-io.component';
+import { DongcuamoListComponent } from './dongcuamo/dongcuamo-list/dongcuamo-list.component';
+import { DongcuamoIoComponent } from './dongcuamo/dongcuamo-io/dongcuamo-io.component';
+import { ChuyennhuongquyenListComponent } from './chuyennhuongquyen/chuyennhuongquyen-list/chuyennhuongquyen-list.component';
+import { ChuyennhuongquyenIoComponent } from './chuyennhuongquyen/chuyennhuongquyen-io/chuyennhuongquyen-io.component';
 
 
 
@@ -79,7 +87,15 @@ import { DangkykhaithackhoangsanIoComponent } from "./khaithackhoangsan/ktks-tho
     KhaithackhoangsanIoComponent,
     KtksThongtindangkyComponent,
     DangkykhaithacgiahanIoComponent,
-    DangkykhaithackhoangsanIoComponent
+    DangkykhaithackhoangsanIoComponent,
+    TanthukhoangsanListComponent,
+    TanthukhoangsanIoComponent,
+    TralaigiayphepListComponent,
+    TralaigiayphepIoComponent,
+    DongcuamoListComponent,
+    DongcuamoIoComponent,
+    ChuyennhuongquyenListComponent,
+    ChuyennhuongquyenIoComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

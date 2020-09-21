@@ -24,6 +24,42 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "tanthukhoangsan": {
+    "titleList": "Danh sách hồ sơ đăng ký tận thu khoáng sản",
+    "titleAdd": "Thêm mới hồ sơ đăng ký tận thu khoáng sản",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký tận thu khoáng sản",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "tralaigiayphep": {
+    "titleList": "Danh sách hồ sơ đăng ký trả lại giấy phép thăm dò, khai thác",
+    "titleAdd": "Thêm mới hồ sơ đăng ký trả lại giấy phép thăm dò, khai thác",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký trả lại giấy phép thăm dò, khai thác",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "dongcuamo": {
+    "titleList": "Danh sách hồ sơ đăng ký đóng cửa mỏ",
+    "titleAdd": "Thêm mới hồ sơ đăng ký đóng cửa mỏ",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký đóng cửa mỏ",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "chuyennhuongquyen": {
+    "titleList": "Danh sách hồ sơ đăng ký chuyển nhượng quyền thăm dò, khai thác",
+    "titleAdd": "Thêm mới hồ sơ đăng ký chuyển nhượng quyền thăm dò, khai thác",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký chuyển nhượng quyền thăm dò, khai thác",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
   "hoso": {
     "titleList": "Danh sách hồ sơ",
     "titleAdd": "Thêm mới hồ sơ",
