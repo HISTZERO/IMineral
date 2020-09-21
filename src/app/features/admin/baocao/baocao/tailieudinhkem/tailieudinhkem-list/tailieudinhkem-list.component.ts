@@ -1,19 +1,20 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
-import { ActivatedRoute } from "@angular/router";
-import { MatSidenav } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { HttpErrorResponse } from "@angular/common/http";
+import {Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {MatSidenav} from "@angular/material";
+import {TranslateService} from "@ngx-translate/core";
+import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
+import {HttpErrorResponse} from "@angular/common/http";
 
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { ThietLapHeThong, SettingsCommon } from "src/app/shared/constants/setting-common";
-import { BaocaoFacadeService } from "src/app/services/admin/baocao/baocao-facade.service";
-import { OutputTaiLieuModel } from "src/app/models/admin/baocao/tailieudinhkem.model";
-import { Paging } from "src/app/shared/constants/enum";
-import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { TailieudinhkemIoComponent } from "src/app/features/admin/baocao/baocao/tailieudinhkem/tailieudinhkem-io/tailieudinhkem-io.component";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {ThietLapHeThong, SettingsCommon} from "src/app/shared/constants/setting-common";
+import {BaocaoFacadeService} from "src/app/services/admin/baocao/baocao-facade.service";
+import {OutputTaiLieuModel} from "src/app/models/admin/baocao/tailieudinhkem.model";
+import {Paging} from "src/app/shared/constants/enum";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import {TailieudinhkemIoComponent} from "src/app/features/admin/baocao/baocao/tailieudinhkem/tailieudinhkem-io/tailieudinhkem-io.component";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
+import {CommonFacadeService} from "src/app/services/admin/common/common-facade.service";
 
 @Component({
   selector: 'app-tailieudinhkem-list',
@@ -23,9 +24,9 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 export class TailieudinhkemListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridTaiLieu", { static: false }) public gridToaDo: GridComponent;
-  @ViewChild('aside', { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compTaiLieuIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("gridTaiLieu", {static: false}) public gridToaDo: GridComponent;
+  @ViewChild('aside', {static: true}) public matSidenav: MatSidenav;
+  @ViewChild("compTaiLieuIO", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
 
   // Chứa id báo cáo
   public idBaoCao: string;
@@ -45,6 +46,9 @@ export class TailieudinhkemListComponent implements OnInit {
   // Chứa dữ liệu item đã chọn
   public selectedItem: OutputTaiLieuModel;
 
+  // Service
+  public itemService: any;
+
   constructor(
     private activatedRoute: ActivatedRoute,
     public matSidenavService: MatsidenavService,
@@ -53,12 +57,14 @@ export class TailieudinhkemListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     public baocaoFacadeService: BaocaoFacadeService,
     public generalClientService: GeneralClientService,
-    public commonService: CommonServiceShared
-  ) { }
+    public commonService: CommonServiceShared,
+    public commonFacadeService: CommonFacadeService,
+  ) {
+  }
 
   async ngOnInit() {
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
+    this.wrapSettings = {wrapMode: 'Both'};
     // Lấy id trên url
     this.idBaoCao = this.activatedRoute.snapshot.paramMap.get('id');
     // Lấy dữ iệu translate
@@ -78,8 +84,8 @@ export class TailieudinhkemListComponent implements OnInit {
   }
 
   /**
-  * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
-  */
+   * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
+   */
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
@@ -95,8 +101,8 @@ export class TailieudinhkemListComponent implements OnInit {
 
   async getAllTaiLieuById() {
     const listData: any = await this.baocaoFacadeService
-    .getTaiLieuDinhKemService()
-    .getAllTaiLieuByIdBaoCao(this.idBaoCao).toPromise();
+      .getTaiLieuDinhKemService()
+      .getAllTaiLieuByIdBaoCao(this.idBaoCao).toPromise();
 
     if (listData) {
       listData.map((tailieu, index) => {
@@ -147,7 +153,7 @@ export class TailieudinhkemListComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-   /**
+  /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
   async deleteItemTaiLieuDinhKem(data) {
@@ -185,7 +191,7 @@ export class TailieudinhkemListComponent implements OnInit {
       if (result === "confirm") {
         await this.baocaoFacadeService
           .getTaiLieuDinhKemService()
-          .deleteItem({ idtailieu: this.selectedItem.idtailieu })
+          .deleteItem({idtailieu: this.selectedItem.idtailieu})
           .subscribe(
             () => this.getAllTaiLieuById(),
             (error: HttpErrorResponse) => {
@@ -211,5 +217,43 @@ export class TailieudinhkemListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName) {
     this[methodName]();
+  }
+
+
+  /**
+   * Download tài liệu
+   */
+  async downloadTaiLieuHoSo(idTaiLieu: string) {
+    const dataItem: any = await this.baocaoFacadeService
+      .getTaiLieuDinhKemService()
+      .getByid(idTaiLieu).toPromise();
+
+    if (!dataItem) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      return;
+    }
+
+    if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
+      await this.commonFacadeService.getFileService()
+        .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem}).subscribe(
+          (data) => {
+            const localBlobData = new Blob([data], {type: 'application/octet-stream'});
+            if (data) {
+              const localDownloadLink = document.createElement('a');
+              const localUrl = window.URL.createObjectURL(localBlobData);
+              localDownloadLink.href = localUrl;
+              localDownloadLink.setAttribute('download', dataItem.filedinhkem);
+              document.body.appendChild(localDownloadLink);
+              localDownloadLink.click();
+              document.body.removeChild(localDownloadLink);
+            }
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          }
+        );
+    } else {
+      this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.informedNotExistedFile);
+    }
   }
 }
