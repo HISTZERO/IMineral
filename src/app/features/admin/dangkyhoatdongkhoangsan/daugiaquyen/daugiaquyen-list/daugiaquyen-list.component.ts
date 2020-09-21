@@ -28,7 +28,7 @@ export class DaugiaquyenListComponent implements OnInit {
   async ngOnInit() {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    this.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.titleList;
+    this.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.daugiaquyen.titleList;
   }
 
   /**
