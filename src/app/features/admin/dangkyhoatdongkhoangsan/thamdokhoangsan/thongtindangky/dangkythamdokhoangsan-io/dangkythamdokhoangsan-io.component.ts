@@ -39,8 +39,8 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   public dangKhoangSanList = DangKhoangSan;
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
-  // chứa dữ liệu Id đăng ký thăm dò
-  private iddangkythamdo: string;
+  // chứa dữ liệu đăng ký thăm dò
+  private dangKyThamDoKhoangSan: any;
   // Action thao tác dữ liệu
   public currentAction: number;
   // Action đăng ký thăm dò
@@ -100,15 +100,15 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       }
     });
 
-    let dangKyThamDo: any;
     if (this.idhoso !== null && this.idhoso !== undefined) {
-      dangKyThamDo = await this.getDangKyThamDoByIdHoSo(this.idhoso);
+      this.dangKyThamDoKhoangSan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
-      if (dangKyThamDo) {
-        this.iddangkythamdo = dangKyThamDo.iddangkythamdo;
+      if (this.dangKyThamDoKhoangSan) {
         this.currentAction = DangKyThamDoActionEnum.Edit;
+        this.selectCurrentFormState();
       } else {
         this.currentAction = DangKyThamDoActionEnum.Add;
+        this.selectCurrentFormState();
       }
     } else {
       this.currentAction = DangKyThamDoActionEnum.None;
@@ -118,7 +118,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
-    await this.formOnEdit(dangKyThamDo);
+    await this.formOnEdit(this.dangKyThamDoKhoangSan);
 
     return true;
   }
@@ -132,7 +132,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       dientichthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       chieusauthamdotu: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       chieusauthamdoden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      thoihanthamdo: ["", Validators.required],
+      thoihanthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       mucdichsudungkhoangsan: ["", Validators.required],
       dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
       donvidientich: ["", Validators.required],
@@ -184,7 +184,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dientichthamdoFormat },
       chieusauthamdotu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdotuFormat },
       chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenFormat },
-      thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoRequired },
+      thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoFormat  },
       mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.mucdichsudungkhoangsanRequired },
       dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvidientichRequired },
@@ -210,7 +210,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getDangKyThamDoByIdHoSo(idHoSo: string) {
-    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
     const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
     return dangKyItem;
   }
@@ -223,13 +223,14 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
     const inputModel = this.dangKyThamDoIOForm.value;
     inputModel.idhoso = this.idhoso;
     if (this.currentAction === DangKyThamDoActionEnum.Add) {
       dkThamDoKhoangSanService.addItem(inputModel).subscribe(
         async (res) => {
-          this.iddangkythamdo = res.iddangkythamdo;
+          this.dangKyThamDoKhoangSan = inputModel;
+          this.dangKyThamDoKhoangSan.iddangkythamdo = res.iddangkythamdo;
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
           this.selectNewInsertedDangKyThamDo();
@@ -244,9 +245,10 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
           )
       );
     } else if (this.currentAction === DangKyThamDoActionEnum.Edit) {
-      inputModel.iddangkythamdo = this.iddangkythamdo;
+      inputModel.iddangkythamdo = this.dangKyThamDoKhoangSan.iddangkythamdo;
       dkThamDoKhoangSanService.updateItem(inputModel).subscribe(
         async (res) => {
+          this.dangKyThamDoKhoangSan = inputModel;
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
         },
@@ -277,6 +279,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * select inserted state of form
    */
   private selectCurrentFormState() {
+    if (this.currentAction === DangKyThamDoActionEnum.Edit) {
+      this.disabledDeleteButton = false;
+    } else {
+      this.disabledDeleteButton = true;
+    }
+
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
@@ -284,7 +292,47 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectNewInsertedDangKyThamDo() {
-    this.selectNewInsertedDangKyThamDoEvent.emit(this.iddangkythamdo);
+    this.selectNewInsertedDangKyThamDoEvent.emit(this.dangKyThamDoKhoangSan.iddangkythamdo);
   }
 
+  /**
+   *
+   */
+  deleteItemDangKyThamDoKhoangSan() {
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.contentDelete,
+      this.dangKyThamDoKhoangSan.diadiem
+    );
+    dialogRef.afterClosed().subscribe(async (result) => {
+      if (result === "confirm") {
+        await this.dangKyHoatDongKhoangSanFacadeService
+          .getDangKyThamDoKhoangSanService()
+          .deleteDangKyThamDoByIdHoSo({ idhoso: this.idhoso })
+          .subscribe(
+            () => {
+              this.dangKyThamDoKhoangSan = null;
+              this.currentAction = DangKyThamDoActionEnum.Add;
+              this.onFormReset();
+              this.selectCurrentFormState();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              )
+          );
+      }
+    });
+  }
+
+  /**
+   * Hàm reset form, gọi khi nhấn nút reset dữ liệu
+   */
+  onFormReset() {
+    // Hàm .reset sẽ xóa trắng mọi control trên form
+    this.dangKyThamDoIOForm.reset();
+  }
 }

@@ -158,7 +158,7 @@ export class HosotailieuListComponent implements OnInit {
   /**
    * Hàm lấy danh sách dữ liệu đã chọn trên grid
    */
-  public getAllDataActive() {
+  getAllDataActive() {
     this.listDataSelect = this.griTaiLieu.getSelectedRecords();
 
     if (this.listDataSelect.length > 0) {
@@ -192,7 +192,7 @@ export class HosotailieuListComponent implements OnInit {
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openTaiLieuIOSidenav() {
+  openTaiLieuIOSidenav() {
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
@@ -354,7 +354,7 @@ export class HosotailieuListComponent implements OnInit {
   /**
    * Hàm delete mảng item đã chọn
    */
-  public deleteArrayItem() {
+  deleteArrayItem() {
     const idItems: string[] = [];
     const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {

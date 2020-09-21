@@ -383,8 +383,6 @@ export class DmLinhvucListComponent implements OnInit {
     this.commonService.canDeleteDialogService(sMsg);
   }
 
-  
-  
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName) {
     this[methodName]();
