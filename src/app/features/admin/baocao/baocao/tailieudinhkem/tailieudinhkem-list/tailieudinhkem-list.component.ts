@@ -14,8 +14,7 @@ import {Paging} from "src/app/shared/constants/enum";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {TailieudinhkemIoComponent} from "src/app/features/admin/baocao/baocao/tailieudinhkem/tailieudinhkem-io/tailieudinhkem-io.component";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {DangKyHoatDongKhoangSanFacadeService} from "../../../../../../services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonFacadeService} from "../../../../../../services/admin/common/common-facade.service";
+import {CommonFacadeService} from "src/app/services/admin/common/common-facade.service";
 
 @Component({
   selector: 'app-tailieudinhkem-list',
