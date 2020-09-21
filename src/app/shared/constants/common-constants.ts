@@ -145,6 +145,24 @@ export const DonViDienTich = [
   }
 ];
 
+export const DonViThoiHan = [
+  {
+      id: "tháng",
+      name: "tháng"
+  },
+  {
+      id: "năm",
+      name: "năm"
+  }
+];
+
+export const DonViDoSau = [
+  {
+      id: "m",
+      name: "m"
+  }
+];
+
 export const DangKhoangSan = [
     {
         id: 1,
