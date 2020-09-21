@@ -134,6 +134,17 @@ export const LoaiVanBan = [
     }
 ];
 
+export const DonViDienTich = [
+  {
+      id: 1,
+      name: "km"
+  },
+  {
+      id: 2,
+      name: "m"
+  }
+];
+
 export const DangKhoangSan = [
     {
         id: 1,
@@ -188,4 +199,4 @@ export const RoutingNameChiTietDangKyHoatDongKS: any = {
     [NhomLoaiCapPhepEnum.DongCuaMo]: "dkdongcuamochitiet",
     [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: "dkchuyennhuongquyenchitiet",
   }
-  
+

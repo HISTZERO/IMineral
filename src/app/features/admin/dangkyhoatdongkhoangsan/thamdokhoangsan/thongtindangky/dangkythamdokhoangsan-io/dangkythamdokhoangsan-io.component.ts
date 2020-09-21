@@ -21,6 +21,8 @@ import { DangKhoangSan } from 'src/app/shared/constants/common-constants';
 export class DangkythamdokhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectNewInsertedDangKyThamDoEvent") selectNewInsertedDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -94,7 +96,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
 
     let dangKyThamDo: any;
     if (this.idhoso !== null && this.idhoso !== undefined) {
-      dangKyThamDo = await this.getDangkyThamDoByIdHoSo(this.idhoso);
+      dangKyThamDo = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (dangKyThamDo) {
         this.iddangkythamdo = dangKyThamDo.iddangkythamdo;
@@ -111,6 +113,8 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     await this.geAllHeQuyChieu();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit(dangKyThamDo);
+
+    return true;
   }
 
   /**
@@ -199,9 +203,9 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * Lấy dữ liệu hồ sơ theo IdHoSo
    * @param idHoSo
    */
-  private async getDangkyThamDoByIdHoSo(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
-    const dangKyItem = await dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoByidHoSo(idHoSo).toPromise();
+  private async getDangKyThamDoByIdHoSo(idHoSo: string) {
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoService();
+    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
     return dangKyItem;
   }
 
@@ -213,15 +217,16 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
     const inputModel = this.dangKyThamDoIOForm.value;
     inputModel.idhoso = this.idhoso;
     if (this.currentAction === DangKyThamDoActionEnum.Add) {
-      dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
+      dkThamDoKhoangSanService.addItem(inputModel).subscribe(
         async (res) => {
           this.iddangkythamdo = res.iddangkythamdo;
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.selectNewInsertedDangKyThamDo();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -234,7 +239,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       );
     } else if (this.currentAction === DangKyThamDoActionEnum.Edit) {
       inputModel.iddangkythamdo = this.iddangkythamdo;
-      dangKyHoatDongKhoangSanFacadeService.updateItem(inputModel).subscribe(
+      dkThamDoKhoangSanService.updateItem(inputModel).subscribe(
         async (res) => {
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
@@ -268,4 +273,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   private selectCurrentFormState() {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectNewInsertedDangKyThamDo() {
+    this.selectNewInsertedDangKyThamDoEvent.emit(this.iddangkythamdo);
+  }
+
 }
