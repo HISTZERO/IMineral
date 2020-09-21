@@ -3,19 +3,18 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
-import { ButtonBackKhaiThacKhoangSan, MenuDkKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
+import { ButtonBackDongCuaMo, MenuDkDongCuaMoChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 
-
 @Component({
-  selector: 'app-khaithackhoangsan-io',
-  templateUrl: './khaithackhoangsan-io.component.html',
-  styleUrls: ['./khaithackhoangsan-io.component.scss']
+  selector: 'app-dongcuamo-io',
+  templateUrl: './dongcuamo-io.component.html',
+  styleUrls: ['./dongcuamo-io.component.scss']
 })
-export class KhaithackhoangsanIoComponent implements OnInit {
+export class DongcuamoIoComponent implements OnInit {
 
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
@@ -24,10 +23,10 @@ export class KhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
   @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
-  public navArray = MenuDkKhaiThacKhoangSanChitiet;
+  public navArray = MenuDkDongCuaMoChitiet;
 
   // Chứa dữ liệu nút quay lại danh sách
-  public btnArray = ButtonBackKhaiThacKhoangSan;
+  public btnArray = ButtonBackDongCuaMo;
 
   public currentAction: number;
 
@@ -165,5 +164,4 @@ export class KhaithackhoangsanIoComponent implements OnInit {
       this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinDangKyComp.manualDataInit();
     }
   }
-
 }
