@@ -45,6 +45,8 @@ import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoang
 import { KtksThongtindangkyComponent } from "./khaithackhoangsan/ktks-thongtindangky/ktks-thongtindangky.component";
 import { DangkykhaithacgiahanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
 import { DangkykhaithackhoangsanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
+import { PheduyettruluongkhoangsanIoComponent } from './pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component';
+import { PheduyettruluongkhoangsanListComponent } from './pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component';
 
 
 
@@ -79,7 +81,9 @@ import { DangkykhaithackhoangsanIoComponent } from "./khaithackhoangsan/ktks-tho
     KhaithackhoangsanIoComponent,
     KtksThongtindangkyComponent,
     DangkykhaithacgiahanIoComponent,
-    DangkykhaithackhoangsanIoComponent
+    DangkykhaithackhoangsanIoComponent,
+    PheduyettruluongkhoangsanIoComponent,
+    PheduyettruluongkhoangsanListComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

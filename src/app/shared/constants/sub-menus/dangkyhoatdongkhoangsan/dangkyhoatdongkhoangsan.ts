@@ -30,7 +30,7 @@ export const MenuThamDoKhoangSanChitiet = [
 
 export const ButtonBackThamDoKhoangSan = [
   {
-    title: `Thăn dò khoáng sản`,
+    title: `Thăm dò khoáng sản`,
     icon: "fad fa-chevron-double-left",
     color: "btn-primary",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkthamdokhoangsanUri}`
@@ -73,4 +73,41 @@ export const ButtonBackKhaiThacKhoangSan = [
       color: "btn-primary",
       url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkKhaithackhoangsanUri}`
     },
-  ]
+  ];
+
+export const MenuDkPheDuyetTruLuongKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Phê duyệt trữ lượng khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuDkPheDuyetTruLuongKhoangSanChitiet = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Phê duyệt trữ lượng khoáng sản",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkPheDuyetTruLuongUri}`,
+  },
+  {
+    title: "Chi tiết",
+    url: "",
+  },
+];
+
+export const ButtonBackPheDuyetTruLuongKhoangSan = [
+  {
+    title: `Phê duyệt trữ lượng khoáng sản`,
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${AdminRoutingName.dkPheDuyetTruLuongUri}`
+  },
+];

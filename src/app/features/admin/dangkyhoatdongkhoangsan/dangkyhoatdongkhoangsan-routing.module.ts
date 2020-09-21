@@ -5,6 +5,8 @@ import {ThamdokhoangsanListComponent} from 'src/app/features/admin/dangkyhoatdon
 import { ThamdokhoangsanIoComponent } from './thamdokhoangsan/thamdokhoangsan-io/thamdokhoangsan-io.component';
 import { KhaithackhoangsanListComponent } from "./khaithackhoangsan/khaithackhoangsan-list/khaithackhoangsan-list.component";
 import { KhaithackhoangsanIoComponent } from "./khaithackhoangsan/khaithackhoangsan-io/khaithackhoangsan-io.component";
+import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component";
+import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
 
 
 const routes: Routes = [
@@ -17,7 +19,9 @@ const routes: Routes = [
           {path: AdminRoutingName.dkthamdokhoangsanUri, component: ThamdokhoangsanListComponent},
           {path: AdminRoutingName.dkthamdokhoangsanchitietUri, component: ThamdokhoangsanIoComponent},
           {path: AdminRoutingName.dkKhaithackhoangsanUri, component: KhaithackhoangsanListComponent},
-          {path: AdminRoutingName.dkKhaithackhoangsanChitiet, component: KhaithackhoangsanIoComponent}
+          {path: AdminRoutingName.dkKhaithackhoangsanChitiet, component: KhaithackhoangsanIoComponent},
+          {path: AdminRoutingName.dkPheDuyetTruLuongUri, component: PheduyettruluongkhoangsanListComponent},
+          {path: AdminRoutingName.dkPheDuyetTruLuongChitiet, component: PheduyettruluongkhoangsanIoComponent},
         ]
       }
     ]

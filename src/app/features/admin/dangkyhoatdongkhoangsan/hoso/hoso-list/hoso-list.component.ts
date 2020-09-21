@@ -1,25 +1,25 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
-import { DatePipe } from '@angular/common';
-import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { Observable } from "rxjs";
-import { MatDialog } from "@angular/material";
-import { HttpErrorResponse } from "@angular/common/http";
-import { TranslateService } from "@ngx-translate/core";
-import { FormGroup, FormBuilder } from "@angular/forms";
-import { GridComponent } from "@syncfusion/ej2-angular-grids";
-import { Router } from "@angular/router";
+import {Component, OnInit, Input, ViewChild} from '@angular/core';
+import {DatePipe} from '@angular/common';
+import {DataStateChangeEventArgs, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
+import {Observable} from "rxjs";
+import {MatDialog} from "@angular/material";
+import {HttpErrorResponse} from "@angular/common/http";
+import {TranslateService} from "@ngx-translate/core";
+import {FormGroup, FormBuilder} from "@angular/forms";
+import {GridComponent} from "@syncfusion/ej2-angular-grids";
+import {Router} from "@angular/router";
 
-import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputHsHoSoModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
-import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
-import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
-import { RoutingNameChiTietDangKyHoatDongKS } from "src/app/shared/constants/common-constants";
+import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import {OutputHsHoSoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
+import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
+import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
+import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import {RoutingNameChiTietDangKyHoatDongKS} from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-hoso-list',
@@ -35,7 +35,7 @@ export class HosoListComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Viewchild template
-  @ViewChild("gridHoSo", { static: false }) public gridHoSo: GridComponent;
+  @ViewChild("gridHoSo", {static: false}) public gridHoSo: GridComponent;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -68,22 +68,22 @@ export class HosoListComponent implements OnInit {
   public wrapSettings: TextWrapSettingsModel;
 
   constructor(public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-    public commonService: CommonServiceShared,
-    public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService,
-    public router: Router,
-    public formBuilder: FormBuilder,
-    public generalClientService: GeneralClientService,
-    public dmFacadeService: DmFacadeService,
-    public datePipe: DatePipe,
-    public modalDialog: MatDialog) {
+              public commonService: CommonServiceShared,
+              public thietlapFacadeService: ThietlapFacadeService,
+              private translate: TranslateService,
+              public router: Router,
+              public formBuilder: FormBuilder,
+              public generalClientService: GeneralClientService,
+              public dmFacadeService: DmFacadeService,
+              public datePipe: DatePipe,
+              public modalDialog: MatDialog) {
     this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
   }
 
   async ngOnInit() {
 
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
+    this.wrapSettings = {wrapMode: 'Both'};
 
     // Gọi hàm lấy dữ liệu translate
     this.getDataTranslate();
@@ -117,7 +117,8 @@ export class HosoListComponent implements OnInit {
 
   async manualDataInit() {
     if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan) {
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
@@ -157,7 +158,7 @@ export class HosoListComponent implements OnInit {
 
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
-      .getFetchAll({ Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1 });
+      .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1});
     this.loaiCapPhepFilters = listData.items;
     this.allLoaiCapPhep = listData.items;
   }
@@ -176,7 +177,7 @@ export class HosoListComponent implements OnInit {
     };
 
     this.itemService
-      .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
+      .getDataFromServer({skip: 0, take: this.settingsCommon.pageSettings.pageSize}, searchModel);
   }
 
   /*
@@ -220,8 +221,8 @@ export class HosoListComponent implements OnInit {
    */
   async editItemHoSo(id: any) {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${RoutingNameChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`],
-      { queryParams: { idhoso: id } });
+        `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${RoutingNameChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`],
+      {queryParams: {idhoso: id}});
   }
 
   /**
@@ -259,7 +260,7 @@ export class HosoListComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getHoSoService()
-          .deleteItem({ idhoso: this.selectedItem.idhoso })
+          .deleteItem({idhoso: this.selectedItem.idhoso})
           .subscribe(
             () => this.getAllHoSo(),
             (error: HttpErrorResponse) => {
