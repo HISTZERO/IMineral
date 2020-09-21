@@ -26,12 +26,24 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
   }
 
   public getDangKyThamDoByIdHoSo(idhoso: any) {
-    this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHOANGSAN
-    });
-
     try {
       return this.httpClient.get(`${this.apiUrl}?Idhoso=${idhoso}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
+
+  /**
+   * Update item
+   * @param {Number} id Item id.
+   * @returns {Observable}
+   */
+  public deleteDangKyThamDoByIdHoSo(params = {}) {
+    try {
+      const queryString = this.convertObjectToQueryString(params);
+      return this.httpClient.delete<any>(`${this.apiUrl}?${queryString}`, {
         headers: this.headers,
       });
     } catch (error) {

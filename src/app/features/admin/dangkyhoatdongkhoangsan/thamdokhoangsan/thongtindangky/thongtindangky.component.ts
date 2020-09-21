@@ -10,6 +10,7 @@ import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyh
 import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
 import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
 import { CongtrinhthamdoListComponent } from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -51,16 +52,19 @@ export class ThongtindangkyComponent implements OnInit {
     [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
   };
 
+  // Lưu trữ dữ liệu action hiện tại
   public currentAction: number;
-
   // Chứa dữ liệu translate
   public dataTranslate: any;
-
+  // Lưu trữ dữ liệu iddangkythamdo
   private iddangkythamdo: string;
+  // Lưu trữ dữ liệu hồ sơ
+  private itemHoSo: any;
 
   constructor(private cfr: ComponentFactoryResolver,
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
+              public commonService: CommonServiceShared,
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
 
   async ngOnInit() {
@@ -90,6 +94,14 @@ export class ThongtindangkyComponent implements OnInit {
     });
 
     if (this.idhoso === null || this.idhoso === undefined) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
+      return;
+    }
+
+    this.itemHoSo =  await this.getHoSoById(this.idhoso);
+
+    if (!this.itemHoSo) {
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
       return;
     }
 
@@ -147,15 +159,14 @@ export class ThongtindangkyComponent implements OnInit {
 
   private async showDangKyViewComponent() {
     let factory: any;
-    const itemHoSo = await this.getHoSoById(this.idhoso);
 
-    if (itemHoSo) {
-      factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[itemHoSo.loaicapphep]);
+    if (this.itemHoSo) {
+      factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[this.itemHoSo.loaicapphep]);
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = itemHoSo.idhoso;
+    componentRef.instance.idhoso = this.itemHoSo.idhoso;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getIdDangKyThamDo(event));
   }

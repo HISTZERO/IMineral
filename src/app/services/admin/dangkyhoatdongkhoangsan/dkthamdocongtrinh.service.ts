@@ -26,10 +26,6 @@ export class DkThamDoCongTrinhService extends RepositoryEloquentService {
   }
 
   public getDangKyThamDoCongTrinhByIdDangKyThamDo(idhoso: any) {
-    this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOCONGTRINH
-    });
-
     try {
       return this.httpClient.get(`${this.apiUrl}?Iddangkythamdo=${idhoso}`, {
         headers: this.headers,
