@@ -183,5 +183,9 @@ export const DoiTuongBaoCao = [
 export const RoutingNameChiTietDangKyHoatDongKS: any = {
     [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: "dkthamdokhoangsanchitiet",
     [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: "dkkhaithackhoangsanchitiet",
+    [NhomLoaiCapPhepEnum.TanThuKhoangSan]: "dktanthukhoangsanchitiet",
+    [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: "dktralaigiayphepchitiet",
+    [NhomLoaiCapPhepEnum.DongCuaMo]: "dkdongcuamochitiet",
+    [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: "dkchuyennhuongquyenchitiet",
   }
   

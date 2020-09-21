@@ -92,6 +92,14 @@ export class AdminRoutingName {
   // 1.11 Routes phần thăm dò khoáng sản
   public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
   public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
+  public static dkTanthukhoangsanUri = "dktanthukhoangsan";
+  public static dkTralaigiayphepUri = "dktralaigiayphep";
+  public static dkDongcuamoUri = "dkdongcuamo";
+  public static dkChuyennhuongquyenUri = "dkchuyennhuongquyen";
   public static dkthamdokhoangsanchitietUri = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ThamDoKhoangSan];
   public static dkKhaithackhoangsanChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.KhaiThacKhoangSan];
+  public static dkTanthukhoangsanChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.TanThuKhoangSan];
+  public static dkTralaigiayphepChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.TraLaiGiayPhep];
+  public static dkDongcuamoChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.DongCuaMo];
+  public static dkChuyennhuongquyenChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac];
 }
