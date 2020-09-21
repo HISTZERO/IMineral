@@ -1,3 +1,5 @@
+import { DangkykhaithacgiahanIoComponent } from "../../features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
+import { DangkykhaithackhoangsanIoComponent } from "../../features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
 import { TrangThai } from "./trangthai-constants";
 export enum InsertedState {
   SaveAndRefresh = 1,
@@ -45,6 +47,12 @@ export enum NhomLoaiCapPhepEnum {
 export enum LoaiCapPhepEnum {
   ThamDoKhoangSan = "3",
   ThamDoGiaHan = "4",
+  KhaiThacKhoangSan = "9",
+  KhaiThacKhoangSanGiaHan = "10",
+  DieuChinhGiayPhapKhaiThac = "11",
+  KhaiThacKhoangSanCoDuAnDauTu = "15",
+  KhaiThacKhoangSanLamVatLieuXayDung = "16",
+  ThuHoiCatSoiDuAnNaoVetKhoiThong = "17"
 }
 
 export enum NhomTaiLieuEnum {
@@ -64,6 +72,7 @@ export enum LoaiDoiTuongEnum {
 }
 
 export enum HoSoActionEnum {
+  None = 0,
   Add = 1,
   Edit = 2
 }
@@ -84,4 +93,17 @@ export enum ThamDoKhoangSanTabEnum {
   TaiLieuHoSoDinhKem = 1,
   TaiLieuXuLyHoSoDinhKem = 2,
   ThongTinDangKy = 3
+}
+
+export enum DangKhoangSanEnum {
+  KhoangSanRan = 1,
+  KhoangSanNuocNong = 2
+}
+
+export enum DangKyThamDoKhoangSanTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucThamDo = 3,
+  CongTrinhThamDo = 4
 }

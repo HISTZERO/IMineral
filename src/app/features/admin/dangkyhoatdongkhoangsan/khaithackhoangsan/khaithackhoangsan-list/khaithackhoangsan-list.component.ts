@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
-import { MenuThamDoKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
+import { MenuDkKhaiThacKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
 
 @Component({
   selector: 'app-khaithackhoangsan-list',
@@ -18,7 +18,7 @@ export class KhaithackhoangsanListComponent implements OnInit {
   title: string;
 
   // Chứa menu item trên subheader
-  public navArray = MenuThamDoKhoangSan;
+  public navArray = MenuDkKhaiThacKhoangSan;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

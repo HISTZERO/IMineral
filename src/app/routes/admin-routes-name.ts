@@ -1,5 +1,7 @@
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
-import { keyNhomBaoCao } from "../shared/constants/nhombaocao-constants";
+import { RoutingNameChiTietDangKyHoatDongKS } from "src/app/shared/constants/common-constants";
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/enum";
+import { keyNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 
 export class AdminRoutingName {
   // Các routes cấp 1
@@ -89,6 +91,7 @@ export class AdminRoutingName {
 
   // 1.11 Routes phần thăm dò khoáng sản
   public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
-  public static dkthamdokhoangsanchitietUri = "dkthamdokhoangsanchitiet";
   public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
+  public static dkthamdokhoangsanchitietUri = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ThamDoKhoangSan];
+  public static dkKhaithackhoangsanChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.KhaiThacKhoangSan];
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InsertedState, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
+import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
 import { ActivatedRoute } from '@angular/router';
@@ -26,9 +26,6 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
-  // State của Save button
-  // tslint:disable-next-line: no-input-rename
-  @Input("insertedState") insertedState = InsertedState.SaveAndRefresh;
   // Chứa dữ liệu Form
   public dangKyThamDoIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -90,7 +87,9 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    */
   async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     let dangKyThamDo: any;
@@ -125,7 +124,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       chieusauthamdoden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       thoihanthamdo: ["", Validators.required],
       mucdichsudungkhoangsan: ["", Validators.required],
-      dangkhoangsan: ["", Validators.required],
+      dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
       donvidientich: ["", Validators.required],
       donvithoihan: ["", Validators.required],
       donvichieusau: ["", Validators.required],
@@ -149,7 +148,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    * hàm set value cho form
    */
   private async formOnEdit(item: OutputDkThamDoKhoangSanModel) {
-    if (this.currentAction === DangKyThamDoActionEnum.Edit) {
+    if (this.currentAction === DangKyThamDoActionEnum.Edit && item) {
       this.dangKyThamDoIOForm.setValue({
         diadiem: item.diadiem,
         dientichthamdo: item.dientichthamdo,
@@ -217,16 +216,12 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
     const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
     const inputModel = this.dangKyThamDoIOForm.value;
     inputModel.idhoso = this.idhoso;
-    if (this.currentAction === DangKyThamDoActionEnum.Add && (this.insertedState === InsertedState.SaveAndRefresh || this.insertedState === InsertedState.SaveAndEdit)) {
+    if (this.currentAction === DangKyThamDoActionEnum.Add) {
       dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
         async (res) => {
-          if (this.insertedState === InsertedState.SaveAndEdit) {
-            this.iddangkythamdo = res.iddangkythamdo;
-            this.currentAction = DangKyThamDoActionEnum.Edit;
-            this.selectCurrentFormState();
-          } else {
-            this.onFormReset();
-          }
+          this.iddangkythamdo = res.iddangkythamdo;
+          this.currentAction = DangKyThamDoActionEnum.Edit;
+          this.selectCurrentFormState();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -265,14 +260,6 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       this.validationErrorMessages,
       this.formErrors
     );
-  }
-
-  /**
-   * Hàm reset form, gọi khi nhấn nút reset dữ liệu
-   */
-  onFormReset() {
-    // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyThamDoIOForm.reset();
   }
 
   /**

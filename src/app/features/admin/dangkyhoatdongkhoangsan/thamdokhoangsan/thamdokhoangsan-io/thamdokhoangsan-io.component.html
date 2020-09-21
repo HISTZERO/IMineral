@@ -1,4 +1,4 @@
-<app-sub-header [menuItems]="navArray"></app-sub-header>
+<app-sub-header [menuItems]="navArray" [buttonItems]="btnArray"></app-sub-header>
 <div class="content pt-3">
   <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
     <mat-sidenav-content>
@@ -17,7 +17,7 @@
                 </h3>
               </div>
               <div class="card-body">
-                <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="selectedDefaultTab"
+                <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="thamDoKhoangSanTabEnum.ThongTinHoSo"
                   (selectedIndexChange)="tabChange($event)">
                   <mat-tab [disabled]="!disabledTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinHoSoTabTitle' | translate }}">
                     <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"

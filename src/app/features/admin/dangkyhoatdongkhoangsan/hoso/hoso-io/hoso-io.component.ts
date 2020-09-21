@@ -1,23 +1,23 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { MatSidenav } from '@angular/material';
 import { TranslateService } from '@ngx-translate/core';
-import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
+import { ActivatedRoute } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
+import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coquantiepnhan.model';
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputHsHoSoModel, OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { MatSidenav } from '@angular/material';
-import { DmCanhanOptionComponent } from "../../../danhmuc/canhan/canhan-option/canhan-option.component";
-import { DmTochucOptionComponent } from "../../../danhmuc/tochuc/tochuc-option/tochuc-option.component";
+import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
+import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 
@@ -45,6 +45,8 @@ export class HosoIoComponent implements OnInit {
   public hosoIOForm: FormGroup;
   // Chứa dữ liệu translate
   public dataTranslate: any;
+  //Chứa loại đối tượng
+  public loaiDoiTuongList = LoaiDoiTuong;
   // Chứa dữ liệu loại đối tượng
   public dangKhoangSanList = DangKhoangSan;
   // Chứa dữ liệu loại giấy tờ
@@ -96,14 +98,14 @@ export class HosoIoComponent implements OnInit {
   };
 
   constructor(private translate: TranslateService,
-              private formBuilder: FormBuilder,
-              private dmFacadeService: DmFacadeService,
-              private hethongFacadeService: HethongFacadeService,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              private activatedRoute: ActivatedRoute,
-              public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver) { }
+    private formBuilder: FormBuilder,
+    private dmFacadeService: DmFacadeService,
+    private hethongFacadeService: HethongFacadeService,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    private activatedRoute: ActivatedRoute,
+    public matSidenavService: MatsidenavService,
+    public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -124,7 +126,9 @@ export class HosoIoComponent implements OnInit {
    */
   async manualDataInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      this.idhoso = param.params.idhoso;
+      if (param && param.params && param.params.idhoso) {
+        this.idhoso = param.params.idhoso;
+      }
     });
 
     if (this.idhoso !== null && this.idhoso !== undefined) {
@@ -169,7 +173,7 @@ export class HosoIoComponent implements OnInit {
       website: [""],
     });
 
-    this.hosoIOForm.controls.tencanhantochuc.disable({onlySelf: true});
+    this.hosoIOForm.controls.tencanhantochuc.disable({ onlySelf: true });
   }
 
   /**
@@ -246,7 +250,7 @@ export class HosoIoComponent implements OnInit {
   async getLoaiCapPhepAll() {
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
-      .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, TrangThai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({ Nhomloaicapphep: this.nhomLoaiCapPhep, TrangThai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
     this.loaiCapPhepList = listData.items;
     this.loaiCapPhepFilters = listData.items;
   }
@@ -254,7 +258,7 @@ export class HosoIoComponent implements OnInit {
   async getCoQuanTiepNhanAll() {
     const listData: any = await this.hethongFacadeService
       .getCoQuanTiepNhanService()
-      .getFetchAll({PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({ PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
     this.coQuanTiepNhanList = listData.items;
     this.coQuanTiepNhanFilters = listData.items;
   }
@@ -350,9 +354,9 @@ export class HosoIoComponent implements OnInit {
     this.hosoIOForm.controls.idcoquantiepnhan.setValue("");
   }
 
-   /**
-    * Hàm mở sidenav
-    */
+  /**
+   * Hàm mở sidenav
+   */
   openIOSidenav() {
     const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
 

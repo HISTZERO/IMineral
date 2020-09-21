@@ -6,7 +6,7 @@ import {
 import { CommonModule } from '@angular/common';
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE, OwlDateTimeModule } from "ng-pick-datetime";
-import { MomentDateTimeAdapter,  OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
+import { MomentDateTimeAdapter, OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
 import { MY_CUSTOM_FORMATS } from "src/app/features/admin/admin-shared.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
@@ -42,39 +42,44 @@ import { CongtrinhthamdoIoComponent } from './thamdokhoangsan/thongtindangky/con
 import { CongtrinhthamdoListComponent } from './thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
 import { KhaithackhoangsanListComponent } from './khaithackhoangsan/khaithackhoangsan-list/khaithackhoangsan-list.component';
 import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoangsan-io/khaithackhoangsan-io.component';
+import { KtksThongtindangkyComponent } from "./khaithackhoangsan/ktks-thongtindangky/ktks-thongtindangky.component";
+import { DangkykhaithacgiahanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
+import { DangkykhaithackhoangsanIoComponent } from "./khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
 
 
 
 @NgModule({
   declarations: [
-  HosoListComponent,
-  HosoIoComponent,
-  ThamdokhoangsanIoComponent,
-  ThamdokhoangsanListComponent,
-  DangkyhoatdongkhoangsanComponent,
-  HosotailieuListComponent,
-  HosotailieuIoComponent,
-  ThongtindangkyComponent,
-  DangkythamdokhoangsanIoComponent,
-  DangkythamdogiahanIoComponent,
-  DonvihanhchinhComponent,
-  LoaikhoangsanComponent,
-  KhuvucthamdoComponent,
-  KhuvuctoadoComponent,
-  CongtrinhthamdoComponent,
-  DonvihanhchinhIoComponent,
-  DonvihanhchinhListComponent,
-  LoaikhoangsanIoComponent,
-  LoaikhoangsanListComponent,
-  KhuvucthamdoIoComponent,
-  KhuvucthamdoListComponent,
-  KhuvuctoadoIoComponent,
-  KhuvuctoadoListComponent,
-  CongtrinhthamdoIoComponent,
-  CongtrinhthamdoListComponent,
-  KhaithackhoangsanListComponent,
-  KhaithackhoangsanIoComponent,
-
+    HosoListComponent,
+    HosoIoComponent,
+    ThamdokhoangsanIoComponent,
+    ThamdokhoangsanListComponent,
+    DangkyhoatdongkhoangsanComponent,
+    HosotailieuListComponent,
+    HosotailieuIoComponent,
+    ThongtindangkyComponent,
+    DangkythamdokhoangsanIoComponent,
+    DangkythamdogiahanIoComponent,
+    DonvihanhchinhComponent,
+    LoaikhoangsanComponent,
+    KhuvucthamdoComponent,
+    KhuvuctoadoComponent,
+    CongtrinhthamdoComponent,
+    DonvihanhchinhIoComponent,
+    DonvihanhchinhListComponent,
+    LoaikhoangsanIoComponent,
+    LoaikhoangsanListComponent,
+    KhuvucthamdoIoComponent,
+    KhuvucthamdoListComponent,
+    KhuvuctoadoIoComponent,
+    KhuvuctoadoListComponent,
+    CongtrinhthamdoIoComponent,
+    CongtrinhthamdoListComponent,
+    KhaithackhoangsanListComponent,
+    KhaithackhoangsanIoComponent,
+    KtksThongtindangkyComponent,
+    DangkykhaithacgiahanIoComponent,
+    DangkykhaithackhoangsanIoComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -99,7 +104,9 @@ import { KhaithackhoangsanIoComponent } from './khaithackhoangsan/khaithackhoang
     CongtrinhthamdoIoComponent,
     DangkythamdokhoangsanIoComponent,
     DangkythamdogiahanIoComponent,
-    KhaithackhoangsanIoComponent
+    KhaithackhoangsanIoComponent,
+    DangkykhaithacgiahanIoComponent,
+    DangkykhaithackhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
