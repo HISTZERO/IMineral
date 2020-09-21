@@ -60,6 +60,24 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "pheduyettruluongkhoangsan": {
+    "titleList": "Danh sách hồ sơ đăng ký phê duyệt trữ lượng khoáng sản",
+    "titleAdd": "Thêm mới hồ sơ đăng ký phê duyệt trữ lượng khoáng sản",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký phê duyệt trữ lượng khoáng sản",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "daugiaquyen": {
+    "titleList": "Danh sách hồ sơ đăng ký đấu giá quyền khai thác khoáng sản",
+    "titleAdd": "Thêm mới hồ sơ đăng ký đấu giá quyền khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu hồ sơ đăng ký đấu giá quyền khai thác khoáng sản",
+    "thongTinHoSoTabTitle": "Thông tin hồ sơ",
+    "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
+    "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
   "hoso": {
     "titleList": "Danh sách hồ sơ",
     "titleAdd": "Thêm mới hồ sơ",

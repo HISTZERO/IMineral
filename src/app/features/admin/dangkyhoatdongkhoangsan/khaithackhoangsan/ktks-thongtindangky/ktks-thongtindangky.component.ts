@@ -11,7 +11,7 @@ import { DangkykhaithackhoangsanIoComponent } from "./dangkykhaithackhoangsan-io
 export const DangKyKhaiThacKhoangSanComponent: any = {
   [LoaiCapPhepEnum.KhaiThacKhoangSan]: DangkykhaithackhoangsanIoComponent,
   [LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan]: DangkykhaithacgiahanIoComponent
-}
+};
 
 @Component({
   selector: 'app-ktks-thongtindangky',
@@ -70,7 +70,7 @@ export class KtksThongtindangkyComponent implements OnInit {
 
     if (itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyKhaiThacKhoangSanComponent[itemHoSo.loaicapphep]);
-      
+
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
