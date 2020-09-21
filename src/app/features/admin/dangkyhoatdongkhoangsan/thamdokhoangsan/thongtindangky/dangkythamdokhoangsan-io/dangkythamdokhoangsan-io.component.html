@@ -16,8 +16,8 @@
           <i class="fal fa-save"></i>
           {{ "COMMON.default.save" | translate }}
         </button>
-        <button *ngIf="disabledDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;"
-                (click)="null">
+        <button *ngIf="!disabledDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;"
+                (click)="deleteItemDangKyThamDoKhoangSan()">
           <i class="far fa-trash"></i>
           {{ "COMMON.default.delete" | translate }}
         </button>
