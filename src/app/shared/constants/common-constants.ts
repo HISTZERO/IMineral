@@ -136,11 +136,11 @@ export const LoaiVanBan = [
 
 export const DonViDienTich = [
   {
-      id: 1,
+      id: 'km',
       name: "km"
   },
   {
-      id: 2,
+      id: 'm',
       name: "m"
   }
 ];

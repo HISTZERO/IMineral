@@ -28,7 +28,7 @@ export class DangKyHoatDongKhoangSanFacadeService {
   }
 
   // Đăng ký thăm dò service
-  public getDangKyThamDoService() {
+  public getDangKyThamDoKhoangSanService() {
     return new DkThamDoKhoangSanService(this.httpClient);
   }
 

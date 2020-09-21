@@ -13,7 +13,8 @@
     "donViHanhChinhTabTile": "Đơn vị hành chính",
     "loaiKhoangSanTabTile": "Loại khoáng sản",
     "khuVucThamDoTabTile": "Khu vực thăm dò",
-    "congTrinhThamDoTabTitle": "Công trình thăm dò"
+    "congTrinhThamDoTabTitle": "Công trình thăm dò",
+    "informedNotExistedHoSoDangKyThamDo": "Hồ sơ đăng ký thăm dò không tồn tại"
   },
   "khaithackhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký khai thác khoáng sản",
@@ -174,6 +175,7 @@
   "dangkythamdokhoangsan": {
     "titleAdd": "Thêm mới đăng ký thăm dò khoáng sản",
     "titleEdit": "Sửa dữ liệu đăng ký thăm dò khoáng sản",
+    "contentDelete": "Đăng ký thăm dò tại địa điểm: ",
     "diadiem": "Địa điểm",
     "dientichthamdo": "Diện tích thăm dò",
     "chieusauthamdotu": "Chiều sâu thăm dò từ",
@@ -208,6 +210,7 @@
     "chieusauthamdodenRequired": "Chiều sâu thăm dò đến không được để trống",
     "chieusauthamdodenFormat": "chiều sâu thăm dò đến chưa đúng định dạng yêu cầu",
     "thoihanthamdoRequired": "Thời hạn thăm dò không được để trống",
+    "thoihanthamdoFormat": "Thời hạn thăm dò chưa đúng định dạng yêu cầu",
     "mucdichsudungkhoangsanRequired": "Mục đích sử dụng không được để trống",
     "dangkhoangsanRequired": "Dạng khoáng sản không được để trống",
     "donvidientichRequired": "Đơn vị điện tích không được để trống",
