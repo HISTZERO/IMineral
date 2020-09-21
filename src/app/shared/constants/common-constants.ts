@@ -184,5 +184,6 @@ export const RoutingNameChiTietDangKyHoatDongKS: any = {
     [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: "dkthamdokhoangsanchitiet",
     [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: "dkkhaithackhoangsanchitiet",
     [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: "dkpheduyettruluongkhoangsanchitiet",
+    [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: "dkdaugiaquyenchitiet",
   };
 

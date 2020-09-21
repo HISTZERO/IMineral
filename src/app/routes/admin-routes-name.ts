@@ -93,7 +93,9 @@ export class AdminRoutingName {
   public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
   public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
   public static dkPheDuyetTruLuongUri = "dkpheduyettruluongkhoangsan";
+  public static dkDauGiaQuyenUri = "dkdaugiaquyen";
   public static dkthamdokhoangsanchitietUri = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ThamDoKhoangSan];
   public static dkKhaithackhoangsanChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.KhaiThacKhoangSan];
   public static dkPheDuyetTruLuongChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.PheDuyetTruLuong];
+  public static dkDauGiaQuyenChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac];
 }

@@ -7,6 +7,8 @@ import { KhaithackhoangsanListComponent } from "./khaithackhoangsan/khaithackhoa
 import { KhaithackhoangsanIoComponent } from "./khaithackhoangsan/khaithackhoangsan-io/khaithackhoangsan-io.component";
 import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component";
 import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
+import {DaugiaquyenListComponent} from "./daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
+import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
 
 
 const routes: Routes = [
@@ -22,6 +24,8 @@ const routes: Routes = [
           {path: AdminRoutingName.dkKhaithackhoangsanChitiet, component: KhaithackhoangsanIoComponent},
           {path: AdminRoutingName.dkPheDuyetTruLuongUri, component: PheduyettruluongkhoangsanListComponent},
           {path: AdminRoutingName.dkPheDuyetTruLuongChitiet, component: PheduyettruluongkhoangsanIoComponent},
+          {path: AdminRoutingName.dkDauGiaQuyenUri, component: DaugiaquyenListComponent},
+          {path: AdminRoutingName.dkDauGiaQuyenChitiet, component: DaugiaquyenIoComponent},
         ]
       }
     ]
