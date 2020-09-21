@@ -97,13 +97,13 @@ export class DonvihanhchinhListComponent implements OnInit {
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoDvhcService()
-      .getDangKyThamDoDvhcByIdDangKyThamDo(this.iddangkythamdo);
-    if (listData.items) {
-      listData.items.map((dvhc, index) => {
+      .getDangKyThamDoDvhcByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+    if (listData) {
+      listData.map((dvhc, index) => {
         dvhc.serialNumber = index + 1;
       });
     }
-    this.listDangKyThamDoDvhc = listData.items;
+    this.listDangKyThamDoDvhc = listData;
   }
 
   /**
@@ -133,7 +133,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
-    await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", {dataItem});
     await this.matSidenavService.open();
   }
 
@@ -146,7 +146,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new");
+    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
     this.matSidenavService.open();
   }
 
