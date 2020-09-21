@@ -31,7 +31,7 @@ export class DkThamDoLoaiKhoangSanService extends RepositoryEloquentService {
     });
 
     try {
-      return this.httpClient.get(`${this.apiUrl}?Iddankythamdo=${idhoso}`, {
+      return this.httpClient.get(`${this.apiUrl}?Iddangkythamdo=${idhoso}`, {
         headers: this.headers,
       });
     } catch (error) {

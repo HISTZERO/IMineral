@@ -21,6 +21,6 @@ export class InputDkThamDoDvhc {
     maxa: string;
     mahuyen: string;
     matinh: string;
-    iddankythamdo: string;
+    iddangkythamdo: string;
     siteid: string;
 }

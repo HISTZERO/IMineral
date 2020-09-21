@@ -234,5 +234,16 @@
     "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
     "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
     "informedNotExistedDangKyThamDoLoaiKhoangSan": "Đăng ký thăm dò loại khoáng sản không tồn tại"
+  },
+  "dangkythamdocongtrinh": {
+    "titleList": "Danh sách công trình",
+    "titleAdd": "Thêm mới công trình",
+    "titleEdit": "Sửa dữ liệu công trình",
+    "contentDelete": "công trình: ",
+    "sohieu": "Số hiệu",
+    "chieusau": "Chiều sâu",
+    "toadox": "Tọa độ x",
+    "toadoy": "Tọa độ y",
+    "informedNotExistedDangKyThamDoCongTrinh": "Đăng ký thăm dò công trình không tồn tại"
   }
 }
