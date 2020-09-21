@@ -264,7 +264,7 @@ export class HosotailieuIoComponent implements OnInit {
   /**
    * hàm kiểm tra validation form
    */
-  public logAllValidationErrorMessages() {
+  logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
       this.tailieuIOForm,
       this.validationErrorMessages,
@@ -275,7 +275,7 @@ export class HosotailieuIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeTaiLieuIOSidenav() {
+  closeTaiLieuIOSidenav() {
     this.matSidenavService.close();
   }
 

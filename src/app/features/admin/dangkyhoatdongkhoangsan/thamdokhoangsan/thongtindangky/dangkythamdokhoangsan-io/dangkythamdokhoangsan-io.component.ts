@@ -298,7 +298,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   /**
    *
    */
-  public deleteItemDangKyThamDoKhoangSan() {
+  deleteItemDangKyThamDoKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.contentDelete,
       this.dangKyThamDoKhoangSan.diadiem
@@ -331,7 +331,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   /**
    * Hàm reset form, gọi khi nhấn nút reset dữ liệu
    */
-  public onFormReset() {
+  onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.dangKyThamDoIOForm.reset();
   }
