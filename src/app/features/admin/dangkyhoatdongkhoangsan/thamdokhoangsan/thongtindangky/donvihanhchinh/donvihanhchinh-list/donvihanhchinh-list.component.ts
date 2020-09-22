@@ -117,11 +117,11 @@ export class DonvihanhchinhListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemDangKyThamDoDvhc(id: any) {
+  async editItemDangKyThamDoDvhc(idThamDoDvhc: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
     .getDangKyThamDoDvhcService()
-    .getByid(id).toPromise();
+    .getByid(idThamDoDvhc).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
@@ -133,7 +133,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
-    await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", {dataItem});
+    await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
