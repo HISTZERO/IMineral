@@ -22,7 +22,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectNewInsertedDangKyThamDoEvent") selectNewInsertedDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyThamDoEvent") selectIdDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -105,6 +105,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
 
       if (this.dangKyThamDoKhoangSan) {
         this.currentAction = DangKyThamDoActionEnum.Edit;
+        this.selectIdDangKyThamDo();
         this.selectCurrentFormState();
       } else {
         this.currentAction = DangKyThamDoActionEnum.Add;
@@ -233,7 +234,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
           this.dangKyThamDoKhoangSan.iddangkythamdo = res.iddangkythamdo;
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
-          this.selectNewInsertedDangKyThamDo();
+          this.selectIdDangKyThamDo();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -291,8 +292,8 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   /**
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
-  private selectNewInsertedDangKyThamDo() {
-    this.selectNewInsertedDangKyThamDoEvent.emit(this.dangKyThamDoKhoangSan.iddangkythamdo);
+  private selectIdDangKyThamDo() {
+    this.selectIdDangKyThamDoEvent.emit(this.dangKyThamDoKhoangSan.iddangkythamdo);
   }
 
   /**
@@ -307,7 +308,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyThamDoKhoangSanService()
-          .deleteDangKyThamDoByIdHoSo({ idhoso: this.idhoso })
+          .deleteDangKyThamDoByIdHoSo(this.idhoso)
           .subscribe(
             () => {
               this.dangKyThamDoKhoangSan = null;

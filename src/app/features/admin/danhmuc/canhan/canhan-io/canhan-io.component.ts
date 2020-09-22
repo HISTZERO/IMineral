@@ -245,18 +245,18 @@ export class DmCanhanIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.canhanIOForm.value.tinhcombobox === true) {
+    if (!this.canhanIOForm.value.tinhcombobox) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.canhanIOForm.controls["huyencombobox"].setValue("");
+        this.canhanIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (!this.canhanIOForm.value.tinhcombobox === false) {
+    if (this.canhanIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
-        this.canhanIOForm.controls["huyencombobox"].setValue("");
+        this.canhanIOForm.controls.huyencombobox.setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
@@ -277,15 +277,12 @@ export class DmCanhanIoComponent implements OnInit {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.canhanIOForm.controls["xacombobox"].setValue("");
+        this.canhanIOForm.controls.xacombobox.setValue("");
       }
     }
-    if (
-      !this.canhanIOForm.value.tinhcombobox === false &&
-      !this.canhanIOForm.value.huyencombobox === false
-    ) {
+    if (this.canhanIOForm.value.tinhcombobox && this.canhanIOForm.value.huyencombobox) {
       if (this.editMode === true) {
-        this.canhanIOForm.controls["xacombobox"].setValue("");
+        this.canhanIOForm.controls.xacombobox.setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
@@ -302,17 +299,17 @@ export class DmCanhanIoComponent implements OnInit {
   selectTinh() {
     if (this.obj && this.purpose === 'edit') {
       if (this.canhanIOForm.value.tinhcombobox) {
-        this.canhanIOForm.controls["tinh"].setValue({
+        this.canhanIOForm.controls.tinh.setValue({
           idtinh: this.canhanIOForm.value.tinhcombobox.idtinh,
           matinh: this.canhanIOForm.value.tinhcombobox.matinh
         });
         this.tenTinhDisplay = this.canhanIOForm.value.tinhcombobox.tentinh;
-        this.canhanIOForm.controls["huyen"].setValue("");
+        this.canhanIOForm.controls.huyen.setValue("");
         this.tenHuyenDisplay = "";
-        this.canhanIOForm.controls["xa"].setValue("");
+        this.canhanIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
-        this.canhanIOForm.controls["tinh"].setValue({
+        this.canhanIOForm.controls.tinh.setValue({
           idtinh: this.dataComboboxModel.idtinh,
           matinh: this.dataComboboxModel.matinh
         });
@@ -320,7 +317,7 @@ export class DmCanhanIoComponent implements OnInit {
         this.selectHuyen();
       }
     } else {
-      this.canhanIOForm.controls["tinh"].setValue({
+      this.canhanIOForm.controls.tinh.setValue({
         idtinh: this.canhanIOForm.value.tinhcombobox.idtinh,
         matinh: this.canhanIOForm.value.tinhcombobox.matinh
       });
@@ -334,29 +331,29 @@ export class DmCanhanIoComponent implements OnInit {
   selectHuyen() {
     if (this.obj && this.purpose === 'edit') {
       if (this.canhanIOForm.value.huyencombobox) {
-        this.canhanIOForm.controls["huyen"].setValue({
+        this.canhanIOForm.controls.huyen.setValue({
           idhuyen: this.canhanIOForm.value.huyencombobox.idhuyen,
           mahuyen: this.canhanIOForm.value.huyencombobox.mahuyen
         });
         this.tenHuyenDisplay = this.canhanIOForm.value.huyencombobox.tenhuyen;
-        this.canhanIOForm.controls["xa"].setValue("");
+        this.canhanIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
         if (this.canhanIOForm.value.tinhcombobox) {
-          this.canhanIOForm.controls["huyen"].setValue("");
+          this.canhanIOForm.controls.huyen.setValue("");
           this.tenHuyenDisplay = "";
         } else {
-          this.canhanIOForm.controls["huyen"].setValue({
+          this.canhanIOForm.controls.huyen.setValue({
             idhuyen: this.dataComboboxModel.idhuyen,
             mahuyen: this.dataComboboxModel.mahuyen
           });
           this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
         }
-        this.canhanIOForm.controls["xacombobox"].setValue("");
+        this.canhanIOForm.controls.xacombobox.setValue("");
         this.selectXa();
       }
     } else {
-      this.canhanIOForm.controls["huyen"].setValue({
+      this.canhanIOForm.controls.huyen.setValue({
         idhuyen: this.canhanIOForm.value.huyencombobox.idhuyen,
         mahuyen: this.canhanIOForm.value.huyencombobox.mahuyen
       });
@@ -370,17 +367,17 @@ export class DmCanhanIoComponent implements OnInit {
   selectXa() {
     if (this.obj && this.purpose === 'edit') {
       if (this.canhanIOForm.value.xacombobox) {
-        this.canhanIOForm.controls["xa"].setValue({
+        this.canhanIOForm.controls.xa.setValue({
           idxa: this.canhanIOForm.value.xacombobox.idxa,
           maxa: this.canhanIOForm.value.xacombobox.maxa
         });
         this.tenXaDisplay = this.canhanIOForm.value.xacombobox.tenxa;
       } else {
         if (this.canhanIOForm.value.tinhcombobox || this.canhanIOForm.value.huyencombobox) {
-          this.canhanIOForm.controls["xa"].setValue("");
+          this.canhanIOForm.controls.xa.setValue("");
           this.tenXaDisplay = "";
         } else {
-          this.canhanIOForm.controls["xa"].setValue({
+          this.canhanIOForm.controls.xa.setValue({
             idxa: this.dataComboboxModel.idxa,
             maxa: this.dataComboboxModel.maxa
           });
@@ -388,7 +385,7 @@ export class DmCanhanIoComponent implements OnInit {
         }
       }
     } else {
-      this.canhanIOForm.controls["xa"].setValue({
+      this.canhanIOForm.controls.xa.setValue({
         idxa: this.canhanIOForm.value.xacombobox.idxa,
         maxa: this.canhanIOForm.value.xacombobox.maxa
       });
@@ -444,7 +441,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -477,7 +474,7 @@ export class DmCanhanIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();

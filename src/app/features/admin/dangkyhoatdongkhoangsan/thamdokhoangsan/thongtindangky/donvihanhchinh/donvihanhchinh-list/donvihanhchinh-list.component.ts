@@ -97,13 +97,13 @@ export class DonvihanhchinhListComponent implements OnInit {
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoDvhcService()
-      .getDangKyThamDoDvhcByIdDangKyThamDo(this.iddangkythamdo);
-    if (listData.items) {
-      listData.items.map((dvhc, index) => {
+      .getDangKyThamDoDvhcByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+    if (listData) {
+      listData.map((dvhc, index) => {
         dvhc.serialNumber = index + 1;
       });
     }
-    this.listDangKyThamDoDvhc = listData.items;
+    this.listDangKyThamDoDvhc = listData;
   }
 
   /**
@@ -117,11 +117,11 @@ export class DonvihanhchinhListComponent implements OnInit {
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemDangKyThamDoDvhc(id: any) {
+  async editItemDangKyThamDoDvhc(idThamDoDvhc: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
     .getDangKyThamDoDvhcService()
-    .getByid(id).toPromise();
+    .getByid(idThamDoDvhc).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
@@ -146,7 +146,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new");
+    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
     this.matSidenavService.open();
   }
 
