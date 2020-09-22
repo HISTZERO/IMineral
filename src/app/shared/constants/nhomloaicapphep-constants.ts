@@ -1,3 +1,27 @@
+import { AdminRoutingName } from "src/app/routes/admin-routes-name";
+
+export class NhomLoaiCapPhepEnum {
+    public static ThamDoKhoangSan = 1;
+    public static PheDuyetTruLuong = 2;
+    public static DauGiaQuyenKhaiThac = 3;
+    public static KhaiThacKhoangSan = 4;
+    public static TanThuKhoangSan = 5;
+    public static TraLaiGiayPhep = 6;
+    public static DongCuaMo = 7;
+    public static ChuyenNhuongThamDoKhaiThac = 8;
+}
+
+export const ChiTietDangKyHoatDongKS: any = {
+    [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: AdminRoutingName.dkthamdokhoangsanchitietUri,
+    [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: AdminRoutingName.dkKhaithackhoangsanChitiet,
+    [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: AdminRoutingName.dkPheDuyetTruLuongChitiet,
+    [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.dkDauGiaQuyenChitiet,
+    [NhomLoaiCapPhepEnum.TanThuKhoangSan]: AdminRoutingName.dkTanthukhoangsanChiTiet,
+    [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: AdminRoutingName.dkTralaigiayphepChiTiet,
+    [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.dkDongcuamoChiTiet,
+    [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.dkChuyennhuongquyenChiTiet,
+};
+
 export const NhomLoaiCapPhep = [
     {
         id: 1,
@@ -31,4 +55,4 @@ export const NhomLoaiCapPhep = [
         id: 8,
         name: "Chuyển nhượng thăm dò khai thác"
     }
-]
+];

@@ -1,6 +1,3 @@
-import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { NhomLoaiCapPhepEnum } from "./enum";
-import { NhomLoaiCapPhep } from "./nhomloaicapphep-constants";
 
 export const LoaiDoiTuong = [
     {
@@ -208,16 +205,5 @@ export const DoiTuongBaoCao = [
         name: "Cá nhân, tổ chức"
     }
 ];
-
-export const RoutingNameChiTietDangKyHoatDongKS: any = {
-    [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: "dkthamdokhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: "dkkhaithackhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: "dkpheduyettruluongkhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: "dkdaugiaquyenchitiet",
-    [NhomLoaiCapPhepEnum.TanThuKhoangSan]: "dktanthukhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: "dktralaigiayphepchitiet",
-    [NhomLoaiCapPhepEnum.DongCuaMo]: "dkdongcuamochitiet",
-    [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: "dkchuyennhuongquyenchitiet",
-  };
 
 

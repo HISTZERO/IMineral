@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
-import { MenuThamDoKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
 import { TranslateService } from '@ngx-translate/core';
+
+import { MenuThamDoKhoangSan } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 
 @Component({
   selector: 'app-thamdokhoangsan-list',

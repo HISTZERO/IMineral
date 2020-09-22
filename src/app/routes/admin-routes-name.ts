@@ -1,6 +1,5 @@
+import { NhomLoaiCapPhepEnum, ChiTietDangKyHoatDongKS } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { keyKhuVucKhoangSan } from "src/app/shared/constants/khuvuckhoangsan-constants";
-import { RoutingNameChiTietDangKyHoatDongKS } from "src/app/shared/constants/common-constants";
-import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { keyNhomBaoCao } from "src/app/shared/constants/nhombaocao-constants";
 
 export class AdminRoutingName {
@@ -92,20 +91,18 @@ export class AdminRoutingName {
   // 1.11 Routes phần thăm dò khoáng sản
   public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
   public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
-
   public static dkPheDuyetTruLuongUri = "dkpheduyettruluongkhoangsan";
   public static dkDauGiaQuyenUri = "dkdaugiaquyen";
-  public static dkPheDuyetTruLuongChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.PheDuyetTruLuong];
-  public static dkDauGiaQuyenChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac];
-
   public static dkTanthukhoangsanUri = "dktanthukhoangsan";
   public static dkTralaigiayphepUri = "dktralaigiayphep";
   public static dkDongcuamoUri = "dkdongcuamo";
   public static dkChuyennhuongquyenUri = "dkchuyennhuongquyen";
-  public static dkthamdokhoangsanchitietUri = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ThamDoKhoangSan];
-  public static dkKhaithackhoangsanChitiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.KhaiThacKhoangSan];
-  public static dkTanthukhoangsanChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.TanThuKhoangSan];
-  public static dkTralaigiayphepChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.TraLaiGiayPhep];
-  public static dkDongcuamoChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.DongCuaMo];
-  public static dkChuyennhuongquyenChiTiet = RoutingNameChiTietDangKyHoatDongKS[NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac];
+  public static dkPheDuyetTruLuongChitiet = "dkpheduyettruluongkhoangsanchitiet";
+  public static dkDauGiaQuyenChitiet = "dkdaugiaquyenchitiet";
+  public static dkthamdokhoangsanchitietUri = "dkthamdokhoangsanchitiet";
+  public static dkKhaithackhoangsanChitiet = "dkkhaithackhoangsanchitiet";
+  public static dkTanthukhoangsanChiTiet = "dktanthukhoangsanchitiet";
+  public static dkTralaigiayphepChiTiet = "dktralaigiayphepchitiet";
+  public static dkDongcuamoChiTiet = "dkdongcuamochitiet";
+  public static dkChuyennhuongquyenChiTiet = "dkchuyennhuongquyenchitiet";
 }
