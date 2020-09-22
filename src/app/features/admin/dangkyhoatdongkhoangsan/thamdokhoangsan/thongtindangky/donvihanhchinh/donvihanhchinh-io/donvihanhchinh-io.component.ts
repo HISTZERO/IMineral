@@ -188,7 +188,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox === true) {
+    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
@@ -197,7 +197,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
         this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox === false) {
+    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
         this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
       }
@@ -216,17 +216,14 @@ export class DonvihanhchinhIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.dangKyThamDoDvhcIOForm.value.huyencombobox === true) {
+    if (!this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
         this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
       }
     }
-    if (
-      !this.dangKyThamDoDvhcIOForm.value.tinhcombobox === false &&
-      !this.dangKyThamDoDvhcIOForm.value.huyencombobox === false
-    ) {
+    if ( this.dangKyThamDoDvhcIOForm.value.tinhcombobox && this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
       if (this.editMode === true) {
         this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
       }

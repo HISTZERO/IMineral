@@ -267,14 +267,14 @@ export class DmTochucIoComponent implements OnInit {
   async selectLoaiToChuc() {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.loaitochuccombobox) {
-        this.tochucIOForm.controls["idloaitochuc"].setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
+        this.tochucIOForm.controls.idloaitochuc.setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
         this.tenLoaiToChucDisplay = this.tochucIOForm.value.loaitochuccombobox.tenloaitochuc;
       } else {
-        this.tochucIOForm.controls["idloaitochuc"].setValue(this.dataComboboxModel.idloaitochuc);
+        this.tochucIOForm.controls.idloaitochuc.setValue(this.dataComboboxModel.idloaitochuc);
         this.tenLoaiToChucDisplay = this.dataComboboxModel.tenloaitochuc;
       }
     } else {
-      this.tochucIOForm.controls["idloaitochuc"].setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
+      this.tochucIOForm.controls.idloaitochuc.setValue(this.tochucIOForm.value.loaitochuccombobox.idloaitochuc);
       this.tenLoaiToChucDisplay = "";
     }
   }
@@ -294,18 +294,18 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.tochucIOForm.value.tinhcombobox === true) {
+    if (!this.tochucIOForm.value.tinhcombobox) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.tochucIOForm.controls["huyencombobox"].setValue("");
+        this.tochucIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (!this.tochucIOForm.value.tinhcombobox === false) {
+    if (this.tochucIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
-        this.tochucIOForm.controls["huyencombobox"].setValue("");
+        this.tochucIOForm.controls.huyencombobox.setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
@@ -322,19 +322,16 @@ export class DmTochucIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.tochucIOForm.value.huyencombobox === true) {
+    if (!this.tochucIOForm.value.huyencombobox) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.tochucIOForm.controls["xacombobox"].setValue("");
+        this.tochucIOForm.controls.xacombobox.setValue("");
       }
     }
-    if (
-      !this.tochucIOForm.value.tinhcombobox === false &&
-      !this.tochucIOForm.value.huyencombobox === false
-    ) {
+    if ( this.tochucIOForm.value.tinhcombobox && this.tochucIOForm.value.huyencombobox ) {
       if (this.editMode === true) {
-        this.tochucIOForm.controls["xacombobox"].setValue("");
+        this.tochucIOForm.controls.xacombobox.setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
@@ -351,17 +348,17 @@ export class DmTochucIoComponent implements OnInit {
   selectTinh() {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.tinhcombobox) {
-        this.tochucIOForm.controls["tinh"].setValue({
+        this.tochucIOForm.controls.tinh.setValue({
           idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
           matinh: this.tochucIOForm.value.tinhcombobox.matinh
         });
         this.tenTinhDisplay = this.tochucIOForm.value.tinhcombobox.tentinh;
-        this.tochucIOForm.controls["huyen"].setValue("");
+        this.tochucIOForm.controls.huyen.setValue("");
         this.tenHuyenDisplay = "";
-        this.tochucIOForm.controls["xa"].setValue("");
+        this.tochucIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
-        this.tochucIOForm.controls["tinh"].setValue({
+        this.tochucIOForm.controls.tinh.setValue({
           idtinh: this.dataComboboxModel.idtinh,
           matinh: this.dataComboboxModel.matinh
         });
@@ -369,7 +366,7 @@ export class DmTochucIoComponent implements OnInit {
         this.selectHuyen();
       }
     } else {
-      this.tochucIOForm.controls["tinh"].setValue({
+      this.tochucIOForm.controls.tinh.setValue({
         idtinh: this.tochucIOForm.value.tinhcombobox.idtinh,
         matinh: this.tochucIOForm.value.tinhcombobox.matinh
       });
@@ -383,29 +380,29 @@ export class DmTochucIoComponent implements OnInit {
   selectHuyen() {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.huyencombobox) {
-        this.tochucIOForm.controls["huyen"].setValue({
+        this.tochucIOForm.controls.huyen.setValue({
           idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
           mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
         });
         this.tenHuyenDisplay = this.tochucIOForm.value.huyencombobox.tenhuyen;
-        this.tochucIOForm.controls["xa"].setValue("");
+        this.tochucIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
         if (this.tochucIOForm.value.tinhcombobox) {
-          this.tochucIOForm.controls["huyen"].setValue("");
+          this.tochucIOForm.controls.huyen.setValue("");
           this.tenHuyenDisplay = "";
         } else {
-          this.tochucIOForm.controls["huyen"].setValue({
+          this.tochucIOForm.controls.huyen.setValue({
             idhuyen: this.dataComboboxModel.idhuyen,
             mahuyen: this.dataComboboxModel.mahuyen
           });
           this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
         }
-        this.tochucIOForm.controls["xacombobox"].setValue("");
+        this.tochucIOForm.controls.xacombobox.setValue("");
         this.selectXa();
       }
     } else {
-      this.tochucIOForm.controls["huyen"].setValue({
+      this.tochucIOForm.controls.huyen.setValue({
         idhuyen: this.tochucIOForm.value.huyencombobox.idhuyen,
         mahuyen: this.tochucIOForm.value.huyencombobox.mahuyen
       });
@@ -419,17 +416,17 @@ export class DmTochucIoComponent implements OnInit {
   selectXa() {
     if (this.obj && this.purpose === 'edit') {
       if (this.tochucIOForm.value.xacombobox) {
-        this.tochucIOForm.controls["xa"].setValue({
+        this.tochucIOForm.controls.xa.setValue({
           idxa: this.tochucIOForm.value.xacombobox.idxa,
           maxa: this.tochucIOForm.value.xacombobox.maxa
         });
         this.tenXaDisplay = this.tochucIOForm.value.xacombobox.tenxa;
       } else {
         if (this.tochucIOForm.value.tinhcombobox || this.tochucIOForm.value.huyencombobox) {
-          this.tochucIOForm.controls["xa"].setValue("");
+          this.tochucIOForm.controls.xa.setValue("");
           this.tenXaDisplay = "";
         } else {
-          this.tochucIOForm.controls["xa"].setValue({
+          this.tochucIOForm.controls.xa.setValue({
             idxa: this.dataComboboxModel.idxa,
             maxa: this.dataComboboxModel.maxa
           });
@@ -437,7 +434,7 @@ export class DmTochucIoComponent implements OnInit {
         }
       }
     } else {
-      this.tochucIOForm.controls["xa"].setValue({
+      this.tochucIOForm.controls.xa.setValue({
         idxa: this.tochucIOForm.value.xacombobox.idxa,
         maxa: this.tochucIOForm.value.xacombobox.maxa
       });
