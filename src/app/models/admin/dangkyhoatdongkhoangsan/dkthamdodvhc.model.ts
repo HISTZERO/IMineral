@@ -7,9 +7,9 @@ export class OutputDkThamDoDvhc {
     mahuyen: string;
     matinh: string;
     iddankythamdo: string;
-    tenTinh: string;
-    tenHuyen: string;
-    tenXa: string;
+    tentinh: string;
+    tenhuyen: string;
+    tenxa: string;
     siteid: string;
 }
 

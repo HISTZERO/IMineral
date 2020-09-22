@@ -9,7 +9,6 @@ export class OutputDkThamDoLoaiKhoangSan {
 export class InputDkThamDoLoaiKhoangSan {
   idthamdoloaikhoangsan: string;
   idloaikhoangsan: string;
-  tenloaikhoangsan: string;
   iddangkythamdo: string;
   siteid: string;
 }

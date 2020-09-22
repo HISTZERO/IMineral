@@ -147,7 +147,7 @@ export class LoaikhoangsanListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.titleAdd);
-    this.matSidenavService.setContentComp(LoaikhoangsanIoComponent, "new");
+    this.matSidenavService.setContentComp(LoaikhoangsanIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
     this.matSidenavService.open();
   }
 
