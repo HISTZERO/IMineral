@@ -25,9 +25,9 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
     return "ok";
   }
 
-  public getDangKyThamDoByIdHoSo(idhoso: any) {
+  public getDangKyThamDoByIdHoSo(idHoSo: any) {
     try {
-      return this.httpClient.get(`${this.apiUrl}?Idhoso=${idhoso}`, {
+      return this.httpClient.get(`${this.apiUrl}?Idhoso=${idHoSo}`, {
         headers: this.headers,
       });
     } catch (error) {
@@ -35,15 +35,9 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
     }
   }
 
-  /**
-   * Update item
-   * @param {Number} id Item id.
-   * @returns {Observable}
-   */
-  public deleteDangKyThamDoByIdHoSo(params = {}) {
+  public deleteDangKyThamDoByIdHoSo(idHoSo: string) {
     try {
-      const queryString = this.convertObjectToQueryString(params);
-      return this.httpClient.delete<any>(`${this.apiUrl}?${queryString}`, {
+      return this.httpClient.delete<any>(`${this.apiUrl}?Idhoso=${idHoSo}`, {
         headers: this.headers,
       });
     } catch (error) {

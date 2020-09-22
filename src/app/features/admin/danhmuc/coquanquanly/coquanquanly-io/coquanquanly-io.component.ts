@@ -106,7 +106,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-    //Khởi tạo form theo dạng add or edit
+    // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
@@ -231,18 +231,18 @@ export class DmCoquanquanlyIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.coQuanQuanLyIOForm.value.tinhcombobox === true) {
+    if (!this.coQuanQuanLyIOForm.value.tinhcombobox) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.coQuanQuanLyIOForm.controls["huyencombobox"].setValue("");
+        this.coQuanQuanLyIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (!this.coQuanQuanLyIOForm.value.tinhcombobox === false) {
+    if (this.coQuanQuanLyIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
-        this.coQuanQuanLyIOForm.controls["huyencombobox"].setValue("");
+        this.coQuanQuanLyIOForm.controls.huyencombobox.setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
@@ -259,19 +259,16 @@ export class DmCoquanquanlyIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.coQuanQuanLyIOForm.value.huyencombobox === true) {
+    if (!this.coQuanQuanLyIOForm.value.huyencombobox) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.coQuanQuanLyIOForm.controls["xacombobox"].setValue("");
+        this.coQuanQuanLyIOForm.controls.xacombobox.setValue("");
       }
     }
-    if (
-      !this.coQuanQuanLyIOForm.value.tinhcombobox === false &&
-      !this.coQuanQuanLyIOForm.value.huyencombobox === false
-    ) {
+    if (this.coQuanQuanLyIOForm.value.tinhcombobox && this.coQuanQuanLyIOForm.value.huyencombobox) {
       if (this.editMode === true) {
-        this.coQuanQuanLyIOForm.controls["xacombobox"].setValue("");
+        this.coQuanQuanLyIOForm.controls.xacombobox.setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
@@ -288,17 +285,17 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   selectTinh() {
     if (this.obj && this.purpose === 'edit') {
       if (this.coQuanQuanLyIOForm.value.tinhcombobox) {
-        this.coQuanQuanLyIOForm.controls["tinh"].setValue({
+        this.coQuanQuanLyIOForm.controls.tinh.setValue({
           idtinh: this.coQuanQuanLyIOForm.value.tinhcombobox.idtinh,
           matinh: this.coQuanQuanLyIOForm.value.tinhcombobox.matinh
         });
         this.tenTinhDisplay = this.coQuanQuanLyIOForm.value.tinhcombobox.tentinh;
-        this.coQuanQuanLyIOForm.controls["huyen"].setValue("");
+        this.coQuanQuanLyIOForm.controls.huyen.setValue("");
         this.tenHuyenDisplay = "";
-        this.coQuanQuanLyIOForm.controls["xa"].setValue("");
+        this.coQuanQuanLyIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
-        this.coQuanQuanLyIOForm.controls["tinh"].setValue({
+        this.coQuanQuanLyIOForm.controls.tinh.setValue({
           idtinh: this.dataComboboxModel.idtinh,
           matinh: this.dataComboboxModel.matinh
         });
@@ -306,7 +303,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
         this.selectHuyen();
       }
     } else {
-      this.coQuanQuanLyIOForm.controls["tinh"].setValue({
+      this.coQuanQuanLyIOForm.controls.tinh.setValue({
         idtinh: this.coQuanQuanLyIOForm.value.tinhcombobox.idtinh,
         matinh: this.coQuanQuanLyIOForm.value.tinhcombobox.matinh
       });
@@ -320,29 +317,29 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   selectHuyen() {
     if (this.obj && this.purpose === 'edit') {
       if (this.coQuanQuanLyIOForm.value.huyencombobox) {
-        this.coQuanQuanLyIOForm.controls["huyen"].setValue({
+        this.coQuanQuanLyIOForm.controls.huyen.setValue({
           idhuyen: this.coQuanQuanLyIOForm.value.huyencombobox.idhuyen,
           mahuyen: this.coQuanQuanLyIOForm.value.huyencombobox.mahuyen
         });
         this.tenHuyenDisplay = this.coQuanQuanLyIOForm.value.huyencombobox.tenhuyen;
-        this.coQuanQuanLyIOForm.controls["xa"].setValue("");
+        this.coQuanQuanLyIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
         if (this.coQuanQuanLyIOForm.value.tinhcombobox) {
-          this.coQuanQuanLyIOForm.controls["huyen"].setValue("");
+          this.coQuanQuanLyIOForm.controls.huyen.setValue("");
           this.tenHuyenDisplay = "";
         } else {
-          this.coQuanQuanLyIOForm.controls["huyen"].setValue({
+          this.coQuanQuanLyIOForm.controls.huyen.setValue({
             idhuyen: this.dataComboboxModel.idhuyen,
             mahuyen: this.dataComboboxModel.mahuyen
           });
           this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
         }
-        this.coQuanQuanLyIOForm.controls["xacombobox"].setValue("");
+        this.coQuanQuanLyIOForm.controls.xacombobox.setValue("");
         this.selectXa();
       }
     } else {
-      this.coQuanQuanLyIOForm.controls["huyen"].setValue({
+      this.coQuanQuanLyIOForm.controls.huyen.setValue({
         idhuyen: this.coQuanQuanLyIOForm.value.huyencombobox.idhuyen,
         mahuyen: this.coQuanQuanLyIOForm.value.huyencombobox.mahuyen
       });
@@ -356,17 +353,17 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   selectXa() {
     if (this.obj && this.purpose === 'edit') {
       if (this.coQuanQuanLyIOForm.value.xacombobox) {
-        this.coQuanQuanLyIOForm.controls["xa"].setValue({
+        this.coQuanQuanLyIOForm.controls.xa.setValue({
           idxa: this.coQuanQuanLyIOForm.value.xacombobox.idxa,
           maxa: this.coQuanQuanLyIOForm.value.xacombobox.maxa
         });
         this.tenXaDisplay = this.coQuanQuanLyIOForm.value.xacombobox.tenxa;
       } else {
         if (this.coQuanQuanLyIOForm.value.tinhcombobox || this.coQuanQuanLyIOForm.value.huyencombobox) {
-          this.coQuanQuanLyIOForm.controls["xa"].setValue("");
+          this.coQuanQuanLyIOForm.controls.xa.setValue("");
           this.tenXaDisplay = "";
         } else {
-          this.coQuanQuanLyIOForm.controls["xa"].setValue({
+          this.coQuanQuanLyIOForm.controls.xa.setValue({
             idxa: this.dataComboboxModel.idxa,
             maxa: this.dataComboboxModel.maxa
           });
@@ -374,7 +371,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
         }
       }
     } else {
-      this.coQuanQuanLyIOForm.controls["xa"].setValue({
+      this.coQuanQuanLyIOForm.controls.xa.setValue({
         idxa: this.coQuanQuanLyIOForm.value.xacombobox.idxa,
         maxa: this.coQuanQuanLyIOForm.value.xacombobox.maxa
       });
@@ -428,7 +425,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -461,7 +458,7 @@ export class DmCoquanquanlyIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -484,8 +481,8 @@ export class DmCoquanquanlyIoComponent implements OnInit {
   }
 
   /**
-  * Hàm check giá trị trong seletec option Tỉnh
-  */
+   * Hàm check giá trị trong seletec option Tỉnh
+   */
   public compareTinh(item1: any, item2: any) {
     if (item1.matinh === item2.matinh) {
       return true;

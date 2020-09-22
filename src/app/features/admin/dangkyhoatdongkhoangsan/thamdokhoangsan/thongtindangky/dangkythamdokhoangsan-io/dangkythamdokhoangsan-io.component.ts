@@ -308,7 +308,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyThamDoKhoangSanService()
-          .deleteDangKyThamDoByIdHoSo({ idhoso: this.idhoso })
+          .deleteDangKyThamDoByIdHoSo(this.idhoso)
           .subscribe(
             () => {
               this.dangKyThamDoKhoangSan = null;
