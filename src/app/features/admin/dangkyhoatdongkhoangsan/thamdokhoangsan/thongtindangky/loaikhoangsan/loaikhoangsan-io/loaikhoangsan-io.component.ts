@@ -76,10 +76,12 @@ export class LoaikhoangsanIoComponent implements OnInit {
     this.formInit();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    // Lấy dữ liệu nhóm khoáng sản
-    await this.geAllNhomKhoangSan();
     // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
+    // Lấy dữ liệu nhóm khoáng sản
+    await this.geAllNhomKhoangSan();
+    // Lấy dữ liệu loại khoáng sản
+    await this.showLoaiKhoangSan(true);
   }
 
   /**
@@ -160,7 +162,6 @@ export class LoaikhoangsanIoComponent implements OnInit {
     this.inputModel = new InputDkThamDoLoaiKhoangSan();
     // check edit
     await this.formOnEdit();
-    await this.showLoaiKhoangSan(true);
   }
 
   /**
@@ -185,13 +186,13 @@ export class LoaikhoangsanIoComponent implements OnInit {
     this.loaiKhoangSanFilters = allLoaikhoangSanData.items;
   }
 
-  async showLoaiKhoangSan(inInitState = false) {
+  async showLoaiKhoangSan(inittState: boolean = false) {
     if (!this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
       this.allLoaiKhoangSan = [];
       this.loaiKhoangSanFilters = [];
       this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
     } else {
-      if (!inInitState) {
+      if (!inittState) {
         this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
       }
 
