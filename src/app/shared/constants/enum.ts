@@ -83,6 +83,12 @@ export enum DangKyThamDoActionEnum {
   Edit = 2
 }
 
+export enum DangKyKhaiThacKsActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum ThongTinKhoangSanTabEnum {
   ThongTinChung = 0,
   ToaDo = 1

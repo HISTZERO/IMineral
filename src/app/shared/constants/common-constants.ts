@@ -142,6 +142,17 @@ export const DonViDienTich = [
   }
 ];
 
+export const DonViTruLuong = [
+    {
+        id: 'Tấn',
+        name: 'Tấn'
+    },
+    {
+        id: 'm3',
+        name: 'm3'
+    }
+]
+
 export const DonViThoiHan = [
   {
       id: "tháng",
@@ -158,6 +169,21 @@ export const DonViDoSau = [
       id: "m",
       name: "m"
   }
+];
+
+export const DonViCongSuat = [
+    {
+        id: '1',
+        name: 'Tấn/năm'
+    },
+    {
+        id: '2',
+        name: 'm3/năm'
+    },
+    {
+        id: '3',
+        name: 'm3/ngày'
+    }
 ];
 
 export const DangKhoangSan = [

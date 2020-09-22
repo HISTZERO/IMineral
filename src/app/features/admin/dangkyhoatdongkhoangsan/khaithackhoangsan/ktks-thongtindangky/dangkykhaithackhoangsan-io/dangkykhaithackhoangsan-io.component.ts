@@ -1,18 +1,17 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputDkThamDoKhoangSanModel, OutputDkThamDoKhoangSanModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.model';
-import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
+import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
+import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
+import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.model";
 
 @Component({
   selector: 'app-dangkykhaithackhoangsan-io',
@@ -24,14 +23,14 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectNewInsertedDangKyThamDoEvent") selectNewInsertedDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
   // Chứa dữ liệu Form
-  public dangKyThamDoIOForm: FormGroup;
+  public dangKyKhaiThacKSIOForm: FormGroup;
   // Chứa dữ liệu translate
   public dataTranslate: any;
   // Chứa danh sách Hệ quy chiếu
@@ -42,44 +41,59 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
   // chứa dữ liệu đăng ký thăm dò
-  private dangKyThamDoKhoangSan: any;
+  private dangKyKhaiThacKhoangSan: any;
   // Action thao tác dữ liệu
   public currentAction: number;
   // Action đăng ký thăm dò
-  public ActionType = DangKyThamDoActionEnum;
+  public ActionType = DangKyKhaiThacKsActionEnum;
   // disable delete button
   public disabledDeleteButton = false;
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
+  // Chứa đon vị trữ lượng
+  public donViTruLuongList = DonViTruLuong;
   // Lưu trữ đơn vị thời hạn
   public donViThoiHanList = DonViThoiHan;
   // lưu dữ liệu đơn vị diện tích
   public donViDoSauList = DonViDoSau;
+  // Chứa đơn vị công suất
+  public donViCongSuat = DonViCongSuat;
   // error message
   validationErrorMessages = {};
 
   // form errors
   formErrors = {
     diadiem: "",
-    dientichthamdo: "",
-    chieusauthamdotu: "",
-    chieusauthamdoden: "",
-    thoihanthamdo: "",
-    mucdichsudungkhoangsan: "",
+    duancongtrinh: "",
+    dientichkhaithac: "",
+    truluongdiachat: "",
+    truluongkhaithac: "",
+    thoihankhaithac: "",
+    thoigianxaydungmo: "",
+    phuongphapkhaithac: "",
+    congsuatkhaithac: "",
+    mucsaukhaithactu: "",
+    mucsaukhaithacden: "",
     dangkhoangsan: "",
+    mucdichsudungkhoangsan: "",
+    donvitruluong: "",
+    donvicongsuat: "",
     donvidientich: "",
     donvithoihan: "",
+    donvithoihanxaymo: "",
     donvichieusau: "",
-    hequychieu: ""
+    hequychieu: "",
   };
 
-  constructor(private translate: TranslateService,
-              private formBuilder: FormBuilder,
-              private dmFacadeService: DmFacadeService,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              private activatedRoute: ActivatedRoute,
-              public cfr: ComponentFactoryResolver) { }
+  constructor(
+    private translate: TranslateService,
+    private formBuilder: FormBuilder,
+    private dmFacadeService: DmFacadeService,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    private activatedRoute: ActivatedRoute,
+    public cfr: ComponentFactoryResolver
+  ) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -103,24 +117,25 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     });
 
     if (this.idhoso !== null && this.idhoso !== undefined) {
-      this.dangKyThamDoKhoangSan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
+      this.dangKyKhaiThacKhoangSan = await this.getDangKyKhaiThacKsByIdHoSo(this.idhoso);
 
-      if (this.dangKyThamDoKhoangSan) {
-        this.currentAction = DangKyThamDoActionEnum.Edit;
+      if (this.dangKyKhaiThacKhoangSan) {
+        this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
+        this.selectIdDangKyKhaiThacKhoangSan();
         this.selectCurrentFormState();
       } else {
-        this.currentAction = DangKyThamDoActionEnum.Add;
+        this.currentAction = DangKyKhaiThacKsActionEnum.Add;
         this.selectCurrentFormState();
       }
     } else {
-      this.currentAction = DangKyThamDoActionEnum.None;
+      this.currentAction = DangKyKhaiThacKsActionEnum.None;
       return;
     }
 
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
-    await this.formOnEdit(this.dangKyThamDoKhoangSan);
+    await this.formOnEdit(this.dangKyKhaiThacKhoangSan);
 
     return true;
   }
@@ -129,12 +144,21 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   private formInit() {
-    this.dangKyThamDoIOForm = this.formBuilder.group({
+    this.dangKyKhaiThacKSIOForm = this.formBuilder.group({
       diadiem: ["", Validators.required],
-      dientichthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdotu: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdoden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      thoihanthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      duancongtrinh: [""],
+      dientichkhaithac: [""],
+      truluongdiachat: [""],
+      truluongkhaithac: [""],
+      thoihankhaithac: [""],
+      thoigianxaydungmo: [""],
+      phuongphapkhaithac: [""],
+      congsuatkhaithac: [""],
+      mucsaukhaithactu: [""],
+      mucsaukhaithacden: [""],
+      donvitruluong: [""],
+      donvicongsuat: [""],
+      donvithoihanxaymo: [""],
       mucdichsudungkhoangsan: ["", Validators.required],
       dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
       donvidientich: ["", Validators.required],
@@ -159,14 +183,23 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   /**
    * hàm set value cho form
    */
-  private async formOnEdit(item: OutputDkThamDoKhoangSanModel) {
-    if (this.currentAction === DangKyThamDoActionEnum.Edit && item) {
-      this.dangKyThamDoIOForm.setValue({
+  private async formOnEdit(item: OutputDkKhaiThacKhoangSanModel) {
+    if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit && item) {
+      this.dangKyKhaiThacKSIOForm.setValue({
         diadiem: item.diadiem,
-        dientichthamdo: item.dientichthamdo,
-        chieusauthamdotu: item.chieusauthamdotu,
-        chieusauthamdoden: item.chieusauthamdoden,
-        thoihanthamdo: item.thoihanthamdo,
+        duancongtrinh: item.duancongtrinh,
+        dientichkhaithac: item.dientichkhaithac,
+        truluongdiachat: item.truluongdiachat,
+        truluongkhaithac: item.truluongkhaithac,
+        thoihankhaithac: item.thoihankhaithac,
+        thoigianxaydungmo: item.thoigianxaydungmo,
+        phuongphapkhaithac: item.phuongphapkhaithac,
+        congsuatkhaithac: item.congsuatkhaithac,
+        mucsaukhaithactu: item.mucsaukhaithactu,
+        mucsaukhaithacden: item.mucsaukhaithacden,
+        donvitruluong: item.donvitruluong,
+        donvicongsuat: item.donvicongsuat,
+        donvithoihanxaymo: item.donvithoihanxaymo,
         mucdichsudungkhoangsan: item.mucdichsudungkhoangsan,
         dangkhoangsan: item.dangkhoangsan,
         donvidientich: item.donvidientich,
@@ -182,17 +215,17 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      diadiem: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.diadiemRequired },
-      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dientichthamdoFormat },
-      chieusauthamdotu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdotuFormat },
-      chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenFormat },
-      thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoFormat  },
-      mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.mucdichsudungkhoangsanRequired },
-      dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
-      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvidientichRequired },
-      donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvithoihanRequired },
-      donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvichieusauRequired },
-      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.hequychieuRequired },
+      diadiem: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.diadiemRequired },
+      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dientichthamdoFormat },
+      chieusauthamdotu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdotuFormat },
+      chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenFormat },
+      thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoFormat },
+      mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.mucdichsudungkhoangsanRequired },
+      dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dangkhoangsanRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvidientichRequired },
+      donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvithoihanRequired },
+      donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvichieusauRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.hequychieuRequired },
     };
   }
 
@@ -211,31 +244,31 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    * Lấy dữ liệu hồ sơ theo IdHoSo
    * @param idHoSo
    */
-  private async getDangKyThamDoByIdHoSo(idHoSo: string) {
-    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
-    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
+  private async getDangKyKhaiThacKsByIdHoSo(idHoSo: string) {
+    const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
+    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({Idhoso: idHoSo});
     return dangKyItem;
   }
 
-  async saveItemDangKyThamDo() {
+  async saveItemDangKyKhaiThacKhoangSan() {
     this.logAllValidationErrorMessages();
 
-    if (!this.dangKyThamDoIOForm.valid) {
+    if (!this.dangKyKhaiThacKSIOForm.valid) {
       return;
     }
 
     // Gán dữ liệu input vào model
-    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
-    const inputModel = this.dangKyThamDoIOForm.value;
+    const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
+    const inputModel = this.dangKyKhaiThacKSIOForm.value;
     inputModel.idhoso = this.idhoso;
-    if (this.currentAction === DangKyThamDoActionEnum.Add) {
-      dkThamDoKhoangSanService.addItem(inputModel).subscribe(
+    if (this.currentAction === DangKyKhaiThacKsActionEnum.Add) {
+      dkKhaiThacKhoangSanService.addItem(inputModel).subscribe(
         async (res) => {
-          this.dangKyThamDoKhoangSan = inputModel;
-          this.dangKyThamDoKhoangSan.iddangkythamdo = res.iddangkythamdo;
-          this.currentAction = DangKyThamDoActionEnum.Edit;
+          this.dangKyKhaiThacKhoangSan = inputModel;
+          this.dangKyKhaiThacKhoangSan.iddangkykhaithac = res.iddangkykhaithac;
+          this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
           this.selectCurrentFormState();
-          this.selectNewInsertedDangKyThamDo();
+          this.selectIdDangKyKhaiThacKhoangSan();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -246,12 +279,12 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
             2000
           )
       );
-    } else if (this.currentAction === DangKyThamDoActionEnum.Edit) {
-      inputModel.iddangkythamdo = this.dangKyThamDoKhoangSan.iddangkythamdo;
-      dkThamDoKhoangSanService.updateItem(inputModel).subscribe(
+    } else if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
+      inputModel.iddangkykhaithac = this.dangKyKhaiThacKhoangSan.iddangkykhaithac;
+      dkKhaiThacKhoangSanService.updateItem(inputModel).subscribe(
         async (res) => {
-          this.dangKyThamDoKhoangSan = inputModel;
-          this.currentAction = DangKyThamDoActionEnum.Edit;
+          this.dangKyKhaiThacKhoangSan = inputModel;
+          this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
           this.selectCurrentFormState();
         },
         (error: HttpErrorResponse) => {
@@ -271,7 +304,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   private logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.dangKyThamDoIOForm,
+      this.dangKyKhaiThacKSIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -281,7 +314,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    * select inserted state of form
    */
   private selectCurrentFormState() {
-    if (this.currentAction === DangKyThamDoActionEnum.Edit) {
+    if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
       this.disabledDeleteButton = false;
     } else {
       this.disabledDeleteButton = true;
@@ -293,27 +326,27 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   /**
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
-  private selectNewInsertedDangKyThamDo() {
-    this.selectNewInsertedDangKyThamDoEvent.emit(this.dangKyThamDoKhoangSan.iddangkythamdo);
+  private selectIdDangKyKhaiThacKhoangSan() {
+    this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacKhoangSan.iddangkykhaithac);
   }
 
   /**
    *
    */
-  deleteItemDangKyThamDoKhoangSan() {
+  deleteItemDangKyKhaiThacKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.contentDelete,
-      this.dangKyThamDoKhoangSan.diadiem
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.contentDelete,
+      this.dangKyKhaiThacKhoangSan.diadiem
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
-          .getDangKyThamDoKhoangSanService()
-          .deleteDangKyThamDoByIdHoSo({ idhoso: this.idhoso })
+          .getDangKyKhaiThacKhoangSanService()
+          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacKhoangSan.iddangkykhaithac})
           .subscribe(
             () => {
-              this.dangKyThamDoKhoangSan = null;
-              this.currentAction = DangKyThamDoActionEnum.Add;
+              this.dangKyKhaiThacKhoangSan = null;
+              this.currentAction = DangKyKhaiThacKsActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
             },
@@ -335,6 +368,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyThamDoIOForm.reset();
+    this.dangKyKhaiThacKSIOForm.reset();
   }
 }
