@@ -97,13 +97,13 @@ export class LoaikhoangsanListComponent implements OnInit {
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoLoaiKhoangSanService()
-      .getDangKyThamDoLoaiKhoangSanByIdDangKyThamDo(this.iddangkythamdo);
-    if (listData.items) {
-      listData.items.map((loaiKhoangSan, index) => {
+      .getDangKyThamDoLoaiKhoangSanByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+    if (listData) {
+      listData.map((loaiKhoangSan, index) => {
         loaiKhoangSan.serialNumber = index + 1;
       });
     }
-    this.listDkThamDoLoaiKhoangSan = listData.items;
+    this.listDkThamDoLoaiKhoangSan = listData;
   }
 
 
