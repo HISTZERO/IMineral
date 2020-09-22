@@ -9,6 +9,7 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 
 @Component({
   selector: 'app-donvihanhchinh-io',
@@ -76,6 +77,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
 
   constructor(public matSidenavService: MatsidenavService,
               public dmFacadeService: DmFacadeService,
+              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
               private translate: TranslateService) { }
@@ -342,20 +344,20 @@ export class DonvihanhchinhIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dmFacadeService = this.dmFacadeService.getDmToChucService();
+    const dkThamDoDvhcService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoDvhcService();
     // Gán dữ liệu input vào model
     const idtinh = this.dangKyThamDoDvhcIOForm.value.tinh.idtinh;
     const idhuyen = this.dangKyThamDoDvhcIOForm.value.huyen.idhuyen;
     const idxa = this.dangKyThamDoDvhcIOForm.value.xa.idxa;
-    this.inputModel = this.dangKyThamDoDvhcIOForm.value;
     this.inputModel.matinh = this.dangKyThamDoDvhcIOForm.value.tinh.matinh;
     this.inputModel.mahuyen = this.dangKyThamDoDvhcIOForm.value.huyen.mahuyen;
     this.inputModel.maxa = this.dangKyThamDoDvhcIOForm.value.xa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
+    this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
     if (operMode === "new") {
-      dmFacadeService.addItem(this.inputModel).subscribe(
+      dkThamDoDvhcService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDangKyThamDoDvhc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -368,7 +370,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idthamdodvhc = this.obj.idthamdodvhc;
-      dmFacadeService.updateItem(this.inputModel).subscribe(
+      dkThamDoDvhcService.updateItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDangKyThamDoDvhc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);

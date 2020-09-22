@@ -143,8 +143,8 @@ export class ThongtindangkyComponent implements OnInit {
     this.setThamDoKhoangSanDisabledTabState(this.currentAction);
   }
 
-  getIdDangKyThamDo(id: string) {
-    this.iddangkythamdo = id;
+  getIdDangKyThamDo(idDangKyThamDo: string) {
+    this.iddangkythamdo = idDangKyThamDo;
   }
 
   /**
@@ -168,7 +168,7 @@ export class ThongtindangkyComponent implements OnInit {
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idhoso = this.itemHoSo.idhoso;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
-    componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getIdDangKyThamDo(event));
+    componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
   }
 
   async tabChange(index: any) {
