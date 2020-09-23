@@ -3,12 +3,13 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
 import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 import { HosoIoComponent } from '../../hoso/hoso-io/hoso-io.component';
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -64,6 +65,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   constructor(public matSidenavService: MatsidenavService,
               private activatedRoute: ActivatedRoute,
+              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               private translate: TranslateService) { }
 
   async ngOnInit() {
@@ -75,10 +77,17 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
+    let existedDangKyThamDo = false;
 
     if (this.idhoso !== null && this.idhoso !== undefined) {
       this.currentAction = HoSoActionEnum.Edit;
       this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+
+      const dkThamDoItem = await this.getDangKyThamDoByIdHoSo(this.idhoso);
+
+      if (dkThamDoItem) {
+        existedDangKyThamDo = true;
+      }
     } else {
       this.currentAction = HoSoActionEnum.Add;
       this.setThamDoKhoangSanDisabledTabState(this.currentAction);
@@ -87,6 +96,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     // Khởi tạo dữ liệu ban đầu  cho form hoso
     this.hoSoIOComp.idhoso = this.idhoso;
     await this.hoSoIOComp.manualDataInit();
+    this.hoSoIOComp.disabledLoaiCapPhepSelectionState = existedDangKyThamDo;
     this.dangKyThamDoKhoanSanTabs.realignInkBar();
   }
 
@@ -100,6 +110,15 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       .toPromise();
   }
 
+  /**
+   * Lấy dữ liệu hồ sơ theo IdHoSo
+   * @param idHoSo
+   */
+  private async getDangKyThamDoByIdHoSo(idHoSo: string) {
+    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
+    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
+    return dangKyItem;
+  }
 
   setThamDoKhoangSanDisabledTabState(actionType: number) {
     switch(actionType) {
@@ -134,6 +153,14 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   getIdHoSo(id: string) {
     this.idhoso = id;
+  }
+
+  getThongTinDangKyThamDoFormState(action: number) {
+    if (action=== DangKyThamDoActionEnum.Edit) {
+      this.hoSoIOComp.disabledLoaiCapPhepSelectionState = true;
+    } else {
+      this.hoSoIOComp.disabledLoaiCapPhepSelectionState = false;
+    }
   }
 
   closeIOSidenav() {
