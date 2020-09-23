@@ -33,23 +33,23 @@ export enum NhomBaoCaoEnum {
 
 }
 
-export enum NhomLoaiCapPhepEnum {
-  ThamDoKhoangSan = 1,
-  PheDuyetTruLuong = 2,
-  DauGiaQuyenKhaiThac = 3,
-  KhaiThacKhoangSan = 4,
-  TanThuKhoangSan = 5,
-  TraLaiGiayPhep = 6,
-  DongCuaMo = 7,
-  ChuyenNhuongThamDoKhaiThac = 8
-}
+// export enum NhomLoaiCapPhepEnum {
+//   ThamDoKhoangSan = 1,
+//   PheDuyetTruLuong = 2,
+//   DauGiaQuyenKhaiThac = 3,
+//   KhaiThacKhoangSan = 4,
+//   TanThuKhoangSan = 5,
+//   TraLaiGiayPhep = 6,
+//   DongCuaMo = 7,
+//   ChuyenNhuongThamDoKhaiThac = 8
+// }
 
 export enum LoaiCapPhepEnum {
   ThamDoKhoangSan = "3",
   ThamDoGiaHan = "4",
   KhaiThacKhoangSan = "9",
   KhaiThacKhoangSanGiaHan = "10",
-  DieuChinhGiayPhapKhaiThac = "11",
+  DieuChinhGiayPhepKhaiThac = "11",
   KhaiThacKhoangSanCoDuAnDauTu = "15",
   KhaiThacKhoangSanLamVatLieuXayDung = "16",
   ThuHoiCatSoiDuAnNaoVetKhoiThong = "17"
@@ -78,6 +78,12 @@ export enum HoSoActionEnum {
 }
 
 export enum DangKyThamDoActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
+export enum DangKyKhaiThacKsActionEnum {
   None = 0,
   Add = 1,
   Edit = 2

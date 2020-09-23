@@ -1,16 +1,23 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
-import { DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from "../../../../../shared/constants/enum";
-import { DangkykhaithacgiahanIoComponent } from "./dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
-import { DangkykhaithackhoangsanIoComponent } from "./dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
+import { DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from "src/app/shared/constants/enum";
+import { DangkykhaithaccaisoiIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component";
+import { DangkykhaithacdieuchinhIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component";
+import { DangkykhaithacgiahanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
+import { DangkykhaithackhoangsanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
+import { DangkykhaithackhoangsanduanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component";
+import { DangkykhaithacvlxdIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component";
 
 export const DangKyKhaiThacKhoangSanComponent: any = {
   [LoaiCapPhepEnum.KhaiThacKhoangSan]: DangkykhaithackhoangsanIoComponent,
-  [LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan]: DangkykhaithacgiahanIoComponent
+  [LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan]: DangkykhaithacgiahanIoComponent,
+  [LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung]: DangkykhaithacvlxdIoComponent,
+  [LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu]: DangkykhaithackhoangsanduanIoComponent,
+  [LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong]: DangkykhaithaccaisoiIoComponent,
+  [LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac]: DangkykhaithacdieuchinhIoComponent
 };
 
 @Component({

@@ -3,13 +3,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
 import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
-import { HosoIoComponent } from '../../hoso/hoso-io/hoso-io.component';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { HosoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-io/hoso-io.component";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 
 @Component({
   selector: 'app-thamdokhoangsan-io',

@@ -40,14 +40,17 @@ export class ServiceName {
   public static TAILIEU = "hstailieu";
   // Đăng ký thăm dò khoáng sản
   public static DANGKYTHAMDOKHOANGSAN = "dangkythamdo";
-  // Đăng ký thăm dò gia hạn
   public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
-  // Đăng ký thăm dò đơn vị hành chính
   public static DANGKYTHAMDODVHC = "dangkythamdodvhc";
-  // Đăng ký thăm dò loại khoáng sản
   public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
-  // Đăng ký thăm dò công trình
   public static DANGKYTHAMDOCONGTRINH = "dangkythamdocongtrinh";
+  // Đăng ký khai thác khoáng sản
+  public static DANGKYKHAITHACKHOANGSAN = "dangkykhaithackhoangsan";
+  public static DANGKYKHAITHACGIAHAN = "dangkykhaithacgiahan";
+  public static DANGKYKHAITHACCATSOI = "dangkykhaithaccatsoi";
+  public static DANGKYKHAITHACDIEUCHINH = "dangkykhaithacdieuchinh";
+  public static DANGKYKHAITHACKHOANGSANDUAN = "dangkykhaithackhoangsanduan";
+  public static DANGKYKHAITHACVLXD = "dangkykhaithacvlxd";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
