@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -32,6 +32,8 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // Lưu trữ thông tin đăng ký tab
   public TabType = DangKyThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id hồ sơ
@@ -144,6 +146,7 @@ export class ThongtindangkyComponent implements OnInit {
   getDangKyThamDoFormState(action: number) {
     this.currentAction = action;
     this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
   getIdDangKyThamDo(idDangKyThamDo: string) {
