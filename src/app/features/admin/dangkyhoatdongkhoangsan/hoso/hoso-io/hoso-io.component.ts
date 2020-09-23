@@ -45,7 +45,7 @@ export class HosoIoComponent implements OnInit {
   public hosoIOForm: FormGroup;
   // Chứa dữ liệu translate
   public dataTranslate: any;
-  //Chứa loại đối tượng
+  // Chứa loại đối tượng
   public loaiDoiTuongList = LoaiDoiTuong;
   // Chứa dữ liệu loại đối tượng
   public dangKhoangSanList = DangKhoangSan;
@@ -65,7 +65,7 @@ export class HosoIoComponent implements OnInit {
   public coQuanTiepNhanList: OutputHsCoQuanTiepNhanModel[];
   public coQuanTiepNhanFilters: OutputHsCoQuanTiepNhanModel[];
   // chứa dữ liệu Id Hồ sơ
-  private idhoso: string;
+  public idhoso: string;
   // Action thao tác dữ liệu
   private currentAction: number;
   // error message
@@ -238,6 +238,7 @@ export class HosoIoComponent implements OnInit {
       hinhthucnophoso: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnophosoRequired },
       hinhthucnhanketqua: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnhanketquaRequired },
       idcoquantiepnhan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.idcoquantiepnhanRequired },
+      idcanhantochuc: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired},
       tencanhantochuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired },
       sogiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.sogiaytoRequired },
       loaigiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.loaigiaytoRequired },

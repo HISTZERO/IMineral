@@ -194,7 +194,7 @@
                   </label>
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <input class="form-control" type="text" formControlName="tencanhantochuc" placeholder="{{'DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucPlaceholder' | translate}}" />
-                    <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc}}</span>
+                    <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc ? formErrors.tencanhantochuc : formErrors.idcanhantochuc}}</span>
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2">
                     <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openIOSidenav()">
