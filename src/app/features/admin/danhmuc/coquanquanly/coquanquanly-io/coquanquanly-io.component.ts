@@ -212,8 +212,8 @@ export class DmCoquanquanlyIoComponent implements OnInit {
       await this.showDvhcHuyen();
       await this.showDvhcXa();
       this.selectXa();
+      this.editMode = true;
     }
-    this.editMode = true;
   }
 
   /**

@@ -27,9 +27,6 @@ export class DmLinhvucIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLinhvucModel;
 
@@ -95,7 +92,6 @@ export class DmLinhvucIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLinhvucModel();
     // check edit
     this.formOnEdit();
@@ -127,7 +123,6 @@ export class DmLinhvucIoComponent implements OnInit {
         thutu: this.obj.thutu,
       });
     }
-    this.editMode = true;
   }
 
 

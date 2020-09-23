@@ -30,9 +30,6 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmThuTucHanhChinhModel;
 
@@ -161,7 +158,6 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmThuTucHanhChinhModel();
     // check edit
     this.formOnEdit();
@@ -228,7 +224,6 @@ export class DmThutuchanhchinhIoComponent implements OnInit {
       this.tenLinhVucDisplay = this.obj.tenlinhvuc;
       this.tenCapQuanLyDisplay = this.obj.tencapthuchien;
     }
-    this.editMode = true;
   }
 
   /**
