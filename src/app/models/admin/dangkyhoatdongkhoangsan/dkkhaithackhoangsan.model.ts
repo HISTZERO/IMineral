@@ -1,7 +1,6 @@
 export class OutputDkKhaiThacKhoangSanModel {
     iddangkykhaithac: string;
     diadiem: string;
-    duancongtrinh: string;
     dientichkhaithac: number;
     truluongdiachat: number;
     truluongkhaithac: number;
@@ -30,7 +29,6 @@ export class OutputDkKhaiThacKhoangSanModel {
 export class InputDkKhaiThacKhoangSanModel {
     iddangkykhaithac: string;
     diadiem: string;
-    duancongtrinh: string;
     dientichkhaithac: number;
     truluongdiachat: number;
     truluongkhaithac: number;

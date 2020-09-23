@@ -64,7 +64,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   // form errors
   formErrors = {
     diadiem: "",
-    duancongtrinh: "",
     dientichkhaithac: "",
     truluongdiachat: "",
     truluongkhaithac: "",
@@ -146,7 +145,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   private formInit() {
     this.dangKyKhaiThacKSIOForm = this.formBuilder.group({
       diadiem: ["", Validators.required],
-      duancongtrinh: [""],
       dientichkhaithac: [""],
       truluongdiachat: [""],
       truluongkhaithac: [""],
@@ -187,7 +185,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit && item) {
       this.dangKyKhaiThacKSIOForm.setValue({
         diadiem: item.diadiem,
-        duancongtrinh: item.duancongtrinh,
         dientichkhaithac: item.dientichkhaithac,
         truluongdiachat: item.truluongdiachat,
         truluongkhaithac: item.truluongkhaithac,

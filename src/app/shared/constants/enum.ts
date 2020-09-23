@@ -49,7 +49,7 @@ export enum LoaiCapPhepEnum {
   ThamDoGiaHan = "4",
   KhaiThacKhoangSan = "9",
   KhaiThacKhoangSanGiaHan = "10",
-  DieuChinhGiayPhapKhaiThac = "11",
+  DieuChinhGiayPhepKhaiThac = "11",
   KhaiThacKhoangSanCoDuAnDauTu = "15",
   KhaiThacKhoangSanLamVatLieuXayDung = "16",
   ThuHoiCatSoiDuAnNaoVetKhoiThong = "17"

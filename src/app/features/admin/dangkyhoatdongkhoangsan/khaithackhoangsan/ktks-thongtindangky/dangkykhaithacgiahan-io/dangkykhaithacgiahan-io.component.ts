@@ -110,7 +110,7 @@ export class DangkykhaithacgiahanIoComponent implements OnInit {
     if (this.idhoso !== null && this.idhoso !== undefined) {
       this.dangKyKhaiThacGiaHan = await this.getDangKyKhaiThacGiaHanByIdHoSo(this.idhoso);
 
-      if (this.dangKyKhaiThacGiaHan.length > 0) {
+      if (this.dangKyKhaiThacGiaHan) {
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIddangKyKhaiThacGiaHan();
         this.selectCurrentFormState();
@@ -293,8 +293,8 @@ export class DangkykhaithacgiahanIoComponent implements OnInit {
    */
   deleteItemdangKyKhaiThacGiaHan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangKyKhaiThacGiaHan.contentDelete,
-      this.dangKyKhaiThacGiaHan.diadiem
+      "",
+      ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {

@@ -57,6 +57,10 @@ import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsa
 import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
 import {DaugiaquyenListComponent} from "./daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
 import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
+import { DangkykhaithaccaisoiIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component';
+import { DangkykhaithacdieuchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
+import { DangkykhaithacvlxdIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
+import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
 
 
 
@@ -103,7 +107,11 @@ import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-i
      PheduyettruluongkhoangsanIoComponent,
     PheduyettruluongkhoangsanListComponent,
     DaugiaquyenIoComponent,
-    DaugiaquyenListComponent
+    DaugiaquyenListComponent,
+    DangkykhaithaccaisoiIoComponent,
+    DangkykhaithacdieuchinhIoComponent,
+    DangkykhaithacvlxdIoComponent,
+    DangkykhaithackhoangsanduanIoComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -130,7 +138,11 @@ import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-i
     DangkythamdogiahanIoComponent,
     KhaithackhoangsanIoComponent,
     DangkykhaithacgiahanIoComponent,
-    DangkykhaithackhoangsanIoComponent
+    DangkykhaithackhoangsanIoComponent,
+    DangkykhaithaccaisoiIoComponent,
+    DangkykhaithacdieuchinhIoComponent,
+    DangkykhaithacvlxdIoComponent,
+    DangkykhaithackhoangsanduanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
