@@ -35,9 +35,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLoaiKhoangSanModel;
 
@@ -128,7 +125,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
   * Hàm khởi tạo form theo dạng edit
   */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLoaiKhoangSanModel();
     // check edit
     this.formOnEdit();
@@ -170,7 +166,6 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
 
       this.tenNhomKhoangSanDisplay = this.obj.tennhomkhoangsan;
     }
-    this.editMode = true;
   }
 
   /**
@@ -210,7 +205,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
 
   /**
   * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-  * @param operMode 
+  * @param operMode
   */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -237,7 +232,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
 
   /**
   * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-  * @param operMode 
+  * @param operMode
   */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -279,8 +274,8 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
 
   /**
    * Hàm so sánh giá trị thuu tục hành chính combobox
-   * @param item1 
-   * @param item2 
+   * @param item1
+   * @param item2
    */
   public compareNhomKhoangSan(item1: any, item2: any) {
     if (item1.idnhomkhoangsan === item2.idnhomkhoangsan) {
@@ -297,7 +292,7 @@ export class DmLoaikhoangsanIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
   *  Hàm gọi từ function con gọi vào chạy function cha

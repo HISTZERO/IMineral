@@ -28,9 +28,6 @@ export class DmLoaicapphepIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLoaiCapPhepModel;
 
@@ -114,18 +111,17 @@ export class DmLoaicapphepIoComponent implements OnInit {
   }
 
   /**
-    * Hàm khởi tạo form theo dạng edit
-    */
+   * Hàm khởi tạo form theo dạng edit
+   */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLoaiCapPhepModel();
     // check edit
     this.formOnEdit();
   }
 
   /**
-    * Hàm khởi tạo form
-    */
+   * Hàm khởi tạo form
+   */
   formInit() {
     this.loaiCapPhepIOForm = this.formBuilder.group({
       maloaicapphep: [""],
@@ -139,8 +135,8 @@ export class DmLoaicapphepIoComponent implements OnInit {
   }
 
   /**
-    * hàm set value cho form
-    */
+   * hàm set value cho form
+   */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.classColDvhc = true;
@@ -156,10 +152,9 @@ export class DmLoaicapphepIoComponent implements OnInit {
       this.dataComboboxModel = {
         idthutuc: this.obj.idthutuchanhchinh,
         tenthutuc: this.obj.tenthutuchanhchinh,
-      }
-      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh
+      };
+      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh;
     }
-    this.editMode = true;
   }
 
   /**
@@ -209,7 +204,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
 
   /**
     * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-    * @param operMode 
+    * @param operMode
     */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -241,22 +236,22 @@ export class DmLoaicapphepIoComponent implements OnInit {
   public selectThuTucHanhChinh() {
     if (this.obj && this.purpose === 'edit') {
       if (this.loaiCapPhepIOForm.value.thutuchanhchinh) {
-        this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+        this.loaiCapPhepIOForm.controls.idthutuchanhchinh.setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
         this.tenThuTucDisplay = this.loaiCapPhepIOForm.value.thutuchanhchinh.tenthutuchanhchinh;
       } else {
-        this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.dataComboboxModel.idthutuc);
+        this.loaiCapPhepIOForm.controls.idthutuchanhchinh.setValue(this.dataComboboxModel.idthutuc);
         this.tenThuTucDisplay = this.dataComboboxModel.tenthutuc;
       }
     } else {
-      this.loaiCapPhepIOForm.controls["idthutuchanhchinh"].setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
+      this.loaiCapPhepIOForm.controls.idthutuchanhchinh.setValue(this.loaiCapPhepIOForm.value.thutuchanhchinh.idthutuchanhchinh);
       this.tenThuTucDisplay = "";
     }
   }
 
   /**
    * Hàm so sánh giá trị thuu tục hành chính combobox
-   * @param item1 
-   * @param item2 
+   * @param item1
+   * @param item2
    */
   public compareThuTucHanhChinh(item1: any, item2: any) {
     if (item1.idthutuchanhchinh === item2.idthutuchanhchinh) {
@@ -268,7 +263,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
 
   /**
     * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-    * @param operMode 
+    * @param operMode
     */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -297,7 +292,7 @@ export class DmLoaicapphepIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
     *  Hàm gọi từ function con gọi vào chạy function cha
