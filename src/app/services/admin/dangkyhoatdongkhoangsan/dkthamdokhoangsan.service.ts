@@ -37,6 +37,10 @@ export class DkThamDoKhoangSanService extends RepositoryEloquentService {
 
   public deleteDangKyThamDoByIdHoSo(idHoSo: string) {
     try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHOANGSAN + "/DeleteByIdhoso"
+      });
+
       return this.httpClient.delete<any>(`${this.apiUrl}?Idhoso=${idHoSo}`, {
         headers: this.headers,
       });

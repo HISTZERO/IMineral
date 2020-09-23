@@ -292,6 +292,7 @@
     "chonloaikhoangsan": "---Chọn loại khoáng sản---",
     "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
     "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
     "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
     "informedNotExistedDangKyThamDoLoaiKhoangSan": "Đăng ký thăm dò loại khoáng sản không tồn tại"
   },

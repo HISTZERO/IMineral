@@ -181,8 +181,8 @@ export class DonvihanhchinhListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANHMUC.linhvuc.contentDelete,
-      this.selectedItem.tenTinh + " - " + this.selectedItem.tenHuyen + " - " + this.selectedItem.tenXa
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.contentDelete,
+      this.selectedItem.tentinh + " - " + this.selectedItem.tenhuyen + " - " + this.selectedItem.tenxa
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {

@@ -85,10 +85,10 @@ export class DonvihanhchinhIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
-    // Khởi tạo form theo dạng add or edit
-    await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+    // Khởi tạo form theo dạng add or edit
+    await this.bindingConfigAddOrUpdate();
   }
 
   /**
@@ -197,7 +197,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
         this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
+    if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
         this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
       }

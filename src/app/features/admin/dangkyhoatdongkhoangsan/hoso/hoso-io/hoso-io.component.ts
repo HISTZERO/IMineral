@@ -35,6 +35,9 @@ export class HosoIoComponent implements OnInit {
   @Output("selectNewInsertedHoSoEvent") selectNewInsertedHoSoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // Lưu trữ trạng thái enable hoặc disable chọn loại cấp phép
+  // tslint:disable-next-line: no-input-rename
+  @Input ("disabledLoaiCapPhepSelectionState") disabledLoaiCapPhepSelectionState = false;
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
@@ -45,7 +48,7 @@ export class HosoIoComponent implements OnInit {
   public hosoIOForm: FormGroup;
   // Chứa dữ liệu translate
   public dataTranslate: any;
-  //Chứa loại đối tượng
+  // Chứa loại đối tượng
   public loaiDoiTuongList = LoaiDoiTuong;
   // Chứa dữ liệu loại đối tượng
   public dangKhoangSanList = DangKhoangSan;
@@ -65,7 +68,9 @@ export class HosoIoComponent implements OnInit {
   public coQuanTiepNhanList: OutputHsCoQuanTiepNhanModel[];
   public coQuanTiepNhanFilters: OutputHsCoQuanTiepNhanModel[];
   // chứa dữ liệu Id Hồ sơ
-  private idhoso: string;
+  public idhoso: string;
+  // Lưu trữ tên loại cấp phép trong trường hợp hồ sơ đã có đăng ký
+  public tenLoaiCapPhep: string;
   // Action thao tác dữ liệu
   private currentAction: number;
   // error message
@@ -195,30 +200,35 @@ export class HosoIoComponent implements OnInit {
   private async formOnEdit() {
     if (this.currentAction === HoSoActionEnum.Edit) {
       const inputModel = await this.getHoSoById(this.idhoso);
-      this.hosoIOForm.setValue({
-        mahoso: inputModel.mahoso,
-        mabiennhan: inputModel.mabiennhan,
-        soden: inputModel.soden,
-        ngaynop: inputModel.ngaynop,
-        ngaytiepnhan: inputModel.ngaytiepnhan,
-        ngaytraketqua: inputModel.ngaytraketqua,
-        loaidoituong: inputModel.loaidoituong,
-        loaicapphep: inputModel.loaicapphep,
-        hinhthucnophoso: inputModel.hinhthucnophoso,
-        hinhthucnhanketqua: inputModel.hinhthucnhanketqua,
-        idcoquantiepnhan: inputModel.idcoquantiepnhan,
-        idcanhantochuc: inputModel.idcanhantochuc,
-        tencanhantochuc: inputModel.tencanhantochuc,
-        sogiayto: inputModel.sogiayto,
-        loaigiayto: inputModel.loaigiayto,
-        ngaycap: inputModel.ngaycap,
-        noicap: inputModel.noicap,
-        diachi: inputModel.diachi,
-        dienthoai: inputModel.dienthoai,
-        fax: inputModel.fax,
-        email: inputModel.email,
-        website: inputModel.website,
-      });
+
+      if (inputModel) {
+        this.hosoIOForm.setValue({
+          mahoso: inputModel.mahoso,
+          mabiennhan: inputModel.mabiennhan,
+          soden: inputModel.soden,
+          ngaynop: inputModel.ngaynop,
+          ngaytiepnhan: inputModel.ngaytiepnhan,
+          ngaytraketqua: inputModel.ngaytraketqua,
+          loaidoituong: inputModel.loaidoituong,
+          loaicapphep: inputModel.loaicapphep,
+          hinhthucnophoso: inputModel.hinhthucnophoso,
+          hinhthucnhanketqua: inputModel.hinhthucnhanketqua,
+          idcoquantiepnhan: inputModel.idcoquantiepnhan,
+          idcanhantochuc: inputModel.idcanhantochuc,
+          tencanhantochuc: inputModel.tencanhantochuc,
+          sogiayto: inputModel.sogiayto,
+          loaigiayto: inputModel.loaigiayto,
+          ngaycap: inputModel.ngaycap,
+          noicap: inputModel.noicap,
+          diachi: inputModel.diachi,
+          dienthoai: inputModel.dienthoai,
+          fax: inputModel.fax,
+          email: inputModel.email,
+          website: inputModel.website,
+        });
+
+        this.tenLoaiCapPhep = inputModel.tenloaicapphep;
+      }
     }
   }
 
@@ -238,6 +248,7 @@ export class HosoIoComponent implements OnInit {
       hinhthucnophoso: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnophosoRequired },
       hinhthucnhanketqua: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnhanketquaRequired },
       idcoquantiepnhan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.idcoquantiepnhanRequired },
+      idcanhantochuc: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired},
       tencanhantochuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired },
       sogiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.sogiaytoRequired },
       loaigiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.loaigiaytoRequired },

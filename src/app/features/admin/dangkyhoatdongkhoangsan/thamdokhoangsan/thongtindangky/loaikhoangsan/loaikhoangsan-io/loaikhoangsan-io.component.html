@@ -4,18 +4,22 @@
       <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tennhomkhoangsan" | translate }}</label>
       <div class="col-sm-9">
         <div class="row">
-          <div class="col-sm-12">
-            <mat-select class="form-control" formControlName="nhomkhoangsan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
-              (selectionChange)="null" *ngIf="dataTranslate">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
+              (selectionChange)="showLoaiKhoangSan()" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters" (filteredReturn)="allNhomKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan" | translate }}
               </mat-option>
-              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan" [value]="nhomKhoangSan.idnhomkhoangsan">
+              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan" [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
                 {{ nhomKhoangSan.tennhomkhoangsan }}
               </mat-option>
             </mat-select>
+          </div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
+            <label class="m-0" *ngIf="tenNhomKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.nhomkhoangsandangdung" | translate}}:</label><br>
+            <span><b>{{tenNhomKhoangSanDisplay}}</b></span>
           </div>
         </div>
       </div>
@@ -27,7 +31,7 @@
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
             <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan' | translate }}"
-              *ngIf="dataTranslate">
+              (selectionChange)="selectLoaiKhoangSan()" *ngIf="dataTranslate">
               <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"(filteredReturn)="allLoaiKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">

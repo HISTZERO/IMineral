@@ -91,7 +91,7 @@
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.hoso.loaicapphep" | translate}}
                     <small>(*)</small>
                   </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
+                  <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledLoaiCapPhepSelectionState">
                     <mat-select class="form-control" placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.hoso.chonloaicapphep' | translate }}" formControlName="loaicapphep"
                       *ngIf="dataTranslate">
                       <mat-select-filter [displayMember]="'name'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
@@ -104,6 +104,9 @@
                       </mat-option>
                     </mat-select>
                     <span *ngIf="formErrors.loaicapphep" class="alert-danger">{{formErrors.loaicapphep}}</span>
+                  </div>
+                  <div class="col-lg-8 col-md-8 col-sm-8 font-weight-bold" style="padding-top: 9px;" *ngIf="disabledLoaiCapPhepSelectionState">
+                    {{tenLoaiCapPhep}}
                   </div>
                 </div>
                 <div class="form-group row mx-0">
@@ -194,7 +197,7 @@
                   </label>
                   <div class="col-lg-6 col-md-6 col-sm-6">
                     <input class="form-control" type="text" formControlName="tencanhantochuc" placeholder="{{'DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucPlaceholder' | translate}}" />
-                    <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc}}</span>
+                    <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc ? formErrors.tencanhantochuc : formErrors.idcanhantochuc}}</span>
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2">
                     <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openIOSidenav()">
