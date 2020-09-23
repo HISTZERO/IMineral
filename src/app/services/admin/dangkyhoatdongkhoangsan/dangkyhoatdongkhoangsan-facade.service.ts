@@ -8,6 +8,12 @@ import { DkThamDoGiaHanService } from 'src/app/services/admin/dangkyhoatdongkhoa
 import { DkThamDoDvhcService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.service';
 import { DkThamDoLoaiKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.service';
 import { DkThamDoCongTrinhService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.service';
+import { DkkhaithaccatsoiService } from "./dkkhaithaccatsoi.service";
+import { DkkhaithacdieuchinhService } from "./dkkhaithacdieuchinh.service";
+import { DkkhaithacgiahanService } from "./dkkhaithacgiahan.service";
+import { DkkhaithackhoangsanService } from "./dkkhaithackhoangsan.service";
+import { DkkhaithackhoangsanduanService } from "./dkkhaithackhoangsanduan.service";
+import { DkkhaithacvlxdService } from "./dkkhaithacvlxd.service";
 
 
 @Injectable({
@@ -15,7 +21,7 @@ import { DkThamDoCongTrinhService } from 'src/app/services/admin/dangkyhoatdongk
 })
 
 export class DangKyHoatDongKhoangSanFacadeService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) { }
 
   // Hồ sơ service
   public getHoSoService() {
@@ -50,6 +56,36 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký thăm dò service
   public getDangKyThamDoCongTrinhService() {
     return new DkThamDoCongTrinhService(this.httpClient);
+  }
+
+  // Đăng ký khai thác cát sỏi service
+  public getDangKyKhaiThacCatSoiService() {
+    return new DkkhaithaccatsoiService(this.httpClient);
+  }
+
+  // Đăng ký khai thác điều chỉnh service
+  public getDangKyKhaiThacDieuChinhService() {
+    return new DkkhaithacdieuchinhService(this.httpClient);
+  }
+
+  // Đăng ký khai thác gia hạn service
+  public getDangKyKhaiThacGiaHanService() {
+    return new DkkhaithacgiahanService(this.httpClient);
+  }
+
+  // Đăng ký khai thác khoáng sản service
+  public getDangKyKhaiThacKhoangSanService() {
+    return new DkkhaithackhoangsanService(this.httpClient);
+  }
+
+  // Đăng ký khai thác khoáng sản dự án service
+  public getDangKyKhaiThacKhoangSanDuAnService() {
+    return new DkkhaithackhoangsanduanService(this.httpClient);
+  }
+
+  // Đăng ký khai thác vật liệu xây dựng service
+  public getDangkyKhaiThacVLXDService() {
+    return new DkkhaithacvlxdService(this.httpClient);
   }
 }
 

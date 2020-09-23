@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
-import {NhomLoaiCapPhepEnum} from 'src/app/shared/constants/enum';
 import { MenuDkDauGiaQuyen } from "src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan";
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 
 @Component({
   selector: 'app-daugiaquyen-list',
@@ -28,7 +28,7 @@ export class DaugiaquyenListComponent implements OnInit {
   async ngOnInit() {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    this.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.titleList;
+    this.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.daugiaquyen.titleList;
   }
 
   /**
