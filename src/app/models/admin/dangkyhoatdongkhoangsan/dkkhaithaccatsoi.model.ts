@@ -5,11 +5,13 @@ export class OutputDkKhaiThacCatSoiModel {
     ngaykyquyetdinh: string;
     coquanpheduyet: string;
     tongkhoiluongnaovet: number;
-    khoiluongthuhoi: number;
-    phuongphapthuhoi: string;
-    thoihanthuhoi: number;
-    donvikhoiluong: string;
+    dientichkhaithac: number;
+    khoiluongkhaithac: number;
+    phuongphapkhaithac: string;
+    thoihankhaithac: number;
+    donvidientich: string;
     donvithoihan: string;
+    donvikhoiluong: string;
     hequychieu: string;
     idhoso: string;
     geom: string;
@@ -25,11 +27,13 @@ export class InputDkKhaiThacCatSoiModel {
     ngaykyquyetdinh: string;
     coquanpheduyet: string;
     tongkhoiluongnaovet: number;
-    khoiluongthuhoi: number;
-    phuongphapthuhoi: string;
-    thoihanthuhoi: number;
-    donvikhoiluong: string;
+    dientichkhaithac: number;
+    khoiluongkhaithac: number;
+    phuongphapkhaithac: string;
+    thoihankhaithac: number;
+    donvidientich: string;
     donvithoihan: string;
+    donvikhoiluong: string;
     hequychieu: string;
     idhoso: string;
 }
