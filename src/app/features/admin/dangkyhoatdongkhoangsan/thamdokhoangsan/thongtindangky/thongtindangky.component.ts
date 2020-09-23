@@ -23,6 +23,7 @@ export const DangKyThamDoKhoangSanComponent: any = {
   styleUrls: ['./thongtindangky.component.scss']
 })
 export class ThongtindangkyComponent implements OnInit {
+  @ViewChild('thongTinDangKyThamDoTabs', {static: false}) thongTinDangKyThamDoTabs;
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
@@ -106,6 +107,8 @@ export class ThongtindangkyComponent implements OnInit {
     }
 
     await this.showDangKyViewComponent();
+
+    this.thongTinDangKyThamDoTabs.realignInkBar();
     return true;
   }
 

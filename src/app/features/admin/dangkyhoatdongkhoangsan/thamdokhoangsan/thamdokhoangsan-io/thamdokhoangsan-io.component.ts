@@ -8,6 +8,7 @@ import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/s
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
+import { HosoIoComponent } from '../../hoso/hoso-io/hoso-io.component';
 
 @Component({
   selector: 'app-thamdokhoangsan-io',
@@ -15,8 +16,10 @@ import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkh
   styleUrls: ['./thamdokhoangsan-io.component.scss']
 })
 export class ThamdokhoangsanIoComponent implements OnInit {
+  @ViewChild('dangKyThamDoKhoanSanTabs', {static: false}) dangKyThamDoKhoanSanTabs;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("hoSoIOComp", { static: false }) hoSoIOComp: HosoIoComponent;
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
@@ -80,6 +83,11 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       this.currentAction = HoSoActionEnum.Add;
       this.setThamDoKhoangSanDisabledTabState(this.currentAction);
     }
+
+    // Khởi tạo dữ liệu ban đầu  cho form hoso
+    this.hoSoIOComp.idhoso = this.idhoso;
+    await this.hoSoIOComp.manualDataInit();
+    this.dangKyThamDoKhoanSanTabs.realignInkBar();
   }
 
   /**
