@@ -173,6 +173,8 @@ export class ThongtindangkyComponent implements OnInit {
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idhoso = this.itemHoSo.idhoso;
+    componentRef.instance.matSidenav =  this.matSidenav;
+    componentRef.instance.content = this.content;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
     componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
   }

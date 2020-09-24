@@ -44,6 +44,11 @@ export class HosoIoComponent implements OnInit {
   // State của Save button
   // tslint:disable-next-line: no-input-rename
   @Input("insertedState") insertedState = InsertedState.SaveAndRefresh;
+   // Action thao tác dữ liệu
+  // tslint:disable-next-line: no-input-rename
+  @Input("currentAction") currentAction: number;
+  // Chữ dữ liệu Action
+  public ActionType = HoSoActionEnum;
   // Chứa dữ liệu Form
   public hosoIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -71,8 +76,6 @@ export class HosoIoComponent implements OnInit {
   public idhoso: string;
   // Lưu trữ tên loại cấp phép trong trường hợp hồ sơ đã có đăng ký
   public tenLoaiCapPhep: string;
-  // Action thao tác dữ liệu
-  private currentAction: number;
   // error message
   validationErrorMessages = {};
 

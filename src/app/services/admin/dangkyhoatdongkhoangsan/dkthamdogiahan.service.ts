@@ -34,4 +34,18 @@ export class DkThamDoGiaHanService extends RepositoryEloquentService {
 
     }
   }
+
+  public deleteDangKyThamDoByIdHoSo(idHoSo: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOGIAHAN + "/DeleteByIdhoso"
+      });
+
+      return this.httpClient.delete<any>(`${this.apiUrl}?Idhoso=${idHoSo}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
