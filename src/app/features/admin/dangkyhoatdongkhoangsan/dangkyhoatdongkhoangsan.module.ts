@@ -61,7 +61,8 @@ import { DangkykhaithaccaisoiIoComponent } from './khaithackhoangsan/ktks-thongt
 import { DangkykhaithacdieuchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
 import { DangkykhaithacvlxdIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
 import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
-
+import { CapphephoatdongkhoangsanModule } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.module";
+import { GiayphepOptionComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-option/giayphep-option.component';
 
 
 @NgModule({
@@ -124,6 +125,7 @@ import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks
     OwlMomentDateTimeModule,
     TranslateModule,
     DanhmucModule,
+    CapphephoatdongkhoangsanModule
   ],
   entryComponents: [
     DmCanhanOptionComponent,
@@ -142,7 +144,8 @@ import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks
     DangkykhaithaccaisoiIoComponent,
     DangkykhaithacdieuchinhIoComponent,
     DangkykhaithacvlxdIoComponent,
-    DangkykhaithackhoangsanduanIoComponent
+    DangkykhaithackhoangsanduanIoComponent,
+    GiayphepOptionComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

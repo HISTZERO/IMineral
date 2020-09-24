@@ -51,6 +51,8 @@ export class ServiceName {
   public static DANGKYKHAITHACDIEUCHINH = "dangkykhaithacdieuchinh";
   public static DANGKYKHAITHACKHOANGSANDUAN = "dangkykhaithackhoangsanduan";
   public static DANGKYKHAITHACVLXD = "dangkykhaithacvlxd";
+  // Giấy phép
+  public static GIAYPHEP = "giayphep";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
