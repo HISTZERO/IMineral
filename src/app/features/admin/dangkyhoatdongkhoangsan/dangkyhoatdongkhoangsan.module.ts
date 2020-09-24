@@ -62,8 +62,7 @@ import { DangkykhaithacdieuchinhIoComponent } from './khaithackhoangsan/ktks-tho
 import { DangkykhaithacvlxdIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
 import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
 import { CapphephoatdongkhoangsanModule } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.module";
-import { CapphephoatdongkhoangsanComponent } from '../capphephoatdongkhoangsan/capphephoatdongkhoangsan.component';
-import { GiayphepOptionComponent } from '../capphephoatdongkhoangsan/giayphep/giayphep-option/giayphep-option.component';
+import { GiayphepOptionComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-option/giayphep-option.component';
 
 
 @NgModule({
@@ -126,7 +125,7 @@ import { GiayphepOptionComponent } from '../capphephoatdongkhoangsan/giayphep/gi
     OwlMomentDateTimeModule,
     TranslateModule,
     DanhmucModule,
-    CapphephoatdongkhoangsanComponent
+    CapphephoatdongkhoangsanModule
   ],
   entryComponents: [
     DmCanhanOptionComponent,
