@@ -187,7 +187,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenFormat },
       thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoFormat  },
       mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.mucdichsudungkhoangsanRequired },
-      dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
+      // dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvidientichRequired },
       donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvithoihanRequired },
       donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvichieusauRequired },
