@@ -10,7 +10,7 @@ import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/co
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
+import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
 import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.model";
 
 @Component({
@@ -46,6 +46,8 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   public currentAction: number;
   // Action đăng ký thăm dò
   public ActionType = DangKyKhaiThacKsActionEnum;
+  // Chứa phương pháp khai thác
+  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
   // disable delete button
   public disabledDeleteButton = false;
   // lưu dữ liệu đơn vị diện tích
@@ -73,7 +75,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     congsuatkhaithac: "",
     mucsaukhaithactu: "",
     mucsaukhaithacden: "",
-    dangkhoangsan: "",
     mucdichsudungkhoangsan: "",
     donvitruluong: "",
     donvicongsuat: "",
@@ -158,7 +159,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       donvicongsuat: [""],
       donvithoihanxaymo: [""],
       mucdichsudungkhoangsan: ["", Validators.required],
-      dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
       donvidientich: ["", Validators.required],
       donvithoihan: ["", Validators.required],
       donvichieusau: ["", Validators.required],
@@ -218,7 +218,6 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenFormat },
       thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoFormat },
       mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.mucdichsudungkhoangsanRequired },
-      dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dangkhoangsanRequired },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvidientichRequired },
       donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvithoihanRequired },
       donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvichieusauRequired },

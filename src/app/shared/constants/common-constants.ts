@@ -237,4 +237,14 @@ export const DoiTuongBaoCao = [
     }
 ];
 
+export const PhuongPhapKhaiThac = [
+    {
+        id: 1,
+        name: "Hầm lò"
+    },
+    {
+        id: 2,
+        name: "Lộ thiên"
+    }
+]
 

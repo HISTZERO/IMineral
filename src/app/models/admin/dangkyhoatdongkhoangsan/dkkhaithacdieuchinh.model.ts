@@ -1,8 +1,11 @@
 export class OutputDkKhaiThacDieuChinhModel {
     iddangkykhaithac: string;
-    truluongkhaithac: number;
-    thoihankhaithac: number;
-    congsuatkhaithac: number;
+    truluongdacapphep: number;
+    truluongdieuchinh: number;
+    thoihandacapphep: number;
+    thoihandieuchinh: number;
+    congsuatdacapphep: number;
+    congsuatdieuchinh: number;
     donvitruluong: string;
     donvicongsuat: string;
     donvithoihan: string;
@@ -15,14 +18,15 @@ export class OutputDkKhaiThacDieuChinhModel {
 
 export class InputDkKhaiThacDieuChinhModel {
     iddangkykhaithac: string;
-    truluongkhaithac: number;
-    thoihankhaithac: number;
-    congsuatkhaithac: number;
+    truluongdacapphep: number;
+    truluongdieuchinh: number;
+    thoihandacapphep: number;
+    thoihandieuchinh: number;
+    congsuatdacapphep: number;
+    congsuatdieuchinh: number;
     donvitruluong: string;
     donvicongsuat: string;
     donvithoihan: string;
     idhoso: string;
     idgiayphep: string;
-    sogiayphep: string;
-    ngaycapphep: string;
 }
