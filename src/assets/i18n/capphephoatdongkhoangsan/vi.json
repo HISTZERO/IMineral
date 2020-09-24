@@ -1,0 +1,14 @@
+{
+  "giayphep": {
+    "titleList": "Danh sách giấy phép",
+    "titleAdd": "Thêm mới giấy phép",
+    "titleEdit": "Sửa dữ liệu giấy phép",
+    "titleSelect": "Chọn giấy phép",
+    "contentDelete": "Giấy phép: ",
+    "sogiayphep": "Số giấy phép",
+    "tencanhantochuc": "Tên cá nhân/tổ chức",
+    "loaigiayphep": "Loại giấy phép",
+    "diachi": "Địa chỉ",
+    "ngaycap": "Ngày cấp"
+  }
+}

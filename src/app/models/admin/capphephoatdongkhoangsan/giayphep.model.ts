@@ -1,0 +1,65 @@
+export class OutputGiayPhepModel {
+  idgiayphep: string;
+  sogiayphep: string;
+  ngaycapphep: Date;
+  ngaybdhieuluc: Date;
+  ngaykthieuluc: Date;
+  thoihan: number;
+  donvithoihan: string;
+  idcoquancapphep: string;
+  coquancapphep: string;
+  chucvunguoiky: string;
+  tennguoiky: string;
+  loaivanban: number;
+  loaigiayphep: string;
+  tenloaigiayphep: string;
+  idcanhantochuc: string;
+  tencanhantochuc: string;
+  sogiayto: string;
+  loaigiayto: number;
+  ngaycap: Date;
+  noicap: string;
+  diachi: string;
+  dienthoai: string;
+  fax: string;
+  email: string;
+  website: string;
+  loaidoituong: number;
+  idhoso: string;
+  idgiayphepls: string;
+  trangthai: number;
+  ghichu: string;
+  siteid: string;
+}
+
+export class InputGiayPhepModel {
+  idgiayphep: string;
+  sogiayphep: string;
+  ngaycapphep: Date;
+  ngaybdhieuluc: Date;
+  ngaykthieuluc: Date;
+  thoihan: number;
+  donvithoihan: string;
+  idcoquancapphep: string;
+  coquancapphep: string;
+  chucvunguoiky: string;
+  tennguoiky: string;
+  loaivanban: number;
+  loaigiayphep: string;
+  idcanhantochuc: string;
+  tencanhantochuc: string;
+  sogiayto: string;
+  loaigiayto: number;
+  ngaycap: Date;
+  noicap: string;
+  diachi: string;
+  dienthoai: string;
+  fax: string;
+  email: string;
+  website: string;
+  loaidoituong: number;
+  idhoso: string;
+  idgiayphepls: string;
+  trangthai: number;
+  ghichu: string;
+}
