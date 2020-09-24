@@ -46,22 +46,57 @@
             <ejs-grid #gridHoSo *ngIf="listGiayPhep" [dataSource]="listGiayPhep | async"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
               [pageSettings]="settingsCommon.pageSettings" class="table-striped"  [allowTextWrap]="true"
-              [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
+              [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="tencanhantochuc" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochuc' | translate }}"></e-column>
-                <e-column field="sogiayphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphep' | translate }}"></e-column>
-                <e-column field="tenloaigiayphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.loaigiayphep' | translate }}"></e-column>
-                <e-column field="diachi" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.diachi' | translate }}"></e-column>
-                <e-column field="ngaycap" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap' | translate }}">
+                <e-column headerText="{{ 'COMMON.default.ketqua' | translate }}">
                   <ng-template #template let-data>
-                    {{ data.ngaycap ? (data.ngaycap | date: 'ddMMyyyy') : "" }}
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochuc' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.tencanhantochuc}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphep' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.sogiayphep}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.loaigiayphep' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.tenloaigiayphep}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.diachi' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.diachi}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{ data.ngaycap ? (data.ngaycap | date: 'ddMMyyyy') : "" }}
+                      </div>
+                    </div>
                   </ng-template>
                 </e-column>
                 <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
-                      <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.delete' | translate }}"
+                      <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.add' | translate }}"
                         (click)="selectItemGiayPhep(data)">
                         <i class="far fa-plus-square"></i>
                       </button>
