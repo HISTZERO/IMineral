@@ -106,7 +106,7 @@
               <mat-select class="form-control" formControlName="donvidientich"
                 *ngIf="dataTranslate" placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chondonvidientich' | translate}}">
                 <mat-option value="">
-                  {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.chondonvidientich" | translate }}
+                  {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chondonvidientich" | translate }}
                 </mat-option>
                 <mat-option *ngFor="let donViDienTich of donViDienTichList" [value]="donViDienTich.id">
                   {{ donViDienTich.name }}

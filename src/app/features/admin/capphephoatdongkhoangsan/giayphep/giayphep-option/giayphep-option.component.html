@@ -31,16 +31,12 @@
             <h3>
               <div class="row">
                 <div class="col-md-4 mb-sm-1">
-                  <span class="title">{{ "DANHMUC.canhan.titleList" | translate }}</span>
+                  <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.titleList" | translate }}</span>
                 </div>
                 <div class="col-md-8">
                   <button class="btn btn-outline-primary" style="float: right;" (click)="reloadDataGrid()">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
-                  </button>
-                  <button class="btn btn-primary mb-sm-1 mr-2" style="float: right;" (click)="goToAddCaNhan()">
-                    <i class="fal fa-plus-square"></i>
-                    {{ "COMMON.default.add" | translate }}
                   </button>
                 </div>
               </div>
@@ -65,7 +61,7 @@
                 <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
-                      <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                      <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.delete' | translate }}"
                         (click)="selectItemGiayPhep(data)">
                         <i class="far fa-plus-square"></i>
                       </button>
