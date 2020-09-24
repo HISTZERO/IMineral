@@ -1,6 +1,3 @@
-import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { NhomLoaiCapPhepEnum } from "./enum";
-import { NhomLoaiCapPhep } from "./nhomloaicapphep-constants";
 
 export const LoaiDoiTuong = [
     {
@@ -150,6 +147,17 @@ export const DonViDienTich = [
 
 ];
 
+export const DonViTruLuong = [
+    {
+        id: 'Tấn',
+        name: 'Tấn'
+    },
+    {
+        id: 'm3',
+        name: 'm3'
+    }
+]
+
 export const DonViThoiHan = [
   {
       id: "tháng",
@@ -166,6 +174,21 @@ export const DonViDoSau = [
       id: "m",
       name: "m"
   }
+];
+
+export const DonViCongSuat = [
+    {
+        id: '1',
+        name: 'Tấn/năm'
+    },
+    {
+        id: '2',
+        name: 'm3/năm'
+    },
+    {
+        id: '3',
+        name: 'm3/ngày'
+    }
 ];
 
 export const DangKhoangSan = [
@@ -213,16 +236,5 @@ export const DoiTuongBaoCao = [
         name: "Cá nhân, tổ chức"
     }
 ];
-
-export const RoutingNameChiTietDangKyHoatDongKS: any = {
-    [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: "dkthamdokhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: "dkkhaithackhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: "dkpheduyettruluongkhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: "dkdaugiaquyenchitiet",
-    [NhomLoaiCapPhepEnum.TanThuKhoangSan]: "dktanthukhoangsanchitiet",
-    [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: "dktralaigiayphepchitiet",
-    [NhomLoaiCapPhepEnum.DongCuaMo]: "dkdongcuamochitiet",
-    [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: "dkchuyennhuongquyenchitiet",
-  };
 
 

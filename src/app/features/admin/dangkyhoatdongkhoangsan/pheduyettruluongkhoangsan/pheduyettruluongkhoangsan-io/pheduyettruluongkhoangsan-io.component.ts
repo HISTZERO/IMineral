@@ -4,10 +4,11 @@ import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
 import { ButtonBackPheDuyetTruLuongKhoangSan, MenuDkPheDuyetTruLuongKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, NhomLoaiCapPhepEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 
 @Component({
   selector: 'app-pheduyettruluongkhoangsan-io',
