@@ -44,7 +44,7 @@
                 <span class="title">{{ 'THIETLAP.cauhinhtailieu.titleDsCauHinhTaiLieu' | translate}}</span>
               </div>
               <div class="col-md-5">
-                <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="getAllDataCauHinh()">
+                <button class="btn btn-outline-primary mr-2"  style="float: right;" (click)="getAllDataCauHinh()">
                   {{ 'THIETLAP.cauhinhtailieu.save' | translate}}
                 </button>
               </div>
@@ -60,10 +60,10 @@
             <e-columns>
               <e-column field="tenloaitailieu" headerText="{{ 'THIETLAP.cauhinhtailieu.loaitailieu' | translate}}"
                 isPrimaryKey='true' [customAttributes]="{class: 'gridcauhinhtailieu-tenloaitailieu'}"></e-column>
-              <e-column field="sobanchinh" editType='numericedit'
+              <e-column field="sobanchinh" editType='numericedit' [validationRules]="this.rule"
                 headerText="{{ 'THIETLAP.cauhinhtailieu.sobanchinh' | translate}}"></e-column>
-              <e-column field="sobansao" editType='numericedit'
-                headerText="{{ 'THIETLAP.cauhinhtailieu.loaitailieu' | translate}}"></e-column>
+              <e-column field="sobansao" editType='numericedit' [validationRules]="this.rule"
+                headerText="{{ 'THIETLAP.cauhinhtailieu.sobansao' | translate}}"></e-column>
               <e-column type="checkbox" [allowEditing]='false'
                 [customAttributes]="{class: 'gridcauhinhtailieu-checkbox'}"></e-column>
             </e-columns>
