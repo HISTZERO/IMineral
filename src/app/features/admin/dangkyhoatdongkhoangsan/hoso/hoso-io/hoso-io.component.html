@@ -12,7 +12,7 @@
               </h4>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
-              <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="saveItemHoSo()">
+              <button class="btn btn-primary mb-sm-1" *ngIf="currentAction === ActionType.Add || currentAction === ActionType.Edit" style="float: right;" (click)="saveItemHoSo()">
                 <i class="fal fa-save"></i>
                 {{ "COMMON.default.save" | translate }}
               </button>

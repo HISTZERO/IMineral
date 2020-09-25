@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
@@ -12,6 +12,8 @@ import { HttpErrorResponse } from '@angular/common/http';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
+import { MatSidenav } from '@angular/material';
+import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 
 @Component({
   selector: 'app-dangkythamdokhoangsan-io',
@@ -19,6 +21,8 @@ import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/
   styleUrls: ['./dangkythamdokhoangsan-io.component.scss']
 })
 export class DangkythamdokhoangsanIoComponent implements OnInit {
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -40,7 +44,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
   // chứa dữ liệu đăng ký thăm dò
-  private dangKyThamDoKhoangSan: any;
+  private dangKyThamDoKhoangSan: OutputDkThamDoKhoangSanModel;
   // Action thao tác dữ liệu
   public currentAction: number;
   // Action đăng ký thăm dò
@@ -77,6 +81,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               public commonService: CommonServiceShared,
               private activatedRoute: ActivatedRoute,
+              public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
@@ -187,7 +192,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chieusauthamdodenFormat },
       thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.thoihanthamdoFormat  },
       mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.mucdichsudungkhoangsanRequired },
-      dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
+      // dangkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.dangkhoangsanRequired },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvidientichRequired },
       donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvithoihanRequired },
       donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.donvichieusauRequired },
@@ -212,7 +217,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    */
   private async getDangKyThamDoByIdHoSo(idHoSo: string) {
     const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
-    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
+    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise() as OutputDkThamDoKhoangSanModel;
     return dangKyItem;
   }
 
@@ -297,7 +302,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   }
 
   /**
-   *
+   * Xóa đăng ký thăm do theo Id hồ sơ
    */
   deleteItemDangKyThamDoKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(

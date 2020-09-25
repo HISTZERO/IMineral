@@ -27,9 +27,6 @@ export class DmNguongocmoIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmNguonGocMoModel;
 
@@ -95,7 +92,6 @@ export class DmNguongocmoIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmNguonGocMoModel();
     // check edit
     this.formOnEdit();
@@ -127,7 +123,6 @@ export class DmNguongocmoIoComponent implements OnInit {
         thutu: this.obj.thutu,
       });
     }
-    this.editMode = true;
   }
 
   /**
@@ -208,7 +203,7 @@ export class DmNguongocmoIoComponent implements OnInit {
     );
   }
 
-  
+
 
   /**
    * Hàm close sidenav

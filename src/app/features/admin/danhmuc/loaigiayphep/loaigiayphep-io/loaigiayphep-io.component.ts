@@ -29,9 +29,6 @@ export class DmLoaigiayphepIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLoaiGiayPhepModel;
 
@@ -129,7 +126,6 @@ export class DmLoaigiayphepIoComponent implements OnInit {
     * Hàm khởi tạo form theo dạng edit
     */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLoaiGiayPhepModel();
     // check edit
     this.formOnEdit();
@@ -169,10 +165,9 @@ export class DmLoaigiayphepIoComponent implements OnInit {
       this.dataComboboxModel = {
         idthutuc: this.obj.idthutuchanhchinh,
         tenthutuc: this.obj.tenthutuchanhchinh,
-      }
-      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh
+      };
+      this.tenThuTucDisplay = this.obj.tenthutuchanhchinh;
     }
-    this.editMode = true;
   }
 
   /**
@@ -214,7 +209,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
 
   /**
     * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-    * @param operMode 
+    * @param operMode
     */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -242,7 +237,7 @@ export class DmLoaigiayphepIoComponent implements OnInit {
 
   /**
     * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-    * @param operMode 
+    * @param operMode
     */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -273,8 +268,8 @@ export class DmLoaigiayphepIoComponent implements OnInit {
 
   /**
    * Hàm so sánh giá trị thuu tục hành chính combobox
-   * @param item1 
-   * @param item2 
+   * @param item1
+   * @param item2
    */
   public compareThuTucHanhChinh(item1: any, item2: any) {
     if (item1.idthutuchanhchinh === item2.idthutuchanhchinh) {

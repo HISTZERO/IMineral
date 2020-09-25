@@ -117,13 +117,13 @@ export class CongtrinhthamdoListComponent implements OnInit {
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoCongTrinhService()
-      .getDangKyThamDoCongTrinhByIdDangKyThamDo(this.iddangkythamdo);
-    if (listData.items) {
-      listData.items.map((loaiKhoangSan, index) => {
-        loaiKhoangSan.serialNumber = index + 1;
+      .getDangKyThamDoCongTrinhByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+    if (listData) {
+      listData.map((congtrinh, index) => {
+        congtrinh.serialNumber = index + 1;
       });
     }
-    this.listDkThamDoCongTrinh = listData.items;
+    this.listDkThamDoCongTrinh = listData;
   }
 
   /**
@@ -159,7 +159,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleAdd);
-    this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "new");
+    this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
     this.matSidenavService.open();
   }
 
@@ -201,7 +201,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyThamDoCongTrinhService()
-          .deleteItem({ idthamdoloaikhoangsan: this.selectedItem.idcongtrinh })
+          .deleteItem({ idcongtrinh: this.selectedItem.idcongtrinh })
           .subscribe(
             () => this.getAllDkThamDoCongTrinh(),
             (error: HttpErrorResponse) => {

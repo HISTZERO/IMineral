@@ -3,7 +3,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
-import { HoSoActionEnum, ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
+import { HoSoActionEnum, ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
 import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
@@ -81,13 +81,19 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     let existedDangKyThamDo = false;
 
     if (this.idhoso !== null && this.idhoso !== undefined) {
-      this.currentAction = HoSoActionEnum.Edit;
-      this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+      const hoSoItem = await this.getHoSoById(this.idhoso);
 
-      const dkThamDoItem = await this.getDangKyThamDoByIdHoSo(this.idhoso);
+      if (hoSoItem) {
+        this.currentAction = HoSoActionEnum.Edit;
+        this.setThamDoKhoangSanDisabledTabState(this.currentAction);
 
-      if (dkThamDoItem) {
-        existedDangKyThamDo = true;
+        const dkThamDoItem = await this.getDangKyThamDoByIdHoSo(hoSoItem.loaicapphep, this.idhoso);
+
+        if (dkThamDoItem) {
+          existedDangKyThamDo = true;
+        }
+      } else {
+        this.currentAction = HoSoActionEnum.None;
       }
     } else {
       this.currentAction = HoSoActionEnum.Add;
@@ -97,6 +103,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     // Khởi tạo dữ liệu ban đầu  cho form hoso
     this.hoSoIOComp.idhoso = this.idhoso;
     await this.hoSoIOComp.manualDataInit();
+    this.hoSoIOComp.currentAction = this.currentAction;
     this.hoSoIOComp.disabledLoaiCapPhepSelectionState = existedDangKyThamDo;
     this.dangKyThamDoKhoanSanTabs.realignInkBar();
   }
@@ -115,10 +122,26 @@ export class ThamdokhoangsanIoComponent implements OnInit {
    * Lấy dữ liệu hồ sơ theo IdHoSo
    * @param idHoSo
    */
-  private async getDangKyThamDoByIdHoSo(idHoSo: string) {
-    const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
-    const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
-    return dangKyItem;
+  private async getHoSoById(idHoSo: string) {
+    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hosoItem = await dangKyHoatDongKhoangSanFacadeService.getByid(idHoSo).toPromise();
+    return hosoItem;
+  }
+
+  /**
+   * Lấy dữ liệu hồ sơ theo IdHoSo
+   * @param idHoSo
+   */
+  private async getDangKyThamDoByIdHoSo(loaiCapPhep: string, idHoSo: string) {
+    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan) {
+      const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhoangSanService();
+      const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
+      return dangKyItem;
+    } else if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan) {
+      const dkThamDoKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoGiaHanService();
+      const dangKyItem = await dkThamDoKhoangSanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise();
+      return dangKyItem;
+    }
   }
 
   setThamDoKhoangSanDisabledTabState(actionType: number) {

@@ -27,9 +27,6 @@ export class DmLoaiDmTochucIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLoaiToChucModel;
 
@@ -95,7 +92,6 @@ export class DmLoaiDmTochucIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLoaiToChucModel();
     // check edit
     this.formOnEdit();
@@ -127,7 +123,6 @@ export class DmLoaiDmTochucIoComponent implements OnInit {
         thutu: this.obj.thutu,
       });
     }
-    this.editMode = true;
   }
 
   /**
@@ -215,7 +210,7 @@ export class DmLoaiDmTochucIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
 
   /**

@@ -27,9 +27,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmLoaiTaiLieuModel;
 
@@ -96,7 +93,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmLoaiTaiLieuModel();
     // check edit
     this.formOnEdit();
@@ -128,7 +124,6 @@ export class DmLoaitailieuIoComponent implements OnInit {
         nhomloaitailieu: +this.obj.nhomloaitailieu
       });
     }
-    this.editMode = true;
   }
 
   /**
@@ -168,7 +163,7 @@ export class DmLoaitailieuIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -188,7 +183,7 @@ export class DmLoaitailieuIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();

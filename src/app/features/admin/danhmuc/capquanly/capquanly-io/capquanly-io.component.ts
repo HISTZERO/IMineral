@@ -27,9 +27,6 @@ export class DmCapquanlyIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu input
   public inputModel: InputDmCapQuanLyModel;
 
@@ -66,7 +63,7 @@ export class DmCapquanlyIoComponent implements OnInit {
     await this.bindingConfigAddOrUpdate();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    
+
   }
 
   /**
@@ -95,7 +92,6 @@ export class DmCapquanlyIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDmCapQuanLyModel();
     // check edit
     this.formOnEdit();
@@ -125,7 +121,6 @@ export class DmCapquanlyIoComponent implements OnInit {
         thutu: this.obj.thutu,
       });
     }
-    this.editMode = true;
   }
 
   /**
@@ -165,7 +160,7 @@ export class DmCapquanlyIoComponent implements OnInit {
 
   /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
-   * @param operMode 
+   * @param operMode
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -190,7 +185,7 @@ export class DmCapquanlyIoComponent implements OnInit {
 
   /**
    * Hàm lưu và reset form để tiếp tục nhập mới dữ liệu. Trường hợp này khi người dùng muốn nhập dữ liệu liên tục
-   * @param operMode 
+   * @param operMode
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
@@ -219,7 +214,7 @@ export class DmCapquanlyIoComponent implements OnInit {
     this.matSidenavService.close();
   }
 
-  
+
 
   /**
    *  Hàm gọi từ function con gọi vào chạy function cha

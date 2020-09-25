@@ -28,9 +28,6 @@ export class LoaikhoangsanIoComponent implements OnInit {
   // Chứa kiểu form
   public purpose: string;
 
-  // Chứa chế độ form
-  public editMode: boolean;
-
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
@@ -151,14 +148,12 @@ export class LoaikhoangsanIoComponent implements OnInit {
         loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan}
       });
     }
-    this.editMode = true;
   }
 
   /**
    * Hàm khởi tạo form theo dạng edit
    */
   async bindingConfigAddOrUpdate() {
-    this.editMode = false;
     this.inputModel = new InputDkThamDoLoaiKhoangSan();
     // check edit
     await this.formOnEdit();

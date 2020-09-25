@@ -61,10 +61,12 @@ import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsa
 import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
 import {DaugiaquyenListComponent} from "./daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
 import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
-import {DangkykhaithaccaisoiIoComponent} from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component';
-import {DangkykhaithacdieuchinhIoComponent} from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
-import {DangkykhaithacvlxdIoComponent} from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
-import {DangkykhaithackhoangsanduanIoComponent} from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
+import { DangkykhaithaccaisoiIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component';
+import { DangkykhaithacdieuchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
+import { DangkykhaithacvlxdIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
+import { DangkykhaithackhoangsanduanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
+import { CapphephoatdongkhoangsanModule } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.module";
+import { GiayphepOptionComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-option/giayphep-option.component';
 
 
 @NgModule({
@@ -127,6 +129,7 @@ import {DangkykhaithackhoangsanduanIoComponent} from './khaithackhoangsan/ktks-t
     OwlMomentDateTimeModule,
     TranslateModule,
     DanhmucModule,
+    CapphephoatdongkhoangsanModule
   ],
   entryComponents: [
     DmCanhanOptionComponent,
@@ -145,7 +148,8 @@ import {DangkykhaithackhoangsanduanIoComponent} from './khaithackhoangsan/ktks-t
     DangkykhaithaccaisoiIoComponent,
     DangkykhaithacdieuchinhIoComponent,
     DangkykhaithacvlxdIoComponent,
-    DangkykhaithackhoangsanduanIoComponent
+    DangkykhaithackhoangsanduanIoComponent,
+    GiayphepOptionComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},
