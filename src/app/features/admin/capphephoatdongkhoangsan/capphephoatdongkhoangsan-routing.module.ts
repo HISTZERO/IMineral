@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
+import { CpthamdokhoangsanListComponent } from './cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
 
 
 const routes: Routes = [
@@ -9,9 +10,9 @@ const routes: Routes = [
     children: [
       {
         path: "",
-        // children: [
-        //   { path: AdminRoutingName.dkthamdokhoangsanUri, component: ThamdokhoangsanListComponent }
-        // ]
+        children: [
+          { path: AdminRoutingName.cpthamdokhoangsanUri, component: CpthamdokhoangsanListComponent }
+        ]
       }
     ]
   }

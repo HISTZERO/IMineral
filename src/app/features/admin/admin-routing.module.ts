@@ -45,6 +45,13 @@ const adminRoutes: Routes = [
           ),
       },
       {
+        path: AdminRoutingName.capphephoatdongkhoangsanUri,
+        loadChildren: () =>
+          import("src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.module").then(
+            (mod) => mod.CapphephoatdongkhoangsanModule
+          ),
+      },
+      {
         path: AdminRoutingName.mapUri,
         loadChildren: () =>
           import("src/app/features/admin/map/map.module").then(

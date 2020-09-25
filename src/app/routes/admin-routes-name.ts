@@ -11,6 +11,7 @@ export class AdminRoutingName {
   public static diemquangmoquangUri = "diemquangmoquang";
   public static baocaoUri = "baocao";
   public static dangkyhoatdongkhoangsanUri = "dangkyhoatdongkhoangsan";
+  public static capphephoatdongkhoangsanUri = "capphephoatdongkhoangsan";
   public static thietlapUri = "thietlap";
   public static thuvienUri = "thuvien";
   public static tinbaiUri = "tinbai";
@@ -105,4 +106,15 @@ export class AdminRoutingName {
   public static dkTralaigiayphepChiTiet = "dktralaigiayphepchitiet";
   public static dkDongcuamoChiTiet = "dkdongcuamochitiet";
   public static dkChuyennhuongquyenChiTiet = "dkchuyennhuongquyenchitiet";
+
+  // 1.12 Routes phần cấp phép khoáng sản
+  public static cpthamdokhoangsanUri = "cpthamdokhoangsan";
+  public static cpPheDuyetTruLuongChitiet = "cppheduyettruluongkhoangsanchitiet";
+  public static cpDauGiaQuyenChitiet = "cpdaugiaquyenchitiet";
+  public static cpThamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
+  public static cpKhaithackhoangsanChitiet = "cpkhaithackhoangsanchitiet";
+  public static cpTanthukhoangsanChiTiet = "cptanthukhoangsanchitiet";
+  public static cpTralaigiayphepChiTiet = "cptralaigiayphepchitiet";
+  public static cpDongcuamoChiTiet = "cpdongcuamochitiet";
+  public static cpTinhTienCapQuyenChiTiet = "cptinhtiencapquyenchitiet";
 }

@@ -9,6 +9,19 @@
     "tencanhantochuc": "Tên cá nhân/tổ chức",
     "loaigiayphep": "Loại giấy phép",
     "diachi": "Địa chỉ",
-    "ngaycap": "Ngày cấp"
+    "ngaycap": "Ngày cấp",
+    "tungay": "Từ ngày:",
+    "denngay": "Đến ngày:",
+    "chonloaigiayphep": "---Chọn loại giấy phép---",
+    "tungayPlaceholder": "Nhập từ ngày",
+    "denngayPlaceholder": "Nhập đến ngày"
+  },
+  "capphepthamdokhoangsan": {
+    "titleList": "Danh sách cấp phép thăm dò khoáng sản",
+    "titleAdd": "Thêm mới cấp phép thăm dò khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép thăm dò khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }
