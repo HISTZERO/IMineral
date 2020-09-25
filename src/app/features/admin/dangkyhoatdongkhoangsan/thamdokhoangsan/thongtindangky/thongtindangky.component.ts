@@ -11,6 +11,7 @@ import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdo
 import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
 import { CongtrinhthamdoListComponent } from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
+import { KhuvucthamdoListComponent } from "./khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -30,6 +31,7 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
   @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
   @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
+  @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -191,7 +193,10 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoLoaiKhoangSan.iddangkythamdo = this.iddangkythamdo;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = await this.dangKyThamDoLoaiKhoangSan.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]) {
-
+      this.dangKyThamDoKhuVuc.matSidenav = this.matSidenav;
+      this.dangKyThamDoKhuVuc.content = this.content;
+      this.dangKyThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
+      this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;
       this.dangKyThamDoCongTrinh.content = this.content;
