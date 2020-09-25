@@ -26,7 +26,7 @@ export class CpthamdokhoangsanListComponent implements OnInit {
   async ngOnInit() {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    this.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.capphepthamdokhoangsan.titleList;
+    this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.titleList;
   }
 
   /**
