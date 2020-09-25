@@ -18,7 +18,9 @@ import {
   DonViThoiHan,
   DonViTruLuong
 } from 'src/app/shared/constants/common-constants';
-import {OutputDkKhaiThacKhoangSanDuAnModel} from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.model";
+import {OutputDkKhaiThacKhoangSanDuAnModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.model";
+
+
 
 @Component({
   selector: 'app-dangkykhaithackhoangsanduan-io',
@@ -31,7 +33,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacGiaHanEvent") selectIdDangKyKhaiThacGiaHanEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacGiaHanEvent") selectIdDangKyKhaiThacKhoangSanDuAnEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -327,7 +329,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIddangKyKhaiThacKhoangSanDuAn() {
-    this.selectIdDangKyKhaiThacGiaHanEvent.emit(this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac);
+    this.selectIdDangKyKhaiThacKhoangSanDuAnEvent.emit(this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac);
   }
 
   /**

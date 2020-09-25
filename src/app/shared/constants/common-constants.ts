@@ -151,7 +151,7 @@ export const DonViTruLuong = [
         id: 'm3',
         name: 'm3'
     }
-]
+];
 
 export const DonViThoiHan = [
   {
