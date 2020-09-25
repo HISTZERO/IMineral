@@ -13,6 +13,7 @@
               <div class="col-lg-5 col-md-5 col-sm-3 form-group d-flex" style="align-items: flex-end;">
                 <div>
                   <button class="btn btn-success" (click)="searchAdvance()">
+                    <i class="fal fa-search"></i>
                     {{"COMMON.default.search" | translate}}
                   </button>
                 </div>
@@ -88,7 +89,7 @@
                         {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{ data.ngaycap ? (data.ngaycap | date: 'ddMMyyyy') : "" }}
+                        {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
                       </div>
                     </div>
                   </ng-template>

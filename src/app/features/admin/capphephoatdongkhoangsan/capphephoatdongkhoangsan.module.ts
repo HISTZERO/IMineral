@@ -17,13 +17,17 @@ import { GiayphepListComponent } from './giayphep/giayphep-list/giayphep-list.co
 import { GiayphepIoComponent } from './giayphep/giayphep-io/giayphep-io.component';
 import { GiayphepOptionComponent } from './giayphep/giayphep-option/giayphep-option.component';
 import { CapphephoatdongkhoangsanComponent } from "./capphephoatdongkhoangsan.component";
+import { CpthamdokhoangsanListComponent } from './cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
+
 
 @NgModule({
   declarations: [
   GiayphepListComponent,
   GiayphepIoComponent,
   GiayphepOptionComponent,
-  CapphephoatdongkhoangsanComponent
+  CapphephoatdongkhoangsanComponent,
+  CpthamdokhoangsanListComponent
+
   ],
   exports: [
     GiayphepOptionComponent
