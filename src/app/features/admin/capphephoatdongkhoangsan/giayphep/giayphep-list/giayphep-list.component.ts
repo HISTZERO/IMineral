@@ -207,7 +207,7 @@ export class GiayphepListComponent implements OnInit {
       Keyword: "",
       GTEqualNgaycapphep: "",
       LTEqualNgaycapphep: "",
-      Loaicapphep: ""
+      Loaigiayphep: ""
     });
     this.getAllGiayPhep();
   }
