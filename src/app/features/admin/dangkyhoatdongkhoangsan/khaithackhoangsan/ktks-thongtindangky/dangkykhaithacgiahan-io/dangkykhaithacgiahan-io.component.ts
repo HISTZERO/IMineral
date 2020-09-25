@@ -24,7 +24,7 @@ export class DangkykhaithacgiahanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacGiaHanEvent") selectIdDangKyKhaiThacGiaHanEvent: EventEmitter<string> = new EventEmitter();
+  @Output() selectIdDangKyKhaiThacGiaHanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép

@@ -14,6 +14,7 @@
           <app-loaikhoangsan-list  #dangKyThamDoLoaiKhoangSan [allowAutoInit]="false"></app-loaikhoangsan-list>
         </mat-tab>
         <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucThamDoTabTile' | translate }}">
+          <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>
         </mat-tab>
         <mat-tab  [disabled]="!disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhThamDoTabTitle' | translate }}">
           <app-congtrinhthamdo-list #dangKyThamDoCongTrinh [allowAutoInit]="false"></app-congtrinhthamdo-list>

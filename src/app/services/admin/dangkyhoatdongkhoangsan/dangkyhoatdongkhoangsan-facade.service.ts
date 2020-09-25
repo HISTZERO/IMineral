@@ -8,12 +8,13 @@ import { DkThamDoGiaHanService } from 'src/app/services/admin/dangkyhoatdongkhoa
 import { DkThamDoDvhcService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.service';
 import { DkThamDoLoaiKhoangSanService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.service';
 import { DkThamDoCongTrinhService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.service';
-import { DkkhaithaccatsoiService } from "./dkkhaithaccatsoi.service";
-import { DkkhaithacdieuchinhService } from "./dkkhaithacdieuchinh.service";
-import { DkkhaithacgiahanService } from "./dkkhaithacgiahan.service";
-import { DkkhaithackhoangsanService } from "./dkkhaithackhoangsan.service";
-import { DkkhaithackhoangsanduanService } from "./dkkhaithackhoangsanduan.service";
-import { DkkhaithacvlxdService } from "./dkkhaithacvlxd.service";
+import { DkkhaithaccatsoiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.service";
+import { DkkhaithacdieuchinhService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.service";
+import { DkkhaithacgiahanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacgiahan.service";
+import { DkkhaithackhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.service";
+import { DkkhaithackhoangsanduanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.service";
+import { DkkhaithacvlxdService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.service";
+import { DkthamdokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.service";
 
 
 @Injectable({
@@ -86,6 +87,11 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký khai thác vật liệu xây dựng service
   public getDangkyKhaiThacVLXDService() {
     return new DkkhaithacvlxdService(this.httpClient);
+  }
+
+  // Đăngnký thăm dò khu vực service
+  public getDangKyThamDoKhuVucService() {
+    return new DkthamdokhuvucService(this.httpClient);
   }
 }
 

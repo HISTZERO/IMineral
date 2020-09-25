@@ -1,15 +1,15 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
-import { EditSettingsModel, GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import {HttpErrorResponse} from "@angular/common/http";
+import {Component, Inject, OnInit, ViewChild} from '@angular/core';
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material";
+import {TranslateService} from "@ngx-translate/core";
+import {EditSettingsModel, GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
 import * as cloneDeep from "lodash.cloneDeep";
 
-import { OutputDmLoaiTaiLieuModel } from "src/app/models/admin/danhmuc/loaitailieu.model";
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import {OutputDmLoaiTaiLieuModel} from "src/app/models/admin/danhmuc/loaitailieu.model";
+import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
 
 @Component({
   selector: 'app-cauhinhtailieu-io',
@@ -19,8 +19,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 export class CauhinhtailieuIoComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild('gridLoaiTaiLieu', { static: false }) public gridLoaiTaiLieu: GridComponent;
-  @ViewChild('gridCauHinhTaiLieu', { static: false }) public gridCauHinhTaiLieu: GridComponent;
+  @ViewChild('gridLoaiTaiLieu', {static: false}) public gridLoaiTaiLieu: GridComponent;
+  @ViewChild('gridCauHinhTaiLieu', {static: false}) public gridCauHinhTaiLieu: GridComponent;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -50,8 +50,11 @@ export class CauhinhtailieuIoComponent implements OnInit {
   public loaicapphep: string;
 
   // Chứa thuộc tính disable button
-  public disableBtnRight: boolean = true;
-  public disableBtnLeft: boolean = true;
+  public disableBtnRight = true;
+  public disableBtnLeft = true;
+  public disableBtnSave = true;
+
+  public rule: object;
 
 
   constructor(
@@ -61,17 +64,20 @@ export class CauhinhtailieuIoComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     @Inject(MAT_DIALOG_DATA) public dataGetIO: any,
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     // Lấy dữ liệu loại cấp phép gửi từ trang list
     this.loaicapphep = this.dataGetIO.model;
 
     // Cấu hình chức năng edit grid
-    this.editSettings = { allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch' };
+    this.editSettings = {allowEditing: true, allowAdding: true, allowDeleting: true, mode: 'Batch'};
+
+    this.rule = {required: true};
 
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
+    this.wrapSettings = {wrapMode: 'Both'};
 
     // hàm lấy dữ liệu translate
     await this.getDataTranslate();
@@ -81,8 +87,8 @@ export class CauhinhtailieuIoComponent implements OnInit {
   }
 
   /**
-    * Hàm lấy dữ liệu translate
-    */
+   * Hàm lấy dữ liệu translate
+   */
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
@@ -91,8 +97,8 @@ export class CauhinhtailieuIoComponent implements OnInit {
   }
 
   /**
-    * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
-    */
+   * Hàm lấy dữ liệu pagesize số bản ghi hiển thị trên 1 trang
+   */
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
@@ -109,9 +115,9 @@ export class CauhinhtailieuIoComponent implements OnInit {
   }
 
   /**
-    * Hàm lấy dữ liệu loại tài liệu
-    */
-  async getAllLoaiTaiLieu(param: any = { PageNumber: 1, PageSize: -1 }) {
+   * Hàm lấy dữ liệu loại tài liệu
+   */
+  async getAllLoaiTaiLieu(param: any = {PageNumber: 1, PageSize: -1}) {
     if (this.listLoaitaiLieu != null && this.listLoaitaiLieu.length > 0) {
       this.gridLoaiTaiLieu.clearSelection();
     }
@@ -130,6 +136,7 @@ export class CauhinhtailieuIoComponent implements OnInit {
    * Lấy danh sách loại tài liệu đã cấu hình
    */
   async getAllCauHinhTaiLieuByLoaiCapPhep() {
+
     const listDataCauHinh: any = await this.thietlapFacadeService
       .getCauHinhTaiLieuService()
       .getByid(this.loaicapphep).toPromise();
@@ -209,12 +216,26 @@ export class CauhinhtailieuIoComponent implements OnInit {
     const dataCauHinhTaiLieu: any = this.gridCauHinhTaiLieu.getBatchChanges();
     dataCauHinhTaiLieu.changedRecords.map(value => {
       value.loaicapphep = this.loaicapphep;
-    })
-    let dataBody = {
+    });
+    const dataBody = {
       list: dataCauHinhTaiLieu.changedRecords
     };
-    this.thietlapFacadeService.getCauHinhTaiLieuService()
-      .updateItem(dataBody).subscribe(
+    let isNull = false;
+
+    if (dataBody.list.length === 0) {
+      isNull = true;
+    } else {
+      for (const input of dataBody.list) {
+        if (!input.sobanchinh || !input.sobansao) {
+          isNull = true;
+        }
+      }
+    }
+    if (isNull) {
+      this.commonService.showDialogWarning(this.dataTranslate.THIETLAP.cauhinhtailieu.nhapthieudulieuError);
+    } else {
+      this.thietlapFacadeService.getCauHinhTaiLieuService()
+        .updateItem(dataBody).subscribe(
         res => {
         },
         (error: HttpErrorResponse) => {
@@ -225,6 +246,7 @@ export class CauhinhtailieuIoComponent implements OnInit {
             this.dataTranslate.COMMON.default.successEdit,
             2000
           ));
+    }
   }
 
   /**
