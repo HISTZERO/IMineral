@@ -80,7 +80,7 @@ export class SidenavComponent implements OnInit {
         {
           label: "Thăm dò khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpthamdokhoangsanUri}`
         },
         {
           label: "Phê duyệt trữ lượng khoáng sản",
