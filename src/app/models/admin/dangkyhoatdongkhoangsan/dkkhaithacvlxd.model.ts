@@ -9,14 +9,14 @@ export class OutputDkKhaiThacVatLieuXayDungModel {
     kehoachkhaithac: string;
     donvidientich: string;
     donvikhoiluong: string;
-    donvisongsuat: string;
+    donvicongsuat: string;
     donvichieusau: string;
     geom: string;
     geovn: string;
     geowgs: string;
     hequychieu: string;
     idhoso: string;
-    siteid: string
+    siteid: string;
 }
 
 export class InputDkKhaiThacVatLieuXayDungModel {
@@ -30,7 +30,7 @@ export class InputDkKhaiThacVatLieuXayDungModel {
     kehoachkhaithac: string;
     donvidientich: string;
     donvikhoiluong: string;
-    donvisongsuat: string;
+    donvicongsuat: string;
     donvichieusau: string;
     hequychieu: string;
     idhoso: string;

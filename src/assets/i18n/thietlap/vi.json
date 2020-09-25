@@ -33,7 +33,8 @@
     "save": "Lưu",
     "loaitailieu": "Loại tài liệu",
     "sobanchinh": "Số bản chính",
-    "sobansao": "Số bản sao"
+    "sobansao": "Số bản sao",
+    "nhapthieudulieuError":"Cần nhập đủ số bản chính và số bản sao"
   },
   "coquantiepnhan": {
     "titleList": "Danh sách cơ quan tiếp nhận",
