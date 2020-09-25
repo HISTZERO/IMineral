@@ -101,7 +101,7 @@ export class GiayphepListComponent implements OnInit {
       GTEqualNgaycapphep: [""],
       LTEqualNgaycapphep: [""],
       Loaigiayphep: [""],
-      Keyword: [""],
+      Keyword: [""]
     });
   }
 
@@ -163,7 +163,7 @@ export class GiayphepListComponent implements OnInit {
 
     const listData: any = await this.dmFacadeService
       .getDmLoaiGiayPhepService()
-      .getFetchAll({Nhomloaicapphep: this.nhomLoaiGiayPhep, PageNumber: 1, PageSize: -1});
+      .getFetchAll({Nhomloaigiayphep: this.nhomLoaiGiayPhep, PageNumber: 1, PageSize: -1});
     this.loaiGiayPhepFilters = listData.items;
     this.allLoaiGiayPhep = listData.items;
   }
@@ -207,7 +207,7 @@ export class GiayphepListComponent implements OnInit {
       Keyword: "",
       GTEqualNgaycapphep: "",
       LTEqualNgaycapphep: "",
-      Loaicapphep: "",
+      Loaicapphep: ""
     });
     this.getAllGiayPhep();
   }
