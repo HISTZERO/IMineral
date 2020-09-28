@@ -77,6 +77,12 @@ export enum HoSoActionEnum {
   Edit = 2
 }
 
+export enum GiayPhepActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum DangKyThamDoActionEnum {
   None = 0,
   Add = 1,

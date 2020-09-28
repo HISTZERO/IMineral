@@ -121,7 +121,7 @@
             </label>
             <div class="col-lg-8 col-md-8 col-sm-8">
               <mat-select class="form-control" formControlName="donvithoihan"
-                *ngIf="dataTranslate" placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chondonvithoihan' | translate}}">
+                *ngIf="dataTranslate" [displayMember]="'name'" placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chondonvithoihan' | translate}}">
                 <mat-option value="">
                   {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhoangsan.chondonvithoihan" | translate }}
                 </mat-option>
