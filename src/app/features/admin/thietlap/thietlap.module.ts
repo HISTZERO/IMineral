@@ -14,6 +14,8 @@ import { CauhinhtailieuListComponent } from "src/app/features/admin/thietlap/cau
 import { CauhinhtailieuIoComponent } from "src/app/features/admin/thietlap/cauhinhtailieu/cauhinhtailieu-io/cauhinhtailieu-io.component";
 import { CoquantiepnhanListComponent } from "src/app/features/admin/thietlap/coquantiepnhan/coquantiepnhan-list/coquantiepnhan-list.component";
 import { CoquantiepnhanIoComponent } from "src/app/features/admin/thietlap/coquantiepnhan/coquantiepnhan-io/coquantiepnhan-io.component";
+import { CoquancapphepIoComponent } from './coquancapphep/coquancapphep-io/coquancapphep-io.component';
+import { CoquancapphepListComponent } from './coquancapphep/coquancapphep-list/coquancapphep-list.component';
 
 @NgModule({
   imports: [
@@ -33,12 +35,15 @@ import { CoquantiepnhanIoComponent } from "src/app/features/admin/thietlap/coqua
     CauhinhtailieuListComponent,
     CauhinhtailieuIoComponent,
     CoquantiepnhanListComponent,
-    CoquantiepnhanIoComponent
+    CoquantiepnhanIoComponent,
+    CoquancapphepIoComponent,
+    CoquancapphepListComponent
   ],
   entryComponents: [
     ThietlaphethongIoComponent,
     CauhinhtailieuIoComponent,
-    CoquantiepnhanIoComponent
+    CoquantiepnhanIoComponent,
+    CoquancapphepIoComponent,
   ]
 })
 export class ThietlapModule { }
