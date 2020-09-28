@@ -1,18 +1,17 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
+import {DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.model";
-import { OutputDkKhaiThacCatSoiModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.model";
+import { OutputDkKhaiThacCatSoiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.model";
 
 @Component({
   selector: 'app-dangkykhaithaccaisoi-io',
@@ -305,7 +304,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
   deleteItemdangKyKhaiThacCatSoi() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccatsoi.contentDelete,
-      this.dangKyKhaiThacCatSoi.diadiem
+      this.dangKyKhaiThacCatSoi.tenduan
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {

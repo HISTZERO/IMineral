@@ -60,6 +60,7 @@ export class AdminRoutingName {
   public static ThietLapHeThong = "thietlaphethong";
   public static CauHinhTaiLieu = "cauhinhtailieu";
   public static CoQuanTiepNhan = "coquantiepnhan";
+  public static CoQuanCapPhep = "coquancapphep";
 
   // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
@@ -91,20 +92,20 @@ export class AdminRoutingName {
 
   // 1.11 Routes phần thăm dò khoáng sản
   public static dkthamdokhoangsanUri = "dkthamdokhoangsan";
-  public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
-  public static dkPheDuyetTruLuongUri = "dkpheduyettruluongkhoangsan";
-  public static dkDauGiaQuyenUri = "dkdaugiaquyen";
-  public static dkTanthukhoangsanUri = "dktanthukhoangsan";
-  public static dkTralaigiayphepUri = "dktralaigiayphep";
-  public static dkDongcuamoUri = "dkdongcuamo";
-  public static dkChuyennhuongquyenUri = "dkchuyennhuongquyen";
-  public static dkPheDuyetTruLuongChitiet = "dkpheduyettruluongkhoangsanchitiet";
-  public static dkDauGiaQuyenChitiet = "dkdaugiaquyenchitiet";
   public static dkthamdokhoangsanchitietUri = "dkthamdokhoangsanchitiet";
+  public static dkKhaithackhoangsanUri = "dkkhaithackhoangsan";
   public static dkKhaithackhoangsanChitiet = "dkkhaithackhoangsanchitiet";
+  public static dkPheDuyetTruLuongUri = "dkpheduyettruluongkhoangsan";
+  public static dkPheDuyetTruLuongChitiet = "dkpheduyettruluongkhoangsanchitiet";
+  public static dkDauGiaQuyenUri = "dkdaugiaquyen";
+  public static dkDauGiaQuyenChitiet = "dkdaugiaquyenchitiet";
+  public static dkTanthukhoangsanUri = "dktanthukhoangsan";
   public static dkTanthukhoangsanChiTiet = "dktanthukhoangsanchitiet";
+  public static dkTralaigiayphepUri = "dktralaigiayphep";
   public static dkTralaigiayphepChiTiet = "dktralaigiayphepchitiet";
+  public static dkDongcuamoUri = "dkdongcuamo";
   public static dkDongcuamoChiTiet = "dkdongcuamochitiet";
+  public static dkChuyennhuongquyenUri = "dkchuyennhuongquyen";
   public static dkChuyennhuongquyenChiTiet = "dkchuyennhuongquyenchitiet";
 
   // 1.12 Routes phần cấp phép khoáng sản

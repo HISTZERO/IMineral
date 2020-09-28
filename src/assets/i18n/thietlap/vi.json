@@ -33,15 +33,25 @@
     "save": "Lưu",
     "loaitailieu": "Loại tài liệu",
     "sobanchinh": "Số bản chính",
-    "sobansao": "Số bản sao"
+    "sobansao": "Số bản sao",
+    "nhapthieudulieuError":"Cần nhập đủ số bản chính và số bản sao"
   },
   "coquantiepnhan": {
-    "titleList": "Danh sách cơ quan tiếp nhận",
-    "tencoquantiepnhan": "Tên cơ quan tiếp nhận",
-    "titleCauHinhCoQuanTiepNhan": "CẤU HÌNH CƠ QUAN TIẾP NHẬN",
+    "titleList": "Danh sách cơ quan cấp phép",
+    "tencoquantiepnhan": "Tên cơ quan cấp phép",
+    "titleCauHinhCoQuanTiepNhan": "CẤU HÌNH CƠ QUAN cấp phép",
     "titleDsCoQuanQuanLy": "Danh sách cơ quan quản lý",
-    "titleDsCoQuanTiepNhan": "Danh sách cơ quan tiếp nhận",
+    "titleDsCoQuanTiepNhan": "Danh sách cơ quan cấp phép",
     "save": "Lưu",
     "tencoquanquanly": "Tên cơ quan quản lý"
-  }
+  },
+  "coquancapphep": {
+  "titleList": "Danh sách cơ quan cấp phép",
+  "tencoquancapphep": "Tên cơ quan cấp phép",
+  "titleCauHinhCoQuanCapPhep": "CẤU HÌNH CƠ QUAN CẤP PHÉP",
+  "titleDsCoQuanQuanLy": "Danh sách cơ quan quản lý",
+  "titleDsCoQuanCapPhep": "Danh sách cơ quan cấp phép",
+  "save": "Lưu",
+  "tencoquanquanly": "Tên cơ quan quản lý"
+}
 }

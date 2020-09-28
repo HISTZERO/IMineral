@@ -4,6 +4,7 @@ import { HttpClient } from "@angular/common/http";
 import { ThietlaphethongService } from "src/app/services/admin/thietlap/thietlaphethong.service";
 import { CauhinhtailieuService } from "./cauhinhtailieu.service";
 import { CoquantiepnhanService } from "./coquantiepnhan.service";
+import {CoquancapphepService} from "src/app/services/admin/thietlap/coquancapphep.service";
 
 @Injectable({
   providedIn: 'root'
@@ -25,5 +26,10 @@ export class ThietlapFacadeService {
   // Cơ quan tiếp nhận service
   public getCoQuanTiepNhanService() {
     return new CoquantiepnhanService(this.httpClient);
+  }
+
+  // Cơ quan cấp phép service
+  public getCoQuanCapPhepService() {
+    return new CoquancapphepService(this.httpClient);
   }
 }

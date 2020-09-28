@@ -16,14 +16,18 @@ import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
 import { GiayphepListComponent } from './giayphep/giayphep-list/giayphep-list.component';
 import { GiayphepIoComponent } from './giayphep/giayphep-io/giayphep-io.component';
 import { GiayphepOptionComponent } from './giayphep/giayphep-option/giayphep-option.component';
+import { CapphephoatdongkhoangsanComponent } from "./capphephoatdongkhoangsan.component";
 import { CpthamdokhoangsanListComponent } from './cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
+
 
 @NgModule({
   declarations: [
   GiayphepListComponent,
   GiayphepIoComponent,
   GiayphepOptionComponent,
+  CapphephoatdongkhoangsanComponent,
   CpthamdokhoangsanListComponent
+
   ],
   exports: [
     GiayphepOptionComponent
