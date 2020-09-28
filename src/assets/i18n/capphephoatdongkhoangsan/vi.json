@@ -18,7 +18,7 @@
     "thoihan": "Thời han",
     "donvithoihan": "Đơn vị thời hạn",
     "coquancapphep": "Cơ quan cấp phép",
-    "tennguoiky": "Người cấp phép",
+    "tennguoiky": "Người ký",
     "loaivanban": "Loại văn bản",
     "chucvunguoiky": "Chức vụ",
     "ghichu": "Ghi chú",
@@ -78,7 +78,7 @@
     "ngaycapRequired": "Ngày cấp không được để trống",
     "noicapRequired": "Nơi cấp không được để trống",
     "diachiRequired": "Địa chỉ không được để trống",
-    "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
+    "dienthoaiIsNumber": "Số điện thoại phải là kiểu số"
   },
   "capphepthamdokhoangsan": {
     "titleList": "Danh sách cấp phép thăm dò khoáng sản",

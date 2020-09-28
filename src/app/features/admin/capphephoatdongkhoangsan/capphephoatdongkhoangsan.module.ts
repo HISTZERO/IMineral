@@ -13,11 +13,12 @@ import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex-component-factory-resolver.service";
 import { CapphephoatdongkhoangsanRoutingModule } from 'src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-routing.module';
 import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
-import { GiayphepListComponent } from './giayphep/giayphep-list/giayphep-list.component';
-import { GiayphepIoComponent } from './giayphep/giayphep-io/giayphep-io.component';
-import { GiayphepOptionComponent } from './giayphep/giayphep-option/giayphep-option.component';
-import { CapphephoatdongkhoangsanComponent } from "./capphephoatdongkhoangsan.component";
-import { CpthamdokhoangsanListComponent } from './cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
+import { GiayphepListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-list/giayphep-list.component';
+import { GiayphepIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-io/giayphep-io.component';
+import { GiayphepOptionComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-option/giayphep-option.component';
+import { CapphephoatdongkhoangsanComponent } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.component";
+import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
+import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
 
 
 @NgModule({
@@ -26,8 +27,8 @@ import { CpthamdokhoangsanListComponent } from './cpthamdokhoangsan/cpthamdokhoa
   GiayphepIoComponent,
   GiayphepOptionComponent,
   CapphephoatdongkhoangsanComponent,
-  CpthamdokhoangsanListComponent
-
+  CpthamdokhoangsanListComponent,
+  CpthamdokhoangsanIoComponent
   ],
   exports: [
     GiayphepOptionComponent

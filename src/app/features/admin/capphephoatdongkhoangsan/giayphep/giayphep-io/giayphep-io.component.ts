@@ -21,6 +21,7 @@ import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
+import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 
 @Component({
   selector: 'app-giayphep-io',
@@ -122,6 +123,7 @@ export class GiayphepIoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dmFacadeService: DmFacadeService,
     private hethongFacadeService: HethongFacadeService,
+    private thietlapFacadeService: ThietlapFacadeService,
     private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
     private activatedRoute: ActivatedRoute,
@@ -338,8 +340,8 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   async getCoQuanCapPhepAll() {
-    const listData: any = await this.hethongFacadeService
-      .getCoQuanTiepNhanService()
+    const listData: any = await this.thietlapFacadeService
+      .getCoQuanCapPhepService()
       .getFetchAll({ PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
     this.allCoQuanCapPhep = listData.items;
     this.coQuanCapPhepFilters = listData.items;

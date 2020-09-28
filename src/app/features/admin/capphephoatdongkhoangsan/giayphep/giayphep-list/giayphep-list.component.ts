@@ -101,7 +101,7 @@ export class GiayphepListComponent implements OnInit {
     this.formSearch = this.formBuilder.group({
       GTEqualNgaycapphep: [""],
       LTEqualNgaycapphep: [""],
-      Loaigiayphep: [""],
+      Loaicapphep: [""],
       Keyword: [""]
     });
   }
