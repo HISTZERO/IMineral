@@ -116,5 +116,5 @@ export class AdminRoutingName {
   public static cpTanthukhoangsanChiTiet = "cptanthukhoangsanchitiet";
   public static cpTralaigiayphepChiTiet = "cptralaigiayphepchitiet";
   public static cpDongcuamoChiTiet = "cpdongcuamochitiet";
-  public static cpTinhTienCapQuyenChiTiet = "cptinhtiencapquyenchitiet";
+  public static cpchuyennhuongquyenchitiet = "cpchuyennhuongquyenchitiet";
 }

@@ -94,7 +94,7 @@
                   <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledLoaiCapPhepSelectionState">
                     <mat-select class="form-control" placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.hoso.chonloaicapphep' | translate }}" formControlName="loaicapphep"
                       *ngIf="dataTranslate">
-                      <mat-select-filter [displayMember]="'name'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
+                      <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
                       </mat-select-filter>
                       <mat-option value="">
                         {{ "DANGKYHOATDONGKHOANGSAN.hoso.chonloaicapphep" | translate }}

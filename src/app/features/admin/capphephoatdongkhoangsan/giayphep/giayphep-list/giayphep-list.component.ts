@@ -8,16 +8,17 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-import {ChiTietCapPhepHoatDongKS, NhomLoaiGiayPhepEnum } from "src/app/shared/constants/nhomloaigiayphep-constants";
+import {ChiTietCapPhepHoatDongKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
-import { OutputDmLoaiGiayPhepModel } from 'src/app/models/admin/danhmuc/loaigiayphep.model';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
+import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 
 
 @Component({
@@ -28,7 +29,7 @@ import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangs
 export class GiayphepListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
-  @Input("nhomLoaiGiayPhep") nhomLoaiGiayPhep: number;
+  @Input("nhomLoaiCapPhep") nhomLoaiCapPhep: number;
 
   // tslint:disable-next-line: no-input-rename
   @Input("title") title: string;
@@ -50,10 +51,10 @@ export class GiayphepListComponent implements OnInit {
   public selectedItem: OutputGiayPhepModel;
 
   // Chứa danh sách loại cấp phép
-  public allLoaiGiayPhep: OutputDmLoaiGiayPhepModel[];
+  public allLoaiCapPhep: OutputDmLoaiCapPhepModel[];
 
   // Filter Lĩnh Vực
-  public loaiGiayPhepFilters: OutputDmLoaiGiayPhepModel[];
+  public loaiCapPhepFilters: OutputDmLoaiCapPhepModel[];
 
   // Service
   public itemService: any;
@@ -116,20 +117,20 @@ export class GiayphepListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    if (this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.ThamDoKhoangSan
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.KhaiThacKhoangSan
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.TanThuKhoangSan
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.TraLaiGiayPhep
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.DongCuaMo
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.TinhTienCapQuyen
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.PheDuyetTruLuong
-      || this.nhomLoaiGiayPhep === NhomLoaiGiayPhepEnum.DauGiaQuyenKhaiThac) {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
       // Khởi tạo form
       this.formInit();
       // Gọi hàm lấy dữ liệu translate
       await this.getDataTranslate();
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
-      await this.getAllLoaiGiayPhep();
+      await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
       await this.getDataPageSize();
     }
@@ -156,16 +157,16 @@ export class GiayphepListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu loại cấp phép
    */
-  async getAllLoaiGiayPhep() {
-    if (this.nhomLoaiGiayPhep === null || this.nhomLoaiGiayPhep === undefined) {
-      this.nhomLoaiGiayPhep = -1;
+  async getAllLoaiCapPhep() {
+    if (this.nhomLoaiCapPhep === null || this.nhomLoaiCapPhep === undefined) {
+      this.nhomLoaiCapPhep = -1;
     }
 
     const listData: any = await this.dmFacadeService
-      .getDmLoaiGiayPhepService()
-      .getFetchAll({Nhomloaigiayphep: this.nhomLoaiGiayPhep, PageNumber: 1, PageSize: -1});
-    this.loaiGiayPhepFilters = listData.items;
-    this.allLoaiGiayPhep = listData.items;
+      .getDmLoaiCapPhepService()
+      .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1});
+    this.loaiCapPhepFilters = listData.items;
+    this.allLoaiCapPhep = listData.items;
   }
 
   /**
@@ -176,9 +177,9 @@ export class GiayphepListComponent implements OnInit {
     const searchModel = {
       GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== null && this.formSearch.controls.GTEqualNgaycapphep.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : "",
       LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== null && this.formSearch.controls.LTEqualNgaycapphep.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : "",
-      Loaigiayphep: this.formSearch.controls.Loaigiayphep.value,
+      Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
-      Nholmoaigiayphep: this.nhomLoaiGiayPhep
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     };
 
     this.itemService
@@ -207,7 +208,7 @@ export class GiayphepListComponent implements OnInit {
       Keyword: "",
       GTEqualNgaycapphep: "",
       LTEqualNgaycapphep: "",
-      Loaigiayphep: ""
+      Loaicapphep: ""
     });
     this.getAllGiayPhep();
   }
@@ -217,7 +218,7 @@ export class GiayphepListComponent implements OnInit {
    */
   addItemGiayPhep() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiGiayPhep]}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`]);
   }
 
   /**
@@ -226,7 +227,7 @@ export class GiayphepListComponent implements OnInit {
    */
   async editItemGiayPhep(id: any) {
     this.router.navigate([
-        `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiGiayPhep]}`],
+        `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`],
       {queryParams: {idgiayphep: id}});
   }
 
@@ -258,7 +259,7 @@ export class GiayphepListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.contentDelete,
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.giayphep.contentDelete,
       this.selectedItem.sogiayphep
     );
     dialogRef.afterClosed().subscribe(async (result) => {

@@ -258,7 +258,7 @@ export class HosoIoComponent implements OnInit {
       ngaycap: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.ngaycapRequired },
       noicap: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.noicapRequired },
       diachi: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.diachiRequired },
-      // dienthoai: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.dienthoaiRequired },
+      dienthoai: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.dienthoaiIsNumber },
     };
   }
 
@@ -283,8 +283,8 @@ export class HosoIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
-    const hosoItem = await dangKyHoatDongKhoangSanFacadeService.getByid(idHoSo).toPromise();
+    const hoSoFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hosoItem = await hoSoFacadeService.getByid(idHoSo).toPromise();
     return hosoItem;
   }
 
@@ -296,14 +296,14 @@ export class HosoIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
     const inputModel = this.hosoIOForm.value;
     const currentLoaiCapPhep = this.loaiCapPhepList.find(item => item.maloaicapphep === this.hosoIOForm.controls.loaicapphep.value);
     inputModel.idthutuchanhchinh = currentLoaiCapPhep.idthutuchanhchinh;
     inputModel.nhomloaicapphep = currentLoaiCapPhep.nhomloaicapphep;
     inputModel.tencanhantochuc = this.hosoIOForm.controls.tencanhantochuc.value;
     if (this.currentAction === HoSoActionEnum.Add && (this.insertedState === InsertedState.SaveAndRefresh || this.insertedState === InsertedState.SaveAndEdit)) {
-      dangKyHoatDongKhoangSanFacadeService.addItem(inputModel).subscribe(
+      hoSoFacadeService.addItem(inputModel).subscribe(
         async (res) => {
           if (this.insertedState === InsertedState.SaveAndEdit) {
             this.idhoso = res.idhoso;
@@ -327,7 +327,7 @@ export class HosoIoComponent implements OnInit {
     } else if (this.currentAction === HoSoActionEnum.Edit) {
       inputModel.idhoso = this.idhoso;
       inputModel.tencanhantochuc = this.hosoIOForm.controls.tencanhantochuc.value;
-      dangKyHoatDongKhoangSanFacadeService.updateItem(inputModel).subscribe(
+      hoSoFacadeService.updateItem(inputModel).subscribe(
         async (res) => {
           this.currentAction = HoSoActionEnum.Edit;
           this.selectCurrentFormState();
