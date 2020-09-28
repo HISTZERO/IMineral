@@ -59,7 +59,9 @@ export class ServiceName {
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
   public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static COQUANCAPPHEP = "cpcoquancapphep";
   public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
+  public static GETALLCOQUANCAPPHEP = "getallcoquancapphep";
 
 
   public static NHOMTHAMSO = "nhomthamso";
