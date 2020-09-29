@@ -21,6 +21,7 @@ import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
+import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-option/hoso-option.component';
 // import { HosoOptionComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-option/hoso-option.component';
 
 @Component({
@@ -514,12 +515,18 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   openHoSoIOSidenav() {
+    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
+
+    if (!loaiCapPhep) {
+      return;
+    }
+
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.giayphep.titleHoSoSelect);
-    // this.matSidenavService.setContentComp(HosoOptionComponent, "select");
+    this.matSidenavService.setContentComp(HosoOptionComponent, "select", {nhomloaicapphep: this.nhomLoaiCapPhep, loaicapphep: loaiCapPhep});
     this.matSidenavService.open();
  }
 
