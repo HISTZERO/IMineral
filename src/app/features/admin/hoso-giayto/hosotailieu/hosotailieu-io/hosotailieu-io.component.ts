@@ -86,10 +86,10 @@ export class HosotailieuIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tentailieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.tentailieuRequired },
-      sobanchinh: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.sobanchinhIsNumber },
-      sobansao: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.sobansaoIsNumber },
-      thutu: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.thutuIsNumber }
+      tentailieu: { required: this.dataTranslate.HOSOGIAYTO.tailieu.tentailieuRequired },
+      sobanchinh: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.sobanchinhIsNumber },
+      sobansao: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.sobansaoIsNumber },
+      thutu: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.thutuIsNumber }
     };
   }
 
@@ -235,7 +235,7 @@ export class HosotailieuIoComponent implements OnInit {
   removeFile() {
     if (this.obj && this.purpose === 'edit') {
       const dialogRef = this.commonService.confirmDeleteDiaLogService(
-        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.contentDelete,
+        this.dataTranslate.HOSOGIAYTO.tailieu.contentDelete,
         this.obj.filedinhkem
       );
       dialogRef.afterClosed().subscribe(async (result) => {

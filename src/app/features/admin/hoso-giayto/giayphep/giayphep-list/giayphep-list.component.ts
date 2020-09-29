@@ -259,7 +259,7 @@ export class GiayphepListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.giayphep.contentDelete,
+      this.dataTranslate.HOSOGIAYTO.giayphep.contentDelete,
       this.selectedItem.sogiayphep
     );
     dialogRef.afterClosed().subscribe(async (result) => {
