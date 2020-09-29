@@ -28,3 +28,12 @@ export const MenuCpThamDoKhoangSanChitiet = [
     url: "",
   },
 ];
+
+export const ButtonBackCpThamDoKhoangSan = [
+  {
+    title: `Cấp phép thăm dò khoáng sản`,
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpthamdokhoangsanUri}`
+  },
+];

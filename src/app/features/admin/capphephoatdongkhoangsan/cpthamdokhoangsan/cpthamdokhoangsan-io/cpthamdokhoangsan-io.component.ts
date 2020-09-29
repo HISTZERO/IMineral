@@ -4,14 +4,11 @@ import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 
 import {ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum, CpThamDoKhoangSanTabEnum, GiayPhepActionEnum } from 'src/app/shared/constants/enum';
-import { ButtonBackThamDoKhoangSan, MenuThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan';
-import { HosotailieuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
-import { GiayphepIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/giayphep/giayphep-io/giayphep-io.component';
+import { GiayphepIoComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-io/giayphep-io.component';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { MenuCpThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
+import { ButtonBackCpThamDoKhoangSan, MenuCpThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 
 @Component({
   selector: 'app-cpthamdokhoangsan-io',
@@ -31,7 +28,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   public navArray = MenuCpThamDoKhoangSanChitiet;
 
   // Chứa dữ liệu nút quay lại trên subheader
-  public btnArray = ButtonBackThamDoKhoangSan;
+  public btnArray = ButtonBackCpThamDoKhoangSan;
 
   public currentAction: number;
 
