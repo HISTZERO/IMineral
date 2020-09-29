@@ -22,7 +22,8 @@ import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/ca
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-option/hoso-option.component';
-// import { HosoOptionComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-option/hoso-option.component';
+import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { GiayphepOptionComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-option/giayphep-option.component';
 
 @Component({
   selector: 'app-giayphep-io',
@@ -79,6 +80,8 @@ export class GiayphepIoComponent implements OnInit {
   public coQuanCapPhepFilters: OutputHsCoQuanTiepNhanModel[];
   // Chứa dữ liệu hồ sơ
   public hoSoList: OutputHsHoSoModel[];
+  // Chứa dữ liệu Giấy phép lịch sử
+  public giayPhepList: OutputGiayPhepModel[];
   // chứa dữ liệu Id Hồ sơ
   public idgiayphep: string;
   // Lưu trữ tên loại cấp phép trong trường hợp hồ sơ đã có đăng ký
@@ -115,6 +118,7 @@ export class GiayphepIoComponent implements OnInit {
     website: "",
     loaidoituong: "",
     idhoso: "",
+    idgiayphepls: "",
     trangthai: "",
     ghichu: ""
   };
@@ -198,6 +202,7 @@ export class GiayphepIoComponent implements OnInit {
       website: [""],
       loaidoituong: [LoaiDoiTuongEnum.ToChuc, Validators.required],
       idhoso: [""],
+      idgiayphepls: [""],
       trangthai: [""],
       ghichu: [""]
     });
@@ -293,6 +298,7 @@ export class GiayphepIoComponent implements OnInit {
           website: inputModel.website,
           loaidoituong: inputModel.loaidoituong,
           idhoso: inputModel.idhoso,
+          idgiayphepls: inputModel.idgiayphepls,
           trangthai: inputModel.trangthai,
           ghichu: inputModel.ghichu
         });
@@ -514,6 +520,9 @@ export class GiayphepIoComponent implements OnInit {
     this.selectNewInsertedGiayPhepEvent.emit(this.idgiayphep);
   }
 
+  /**
+   * Hàm open sidenav chọn hồ sơ
+   */
   openHoSoIOSidenav() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
 
@@ -533,8 +542,20 @@ export class GiayphepIoComponent implements OnInit {
     this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.giayphep.titleHoSoSelect);
     this.matSidenavService.setContentComp(HosoOptionComponent, "select", {nhomloaicapphep: this.nhomLoaiCapPhep, loaicapphep: loaiCapPhep});
     this.matSidenavService.open();
- }
+  }
 
+  /**
+   * Hàm open sidenav chọn giấy phép lịch sử
+   */
+  openGiayPhepLichSuIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.giayphep.titleSelect);
+    this.matSidenavService.setContentComp(GiayphepOptionComponent, "select");
+    this.matSidenavService.open();
+  }
 
   /**
    * Hàm đóng sidenav

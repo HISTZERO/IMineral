@@ -58,7 +58,8 @@ import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/t
   entryComponents: [
     DmCanhanOptionComponent,
     DmTochucOptionComponent,
-    HosotailieuIoComponent
+    HosoOptionComponent,
+    GiayphepOptionComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
