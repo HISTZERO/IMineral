@@ -11,8 +11,8 @@ export class OutputGiayPhepModel {
   chucvunguoiky: string;
   tennguoiky: string;
   loaivanban: number;
-  loaigiayphep: string;
-  tenloaigiayphep: string;
+  loaicapphep: string;
+  tenloaicapphep: string;
   idcanhantochuc: string;
   tencanhantochuc: string;
   sogiayto: string;
@@ -45,7 +45,7 @@ export class InputGiayPhepModel {
   chucvunguoiky: string;
   tennguoiky: string;
   loaivanban: number;
-  loaigiayphep: string;
+  loaicapphep: string;
   idcanhantochuc: string;
   tencanhantochuc: string;
   sogiayto: string;

@@ -19,15 +19,15 @@
                 <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                <label class="col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.loaigiayphep" | translate }}:</label>
-                  <mat-select class="form-control" formControlName="Loaigiayphep"  placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaigiayphep' | translate }}"  *ngIf="dataTranslate">
-                    <mat-select-filter [displayMember]="'tenloaigiayphep'" [array]="loaiGiayPhepFilters" (filteredReturn)="allLoaiGiayPhep = $event">
+                <label class="col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.loaicapphep" | translate }}:</label>
+                  <mat-select class="form-control" formControlName="Loaicapphep"  placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep' | translate }}"  *ngIf="dataTranslate">
+                    <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="allLoaiCapPhep = $event">
                     </mat-select-filter>
                     <mat-option value="">
-                      {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaigiayphep" | translate }}
+                      {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep" | translate }}
                     </mat-option>
-                    <mat-option *ngFor="let loaiGiayPhep of allLoaiGiayPhep" [value]="loaiGiayPhep.maloaigiayphep">
-                      {{ loaiGiayPhep.tenloaigiayphep }}
+                    <mat-option *ngFor="let loaiCapPhep of allLoaiCapPhep" [value]="loaiCapPhep.maloaicapphep">
+                      {{ loaiCapPhep.tenloaicapphep }}
                     </mat-option>
                   </mat-select>
               </div>
@@ -80,7 +80,7 @@
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                 <e-column field="tencanhantochuc" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochuc' | translate }}"></e-column>
                 <e-column field="sogiayphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphep' | translate }}"></e-column>
-                <e-column field="tenloaigiayphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.loaigiayphep' | translate }}"></e-column>
+                <e-column field="tenloaicapphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.loaicapphep' | translate }}"></e-column>
                 <e-column field="diachi" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.diachi' | translate }}"></e-column>
                 <e-column field="ngaycap" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap' | translate }}">
                   <ng-template #template let-data>

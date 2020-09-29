@@ -150,7 +150,7 @@
     "ngaycapRequired": "Ngày cấp không được để trống",
     "noicapRequired": "Nơi cấp không được để trống",
     "diachiRequired": "Địa chỉ không được để trống",
-    "dienthoaiRequired": "Số điện thoại không được để trống",
+    "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
     "informedDialogTitle": "Thông báo",
     "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
     "chonloaidoituongRequiredDialog": " Yêu cầu chọn loại đối tượng",

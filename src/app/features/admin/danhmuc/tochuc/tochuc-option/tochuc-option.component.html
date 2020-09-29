@@ -52,9 +52,34 @@
               [allowResizing]="true">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="tentochuc" headerText="{{ 'DANHMUC.tochuc.tentochuc' | translate }}"></e-column>
-                <e-column field="sogiayto" headerText="{{ 'DANHMUC.tochuc.sogiayto' | translate }}"></e-column>
-                <e-column field="diachi" headerText="{{ 'DANHMUC.tochuc.diachi' | translate }}"></e-column>
+                <e-column headerText="{{ 'COMMON.default.ketqua' | translate }}">
+                  <ng-template #template let-data>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.tochuc.tentochuc' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.tentochuc}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.tochuc.sogiayto' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.sogiayto}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.tochuc.diachi' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.diachi}}
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-column>
                 <e-column field="idtochuc" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">

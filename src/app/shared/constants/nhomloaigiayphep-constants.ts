@@ -1,4 +1,5 @@
 import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
+import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 
 export const NhomLoaiGiayPhep = [
     {
@@ -35,24 +36,24 @@ export const NhomLoaiGiayPhep = [
     }
 ];
 
-export enum NhomLoaiGiayPhepEnum {
-  ThamDoKhoangSan = 1,
-  PheDuyetTruLuong = 2,
-  DauGiaQuyenKhaiThac = 3,
-  KhaiThacKhoangSan = 4,
-  TanThuKhoangSan = 5,
-  TraLaiGiayPhep = 6,
-  DongCuaMo = 7,
-  TinhTienCapQuyen = 8
-}
+// export enum NhomLoaiGiayPhepEnum {
+//   ThamDoKhoangSan = 1,
+//   PheDuyetTruLuong = 2,
+//   DauGiaQuyenKhaiThac = 3,
+//   KhaiThacKhoangSan = 4,
+//   TanThuKhoangSan = 5,
+//   TraLaiGiayPhep = 6,
+//   DongCuaMo = 7,
+//   TinhTienCapQuyen = 8
+// }
 
 export const ChiTietCapPhepHoatDongKS: any = {
-  [NhomLoaiGiayPhepEnum.ThamDoKhoangSan]: AdminRoutingName.cpThamdokhoangsanchitietUri,
-  [NhomLoaiGiayPhepEnum.KhaiThacKhoangSan]: AdminRoutingName.cpKhaithackhoangsanChitiet,
-  [NhomLoaiGiayPhepEnum.PheDuyetTruLuong]: AdminRoutingName.cpPheDuyetTruLuongChitiet,
-  [NhomLoaiGiayPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.cpDauGiaQuyenChitiet,
-  [NhomLoaiGiayPhepEnum.TanThuKhoangSan]: AdminRoutingName.cpTanthukhoangsanChiTiet,
-  [NhomLoaiGiayPhepEnum.TraLaiGiayPhep]: AdminRoutingName.cpTralaigiayphepChiTiet,
-  [NhomLoaiGiayPhepEnum.DongCuaMo]: AdminRoutingName.cpDongcuamoChiTiet,
-  [NhomLoaiGiayPhepEnum.TinhTienCapQuyen]: AdminRoutingName.cpTinhTienCapQuyenChiTiet,
+  [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: AdminRoutingName.cpThamdokhoangsanchitietUri,
+  [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: AdminRoutingName.cpKhaithackhoangsanChitiet,
+  [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: AdminRoutingName.cpPheDuyetTruLuongChitiet,
+  [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.cpDauGiaQuyenChitiet,
+  [NhomLoaiCapPhepEnum.TanThuKhoangSan]: AdminRoutingName.cpTanthukhoangsanChiTiet,
+  [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: AdminRoutingName.cpTralaigiayphepChiTiet,
+  [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.cpDongcuamoChiTiet,
+  [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.cpchuyennhuongquyenchitiet,
 };
