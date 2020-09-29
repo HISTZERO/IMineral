@@ -148,13 +148,6 @@ export class GiayphepOptionComponent implements OnInit {
   }
 
   /**
-   * Tìm kiếm nâng cao
-   */
-  public searchAdvance() {
-    this.getAllGiayPhep();
-  }
-
-  /**
    *  chọn item cá nhân trong danh sách
    */
   public selectItemGiayPhep(data) {

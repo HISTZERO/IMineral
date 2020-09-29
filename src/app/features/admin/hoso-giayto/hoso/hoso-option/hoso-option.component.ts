@@ -39,10 +39,10 @@ export class HosoOptionComponent implements OnInit {
   @Input("selectedOptionType") selectedOptionType = SelectedOptionType.Popup;
   // tslint:disable-next-line: no-input-rename
   @Input("title") title: string;
-  // tslint:disable-next-line: no-input-rename
-  @Input("allowAutoInit") allowAutoInit = true;
   // Viewchild template
   @ViewChild("gridHoSo", {static: false}) public gridHoSo: GridComponent;
+  // Chứa dữ liệu đối tượng truyền từ list comp
+  public obj: any;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -80,15 +80,35 @@ export class HosoOptionComponent implements OnInit {
   }
 
   async ngOnInit() {
-
     // Setting wrap mode
     this.wrapSettings = {wrapMode: 'Both'};
-
     // Gọi hàm lấy dữ liệu translate
     this.getDataTranslate();
+    // Khởi tạo form
+    this.formInit();
 
-    if (this.allowAutoInit) {
-      await this.manualDataInit();
+    if (this.selectedOptionType === SelectedOptionType.Popup) {
+      if (this.obj) {
+        if (this.obj.nhomloaicapphep !== undefined && this.obj.nhomloaicapphep !== null) {
+          this.nhomLoaiCapPhep = this.obj.nhomloaicapphep;
+        }
+
+        if (this.obj.loaicapphep !== undefined && this.obj.loaicapphep !== null) {
+          this.loaiCapPhep = this.obj.loaicapphep;
+        }
+      }
+    }
+
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
+      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
+      // Gọi hàm lấy dữ liệu pagesize
+      await this.getDataPageSize();
     }
   }
 
@@ -110,26 +130,6 @@ export class HosoOptionComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
-  }
-
-  async manualDataInit() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
-      // Gọi hàm lấy dữ liệu pagesize
-      await this.getDataPageSize();
-    }
-
-    return true;
   }
 
   /**
