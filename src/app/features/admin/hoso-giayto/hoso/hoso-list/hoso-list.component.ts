@@ -258,7 +258,7 @@ export class HosoListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.contentDelete,
+      this.dataTranslate.HOSOGIAYTO.hoso.contentDelete,
       this.selectedItem.mahoso
     );
     dialogRef.afterClosed().subscribe(async (result) => {

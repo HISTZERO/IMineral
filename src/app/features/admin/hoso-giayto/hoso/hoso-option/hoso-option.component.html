@@ -23,16 +23,11 @@
       <div class="card-header">
         <h3>
           <div class="row">
-            <div class="col-md-7 mb-sm-1">
-              <span class="title" *ngIf="title">{{ title }}</span>
-              <span class="title" *ngIf="!title">{{ "DANGKYHOATDONGKHOANGSAN.hoso.titleList" | translate }}</span>
+            <div class="col-md-4 mb-sm-1">
+              <span class="title">{{ "HOSOGIAYTO.hoso.titleList" | translate }}</span>
             </div>
-            <div class="col-md-5">
-              <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="addItemHoSo()">
-                <i class="fal fa-plus-square"></i>
-                {{ "COMMON.default.add" | translate }}
-              </button>
-              <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="reloadDataGrid()">
+            <div class="col-md-8">
+              <button class="btn btn-outline-primary" style="float: right;" (click)="reloadDataGrid()">
                 <i class="far fa-sync-alt"></i>
                 {{ "COMMON.default.load" | translate }}
               </button>
@@ -51,7 +46,7 @@
               <ng-template #template let-data>
                 <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                    {{ 'DANGKYHOATDONGKHOANGSAN.hoso.mahoso' | translate }}:
+                    {{ 'HOSOGIAYTO.hoso.mahoso' | translate }}:
                   </div>
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     {{data && data.mahoso}}
@@ -59,7 +54,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                    {{ 'DANGKYHOATDONGKHOANGSAN.hoso.mabiennhan' | translate }}:
+                    {{ 'HOSOGIAYTO.hoso.mabiennhan' | translate }}:
                   </div>
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     {{data && data.mabiennhan}}
@@ -67,7 +62,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                    {{ 'DANGKYHOATDONGKHOANGSAN.hoso.thutuchanhchinh' | translate }}:
+                    {{ 'HOSOGIAYTO.hoso.thutuchanhchinh' | translate }}:
                   </div>
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     {{data && data.tenthutuchanhchinh}}
@@ -75,7 +70,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                    {{ 'DANGKYHOATDONGKHOANGSAN.hoso.loaicapphep' | translate }}:
+                    {{ 'HOSOGIAYTO.hoso.loaicapphep' | translate }}:
                   </div>
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     {{data && data.loaicapphep}}
@@ -83,7 +78,7 @@
                 </div>
                 <div class="row">
                   <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                    {{ 'DANGKYHOATDONGKHOANGSAN.hoso.coquantiepnhan' | translate }}:
+                    {{ 'HOSOGIAYTO.hoso.coquantiepnhan' | translate }}:
                   </div>
                   <div class="col-lg-7 col-md-7 col-sm-7">
                     {{data && data.tencoquantiepnhan}}

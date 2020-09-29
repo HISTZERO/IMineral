@@ -240,25 +240,25 @@ export class HosoIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      mahoso: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.mahosoRequired },
-      mabiennhan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.mabiennhanRequired },
+      mahoso: { required: this.dataTranslate.HOSOGIAYTO.hoso.mahosoRequired },
+      mabiennhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.mabiennhanRequired },
       // soden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.sodenRequired },
-      ngaynop: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.ngaynopRequired },
-      ngaytiepnhan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.ngaytiepnhanRequired },
-      ngaytraketqua: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.ngaytraketquaRequired },
-      loaidoituong: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.loaidoituongRequired },
-      loaicapphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.loaicapphepRequired },
-      hinhthucnophoso: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnophosoRequired },
-      hinhthucnhanketqua: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.hinhthucnhanketquaRequired },
-      idcoquantiepnhan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.idcoquantiepnhanRequired },
-      idcanhantochuc: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired},
-      tencanhantochuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.tencanhantochucRequired },
-      sogiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.sogiaytoRequired },
-      loaigiayto: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.loaigiaytoRequired },
-      ngaycap: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.ngaycapRequired },
-      noicap: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.noicapRequired },
-      diachi: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.diachiRequired },
-      dienthoai: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.dienthoaiIsNumber },
+      ngaynop: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaynopRequired },
+      ngaytiepnhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaytiepnhanRequired },
+      ngaytraketqua: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaytraketquaRequired },
+      loaidoituong: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaidoituongRequired },
+      loaicapphep: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaicapphepRequired },
+      hinhthucnophoso: { required: this.dataTranslate.HOSOGIAYTO.hoso.hinhthucnophosoRequired },
+      hinhthucnhanketqua: { required: this.dataTranslate.HOSOGIAYTO.hoso.hinhthucnhanketquaRequired },
+      idcoquantiepnhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.idcoquantiepnhanRequired },
+      idcanhantochuc: {required: this.dataTranslate.HOSOGIAYTO.hoso.tencanhantochucRequired},
+      tencanhantochuc: { required: this.dataTranslate.HOSOGIAYTO.hoso.tencanhantochucRequired },
+      sogiayto: { required: this.dataTranslate.HOSOGIAYTO.hoso.sogiaytoRequired },
+      loaigiayto: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaigiaytoRequired },
+      ngaycap: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaycapRequired },
+      noicap: { required: this.dataTranslate.HOSOGIAYTO.hoso.noicapRequired },
+      diachi: { required: this.dataTranslate.HOSOGIAYTO.hoso.diachiRequired },
+      dienthoai: { pattern: this.dataTranslate.HOSOGIAYTO.hoso.dienthoaiIsNumber },
     };
   }
 
@@ -390,8 +390,8 @@ export class HosoIoComponent implements OnInit {
     } else {
       const informationDialogRef = this.commonService.informationDiaLogService(
         "",
-        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.chonloaidoituongRequiredDialog,
-        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.informedDialogTitle,
+        this.dataTranslate.HOSOGIAYTO.hoso.chonloaidoituongRequiredDialog,
+        this.dataTranslate.HOSOGIAYTO.hoso.informedDialogTitle,
       );
     }
   }
