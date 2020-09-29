@@ -60,6 +60,7 @@ export class AdminRoutingName {
   public static ThietLapHeThong = "thietlaphethong";
   public static CauHinhTaiLieu = "cauhinhtailieu";
   public static CoQuanTiepNhan = "coquantiepnhan";
+  public static CoQuanCapPhep = "coquancapphep";
 
   // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
@@ -116,5 +117,5 @@ export class AdminRoutingName {
   public static cpTanthukhoangsanChiTiet = "cptanthukhoangsanchitiet";
   public static cpTralaigiayphepChiTiet = "cptralaigiayphepchitiet";
   public static cpDongcuamoChiTiet = "cpdongcuamochitiet";
-  public static cpTinhTienCapQuyenChiTiet = "cptinhtiencapquyenchitiet";
+  public static cpchuyennhuongquyenchitiet = "cpchuyennhuongquyenchitiet";
 }

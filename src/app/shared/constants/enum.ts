@@ -77,6 +77,12 @@ export enum HoSoActionEnum {
   Edit = 2
 }
 
+export enum GiayPhepActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum DangKyThamDoActionEnum {
   None = 0,
   Add = 1,
@@ -112,4 +118,10 @@ export enum DangKyThamDoKhoangSanTabEnum {
   LoaiKhoangSan = 2,
   KhuVucThamDo = 3,
   CongTrinhThamDo = 4
+}
+
+export enum CpThamDoKhoangSanTabEnum {
+  ThongTinGiayPhep = 0,
+  TaiLieuHoSoDinhKem = 1,
+  ThongTinDangKy = 2
 }

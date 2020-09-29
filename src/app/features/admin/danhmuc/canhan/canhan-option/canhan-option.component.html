@@ -52,9 +52,34 @@
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowResizing]="true">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="hovaten" headerText="{{ 'DANHMUC.canhan.hovaten' | translate }}"></e-column>
-                <e-column field="sogiayto" headerText="{{ 'DANHMUC.canhan.sogiayto' | translate }}"></e-column>
-                <e-column field="diachi" headerText="{{ 'DANHMUC.canhan.diachi' | translate }}"></e-column>
+                <e-column headerText="{{ 'COMMON.default.ketqua' | translate }}">
+                  <ng-template #template let-data>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.canhan.hovaten' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.hovaten}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.canhan.sogiayto' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.sogiayto}}
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
+                        {{ 'DANHMUC.canhan.diachi' | translate }}:
+                      </div>
+                      <div class="col-lg-7 col-md-7 col-sm-7">
+                        {{data && data.diachi}}
+                      </div>
+                    </div>
+                  </ng-template>
+                </e-column>
                 <e-column field="idcanhan" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { NhomLoaiGiayPhepEnum } from 'src/app/shared/constants/nhomloaigiayphep-constants';
+import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { MenuCpThamDoKhoangSan } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 
 @Component({
@@ -10,7 +10,7 @@ import { MenuCpThamDoKhoangSan } from 'src/app/shared/constants/sub-menus/capphe
 })
 export class CpthamdokhoangsanListComponent implements OnInit {
   // nhóm loại cấp phép enum
-  NhomLoaiGiayPhepType = NhomLoaiGiayPhepEnum;
+  NhomLoaiCapPhepType = NhomLoaiCapPhepEnum;
 
   // title danh sách hồ sơ
   title: string;
