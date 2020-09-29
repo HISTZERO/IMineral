@@ -45,6 +45,7 @@ export class ServiceName {
   public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
   public static DANGKYTHAMDOCONGTRINH = "dangkythamdocongtrinh";
   public static DANGKYTHAMDOKHUVUC = "dangkythamdokhuvuc";
+  public static DANGKYTHAMDOTOADOKHUVUC = "dangkythamdotoadokhuvuc";
   // Đăng ký khai thác khoáng sản
   public static DANGKYKHAITHACKHOANGSAN = "dangkykhaithackhoangsan";
   public static DANGKYKHAITHACGIAHAN = "dangkykhaithacgiahan";

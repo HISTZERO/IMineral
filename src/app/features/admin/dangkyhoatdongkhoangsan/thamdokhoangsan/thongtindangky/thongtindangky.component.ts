@@ -196,6 +196,7 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoKhuVuc.matSidenav = this.matSidenav;
       this.dangKyThamDoKhuVuc.content = this.content;
       this.dangKyThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
+      this.dangKyThamDoKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;

@@ -5,7 +5,7 @@ import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 
-import { OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamsokhuvuc.model";
+import { OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.model";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -28,6 +28,9 @@ export class KhuvucthamdoListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  // Chứa loại cấp phép
+  public loaicapphep: number;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -172,7 +175,7 @@ export class KhuvucthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleAdd);
-    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.idHoSo });
+    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.iddangkythamdo, loaicapphep: this.loaicapphep });
     this.matSidenavService.open();
   }
 

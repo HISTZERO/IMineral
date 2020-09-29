@@ -348,7 +348,20 @@
     "toadoxPlaceholder": "Nhập tọa độ x",
     "toadoyPlaceholder": "Nhập tọa độ y",
     "thutuPlaceholder": "Thứ tự",
-    "sohieuPlaceholder": "Số hiệu"
+    "sohieuPlaceholder": "Số hiệu",
+    "thutuDuplicate": "Thứ tự không được trùng",
+    "sohieuRequired": "Số hiệu không được để trống",
+    "toadoxRequired": "Tọa độ x không được để trống",
+    "toadoyRequired": "Tọa độ y không được để trống",
+    "thutuRequired": "Thứ tự không được để trống",
+    "tenkhuvucRequired": "Tên khu vực không được để trống",
+    "dientichRequired": "Diện tích không được để trống",
+    "donvidientichRequired": "Đơn vị điện tích không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "thutuIsNumber": "Thứ tự phải là kiểu số",
+    "toadoxIsNumber": "Tọa độ x phải là kiểu số",
+    "toadoyIsNumber": "Tọa độ y phải là kiểu số",
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   },
   "dangkykhaithackhoangsan": {
     "titleAdd": "Thêm mới đăng ký khai thác khoáng sản",
@@ -574,7 +587,6 @@
     "mucsaukhaithacdenPlaceholder": "Nhập mức sâu khai thác đến",
     "khaithacdenngayPlaceholder": "Nhập khai thác đến ngày",
     "kehoachkhaithacPlaceholder": "Nhập kế hoạch khai thác",
-
     "donvitruluongPlaceholder": "---Chọn đơn vị trữ lượng---",
     "donvikhoiluongPlaceholder": "---Chọn đơn vị khối lượng---",
     "donvicongsuatPlaceholder": "---Chọn đơn vị công suất---",
@@ -590,7 +602,6 @@
     "khoiluongkhaithacRequired": "Khối lượng khai thác không được để trống",
     "congsuatkhaithacRequired": "Công suất khai thác không được để trống",
     "dientichkhaithacRequired": "Diện tích không được để trống",
-
     "donvithoihanRequired": "Đơn vị thời hạn không được để trống",
     "hequychieuRequired": "Hệ quy chiếu không được để trống"
   }

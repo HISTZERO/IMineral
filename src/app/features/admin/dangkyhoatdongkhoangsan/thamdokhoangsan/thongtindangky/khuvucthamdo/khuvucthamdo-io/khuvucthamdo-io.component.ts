@@ -1,18 +1,20 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { InputDkThamDoToaDoKhuVucModel } from "../../../../../../../models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
-import { InputDkThamDoKhuVucModel } from "../../../../../../../models/admin/dangkyhoatdongkhoangsan/dkthamsokhuvuc.model";
-import { OutputDmHeQuyChieuModel } from "../../../../../../../models/admin/danhmuc/hequychieu.model";
-import { DangKyHoatDongKhoangSanFacadeService } from "../../../../../../../services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import { DmFacadeService } from "../../../../../../../services/admin/danhmuc/danhmuc-facade.service";
-import { CommonServiceShared } from "../../../../../../../services/utilities/common-service";
-import { MatsidenavService } from "../../../../../../../services/utilities/matsidenav.service";
-import { validationAllErrorMessagesService } from "../../../../../../../services/utilities/validatorService";
-import { DonViDienTich, LoaiKhuVucThamDo } from "../../../../../../../shared/constants/common-constants";
-import { SettingsCommon } from "../../../../../../../shared/constants/setting-common";
+
+import { InputDkThamDoToaDoKhuVucModel, OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
+import { InputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.model";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { DonViDienTich, LoaiKhuVucThamDo } from "src/app/shared/constants/common-constants";
+import { SettingsCommon } from "src/app/shared/constants/setting-common";
+import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 
 @Component({
   selector: 'app-khuvucthamdo-io',
@@ -31,7 +33,10 @@ export class KhuvucthamdoIoComponent implements OnInit {
   public dkThamDoToaDoKhuVucIOForm: FormGroup;
 
   // Chứa danh sách tọa độ
-  public listToaDoKhuVuc: any = [];
+  public listToaDoKhuVuc: OutputDkThamDoToaDoKhuVucModel[] = [];
+
+  // Chứa loại cấp phép
+  public loaiCapPhep = LoaiCapPhepEnum;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -66,11 +71,16 @@ export class KhuvucthamdoIoComponent implements OnInit {
   // Chứa danh sách loại khu vực thăm dò
   public loaiKhuVuc = LoaiKhuVucThamDo;
 
+  // Chứa thông báo lỗi thứ tự
+  public errorThuTu: string = "";
 
   // error message
   validationErrorMessages = {};
 
-  // form errors
+  // Chứa error tọa độ khu vực
+  public validationErrorToaDo = {}
+
+  // Form errors khu vực
   formErrors = {
     tenkhuvuc: "",
     dientich: "",
@@ -78,6 +88,14 @@ export class KhuvucthamdoIoComponent implements OnInit {
     loaikhuvuc: "",
     hequychieu: "",
   };
+
+  // Form errors tọa độ
+  formErrorsToaDo = {
+    thutu: "",
+    sohieu: "",
+    toadox: "",
+    toadoy: "",
+  }
 
   constructor(public matSidenavService: MatsidenavService,
     public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
@@ -87,6 +105,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
     private translate: TranslateService) { }
 
   async ngOnInit() {
+    console.log(this.obj);
     // Khởi tạo form
     await this.formInit();
     // Khởi tạo form theo dạng add or edit
@@ -113,13 +132,30 @@ export class KhuvucthamdoIoComponent implements OnInit {
    * Hàm set validate
    */
   setValidation() {
+    // Error message khu vực
     this.validationErrorMessages = {
-      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.sohieuRequired },
-      chieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauFormat },
-      toadox: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxFormat },
-      toadoy: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyFormat },
-      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.hequychieuRequired },
+      tenkhuvuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.tenkhuvucRequired },
+      dientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.dientichRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.donvidientichRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.hequychieuRequired },
     };
+
+    // Error message Tọa độ
+    this.validationErrorToaDo = {
+      thutu: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutuRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutuIsNumber
+      },
+      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieuRequired },
+      toadox: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoxRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoxIsNumber,
+      },
+      toadoy: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoyRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoyIsNumber
+      }
+    }
   }
 
   /**
@@ -137,17 +173,17 @@ export class KhuvucthamdoIoComponent implements OnInit {
   formInit() {
     this.dKThamDoKhuVucIOForm = this.formBuilder.group({
       tenkhuvuc: ["", Validators.required],
-      dientich: ["", Validators.required],
+      dientich: ["", [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
       donvidientich: ["", Validators.required],
       loaikhuvuc: [0],
       hequychieu: ["", Validators.required],
     });
 
     this.dkThamDoToaDoKhuVucIOForm = this.formBuilder.group({
-      thutu: ["", Validators.required],
+      thutu: ["", [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
       sohieu: ["", Validators.required],
-      toadox: ["", Validators.required],
-      toadoy: ["", Validators.required],
+      toadox: ["", [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
+      toadoy: ["", [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
     })
   }
 
@@ -167,7 +203,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
   }
 
   /**
-   * Hàm lấy danh sách Lĩnh Vực
+   * Hàm lấy danh sách Hệ quy chiếu
    */
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
@@ -182,12 +218,23 @@ export class KhuvucthamdoIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     const dKThamDoKhuVucService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhuVucService();
+    const dkThamDoToaDoKhuVuc = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoToaDoKhuVucService();
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.dKThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
+
     if (operMode === "new") {
       dKThamDoKhuVucService.addItem(this.inputModelKhuVuc).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc"),
+        (res) => {
+          this.listToaDoKhuVuc.map(value => {
+            value.loaikhuvuc = this.dKThamDoKhuVucIOForm.value.loaikhuvuc;
+            value.idthamdokhuvuc = res.idthamdokhuvuc;
+            value.iddangkythamdo = this.obj.iddangkythamdo;
+          });
+          dkThamDoToaDoKhuVuc.addItem({ list: this.listToaDoKhuVuc }).subscribe((res) => {
+            this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
+          });
+        },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -238,6 +285,13 @@ export class KhuvucthamdoIoComponent implements OnInit {
       loaikhuvuc: 0,
       hequychieu: "",
     });
+
+    this.dkThamDoToaDoKhuVucIOForm.reset({
+      thutu: "",
+      sohieu: "",
+      toadox: "",
+      toadoy: "",
+    });
   }
 
   /**
@@ -254,7 +308,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
   }
 
   /**
-   * hàm kiểm tra validation form
+   * Hàm kiểm tra validation form khu vực
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
@@ -263,6 +317,18 @@ export class KhuvucthamdoIoComponent implements OnInit {
       this.formErrors
     );
   }
+
+  /**
+   * Hàm kiểm tra validation form tọa độ
+   */
+  public logAllValidationErrorMessagesToaDo() {
+    validationAllErrorMessagesService(
+      this.dkThamDoToaDoKhuVucIOForm,
+      this.validationErrorToaDo,
+      this.formErrorsToaDo
+    );
+  }
+
 
   /**
    * Hàm close sidenav
@@ -275,21 +341,44 @@ export class KhuvucthamdoIoComponent implements OnInit {
    * Lưu tọa độ khu vực
    */
   public saveToaDoKhuVuc() {
-    this.listToaDoKhuVuc.push(this.dkThamDoToaDoKhuVucIOForm.value);
+    this.logAllValidationErrorMessagesToaDo();
+    let dataToaDo: any = [this.dkThamDoToaDoKhuVucIOForm.value];
+    let status: boolean = true;
+
+    // Check dữ liệu thứ tự có trùng không
+    for (let i = this.listToaDoKhuVuc.length; i--;) {
+      if (dataToaDo.find(item => item.thutu === this.listToaDoKhuVuc[i].thutu)) {
+        this.errorThuTu = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutuDuplicate;
+        status = false;
+      }
+    }
+
+    // Nếu không trùng thì thêm vào grid
+    if (status === true && this.dkThamDoToaDoKhuVucIOForm.valid === true) {
+      this.listToaDoKhuVuc.push(this.dkThamDoToaDoKhuVucIOForm.value);
+      this.gridDkToaDoKhuVuc.refresh();
+      this.dkThamDoToaDoKhuVucIOForm.reset();
+      this.errorThuTu = "";
+    }
+  }
+
+  /**
+   * Hàm xóa item trên grid
+   * @param data 
+   */
+  public deleteToaDoKhuVuc(data: any) {
+    // Thêm item vào mảng
+    let item: any[] = [];
+    item.push(data);
+
+    // Xóa item đã chọn trong danh sách 
+    for (let i = this.listToaDoKhuVuc.length; i--;) {
+      if (item.find(item => item.thutu === this.listToaDoKhuVuc[i].thutu)) {
+        this.listToaDoKhuVuc.splice(i, 1);
+      }
+    }
+
+    // Làm mới grid
     this.gridDkToaDoKhuVuc.refresh();
-    this.dkThamDoToaDoKhuVucIOForm.reset();
-  }
-
-  public editToaDoKhuVuc(item: any) {
-    this.dkThamDoToaDoKhuVucIOForm.setValue({
-      thutu: item.thutu,
-      sohieu: item.sohieu,
-      toadox: item.toadox,
-      toadoy: item.toadoy,
-    });
-  }
-
-  public deleteToaDoKhuVuc(item: any) {
-
   }
 }
