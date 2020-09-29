@@ -12,6 +12,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { KhuvucthamdoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-io/khuvucthamdo-io.component";
+import { ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-khuvucthamdo-list',
@@ -52,6 +53,8 @@ export class KhuvucthamdoListComponent implements OnInit {
   // Chứa dữ liệu Iddangkythamdo
   public iddangkythamdo: string;
 
+  public idHoSo: string;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -59,12 +62,13 @@ export class KhuvucthamdoListComponent implements OnInit {
     public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute
   ) { }
 
   async ngOnInit() {
     this.getDataTranslate();
-
+    this.getIdDangKyThamDo();
     if (this.allowAutoInit) {
       await this.manualDataInit();
     }
@@ -84,6 +88,17 @@ export class KhuvucthamdoListComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+  }
+
+  /**
+   * Lấy id đăng ký thăm dò
+   */
+  public getIdDangKyThamDo() {
+    this.activatedRoute.queryParamMap.subscribe((param: any) => {
+      if (param && param.params && param.params.idhoso) {
+        this.idHoSo = param.params.idhoso;
+      }
+    });
   }
 
   /**
@@ -115,7 +130,7 @@ export class KhuvucthamdoListComponent implements OnInit {
   async getAllDkThamDoKhuVuc() {
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoKhuVucService()
-      .getFetchAll({ iddangkythamdo: this.iddangkythamdo });
+      .getFetchAll({ iddangkythamdo: this.idHoSo });
     if (listData) {
       listData.map((khuvuc, index) => {
         khuvuc.serialNumber = index + 1;
@@ -157,7 +172,7 @@ export class KhuvucthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleAdd);
-    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.iddangkythamdo });
+    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.idHoSo });
     this.matSidenavService.open();
   }
 
@@ -198,7 +213,7 @@ export class KhuvucthamdoListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
-          .getDangKyThamDoCongTrinhService()
+          .getDangKyThamDoKhuVucService()
           .deleteItem({ idcongtrinh: this.selectedItem.idthamdokhuvuc })
           .subscribe(
             () => this.getAllDkThamDoKhuVuc(),

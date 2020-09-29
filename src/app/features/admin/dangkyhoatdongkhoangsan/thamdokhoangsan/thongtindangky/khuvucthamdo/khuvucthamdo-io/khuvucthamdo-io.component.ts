@@ -21,8 +21,8 @@ import { SettingsCommon } from "../../../../../../../shared/constants/setting-co
 })
 export class KhuvucthamdoIoComponent implements OnInit {
 
-   // Viewchild template
-   @ViewChild("gridDkToaDoKhuVuc", { static: false }) public gridDkToaDoKhuVuc: GridComponent;
+  // Viewchild template
+  @ViewChild("gridDkToaDoKhuVuc", { static: false }) public gridDkToaDoKhuVuc: GridComponent;
 
   // Chứa dữ liệu Form khu vực
   public dKThamDoKhuVucIOForm: FormGroup;
@@ -136,12 +136,19 @@ export class KhuvucthamdoIoComponent implements OnInit {
    */
   formInit() {
     this.dKThamDoKhuVucIOForm = this.formBuilder.group({
-      tenkhuvuc: [""],
-      dientich: [""],
-      donvidientich: [""],
-      loaikhuvuc: [""],
-      hequychieu: [""],
+      tenkhuvuc: ["", Validators.required],
+      dientich: ["", Validators.required],
+      donvidientich: ["", Validators.required],
+      loaikhuvuc: [0],
+      hequychieu: ["", Validators.required],
     });
+
+    this.dkThamDoToaDoKhuVucIOForm = this.formBuilder.group({
+      thutu: ["", Validators.required],
+      sohieu: ["", Validators.required],
+      toadox: ["", Validators.required],
+      toadoy: ["", Validators.required],
+    })
   }
 
   /**
@@ -174,13 +181,13 @@ export class KhuvucthamdoIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dKThamDoCongTrinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoCongTrinhService();
+    const dKThamDoKhuVucService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhuVucService();
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.dKThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
     if (operMode === "new") {
-      dKThamDoCongTrinhService.addItem(this.inputModelKhuVuc).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoCongTrinh"),
+      dKThamDoKhuVucService.addItem(this.inputModelKhuVuc).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -191,9 +198,10 @@ export class KhuvucthamdoIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idcongtrinh;
-      dKThamDoCongTrinhService.updateItem(this.inputModelKhuVuc).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoCongTrinh"),
+      this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idthamdokhuvuc;
+      this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
+      dKThamDoKhuVucService.updateItem(this.inputModelKhuVuc).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -223,7 +231,13 @@ export class KhuvucthamdoIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dKThamDoKhuVucIOForm.reset();
+    this.dKThamDoKhuVucIOForm.reset({
+      tenkhuvuc: "",
+      dientich: "",
+      donvidientich: "",
+      loaikhuvuc: 0,
+      hequychieu: "",
+    });
   }
 
   /**
@@ -255,5 +269,27 @@ export class KhuvucthamdoIoComponent implements OnInit {
    */
   closeKhuVucToaDoIOSidenav() {
     this.matSidenavService.close();
+  }
+
+  /**
+   * Lưu tọa độ khu vực
+   */
+  public saveToaDoKhuVuc() {
+    this.listToaDoKhuVuc.push(this.dkThamDoToaDoKhuVucIOForm.value);
+    this.gridDkToaDoKhuVuc.refresh();
+    this.dkThamDoToaDoKhuVucIOForm.reset();
+  }
+
+  public editToaDoKhuVuc(item: any) {
+    this.dkThamDoToaDoKhuVucIOForm.setValue({
+      thutu: item.thutu,
+      sohieu: item.sohieu,
+      toadox: item.toadox,
+      toadoy: item.toadoy,
+    });
+  }
+
+  public deleteToaDoKhuVuc(item: any) {
+
   }
 }
