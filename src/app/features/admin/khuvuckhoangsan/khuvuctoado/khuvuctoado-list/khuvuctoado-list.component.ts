@@ -1,21 +1,26 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input} from "@angular/core";
-import { MatSidenav } from "@angular/material/sidenav";
-import { TranslateService } from "@ngx-translate/core";
-import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { FormBuilder } from "@angular/forms";
-import { ActivatedRoute } from "@angular/router";
+import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input} from "@angular/core";
+import {MatSidenav} from "@angular/material/sidenav";
+import {TranslateService} from "@ngx-translate/core";
+import {HttpErrorResponse} from "@angular/common/http";
+import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
+import {FormBuilder} from "@angular/forms";
+import {ActivatedRoute} from "@angular/router";
 
-import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { KhuvuctoadoIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-io/khuvuctoado-io.component";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
-import {KhuVucKhoangSanEnum, MaLoaiHinhEnum, keyKhuVucKhoangSan, KhuVucKhoangSan} from "src/app/shared/constants/khuvuckhoangsan-constants";
-import { OutputKhuVucToaDoModel } from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
+import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {KhuvuctoadoIoComponent} from "src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-io/khuvuctoado-io.component";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {KhuVucKhoangSanFacadeService} from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
+import {
+  KhuVucKhoangSanEnum,
+  MaLoaiHinhEnum,
+  keyKhuVucKhoangSan,
+  KhuVucKhoangSan
+} from "src/app/shared/constants/khuvuckhoangsan-constants";
+import {OutputKhuVucToaDoModel} from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import { SequenceModel } from 'src/app/models/admin/common/sequence.model';
+import {SequenceModel} from 'src/app/models/admin/common/sequence.model';
 
 @Component({
   selector: 'app-khuvuctoado-list',
@@ -25,9 +30,9 @@ import { SequenceModel } from 'src/app/models/admin/common/sequence.model';
 export class KhuvuctoadoListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridToaDo", { static: false }) public gridToaDo: GridComponent;
-  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("compToaDoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("gridToaDo", {static: false}) public gridToaDo: GridComponent;
+  @ViewChild("aside", {static: true}) public matSidenav: MatSidenav;
+  @ViewChild("compToaDoIO", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -70,6 +75,8 @@ export class KhuvuctoadoListComponent implements OnInit {
 
   private squencekhuVucToaDoId: SequenceModel = new SequenceModel();
 
+  public isValidThuTu: boolean;
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -81,7 +88,8 @@ export class KhuvuctoadoListComponent implements OnInit {
     private translate: TranslateService,
     public formBuilder: FormBuilder,
     public generalClientService: GeneralClientService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     this.squencekhuVucToaDoId.setDefaultValue(1);
@@ -94,9 +102,9 @@ export class KhuvuctoadoListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Setting wrap mode
-    this.wrapSettings = { wrapMode: 'Both' };
+    this.wrapSettings = {wrapMode: 'Both'};
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav( this.matSidenav, this, this.content, this.cfr );
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -119,8 +127,8 @@ export class KhuvuctoadoListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -129,7 +137,7 @@ export class KhuvuctoadoListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -151,11 +159,11 @@ export class KhuvuctoadoListComponent implements OnInit {
    */
   async getThongTinKhuVucKhoangSan() {
     if ((this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucCamTamCam
-        && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucDauGia
-        && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucDuTruKhoangSan
-        && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucKhoangSanDocHai
-        && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucKhongDauGia
-        ) || this.idKhuVuc == null || this.idKhuVuc === undefined) {
+      && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucDauGia
+      && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucDuTruKhoangSan
+      && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucKhoangSanDocHai
+      && this.keyKhuVuc !== keyKhuVucKhoangSan.KhuVucKhongDauGia
+    ) || this.idKhuVuc == null || this.idKhuVuc === undefined) {
       this.thongTinKhuVucKhoangSan = null;
     } else if (this.keyKhuVuc === keyKhuVucKhoangSan.KhuVucCamTamCam) {
       this.thongTinKhuVucKhoangSan = await this.kvKhoangSanFacadeSv.getKhuVucCamTamCamService().getByid(this.idKhuVuc).toPromise();
@@ -193,6 +201,7 @@ export class KhuvuctoadoListComponent implements OnInit {
       }
     }
   }
+
   /**
    * Hàm lấy dữ liệu Tọa độ
    */
@@ -210,9 +219,12 @@ export class KhuvuctoadoListComponent implements OnInit {
   async editItemKhuVucToaDo(id: any) {
     // Lấy dữ liệu khu vực tọa độ theo id
     if (this.thongTinKhuVucKhoangSan !== null) {
-      const dataItem: any = this.listToaDo.find(item => item.idkhuvuctoado === id);
-      await this.matSidenavService.setTitle( this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.titleEdit );
-      await this.matSidenavService.setContentComp( KhuvuctoadoIoComponent, "edit", dataItem);
+      let dataItem: any = {
+        item: this.listToaDo.find(item => item.idkhuvuctoado === id),
+        listData: this.listToaDo
+      };
+      await this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.titleEdit);
+      await this.matSidenavService.setContentComp(KhuvuctoadoIoComponent, "edit", dataItem);
       await this.matSidenavService.open();
     } else {
       this.commonService.showDialogWarning(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thongtinkhoangsankhongtontaiInform);
@@ -224,7 +236,10 @@ export class KhuvuctoadoListComponent implements OnInit {
    */
   openKhuVucToaDoIOSidenav() {
     if (this.thongTinKhuVucKhoangSan !== null) {
-      const dataItem: any = {idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaiKhuVuc};
+      let dataItem: any = {
+        item: {idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaiKhuVuc},
+        listData: this.listToaDo
+      };
       this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.titleAdd);
       this.matSidenavService.setContentComp(KhuvuctoadoIoComponent, "new", dataItem);
       this.matSidenavService.open();
@@ -249,6 +264,7 @@ export class KhuvuctoadoListComponent implements OnInit {
     this.listToaDo = this.generalClientService.generateOrderOf<OutputKhuVucToaDoModel>(this.listToaDo, "serialNumber", 1);
     this.gridToaDo.refresh();
   }
+
 
   /**
    * Hàm đóng sidenav
@@ -322,18 +338,18 @@ export class KhuvuctoadoListComponent implements OnInit {
       if (result === "confirm") {
         if ((this.listToaDo === null || this.listToaDo.length === 0) && this.idKhuVuc !== null && this.idKhuVuc !== undefined) {
           await this.kvKhoangSanFacadeSv.getKhuVucToaDoService()
-              .deleteItem({idkhuvuc: this.idKhuVuc})
-              .subscribe(
-                () => this.getAllToaDo(),
-                (error: HttpErrorResponse) => {
-                  this.commonService.showDialogWarning(error.error.errors);
-                },
-                () =>
-                  this.commonService.showeNotiResult(
-                    this.dataTranslate.COMMON.default.successDelete,
-                    2000
-                  )
-              );
+            .deleteItem({idkhuvuc: this.idKhuVuc})
+            .subscribe(
+              () => this.getAllToaDo(),
+              (error: HttpErrorResponse) => {
+                this.commonService.showDialogWarning(error.error.errors);
+              },
+              () =>
+                this.commonService.showeNotiResult(
+                  this.dataTranslate.COMMON.default.successDelete,
+                  2000
+                )
+            );
         } else {
           if (this.listToaDo.length < this.minimumNumberOfKhuVucToaDoRecord) {
             const informationDialogRef = this.commonService.informationDiaLogService(
@@ -360,6 +376,7 @@ export class KhuvuctoadoListComponent implements OnInit {
       }
     });
   }
+
   /**
    * Hàm thông báo không thể xóa
    */

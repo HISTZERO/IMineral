@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from "@angular/forms";
+import {Component, Input, OnInit} from '@angular/core';
+import {FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl} from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { InputKhuVucToaDoModel } from "src/app/models/admin/khuvuckhoangsan/khuvuctoado.model";
@@ -14,6 +14,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
   styleUrls: ['./khuvuctoado-io.component.scss']
 })
 export class KhuvuctoadoIoComponent implements OnInit {
+
 
   // Chứa dữ liệu Form
   public khuvuctoadoIOForm: FormGroup;
@@ -39,6 +40,7 @@ export class KhuvuctoadoIoComponent implements OnInit {
   // form errors
   formErrors = {
     sohieu: "",
+    thutu: "",
     toadox: "",
     toadoy: "",
     loaikhuvuc: "",
@@ -77,8 +79,24 @@ export class KhuvuctoadoIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
+      thutu: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thutuRequired, duplicate: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.thutubitrung},
       toadox: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoxRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoxFormat },
       toadoy: {required: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyRequired , pattern: this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.toadoyFormat }
+    };
+  }
+
+
+  NoDuplicateThutu(): ValidatorFn {
+    return (control: AbstractControl): { [key: string]: any } => {
+      let controlVal = control.value;
+      let isValid = true;
+      for (let toaDo of this.obj.listData){
+        if(toaDo.thutu == controlVal && toaDo.thutu != this.obj.item.thutu){
+          isValid = false;
+          break;
+        }
+      }
+      return isValid ? null : {duplicate : "" };
     };
   }
 
@@ -98,6 +116,7 @@ export class KhuvuctoadoIoComponent implements OnInit {
   formInit() {
     this.khuvuctoadoIOForm = this.formBuilder.group({
       sohieu: [""],
+      thutu: ["", [Validators.required, this.NoDuplicateThutu()]],
       toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       loaikhuvuc: ["", Validators.required],
@@ -111,21 +130,23 @@ export class KhuvuctoadoIoComponent implements OnInit {
   formOnNewOrEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.khuvuctoadoIOForm.setValue({
-        sohieu: this.obj.sohieu,
-        toadox: this.obj.toadox,
-        toadoy: this.obj.toadoy,
-        loaikhuvuc: this.obj.loaikhuvuc,
-        idkhuvuc: this.obj.idkhuvuc
+        sohieu: this.obj.item.sohieu,
+        thutu: this.obj.item.thutu,
+        toadox: this.obj.item.toadox,
+        toadoy: this.obj.item.toadoy,
+        loaikhuvuc: this.obj.item.loaikhuvuc,
+        idkhuvuc: this.obj.item.idkhuvuc
       });
 
       this.editMode = true;
     } else if (this.obj && this.purpose === 'new') {
       this.khuvuctoadoIOForm.setValue({
         sohieu: "",
+        thutu: "",
         toadox: "",
         toadoy: "",
-        loaikhuvuc: this.obj.loaikhuvuc,
-        idkhuvuc: this.obj.idkhuvuc
+        loaikhuvuc: this.obj.item.loaikhuvuc,
+        idkhuvuc: this.obj.item.idkhuvuc
       });
     }
   }
@@ -140,7 +161,7 @@ export class KhuvuctoadoIoComponent implements OnInit {
       const inputData = {data: this.inputModel, purpose: this.purpose};
       this.matSidenavService.doParentFunction("addOrUpdateGrid", inputData);
     } else if (operMode === "edit") {
-      this.inputModel.idkhuvuctoado = this.obj.idkhuvuctoado;
+      this.inputModel.idkhuvuctoado = this.obj.item.idkhuvuctoado;
       const inputData = {data: this.inputModel, purpose: this.purpose};
       this.matSidenavService.doParentFunction("addOrUpdateGrid", inputData);
     }
@@ -192,10 +213,11 @@ export class KhuvuctoadoIoComponent implements OnInit {
     if (this.obj && this.purpose === 'new') {
       this.khuvuctoadoIOForm.setValue({
         sohieu: "",
+        thutu: "",
         toadox: "",
         toadoy: "",
-        loaikhuvuc: this.obj.loaikhuvuc,
-        idkhuvuc: this.obj.idkhuvuc
+        loaikhuvuc: this.obj.item.loaikhuvuc,
+        idkhuvuc: this.obj.item.idkhuvuc
       });
     }
   }
