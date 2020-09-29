@@ -1,81 +1,91 @@
 <div class="d-flex align-items-start flex-column flex-md-row">
-    <div class="w-100 order-1 order-md-1">
-      <mat-sidenav-container class="sidenav-container px-2">
-        <mat-sidenav-content>
-          <div class="container-fluid mt-3">
-            <div class="row">
-              <div class="col-lg-12" style="padding: 0px;">
-                <div class="card border">
-                  <div class="card-header">
-                    <h6 class="card-title">
-                        <div class="row">
-                            <div class="col-md-4 mb-sm-1">
-                              <span class="title">{{ "KHUVUCKHOANGSAN.khuvuctoado.titleList" | translate }}</span>
-                            </div>
-                            <div class="col-md-8">
-                              <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openKhuVucToaDoIOSidenav()">
-                                <i class="fal fa-plus-square"></i>
-                                {{ "COMMON.default.add" | translate }}
-                              </button>
-                              <button class="btn btn-primary mr-2" style="float: right;" (click)="saveData()">
-                                <i class="fal fa-save"></i>
-                                {{ "COMMON.default.save" | translate }}
-                              </button>
-                              <!-- <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
-                                <i class="far fa-sync-alt"></i>
-                                {{ "COMMON.default.load" | translate }}
-                              </button> -->
-                            </div>
-                        </div>
-                    </h6>
-                  </div>
-                  <div class="card-body">
-                    <ejs-grid #gridToaDo *ngIf="listToaDo" [dataSource]="listToaDo"
-                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" >
-                  <e-columns>
-                    <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                    <e-column field="sohieu" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.sohieu' | translate }}"></e-column>
-                    <e-column field="toadox" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadox' | translate }}"></e-column>
-                    <e-column field="toadoy" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadoy' | translate }}"></e-column>
-                    <e-column field="loaikhuvuc" headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.loaikhuvuc' | translate }}">
-                      <ng-template #template let-data>
-                        {{ data.loaikhuvuc | getNameLoaiKhuVucKhoangSanPipe: loaiKhuVucKhoangSan}}
-                      </ng-template>
-                    </e-column>
-                    <e-column field="idkhuvuctoado"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
-                      <ng-template #template let-data>
-                        <div class="btn-group">
-                          <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                           (click)="editItemKhuVucToaDo(data.idkhuvuctoado)">
-                            <i class="far fa-edit"></i>
-                          </button>
-                          <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                            (click)="deleteItemKhuVucToaDo(data)">
-                            <i class="far fa-trash"></i>
-                          </button>
-                        </div>
-                      </ng-template>
-                    </e-column>
-                  </e-columns>
-                </ejs-grid>
-                  </div>
+  <div class="w-100 order-1 order-md-1">
+    <mat-sidenav-container class="sidenav-container px-2">
+      <mat-sidenav-content>
+        <div class="container-fluid mt-3">
+          <div class="row">
+            <div class="col-lg-12" style="padding: 0px;">
+              <div class="card border">
+                <div class="card-header">
+                  <h6 class="card-title">
+                    <div class="row">
+                      <div class="col-md-4 mb-sm-1">
+                        <span class="title">{{ "KHUVUCKHOANGSAN.khuvuctoado.titleList" | translate }}</span>
+                      </div>
+                      <div class="col-md-8">
+                        <button class="btn btn-primary mb-sm-1" style="float: right;"
+                                (click)="openKhuVucToaDoIOSidenav()">
+                          <i class="fal fa-plus-square"></i>
+                          {{ "COMMON.default.add" | translate }}
+                        </button>
+                        <button class="btn btn-primary mr-2" style="float: right;" (click)="saveData()">
+                          <i class="fal fa-save"></i>
+                          {{ "COMMON.default.save" | translate }}
+                        </button>
+                        <!-- <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                          <i class="far fa-sync-alt"></i>
+                          {{ "COMMON.default.load" | translate }}
+                        </button> -->
+                      </div>
+                    </div>
+                  </h6>
+                </div>
+                <div class="card-body">
+                  <ejs-grid #gridToaDo *ngIf="listToaDo" [dataSource]="listToaDo"
+                            [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
+                            [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
+                            [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
+                            class="table-striped" [allowResizing]="true">
+                    <e-columns>
+                      <e-column field="thutu"
+                                headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.thutu' | translate }}"></e-column>
+                      <e-column field="sohieu"
+                                headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.sohieu' | translate }}"></e-column>
+                      <e-column field="toadox"
+                                headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadox' | translate }}"></e-column>
+                      <e-column field="toadoy"
+                                headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.toadoy' | translate }}"></e-column>
+                      <e-column field="loaikhuvuc"
+                                headerText="{{ 'KHUVUCKHOANGSAN.khuvuctoado.loaikhuvuc' | translate }}">
+                        <ng-template #template let-data>
+                          {{ data.loaikhuvuc | getNameLoaiKhuVucKhoangSanPipe: loaiKhuVucKhoangSan}}
+                        </ng-template>
+                      </e-column>
+                      <e-column field="idkhuvuctoado" isPrimaryKey='true'
+                                headerText="{{ 'COMMON.default.action' | translate }}">
+                        <ng-template #template let-data>
+                          <div class="btn-group">
+                            <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+                                    (click)="editItemKhuVucToaDo(data.idkhuvuctoado)">
+                              <i class="far fa-edit"></i>
+                            </button>
+                            <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                                    (click)="deleteItemKhuVucToaDo(data)">
+                              <i class="far fa-trash"></i>
+                            </button>
+                          </div>
+                        </ng-template>
+                      </e-column>
+                    </e-columns>
+                  </ejs-grid>
                 </div>
               </div>
             </div>
           </div>
-          <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 700px;">
-        <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
-          <button class="btn btn-sm btn-light" (click)="closeKhuVucToaDoIOSidenav()">
-            <i class="fad fa-chevron-double-right"></i>
-          </button>
-          <span style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
-        <template #compToaDoIO> </template>
-      </mat-sidenav>
-        </mat-sidenav-content>
-      </mat-sidenav-container>
-    </div>
+        <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+                     style="width: 700px;">
+          <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
+            <button class="btn btn-sm btn-light" (click)="closeKhuVucToaDoIOSidenav()">
+              <i class="fad fa-chevron-double-right"></i>
+            </button>
+            <span style="vertical-align: middle;"
+                  class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
+          </div>
+          <template #compToaDoIO></template>
+        </mat-sidenav>
+      </mat-sidenav-content>
+    </mat-sidenav-container>
   </div>
+</div>
 
