@@ -1,5 +1,6 @@
 export class OutputKhuVucToaDoModel {
     idkhuvuctoado: string;
+    thutu: number;
     sohieu: string;
     toadox: number;
     toadoy: number;
@@ -10,6 +11,7 @@ export class OutputKhuVucToaDoModel {
 
 export class InputKhuVucToaDoModel {
     idkhuvuctoado: string;
+    thutu: number;
     sohieu: string;
     toadox: number;
     toadoy: number;
