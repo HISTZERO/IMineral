@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan, DonViThoiHan, LoaiVanBan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
@@ -22,6 +21,8 @@ import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
+import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-option/hoso-option.component';
+// import { HosoOptionComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/hoso/hoso-option/hoso-option.component';
 
 @Component({
   selector: 'app-giayphep-io',
@@ -216,7 +217,7 @@ export class GiayphepIoComponent implements OnInit {
     await this.setValidation();
   }
 
-  private AddThongTinVaoHoSoCombobox(item: any) {
+  private AddOrUpdateThongTinHoSoList(item: OutputHsHoSoModel) {
     if (item.idhoso) {
       const hoSoItem = {
         idhoso: item.idhoso,
@@ -265,7 +266,7 @@ export class GiayphepIoComponent implements OnInit {
       const inputModel = await this.getGiayPhepById(this.idgiayphep);
 
       if (inputModel) {
-        this.AddThongTinVaoHoSoCombobox(inputModel);
+        this.AddOrUpdateThongTinHoSoList(inputModel);
         this.giayPhepIOForm.setValue({
           sogiayphep: inputModel.sogiayphep,
           ngaycapphep: inputModel.ngaycapphep,
@@ -481,6 +482,16 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   /**
+   * lấy item dữ liệu đối tượng hồ sơ từ popup
+   */
+  private selectItemHoSo(item: OutputHsHoSoModel) {
+    if (item !== null && item !== undefined) {
+      this.giayPhepIOForm.controls.idcanhantochuc.setValue(item.idhoso);
+      this.AddOrUpdateThongTinHoSoList(item);
+    }
+  }
+
+  /**
    * Thay đổi loại đối tượng trên form
    */
   selectLoaiDoiTuongChange() {
@@ -504,12 +515,18 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   openHoSoIOSidenav() {
+    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
+
+    if (!loaiCapPhep) {
+      return;
+    }
+
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.giayphep.titleHoSoSelect);
-    this.matSidenavService.setContentComp(null, "select");
+    this.matSidenavService.setContentComp(HosoOptionComponent, "select", {nhomloaicapphep: this.nhomLoaiCapPhep, loaicapphep: loaiCapPhep});
     this.matSidenavService.open();
  }
 

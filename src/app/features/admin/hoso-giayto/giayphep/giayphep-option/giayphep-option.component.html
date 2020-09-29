@@ -10,13 +10,11 @@
               <div class="col-lg-5 col-md-7 col-sm-8 form-group">
                 <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
               </div>
-              <div class="col-lg-5 col-md-5 col-sm-3 form-group d-flex" style="align-items: flex-end;">
-                <div>
-                  <button class="btn btn-success" (click)="searchAdvance()">
-                    <i class="fal fa-search"></i>
-                    {{"COMMON.default.search" | translate}}
-                  </button>
-                </div>
+              <div class="col-lg-5 col-md-5 col-sm-2 form-group d-flex" style="align-items: flex-end;">
+                <button class="btn btn-success" (click)="getAllGiayPhep()">
+                  <i class="fal fa-search"></i>
+                  {{"COMMON.default.search" | translate}}
+                </button>
               </div>
             </div>
           </div>

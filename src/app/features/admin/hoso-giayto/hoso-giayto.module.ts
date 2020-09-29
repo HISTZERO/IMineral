@@ -11,35 +11,54 @@ import { MY_CUSTOM_FORMATS } from "src/app/features/admin/admin-shared.module";
 import { TranslateModule } from "@ngx-translate/core";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex-component-factory-resolver.service";
-import { CapphephoatdongkhoangsanRoutingModule } from 'src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-routing.module';
 import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
-import { CapphephoatdongkhoangsanComponent } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.component";
-import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
-import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
-import {HosoGiaytoModule} from "src/app/features/admin/hoso-giayto/hoso-giayto.module";
+import { GiayphepListComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-list/giayphep-list.component';
+import { GiayphepIoComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-io/giayphep-io.component';
+import { GiayphepOptionComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-option/giayphep-option.component';
 import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-option/hoso-option.component';
+import { HosoListComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-list/hoso-list.component';
+import { HosoIoComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-io/hoso-io.component';
+import { HosotailieuIoComponent } from 'src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
+import { HosotailieuListComponent } from 'src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-list/hosotailieu-list.component';
+import { DmCanhanOptionComponent } from 'src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component';
+import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component';
+
+
 @NgModule({
   declarations: [
-  CapphephoatdongkhoangsanComponent,
-  CpthamdokhoangsanListComponent,
-  CpthamdokhoangsanIoComponent
+    GiayphepListComponent,
+    GiayphepIoComponent,
+    GiayphepOptionComponent,
+    HosoListComponent,
+    HosoIoComponent,
+    HosoOptionComponent,
+    HosotailieuIoComponent,
+    HosotailieuListComponent
   ],
   exports: [
+    GiayphepListComponent,
+    GiayphepIoComponent,
+    GiayphepOptionComponent,
+    HosoListComponent,
+    HosoIoComponent,
+    HosoOptionComponent,
+    HosotailieuIoComponent,
+    HosotailieuListComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
-    CapphephoatdongkhoangsanRoutingModule,
     NgbModule,
     AdminSharedModule,
     OwlDateTimeModule,
     OwlMomentDateTimeModule,
     TranslateModule,
     DanhmucModule,
-    HosoGiaytoModule
   ],
   entryComponents: [
-    HosoOptionComponent
+    DmCanhanOptionComponent,
+    DmTochucOptionComponent,
+    HosotailieuIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
@@ -48,7 +67,7 @@ import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hos
     { provide: OWL_DATE_TIME_FORMATS, useValue: MY_CUSTOM_FORMATS },
   ]
 })
-export class CapphephoatdongkhoangsanModule {
+export class HosoGiaytoModule {
   constructor(
     exResolver: ExComponentFactoryResolverService,
     localResolver: ComponentFactoryResolver

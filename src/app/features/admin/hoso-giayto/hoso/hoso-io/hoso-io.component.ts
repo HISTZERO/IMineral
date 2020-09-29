@@ -122,7 +122,7 @@ export class HosoIoComponent implements OnInit {
     // Lấy dữ liệu translate
     await this.getDataTranslate();
     // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    // this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     // Lấy dữ liệu loại cấp phép
 
     if (this.allowAutoInit) {
@@ -373,6 +373,10 @@ export class HosoIoComponent implements OnInit {
    * Hàm mở sidenav
    */
   openIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     const loaiDoiTuong = this.hosoIOForm.controls.loaidoituong.value;
 
     if (loaiDoiTuong === LoaiDoiTuongEnum.CaNhan) {
