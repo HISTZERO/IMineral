@@ -6,6 +6,7 @@ export class OutputDkThamDoToaDoKhuVucModel {
     iddangkythamdo: string;
     idthamdokhuvuc: string;
     loaikhuvuc: number;
+    loaicapphep: number;
     siteid: string;
     thutu: number
 }
@@ -17,6 +18,7 @@ export class InputDkThamDoToaDoKhuVucModel {
     toadoy: string;
     iddangkythamdo: string;
     idthamdokhuvuc: string;
+    loaicapphep: number;
     loaikhuvuc: number;
     thutu: number
 }

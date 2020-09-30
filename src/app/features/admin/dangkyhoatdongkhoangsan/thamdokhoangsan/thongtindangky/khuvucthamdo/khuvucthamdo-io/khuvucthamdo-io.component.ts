@@ -105,13 +105,15 @@ export class KhuvucthamdoIoComponent implements OnInit {
     private translate: TranslateService) { }
 
   async ngOnInit() {
-    console.log(this.obj);
     // Khởi tạo form
     await this.formInit();
+
     // Khởi tạo form theo dạng add or edit
     await this.bindingConfigAddOrUpdate();
+
     // Lấy dữ liệu translate
     await this.getDataTranslate();
+
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
   }
@@ -199,6 +201,8 @@ export class KhuvucthamdoIoComponent implements OnInit {
         loaikhuvuc: this.obj.loaikhuvuc,
         hequychieu: this.obj.hequychieu,
       });
+
+      this.getToaDoByIdKhuVuc(this.obj.idthamdokhuvuc);
     }
   }
 
@@ -226,14 +230,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
     if (operMode === "new") {
       dKThamDoKhuVucService.addItem(this.inputModelKhuVuc).subscribe(
         (res) => {
-          this.listToaDoKhuVuc.map(value => {
-            value.loaikhuvuc = this.dKThamDoKhuVucIOForm.value.loaikhuvuc;
-            value.idthamdokhuvuc = res.idthamdokhuvuc;
-            value.iddangkythamdo = this.obj.iddangkythamdo;
-          });
-          dkThamDoToaDoKhuVuc.addItem({ list: this.listToaDoKhuVuc }).subscribe((res) => {
-            this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
-          });
+          this.addOrUpdateToaDoKhuVuc(res.idthamdokhuvuc);
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -248,7 +245,9 @@ export class KhuvucthamdoIoComponent implements OnInit {
       this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idthamdokhuvuc;
       this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
       dKThamDoKhuVucService.updateItem(this.inputModelKhuVuc).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc"),
+        (res) => {
+          this.addOrUpdateToaDoKhuVuc();
+        },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -271,6 +270,72 @@ export class KhuvucthamdoIoComponent implements OnInit {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
+  }
+
+  async addOrUpdateToaDoKhuVuc(idthamdokhuvuc?: string) {
+    let dataToaDo: any[] = [];
+    const loaiKhuVuc = this.dKThamDoKhuVucIOForm.value.loaikhuvuc;
+    const idDangKyThamDo = this.obj.iddangkythamdo;
+    const loaiCapPhep = this.obj.loaicapphep;
+    let test2 = {
+      list: []
+    };
+    for (let i of this.listToaDoKhuVuc) {
+      let item = {
+        iddangkythamdo: idDangKyThamDo,
+        idthamdokhuvuc: idthamdokhuvuc ? idthamdokhuvuc : this.obj.idthamdokhuvuc,
+        loaicapphep: loaiCapPhep,
+        loaikhuvuc: loaiKhuVuc,
+        sohieu: "aaaa",
+        thutu: "1",
+        toadox: "2215073",
+        toadoy: "585453",
+      };
+      test2.list.push(item);
+    }
+
+    let test = {
+      list: [
+        {
+          iddangkythamdo: idDangKyThamDo,
+          idthamdokhuvuc: idthamdokhuvuc,
+          loaicapphep: loaiCapPhep,
+          loaikhuvuc: loaiKhuVuc,
+          sohieu: "aaaa",
+          thutu: "1",
+          toadox: "2215073",
+          toadoy: "585453",
+        },
+        {
+          iddangkythamdo: idDangKyThamDo,
+          idthamdokhuvuc: idthamdokhuvuc,
+          loaicapphep: loaiCapPhep,
+          loaikhuvuc: loaiKhuVuc,
+          sohieu: "aaaa",
+          thutu: "1",
+          toadox: "2215073",
+          toadoy: "585453",
+        },
+        {
+          iddangkythamdo: idDangKyThamDo,
+          idthamdokhuvuc: idthamdokhuvuc,
+          loaicapphep: loaiCapPhep,
+          loaikhuvuc: loaiKhuVuc,
+          sohieu: "aaaa",
+          thutu: "1",
+          toadox: "2215073",
+          toadoy: "585453",
+        }
+      ]
+    };
+
+
+
+    console.log(test);
+    console.log(test2);
+    await this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoToaDoKhuVucService().addItem(test2).subscribe((res) => {
+      this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
+    });
   }
 
   /**
@@ -380,5 +445,16 @@ export class KhuvucthamdoIoComponent implements OnInit {
 
     // Làm mới grid
     this.gridDkToaDoKhuVuc.refresh();
+  }
+
+  /**
+   * Lấy danh sách Tọa độ theo khu vực
+   * @param idthamdokhuvuc
+   */
+  async getToaDoByIdKhuVuc(idthamdokhuvuc: string) {
+    let listToaDo: any = await this.dangKyHoatDongKhoangSanFacadeService
+      .getDangKyThamDoToaDoKhuVucService()
+      .getFetchAll({ idthamdokhuvuc: idthamdokhuvuc });
+    this.listToaDoKhuVuc = listToaDo;
   }
 }

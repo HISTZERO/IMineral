@@ -3,7 +3,7 @@ import { ComponentFactoryResolver, Input, Type, ViewChild, ViewContainerRef } fr
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 
 import { OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.model";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
@@ -17,7 +17,8 @@ import { ActivatedRoute } from "@angular/router";
 @Component({
   selector: 'app-khuvucthamdo-list',
   templateUrl: './khuvucthamdo-list.component.html',
-  styleUrls: ['./khuvucthamdo-list.component.scss']
+  styleUrls: ['./khuvucthamdo-list.component.scss'],
+  providers: [DetailRowService],
 })
 export class KhuvucthamdoListComponent implements OnInit {
 
@@ -58,6 +59,10 @@ export class KhuvucthamdoListComponent implements OnInit {
 
   public idHoSo: string;
 
+  public data = [];
+
+  public childGrid: GridModel = {};
+
   // Contructor
   constructor(
     public matSidenavService: MatsidenavService,
@@ -84,6 +89,13 @@ export class KhuvucthamdoListComponent implements OnInit {
   }
 
   /**
+   * Hàm chạy khi load chidgrid
+   */
+  onLoad() {
+    this.gridDkThamDoKhuVuc.childGrid.dataSource = this.data; // assign data source for child grid.
+  }
+
+  /**
    * Hàm lấy dữ liệu translate
    */
   async getDataTranslate() {
@@ -91,7 +103,19 @@ export class KhuvucthamdoListComponent implements OnInit {
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+
+    this.childGrid = await {
+      queryString: 'serialNumber',
+      columns: [
+        { field: 'thutu', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutu, width: 120 },
+        { field: 'sohieu', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieu, width: 150 },
+        { field: 'toadox', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadox, width: 150 },
+        { field: 'toadoy', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoy, width: 150 }
+      ],
+      allowResizing: true,
+    };
   }
+
 
   /**
    * Lấy id đăng ký thăm dò
@@ -133,7 +157,7 @@ export class KhuvucthamdoListComponent implements OnInit {
   async getAllDkThamDoKhuVuc() {
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoKhuVucService()
-      .getFetchAll({ iddangkythamdo: this.idHoSo });
+      .getFetchAll({ iddangkythamdo: this.iddangkythamdo });
     if (listData) {
       listData.map((khuvuc, index) => {
         khuvuc.serialNumber = index + 1;
@@ -217,7 +241,7 @@ export class KhuvucthamdoListComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyThamDoKhuVucService()
-          .deleteItem({ idcongtrinh: this.selectedItem.idthamdokhuvuc })
+          .deleteItem({ idthamdokhuvuc: this.selectedItem.idthamdokhuvuc })
           .subscribe(
             () => this.getAllDkThamDoKhuVuc(),
             (error: HttpErrorResponse) => {
