@@ -175,6 +175,8 @@
     "faxPlaceholder": "Nhập số fax",
     "emailPlaceholder": "Nhập email",
     "websitePlaceholder": "Nhập website",
+    "coquancapphepRequired": "Cơ quan cấp phép không được để trống",
+    "loaicapphepRequired": "Loại cấp phép không được để trống",
     "sogiayphepRequired": "Số giấy phép không được để trống",
     "ngaycapphepRequired": "Ngày cấp phép không được để trống",
     "ngaybdhieulucRequired": "Ngày bắt đầu hiệu lực không được để trống",

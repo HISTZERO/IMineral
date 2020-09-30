@@ -17,6 +17,8 @@ import { GeneralClientService } from "src/app/services/admin/common/general-clie
 import { TrangThaiEnum, Paging, SelectedOptionType } from "src/app/shared/constants/enum";
 import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+import { Router } from '@angular/router';
+import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
 
 @Component({
   selector: 'app-tochuc-option',
@@ -54,6 +56,7 @@ export class DmTochucOptionComponent implements OnInit {
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
+              public router: Router,
               public matSidenavService: MatsidenavService,
               public formBuilder: FormBuilder) { }
 
@@ -140,6 +143,13 @@ export class DmTochucOptionComponent implements OnInit {
       this.matSidenavService.doParentFunction("selectItemToChuc", itemToChuc);
       this.closeToChucIOSidenav();
     }
+  }
+
+  public goToAddToChuc() {
+    const url = this.router.serializeUrl(
+      this.router.createUrlTree([`${AdminRoutingName.adminUri}/${AdminRoutingName.danhmucUri}/${AdminRoutingName.tochucUri}`])
+    );
+    window.open(url, '_blank');
   }
 
   /**

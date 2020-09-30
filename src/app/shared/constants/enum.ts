@@ -45,14 +45,28 @@ export enum NhomBaoCaoEnum {
 // }
 
 export enum LoaiCapPhepEnum {
+  DauGiaQuyenKhaiThacKhoangSanKhuVucChuaThamDo = "1",
+  DauGiaQuyenKhaiThacKhoangSanKhuVucDaThamDo = "2",
   ThamDoKhoangSan = "3",
   ThamDoGiaHan = "4",
+  PheDuyetTruLuongKhoangSan = "5",
+  TraLaiMotPhanDienTichKhuVucThamDoKhoangSan = "6",
+  TraLaiGiayPhepThamDoKhoangSan = "7",
+  ChuyenNhuongQuyenThamDoKhoangSan = "8",
   KhaiThacKhoangSan = "9",
   KhaiThacKhoangSanGiaHan = "10",
   DieuChinhGiayPhepKhaiThac = "11",
+  TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan = "12",
+  TraLaiGiayPhepKhaiThacKhoangSan = "13",
+  ChuyenNhuongQuyenKhaiThacKhoangSan = "14",
   KhaiThacKhoangSanCoDuAnDauTu = "15",
   KhaiThacKhoangSanLamVatLieuXayDung = "16",
-  ThuHoiCatSoiDuAnNaoVetKhoiThong = "17"
+  ThuHoiCatSoiDuAnNaoVetKhoiThong = "17",
+  KhaiThacTanThuKhoangSan = "18",
+  KhaiThacTanThuKhoangSanGiaHan = "19",
+  TraLaiGiayPhepTanThuKhoangSan = "20",
+  DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan = "21",
+  DongCuaMoKhoangSan = "22"
 }
 
 export enum NhomTaiLieuEnum {
