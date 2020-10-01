@@ -8,25 +8,27 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-
-import { NhomLoaiCapPhepEnum, ChiTietDangKyHoatDongKS } from "src/app/shared/constants/nhomloaicapphep-constants";
+import {ChiTietCapPhepHoatDongKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputHsHoSoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
-import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
+import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
-  selector: 'app-hoso-list',
-  templateUrl: './hoso-list.component.html',
-  styleUrls: ['./hoso-list.component.scss']
+  selector: 'app-giayphep-list',
+  templateUrl: './giayphep-list.component.html',
+  styleUrls: ['./giayphep-list.component.scss']
 })
-export class HosoListComponent implements OnInit {
+export class GiayphepListComponent implements OnInit {
+
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep: number;
 
@@ -35,7 +37,7 @@ export class HosoListComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Viewchild template
-  @ViewChild("gridHoSo", {static: false}) public gridHoSo: GridComponent;
+  @ViewChild("gridGiayPhep", {static: false}) public gridGiayPhep: GridComponent;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
@@ -44,10 +46,10 @@ export class HosoListComponent implements OnInit {
   public formSearch: FormGroup;
 
   // Chứa danh sách hồ sơ
-  public listHoSo: Observable<DataStateChangeEventArgs>;
+  public listGiayPhep: Observable<DataStateChangeEventArgs>;
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputHsHoSoModel;
+  public selectedItem: OutputGiayPhepModel;
 
   // Chứa danh sách loại cấp phép
   public allLoaiCapPhep: OutputDmLoaiCapPhepModel[];
@@ -67,7 +69,7 @@ export class HosoListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
-  constructor(public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+  constructor(public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
@@ -77,7 +79,7 @@ export class HosoListComponent implements OnInit {
               public dmFacadeService: DmFacadeService,
               public datePipe: DatePipe,
               public modalDialog: MatDialog) {
-    this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    this.itemService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
   }
 
   async ngOnInit() {
@@ -98,10 +100,10 @@ export class HosoListComponent implements OnInit {
    */
   formInit() {
     this.formSearch = this.formBuilder.group({
-      GTEqualNgaytiepnhan: [""],
-      LTEqualNgaytiepnhan: [""],
-      Loaicapphep: [""],
-      Keyword: [""],
+      GTEqualNgaycapphep: [DefaultValue.Empty],
+      LTEqualNgaycapphep: [DefaultValue.Empty],
+      Loaicapphep: [DefaultValue.Empty],
+      Keyword: [DefaultValue.Empty]
     });
   }
 
@@ -150,14 +152,14 @@ export class HosoListComponent implements OnInit {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
 
-    await this.getAllHoSo();
+    await this.getAllGiayPhep();
   }
 
   /**
    * Hàm lấy dữ liệu loại cấp phép
    */
   async getAllLoaiCapPhep() {
-    if (this.nhomLoaiCapPhep === null || this.nhomLoaiCapPhep === undefined) {
+    if (this.nhomLoaiCapPhep === DefaultValue.Null || this.nhomLoaiCapPhep === DefaultValue.Undefined) {
       this.nhomLoaiCapPhep = -1;
     }
 
@@ -171,11 +173,11 @@ export class HosoListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu hồ sơ
    */
-  async getAllHoSo() {
-    this.listHoSo = this.itemService;
+  async getAllGiayPhep() {
+    this.listGiayPhep = this.itemService;
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
       Nhomloaicapphep: this.nhomLoaiCapPhep
@@ -190,8 +192,8 @@ export class HosoListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
     };
@@ -204,40 +206,40 @@ export class HosoListComponent implements OnInit {
    */
   reloadDataGrid() {
     this.formSearch.reset({
-      Keyword: "",
-      GTEqualNgaytiepnhan: "",
-      LTEqualNgaytiepnhan: "",
-      Loaicapphep: "",
+      Keyword: DefaultValue.Empty,
+      GTEqualNgaycapphep: DefaultValue.Empty,
+      LTEqualNgaycapphep: DefaultValue.Empty,
+      Loaicapphep: DefaultValue.Empty
     });
-    this.getAllHoSo();
+    this.getAllGiayPhep();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  addItemHoSo() {
+  addItemGiayPhep() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${ChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`]);
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemHoSo(id: any) {
+  async editItemGiayPhep(id: any) {
     this.router.navigate([
-        `${AdminRoutingName.adminUri}/${AdminRoutingName.dangkyhoatdongkhoangsanUri}/${ChiTietDangKyHoatDongKS[this.nhomLoaiCapPhep]}`],
-      {queryParams: {idhoso: id}});
+        `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`],
+      {queryParams: {idgiayphep: id}});
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemHoSo(data) {
+  async deleteItemGiayPhep(data) {
     this.selectedItem = data;
-    const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
-      .getHoSoService()
-      .checkBeDeleted(this.selectedItem.idhoso);
+    const canDelete: string = this.capPhepHoatDongKhoangSanFacadeService
+      .getGiayPhepService()
+      .checkBeDeleted(this.selectedItem.idgiayphep);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -258,16 +260,16 @@ export class HosoListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.HOSOGIAYTO.hoso.contentDelete,
-      this.selectedItem.mahoso
+      this.dataTranslate.HOSOGIAYTO.giayphep.contentDelete,
+      this.selectedItem.sogiayphep
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dangKyHoatDongKhoangSanFacadeService
-          .getHoSoService()
-          .deleteItem({idhoso: this.selectedItem.idhoso})
+        await this.capPhepHoatDongKhoangSanFacadeService
+          .getGiayPhepService()
+          .deleteItem({idgiayphep: this.selectedItem.idgiayphep})
           .subscribe(
-            () => this.getAllHoSo(),
+            () => this.getAllGiayPhep(),
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },

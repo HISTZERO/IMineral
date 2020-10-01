@@ -12,7 +12,7 @@
               </h4>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
-              <button class="btn btn-primary mb-sm-1" *ngIf="currentAction === ActionType.Add || currentAction === ActionType.Edit" style="float: right;" (click)="saveItemHoSo()">
+              <button class="btn btn-primary mb-sm-1" *ngIf="currentAction === ActionType.Add || currentAction === ActionType.Edit" style="float: right;" (click)="saveItemGiayPhep()">
                 <i class="fal fa-save"></i>
                 {{ "COMMON.default.save" | translate }}
               </button>
@@ -47,7 +47,7 @@
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledLoaiCapPhepSelectionState">
                     <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaicapphep' | translate }}" formControlName="loaicapphep"
-                      *ngIf="dataTranslate">
+                      *ngIf="dataTranslate" (selectionChange)="selectItemLoaiCapPhepChange($event)">
                       <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
                       </mat-select-filter>
                       <mat-option value="">
@@ -63,11 +63,11 @@
                     {{tenLoaiCapPhep}}
                   </div>
                 </div>
-                <div class="form-group row mx-0">
+                <div class="form-group row mx-0" *ngIf="!disabledHoSo">
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.mahoso" | translate }}
                   </label>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <mat-select class="form-control" formControlName="idhoso"
+                    <mat-select class="form-control" formControlName="idhoso" (selectionChange)="selectItemHoSoChange($event)"
                       *ngIf="dataTranslate" [displayMember]="'mahoso'" placeholder="{{'HOSOGIAYTO.giayphep.chonhoso' | translate}}">
                       <mat-option value="">
                         {{ "HOSOGIAYTO.giayphep.chonhoso" | translate }}
@@ -80,6 +80,28 @@
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2">
                     <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openHoSoIOSidenav()">
+                      <i class="fal fa-plus-square"></i>
+                      {{ "COMMON.default.select" | translate }}
+                    </button>
+                  </div>
+                </div>
+                <div class="form-group row mx-0" *ngIf="!disabledGiayPhepLichSu">
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayphepcu" | translate }}
+                  </label>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-select class="form-control" formControlName="idgiayphepls" (selectionChange)="selectItemGiayPhepLichSuChange($event)"
+                      *ngIf="dataTranslate" [displayMember]="'sogiayphep'" placeholder="{{'HOSOGIAYTO.giayphep.chongiayphepcu' | translate}}">
+                      <mat-option value="">
+                        {{ "HOSOGIAYTO.giayphep.chongiayphepcu" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let giayPhep of giayPhepLichSuList" [value]="giayPhep.idgiayphep">
+                        {{ giayPhep.sogiayphep }}
+                      </mat-option>
+                    </mat-select>
+                    <span *ngIf="formErrors.idgiayphepls" class="alert-danger">{{formErrors.idgiayphepls}}</span>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2">
+                    <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openGiayPhepLichSuIOSidenav()">
                       <i class="fal fa-plus-square"></i>
                       {{ "COMMON.default.select" | translate }}
                     </button>
@@ -197,7 +219,6 @@
                 </div>
                 <div class="form-group row mx-0">
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.ghichu" | translate }}
-                    <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
                     <input class="form-control" type="text" formControlName="ghichu" placeholder="{{'HOSOGIAYTO.giayphep.ghichuPlaceholder' | translate}}" />
@@ -220,7 +241,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" formControlName="loaidoituong" (selectionChange)="selectLoaiDoiTuongChange()"
+                    <mat-select class="form-control" [disabled]= "disabledLoaiDoiTuong" formControlName="loaidoituong" (selectionChange)="selectItemLoaiDoiTuongChange()"
                       *ngIf="dataTranslate">
                       <mat-option *ngFor="let loaiDoiTuong of loaiDoiTuongList" [value]="loaiDoiTuong.id">
                         {{ loaiDoiTuong.name }}
@@ -238,7 +259,7 @@
                     <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc ? formErrors.tencanhantochuc : formErrors.idcanhantochuc}}</span>
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2">
-                    <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCaNhanToChucIOSidenav()">
+                    <button class="btn btn-primary mb-sm-1" *ngIf="!disabledLoaiDoiTuong" style="float: right;" (click)="openCaNhanToChucIOSidenav()">
                       <i class="fal fa-plus-square"></i>
                       {{ "COMMON.default.select" | translate }}
                     </button>
@@ -249,7 +270,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaigiayto' | translate }}" formControlName="loaigiayto"
+                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaigiayto' | translate }}" formControlName="loaigiaytoDisplay"
                       *ngIf="dataTranslate">
                       <mat-select-filter [displayMember]="'name'" [array]="loaiGiayToFilters" (filteredReturn)="loaiGiayToList = $event">
                       </mat-select-filter>
@@ -268,7 +289,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'HOSOGIAYTO.giayphep.sogiaytoPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="sogiaytoDisplay" placeholder="{{'HOSOGIAYTO.giayphep.sogiaytoPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
                   </div>
                 </div>
@@ -277,7 +298,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaycap" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'HOSOGIAYTO.giayphep.ngaycapPlaceholder' | translate}}" />
+                    <input class="form-control" formControlName="ngaycapDisplay" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'HOSOGIAYTO.giayphep.ngaycapPlaceholder' | translate}}" />
                     <owl-date-time #dt4 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
                   </div>
@@ -287,7 +308,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="noicap" placeholder="{{'HOSOGIAYTO.giayphep.noicapPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="noicapDisplay" placeholder="{{'HOSOGIAYTO.giayphep.noicapPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
                   </div>
                 </div>
@@ -296,7 +317,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="diachi" placeholder="{{'HOSOGIAYTO.giayphep.diachiPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="diachiDisplay" placeholder="{{'HOSOGIAYTO.giayphep.diachiPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
                   </div>
                 </div>

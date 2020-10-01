@@ -12,13 +12,14 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import { HosotailieuIoComponent } from "src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
+import { HosotailieuIoComponent } from "src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { FileService } from 'src/app/services/admin/common/file.service';
 import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -285,7 +286,7 @@ export class HosotailieuListComponent implements OnInit {
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
     const dialogRef = this.commonService.confirmSaveDiaLogService
-                              ("", this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
+                              (DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
                               this.dataTranslate.HOSOGIAYTO.tailieu.informedDialogTitle);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -356,7 +357,7 @@ export class HosotailieuListComponent implements OnInit {
    */
   deleteArrayItem() {
     const idItems: string[] = [];
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfDeleteDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         this.listDataSelect.map(res => {

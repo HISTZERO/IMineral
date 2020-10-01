@@ -16,8 +16,8 @@ import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
 import { CapphephoatdongkhoangsanComponent } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.component";
 import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
 import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
-import {HosoGiaytoModule} from "src/app/features/admin/hoso-giayto/hoso-giayto.module";
-import { HosoOptionComponent } from 'src/app/features/admin/hoso-giayto/hoso/hoso-option/hoso-option.component';
+import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
+import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,

@@ -87,11 +87,11 @@
                     {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
                   </ng-template>
                 </e-column>
-                <e-column field="idhoso" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                        (click)="editItemGiayPhep(data.idhoso)">
+                        (click)="editItemGiayPhep(data.idgiayphep)">
                         <i class="far fa-edit"></i>
                       </button>
                       <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"

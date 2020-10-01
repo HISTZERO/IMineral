@@ -61,9 +61,9 @@ import { DangkykhaithaccaisoiIoComponent } from 'src/app/features/admin/dangkyho
 import { DangkykhaithacdieuchinhIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
 import { DangkykhaithacvlxdIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
 import { DangkykhaithackhoangsanduanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
-import {HosoGiaytoModule} from "src/app/features/admin/hoso-giayto/hoso-giayto.module";
-import { GiayphepOptionComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-option/giayphep-option.component';
-import { HosotailieuIoComponent } from 'src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
+import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
+import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
+import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
 import { KtksDonvihanhchinhComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh.component';
 import { KtksDonvihanhchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component';
 import { KtksDonvihanhchinhListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-list/ktks-donvihanhchinh-list.component';
