@@ -63,7 +63,6 @@ import { DangkykhaithacvlxdIoComponent } from 'src/app/features/admin/dangkyhoat
 import { DangkykhaithackhoangsanduanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
 import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
-import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
 
 @NgModule({
   declarations: [
