@@ -10,6 +10,7 @@ import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { ButtonBackCpThamDoKhoangSan, MenuCpThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { GiaypheptailieuListComponent } from '../../../hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
 
 @Component({
   selector: 'app-cpthamdokhoangsan-io',
@@ -21,9 +22,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
-  // @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
-  // @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
-  // @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
+  @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
   // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpThamDoKhoangSanChitiet;
@@ -50,13 +49,13 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
 
   public loadedTabState: any = {
     [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
-    [CpThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] : false,
+    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
     [CpThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
   };
 
   public disabledTabState: any = {
     [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
-    [CpThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] : false,
+    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
     [CpThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
   };
 
@@ -145,19 +144,19 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
     switch(actionType) {
       case GiayPhepActionEnum.Add: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
         break;
       }
       case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = true;
         break;
       }
       default: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
         break;
       }
@@ -186,19 +185,14 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   }
 
   async tabChange(index: any) {
-    // if (index === ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem]) {
-    //   this.taiLieuBatBuocListComp.matSidenav = this.matSidenav;
-    //   this.taiLieuBatBuocListComp.content = this.content;
-    //   this.taiLieuBatBuocListComp.idhoso = this.idhoso;
-    //   this.taiLieuBatBuocListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredTitleList;
-    //   const loadedTaiLieuBatBuocState =  await this.taiLieuBatBuocListComp.manualDataInit();
-    //   this.taiLieuKhacListComp.matSidenav = this.matSidenav;
-    //   this.taiLieuKhacListComp.content = this.content;
-    //   this.taiLieuKhacListComp.idhoso = this.idhoso;
-    //   this.taiLieuKhacListComp.title = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleList;
-    //   const loadedTaiLieuKhacState =  await this.taiLieuKhacListComp.manualDataInit();
-    //   this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = loadedTaiLieuBatBuocState || loadedTaiLieuKhacState;
-    // } else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
+    if (index === CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem && !this.loadedTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem]) {
+      this.taiLieuListComp.matSidenav = this.matSidenav;
+      this.taiLieuListComp.content = this.content;
+      this.taiLieuListComp.idgiayphep = this.idgiayphep;
+      this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
+      this.loadedTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem]  =  await this.taiLieuListComp.manualDataInit();
+    }
+    // else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
     //   this.taiLieuXuLyHoSoListComp.matSidenav = this.matSidenav;
     //   this.taiLieuXuLyHoSoListComp.content = this.content;
     //   this.taiLieuXuLyHoSoListComp.idhoso = this.idhoso;

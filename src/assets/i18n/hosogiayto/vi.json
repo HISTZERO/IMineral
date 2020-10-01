@@ -71,6 +71,7 @@
     "noicapRequired": "Nơi cấp không được để trống",
     "diachiRequired": "Địa chỉ không được để trống",
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
+    "hosoInvalid": "Hồ sơ không hợp lệ",
     "informedDialogTitle": "Thông báo",
     "informedContentOfUnDeletedDialog": " đang được sử dụng. Không được phép xóa!",
     "chonloaidoituongRequiredDialog": " Yêu cầu chọn loại đối tượng",
@@ -81,6 +82,8 @@
   },
   "tailieu": {
     "titleList": "Danh sách tài liệu",
+    "titleAdd": "Thêm mới tài liệu",
+    "titleEdit": "Sửa dữ liệu tài liệu",
     "requiredTitleList": "Danh sách tài liệu bắt buộc",
     "differentTitleList": "Danh sách tài liệu khác",
     "processedTitleList": "Tài liệu xử lý hồ sơ",
@@ -91,6 +94,7 @@
     "requiredUploadFile": "Upload file tài liệu bắt buộc",
     "differentUploadFile": "Upload file tài liệu khác",
     "processedUploadFile": "Upload file tài liệu xử lý hồ sơ",
+    "uploadFile": "Upload file tài liệu",
     "contentDelete": "Tài liệu: ",
     "tentailieu": "Tên tài liệu",
     "sobanchinh": "Số bản chính",
@@ -194,6 +198,7 @@
     "noicapRequired": "Nơi cấp không được để trống",
     "diachiRequired": "Địa chỉ không được để trống",
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
+    "giayphepInvalid": "Giấy phép không hợp lệ",
     "loaicapphepInformedRequiredSelection": "Yêu cầu chọn loại cấp phép",
     "hosogiaytoInformedRequiredSelection": "Yêu cầu chọn hồ sơ hoặc giấy phép lịch sử",
     "informedDialogTitle": "Thông báo"

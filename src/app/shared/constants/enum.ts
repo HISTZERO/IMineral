@@ -136,6 +136,6 @@ export enum DangKyThamDoKhoangSanTabEnum {
 
 export enum CpThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
-  TaiLieuHoSoDinhKem = 1,
+  TaiLieuGiayPhepDinhKem = 1,
   ThongTinDangKy = 2
 }
