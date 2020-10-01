@@ -3,14 +3,13 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
-
 import { InputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { TrangThai } from "src/app/shared/constants/trangthai-constants";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -46,10 +45,10 @@ export class HosotailieuIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    tentailieu: "",
-    sobanchinh: "",
-    sobansao: "",
-    thutu: ""
+    tentailieu: DefaultValue.Empty,
+    sobanchinh: DefaultValue.Empty,
+    sobansao: DefaultValue.Empty,
+    thutu: DefaultValue.Empty
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -107,10 +106,10 @@ export class HosotailieuIoComponent implements OnInit {
    */
   formInit() {
     this.tailieuIOForm = this.formBuilder.group({
-      tentailieu: ["", Validators.required],
-      sobanchinh: ["", Validators.pattern("^[0-9-+]+$")],
-      sobansao: ["", Validators.pattern("^[0-9-+]+$")],
-      thutu: ["", Validators.pattern("^[0-9-+]+$")],
+      tentailieu: [DefaultValue.Empty, Validators.required],
+      sobanchinh: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
+      sobansao: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
+      thutu: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
     });
     this.disabled = false;
   }
@@ -163,10 +162,10 @@ export class HosotailieuIoComponent implements OnInit {
     formData.append("File", this.fileData);
     formData.append("Idhoso", this.obj.idhoso);
     formData.append("Tentailieu", this.inputModel.tentailieu);
-    formData.append("Sobanchinh", this.inputModel.sobanchinh ? this.inputModel.sobanchinh.toString() : "");
-    formData.append("Sobansao", this.inputModel.sobansao ? this.inputModel.sobansao.toString() : "");
-    formData.append("Nhomtailieu", this.obj.nhomtailieu ? this.obj.nhomtailieu.toString() : "");
-    formData.append("thutu", this.inputModel.thutu ? this.inputModel.thutu.toString() : "");
+    formData.append("Sobanchinh", this.inputModel.sobanchinh ? this.inputModel.sobanchinh.toString() : DefaultValue.Empty);
+    formData.append("Sobansao", this.inputModel.sobansao ? this.inputModel.sobansao.toString() : DefaultValue.Empty);
+    formData.append("Nhomtailieu", this.obj.nhomtailieu ? this.obj.nhomtailieu.toString() : DefaultValue.Empty);
+    formData.append("thutu", this.inputModel.thutu ? this.inputModel.thutu.toString() : DefaultValue.Empty);
 
     if (operMode === "new") {
       dkhdksService.addItem(formData).subscribe(
@@ -243,8 +242,8 @@ export class HosotailieuIoComponent implements OnInit {
           const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
           dkhdksService.removeFileHsTaiLieu({ idtailieu: this.obj.idtailieu }).subscribe(
             (res) => {
-              this.obj.duongdan = "";
-              this.obj.filedinhkem = "";
+              this.obj.duongdan = DefaultValue.Empty;
+              this.obj.filedinhkem = DefaultValue.Empty;
               this.matSidenavService.doParentFunction("getAllTaiLieu");
             },
             (error: HttpErrorResponse) => {

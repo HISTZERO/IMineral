@@ -182,7 +182,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" formControlName="loaidoituong" (selectionChange)="selectLoaiDoiTuongChange()"
+                    <mat-select class="form-control" formControlName="loaidoituong" (selectionChange)="selectItemLoaiDoiTuongChange()"
                       *ngIf="dataTranslate">
                       <mat-option *ngFor="let loaiDoiTuong of loaiDoiTuongList" [value]="loaiDoiTuong.id">
                         {{ loaiDoiTuong.name }}
@@ -211,7 +211,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.hoso.chonloaigiayto' | translate }}" formControlName="loaigiayto"
+                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.hoso.chonloaigiayto' | translate }}" formControlName="loaigiaytoDisplay"
                       *ngIf="dataTranslate">
                       <mat-select-filter [displayMember]="'name'" [array]="loaiGiayToFilters" (filteredReturn)="loaiGiayToList = $event">
                       </mat-select-filter>
@@ -230,7 +230,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'HOSOGIAYTO.hoso.sogiaytoPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="sogiaytoDisplay" placeholder="{{'HOSOGIAYTO.hoso.sogiaytoPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
                   </div>
                 </div>
@@ -239,7 +239,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaycap" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'HOSOGIAYTO.hoso.ngaycapPlaceholder' | translate}}" />
+                    <input class="form-control" formControlName="ngaycapDisplay" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'HOSOGIAYTO.hoso.ngaycapPlaceholder' | translate}}" />
                     <owl-date-time #dt4 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
                   </div>
@@ -249,7 +249,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="noicap" placeholder="{{'HOSOGIAYTO.hoso.noicapPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="noicapDisplay" placeholder="{{'HOSOGIAYTO.hoso.noicapPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
                   </div>
                 </div>
@@ -258,7 +258,7 @@
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="diachi" placeholder="{{'HOSOGIAYTO.hoso.diachiPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="diachiDisplay" placeholder="{{'HOSOGIAYTO.hoso.diachiPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
                   </div>
                 </div>
