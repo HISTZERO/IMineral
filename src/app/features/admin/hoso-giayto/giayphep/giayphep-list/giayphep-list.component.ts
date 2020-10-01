@@ -267,7 +267,7 @@ export class GiayphepListComponent implements OnInit {
       if (result === "confirm") {
         await this.capPhepHoatDongKhoangSanFacadeService
           .getGiayPhepService()
-          .deleteItem({idhoso: this.selectedItem.idhoso})
+          .deleteItem({idgiayphep: this.selectedItem.idgiayphep})
           .subscribe(
             () => this.getAllGiayPhep(),
             (error: HttpErrorResponse) => {
