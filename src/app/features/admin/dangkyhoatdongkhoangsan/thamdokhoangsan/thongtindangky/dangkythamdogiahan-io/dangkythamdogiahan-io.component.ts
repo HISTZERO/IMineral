@@ -14,7 +14,7 @@ import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu
 import { DangKhoangSan, DonViDienTich, DonViDoSau } from 'src/app/shared/constants/common-constants';
 import { MatSidenav } from '@angular/material';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { GiayphepOptionComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-option/giayphep-option.component';
+import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
 import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
 
 

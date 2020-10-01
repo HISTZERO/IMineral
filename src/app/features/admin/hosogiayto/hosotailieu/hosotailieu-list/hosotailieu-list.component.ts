@@ -12,7 +12,7 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import { HosotailieuIoComponent } from "src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
+import { HosotailieuIoComponent } from "src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
