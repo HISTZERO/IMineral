@@ -6,7 +6,7 @@ export class OutputDkThamDoDvhc {
     maxa: string;
     mahuyen: string;
     matinh: string;
-    iddankythamdo: string;
+    iddangkythamdo: string;
     tentinh: string;
     tenhuyen: string;
     tenxa: string;

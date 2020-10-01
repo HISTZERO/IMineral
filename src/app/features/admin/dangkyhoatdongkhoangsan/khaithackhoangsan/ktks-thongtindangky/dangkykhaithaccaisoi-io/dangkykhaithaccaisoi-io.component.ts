@@ -23,7 +23,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacCatSoiEvent") selectIdDangKyKhaiThacCatSoiEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -295,7 +295,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIddangKyKhaiThacCatSoi() {
-    this.selectIdDangKyKhaiThacCatSoiEvent.emit(this.dangKyKhaiThacCatSoi.iddangkykhaithac);
+    this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacCatSoi.iddangkykhaithac);
   }
 
   /**

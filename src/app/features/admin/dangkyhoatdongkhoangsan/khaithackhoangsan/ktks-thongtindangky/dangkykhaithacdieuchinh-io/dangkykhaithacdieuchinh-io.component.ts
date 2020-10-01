@@ -12,7 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
 import { OutputDkKhaiThacCatSoiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.model";
-import { OutputDkKhaiThacDieuChinhModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
+import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
 
 @Component({
   selector: 'app-dangkykhaithacdieuchinh-io',
@@ -24,7 +24,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacDieuChinhEvent") selectIdDangKyKhaiThacDieuChinhEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -287,7 +287,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIddangKyKhaiThacDieuChinh() {
-    this.selectIdDangKyKhaiThacDieuChinhEvent.emit(this.dangKyKhaiThacDieuChinh.iddangkykhaithac);
+    this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacDieuChinh.iddangkykhaithac);
   }
 
   /**

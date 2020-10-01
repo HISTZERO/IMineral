@@ -66,6 +66,12 @@ import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayp
 import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
 import { KhuvuckhaithacListComponent } from './khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-list/khuvuckhaithac-list.component';
 import { KhuvuckhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component';
+import { KtksDonvihanhchinhComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh.component';
+import { KtksDonvihanhchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component';
+import { KtksDonvihanhchinhListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-list/ktks-donvihanhchinh-list.component';
+import { KtksLoaikhoangsanComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
+import { KtksLoaikhoangsanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
+import { KtksLoaikhoangsanListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
 
 @NgModule({
   declarations: [
@@ -113,6 +119,12 @@ import { KhuvuckhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindang
     DangkykhaithackhoangsanduanIoComponent,
     KhuvuckhaithacListComponent,
     KhuvuckhaithacIoComponent
+    KtksDonvihanhchinhComponent,
+    KtksDonvihanhchinhIoComponent,
+    KtksDonvihanhchinhListComponent,
+    KtksLoaikhoangsanComponent,
+    KtksLoaikhoangsanIoComponent,
+    KtksLoaikhoangsanListComponent
   ],
   exports: [
   ],
