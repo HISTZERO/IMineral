@@ -15,6 +15,10 @@ import { DkkhaithackhoangsanService } from "src/app/services/admin/dangkyhoatdon
 import { DkkhaithackhoangsanduanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.service";
 import { DkkhaithacvlxdService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.service";
 import { DkthamdokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.service";
+import {DkKhaiThacDvhcService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.service";
+import {DkkhaithacloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.service";
+import {DkKhaiThacCongTrinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.service";
+import { DkthamdotoadokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
 
 
 @Injectable({
@@ -89,9 +93,28 @@ export class DangKyHoatDongKhoangSanFacadeService {
     return new DkkhaithacvlxdService(this.httpClient);
   }
 
-  // Đăngnký thăm dò khu vực service
+  // Đăng ký thăm dò khu vực service
   public getDangKyThamDoKhuVucService() {
     return new DkthamdokhuvucService(this.httpClient);
+  }
+
+  // Đăng ký khai thác dvhc service
+  public getDangKyKhaiThacDvhcService() {
+    return new DkKhaiThacDvhcService(this.httpClient);
+  }
+  // Đăng ký khai thác service
+  public getDangKyKhaiThacLoaiKhoangSanService() {
+    return new DkkhaithacloaikhoangsanService(this.httpClient);
+  }
+  // Đăng ký thăm dò service
+  public getDangKyKhaiThacCongTrinhService() {
+    return new DkKhaiThacCongTrinhService(this.httpClient);
+  }
+  
+  // Đăng ký thăm dò tọa độ khu vực service
+  public getDangKyThamDoToaDoKhuVucService() {
+    return new DkthamdotoadokhuvucService(this.httpClient);
+
   }
 }
 

@@ -38,7 +38,7 @@
                 <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
             </div>
         </div>
-        <div class="form-group row mx-0">
+        <div class="form-group row mx-0" *ngIf="obj.loaicapphep === loaiCapPhep.ThamDoGiaHan">
             <label
                 class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.loaikhuvuc" | translate }}
                 <small>(*)</small>
@@ -46,7 +46,7 @@
             <div class="col-sm-9">
                 <mat-select class="form-control" formControlName="loaikhuvuc" *ngIf="dataTranslate"
                     placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.chonloaikhuvuc' | translate}}">
-                    <mat-option value="">
+                    <mat-option [value]="0">
                         {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.chonloaikhuvuc" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let loaiKV of loaiKhuVuc" [value]="loaiKV.id">
@@ -81,39 +81,50 @@
             <div class="col-12 px-0">
                 <div class="card border">
                     <div class="card-header">
-                        <form >
+                        <form [formGroup]="dkThamDoToaDoKhuVucIOForm">
                             <div class="row">
                                 <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="stt">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutu' | translate}}:</label>
-                                        <input type="text" class="form-control" id="stt"
+                                    <div class="form-group mb-1">
+                                        <label>{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutu' | translate}}:</label>
+                                        <input type="text" class="form-control" formControlName="thutu"
                                             placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutuPlaceholder' | translate}}">
+                                        <span *ngIf="formErrorsToaDo.thutu"
+                                            class="alert-danger">{{formErrorsToaDo.thutu}}</span>
+                                        <span *ngIf="errorThuTu" class="alert-danger">{{errorThuTu}}</span>
                                     </div>
                                 </div>
                                 <div class="col-2">
-                                    <div class="form-group">
-                                        <label for="sohieu">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieu' | translate}}:</label>
-                                        <input type="text" class="form-control" id="sohieu"
+                                    <div class="form-group mb-1">
+                                        <label>{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieu' | translate}}:</label>
+                                        <input type="text" class="form-control" formControlName="sohieu"
                                             placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieuPlaceholder' | translate}}">
+                                            <span *ngIf="formErrorsToaDo.sohieu"
+                                            class="alert-danger">{{formErrorsToaDo.sohieu}}</span>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="toadox">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadox' | translate}}:</label>
-                                        <input type="text" class="form-control" id="toadox"
+                                    <div class="form-group mb-1">
+                                        <label>{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadox' | translate}}:</label>
+                                        <input type="text" class="form-control" formControlName="toadox"
                                             placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoxPlaceholder' | translate}}">
+                                            <span *ngIf="formErrorsToaDo.toadox"
+                                            class="alert-danger">{{formErrorsToaDo.toadox}}</span>
                                     </div>
                                 </div>
                                 <div class="col-3">
-                                    <div class="form-group">
-                                        <label for="toadoy">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoy' | translate}}:</label>
-                                        <input type="text" class="form-control" id="toadoy"
+                                    <div class="form-group mb-1">
+                                        <label>{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoy' | translate}}:</label>
+                                        <input type="text" class="form-control" formControlName="toadoy"
                                             placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoyPlaceholder' | translate}}">
+                                            <span *ngIf="formErrorsToaDo.toadoy"
+                                            class="alert-danger">{{formErrorsToaDo.toadoy}}</span>
                                     </div>
                                 </div>
-                                <div class="col-2">
-                                    <button class="btn btn-success" style="position: absolute;top: 28px;">Lưu</button>
+                                <div class="col-2 mb-1">
+                                    <button class="btn btn-success" style="position: absolute;top: 28px;"
+                                        (click)="saveToaDoKhuVuc()">{{ 'COMMON.default.save' | translate }}</button>
                                 </div>
+
                             </div>
                         </form>
                     </div>
@@ -139,12 +150,9 @@
                                     headerText="{{ 'COMMON.default.action' | translate }}">
                                     <ng-template #template let-data>
                                         <div class="btn-group">
-                                            <button class="btn btn-sm btn-primary"
-                                                title="{{ 'COMMON.default.edit' | translate }}">
-                                                <i class="far fa-edit"></i>
-                                            </button>
                                             <button class="btn btn-sm btn-danger"
-                                                title="{{ 'COMMON.default.delete' | translate }}">
+                                                title="{{ 'COMMON.default.delete' | translate }}"
+                                                (click)="deleteToaDoKhuVuc(data)">
                                                 <i class="far fa-trash"></i>
                                             </button>
                                         </div>

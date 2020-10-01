@@ -1,10 +1,24 @@
 <div class="mt-3">
   <div class="card border">
     <div class="card-body">
-      <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="selectedDefaultTab">
-        <mat-tab  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietTabTitle' | translate }}">
+      <mat-tab-group mat-stretch-tabs #thongTinDangKyThamDoTabs [animationDuration]="" [selectedIndex]="TabType.ThongTinChiTiet"
+                     (selectedIndexChange)="tabChange($event)">
+        <mat-tab  [disabled]="!disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietKhaiThacTabTitle' | translate }}">
           <ng-template appContentContainer>
           </ng-template>
+        </mat-tab>
+        <mat-tab [disabled]="!disabledTabState[TabType.LoaiKhoangSan]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
+          <app-ktks-donvihanhchinh-list #dangKyKhaiThacKsDvhc [allowAutoInit]="false"></app-ktks-donvihanhchinh-list>
+        </mat-tab>
+        <mat-tab  [disabled]="!disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
+          <app-ktks-loaikhoangsan-list  #dangKyKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-ktks-loaikhoangsan-list>
+        </mat-tab>
+        <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
+          <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>
+        </mat-tab>
+        <mat-tab  [disabled]="!disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhKhaiThacTabTitle' | translate }}">
+          <app-ktks-congtrinhkhaithac-list #dangKyKhaiThacCongTrinh [allowAutoInit]="false"></app-ktks-congtrinhkhaithac-list>
+          <app-congtrinhthamdo-list #dangKyThamDoCongTrinh [allowAutoInit]="false"></app-congtrinhthamdo-list>
         </mat-tab>
       </mat-tab-group>
     </div>

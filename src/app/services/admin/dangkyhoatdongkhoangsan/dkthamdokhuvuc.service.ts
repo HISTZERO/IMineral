@@ -2,7 +2,7 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 
 import { environment } from "src/environments/environment";
-import { InputDkThamDoKhuVucModel, OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamsokhuvuc.model";
+import { InputDkThamDoKhuVucModel, OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.model";
 import { ServiceName } from "src/app/shared/constants/service-name";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
 

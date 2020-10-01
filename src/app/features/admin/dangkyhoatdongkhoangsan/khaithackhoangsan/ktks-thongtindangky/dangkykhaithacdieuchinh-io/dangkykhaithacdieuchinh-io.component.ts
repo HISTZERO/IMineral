@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, Type, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSidenav } from "@angular/material";
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
@@ -10,9 +11,11 @@ import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacCatSoiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.model";
-import { OutputDkKhaiThacDieuChinhModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
+import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
+import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
+import { OutputGiayPhepModel } from "src/app/models/admin/capphephoatdongkhoangsan/giayphep.model";
+import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 
 @Component({
   selector: 'app-dangkykhaithacdieuchinh-io',
@@ -21,59 +24,90 @@ import { OutputDkKhaiThacDieuChinhModel } from "../../../../../../models/admin/d
 })
 export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacDieuChinhEvent") selectIdDangKyKhaiThacDieuChinhEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
+
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
+
   // Chứa dữ liệu Form
   public dangKyKhaiThacDieuChinhIOForm: FormGroup;
+
   // Chứa dữ liệu translate
   public dataTranslate: any;
+
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+
   // Dạng khoáng sản
   public dangKhoangSanList = DangKhoangSan;
+
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
-  // chứa dữ liệu đăng ký thăm dò
+
+  // chứa dữ liệu đăng ký khai thác điều chỉnh
   private dangKyKhaiThacDieuChinh: any;
+
   // Action thao tác dữ liệu
   public currentAction: number;
+
   // Action đăng ký thăm dò
   public ActionType = DangKyKhaiThacKsActionEnum;
+
+  // Chứa phương pháp khai thác
+  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
+
   // disable delete button
   public disabledDeleteButton = false;
+
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
+
   // Chứa đon vị trữ lượng
   public donViTruLuongList = DonViTruLuong;
+
   // Lưu trữ đơn vị thời hạn
   public donViThoiHanList = DonViThoiHan;
+
   // lưu dữ liệu đơn vị diện tích
   public donViDoSauList = DonViDoSau;
+
   // Chứa đơn vị công suất
   public donViCongSuat = DonViCongSuat;
+
   // error message
   validationErrorMessages = {};
 
   // form errors
   formErrors = {
-    truluongdacapphep: "",
-    truluongdieuchinh: "",
-    thoihandacapphep: "",
-    thoihandieuchinh: "",
-    congsuatdacapphep: "",
-    congsuatdieuchinh: "",
+    dientichkhaithac: "",
+    truluongdiachat: "",
+    truluongkhaithac: "",
+    thoihankhaithac: "",
+    phuongphapkhaithac: "",
+    dangkhoangsan: "",
+    congsuatkhaithac: "",
+    mucsaukhaithactu: "",
+    mucsaukhaithacden: "",
     donvitruluong: "",
     donvicongsuat: "",
+    donvidientich: "",
     donvithoihan: "",
+    donvichieusau: "",
+    hequychieu: "",
     idgiayphep: "",
+    sogiayphep: "",
   };
 
   constructor(
@@ -83,12 +117,15 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
     private activatedRoute: ActivatedRoute,
-    public cfr: ComponentFactoryResolver
+    public cfr: ComponentFactoryResolver,
+    public matSidenavService: MatsidenavService
   ) { }
 
   async ngOnInit() {
+
     // Khởi tạo form
     this.formInit();
+
     // Lấy dữ liệu translate
     await this.getDataTranslate();
 
@@ -112,7 +149,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
       if (this.dangKyKhaiThacDieuChinh) {
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
-        this.selectIddangKyKhaiThacDieuChinh();
+        this.selectIdDangKyKhaiThacDieuChinh();
         this.selectCurrentFormState();
       } else {
         this.currentAction = DangKyKhaiThacKsActionEnum.Add;
@@ -125,10 +162,35 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
+
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit(this.dangKyKhaiThacDieuChinh);
 
     return true;
+  }
+
+
+  /**
+   * lấy item dữ liệu đối tượng cá nhân từ popup
+   */
+  private selectItemGiayPhep(item: OutputGiayPhepModel) {
+    if (item !== null && item !== undefined) {
+      this.dangKyKhaiThacDieuChinhIOForm.controls.sogiayphep.setValue(item.sogiayphep);
+      this.dangKyKhaiThacDieuChinhIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+    }
+  }
+
+  /**
+   * Mở sidenav giấy phép
+   */
+  openGiayPhepIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.titleGiayPhepSelect);
+    this.matSidenavService.setContentComp(GiayphepOptionComponent, "select");
+    this.matSidenavService.open();
   }
 
   /**
@@ -136,47 +198,64 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyKhaiThacDieuChinhIOForm = this.formBuilder.group({
-      truluongdacapphep: [""],
-      truluongdieuchinh: [""],
-      thoihandacapphep: [""],
-      thoihandieuchinh: [""],
-      congsuatdacapphep: [""],
-      congsuatdieuchinh: [""],
+      dientichkhaithac: [""],
+      truluongdiachat: [""],
+      truluongkhaithac: [""],
+      thoihankhaithac: [""],
+      phuongphapkhaithac: [""],
+      dangkhoangsan: [""],
+      congsuatkhaithac: [""],
+      mucsaukhaithactu: [""],
+      mucsaukhaithacden: [""],
       donvitruluong: [""],
       donvicongsuat: [""],
-      donvithoihan: [""],
-      idgiayphep: [""],
+      donvidientich: ["", Validators.required],
+      donvithoihan: ["", Validators.required],
+      donvichieusau: ["", Validators.required],
+      hequychieu: ["", Validators.required],
+      idgiayphep: ["", Validators.required],
+      sogiayphep: ["", Validators.required]
     });
+    this.dangKyKhaiThacDieuChinhIOForm.controls.sogiayphep.disable({ onlySelf: true });
   }
 
   /**
-   * hàm lấy dữ liệu translate
+   * Hàm lấy dữ liệu translate
    */
   async getDataTranslate() {
+
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+
     // Hàm set validation cho form
     await this.setValidation();
   }
 
   /**
-   * hàm set value cho form
+   * Hàm set value cho form
    */
   private async formOnEdit(item: OutputDkKhaiThacDieuChinhModel) {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit && item) {
       this.dangKyKhaiThacDieuChinhIOForm.setValue({
-        truluongdacapphep: item.truluongdacapphep,
-        truluongdieuchinh: item.truluongdieuchinh,
-        thoihandacapphep: item.thoihandacapphep,
-        thoihandieuchinh: item.thoihandieuchinh,
-        congsuatdacapphep: item.congsuatdacapphep,
-        congsuatdieuchinh: item.congsuatdieuchinh,
+        dientichkhaithac: item.dientichkhaithac,
+        truluongdiachat: item.truluongdiachat,
+        truluongkhaithac: item.truluongkhaithac,
+        thoihankhaithac: item.thoihankhaithac,
+        phuongphapkhaithac: item.phuongphapkhaithac,
+        congsuatkhaithac: item.congsuatkhaithac,
+        mucsaukhaithactu: item.mucsaukhaithactu,
+        mucsaukhaithacden: item.mucsaukhaithacden,
         donvitruluong: item.donvitruluong,
-        donvicongsuat: item.donvitruluong,
+        donvicongsuat: item.donvicongsuat,
+        dangkhoangsan: item.dangkhoangsan,
+        donvidientich: item.donvidientich,
         donvithoihan: item.donvithoihan,
+        donvichieusau: item.donvichieusau,
+        hequychieu: item.hequychieu,
         idgiayphep: item.idgiayphep,
+        sogiayphep: item.sogiayphep
       });
     }
   }
@@ -190,7 +269,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   }
 
   /**
-   * Hàm lấy danh sách Lĩnh Vực
+   * Hàm lấy danh sách Hệ quy chiếu
    */
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
@@ -205,12 +284,15 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getDangKyKhaiThacDieuChinhByIdHoSo(idHoSo: string) {
-    const dkKhaiThacCatSoiService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
-    const dangKyItem = await dkKhaiThacCatSoiService.getFetchAll({ Idhoso: idHoSo });
+    const dkKhaiThacDieuChinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
+    const dangKyItem = await dkKhaiThacDieuChinhService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
-  async saveItemdangKyKhaiThacDieuChinh() {
+  /**
+   * Lưu dữ liệu đăng ký khai thác điều chỉnh
+   */
+  async saveItemDangKyKhaiThacDieuChinh() {
     this.logAllValidationErrorMessages();
 
     if (!this.dangKyKhaiThacDieuChinhIOForm.valid) {
@@ -218,17 +300,17 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dkKhaiThacCatSoiService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
+    const dkKhaiThacDieuChinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
     const inputModel = this.dangKyKhaiThacDieuChinhIOForm.value;
     inputModel.idhoso = this.idhoso;
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Add) {
-      dkKhaiThacCatSoiService.addItem(inputModel).subscribe(
+      dkKhaiThacDieuChinhService.addItem(inputModel).subscribe(
         async (res) => {
           this.dangKyKhaiThacDieuChinh = inputModel;
           this.dangKyKhaiThacDieuChinh.iddangkykhaithac = res.iddangkykhaithac;
           this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
           this.selectCurrentFormState();
-          this.selectIddangKyKhaiThacDieuChinh();
+          this.selectIdDangKyKhaiThacDieuChinh();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -241,7 +323,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
       );
     } else if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
       inputModel.iddangkykhaithac = this.dangKyKhaiThacDieuChinh.iddangkykhaithac;
-      dkKhaiThacCatSoiService.updateItem(inputModel).subscribe(
+      dkKhaiThacDieuChinhService.updateItem(inputModel).subscribe(
         async (res) => {
           this.dangKyKhaiThacDieuChinh = inputModel;
           this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
@@ -260,7 +342,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   }
 
   /**
-   * hàm kiểm tra validation form
+   * Hàm kiểm tra validation form
    */
   private logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
@@ -271,7 +353,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   }
 
   /**
-   * select inserted state of form
+   * Select inserted state of form
    */
   private selectCurrentFormState() {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
@@ -284,19 +366,19 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   }
 
   /**
-   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   * Lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
-  private selectIddangKyKhaiThacDieuChinh() {
-    this.selectIdDangKyKhaiThacDieuChinhEvent.emit(this.dangKyKhaiThacDieuChinh.iddangkykhaithac);
+  private selectIdDangKyKhaiThacDieuChinh() {
+    this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacDieuChinh.iddangkykhaithac);
   }
 
   /**
-   *
+   * Xóa item đăng ký khai thác điều chỉnh
    */
-  deleteItemdangKyKhaiThacDieuChinh() {
+  deleteItemDangKyKhaiThacDieuChinh() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangKyKhaiThacDieuChinh.contentDelete,
-      this.dangKyKhaiThacDieuChinh.tenduan
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.contentDelete,
+      this.dangKyKhaiThacDieuChinh.diadiem
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -328,8 +410,29 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyKhaiThacDieuChinhIOForm.reset();
+    this.dangKyKhaiThacDieuChinhIOForm.reset({
+      dientichkhaithac: "",
+      truluongdiachat: "",
+      truluongkhaithac: "",
+      thoihankhaithac: "",
+      phuongphapkhaithac: "",
+      dangkhoangsan: "",
+      congsuatkhaithac: "",
+      mucsaukhaithactu: "",
+      mucsaukhaithacden: "",
+      donvitruluong: "",
+      donvicongsuat: "",
+      donvidientich: "",
+      donvithoihan: "",
+      donvichieusau: "",
+      hequychieu: "",
+      idgiayphep: "",
+      sogiayphep: "",
+    });
   }
 
-
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName, obj) {
+    this[methodName](obj);
+  }
 }
