@@ -89,13 +89,6 @@ export class KhuvucthamdoListComponent implements OnInit {
   }
 
   /**
-   * Hàm chạy khi load chidgrid
-   */
-  onLoad() {
-    this.gridDkThamDoKhuVuc.childGrid.dataSource = this.data; // assign data source for child grid.
-  }
-
-  /**
    * Hàm lấy dữ liệu translate
    */
   async getDataTranslate() {
