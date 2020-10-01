@@ -109,7 +109,8 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký thăm dò service
   public getDangKyKhaiThacCongTrinhService() {
     return new DkKhaiThacCongTrinhService(this.httpClient);
-
+  }
+  
   // Đăng ký thăm dò tọa độ khu vực service
   public getDangKyThamDoToaDoKhuVucService() {
     return new DkthamdotoadokhuvucService(this.httpClient);
