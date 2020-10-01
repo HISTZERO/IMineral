@@ -64,6 +64,8 @@ import { DangkykhaithackhoangsanduanIoComponent } from 'src/app/features/admin/d
 import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
 import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
+import { KhuvuckhaithacListComponent } from './khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-list/khuvuckhaithac-list.component';
+import { KhuvuckhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component';
 
 @NgModule({
   declarations: [
@@ -108,7 +110,9 @@ import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosota
     DangkykhaithaccaisoiIoComponent,
     DangkykhaithacdieuchinhIoComponent,
     DangkykhaithacvlxdIoComponent,
-    DangkykhaithackhoangsanduanIoComponent
+    DangkykhaithackhoangsanduanIoComponent,
+    KhuvuckhaithacListComponent,
+    KhuvuckhaithacIoComponent
   ],
   exports: [
   ],
