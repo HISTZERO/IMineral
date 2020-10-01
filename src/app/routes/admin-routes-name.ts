@@ -112,6 +112,7 @@ export class AdminRoutingName {
   public static cpthamdokhoangsanUri = "cpthamdokhoangsan";
   public static cpkhaithackhoangsanUri = "cpkhaithackhoangsan";
   public static cppheduyettruluongkhoangsanUri = "cppheduyettruluongkhoangsan";
+  public static cptanthukhoangsanUri = "cptanthukhoangsan";
   public static cpthamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
   public static cpkhaithackhoangsanchitietUri = "cpkhaithackhoangsanchitiet";
   public static cppheduyettruluongkhoangsanchitietUri = "cppheduyettruluongkhoangsanchitiet";

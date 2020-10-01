@@ -22,5 +22,13 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "cappheptanthukhoangsan": {
+    "titleList": "Danh sách cấp phép tận thu khoáng sản",
+    "titleAdd": "Thêm mới cấp phép tận thu khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép tận thu khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }

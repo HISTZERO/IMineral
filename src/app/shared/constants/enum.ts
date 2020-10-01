@@ -151,3 +151,9 @@ export enum CpPheDuyetTruLuongKhoangSanTabEnum {
   TaiLieuGiayPhepDinhKem = 1,
   ThongTinDangKy = 2
 }
+
+export enum CpTanThuKhoangSanTabEnum {
+  ThongTinGiayPhep = 0,
+  TaiLieuGiayPhepDinhKem = 1,
+  ThongTinDangKy = 2
+}
