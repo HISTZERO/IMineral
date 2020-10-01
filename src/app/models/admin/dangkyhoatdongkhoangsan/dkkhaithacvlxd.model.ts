@@ -1,14 +1,18 @@
 export class OutputDkKhaiThacVatLieuXayDungModel {
     iddangkykhaithac: string;
+    tenduan: string;
+    soquyetdinh: string;
+    ngaykyquyetdinh: string;
+    coquanpheduyet: string;
     dientichkhaithac: number;
-    khoiluongkhaithac: number;
+    truluongkhaithac: number;
     congsuatkhaithac: number;
     mucsaukhaithactu: number;
     mucsaukhaithacden: number;
     khaithacdenngay: string;
     kehoachkhaithac: string;
     donvidientich: string;
-    donvikhoiluong: string;
+    donvitruluong: string;
     donvicongsuat: string;
     donvichieusau: string;
     geom: string;
@@ -21,15 +25,19 @@ export class OutputDkKhaiThacVatLieuXayDungModel {
 
 export class InputDkKhaiThacVatLieuXayDungModel {
     iddangkykhaithac: string;
+    tenduan: string;
+    soquyetdinh: string;
+    ngaykyquyetdinh: string;
+    coquanpheduyet: string;
     dientichkhaithac: number;
-    khoiluongkhaithac: number;
+    truluongkhaithac: number;
     congsuatkhaithac: number;
     mucsaukhaithactu: number;
     mucsaukhaithacden: number;
-    khaithacdenngay: string;
+    khaithacdenngay: string;;
     kehoachkhaithac: string;
     donvidientich: string;
-    donvikhoiluong: string;
+    donvitruluong: string;
     donvicongsuat: string;
     donvichieusau: string;
     hequychieu: string;

@@ -20,7 +20,8 @@ export class OutputDkKhaiThacDieuChinhModel {
     hequychieu: string;
     idhoso: string;
     idgiayphep: string;
-    siteid: string
+    siteid: string;
+    sogiayphep: string;
 }
 
 export class InputDkKhaiThacDieuChinhModel {

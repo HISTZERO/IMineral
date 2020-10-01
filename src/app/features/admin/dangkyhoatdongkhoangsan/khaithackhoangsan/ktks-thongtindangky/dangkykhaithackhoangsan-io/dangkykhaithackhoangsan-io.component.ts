@@ -71,6 +71,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     truluongkhaithac: "",
     thoihankhaithac: "",
     thoigianxaydungmo: "",
+    dangkhoangsan: "",
     phuongphapkhaithac: "",
     congsuatkhaithac: "",
     mucsaukhaithactu: "",
@@ -83,6 +84,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     donvithoihanxaymo: "",
     donvichieusau: "",
     hequychieu: "",
+
   };
 
   constructor(
@@ -154,6 +156,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       truluongkhaithac: [""],
       thoihankhaithac: [""],
       thoigianxaydungmo: [""],
+      dangkhoangsan: [""],
       phuongphapkhaithac: [""],
       congsuatkhaithac: [""],
       mucsaukhaithactu: [""],
@@ -247,7 +250,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacKsByIdHoSo(idHoSo: string) {
     const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
-    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({Idhoso: idHoSo});
+    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
@@ -346,7 +349,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyKhaiThacKhoangSanService()
-          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacKhoangSan.iddangkykhaithac})
+          .deleteItem({ iddangkykhaithac: this.dangKyKhaiThacKhoangSan.iddangkykhaithac })
           .subscribe(
             () => {
               this.dangKyKhaiThacKhoangSan = null;
@@ -372,6 +375,27 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyKhaiThacKSIOForm.reset();
+    this.dangKyKhaiThacKSIOForm.reset({
+      diadiem: "",
+      dientichkhaithac: "",
+      truluongdiachat: "",
+      truluongkhaithac: "",
+      thoihankhaithac: "",
+      thoigianxaydungmo: "",
+      dangkhoangsan: "",
+      phuongphapkhaithac: "",
+      congsuatkhaithac: "",
+      mucsaukhaithactu: "",
+      mucsaukhaithacden: "",
+      mucdichsudungkhoangsan: "",
+      donvitruluong: "",
+      donvicongsuat: "",
+      donvidientich: "",
+      donvithoihan: "",
+      donvithoihanxaymo: "",
+      donvichieusau: "",
+      hequychieu: "",
+
+    });
   }
 }

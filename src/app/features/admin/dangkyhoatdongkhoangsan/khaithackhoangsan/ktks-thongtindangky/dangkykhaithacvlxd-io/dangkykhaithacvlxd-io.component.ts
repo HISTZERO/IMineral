@@ -1,15 +1,15 @@
-import {Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import {DangKhoangSanEnum, DangKyKhaiThacKsActionEnum} from 'src/app/shared/constants/enum';
-import {CommonServiceShared} from 'src/app/services/utilities/common-service';
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {OutputDmHeQuyChieuModel} from 'src/app/models/admin/danhmuc/hequychieu.model';
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import {
   DangKhoangSan,
   DonViCongSuat,
@@ -18,7 +18,7 @@ import {
   DonViThoiHan,
   DonViTruLuong
 } from 'src/app/shared/constants/common-constants';
-import {OutputDkKhaiThacVatLieuXayDungModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.model";
+import { OutputDkKhaiThacVatLieuXayDungModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.model";
 
 @Component({
   selector: 'app-dangkykhaithacvlxd-io',
@@ -72,15 +72,19 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
 
   // form errors
   formErrors = {
+    tenduan: "",
+    soquyetdinh: "",
+    ngaykyquyetdinh: "",
+    coquanpheduyet: "",
     dientichkhaithac: "",
-    khoiluongkhaithac: "",
+    truluongkhaithac: "",
     congsuatkhaithac: "",
     mucsaukhaithactu: "",
     mucsaukhaithacden: "",
     khaithacdenngay: "",
     kehoachkhaithac: "",
     donvidientich: "",
-    donvikhoiluong: "",
+    donvitruluong: "",
     donvicongsuat: "",
     donvichieusau: "",
     hequychieu: "",
@@ -147,6 +151,10 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyKhaiThacVLXDIOForm = this.formBuilder.group({
+      tenduan: ["", Validators.required],
+      soquyetdinh: ["", Validators.required],
+      ngaykyquyetdinh: [""],
+      coquanpheduyet: [""],
       dientichkhaithac: ["", Validators.required],
       khoiluongkhaithac: ["", Validators.required],
       congsuatkhaithac: ["", Validators.required],
@@ -155,7 +163,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
       khaithacdenngay: [""],
       kehoachkhaithac: [""],
       donvidientich: ["", Validators.required],
-      donvikhoiluong: ["", Validators.required],
+      donvitruluong: ["", Validators.required],
       donvicongsuat: ["", Validators.required],
       donvichieusau: [""],
       hequychieu: [""],
@@ -180,15 +188,19 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
   private async formOnEdit(item: OutputDkKhaiThacVatLieuXayDungModel) {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit && item) {
       this.dangKyKhaiThacVLXDIOForm.setValue({
+        tenduan: item.tenduan,
+        soquyetdinh: item.soquyetdinh,
+        ngaykyquyetdinh: item.ngaykyquyetdinh,
+        coquanpheduyet: item.coquanpheduyet,
         dientichkhaithac: item.dientichkhaithac,
-        khoiluongkhaithac: item.khoiluongkhaithac,
+        truluongkhaithac: item.truluongkhaithac,
         congsuatkhaithac: item.congsuatkhaithac,
         mucsaukhaithactu: item.mucsaukhaithactu,
         mucsaukhaithacden: item.mucsaukhaithacden,
         khaithacdenngay: item.khaithacdenngay,
         kehoachkhaithac: item.kehoachkhaithac,
         donvidientich: item.donvidientich,
-        donvikhoiluong: item.donvikhoiluong,
+        donvitruluong: item.donvitruluong,
         donvicongsuat: item.donvicongsuat,
         donvichieusau: item.donvichieusau,
         hequychieu: item.hequychieu,
@@ -201,12 +213,12 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      dientichkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.dientichkhaithacRequired},
-      khoiluongkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.khoiluongkhaithacRequired},
-      congsuatkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.congsuatkhaithacRequired},
-      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvidientichRequired},
-      donvikhoiluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvikhoiluongRequired},
-      donvicongsuat: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvicongsuatRequired},
+      dientichkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.dientichkhaithacRequired },
+      khoiluongkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.khoiluongkhaithacRequired },
+      congsuatkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.congsuatkhaithacRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvidientichRequired },
+      donvitruluong: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvitruluongRequired },
+      donvicongsuat: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvicongsuatRequired },
     };
   }
 
@@ -216,7 +228,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -227,7 +239,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacVLXDByIdHoSo(idHoSo: string) {
     const dkKhaiThacVLXDService = this.dangKyHoatDongKhoangSanFacadeService.getDangkyKhaiThacVLXDService();
-    const dangKyItem = await dkKhaiThacVLXDService.getFetchAll({Idhoso: idHoSo});
+    const dangKyItem = await dkKhaiThacVLXDService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
@@ -323,7 +335,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangkyKhaiThacVLXDService()
-          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacVLXD.iddangkykhaithac})
+          .deleteItem({ iddangkykhaithac: this.dangKyKhaiThacVLXD.iddangkykhaithac })
           .subscribe(
             () => {
               this.dangKyKhaiThacVLXD = null;
@@ -349,7 +361,24 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyKhaiThacVLXDIOForm.reset();
+    this.dangKyKhaiThacVLXDIOForm.reset({
+      tenduan: "",
+      soquyetdinh: "",
+      ngaykyquyetdinh: "",
+      coquanpheduyet: "",
+      dientichkhaithac: "",
+      truluongkhaithac: "",
+      congsuatkhaithac: "",
+      mucsaukhaithactu: "",
+      mucsaukhaithacden: "",
+      khaithacdenngay: "",
+      kehoachkhaithac: "",
+      donvidientich: "",
+      donvitruluong: "",
+      donvicongsuat: "",
+      donvichieusau: "",
+      hequychieu: "",
+    });
   }
 
 
