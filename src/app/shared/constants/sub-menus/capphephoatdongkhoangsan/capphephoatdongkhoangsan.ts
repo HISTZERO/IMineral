@@ -37,3 +37,42 @@ export const ButtonBackCpThamDoKhoangSan = [
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpthamdokhoangsanUri}`
   },
 ];
+
+
+// Khai thacs khoáng sản
+export const MenuCpKhaiThacKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép thăm dò khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuCpKhaiThacKhoangSanChitiet = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép khai thác khoáng sản",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpkhaithackhoangsanUri}`,
+  },
+  {
+    title: "Chi tiết",
+    url: "",
+  },
+];
+
+export const ButtonBackCpKhaiThacKhoangSan = [
+  {
+    title: `Cấp phép khai thác khoáng sản`,
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpkhaithackhoangsanUri}`
+  },
+];

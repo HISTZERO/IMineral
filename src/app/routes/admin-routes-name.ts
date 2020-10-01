@@ -110,12 +110,13 @@ export class AdminRoutingName {
 
   // 1.12 Routes phần cấp phép khoáng sản
   public static cpthamdokhoangsanUri = "cpthamdokhoangsan";
-  public static cpPheDuyetTruLuongChitiet = "cppheduyettruluongkhoangsanchitiet";
-  public static cpDauGiaQuyenChitiet = "cpdaugiaquyenchitiet";
-  public static cpThamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
-  public static cpKhaithackhoangsanChitiet = "cpkhaithackhoangsanchitiet";
-  public static cpTanthukhoangsanChiTiet = "cptanthukhoangsanchitiet";
-  public static cpTralaigiayphepChiTiet = "cptralaigiayphepchitiet";
-  public static cpDongcuamoChiTiet = "cpdongcuamochitiet";
-  public static cpchuyennhuongquyenchitiet = "cpchuyennhuongquyenchitiet";
+  public static cpkhaithackhoangsanUri = "cpkhaithackhoangsan";
+  public static cpthamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
+  public static cpkhaithackhoangsanchitietUri = "cpkhaithackhoangsanchitiet";
+  public static cppheduyettruluongchitietUri = "cppheduyettruluongkhoangsanchitiet";
+  public static cpdaugiaquyenchitietUri = "cpdaugiaquyenchitiet";
+  public static cptanthukhoangsanchitietUri = "cptanthukhoangsanchitiet";
+  public static cptralaigiayphepchitietUri = "cptralaigiayphepchitiet";
+  public static cpdongcuamochiTietUri = "cpdongcuamochitiet";
+  public static cpchuyennhuongquyenchitietUri = "cpchuyennhuongquyenchitiet";
 }

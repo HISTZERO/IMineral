@@ -3,6 +3,8 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
 import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
 import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
+import { CpkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-list/cpkhaithackhoangsan-list.component';
+import { CpkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-io/cpkhaithackhoangsan-io.component';
 
 
 const routes: Routes = [
@@ -13,7 +15,9 @@ const routes: Routes = [
         path: "",
         children: [
           { path: AdminRoutingName.cpthamdokhoangsanUri, component: CpthamdokhoangsanListComponent },
-          { path: AdminRoutingName.cpThamdokhoangsanchitietUri, component: CpthamdokhoangsanIoComponent }
+          { path: AdminRoutingName.cpthamdokhoangsanchitietUri, component: CpthamdokhoangsanIoComponent },
+          { path: AdminRoutingName.cpkhaithackhoangsanUri, component: CpkhaithackhoangsanListComponent },
+          { path: AdminRoutingName.cpkhaithackhoangsanchitietUri, component: CpkhaithackhoangsanIoComponent }
         ]
       }
     ]
