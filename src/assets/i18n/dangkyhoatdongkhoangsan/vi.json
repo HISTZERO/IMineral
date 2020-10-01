@@ -14,6 +14,8 @@
     "loaiKhoangSanTabTile": "Loại khoáng sản",
     "khuVucThamDoTabTile": "Khu vực thăm dò",
     "congTrinhThamDoTabTitle": "Công trình thăm dò",
+    "congTrinhKhaiThacTabTitle": "Công trình khai thác",
+    "informedNotExistedHoSoDangKyThamDo": "Hồ sơ đăng ký thăm dò không tồn tại",
     "informedNotExistedHoSoDangKyThamDo": "Hồ sơ đăng ký thăm dò không tồn tại",
     "thongTinChiTietKhaiThacTabTitle": "Thông tin chi tiết",
     "donViHanhChinhKhaiThacTabTile": "Đơn vị hành chính",
@@ -21,6 +23,7 @@
     "khuVucKhaiThacTabTile": "Khu vực khai thác",
     "congTrinhKhaiThacTabTitle": "Công trình khai thác",
     "informedNotExistedHoSoDangKyKhaiThac": "Hồ sơ đăng ký khai thác không tồn tại"
+
   },
   "khaithackhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký khai thác khoáng sản",
@@ -29,7 +32,8 @@
     "thongTinHoSoTabTitle": "Thông tin hồ sơ",
     "taiLieuDinhKemHoSoTabTile": "Tài liệu đính kèm hồ sơ",
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinDangKyTabTitle": "Thông tin đăng ký",
+    "tenkhoangsan": "Tên khoáng sản"
   },
   "tanthukhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký tận thu khoáng sản",

@@ -17,6 +17,7 @@
           <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>
         </mat-tab>
         <mat-tab  [disabled]="!disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhKhaiThacTabTitle' | translate }}">
+          <app-ktks-congtrinhkhaithac-list #dangKyKhaiThacCongTrinh [allowAutoInit]="false"></app-ktks-congtrinhkhaithac-list>
           <app-congtrinhthamdo-list #dangKyThamDoCongTrinh [allowAutoInit]="false"></app-congtrinhthamdo-list>
         </mat-tab>
       </mat-tab-group>

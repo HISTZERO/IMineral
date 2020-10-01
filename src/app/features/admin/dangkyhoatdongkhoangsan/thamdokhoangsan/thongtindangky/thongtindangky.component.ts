@@ -120,7 +120,7 @@ export class ThongtindangkyComponent implements OnInit {
     switch (actionType) {
       case DangKyThamDoActionEnum.Add: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false,
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
@@ -128,7 +128,7 @@ export class ThongtindangkyComponent implements OnInit {
       }
       case DangKyThamDoActionEnum.Edit: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true,
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
@@ -136,7 +136,7 @@ export class ThongtindangkyComponent implements OnInit {
       }
       default: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false,
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;

@@ -43,8 +43,11 @@ export class ServiceName {
   public static DANGKYTHAMDOKHOANGSAN = "dangkythamdo";
   public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
   public static DANGKYTHAMDODVHC = "dangkythamdodvhc";
+  public static DANGKYKHAITHACDVHC = "dangkykhaithacdvhc";
   public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
+  public static DANGKYKHAITHACLOAIKHOANGSAN = "dangkykhaithacloaikhoangsan";
   public static DANGKYTHAMDOCONGTRINH = "dangkythamdocongtrinh";
+  public static DANGKYKHAITHACCONGTRINH = "dangkykhaithaccongtrinh";
   public static DANGKYTHAMDOKHUVUC = "dangkythamdokhuvuc";
   public static DANGKYTHAMDOTOADOKHUVUC = "dangkythamdotoadokhuvuc";
   // Đăng ký khai thác khoáng sản
