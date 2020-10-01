@@ -2,22 +2,22 @@ import { HttpClient } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 
 import { environment } from "src/environments/environment";
-import { InputDkThamDoKhuVucModel, OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.model";
 import { ServiceName } from "src/app/shared/constants/service-name";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
+import { InputDkThamDoToaDoKhuVucModel, OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DkthamdokhuvucService extends RepositoryEloquentService {
+export class DkthamdotoadokhuvucService extends RepositoryEloquentService {
 
   constructor(public httpClient: HttpClient) {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputDkThamDoKhuVucModel(),
-      outputModelName: new OutputDkThamDoKhuVucModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHUVUC
+      inputModelName: null,
+      outputModelName: null,
+      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOTOADOKHUVUC
     });
   }
 

@@ -1,32 +1,46 @@
 export class OutputDkKhaiThacDieuChinhModel {
     iddangkykhaithac: string;
-    truluongdacapphep: number;
-    truluongdieuchinh: number;
-    thoihandacapphep: number;
-    thoihandieuchinh: number;
-    congsuatdacapphep: number;
-    congsuatdieuchinh: number;
+    dientichkhaithac: number;
+    truluongdiachat: number;
+    truluongkhaithac: number;
+    thoihankhaithac: number;
+    phuongphapkhaithac: number;
+    congsuatkhaithac: number;
+    mucsaukhaithactu: number;
+    mucsaukhaithacden: number;
+    dangkhoangsan: number;
     donvitruluong: string;
     donvicongsuat: string;
+    donvidientich: string;
     donvithoihan: string;
+    donvichieusau: string;
+    geom: string;
+    geovn: string;
+    geowgs: string;
+    hequychieu: string;
     idhoso: string;
     idgiayphep: string;
-    sogiayphep: string;
-    ngaycapphep: string;
     siteid: string;
+    sogiayphep: string;
 }
 
 export class InputDkKhaiThacDieuChinhModel {
     iddangkykhaithac: string;
-    truluongdacapphep: number;
-    truluongdieuchinh: number;
-    thoihandacapphep: number;
-    thoihandieuchinh: number;
-    congsuatdacapphep: number;
-    congsuatdieuchinh: number;
+    dientichkhaithac: number;
+    truluongdiachat: number;
+    truluongkhaithac: number;
+    thoihankhaithac: number;
+    phuongphapkhaithac: number;
+    congsuatkhaithac: number;
+    mucsaukhaithactu: number;
+    mucsaukhaithacden: number;
+    dangkhoangsan: number;
     donvitruluong: string;
     donvicongsuat: string;
+    donvidientich: string;
     donvithoihan: string;
+    donvichieusau: string;
+    hequychieu: string;
     idhoso: string;
     idgiayphep: string;
 }

@@ -5,10 +5,10 @@
           <div class="card-header">
             <h3 class="card-title">
                 <div class="row">
-                    <div class="col-md-4 mb-sm-1">
+                    <div class="col-md-8 mb-sm-1">
                       <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleList" | translate }}</span>
                     </div>
-                    <div class="col-md-8">
+                    <div class="col-md-4">
                       <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openDkThamDoCongTrinhIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
@@ -24,7 +24,39 @@
           <div class="card-body">
             <ejs-grid #gridDkThamDoKhuVuc *ngIf="listDkThamDoKhuVuc" [dataSource]="listDkThamDoKhuVuc"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
-              [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" >
+              [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"  [allowResizing]="true" >
+              <ng-template #detailTemplate let-obj>
+                <table class="table table-striped">
+                  <thead class="thead-secondary">
+                    <tr>
+                      <th scope="col">Thứ tự</th>
+                      <th scope="col">Số hiệu</th>
+                      <th scope="col">Tọa độ x</th>
+                      <th scope="col">Tọa độ y</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>Mark</td>
+                      <td>Otto</td>
+                      <td>@mdo</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">2</th>
+                      <td>Jacob</td>
+                      <td>Thornton</td>
+                      <td>@fat</td>
+                    </tr>
+                    <tr>
+                      <th scope="row">3</th>
+                      <td>Larry</td>
+                      <td>the Bird</td>
+                      <td>@twitter</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                 <e-column field="tenkhuvuc" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.tenkhuvuc' | translate }}"></e-column>

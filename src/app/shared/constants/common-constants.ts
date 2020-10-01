@@ -245,6 +245,14 @@ export const PhuongPhapKhaiThac = [
     {
         id: 2,
         name: "Lộ thiên"
+    },
+    {
+        id: 3,
+        name: "Nước nóng, nước khoáng"
+    },
+    {
+        id: 4,
+        name: "Phương pháp khác"
     }
 ]
 

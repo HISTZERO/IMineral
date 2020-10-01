@@ -1,7 +1,7 @@
 export class OutputDkKhaiThacGiaHanModel {
     iddangkykhaithac: string;
+    truluongdacapphep: number;
     truluongkhaithac: number;
-    truluongconlai: number;
     thoihankhaithac: number;
     giahandenngay: string;
     donvitruluong: string;
@@ -21,8 +21,8 @@ export class OutputDkKhaiThacGiaHanModel {
 
 export class InputDkKhaiThacGiaHanModel {
     iddangkykhaithac: string;
+    truluongdacapphep: number;
     truluongkhaithac: number;
-    truluongconlai: number;
     thoihankhaithac: number;
     giahandenngay: string;
     donvitruluong: string;
