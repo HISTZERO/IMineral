@@ -13,7 +13,7 @@ export class OutputDkKhaiThacDieuChinhModel {
     idgiayphep: string;
     sogiayphep: string;
     ngaycapphep: string;
-    siteid: string
+    siteid: string;
 }
 
 export class InputDkKhaiThacDieuChinhModel {

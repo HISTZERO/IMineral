@@ -1,11 +1,21 @@
-import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatSidenav } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {MatSidenav} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import {DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import {ContentContainerDirective} from 'src/app/shared/directives/content-container/content-container.directive';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
 import {DangkykhaithackhoangsanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsan-io/dangkykhaithackhoangsan-io.component";
 import {DangkykhaithacgiahanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacgiahan-io/dangkykhaithacgiahan-io.component";
 import {DangkykhaithacvlxdIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component";
@@ -31,11 +41,11 @@ export const DangKyKhaiThacKhoangSanComponent: any = {
 })
 export class KtksThongtindangkyComponent implements OnInit {
   @ViewChild('thongTinDangKyThamDoTabs', {static: false}) thongTinDangKyThamDoTabs;
-  @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-  @ViewChild("dangKyKhaiThacKsDvhc", { static: false }) dangKyKhaiThacKsDvhc: KtksDonvihanhchinhListComponent;
-  @ViewChild("dangKyKhaiThacLoaiKhoangSan", { static: false }) dangKyKhaiThacLoaiKhoangSan: KtksLoaikhoangsanListComponent;
+  @ViewChild(ContentContainerDirective, {static: true}) contentContainer: ContentContainerDirective;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild("dangKyKhaiThacKsDvhc", {static: false}) dangKyKhaiThacKsDvhc: KtksDonvihanhchinhListComponent;
+  @ViewChild("dangKyKhaiThacLoaiKhoangSan", {static: false}) dangKyKhaiThacLoaiKhoangSan: KtksLoaikhoangsanListComponent;
   // @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
   // @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
@@ -48,19 +58,19 @@ export class KtksThongtindangkyComponent implements OnInit {
   public idhoso;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
-    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet]: true,
+    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: false,
+    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: false,
+    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: false,
+    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: false
   };
 
   public disabledTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
-    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet]: false,
+    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: false,
+    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: false,
+    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: false,
+    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: false
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -76,7 +86,8 @@ export class KtksThongtindangkyComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
+              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+  }
 
   async ngOnInit() {
     // Lấy dữ liệu translate
@@ -109,7 +120,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       return;
     }
 
-    this.itemHoSo =  await this.getHoSoById(this.idhoso);
+    this.itemHoSo = await this.getHoSoById(this.idhoso);
 
     if (!this.itemHoSo) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
@@ -127,7 +138,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       case DangKyThamDoActionEnum.Add: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
-          this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
@@ -135,7 +146,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       case DangKyThamDoActionEnum.Edit: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
-          this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
@@ -143,7 +154,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       default: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
-          this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
@@ -181,7 +192,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idhoso = this.itemHoSo.idhoso;
-    componentRef.instance.matSidenav =  this.matSidenav;
+    componentRef.instance.matSidenav = this.matSidenav;
     componentRef.instance.content = this.content;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyKhaiThacKhoangSanFormState(event));
     componentRef.instance.selectIdDangKyKhaiThacKhoangSanEvent.subscribe(event => this.getIdDangKyKhaiThacKhoangSan(event));
@@ -193,7 +204,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       this.dangKyKhaiThacKsDvhc.content = this.content;
       this.dangKyKhaiThacKsDvhc.iddangkythamdo = this.iddangkykhaithac;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = await this.dangKyKhaiThacKsDvhc.manualDataInit();
-     }  else if (index === DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]) {
+    } else if (index === DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]) {
       this.dangKyKhaiThacKsDvhc.matSidenav = this.matSidenav;
       this.dangKyKhaiThacKsDvhc.content = this.content;
       this.dangKyKhaiThacKsDvhc.iddangkythamdo = this.iddangkykhaithac;

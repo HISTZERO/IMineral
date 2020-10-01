@@ -11,7 +11,7 @@
           <app-ktks-donvihanhchinh-list #dangKyKhaiThacKsDvhc [allowAutoInit]="false"></app-ktks-donvihanhchinh-list>
         </mat-tab>
         <mat-tab  [disabled]="!disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanTabTile' | translate }}">
-          <app-ktks-loaikhoangsan-list  #dangKyThamDoLoaiKhoangSan [allowAutoInit]="false"></app-ktks-loaikhoangsan-list>
+          <app-ktks-loaikhoangsan-list  #dangKyKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-ktks-loaikhoangsan-list>
         </mat-tab>
         <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucThamDoTabTile' | translate }}">
           <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>

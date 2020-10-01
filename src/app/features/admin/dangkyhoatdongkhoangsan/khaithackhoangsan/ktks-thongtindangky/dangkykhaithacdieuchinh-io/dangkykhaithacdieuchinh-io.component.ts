@@ -12,7 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong } from 'src/app/shared/constants/common-constants';
 import { OutputDkKhaiThacCatSoiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.model";
-import { OutputDkKhaiThacDieuChinhModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
+import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
 
 @Component({
   selector: 'app-dangkykhaithacdieuchinh-io',
