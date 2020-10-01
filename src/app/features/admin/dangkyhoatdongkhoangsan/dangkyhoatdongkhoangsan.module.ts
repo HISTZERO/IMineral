@@ -64,12 +64,6 @@ import { DangkykhaithackhoangsanduanIoComponent } from 'src/app/features/admin/d
 import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
 import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
-import { KtksDonvihanhchinhComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh.component';
-import { KtksDonvihanhchinhIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component';
-import { KtksDonvihanhchinhListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-list/ktks-donvihanhchinh-list.component';
-import { KtksLoaikhoangsanComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
-import { KtksLoaikhoangsanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
-import { KtksLoaikhoangsanListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
 import { KtksCongtrinhkhaithacComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac.component';
 import { KtksCongtrinhkhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component';
 import { KtksCongtrinhkhaithacListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-list/ktks-congtrinhkhaithac-list.component';
