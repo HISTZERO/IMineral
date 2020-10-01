@@ -6,7 +6,7 @@ import { ActivatedRoute } from '@angular/router';
 import {ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum, CpThamDoKhoangSanTabEnum, GiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
-import { GiayphepIoComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-io/giayphep-io.component';
+import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-io/giayphep-io.component';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { ButtonBackCpThamDoKhoangSan, MenuCpThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
