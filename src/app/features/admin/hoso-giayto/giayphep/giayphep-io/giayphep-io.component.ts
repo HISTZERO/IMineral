@@ -564,6 +564,7 @@ export class GiayphepIoComponent implements OnInit {
     this.giayPhepIOForm.controls.noicapDisplay.setValue(item.noicap);
     this.giayPhepIOForm.controls.diachi.setValue(item.diachi);
     this.giayPhepIOForm.controls.diachiDisplay.setValue(item.diachi);
+    this.giayPhepIOForm.controls.dienthoai.setValue(item.dienthoai);
   }
 
   /**
@@ -687,6 +688,7 @@ export class GiayphepIoComponent implements OnInit {
     this.giayPhepIOForm.controls.noicapDisplay.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.diachi.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.diachiDisplay.setValue(DefaultValue.Empty);
+    this.giayPhepIOForm.controls.dienthoai.setValue(DefaultValue.Empty);
   }
 
   /**

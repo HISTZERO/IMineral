@@ -428,6 +428,7 @@ export class HosoIoComponent implements OnInit {
     this.hosoIOForm.controls.noicapDisplay.setValue(DefaultValue.Empty);
     this.hosoIOForm.controls.diachi.setValue(DefaultValue.Empty);
     this.hosoIOForm.controls.diachiDisplay.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.dienthoai.setValue(DefaultValue.Empty);
   }
 
   /**
@@ -452,6 +453,7 @@ export class HosoIoComponent implements OnInit {
     this.hosoIOForm.controls.noicapDisplay.setValue(item.noicap);
     this.hosoIOForm.controls.diachi.setValue(item.diachi);
     this.hosoIOForm.controls.diachiDisplay.setValue(item.diachi);
+    this.hosoIOForm.controls.dienthoai.setValue(item.dienthoai);
   }
 
   /**
