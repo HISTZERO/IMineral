@@ -20,14 +20,17 @@ import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.mod
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
 import { CpkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-list/cpkhaithackhoangsan-list.component';
 import { CpkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-io/cpkhaithackhoangsan-io.component';
+import { CppheduyettruluongkhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cppheduyettruluongkhoangsan-list/cppheduyettruluongkhoangsan-list.component';
+import { CppheduyettruluongkhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cppheduyettruluongkhoangsan-io/cppheduyettruluongkhoangsan-io.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
   CpthamdokhoangsanListComponent,
   CpthamdokhoangsanIoComponent,
   CpkhaithackhoangsanListComponent,
-  CpkhaithackhoangsanIoComponent
-
+  CpkhaithackhoangsanIoComponent,
+  CppheduyettruluongkhoangsanListComponent,
+  CppheduyettruluongkhoangsanIoComponent
   ],
   exports: [
   ],

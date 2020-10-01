@@ -111,9 +111,10 @@ export class AdminRoutingName {
   // 1.12 Routes phần cấp phép khoáng sản
   public static cpthamdokhoangsanUri = "cpthamdokhoangsan";
   public static cpkhaithackhoangsanUri = "cpkhaithackhoangsan";
+  public static cppheduyettruluongkhoangsanUri = "cppheduyettruluongkhoangsan";
   public static cpthamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
   public static cpkhaithackhoangsanchitietUri = "cpkhaithackhoangsanchitiet";
-  public static cppheduyettruluongchitietUri = "cppheduyettruluongkhoangsanchitiet";
+  public static cppheduyettruluongkhoangsanchitietUri = "cppheduyettruluongkhoangsanchitiet";
   public static cpdaugiaquyenchitietUri = "cpdaugiaquyenchitiet";
   public static cptanthukhoangsanchitietUri = "cptanthukhoangsanchitiet";
   public static cptralaigiayphepchitietUri = "cptralaigiayphepchitiet";

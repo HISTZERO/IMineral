@@ -14,5 +14,13 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "cappheppheduyettruluongkhoangsan": {
+    "titleList": "Danh sách cấp phép phê duyệt trữ lượng khoáng sản",
+    "titleAdd": "Thêm mới cấp phép phê duyệt trữ lượng khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép phê duyệt trữ lượng khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }
