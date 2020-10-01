@@ -19,6 +19,7 @@ import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/ca
 import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -99,10 +100,10 @@ export class GiayphepListComponent implements OnInit {
    */
   formInit() {
     this.formSearch = this.formBuilder.group({
-      GTEqualNgaycapphep: [""],
-      LTEqualNgaycapphep: [""],
-      Loaicapphep: [""],
-      Keyword: [""]
+      GTEqualNgaycapphep: [DefaultValue.Empty],
+      LTEqualNgaycapphep: [DefaultValue.Empty],
+      Loaicapphep: [DefaultValue.Empty],
+      Keyword: [DefaultValue.Empty]
     });
   }
 
@@ -158,7 +159,7 @@ export class GiayphepListComponent implements OnInit {
    * Hàm lấy dữ liệu loại cấp phép
    */
   async getAllLoaiCapPhep() {
-    if (this.nhomLoaiCapPhep === null || this.nhomLoaiCapPhep === undefined) {
+    if (this.nhomLoaiCapPhep === DefaultValue.Null || this.nhomLoaiCapPhep === DefaultValue.Undefined) {
       this.nhomLoaiCapPhep = -1;
     }
 
@@ -175,8 +176,8 @@ export class GiayphepListComponent implements OnInit {
   async getAllGiayPhep() {
     this.listGiayPhep = this.itemService;
     const searchModel = {
-      GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== null && this.formSearch.controls.GTEqualNgaycapphep.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : "",
-      LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== null && this.formSearch.controls.LTEqualNgaycapphep.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : "",
+      GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
       Nhomloaicapphep: this.nhomLoaiCapPhep
@@ -191,8 +192,8 @@ export class GiayphepListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
     };
@@ -205,10 +206,10 @@ export class GiayphepListComponent implements OnInit {
    */
   reloadDataGrid() {
     this.formSearch.reset({
-      Keyword: "",
-      GTEqualNgaycapphep: "",
-      LTEqualNgaycapphep: "",
-      Loaicapphep: ""
+      Keyword: DefaultValue.Empty,
+      GTEqualNgaycapphep: DefaultValue.Empty,
+      LTEqualNgaycapphep: DefaultValue.Empty,
+      Loaicapphep: DefaultValue.Empty
     });
     this.getAllGiayPhep();
   }
@@ -259,14 +260,14 @@ export class GiayphepListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.giayphep.contentDelete,
+      this.dataTranslate.HOSOGIAYTO.giayphep.contentDelete,
       this.selectedItem.sogiayphep
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.capPhepHoatDongKhoangSanFacadeService
           .getGiayPhepService()
-          .deleteItem({idhoso: this.selectedItem.idhoso})
+          .deleteItem({idgiayphep: this.selectedItem.idgiayphep})
           .subscribe(
             () => this.getAllGiayPhep(),
             (error: HttpErrorResponse) => {

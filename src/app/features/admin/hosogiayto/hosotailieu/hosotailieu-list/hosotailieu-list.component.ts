@@ -12,13 +12,14 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import { HosotailieuIoComponent } from "src/app/features/admin/hoso-giayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
+import { HosotailieuIoComponent } from "src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { FileService } from 'src/app/services/admin/common/file.service';
 import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -199,9 +200,9 @@ export class HosotailieuListComponent implements OnInit {
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleAdd);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.differentTitleAdd);
     } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleAdd);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.processedTitleAdd);
     } else {
       return;
     }
@@ -218,7 +219,7 @@ export class HosotailieuListComponent implements OnInit {
       .getByid(idTaiLieu).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      this.commonService.showDialogWarning(this.dataTranslate.HOSOGIAYTO.tailieu.informedNotExistedTaiLieu);
       return;
     }
 
@@ -228,11 +229,11 @@ export class HosotailieuListComponent implements OnInit {
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.requiredUploadFile);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.requiredUploadFile);
     } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentUploadFile);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.differentUploadFile);
     } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedUploadFile);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.processedUploadFile);
     } else {
       return;
     }
@@ -252,7 +253,7 @@ export class HosotailieuListComponent implements OnInit {
       .getByid(idTaiLieu).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      this.commonService.showDialogWarning(this.dataTranslate.HOSOGIAYTO.tailieu.informedNotExistedTaiLieu);
       return;
     }
 
@@ -267,9 +268,9 @@ export class HosotailieuListComponent implements OnInit {
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
     if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.differentTitleEdit);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.differentTitleEdit);
     } else if (this.nhomTaiLieu === this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.processedTitleEdit);
+      this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.tailieu.processedTitleEdit);
     } else {
       return;
     }
@@ -285,8 +286,8 @@ export class HosotailieuListComponent implements OnInit {
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
     const dialogRef = this.commonService.confirmSaveDiaLogService
-                              ("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
-                              this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedDialogTitle);
+                              (DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
+                              this.dataTranslate.HOSOGIAYTO.tailieu.informedDialogTitle);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
@@ -316,7 +317,7 @@ export class HosotailieuListComponent implements OnInit {
       .getByid(idTaiLieu).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.informedNotExistedTaiLieu);
+      this.commonService.showDialogWarning(this.dataTranslate.HOSOGIAYTO.tailieu.informedNotExistedTaiLieu);
       return;
     }
 
@@ -356,7 +357,7 @@ export class HosotailieuListComponent implements OnInit {
    */
   deleteArrayItem() {
     const idItems: string[] = [];
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.confirmedContentOfDeleteDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         this.listDataSelect.map(res => {
@@ -423,7 +424,7 @@ export class HosotailieuListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.tailieu.contentDelete,
+      this.dataTranslate.HOSOGIAYTO.tailieu.contentDelete,
       this.selectedItem.tentailieu
     );
     dialogRef.afterClosed().subscribe(async (result) => {

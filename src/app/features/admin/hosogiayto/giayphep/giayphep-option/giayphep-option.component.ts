@@ -1,24 +1,18 @@
 import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angular/core';
-import {DatePipe} from '@angular/common';
 import {DataStateChangeEventArgs, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
 import {Observable} from "rxjs";
-import {MatDialog} from "@angular/material";
-import {HttpErrorResponse} from "@angular/common/http";
 import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {OutputGiayPhepModel} from "src/app/models/admin/capphephoatdongkhoangsan/giayphep.model";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {CapPhepHoatDongKhoangSanFacadeService} from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
-import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { SelectedOptionType } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-giayphep-option',
@@ -83,7 +77,7 @@ export class GiayphepOptionComponent implements OnInit {
    */
   formInit() {
     this.formSearch = this.formBuilder.group({
-      Keyword: [""],
+      Keyword: [DefaultValue.Empty],
     });
   }
 
@@ -142,15 +136,8 @@ export class GiayphepOptionComponent implements OnInit {
    */
   public reloadDataGrid() {
     this.formSearch.reset({
-      Keyword: "",
+      Keyword: DefaultValue.Empty,
     });
-    this.getAllGiayPhep();
-  }
-
-  /**
-   * Tìm kiếm nâng cao
-   */
-  public searchAdvance() {
     this.getAllGiayPhep();
   }
 

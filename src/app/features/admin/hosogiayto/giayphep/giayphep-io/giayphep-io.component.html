@@ -7,12 +7,12 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
               <h4>
                 <span class="title font-weight-bold">
-                  {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.thongTinCapPhepTitle' | translate}}
+                  {{ 'HOSOGIAYTO.giayphep.thongTinCapPhepTitle' | translate}}
                 </span>
               </h4>
             </div>
             <div class="col-lg-3 col-md-3 col-sm-3">
-              <button class="btn btn-primary mb-sm-1" *ngIf="currentAction === ActionType.Add || currentAction === ActionType.Edit" style="float: right;" (click)="saveItemHoSo()">
+              <button class="btn btn-primary mb-sm-1" *ngIf="currentAction === ActionType.Add || currentAction === ActionType.Edit" style="float: right;" (click)="saveItemGiayPhep()">
                 <i class="fal fa-save"></i>
                 {{ "COMMON.default.save" | translate }}
               </button>
@@ -27,22 +27,31 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <h5>
                       <span class="title font-weight-bold">
-                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.thongTinGiayPhepTitle' | translate}}
+                        {{ 'HOSOGIAYTO.giayphep.thongTinGiayPhepTitle' | translate}}
                       </span>
                     </h5>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.loaicapphep" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayphep" | translate }}
+                    <small>(*)</small>
+                  </label>
+                  <div class="col-lg-8 col-md-8 col-sm-8">
+                    <input class="form-control" type="text" formControlName="sogiayphep" placeholder="{{'HOSOGIAYTO.giayphep.sogiayphepPlaceholder' | translate}}" />
+                    <span *ngIf="formErrors.sogiayphep" class="alert-danger">{{formErrors.sogiayphep}}</span>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.loaicapphep" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledLoaiCapPhepSelectionState">
-                    <mat-select class="form-control" placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep' | translate }}" formControlName="loaicapphep"
-                      *ngIf="dataTranslate">
+                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaicapphep' | translate }}" formControlName="loaicapphep"
+                      *ngIf="dataTranslate" (selectionChange)="selectItemLoaiCapPhepChange($event)">
                       <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
                       </mat-select-filter>
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.chonloaicapphep" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let loaiCapPhep of loaiCapPhepList" [value]="loaiCapPhep.maloaicapphep">
                         {{ loaiCapPhep.tenloaicapphep }}
@@ -54,14 +63,14 @@
                     {{tenLoaiCapPhep}}
                   </div>
                 </div>
-                <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.mahoso" | translate }}
+                <div class="form-group row mx-0" *ngIf="!disabledHoSo">
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.mahoso" | translate }}
                   </label>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <mat-select class="form-control" formControlName="idhoso"
-                      *ngIf="dataTranslate" [displayMember]="'mahoso'" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonhoso' | translate}}">
+                    <mat-select class="form-control" formControlName="idhoso" (selectionChange)="selectItemHoSoChange($event)"
+                      *ngIf="dataTranslate" [displayMember]="'mahoso'" placeholder="{{'HOSOGIAYTO.giayphep.chonhoso' | translate}}">
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonhoso" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.chonhoso" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let hoSo of hoSoList" [value]="hoSo.idhoso">
                         {{ hoSo.mahoso }}
@@ -76,24 +85,37 @@
                     </button>
                   </div>
                 </div>
-                <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphep" | translate }}
-                    <small>(*)</small>
+                <div class="form-group row mx-0" *ngIf="!disabledGiayPhepLichSu">
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayphepcu" | translate }}
                   </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="sogiayphep" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphepPlaceholder' | translate}}" />
-                    <span *ngIf="formErrors.sogiayphep" class="alert-danger">{{formErrors.sogiayphep}}</span>
+                  <div class="col-lg-6 col-md-6 col-sm-6">
+                    <mat-select class="form-control" formControlName="idgiayphepls" (selectionChange)="selectItemGiayPhepLichSuChange($event)"
+                      *ngIf="dataTranslate" [displayMember]="'sogiayphep'" placeholder="{{'HOSOGIAYTO.giayphep.chongiayphepcu' | translate}}">
+                      <mat-option value="">
+                        {{ "HOSOGIAYTO.giayphep.chongiayphepcu" | translate }}
+                      </mat-option>
+                      <mat-option *ngFor="let giayPhep of giayPhepLichSuList" [value]="giayPhep.idgiayphep">
+                        {{ giayPhep.sogiayphep }}
+                      </mat-option>
+                    </mat-select>
+                    <span *ngIf="formErrors.idgiayphepls" class="alert-danger">{{formErrors.idgiayphepls}}</span>
+                  </div>
+                  <div class="col-lg-2 col-md-2 col-sm-2">
+                    <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openGiayPhepLichSuIOSidenav()">
+                      <i class="fal fa-plus-square"></i>
+                      {{ "COMMON.default.select" | translate }}
+                    </button>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.loaivanban" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.loaivanban" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
                     <mat-select class="form-control" formControlName="loaivanban"
-                      *ngIf="dataTranslate" [displayMember]="'name'" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaivanban' | translate}}">
+                      *ngIf="dataTranslate" [displayMember]="'name'" placeholder="{{'HOSOGIAYTO.giayphep.chonloaivanban' | translate}}">
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaivanban" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.chonloaivanban" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let loaiVanBan of loaiVanBanList" [value]="loaiVanBan.id">
                         {{ loaiVanBan.name }}
@@ -103,33 +125,33 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycapphep" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.ngaycapphep" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaycapphep" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycapphepRequired' | translate}}" />
+                    <input class="form-control" formControlName="ngaycapphep" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" placeholder="{{'HOSOGIAYTO.giayphep.ngaycapphepRequired' | translate}}" />
                     <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaycapphep" class="alert-danger">{{formErrors.ngaycapphep}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.thoihan" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.thoihan" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="thoihan" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.thoihanPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="thoihan" placeholder="{{'HOSOGIAYTO.giayphep.thoihanPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.thoihan" class="alert-danger">{{formErrors.thoihan}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.donvithoihan" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.donvithoihan" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
                     <mat-select class="form-control" formControlName="donvithoihan"
-                      *ngIf="dataTranslate" [displayMember]="'name'" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.chondonvithoihan' | translate}}">
+                      *ngIf="dataTranslate" [displayMember]="'name'" placeholder="{{'HOSOGIAYTO.giayphep.chondonvithoihan' | translate}}">
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chondonvithoihan" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.chondonvithoihan" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let donViThoiHan of donViThoiHanList" [value]="donViThoiHan.id">
                         {{ donViThoiHan.name }}
@@ -139,36 +161,36 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaybdhieuluc" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.ngaybdhieuluc" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaybdhieuluc" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaybdhieulucPlaceholder' | translate}}" />
+                    <input class="form-control" formControlName="ngaybdhieuluc" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="{{'HOSOGIAYTO.giayphep.ngaybdhieulucPlaceholder' | translate}}" />
                     <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaybdhieuluc" class="alert-danger">{{formErrors.ngaybdhieuluc}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaykthieuluc" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.ngaykthieuluc" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaykthieuluc" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaykthieulucPlaceholder' | translate}}" />
+                    <input class="form-control" formControlName="ngaykthieuluc" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="{{'HOSOGIAYTO.giayphep.ngaykthieulucPlaceholder' | translate}}" />
                     <owl-date-time #dt3 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaykthieuluc" class="alert-danger">{{formErrors.ngaykthieuluc}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.coquancapphep" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.coquancapphep" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.choncoquancapphep' | translate }}" formControlName="idcoquancapphep"
+                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.choncoquancapphep' | translate }}" formControlName="idcoquancapphep"
                       *ngIf="dataTranslate">
                       <mat-select-filter [displayMember]="'tencoquanquanly'" [array]="coQuanCapPhepFilters" (filteredReturn)="allCoQuanCapPhep = $event">
                       </mat-select-filter>
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.choncoquancapphep" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.choncoquancapphep" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let coQuanCapPhep of allCoQuanCapPhep" [value]="coQuanCapPhep.idcoquanquanly">
                         {{ coQuanCapPhep.tencoquanquanly }}
@@ -178,29 +200,28 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.tennguoiky" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.tennguoiky" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="tennguoiky" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.tennguoikyPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="tennguoiky" placeholder="{{'HOSOGIAYTO.giayphep.tennguoikyPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.tennguoiky" class="alert-danger">{{formErrors.tennguoiky}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chucvunguoiky" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.chucvunguoiky" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="chucvunguoiky" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.chucvunguoikyPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="chucvunguoiky" placeholder="{{'HOSOGIAYTO.giayphep.chucvunguoikyPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.chucvunguoiky" class="alert-danger">{{formErrors.chucvunguoiky}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.ghichu" | translate }}
-                    <small>(*)</small>
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.ghichu" | translate }}
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="ghichu" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.ghichuPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="ghichu" placeholder="{{'HOSOGIAYTO.giayphep.ghichuPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.ghichu" class="alert-danger">{{formErrors.ghichu}}</span>
                   </div>
                 </div>
@@ -210,17 +231,17 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <h5>
                       <span class="title font-weight-bold">
-                        {{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.thongTinCaNhanToChucTitle' | translate}}
+                        {{ 'HOSOGIAYTO.giayphep.thongTinCaNhanToChucTitle' | translate}}
                       </span>
                     </h5>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.loaidoituong" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.loaidoituong" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" formControlName="loaidoituong" (selectionChange)="selectLoaiDoiTuongChange()"
+                    <mat-select class="form-control" [disabled]= "disabledLoaiDoiTuong" formControlName="loaidoituong" (selectionChange)="selectItemLoaiDoiTuongChange()"
                       *ngIf="dataTranslate">
                       <mat-option *ngFor="let loaiDoiTuong of loaiDoiTuongList" [value]="loaiDoiTuong.id">
                         {{ loaiDoiTuong.name }}
@@ -230,31 +251,31 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochuc" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.tencanhantochuc" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-6 col-md-6 col-sm-6">
-                    <input class="form-control" type="text" formControlName="tencanhantochuc" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochucPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="tencanhantochuc" placeholder="{{'HOSOGIAYTO.giayphep.tencanhantochucPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.tencanhantochuc || formErrors.idcanhantochuc" class="alert-danger">{{formErrors.tencanhantochuc ? formErrors.tencanhantochuc : formErrors.idcanhantochuc}}</span>
                   </div>
                   <div class="col-lg-2 col-md-2 col-sm-2">
-                    <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCaNhanToChucIOSidenav()">
+                    <button class="btn btn-primary mb-sm-1" *ngIf="!disabledLoaiDoiTuong" style="float: right;" (click)="openCaNhanToChucIOSidenav()">
                       <i class="fal fa-plus-square"></i>
                       {{ "COMMON.default.select" | translate }}
                     </button>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.loaigiayto" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.loaigiayto" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <mat-select class="form-control" placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaigiayto' | translate }}" formControlName="loaigiayto"
+                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaigiayto' | translate }}" formControlName="loaigiaytoDisplay"
                       *ngIf="dataTranslate">
                       <mat-select-filter [displayMember]="'name'" [array]="loaiGiayToFilters" (filteredReturn)="loaiGiayToList = $event">
                       </mat-select-filter>
                       <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaigiayto" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.chonloaigiayto" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let loaiGiayTo of loaiGiayToList" [value]="loaiGiayTo.id">
                         {{ loaiGiayTo.name }}
@@ -264,71 +285,71 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayto" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayto" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="sogiayto" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiaytoPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="sogiaytoDisplay" placeholder="{{'HOSOGIAYTO.giayphep.sogiaytoPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.sogiayto" class="alert-danger">{{formErrors.sogiayto}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap" | translate}}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.ngaycap" | translate}}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaycap" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycapPlaceholder' | translate}}" />
+                    <input class="form-control" formControlName="ngaycapDisplay" [owlDateTimeTrigger]="dt4" [owlDateTime]="dt4" placeholder="{{'HOSOGIAYTO.giayphep.ngaycapPlaceholder' | translate}}" />
                     <owl-date-time #dt4 [pickerType]="'calendar'"></owl-date-time>
                     <span *ngIf="formErrors.ngaycap" class="alert-danger">{{formErrors.ngaycap}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.noicap" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.noicap" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="noicap" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.noicapPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="noicapDisplay" placeholder="{{'HOSOGIAYTO.giayphep.noicapPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.noicap" class="alert-danger">{{formErrors.noicap}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.diachi" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.diachi" | translate }}
                     <small>(*)</small>
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="diachi" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.diachiPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="diachiDisplay" placeholder="{{'HOSOGIAYTO.giayphep.diachiPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.diachi" class="alert-danger">{{formErrors.diachi}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.dienthoai" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.dienthoai" | translate }}
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="dienthoai" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.dienthoaiPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="dienthoai" placeholder="{{'HOSOGIAYTO.giayphep.dienthoaiPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.dienthoai" class="alert-danger">{{formErrors.dienthoai}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.fax" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.fax" | translate }}
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="fax" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.faxPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="fax" placeholder="{{'HOSOGIAYTO.giayphep.faxPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.fax" class="alert-danger">{{formErrors.fax}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.email" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.email" | translate }}
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="email" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.emailPlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="email" placeholder="{{'HOSOGIAYTO.giayphep.emailPlaceholder' | translate}}" />
                     <span *ngIf="formErrors.email" class="alert-danger">{{formErrors.email}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.website" | translate }}
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.website" | translate }}
                   </label>
                   <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="website" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.websitePlaceholder' | translate}}" />
+                    <input class="form-control" type="text" formControlName="website" placeholder="{{'HOSOGIAYTO.giayphep.websitePlaceholder' | translate}}" />
                     <span *ngIf="formErrors.website" class="alert-danger">{{formErrors.website}}</span>
                   </div>
                 </div>

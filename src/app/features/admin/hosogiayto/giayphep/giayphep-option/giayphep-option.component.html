@@ -1,17 +1,17 @@
-<div class="pt-3">
+<div class="pt-5 pl-2 pr-2">
   <div class="container-fluid">
-    <!-- <div class="row">
-      <div class="col-12 px-0"> -->
+    <div class="row">
+      <div class="col-12 px-0">
         <div class="card border">
           <div class="card-body">
-            <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
+            <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
             <div class="row" [formGroup]="formSearch">
-              <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-                <label class="col-form-label text-right">{{"COMMON.default.key" | translate}}:</label>
+              <div class="col-lg-2 col-md-2 col-sm-2"><label class="col-form-label">{{"COMMON.default.key" | translate}}:</label></div>
+              <div class="col-lg-5 col-md-7 col-sm-8 form-group">
                 <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
               </div>
-              <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-                <button class="btn btn-success" style="position: absolute; bottom: 0;" (click)="getAllHoSo()">
+              <div class="col-lg-5 col-md-5 col-sm-2 form-group d-flex" style="align-items: flex-end;">
+                <button class="btn btn-success" (click)="getAllGiayPhep()">
                   <i class="fal fa-search"></i>
                   {{"COMMON.default.search" | translate}}
                 </button>
@@ -19,26 +19,21 @@
             </div>
           </div>
         </div>
-      <!-- </div>
-    </div> -->
+      </div>
+    </div>
   </div>
   <div class="container-fluid">
-    <!-- <div class="row">
-      <div class="col-12 px-0"> -->
+    <div class="row">
+      <div class="col-12 px-0">
         <div class="card border">
           <div class="card-header">
             <h3>
               <div class="row">
-                <div class="col-md-7 mb-sm-1">
-                  <span class="title" *ngIf="title">{{ title }}</span>
-                  <span class="title" *ngIf="!title">{{ "DANGKYHOATDONGKHOANGSAN.hoso.titleList" | translate }}</span>
+                <div class="col-md-4 mb-sm-1">
+                  <span class="title">{{ "HOSOGIAYTO.giayphep.titleList" | translate }}</span>
                 </div>
-                <div class="col-md-5">
-                  <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="addItemHoSo()">
-                    <i class="fal fa-plus-square"></i>
-                    {{ "COMMON.default.add" | translate }}
-                  </button>
-                  <button class="btn btn-outline-primary mr-2 mb-sm-1" style="float: right;" (click)="reloadDataGrid()">
+                <div class="col-md-8">
+                  <button class="btn btn-outline-primary" style="float: right;" (click)="reloadDataGrid()">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
                   </button>
@@ -46,62 +41,62 @@
               </div>
             </h3>
           </div>
-          <div class="card-body">
-            <ejs-grid #gridHoSo *ngIf="listHoSo" [dataSource]="listHoSo | async"
+          <div class="card-body" >
+            <ejs-grid #gridHoSo *ngIf="listGiayPhep" [dataSource]="listGiayPhep | async"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
               [pageSettings]="settingsCommon.pageSettings" class="table-striped"  [allowTextWrap]="true"
-              [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
+              [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
                 <e-column headerText="{{ 'COMMON.default.ketqua' | translate }}">
                   <ng-template #template let-data>
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                        {{ 'DANGKYHOATDONGKHOANGSAN.hoso.mahoso' | translate }}:
+                        {{ 'HOSOGIAYTO.giayphep.tencanhantochuc' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{data && data.mahoso}}
+                        {{data && data.tencanhantochuc}}
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                        {{ 'DANGKYHOATDONGKHOANGSAN.hoso.mabiennhan' | translate }}:
+                        {{ 'HOSOGIAYTO.giayphep.sogiayphep' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{data && data.mabiennhan}}
+                        {{data && data.sogiayphep}}
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                        {{ 'DANGKYHOATDONGKHOANGSAN.hoso.thutuchanhchinh' | translate }}:
+                        {{ 'HOSOGIAYTO.giayphep.loaicapphep' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{data && data.thutuchanhchinh}}
+                        {{data && data.tenloaicapphep}}
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                        {{ 'DANGKYHOATDONGKHOANGSAN.hoso.loaicapphep' | translate }}:
+                        {{ 'HOSOGIAYTO.giayphep.diachi' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{data && data.loaicapphep}}
+                        {{data && data.diachi}}
                       </div>
                     </div>
                     <div class="row">
                       <div class="col-lg-5 col-md-5 col-sm-5 font-weight-bold">
-                        {{ 'DANGKYHOATDONGKHOANGSAN.hoso.coquantiepnhan' | translate }}:
+                        {{ 'HOSOGIAYTO.giayphep.ngaycap' | translate }}:
                       </div>
                       <div class="col-lg-7 col-md-7 col-sm-7">
-                        {{data && data.coquantiepnhan}}
+                        {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
                       </div>
                     </div>
                   </ng-template>
                 </e-column>
-                <e-column field="idhoso" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.add' | translate }}"
-                        (click)="selectItemHoSo(data)">
+                        (click)="selectItemGiayPhep(data)">
                         <i class="far fa-plus-square"></i>
                       </button>
                     </div>
@@ -111,8 +106,7 @@
             </ejs-grid>
           </div>
         </div>
-      <!-- </div>
-    </div> -->
+      </div>
+    </div>
   </div>
 </div>
-

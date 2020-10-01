@@ -6,9 +6,10 @@ import { ActivatedRoute } from '@angular/router';
 import {ThamDoKhoangSanTabEnum, InsertedState, NhomTaiLieuEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum, CpThamDoKhoangSanTabEnum, GiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
-import { GiayphepIoComponent } from 'src/app/features/admin/hoso-giayto/giayphep/giayphep-io/giayphep-io.component';
+import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-io/giayphep-io.component';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { ButtonBackCpThamDoKhoangSan, MenuCpThamDoKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-cpthamdokhoangsan-io',
@@ -67,7 +68,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
 
   async ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
-      if (param && param.params && param.params.idhoso) {
+      if (param && param.params && param.params.idgiayphep) {
         this.idgiayphep = param.params.idgiayphep;
       }
     });
@@ -76,7 +77,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
     await this.getDataTranslate();
     let existedCapPhepThamDo = false;
 
-    if (this.idgiayphep !== null && this.idgiayphep !== undefined) {
+    if (this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined && this.idgiayphep.trim() !== DefaultValue.Empty) {
       const giayPhepItem = await this.getGiayPhepById(this.idgiayphep);
 
       if (giayPhepItem) {
@@ -119,14 +120,14 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
    * @param idGiayPhep
    */
   private async getGiayPhepById(idGiayPhep: string) {
-    const capPhepHoatDongKhoangSanFacadeService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
-    const giayPhepItem = await capPhepHoatDongKhoangSanFacadeService.getByid(idGiayPhep).toPromise();
+    const giayPhepService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+    const giayPhepItem = await giayPhepService.getByid(idGiayPhep).toPromise();
     return giayPhepItem;
   }
 
   /**
-   * Lấy dữ liệu hồ sơ theo IdHoSo
-   * @param idHoSo
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
    */
   // private async getCapPhepThamDoByIdGiayPhep(loaiCapPhep: string, idHoSo: string) {
   //   if (loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan) {

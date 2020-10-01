@@ -7,24 +7,24 @@
             <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
             <div class="row" [formGroup]="formSearch">
               <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-                <label class="col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.tungay" | translate}}</label>
-                <input class="form-control" formControlName="GTEqualNgaycapphep" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
-                  placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.tungayPlaceholder' | translate}}" />
+                <label class="col-form-label text-right">{{"HOSOGIAYTO.hoso.tungay" | translate}}</label>
+                <input class="form-control" formControlName="GTEqualNgaytiepnhan" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                  placeholder="{{'HOSOGIAYTO.hoso.tungayPlaceholder' | translate}}" />
                 <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-                <label class="col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.giayphep.denngay" | translate}}</label>
-                <input class="form-control" formControlName="LTEqualNgaycapphep" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
-                  placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.giayphep.denngayPlaceholder' | translate}}" />
+                <label class="col-form-label text-right">{{"HOSOGIAYTO.hoso.denngay" | translate}}</label>
+                <input class="form-control" formControlName="LTEqualNgaytiepnhan" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                  placeholder="{{'HOSOGIAYTO.hoso.denngayPlaceholder' | translate}}" />
                 <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
               </div>
               <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-                <label class="col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.loaicapphep" | translate }}:</label>
-                  <mat-select class="form-control" formControlName="Loaicapphep"  placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep' | translate }}"  *ngIf="dataTranslate">
+                <label class="col-form-label text-right">{{ "HOSOGIAYTO.hoso.loaicapphep" | translate }}:</label>
+                  <mat-select class="form-control" formControlName="Loaicapphep"  placeholder="{{ 'HOSOGIAYTO.hoso.chonloaicapphep' | translate }}"  *ngIf="dataTranslate">
                     <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="allLoaiCapPhep = $event">
                     </mat-select-filter>
                     <mat-option value="">
-                      {{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.chonloaicapphep" | translate }}
+                      {{ "HOSOGIAYTO.hoso.chonloaicapphep" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let loaiCapPhep of allLoaiCapPhep" [value]="loaiCapPhep.maloaicapphep">
                       {{ loaiCapPhep.tenloaicapphep }}
@@ -36,7 +36,7 @@
                 <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
               </div>
               <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-                <button class="btn btn-success" style="position: absolute; bottom: 0;" (click)="getAllGiayPhep()">
+                <button class="btn btn-success" style="position: absolute; bottom: 0;" (click)="getAllHoSo()">
                   <i class="fal fa-search"></i>
                   {{"COMMON.default.search" | translate}}
                 </button>
@@ -56,10 +56,10 @@
               <div class="row">
                 <div class="col-md-7 mb-sm-1">
                   <span class="title" *ngIf="title">{{ title }}</span>
-                  <span class="title" *ngIf="!title">{{ "CAPPHEPHOATDONGKHOANGSAN.giayphep.titleList" | translate }}</span>
+                  <span class="title" *ngIf="!title">{{ "HOSOGIAYTO.hoso.titleList" | translate }}</span>
                 </div>
                 <div class="col-md-5">
-                  <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="addItemGiayPhep()">
+                  <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="addItemHoSo()">
                     <i class="fal fa-plus-square"></i>
                     {{ "COMMON.default.add" | translate }}
                   </button>
@@ -72,30 +72,26 @@
             </h3>
           </div>
           <div class="card-body">
-            <ejs-grid #gridGiayPhep *ngIf="listGiayPhep" [dataSource]="listGiayPhep | async"
+            <ejs-grid #gridHoSo *ngIf="listHoSo" [dataSource]="listHoSo | async"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
               [pageSettings]="settingsCommon.pageSettings" class="table-striped"  [allowTextWrap]="true"
               [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="tencanhantochuc" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.tencanhantochuc' | translate }}"></e-column>
-                <e-column field="sogiayphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.sogiayphep' | translate }}"></e-column>
-                <e-column field="tenloaicapphep" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.loaicapphep' | translate }}"></e-column>
-                <e-column field="diachi" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.diachi' | translate }}"></e-column>
-                <e-column field="ngaycap" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.giayphep.ngaycap' | translate }}">
-                  <ng-template #template let-data>
-                    {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
-                  </ng-template>
-                </e-column>
+                <e-column field="mahoso" headerText="{{ 'HOSOGIAYTO.hoso.mahoso' | translate }}"></e-column>
+                <e-column field="mabiennhan" headerText="{{ 'HOSOGIAYTO.hoso.mabiennhan' | translate }}"></e-column>
+                <e-column field="tenthutuchanhchinh" headerText="{{ 'HOSOGIAYTO.hoso.thutuchanhchinh' | translate }}"></e-column>
+                <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.hoso.loaicapphep' | translate }}"></e-column>
+                <e-column field="tencoquantiepnhan" headerText="{{ 'HOSOGIAYTO.hoso.coquantiepnhan' | translate }}"></e-column>
                 <e-column field="idhoso" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                        (click)="editItemGiayPhep(data.idhoso)">
+                        (click)="editItemHoSo(data.idhoso)">
                         <i class="far fa-edit"></i>
                       </button>
                       <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                        (click)="deleteItemGiayPhep(data)">
+                        (click)="deleteItemHoSo(data)">
                         <i class="far fa-trash"></i>
                       </button>
                     </div>
