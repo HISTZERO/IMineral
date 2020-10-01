@@ -70,6 +70,9 @@ import { KtksDonvihanhchinhListComponent } from './khaithackhoangsan/ktks-thongt
 import { KtksLoaikhoangsanComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
 import { KtksLoaikhoangsanIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
 import { KtksLoaikhoangsanListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
+import { KtksCongtrinhkhaithacComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac.component';
+import { KtksCongtrinhkhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component';
+import { KtksCongtrinhkhaithacListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-list/ktks-congtrinhkhaithac-list.component';
 
 @NgModule({
   declarations: [
@@ -120,7 +123,10 @@ import { KtksLoaikhoangsanListComponent } from './khaithackhoangsan/ktks-thongti
     KtksDonvihanhchinhListComponent,
     KtksLoaikhoangsanComponent,
     KtksLoaikhoangsanIoComponent,
-    KtksLoaikhoangsanListComponent
+    KtksLoaikhoangsanListComponent,
+    KtksCongtrinhkhaithacComponent,
+    KtksCongtrinhkhaithacIoComponent,
+    KtksCongtrinhkhaithacListComponent,
   ],
   exports: [
   ],
@@ -153,7 +159,10 @@ import { KtksLoaikhoangsanListComponent } from './khaithackhoangsan/ktks-thongti
     DangkykhaithacdieuchinhIoComponent,
     DangkykhaithacvlxdIoComponent,
     DangkykhaithackhoangsanduanIoComponent,
-    GiayphepOptionComponent
+    GiayphepOptionComponent,
+    KtksDonvihanhchinhIoComponent,
+    KtksLoaikhoangsanIoComponent,
+    KtksCongtrinhkhaithacIoComponent,
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

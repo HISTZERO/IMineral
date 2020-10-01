@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InputDkThamDoLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
 import {OutputDmNhomKhoangSanModel} from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 import {OutputDmLoaiKhoangSanModel} from "src/app/models/admin/danhmuc/loaikhoangsan.model";
 import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
@@ -11,6 +10,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Paging, TrangThaiEnum} from "src/app/shared/constants/enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import {InputDkKhaiThacLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.model";
 
 @Component({
   selector: 'app-ktks-loaikhoangsan-io',
@@ -20,7 +20,7 @@ import {validationAllErrorMessagesService} from "src/app/services/utilities/vali
 export class KtksLoaikhoangsanIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
-  public dKThamDoLoaiKhoangSanIOForm: FormGroup;
+  public dkKhaiThacLoaiKhoangSanIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -32,7 +32,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   public dataTranslate: any;
 
   // Chứa dữ liệu input
-  public inputModel: InputDkThamDoLoaiKhoangSan;
+  public inputModel: InputDkKhaiThacLoaiKhoangSan;
 
   // Chứa danh sách Dvhc Tỉnh
   public allNhomKhoangSan: OutputDmNhomKhoangSanModel[];
@@ -129,7 +129,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.dKThamDoLoaiKhoangSanIOForm = this.formBuilder.group({
+    this.dkKhaiThacLoaiKhoangSanIOForm = this.formBuilder.group({
       nhomkhoangsan: [""],
       loaikhoangsan: [""],
       idloaikhoangsan: ["", Validators.required],
@@ -142,7 +142,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.classColWithFiftyPercentForCombobox = true;
-      this.dKThamDoLoaiKhoangSanIOForm.setValue({
+      this.dkKhaiThacLoaiKhoangSanIOForm.setValue({
         nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
         idloaikhoangsan: this.obj.idloaikhoangsan,
         loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan}
@@ -154,7 +154,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   async bindingConfigAddOrUpdate() {
-    this.inputModel = new InputDkThamDoLoaiKhoangSan();
+    this.inputModel = new InputDkKhaiThacLoaiKhoangSan();
     // check edit
     await this.formOnEdit();
   }
@@ -182,16 +182,16 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   }
 
   async showLoaiKhoangSan(inittState: boolean = false) {
-    if (!this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
+    if (!this.dkKhaiThacLoaiKhoangSanIOForm.value.nhomkhoangsan) {
       this.allLoaiKhoangSan = [];
       this.loaiKhoangSanFilters = [];
-      this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
+      this.dkKhaiThacLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
     } else {
       if (!inittState) {
-        this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
+        this.dkKhaiThacLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
       }
 
-      const nhomKhoangSan = this.dKThamDoLoaiKhoangSanIOForm.controls.nhomkhoangsan.value;
+      const nhomKhoangSan = this.dkKhaiThacLoaiKhoangSanIOForm.controls.nhomkhoangsan.value;
       await this.geAllLoaiKhoangSan(nhomKhoangSan.idnhomkhoangsan);
     }
 
@@ -200,8 +200,8 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
 
   async selectNhomKhoangSan() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
-        this.tenNhomKhoangSanDisplay = this.dKThamDoLoaiKhoangSanIOForm.controls.nhomkhoangsan.value.tennhomkhoangsan;
+      if (this.dkKhaiThacLoaiKhoangSanIOForm.value.nhomkhoangsan) {
+        this.tenNhomKhoangSanDisplay = this.dkKhaiThacLoaiKhoangSanIOForm.controls.nhomkhoangsan.value.tennhomkhoangsan;
       } else {
         this.tenNhomKhoangSanDisplay = this.obj.tennhomkhoangsan;
       }
@@ -215,31 +215,31 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
 
   async selectLoaiKhoangSan() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.dKThamDoLoaiKhoangSanIOForm.value.loaikhoangsan) {
-        this.dKThamDoLoaiKhoangSanIOForm.controls
+      if (this.dkKhaiThacLoaiKhoangSanIOForm.value.loaikhoangsan) {
+        this.dkKhaiThacLoaiKhoangSanIOForm.controls
           .idloaikhoangsan
-          .setValue(this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.value.idloaikhoangsan);
-        this.tenLoaiKhoangSanDisplay = this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.value.tenloaikhoangsan;
+          .setValue(this.dkKhaiThacLoaiKhoangSanIOForm.controls.loaikhoangsan.value.idloaikhoangsan);
+        this.tenLoaiKhoangSanDisplay = this.dkKhaiThacLoaiKhoangSanIOForm.controls.loaikhoangsan.value.tenloaikhoangsan;
       } else {
-        if (this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
-          this.dKThamDoLoaiKhoangSanIOForm.controls
+        if (this.dkKhaiThacLoaiKhoangSanIOForm.value.nhomkhoangsan) {
+          this.dkKhaiThacLoaiKhoangSanIOForm.controls
             .idloaikhoangsan
             .setValue("");
           this.tenLoaiKhoangSanDisplay = "";
         } else {
-          this.dKThamDoLoaiKhoangSanIOForm.controls
+          this.dkKhaiThacLoaiKhoangSanIOForm.controls
             .idloaikhoangsan
             .setValue(this.obj.idloaikhoangsan);
           this.tenLoaiKhoangSanDisplay = this.obj.tenloaikhoangsan;
         }
       }
     } else {
-      if (this.dKThamDoLoaiKhoangSanIOForm.value.loaikhoangsan) {
-        this.dKThamDoLoaiKhoangSanIOForm.controls
+      if (this.dkKhaiThacLoaiKhoangSanIOForm.value.loaikhoangsan) {
+        this.dkKhaiThacLoaiKhoangSanIOForm.controls
           .idloaikhoangsan
-          .setValue(this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.value.idloaikhoangsan);
+          .setValue(this.dkKhaiThacLoaiKhoangSanIOForm.controls.loaikhoangsan.value.idloaikhoangsan);
       } else {
-        this.dKThamDoLoaiKhoangSanIOForm.controls
+        this.dkKhaiThacLoaiKhoangSanIOForm.controls
           .idloaikhoangsan
           .setValue("");
       }
@@ -252,13 +252,13 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dKThamDoLoaiKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoLoaiKhoangSanService();
+    const dkKhaiThacLoaiKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacLoaiKhoangSanService();
     // Gán dữ liệu input vào model
-    this.inputModel.idloaikhoangsan = this.dKThamDoLoaiKhoangSanIOForm.controls.idloaikhoangsan.value;
-    this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModel.idloaikhoangsan = this.dkKhaiThacLoaiKhoangSanIOForm.controls.idloaikhoangsan.value;
+    this.inputModel.iddangkykhaithac = this.obj.iddangkykhaithac;
     if (operMode === "new") {
-      dKThamDoLoaiKhoangSanService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
+      dkKhaiThacLoaiKhoangSanService.addItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -269,9 +269,9 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      this.inputModel.idthamdoloaikhoangsan = this.obj.idthamdoloaikhoangsan;
-      dKThamDoLoaiKhoangSanService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
+      this.inputModel.idkhaithacloaikhoangsan = this.obj.idkhaithacloaikhoangsan;
+      dkKhaiThacLoaiKhoangSanService.updateItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -290,7 +290,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKThamDoLoaiKhoangSanIOForm.valid === true) {
+    if (this.dkKhaiThacLoaiKhoangSanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -301,7 +301,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dKThamDoLoaiKhoangSanIOForm.reset();
+    this.dkKhaiThacLoaiKhoangSanIOForm.reset();
   }
 
   /**
@@ -310,7 +310,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKThamDoLoaiKhoangSanIOForm.valid === true) {
+    if (this.dkKhaiThacLoaiKhoangSanIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -322,7 +322,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.dKThamDoLoaiKhoangSanIOForm,
+      this.dkKhaiThacLoaiKhoangSanIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -331,7 +331,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeDkThamDoLoaiKhoangSanIOSidenav() {
+  public closeDkKhaiThacLoaiKhoangSanIOSidenav() {
     this.matSidenavService.close();
   }
 

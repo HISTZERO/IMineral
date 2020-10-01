@@ -2,7 +2,6 @@ import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, Vie
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {MatSidenav} from "@angular/material/sidenav";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputDkThamDoDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
 import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
@@ -10,6 +9,8 @@ import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-fa
 import {TranslateService} from "@ngx-translate/core";
 import {DonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-io/donvihanhchinh-io.component";
 import {HttpErrorResponse} from "@angular/common/http";
+import {OutputDkKhaiThacDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.model";
+import {KtksDonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component";
 
 @Component({
   selector: 'app-ktks-donvihanhchinh-list',
@@ -26,16 +27,16 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa dữ liệu danh sách đơn vị
-  public listDangKyThamDoDvhc: OutputDkThamDoDvhc[];
+  public listDangKyKhaiThacDvhc: OutputDkKhaiThacDvhc[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDkThamDoDvhc;
+  public selectedItem: OutputDkKhaiThacDvhc;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
-  // Chứa dữ liệu Iddangkythamdo
-  public iddangkythamdo: string;
+  // Chứa dữ liệu Iddangkykhaithac
+  public iddangkykhaithac: string;
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -78,7 +79,7 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
     // Gọi hàm lấy dữ liệu cá nhân
-    await this.getAllDangKyThamDoDvhc();
+    await this.getAllDangKyKhaiThacDvhc();
   }
 
   async manualDataInit() {
@@ -89,38 +90,38 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
   /**
    * Hàm lấy dữ liệu Dvdc
    */
-  async getAllDangKyThamDoDvhc() {
-    if (this.iddangkythamdo === null || this.iddangkythamdo === undefined) {
+  async getAllDangKyKhaiThacDvhc() {
+    if (this.iddangkykhaithac === null || this.iddangkykhaithac === undefined) {
       return;
     }
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
-      .getDangKyThamDoDvhcService()
-      .getDangKyThamDoDvhcByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+      .getDangKyKhaiThacDvhcService()
+      .getDangKyKhaiThacDvhcByIdDangKyKhaiThac(this.iddangkykhaithac).toPromise();
     if (listData) {
       listData.map((dvhc, index) => {
         dvhc.serialNumber = index + 1;
       });
     }
-    this.listDangKyThamDoDvhc = listData;
+    this.listDangKyKhaiThacDvhc = listData;
   }
 
   /**
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.getAllDangKyThamDoDvhc();
+    this.getAllDangKyKhaiThacDvhc();
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemDangKyThamDoDvhc(idThamDoDvhc: any) {
+  async editItemDangKyKhaiThacDvhc(idKhaiThacDvhc: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-      .getDangKyThamDoDvhcService()
-      .getByid(idThamDoDvhc).toPromise();
+      .getDangKyKhaiThacDvhcService()
+      .getByid(idKhaiThacDvhc).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
@@ -132,34 +133,34 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
-    await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", dataItem);
+    await this.matSidenavService.setContentComp(KtksDonvihanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openDangKyThamDoDvhcIOSidenav() {
+  public openDangKyKhaiThacDvhcIOSidenav() {
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
+    this.matSidenavService.setContentComp(KtksDonvihanhchinhIoComponent, "new", {iddangkykhaithac: this.iddangkykhaithac});
     this.matSidenavService.open();
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemDangKyThamDoDvhc(data) {
+  async deleteItemDangKyKhaiThacDvhc(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
-      .getDangKyThamDoDvhcService()
-      .checkBeDeleted(this.selectedItem.idthamdodvhc);
+      .getDangKyKhaiThacDvhcService()
+      .checkBeDeleted(this.selectedItem.idkhaithacdvhc);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -186,10 +187,10 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
-          .getDangKyThamDoDvhcService()
-          .deleteItem({ idthamdodvhc: this.selectedItem.idthamdodvhc })
+          .getDangKyKhaiThacDvhcService()
+          .deleteItem({ idkhaithacdvhc: this.selectedItem.idkhaithacdvhc })
           .subscribe(
-            () => this.getAllDangKyThamDoDvhc(),
+            () => this.getAllDangKyKhaiThacDvhc(),
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoDvhc } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -10,6 +9,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import {InputDkKhaiThacDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.model";
 
 @Component({
   selector: 'app-ktks-donvihanhchinh-io',
@@ -19,7 +19,7 @@ import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dan
 export class KtksDonvihanhchinhIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
-  public dangKyThamDoDvhcIOForm: FormGroup;
+  public dangKyKhaiThacDvhcIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -31,7 +31,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputDkThamDoDvhc;
+  public inputModel: InputDkKhaiThacDvhc;
 
   // Chứa danh sách Dvhc Tỉnh
   public allTinh: any;
@@ -121,7 +121,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
   async bindingConfigAddOrUpdate() {
     await this.showDvhcTinh();
     this.editMode = false;
-    this.inputModel = new InputDkThamDoDvhc();
+    this.inputModel = new InputDkKhaiThacDvhc();
     // check edit
     await this.formOnEdit();
   }
@@ -130,7 +130,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.dangKyThamDoDvhcIOForm = this.formBuilder.group({
+    this.dangKyKhaiThacDvhcIOForm = this.formBuilder.group({
       tinh: ["", Validators.required],
       tinhcombobox: [""],
       huyen: ["", Validators.required],
@@ -146,7 +146,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
   async formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
       this.classColWithFiftyPercentForCombobox = true;
-      this.dangKyThamDoDvhcIOForm.setValue({
+      this.dangKyKhaiThacDvhcIOForm.setValue({
         tinhcombobox: { idtinh: this.obj.idtinh, matinh: this.obj.matinh, tentinh: this.obj.tentinh },
         tinh: { idtinh: this.obj.idtinh, matinh: this.obj.matinh },
         huyencombobox: { idhuyen: this.obj.idhuyen, mahuyen: this.obj.mahuyen, tenhuyen: this.obj.tenhuyen },
@@ -189,24 +189,24 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Huyện
    */
   async showDvhcHuyen() {
-    if (!this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
+    if (!this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox) {
       this.allHuyen = [];
       this.dvhcDistrictFilters = [];
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.huyencombobox.setValue("");
       }
     }
-    if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
+    if (this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.huyencombobox.setValue("");
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
       this.allHuyen = await this.dmFacadeService
         .getDistrictService()
-        .getFetchAll({ IdTinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.idtinh, Trangthai: TrangThaiEnum.Active });
+        .getFetchAll({ IdTinh: this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.idtinh, Trangthai: TrangThaiEnum.Active });
       this.dvhcDistrictFilters = this.allHuyen;
     }
 
@@ -217,20 +217,20 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    * Hàm lấy danh sách Dvhc Xã
    */
   async showDvhcXa() {
-    if (!this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
+    if (!this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.xacombobox.setValue("");
       }
     }
-    if ( this.dangKyThamDoDvhcIOForm.value.tinhcombobox && this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
+    if ( this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox && this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.xacombobox.setValue("");
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
-        .getFetchAll({ IdHuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.idhuyen, Tranthai: TrangThaiEnum.Active });
+        .getFetchAll({ IdHuyen: this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.idhuyen, Tranthai: TrangThaiEnum.Active });
       this.dvhcWardFilters = this.allXa;
     }
 
@@ -242,18 +242,18 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   selectTinh() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
-        this.dangKyThamDoDvhcIOForm.controls.tinh.setValue({
-          idtinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.idtinh,
-          matinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.matinh
+      if (this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox) {
+        this.dangKyKhaiThacDvhcIOForm.controls.tinh.setValue({
+          idtinh: this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.idtinh,
+          matinh: this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.matinh
         });
-        this.tenTinhDisplay = this.dangKyThamDoDvhcIOForm.value.tinhcombobox.tentinh;
-        this.dangKyThamDoDvhcIOForm.controls.huyen.setValue("");
+        this.tenTinhDisplay = this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.tentinh;
+        this.dangKyKhaiThacDvhcIOForm.controls.huyen.setValue("");
         this.tenHuyenDisplay = "";
-        this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
-        this.dangKyThamDoDvhcIOForm.controls.tinh.setValue({
+        this.dangKyKhaiThacDvhcIOForm.controls.tinh.setValue({
           idtinh: this.dataComboboxModel.idtinh,
           matinh: this.dataComboboxModel.matinh
         });
@@ -261,9 +261,9 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
         this.selectHuyen();
       }
     } else {
-      this.dangKyThamDoDvhcIOForm.controls.tinh.setValue({
-        idtinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.idtinh,
-        matinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.matinh
+      this.dangKyKhaiThacDvhcIOForm.controls.tinh.setValue({
+        idtinh: this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.idtinh,
+        matinh: this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox.matinh
       });
       this.tenTinhDisplay = "";
     }
@@ -274,32 +274,32 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   selectHuyen() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
-        this.dangKyThamDoDvhcIOForm.controls.huyen.setValue({
-          idhuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.idhuyen,
-          mahuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.mahuyen
+      if (this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
+        this.dangKyKhaiThacDvhcIOForm.controls.huyen.setValue({
+          idhuyen: this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.idhuyen,
+          mahuyen: this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.mahuyen
         });
-        this.tenHuyenDisplay = this.dangKyThamDoDvhcIOForm.value.huyencombobox.tenhuyen;
-        this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
+        this.tenHuyenDisplay = this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.tenhuyen;
+        this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue("");
         this.tenXaDisplay = "";
       } else {
-        if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
-          this.dangKyThamDoDvhcIOForm.controls.huyen.setValue("");
+        if (this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox) {
+          this.dangKyKhaiThacDvhcIOForm.controls.huyen.setValue("");
           this.tenHuyenDisplay = "";
         } else {
-          this.dangKyThamDoDvhcIOForm.controls.huyen.setValue({
+          this.dangKyKhaiThacDvhcIOForm.controls.huyen.setValue({
             idhuyen: this.dataComboboxModel.idhuyen,
             mahuyen: this.dataComboboxModel.mahuyen
           });
           this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
         }
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyKhaiThacDvhcIOForm.controls.xacombobox.setValue("");
         this.selectXa();
       }
     } else {
-      this.dangKyThamDoDvhcIOForm.controls.huyen.setValue({
-        idhuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.idhuyen,
-        mahuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.mahuyen
+      this.dangKyKhaiThacDvhcIOForm.controls.huyen.setValue({
+        idhuyen: this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.idhuyen,
+        mahuyen: this.dangKyKhaiThacDvhcIOForm.value.huyencombobox.mahuyen
       });
       this.tenHuyenDisplay = "";
     }
@@ -310,18 +310,18 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   selectXa() {
     if (this.obj && this.purpose === 'edit') {
-      if (this.dangKyThamDoDvhcIOForm.value.xacombobox) {
-        this.dangKyThamDoDvhcIOForm.controls.xa.setValue({
-          idxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.idxa,
-          maxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.maxa
+      if (this.dangKyKhaiThacDvhcIOForm.value.xacombobox) {
+        this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue({
+          idxa: this.dangKyKhaiThacDvhcIOForm.value.xacombobox.idxa,
+          maxa: this.dangKyKhaiThacDvhcIOForm.value.xacombobox.maxa
         });
-        this.tenXaDisplay = this.dangKyThamDoDvhcIOForm.value.xacombobox.tenxa;
+        this.tenXaDisplay = this.dangKyKhaiThacDvhcIOForm.value.xacombobox.tenxa;
       } else {
-        if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox || this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
-          this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
+        if (this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox || this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
+          this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue("");
           this.tenXaDisplay = "";
         } else {
-          this.dangKyThamDoDvhcIOForm.controls.xa.setValue({
+          this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue({
             idxa: this.dataComboboxModel.idxa,
             maxa: this.dataComboboxModel.maxa
           });
@@ -329,9 +329,9 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
         }
       }
     } else {
-      this.dangKyThamDoDvhcIOForm.controls.xa.setValue({
-        idxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.idxa,
-        maxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.maxa
+      this.dangKyKhaiThacDvhcIOForm.controls.xa.setValue({
+        idxa: this.dangKyKhaiThacDvhcIOForm.value.xacombobox.idxa,
+        maxa: this.dangKyKhaiThacDvhcIOForm.value.xacombobox.maxa
       });
       this.tenXaDisplay = "";
     }
@@ -342,21 +342,21 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dkThamDoDvhcService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoDvhcService();
+    const dkKhaiThacDvhcService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDvhcService();
     // Gán dữ liệu input vào model
-    const idtinh = this.dangKyThamDoDvhcIOForm.value.tinh.idtinh;
-    const idhuyen = this.dangKyThamDoDvhcIOForm.value.huyen.idhuyen;
-    const idxa = this.dangKyThamDoDvhcIOForm.value.xa.idxa;
-    this.inputModel.matinh = this.dangKyThamDoDvhcIOForm.value.tinh.matinh;
-    this.inputModel.mahuyen = this.dangKyThamDoDvhcIOForm.value.huyen.mahuyen;
-    this.inputModel.maxa = this.dangKyThamDoDvhcIOForm.value.xa.maxa;
+    const idtinh = this.dangKyKhaiThacDvhcIOForm.value.tinh.idtinh;
+    const idhuyen = this.dangKyKhaiThacDvhcIOForm.value.huyen.idhuyen;
+    const idxa = this.dangKyKhaiThacDvhcIOForm.value.xa.idxa;
+    this.inputModel.matinh = this.dangKyKhaiThacDvhcIOForm.value.tinh.matinh;
+    this.inputModel.mahuyen = this.dangKyKhaiThacDvhcIOForm.value.huyen.mahuyen;
+    this.inputModel.maxa = this.dangKyKhaiThacDvhcIOForm.value.xa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
     this.inputModel.idxa = idxa ? idxa : "";
-    this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModel.iddangkykhaithac = this.obj.iddangkykhaithac;
     if (operMode === "new") {
-      dkThamDoDvhcService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDangKyThamDoDvhc"),
+      dkKhaiThacDvhcService.addItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDangKyKhaiThacDvhc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -367,9 +367,9 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
           )
       );
     } else if (operMode === "edit") {
-      this.inputModel.idthamdodvhc = this.obj.idthamdodvhc;
-      dkThamDoDvhcService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDangKyThamDoDvhc"),
+      this.inputModel.idkhaithacdvhc = this.obj.idkhaithacdvhc;
+      dkKhaiThacDvhcService.updateItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllDangKyKhaiThacDvhc"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -388,7 +388,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dangKyThamDoDvhcIOForm.valid === true) {
+    if (this.dangKyKhaiThacDvhcIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -399,7 +399,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyThamDoDvhcIOForm.reset();
+    this.dangKyKhaiThacDvhcIOForm.reset();
   }
 
   /**
@@ -408,7 +408,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dangKyThamDoDvhcIOForm.valid === true) {
+    if (this.dangKyKhaiThacDvhcIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -420,7 +420,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.dangKyThamDoDvhcIOForm,
+      this.dangKyKhaiThacDvhcIOForm,
       this.validationErrorMessages,
       this.formErrors
     );
@@ -429,7 +429,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
   /**
    * Hàm close sidenav
    */
-  public closeDkThamDoDvhcIOSidenav() {
+  public closeDkKhaiThacDvhcIOSidenav() {
     this.matSidenavService.close();
   }
 
