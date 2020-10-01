@@ -136,6 +136,24 @@ export enum DangKyThamDoKhoangSanTabEnum {
 
 export enum CpThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
-  TaiLieuHoSoDinhKem = 1,
+  TaiLieuGiayPhepDinhKem = 1,
+  ThongTinDangKy = 2
+}
+
+export enum CpKhaiThacKhoangSanTabEnum {
+  ThongTinGiayPhep = 0,
+  TaiLieuGiayPhepDinhKem = 1,
+  ThongTinDangKy = 2
+}
+
+export enum CpPheDuyetTruLuongKhoangSanTabEnum {
+  ThongTinGiayPhep = 0,
+  TaiLieuGiayPhepDinhKem = 1,
+  ThongTinDangKy = 2
+}
+
+export enum CpTanThuKhoangSanTabEnum {
+  ThongTinGiayPhep = 0,
+  TaiLieuGiayPhepDinhKem = 1,
   ThongTinDangKy = 2
 }

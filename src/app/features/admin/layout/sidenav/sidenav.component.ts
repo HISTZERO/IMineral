@@ -85,7 +85,7 @@ export class SidenavComponent implements OnInit {
         {
           label: "Phê duyệt trữ lượng khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cppheduyettruluongkhoangsanUri}`
         },
         {
           label: "Đấu giá quyền khai thác khoáng sản",
@@ -95,12 +95,12 @@ export class SidenavComponent implements OnInit {
         {
           label: "Khai thác khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpkhaithackhoangsanUri}`
         },
         {
           label: "Tận thu khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptanthukhoangsanUri}`
         },
         {
           label: "Trả lại giấy phép thăm do, khai thác",

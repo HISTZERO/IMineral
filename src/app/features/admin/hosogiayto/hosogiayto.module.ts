@@ -22,6 +22,8 @@ import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosota
 import { HosotailieuListComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { DmCanhanOptionComponent } from 'src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component';
 import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component';
+import { GiaypheptailieuIoComponent } from './giaypheptailieu/giaypheptailieu-io/giaypheptailieu-io.component';
+import { GiaypheptailieuListComponent } from './giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
 
 
 @NgModule({
@@ -33,7 +35,9 @@ import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/t
     HosoIoComponent,
     HosoOptionComponent,
     HosotailieuIoComponent,
-    HosotailieuListComponent
+    HosotailieuListComponent,
+    GiaypheptailieuIoComponent,
+    GiaypheptailieuListComponent
   ],
   exports: [
     GiayphepListComponent,
@@ -43,7 +47,9 @@ import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/t
     HosoIoComponent,
     HosoOptionComponent,
     HosotailieuIoComponent,
-    HosotailieuListComponent
+    HosotailieuListComponent,
+    GiaypheptailieuIoComponent,
+    GiaypheptailieuListComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -59,7 +65,9 @@ import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/t
     DmCanhanOptionComponent,
     DmTochucOptionComponent,
     HosoOptionComponent,
-    GiayphepOptionComponent
+    HosotailieuIoComponent,
+    GiayphepOptionComponent,
+    GiaypheptailieuIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

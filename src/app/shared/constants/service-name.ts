@@ -38,6 +38,7 @@ export class ServiceName {
   // Hồ sơ
   public static HOSO = "hoso";
   public static TAILIEU = "hstailieu";
+  public static CPTAILIEU = "cptailieu";
   // Đăng ký thăm dò khoáng sản
   public static DANGKYTHAMDOKHOANGSAN = "dangkythamdo";
   public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
