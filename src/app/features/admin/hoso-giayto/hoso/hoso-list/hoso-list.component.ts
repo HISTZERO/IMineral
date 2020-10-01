@@ -8,7 +8,6 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-
 import { NhomLoaiCapPhepEnum, ChiTietDangKyHoatDongKS } from "src/app/shared/constants/nhomloaicapphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {OutputHsHoSoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
@@ -19,6 +18,7 @@ import {GeneralClientService} from "src/app/services/admin/common/general-client
 import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
 import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -98,10 +98,10 @@ export class HosoListComponent implements OnInit {
    */
   formInit() {
     this.formSearch = this.formBuilder.group({
-      GTEqualNgaytiepnhan: [""],
-      LTEqualNgaytiepnhan: [""],
-      Loaicapphep: [""],
-      Keyword: [""],
+      GTEqualNgaytiepnhan: [DefaultValue.Empty],
+      LTEqualNgaytiepnhan: [DefaultValue.Empty],
+      Loaicapphep: [DefaultValue.Empty],
+      Keyword: [DefaultValue.Empty],
     });
   }
 
@@ -157,7 +157,7 @@ export class HosoListComponent implements OnInit {
    * Hàm lấy dữ liệu loại cấp phép
    */
   async getAllLoaiCapPhep() {
-    if (this.nhomLoaiCapPhep === null || this.nhomLoaiCapPhep === undefined) {
+    if (this.nhomLoaiCapPhep === DefaultValue.Null || this.nhomLoaiCapPhep === DefaultValue.Undefined) {
       this.nhomLoaiCapPhep = -1;
     }
 
@@ -174,8 +174,8 @@ export class HosoListComponent implements OnInit {
   async getAllHoSo() {
     this.listHoSo = this.itemService;
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
       Nhomloaicapphep: this.nhomLoaiCapPhep
@@ -190,8 +190,8 @@ export class HosoListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== null && this.formSearch.controls.GTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== null && this.formSearch.controls.LTEqualNgaytiepnhan.value !== "" ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : "",
+      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
     };
@@ -204,10 +204,10 @@ export class HosoListComponent implements OnInit {
    */
   reloadDataGrid() {
     this.formSearch.reset({
-      Keyword: "",
-      GTEqualNgaytiepnhan: "",
-      LTEqualNgaytiepnhan: "",
-      Loaicapphep: "",
+      Keyword: DefaultValue.Empty,
+      GTEqualNgaytiepnhan: DefaultValue.Empty,
+      LTEqualNgaytiepnhan: DefaultValue.Empty,
+      Loaicapphep: DefaultValue.Empty,
     });
     this.getAllHoSo();
   }

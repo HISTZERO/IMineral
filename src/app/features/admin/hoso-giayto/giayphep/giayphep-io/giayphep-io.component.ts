@@ -166,7 +166,8 @@ export class GiayphepIoComponent implements OnInit {
       }
     });
 
-    if (this.idgiayphep !== null && this.idgiayphep !== undefined) {
+    if (this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
+        && this.idgiayphep.trim() !== DefaultValue.Empty) {
       this.currentAction = GiayPhepActionEnum.Edit;
     } else {
       this.currentAction = GiayPhepActionEnum.Add;
@@ -398,10 +399,43 @@ export class GiayphepIoComponent implements OnInit {
     return giayphepItem;
   }
 
+  private validateSaveItemGiayPhep() {
+    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
+    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      ) {
+        const idHoSo = this.giayPhepIOForm.controls.idhoso.value;
+        const idGiayPhepLS = this.giayPhepIOForm.controls.idgiayphepls.value;
+        if ((idHoSo === DefaultValue.Null || idHoSo === DefaultValue.Undefined  || idHoSo.trim() === DefaultValue.Empty)
+            && (idGiayPhepLS === DefaultValue.Null || idGiayPhepLS === DefaultValue.Undefined  || idGiayPhepLS.trim() === DefaultValue.Empty)) {
+          this.commonService.informationDiaLogService(
+            DefaultValue.Empty,
+            this.dataTranslate.HOSOGIAYTO.giayphep.hosogiaytoInformedRequiredSelection,
+            this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle
+          );
+          return false;
+        }
+
+        return true;
+      }
+
+    return true;
+  }
+
+
   async saveItemGiayPhep() {
     this.logAllValidationErrorMessages();
 
     if (!this.giayPhepIOForm.valid) {
+      return;
+    }
+
+    if (!this.validateSaveItemGiayPhep()) {
       return;
     }
 
@@ -503,7 +537,7 @@ export class GiayphepIoComponent implements OnInit {
       const informationDialogRef = this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.chonloaidoituongRequiredDialog,
-        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.informedDialogTitle,
+        this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.informedDialogTitle
       );
     }
   }
@@ -687,7 +721,7 @@ export class GiayphepIoComponent implements OnInit {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedRequiredSelection,
-        this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle,
+        this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle
       );
       return;
     }

@@ -19,6 +19,7 @@ import { GeneralClientService } from "src/app/services/admin/common/general-clie
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { FileService } from 'src/app/services/admin/common/file.service';
 import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 
 @Component({
@@ -285,7 +286,7 @@ export class HosotailieuListComponent implements OnInit {
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
     const dialogRef = this.commonService.confirmSaveDiaLogService
-                              ("", this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
+                              (DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
                               this.dataTranslate.HOSOGIAYTO.tailieu.informedDialogTitle);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -356,7 +357,7 @@ export class HosotailieuListComponent implements OnInit {
    */
   deleteArrayItem() {
     const idItems: string[] = [];
-    const dialogRef = this.commonService.confirmDeleteDiaLogService("", this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfDeleteDialog);
+    const dialogRef = this.commonService.confirmDeleteDiaLogService(DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfDeleteDialog);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         this.listDataSelect.map(res => {

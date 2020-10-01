@@ -4,7 +4,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
@@ -20,6 +19,7 @@ import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/c
 import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-hoso-io',
@@ -81,28 +81,28 @@ export class HosoIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    mahoso: "",
-    mabiennhan: "",
-    soden: "",
-    ngaynop: "",
-    ngaytiepnhan: "",
-    ngaytraketqua: "",
-    loaidoituong: "",
-    loaicapphep: "",
-    hinhthucnophoso: "",
-    hinhthucnhanketqua: "",
-    idcoquantiepnhan: "",
-    idcanhantochuc: "",
-    tencanhantochuc: "",
-    sogiayto: "",
-    loaigiayto: "",
-    ngaycap: "",
-    noicap: "",
-    diachi: "",
-    dienthoai: "",
-    fax: "",
-    email: "",
-    website: "",
+    mahoso: DefaultValue.Empty,
+    mabiennhan: DefaultValue.Empty,
+    soden: DefaultValue.Empty,
+    ngaynop: DefaultValue.Empty,
+    ngaytiepnhan: DefaultValue.Empty,
+    ngaytraketqua: DefaultValue.Empty,
+    loaidoituong: DefaultValue.Empty,
+    loaicapphep: DefaultValue.Empty,
+    hinhthucnophoso: DefaultValue.Empty,
+    hinhthucnhanketqua: DefaultValue.Empty,
+    idcoquantiepnhan: DefaultValue.Empty,
+    idcanhantochuc: DefaultValue.Empty,
+    tencanhantochuc: DefaultValue.Empty,
+    sogiayto: DefaultValue.Empty,
+    loaigiayto: DefaultValue.Empty,
+    ngaycap: DefaultValue.Empty,
+    noicap: DefaultValue.Empty,
+    diachi: DefaultValue.Empty,
+    dienthoai: DefaultValue.Empty,
+    fax: DefaultValue.Empty,
+    email: DefaultValue.Empty,
+    website: DefaultValue.Empty,
   };
 
   constructor(
@@ -140,7 +140,8 @@ export class HosoIoComponent implements OnInit {
       }
     });
 
-    if (this.idhoso !== null && this.idhoso !== undefined) {
+    if (this.idhoso !== DefaultValue.Null && this.idhoso !== DefaultValue.Undefined
+        && this.idhoso !== DefaultValue.Empty) {
       this.currentAction = HoSoActionEnum.Edit;
     } else {
       this.currentAction = HoSoActionEnum.Add;
@@ -158,31 +159,41 @@ export class HosoIoComponent implements OnInit {
    */
   private formInit() {
     this.hosoIOForm = this.formBuilder.group({
-      mahoso: ["", Validators.required],
-      mabiennhan: [""],
-      soden: [""],
-      ngaynop: ["", Validators.required],
-      ngaytiepnhan: ["", Validators.required],
-      ngaytraketqua: ["", Validators.required],
+      mahoso: [DefaultValue.Empty, Validators.required],
+      mabiennhan: [DefaultValue.Empty],
+      soden: [DefaultValue.Empty],
+      ngaynop: [DefaultValue.Empty, Validators.required],
+      ngaytiepnhan: [DefaultValue.Empty, Validators.required],
+      ngaytraketqua: [DefaultValue.Empty, Validators.required],
       loaidoituong: [LoaiDoiTuongEnum.ToChuc, Validators.required],
-      loaicapphep: ["", Validators.required],
-      hinhthucnophoso: ["", Validators.required],
-      hinhthucnhanketqua: ["", Validators.required],
-      idcoquantiepnhan: ["", Validators.required],
-      idcanhantochuc: ["", Validators.required],
-      tencanhantochuc: ["", Validators.required],
-      sogiayto: ["", Validators.required],
-      loaigiayto: ["", Validators.required],
-      ngaycap: ["", Validators.required],
-      noicap: ["", Validators.required],
-      diachi: ["", Validators.required],
-      dienthoai: ["", Validators.pattern("^[0-9-+]+$")],
-      fax: [""],
-      email: [""],
-      website: [""],
+      loaicapphep: [DefaultValue.Empty, Validators.required],
+      hinhthucnophoso: [DefaultValue.Empty, Validators.required],
+      hinhthucnhanketqua: [DefaultValue.Empty, Validators.required],
+      idcoquantiepnhan: [DefaultValue.Empty, Validators.required],
+      idcanhantochuc: [DefaultValue.Empty, Validators.required],
+      tencanhantochuc: [DefaultValue.Empty, Validators.required],
+      sogiayto: [DefaultValue.Empty, Validators.required],
+      sogiaytoDisplay: [DefaultValue.Empty],
+      loaigiayto: [DefaultValue.Empty, Validators.required],
+      loaigiaytoDisplay: [DefaultValue.Empty],
+      ngaycap: [DefaultValue.Empty, Validators.required],
+      ngaycapDisplay: [DefaultValue.Empty],
+      noicap: [DefaultValue.Empty, Validators.required],
+      noicapDisplay: [DefaultValue.Empty],
+      diachi: [DefaultValue.Empty, Validators.required],
+      diachiDisplay: [DefaultValue.Empty],
+      dienthoai: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
+      fax: [DefaultValue.Empty],
+      email: [DefaultValue.Empty],
+      website: [DefaultValue.Empty],
     });
 
     this.hosoIOForm.controls.tencanhantochuc.disable({ onlySelf: true });
+    this.hosoIOForm.controls.loaigiaytoDisplay.disable({ onlySelf: true });
+    this.hosoIOForm.controls.sogiaytoDisplay.disable({ onlySelf: true });
+    this.hosoIOForm.controls.ngaycapDisplay.disable({ onlySelf: true });
+    this.hosoIOForm.controls.noicapDisplay.disable({ onlySelf: true });
+    this.hosoIOForm.controls.diachiDisplay.disable({ onlySelf: true });
   }
 
   /**
@@ -220,10 +231,15 @@ export class HosoIoComponent implements OnInit {
           idcanhantochuc: inputModel.idcanhantochuc,
           tencanhantochuc: inputModel.tencanhantochuc,
           sogiayto: inputModel.sogiayto,
+          sogiaytoDisplay: inputModel.sogiayto,
           loaigiayto: inputModel.loaigiayto,
+          loaigiaytoDisplay: inputModel.loaigiayto,
           ngaycap: inputModel.ngaycap,
+          ngaycapDisplay:  inputModel.ngaycap,
           noicap: inputModel.noicap,
+          noicapDisplay: inputModel.noicap,
           diachi: inputModel.diachi,
+          diachiDisplay: inputModel.diachi,
           dienthoai: inputModel.dienthoai,
           fax: inputModel.fax,
           email: inputModel.email,
@@ -362,11 +378,11 @@ export class HosoIoComponent implements OnInit {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.hosoIOForm.reset();
     this.hosoIOForm.controls.loaidoituong.setValue(LoaiDoiTuongEnum.ToChuc);
-    this.hosoIOForm.controls.loaigiayto.setValue("");
-    this.hosoIOForm.controls.loaicapphep.setValue("");
-    this.hosoIOForm.controls.hinhthucnophoso.setValue("");
-    this.hosoIOForm.controls.hinhthucnhanketqua.setValue("");
-    this.hosoIOForm.controls.idcoquantiepnhan.setValue("");
+    this.hosoIOForm.controls.loaigiayto.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.loaicapphep.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.hinhthucnophoso.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.hinhthucnhanketqua.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.idcoquantiepnhan.setValue(DefaultValue.Empty);
   }
 
   /**
@@ -389,7 +405,7 @@ export class HosoIoComponent implements OnInit {
       this.matSidenavService.open();
     } else {
       const informationDialogRef = this.commonService.informationDiaLogService(
-        "",
+        DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.hoso.chonloaidoituongRequiredDialog,
         this.dataTranslate.HOSOGIAYTO.hoso.informedDialogTitle,
       );
@@ -397,12 +413,56 @@ export class HosoIoComponent implements OnInit {
   }
 
   /**
+   * CLear dữ liệu thông tin cá nhân tổ chức trên form UI
+   */
+  private ClearThongTinCaNhanToChucOnUI() {
+    this.hosoIOForm.controls.idcanhantochuc.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.tencanhantochuc.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.loaigiayto.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.loaigiaytoDisplay.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.sogiayto.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.sogiaytoDisplay.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.ngaycap.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.ngaycapDisplay.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.noicap.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.noicapDisplay.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.diachi.setValue(DefaultValue.Empty);
+    this.hosoIOForm.controls.diachiDisplay.setValue(DefaultValue.Empty);
+  }
+
+  /**
+   * khởi tạo thông tin cá nhân tổ chức trên form UI
+   */
+  private CreateThongTinCaNhanToChucOnUI(item: any, loaiDoiTuong: number) {
+    if (loaiDoiTuong !== LoaiDoiTuongEnum.CaNhan && loaiDoiTuong !== LoaiDoiTuongEnum.ToChuc) {
+      this.ClearThongTinCaNhanToChucOnUI();
+      return;
+    }
+
+    this.hosoIOForm.controls.loaidoituong.setValue(loaiDoiTuong);
+    this.hosoIOForm.controls.idcanhantochuc.setValue(item.idcanhantochuc);
+    this.hosoIOForm.controls.tencanhantochuc.setValue(item.tencanhantochuc);
+    this.hosoIOForm.controls.loaigiayto.setValue(item.loaigiayto);
+    this.hosoIOForm.controls.loaigiaytoDisplay.setValue(item.loaigiayto);
+    this.hosoIOForm.controls.sogiayto.setValue(item.sogiayto);
+    this.hosoIOForm.controls.sogiaytoDisplay.setValue(item.sogiayto);
+    this.hosoIOForm.controls.ngaycap.setValue(item.ngaycap);
+    this.hosoIOForm.controls.ngaycapDisplay.setValue(item.ngaycap);
+    this.hosoIOForm.controls.noicap.setValue(item.noicap);
+    this.hosoIOForm.controls.noicapDisplay.setValue(item.noicap);
+    this.hosoIOForm.controls.diachi.setValue(item.diachi);
+    this.hosoIOForm.controls.diachiDisplay.setValue(item.diachi);
+  }
+
+  /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
   private selectItemCaNhan(item: OutputDmCanhanModel) {
-    if (item !== null && item !== undefined) {
-      this.hosoIOForm.controls.idcanhantochuc.setValue(item.idcanhan);
-      this.hosoIOForm.controls.tencanhantochuc.setValue(item.hovaten);
+    if (item !== DefaultValue.Null && item !== DefaultValue.Undefined) {
+      const data: any = Object.assign({}, item);
+      data.tencanhantochuc = item.hovaten;
+      data.idcanhantochuc = item.idcanhan;
+      this.CreateThongTinCaNhanToChucOnUI(data, LoaiDoiTuongEnum.CaNhan);
     }
   }
 
@@ -410,18 +470,19 @@ export class HosoIoComponent implements OnInit {
    * lấy item dữ liệu đối tượng tổ chức từ popup
    */
   private selectItemToChuc(item: OutputDmToChucModel) {
-    if (item !== null && item !== undefined) {
-      this.hosoIOForm.controls.idcanhantochuc.setValue(item.idtochuc);
-      this.hosoIOForm.controls.tencanhantochuc.setValue(item.tentochuc);
+    if (item !== DefaultValue.Null && item !== DefaultValue.Undefined) {
+      const data: any = Object.assign({}, item);
+      data.tencanhantochuc = item.tentochuc;
+      data.idcanhantochuc = item.idtochuc;
+      this.CreateThongTinCaNhanToChucOnUI(data,  LoaiDoiTuongEnum.ToChuc);
     }
   }
 
   /**
    * Thay đổi loại đối tượng trên form
    */
-  selectLoaiDoiTuongChange() {
-    this.hosoIOForm.controls.idcanhantochuc.setValue("");
-    this.hosoIOForm.controls.tencanhantochuc.setValue("");
+  selectItemLoaiDoiTuongChange() {
+    this.ClearThongTinCaNhanToChucOnUI();
   }
 
   /**

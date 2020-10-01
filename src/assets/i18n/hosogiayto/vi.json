@@ -195,6 +195,7 @@
     "diachiRequired": "Địa chỉ không được để trống",
     "dienthoaiIsNumber": "Số điện thoại phải là kiểu số",
     "loaicapphepInformedRequiredSelection": "Yêu cầu chọn loại cấp phép",
+    "hosogiaytoInformedRequiredSelection": "Yêu cầu chọn hồ sơ hoặc giấy phép lịch sử",
     "informedDialogTitle": "Thông báo"
   }
 }
