@@ -18,11 +18,23 @@ import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphepho
 import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
 import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
+import { CpkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-list/cpkhaithackhoangsan-list.component';
+import { CpkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-io/cpkhaithackhoangsan-io.component';
+import { CppheduyettruluongkhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cppheduyettruluongkhoangsan-list/cppheduyettruluongkhoangsan-list.component';
+import { CppheduyettruluongkhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cppheduyettruluongkhoangsan-io/cppheduyettruluongkhoangsan-io.component';
+import { CptanthukhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan-io/cptanthukhoangsan-io.component';
+import { CptanthukhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan-list/cptanthukhoangsan-list.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
   CpthamdokhoangsanListComponent,
-  CpthamdokhoangsanIoComponent
+  CpthamdokhoangsanIoComponent,
+  CpkhaithackhoangsanListComponent,
+  CpkhaithackhoangsanIoComponent,
+  CppheduyettruluongkhoangsanListComponent,
+  CppheduyettruluongkhoangsanIoComponent,
+  CptanthukhoangsanListComponent,
+  CptanthukhoangsanIoComponent,
   ],
   exports: [
   ],

@@ -3,21 +3,20 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
-import { InputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
-import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { InputCpTaiLieuModel } from 'src/app/models/admin/hosogiayto/cptailieu.model';
 
 
 @Component({
-  selector: 'app-hosotailieu-io',
-  templateUrl: './hosotailieu-io.component.html',
-  styleUrls: ['./hosotailieu-io.component.scss']
+  selector: 'app-giaypheptailieu-io',
+  templateUrl: './giaypheptailieu-io.component.html',
+  styleUrls: ['./giaypheptailieu-io.component.scss']
 })
-export class HosotailieuIoComponent implements OnInit {
+export class GiaypheptailieuIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
   public tailieuIOForm: FormGroup;
@@ -29,7 +28,7 @@ export class HosotailieuIoComponent implements OnInit {
   public purpose: string;
 
   // Chứa dữ liệu input
-  public inputModel: InputHsTaiLieuModel;
+  public inputModel: InputCpTaiLieuModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -52,7 +51,7 @@ export class HosotailieuIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+              public hoSoGiayToFacadeService: HoSoGiayToFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
               private translate: TranslateService,
@@ -86,8 +85,6 @@ export class HosotailieuIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       tentailieu: { required: this.dataTranslate.HOSOGIAYTO.tailieu.tentailieuRequired },
-      sobanchinh: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.sobanchinhIsNumber },
-      sobansao: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.sobansaoIsNumber },
       thutu: { pattern: this.dataTranslate.HOSOGIAYTO.tailieu.thutuIsNumber }
     };
   }
@@ -96,7 +93,7 @@ export class HosotailieuIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.inputModel = new InputHsTaiLieuModel();
+    this.inputModel = new InputCpTaiLieuModel();
     // check edit
     this.formOnEdit();
   }
@@ -107,8 +104,6 @@ export class HosotailieuIoComponent implements OnInit {
   formInit() {
     this.tailieuIOForm = this.formBuilder.group({
       tentailieu: [DefaultValue.Empty, Validators.required],
-      sobanchinh: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
-      sobansao: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
       thutu: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
     });
     this.disabled = false;
@@ -121,8 +116,6 @@ export class HosotailieuIoComponent implements OnInit {
     if (this.obj && (this.purpose === 'edit' || this.purpose === 'upload')) {
       this.tailieuIOForm.setValue({
         tentailieu: this.obj.tentailieu,
-        sobanchinh: this.obj.sobanchinh,
-        sobansao: this.obj.sobansao,
         thutu: this.obj.thutu,
       });
     }
@@ -146,37 +139,28 @@ export class HosotailieuIoComponent implements OnInit {
    */
   private addOrUpdate(operMode: string) {
     if (this.obj === DefaultValue.Null || this.obj === DefaultValue.Undefined
-      || this.obj.idhoso ===  DefaultValue.Null || this.obj.idhoso === DefaultValue.Undefined
-      || this.obj.idhoso.trim() === DefaultValue.Empty) {
+        || this.obj.idgiayphep === DefaultValue.Null || this.obj.idgiayphep === DefaultValue.Undefined
+        || this.obj.idgiayphep.trim() === DefaultValue.Empty) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
-        this.dataTranslate.HOSOGIAYTO.giayphep.hosoInvalid,
+        this.dataTranslate.HOSOGIAYTO.giayphep.giayphepInvalid,
         this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle
       );
 
       return;
     }
 
-    if (operMode !== "upload" && this.obj && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuKhongBatBuoc
-        && this.obj.nhomtailieu !== NhomTaiLieuEnum.TaiLieuXuLyHoSo) {
-      return;
-    }
-
     // Gán dữ liệu input vào model
-    const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
+    const giayPhepTaiLieu = this.hoSoGiayToFacadeService.getGiayPhepTaiLieuService();
     this.inputModel = this.tailieuIOForm.value;
-
     const formData: FormData = new FormData();
     formData.append("File", this.fileData);
-    formData.append("Idhoso", this.obj.idhoso);
+    formData.append("Idgiayphep", this.obj.idgiayphep);
     formData.append("Tentailieu", this.inputModel.tentailieu);
-    formData.append("Sobanchinh", this.inputModel.sobanchinh ? this.inputModel.sobanchinh.toString() : DefaultValue.Empty);
-    formData.append("Sobansao", this.inputModel.sobansao ? this.inputModel.sobansao.toString() : DefaultValue.Empty);
-    formData.append("Nhomtailieu", this.obj.nhomtailieu ? this.obj.nhomtailieu.toString() : DefaultValue.Empty);
-    formData.append("thutu", this.inputModel.thutu ? this.inputModel.thutu.toString() : DefaultValue.Empty);
+    formData.append("Thutu", this.inputModel.thutu ? this.inputModel.thutu.toString() : DefaultValue.Empty);
 
     if (operMode === "new") {
-      dkhdksService.addItem(formData).subscribe(
+      giayPhepTaiLieu.addItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllTaiLieu"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -189,7 +173,7 @@ export class HosotailieuIoComponent implements OnInit {
       );
     } else if (operMode === "edit" || operMode === "upload") {
       formData.append("Idtailieu", this.obj.idtailieu);
-      dkhdksService.updateItem(formData).subscribe(
+      giayPhepTaiLieu.updateItem(formData).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllTaiLieu"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -247,8 +231,8 @@ export class HosotailieuIoComponent implements OnInit {
       );
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
-          const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
-          dkhdksService.removeFileHsTaiLieu({ idtailieu: this.obj.idtailieu }).subscribe(
+          const giayPhepService = this.hoSoGiayToFacadeService.getGiayPhepTaiLieuService();
+          giayPhepService.removeFileCpTaiLieu({ idtailieu: this.obj.idtailieu }).subscribe(
             (res) => {
               this.obj.duongdan = DefaultValue.Empty;
               this.obj.filedinhkem = DefaultValue.Empty;
