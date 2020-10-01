@@ -48,12 +48,12 @@ export const NhomLoaiGiayPhep = [
 // }
 
 export const ChiTietCapPhepHoatDongKS: any = {
-  [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: AdminRoutingName.cpThamdokhoangsanchitietUri,
-  [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: AdminRoutingName.cpKhaithackhoangsanChitiet,
-  [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: AdminRoutingName.cpPheDuyetTruLuongChitiet,
-  [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.cpDauGiaQuyenChitiet,
-  [NhomLoaiCapPhepEnum.TanThuKhoangSan]: AdminRoutingName.cpTanthukhoangsanChiTiet,
-  [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: AdminRoutingName.cpTralaigiayphepChiTiet,
-  [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.cpDongcuamoChiTiet,
-  [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.cpchuyennhuongquyenchitiet,
+  [NhomLoaiCapPhepEnum.ThamDoKhoangSan]: AdminRoutingName.cpthamdokhoangsanchitietUri,
+  [NhomLoaiCapPhepEnum.KhaiThacKhoangSan]: AdminRoutingName.cpkhaithackhoangsanchitietUri,
+  [NhomLoaiCapPhepEnum.PheDuyetTruLuong]: AdminRoutingName.cppheduyettruluongchitietUri,
+  [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.cpdaugiaquyenchitietUri,
+  [NhomLoaiCapPhepEnum.TanThuKhoangSan]: AdminRoutingName.cptanthukhoangsanchitietUri,
+  [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: AdminRoutingName.cptralaigiayphepchitietUri,
+  [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.cpdongcuamochiTietUri,
+  [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.cpchuyennhuongquyenchitietUri,
 };
