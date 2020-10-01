@@ -258,7 +258,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
     if (operMode === "new") {
       dKThamDoLoaiKhoangSanService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
+        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -271,7 +271,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idthamdoloaikhoangsan = this.obj.idthamdoloaikhoangsan;
       dKThamDoLoaiKhoangSanService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
+        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },

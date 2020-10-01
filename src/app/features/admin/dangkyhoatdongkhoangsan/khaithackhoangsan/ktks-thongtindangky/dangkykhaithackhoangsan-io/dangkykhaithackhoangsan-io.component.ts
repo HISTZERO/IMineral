@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
+import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
@@ -71,6 +71,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     truluongkhaithac: "",
     thoihankhaithac: "",
     thoigianxaydungmo: "",
+    dangkhoangsan: "",
     phuongphapkhaithac: "",
     congsuatkhaithac: "",
     mucsaukhaithactu: "",
@@ -83,6 +84,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
     donvithoihanxaymo: "",
     donvichieusau: "",
     hequychieu: "",
+
   };
 
   constructor(
@@ -96,8 +98,10 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
+
     // Khởi tạo form
     this.formInit();
+
     // Lấy dữ liệu translate
     await this.getDataTranslate();
 
@@ -134,6 +138,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
 
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
+
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit(this.dangKyKhaiThacKhoangSan);
 
@@ -151,6 +156,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       truluongkhaithac: [""],
       thoihankhaithac: [""],
       thoigianxaydungmo: [""],
+      dangkhoangsan: [""],
       phuongphapkhaithac: [""],
       congsuatkhaithac: [""],
       mucsaukhaithactu: [""],
@@ -167,19 +173,21 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * hàm lấy dữ liệu translate
+   * Hàm lấy dữ liệu translate
    */
   async getDataTranslate() {
+
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+
     // Hàm set validation cho form
     await this.setValidation();
   }
 
   /**
-   * hàm set value cho form
+   * Hàm set value cho form
    */
   private async formOnEdit(item: OutputDkKhaiThacKhoangSanModel) {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit && item) {
@@ -242,10 +250,13 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacKsByIdHoSo(idHoSo: string) {
     const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
-    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({Idhoso: idHoSo});
+    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
+  /**
+   * Lưu dữ liệu đăng ký khai thác khoáng sản
+   */
   async saveItemDangKyKhaiThacKhoangSan() {
     this.logAllValidationErrorMessages();
 
@@ -296,7 +307,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * hàm kiểm tra validation form
+   * Hàm kiểm tra validation form
    */
   private logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
@@ -307,7 +318,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * select inserted state of form
+   * Select inserted state of form
    */
   private selectCurrentFormState() {
     if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
@@ -320,14 +331,14 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   * Lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIdDangKyKhaiThacKhoangSan() {
     this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacKhoangSan.iddangkykhaithac);
   }
 
   /**
-   *
+   * Xóa item đăng ký khai thác khoáng sản
    */
   deleteItemDangKyKhaiThacKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
@@ -338,7 +349,7 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyKhaiThacKhoangSanService()
-          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacKhoangSan.iddangkykhaithac})
+          .deleteItem({ iddangkykhaithac: this.dangKyKhaiThacKhoangSan.iddangkykhaithac })
           .subscribe(
             () => {
               this.dangKyKhaiThacKhoangSan = null;
@@ -364,6 +375,27 @@ export class DangkykhaithackhoangsanIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyKhaiThacKSIOForm.reset();
+    this.dangKyKhaiThacKSIOForm.reset({
+      diadiem: "",
+      dientichkhaithac: "",
+      truluongdiachat: "",
+      truluongkhaithac: "",
+      thoihankhaithac: "",
+      thoigianxaydungmo: "",
+      dangkhoangsan: "",
+      phuongphapkhaithac: "",
+      congsuatkhaithac: "",
+      mucsaukhaithactu: "",
+      mucsaukhaithacden: "",
+      mucdichsudungkhoangsan: "",
+      donvitruluong: "",
+      donvicongsuat: "",
+      donvidientich: "",
+      donvithoihan: "",
+      donvithoihanxaymo: "",
+      donvichieusau: "",
+      hequychieu: "",
+
+    });
   }
 }

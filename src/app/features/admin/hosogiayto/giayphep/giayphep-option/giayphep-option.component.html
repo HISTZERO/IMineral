@@ -6,9 +6,11 @@
           <div class="card-body">
             <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}:</h4>
             <div class="row" [formGroup]="formSearch">
-              <div class="col-lg-2 col-md-2 col-sm-2"><label class="col-form-label">{{"COMMON.default.key" | translate}}:</label></div>
+              <div class="col-lg-2 col-md-2 col-sm-2"><label
+                  class="col-form-label">{{"COMMON.default.key" | translate}}:</label></div>
               <div class="col-lg-5 col-md-7 col-sm-8 form-group">
-                <input type="text" formControlName="Keyword" class="form-control" placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
+                <input type="text" formControlName="Keyword" class="form-control"
+                  placeholder="{{'COMMON.default.keyPlaceholder' | translate}}">
               </div>
               <div class="col-lg-5 col-md-5 col-sm-2 form-group d-flex" style="align-items: flex-end;">
                 <button class="btn btn-success" (click)="getAllGiayPhep()">
@@ -29,10 +31,10 @@
           <div class="card-header">
             <h3>
               <div class="row">
-                <div class="col-md-4 mb-sm-1">
+                <div class="col-md-7 mb-sm-1">
                   <span class="title">{{ "HOSOGIAYTO.giayphep.titleList" | translate }}</span>
                 </div>
-                <div class="col-md-8">
+                <div class="col-md-5">
                   <button class="btn btn-outline-primary" style="float: right;" (click)="reloadDataGrid()">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
@@ -41,13 +43,14 @@
               </div>
             </h3>
           </div>
-          <div class="card-body" >
+          <div class="card-body">
             <ejs-grid #gridHoSo *ngIf="listGiayPhep" [dataSource]="listGiayPhep | async"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-              [pageSettings]="settingsCommon.pageSettings" class="table-striped"  [allowTextWrap]="true"
+              [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowTextWrap]="true"
               [allowResizing]="true" (dataStateChange)="dataStateChange($event)">
               <e-columns>
-                <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+                <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
+                </e-column>
                 <e-column headerText="{{ 'COMMON.default.ketqua' | translate }}">
                   <ng-template #template let-data>
                     <div class="row">

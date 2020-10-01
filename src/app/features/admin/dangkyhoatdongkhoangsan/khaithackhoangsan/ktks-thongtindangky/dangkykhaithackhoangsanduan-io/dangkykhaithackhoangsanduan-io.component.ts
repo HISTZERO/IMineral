@@ -1,24 +1,25 @@
-import {Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {ActivatedRoute} from '@angular/router';
-import {FormGroup, FormBuilder, Validators} from '@angular/forms';
-import {HttpErrorResponse} from '@angular/common/http';
+import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { ActivatedRoute } from '@angular/router';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpErrorResponse } from '@angular/common/http';
 
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import {DangKhoangSanEnum, DangKyKhaiThacKsActionEnum} from 'src/app/shared/constants/enum';
-import {CommonServiceShared} from 'src/app/services/utilities/common-service';
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {OutputDmHeQuyChieuModel} from 'src/app/models/admin/danhmuc/hequychieu.model';
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import {
   DangKhoangSan,
   DonViCongSuat,
   DonViDienTich,
   DonViDoSau,
   DonViThoiHan,
-  DonViTruLuong
+  DonViTruLuong,
+  PhuongPhapKhaiThac
 } from 'src/app/shared/constants/common-constants';
-import {OutputDkKhaiThacKhoangSanDuAnModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.model";
+import { OutputDkKhaiThacKhoangSanDuAnModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.model";
 
 
 
@@ -33,7 +34,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacGiaHanEvent") selectIdDangKyKhaiThacKhoangSanDuAnEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -70,6 +71,9 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
   public donViCongSuat = DonViCongSuat;
   // error message
   validationErrorMessages = {};
+
+  // Chứa phương pháp khai thác
+  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
 
   // form errors
   formErrors = {
@@ -237,7 +241,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -248,7 +252,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacKhoangSanDuAnByIdHoSo(idHoSo: string) {
     const dkKhaiThacKhoangSanDuAnService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanDuAnService();
-    const dangKyItem = await dkKhaiThacKhoangSanDuAnService.getFetchAll({Idhoso: idHoSo});
+    const dangKyItem = await dkKhaiThacKhoangSanDuAnService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
@@ -329,7 +333,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
    * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIddangKyKhaiThacKhoangSanDuAn() {
-    this.selectIdDangKyKhaiThacKhoangSanDuAnEvent.emit(this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac);
+    this.selectIdDangKyKhaiThacKhoangSanEvent.emit(this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac);
   }
 
   /**
@@ -344,7 +348,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyKhaiThacKhoangSanDuAnService()
-          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac})
+          .deleteItem({ iddangkykhaithac: this.dangKyKhaiThacKhoangSanDuAn.iddangkykhaithac })
           .subscribe(
             () => {
               this.dangKyKhaiThacKhoangSanDuAn = null;
@@ -370,7 +374,29 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dangKyKhaiThacKhoangSanDuAnIOForm.reset();
+    this.dangKyKhaiThacKhoangSanDuAnIOForm.reset({
+      tenduan: "",
+      soquyetdinh: "",
+      ngaykyquyetdinh: "",
+      coquanpheduyet: "",
+      diadiem: "",
+      dientichkhaithac: "",
+      truluongdiachat: "",
+      truluongkhaithac: "",
+      thoihankhaithac: "",
+      phuongphapkhaithac: "",
+      congsuatkhaithac: "",
+      mucsaukhaithactu: "",
+      mucsaukhaithacden: "",
+      dangkhoangsan: "",
+      mucdichsudungkhoangsan: "",
+      donvitruluong: "",
+      donvicongsuat: "",
+      donvidientich: "",
+      donvithoihan: "",
+      donvichieusau: "",
+      hequychieu: ""
+    });
   }
 
 
