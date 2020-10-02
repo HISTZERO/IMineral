@@ -29,30 +29,18 @@
                 <table class="table table-striped">
                   <thead class="thead-secondary">
                     <tr>
-                      <th scope="col">Thứ tự</th>
-                      <th scope="col">Số hiệu</th>
-                      <th scope="col">Tọa độ x</th>
-                      <th scope="col">Tọa độ y</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutu' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieu' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadox' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoy' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
+                    <tr *ngFor="let i of obj.lstToado">
+                      <th scope="row">{{i.thutu}}</th>
+                      <td>{{i.sohieu}}</td>
+                      <td>{{i.toadox}}</td>
+                      <td>{{i.toadoy}}</td>
                     </tr>
                   </tbody>
                 </table>

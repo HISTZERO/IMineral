@@ -201,8 +201,8 @@ export class KhuvucthamdoIoComponent implements OnInit {
         loaikhuvuc: this.obj.loaikhuvuc,
         hequychieu: this.obj.hequychieu,
       });
-
-      this.getToaDoByIdKhuVuc(this.obj.idthamdokhuvuc);
+      this.listToaDoKhuVuc = this.obj.lstToado;
+      // this.getToaDoByIdKhuVuc(this.obj.idthamdokhuvuc);
     }
   }
 
@@ -220,17 +220,21 @@ export class KhuvucthamdoIoComponent implements OnInit {
   /**
    * Hàm thực thi chức năng add và edit
    */
-  private addOrUpdate(operMode: string) {
+  async addOrUpdate(operMode: string) {
+    
     const dKThamDoKhuVucService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhuVucService();
-    const dkThamDoToaDoKhuVuc = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoToaDoKhuVucService();
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.dKThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModelKhuVuc.loaicapphep = this.obj.loaicapphep;
+    
+    this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
 
     if (operMode === "new") {
-      dKThamDoKhuVucService.addItem(this.inputModelKhuVuc).subscribe(
+      console.log(this.inputModelKhuVuc);
+      await dKThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
-          this.addOrUpdateToaDoKhuVuc(res.idthamdokhuvuc);
+          this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -244,9 +248,9 @@ export class KhuvucthamdoIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idthamdokhuvuc;
       this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
-      dKThamDoKhuVucService.updateItem(this.inputModelKhuVuc).subscribe(
+      dKThamDoKhuVucService.updateKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
-          this.addOrUpdateToaDoKhuVuc();
+          this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -258,6 +262,28 @@ export class KhuvucthamdoIoComponent implements OnInit {
           )
       );
     }
+  }
+
+  async generateModelData() {
+    let listToaDo = {
+      list: []
+    };
+
+    for (let i of this.listToaDoKhuVuc) {
+      let item = {
+        iddangkythamdo: this.obj.iddangkythamdo,
+        idthamdokhuvuc: this.obj.idthamdokhuvuc ? this.obj.idthamdokhuvuc : "",
+        loaicapphep: this.obj.loaicapphep,
+        loaikhuvuc: this.dKThamDoKhuVucIOForm.value.loaikhuvuc,
+        sohieu: i.sohieu,
+        thutu: i.thutu,
+        toadox: i.toadox,
+        toadoy: i.toadoy,
+      };
+      listToaDo.list.push(item);
+    }
+    console.log(listToaDo);
+    return listToaDo;
   }
 
   /**
@@ -273,7 +299,6 @@ export class KhuvucthamdoIoComponent implements OnInit {
   }
 
   async addOrUpdateToaDoKhuVuc(idthamdokhuvuc?: string) {
-    let dataToaDo: any[] = [];
     const loaiKhuVuc = this.dKThamDoKhuVucIOForm.value.loaikhuvuc;
     const idDangKyThamDo = this.obj.iddangkythamdo;
     const loaiCapPhep = this.obj.loaicapphep;

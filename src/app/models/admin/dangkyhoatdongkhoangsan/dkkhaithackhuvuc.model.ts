@@ -1,25 +1,25 @@
-export class OutputDkThamDoKhuVucModel {
-    idthamdokhuvuc: string;
+export class OutputDkKhaiThacKhuVucModel {
+    idkhaithackhuvuc: string;
     tenkhuvuc: string;
     dientich: number;
     donvidientich: string;
-    iddangkythamdo: string;
+    iddangkykhaithac: string;
     loaikhuvuc: number;
+    loaicapphep: string;
     geom: string;
     geovn: string;
     geowgs: string;
     hequychieu: string;
-    siteid: string;
+    siteid: string
 }
 
-export class InputDkThamDoKhuVucModel {
-    idthamdokhuvuc: string;
+export class InputDkKhaiThacKhuVucModel {
+    idkhaithackhuvuc: string;
     tenkhuvuc: string;
     dientich: number;
     donvidientich: string;
-    iddangkythamdo: string;
+    iddangkykhaithac: string;
     loaikhuvuc: number;
-    hequychieu: string;
     loaicapphep: string;
-    toadokhuvuc: any;
+    hequychieu: string;
 }
