@@ -116,6 +116,7 @@ export class AdminRoutingName {
   public static cpdongcuamokhoangsanUri = "cpdongcuamokhoangsan";
   public static cpdaugiaquyenkhaithackhoangsanUri = "cpdaugiaquyenkhaithackhoangsan";
   public static cptralaigiayphepthamdokhaithackhoangsanUri = "cptralaigiayphepthamdokhaithackhoangsan";
+  public static cpchuyennhuongquyenthamdokhaithackhoangsanUri = "cpchuyennhuongquyenthamdokhaithackhoangsan";
   public static cpthamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
   public static cpkhaithackhoangsanchitietUri = "cpkhaithackhoangsanchitiet";
   public static cppheduyettruluongkhoangsanchitietUri = "cppheduyettruluongkhoangsanchitiet";
@@ -123,5 +124,5 @@ export class AdminRoutingName {
   public static cptanthukhoangsanchitietUri = "cptanthukhoangsanchitiet";
   public static cptralaigiayphepthamdokhaithackhoangsanchitietUri = "cptralaigiayphepthamdokhaithackhoangsanchitiet";
   public static cpdongcuamokhoangsanchitietUri = "cpdongcuamokhoangsanchitiet";
-  public static cpchuyennhuongquyenchitietUri = "cpchuyennhuongquyenchitiet";
+  public static cpchuyennhuongquyenthamdokhaithackhoangsanchitietUri = "cpchuyennhuongquyenthamdokhaithackhoangsanchitiet";
 }

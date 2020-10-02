@@ -54,5 +54,13 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "capphepchuyennhuongquyenthamdokhaithackhoangsan": {
+    "titleList": "Danh sách cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "titleAdd": "Thêm mới cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }

@@ -267,3 +267,41 @@ export const ButtonBackCpTraLaiGiayPhepThamDoKhaiThacKhoangSan = [
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`
   },
 ];
+
+// chuyển nhượng quyền thăm dò, khai thác khoáng sản
+export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép chuyển nhượng quyền thăm dò, khai thác khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép chuyển nhượng quyền thăm dò, khai thác khoáng sản",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`,
+  },
+  {
+    title: "Chi tiết",
+    url: "",
+  },
+];
+
+export const ButtonBackCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan = [
+  {
+    title: "Cấp phép chuyển nhượng quyền thăm dò, khai thác khoáng sản",
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`
+  },
+];
