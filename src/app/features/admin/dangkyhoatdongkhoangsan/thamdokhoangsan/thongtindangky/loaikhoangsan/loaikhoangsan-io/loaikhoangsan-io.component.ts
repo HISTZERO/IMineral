@@ -58,7 +58,8 @@ export class LoaikhoangsanIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    idloaikhoangsan: ""
+    idloaikhoangsan: "",
+    tenkhoangsan: "",
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -122,6 +123,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       idloaikhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.loaikhoangsanRequired },
+      tenkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tenkhoangsanRequired },
     };
   }
 
@@ -132,6 +134,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     this.dKThamDoLoaiKhoangSanIOForm = this.formBuilder.group({
       nhomkhoangsan: [""],
       loaikhoangsan: [""],
+      tenkhoangsan: ["", Validators.required],
       idloaikhoangsan: ["", Validators.required],
     });
   }
@@ -144,6 +147,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
       this.classColWithFiftyPercentForCombobox = true;
       this.dKThamDoLoaiKhoangSanIOForm.setValue({
         nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
+        tenkhoangsan: this.obj.tenkhoangsan,
         idloaikhoangsan: this.obj.idloaikhoangsan,
         loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan}
       });
@@ -256,9 +260,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     this.inputModel.idloaikhoangsan = this.dKThamDoLoaiKhoangSanIOForm.controls.idloaikhoangsan.value;
     this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModel.tenkhoangsan = this.dKThamDoLoaiKhoangSanIOForm.controls.tenkhoangsan.value;
     if (operMode === "new") {
       dKThamDoLoaiKhoangSanService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
+        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -271,7 +276,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModel.idthamdoloaikhoangsan = this.obj.idthamdoloaikhoangsan;
       dKThamDoLoaiKhoangSanService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),
+        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoLoaiKhoangSan"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
