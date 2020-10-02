@@ -6,7 +6,7 @@
             <h3 class="card-title">
                 <div class="row">
                     <div class="col-md-8 mb-sm-1">
-                      <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleList" | translate }}</span>
+                      <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-4">
                       <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openDkKhaiThacKhuVucIOSidenav()">
@@ -29,44 +29,32 @@
                 <table class="table table-striped">
                   <thead class="thead-secondary">
                     <tr>
-                      <th scope="col">Thứ tự</th>
-                      <th scope="col">Số hiệu</th>
-                      <th scope="col">Tọa độ x</th>
-                      <th scope="col">Tọa độ y</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutu' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieu' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadox' | translate }}</th>
+                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadoy' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <th scope="row">1</th>
-                      <td>Mark</td>
-                      <td>Otto</td>
-                      <td>@mdo</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">2</th>
-                      <td>Jacob</td>
-                      <td>Thornton</td>
-                      <td>@fat</td>
-                    </tr>
-                    <tr>
-                      <th scope="row">3</th>
-                      <td>Larry</td>
-                      <td>the Bird</td>
-                      <td>@twitter</td>
+                    <tr *ngFor="let i of obj.lstToado">
+                      <th scope="row">{{i.thutu}}</th>
+                      <td>{{i.sohieu}}</td>
+                      <td>{{i.toadox}}</td>
+                      <td>{{i.toadoy}}</td>
                     </tr>
                   </tbody>
                 </table>
               </ng-template>
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="tenkhuvuc" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.tenkhuvuc' | translate }}"></e-column>
-                <e-column field="dientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.dientich' | translate }}"></e-column>
-                <e-column field="donvidientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.donvidientich' | translate }}"></e-column>
+                <e-column field="tenkhuvuc" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.tenkhuvuc' | translate }}"></e-column>
+                <e-column field="dientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.dientich' | translate }}"></e-column>
+                <e-column field="donvidientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.donvidientich' | translate }}"></e-column>
                 <e-column field="idthamdokhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                      (click)="editItemDkKhaiThacKhuVuc(data.idthamdokhuvuc)">
+                      (click)="editItemDkKhaiThacKhuVuc(data.idkhaithackhuvuc)">
                         <i class="far fa-edit"></i>
                       </button>
                       <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"

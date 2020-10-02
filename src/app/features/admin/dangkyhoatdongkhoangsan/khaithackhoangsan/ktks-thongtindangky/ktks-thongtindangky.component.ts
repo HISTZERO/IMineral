@@ -216,6 +216,7 @@ export class KtksThongtindangkyComponent implements OnInit {
       this.dangKyKhaiThacKhuVuc.matSidenav = this.matSidenav;
       this.dangKyKhaiThacKhuVuc.content = this.content;
       this.dangKyKhaiThacKhuVuc.iddangkykhaithac = this.iddangkykhaithac;
+      this.dangKyKhaiThacKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
       this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = await this.dangKyKhaiThacKhuVuc.manualDataInit();
     } else if (index === DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac && !this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac]) {
       this.dangKyKhaiThacCongTrinh.matSidenav = this.matSidenav;
