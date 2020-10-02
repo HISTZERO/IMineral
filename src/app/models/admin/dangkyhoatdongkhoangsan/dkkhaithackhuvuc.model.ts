@@ -10,7 +10,8 @@ export class OutputDkKhaiThacKhuVucModel {
     geovn: string;
     geowgs: string;
     hequychieu: string;
-    siteid: string
+    siteid: string;
+    toado: any;
 }
 
 export class InputDkKhaiThacKhuVucModel {
@@ -22,4 +23,5 @@ export class InputDkKhaiThacKhuVucModel {
     loaikhuvuc: number;
     loaicapphep: string;
     hequychieu: string;
+    toado: any;
 }
