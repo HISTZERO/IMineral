@@ -1,54 +1,78 @@
 <div class="pt-3 pb-4">
   <form [formGroup]="dKThamDoLoaiKhoangSanIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tennhomkhoangsan" | translate }}</label>
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tennhomkhoangsan" | translate }}
+        <small>(*)</small></label>
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
-              (selectionChange)="showLoaiKhoangSan()" *ngIf="dataTranslate">
-              <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters" (filteredReturn)="allNhomKhoangSan = $event">
+            <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"
+                        placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
+                        (selectionChange)="showLoaiKhoangSan()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters"
+                                 (filteredReturn)="allNhomKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan" | translate }}
               </mat-option>
-              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan" [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
+              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan"
+                          [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
                 {{ nhomKhoangSan.tennhomkhoangsan }}
               </mat-option>
             </mat-select>
           </div>
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
-            <label class="m-0" *ngIf="tenNhomKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.nhomkhoangsandangdung" | translate}}:</label><br>
+            <label class="m-0"
+                   *ngIf="tenNhomKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.nhomkhoangsandangdung" | translate}}
+              :</label><br>
             <span><b>{{tenNhomKhoangSanDisplay}}</b></span>
           </div>
         </div>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tenloaikhoangsan" | translate }}
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tenloaikhoangsan" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan' | translate }}"
-              (selectionChange)="selectLoaiKhoangSan()" *ngIf="dataTranslate">
-              <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"(filteredReturn)="allLoaiKhoangSan = $event">
+            <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"
+                        placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan' | translate }}"
+                        (selectionChange)="selectLoaiKhoangSan()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"
+                                 (filteredReturn)="allLoaiKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">
                 {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan" | translate }}
               </mat-option>
-              <mat-option *ngFor="let loaiKhoangSan of allLoaiKhoangSan" [value]="{idloaikhoangsan: loaiKhoangSan.idloaikhoangsan, tenloaikhoangsan: loaiKhoangSan.tenloaikhoangsan}">
+              <mat-option *ngFor="let loaiKhoangSan of allLoaiKhoangSan"
+                          [value]="{idloaikhoangsan: loaiKhoangSan.idloaikhoangsan, tenloaikhoangsan: loaiKhoangSan.tenloaikhoangsan}">
                 {{ loaiKhoangSan.tenloaikhoangsan }}
               </mat-option>
             </mat-select>
             <input type="hidden" class="form-control" formControlName="idloaikhoangsan">
           </div>
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
-            <label class="m-0" *ngIf="tenLoaiKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.loaikhoangsandangdung" | translate}}:</label><br>
+            <label class="m-0"
+                   *ngIf="tenLoaiKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.loaikhoangsandangdung" | translate}}
+              :</label><br>
             <span><b>{{tenLoaiKhoangSanDisplay}}</b></span>
           </div>
         </div>
         <span *ngIf="formErrors.idloaikhoangsan" class="alert-danger">{{formErrors.idloaikhoangsan}}</span>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsan" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="tenkhoangsan"
+               placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsanPlaceholder' | translate}}"/>
+        <span *ngIf="formErrors.tenkhoangsan" class="alert-danger">{{formErrors.tenkhoangsan}}</span>
       </div>
     </div>
     <div class="toolbar-container py-2">
@@ -60,7 +84,7 @@
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
             <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
-              (click)="onContinueAdd(purpose)">
+                    (click)="onContinueAdd(purpose)">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>

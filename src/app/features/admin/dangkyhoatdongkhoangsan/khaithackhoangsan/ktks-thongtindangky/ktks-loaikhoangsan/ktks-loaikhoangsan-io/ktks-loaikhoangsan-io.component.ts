@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OutputDmNhomKhoangSanModel} from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 import {OutputDmLoaiKhoangSanModel} from "src/app/models/admin/danhmuc/loaikhoangsan.model";
@@ -11,6 +11,7 @@ import {Paging, TrangThaiEnum} from "src/app/shared/constants/enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
 import {InputDkKhaiThacLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.model";
+import {DonViTruLuong} from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-ktks-loaikhoangsan-io',
@@ -49,6 +50,9 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   // Chứa trạng thái hiển thị của combobox trên layout
   public classColWithFiftyPercentForCombobox = false;
 
+
+  public donViTruLuongList = DonViTruLuong;
+
   public tenLoaiKhoangSanDisplay: string;
 
   public tenNhomKhoangSanDisplay: string;
@@ -58,7 +62,11 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    idloaikhoangsan: ""
+    idloaikhoangsan: "",
+    tenkhoangsan: "",
+    truluong: "",
+    donvitruluong: "",
+    nhomkhoangsan: "",
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -66,7 +74,8 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
               private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
-              private translate: TranslateService) { }
+              private translate: TranslateService) {
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -121,7 +130,11 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      idloaikhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.loaikhoangsanRequired },
+      idloaikhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.loaikhoangsanRequired},
+      tenkhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsanRequired},
+      nhomkhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.nhomkhoangsanRequired},
+      truluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongFormat},
+      donvitruluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.donvitruluongRequired},
     };
   }
 
@@ -133,6 +146,9 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
       nhomkhoangsan: [""],
       loaikhoangsan: [""],
       idloaikhoangsan: ["", Validators.required],
+      tenkhoangsan: ["", Validators.required],
+      truluong: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      donvitruluong: ["", Validators.required],
     });
   }
 
@@ -145,7 +161,10 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
       this.dkKhaiThacLoaiKhoangSanIOForm.setValue({
         nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
         idloaikhoangsan: this.obj.idloaikhoangsan,
-        loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan}
+        loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan},
+        tenkhoangsan: this.obj.tenkhoangsan,
+        truluong: this.obj.truluong,
+        donvitruluong: this.obj.donvitruluong,
       });
     }
   }
@@ -165,7 +184,7 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   async geAllNhomKhoangSan() {
     const allNhomKhoangSanData: any = await this.dmFacadeService
       .getDmNhomKhoangSanService()
-      .getFetchAll({ Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
+      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1});
     this.allNhomKhoangSan = allNhomKhoangSanData.items;
     this.nhomKhoangSanFilters = allNhomKhoangSanData.items;
   }
@@ -176,7 +195,12 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
   async geAllLoaiKhoangSan(idNhomKhoangSan: string) {
     const allLoaikhoangSanData: any = await this.dmFacadeService
       .getDmLoaiKhoangSanService()
-      .getFetchAll({Idnhomkhoangsan: idNhomKhoangSan, Trangthai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({
+        Idnhomkhoangsan: idNhomKhoangSan,
+        Trangthai: TrangThaiEnum.Active,
+        PageNumber: Paging.PageNumber,
+        PageSize: Paging.PageSize
+      });
     this.allLoaiKhoangSan = allLoaikhoangSanData.items;
     this.loaiKhoangSanFilters = allLoaikhoangSanData.items;
   }
@@ -256,6 +280,9 @@ export class KtksLoaikhoangsanIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     this.inputModel.idloaikhoangsan = this.dkKhaiThacLoaiKhoangSanIOForm.controls.idloaikhoangsan.value;
     this.inputModel.iddangkykhaithac = this.obj.iddangkykhaithac;
+    this.inputModel.tenkhoangsan = this.dkKhaiThacLoaiKhoangSanIOForm.controls.tenkhoangsan.value;
+    this.inputModel.truluong = this.dkKhaiThacLoaiKhoangSanIOForm.controls.truluong.value;
+    this.inputModel.donvitruluong = this.dkKhaiThacLoaiKhoangSanIOForm.controls.donvitruluong.value;
     if (operMode === "new") {
       dkKhaiThacLoaiKhoangSanService.addItem(this.inputModel).subscribe(
         (res) => this.matSidenavService.doParentFunction("getAllDkKhaiThacLoaiKhoangSan"),

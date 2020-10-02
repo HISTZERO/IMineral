@@ -1,56 +1,105 @@
 <div class="pt-3 pb-4">
   <form [formGroup]="dkKhaiThacLoaiKhoangSanIOForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tennhomkhoangsan" | translate }}</label>
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tennhomkhoangsan" | translate }}
+        <small>(*)</small></label>
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
+            <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"
+                        placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chonnhomkhoangsan' | translate }}"
                         (selectionChange)="showLoaiKhoangSan()" *ngIf="dataTranslate">
-              <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters" (filteredReturn)="allNhomKhoangSan = $event">
+              <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters"
+                                 (filteredReturn)="allNhomKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">
-                {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonnhomkhoangsan" | translate }}
+                {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chonnhomkhoangsan" | translate }}
               </mat-option>
-              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan" [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
+              <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan"
+                          [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
                 {{ nhomKhoangSan.tennhomkhoangsan }}
               </mat-option>
             </mat-select>
           </div>
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
-            <label class="m-0" *ngIf="tenNhomKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.nhomkhoangsandangdung" | translate}}:</label><br>
+            <label class="m-0"
+                   *ngIf="tenNhomKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.nhomkhoangsandangdung" | translate}}
+              :</label><br>
             <span><b>{{tenNhomKhoangSanDisplay}}</b></span>
           </div>
         </div>
+        <span *ngIf="formErrors.nhomkhoangsan" class="alert-danger">{{formErrors.nhomkhoangsan}}</span>
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.tenloaikhoangsan" | translate }}
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenloaikhoangsan" | translate }}
         <small>(*)</small></label>
       <div class="col-sm-9">
         <div class="row">
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
-            <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan' | translate }}"
+            <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"
+                        placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chonloaikhoangsan' | translate }}"
                         (selectionChange)="selectLoaiKhoangSan()" *ngIf="dataTranslate">
-              <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"(filteredReturn)="allLoaiKhoangSan = $event">
+              <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"
+                                 (filteredReturn)="allLoaiKhoangSan = $event">
               </mat-select-filter>
               <mat-option value="">
-                {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.chonloaikhoangsan" | translate }}
+                {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chonloaikhoangsan" | translate }}
               </mat-option>
-              <mat-option *ngFor="let loaiKhoangSan of allLoaiKhoangSan" [value]="{idloaikhoangsan: loaiKhoangSan.idloaikhoangsan, tenloaikhoangsan: loaiKhoangSan.tenloaikhoangsan}">
+              <mat-option *ngFor="let loaiKhoangSan of allLoaiKhoangSan"
+                          [value]="{idloaikhoangsan: loaiKhoangSan.idloaikhoangsan, tenloaikhoangsan: loaiKhoangSan.tenloaikhoangsan}">
                 {{ loaiKhoangSan.tenloaikhoangsan }}
               </mat-option>
             </mat-select>
             <input type="hidden" class="form-control" formControlName="idloaikhoangsan">
           </div>
           <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
-            <label class="m-0" *ngIf="tenLoaiKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.loaikhoangsandangdung" | translate}}:</label><br>
+            <label class="m-0"
+                   *ngIf="tenLoaiKhoangSanDisplay">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.loaikhoangsandangdung" | translate}}
+              :</label><br>
             <span><b>{{tenLoaiKhoangSanDisplay}}</b></span>
           </div>
         </div>
         <span *ngIf="formErrors.idloaikhoangsan" class="alert-danger">{{formErrors.idloaikhoangsan}}</span>
       </div>
     </div>
+
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsan" | translate }} <small>(*)</small></label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="tenkhoangsan" placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsanPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tenkhoangsan" class="alert-danger">{{formErrors.tenkhoangsan}}</span>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluong" | translate }} <small>(*)</small></label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="truluong" placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.truluong" class="alert-danger">{{formErrors.truluong}}</span>
+      </div>
+    </div>
+
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluong" | translate}}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-9">
+        <mat-select class="form-control" placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chondonvitruluong' | translate }}"
+                    formControlName="donvitruluong" *ngIf="dataTranslate">
+          <mat-option value="">
+            {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.chondonvitruluong" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let donViTruLuong of donViTruLuongList" [value]="donViTruLuong.id">
+            {{ donViTruLuong.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.donvitruluong" class="alert-danger">{{formErrors.donvitruluong}}</span>
+      </div>
+    </div>
+
     <div class="toolbar-container py-2">
       <div class="function-toolbar">
         <div class="form-group row mx-0">
