@@ -90,7 +90,7 @@ export class SidenavComponent implements OnInit {
         {
           label: "Đấu giá quyền khai thác khoáng sản",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdaugiaquyenkhaithackhoangsanUri}`
         },
         {
           label: "Khai thác khoáng sản",

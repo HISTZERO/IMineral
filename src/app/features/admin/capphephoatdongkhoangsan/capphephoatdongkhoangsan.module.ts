@@ -26,6 +26,8 @@ import { CptanthukhoangsanIoComponent } from 'src/app/features/admin/capphephoat
 import { CptanthukhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan-list/cptanthukhoangsan-list.component';
 import { CpdongcuamokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-io/cpdongcuamokhoangsan-io.component';
 import { CpdongcuamokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-list/cpdongcuamokhoangsan-list.component';
+import { CpdaugiaquyenkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-io/cpdaugiaquyenkhaithackhoangsan-io.component';
+import { CpdaugiaquyenkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-list/cpdaugiaquyenkhaithackhoangsan-list.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
@@ -38,7 +40,9 @@ import { CpdongcuamokhoangsanListComponent } from 'src/app/features/admin/capphe
   CptanthukhoangsanListComponent,
   CptanthukhoangsanIoComponent,
   CpdongcuamokhoangsanListComponent,
-  CpdongcuamokhoangsanIoComponent
+  CpdongcuamokhoangsanIoComponent,
+  CpdaugiaquyenkhaithackhoangsanListComponent,
+  CpdaugiaquyenkhaithackhoangsanIoComponent
   ],
   exports: [
   ],

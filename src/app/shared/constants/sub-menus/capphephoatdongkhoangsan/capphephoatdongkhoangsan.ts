@@ -191,3 +191,41 @@ export const ButtonBackCpDongCuaMoKhoangSan = [
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdongcuamokhoangsanUri}`
   },
 ];
+
+// Đấu giá quyền khai thác khoáng sản
+export const MenuCpDauGiaQuyenKhaiThacKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép đấu giá quyền khai thác khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuCpDauGiaQuyenKhaiThacKhoangSanChitiet = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép đấu giá quyền khai thác khoáng sản",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdaugiaquyenkhaithackhoangsanUri}`,
+  },
+  {
+    title: "Chi tiết",
+    url: "",
+  },
+];
+
+export const ButtonBackCpDauGiaQuyenKhaiThacKhoangSan = [
+  {
+    title: `Cấp phép đấu giá quyền khai thác khoáng sản`,
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdaugiaquyenkhaithackhoangsanUri}`
+  },
+];
