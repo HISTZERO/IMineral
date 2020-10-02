@@ -38,5 +38,13 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "capphepdaugiaquyenkhaithackhoangsan": {
+    "titleList": "Danh sách cấp phép đấu giá quyền khai thác khoáng sản",
+    "titleAdd": "Thêm mới cấp phép đấu giá quyền khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép đấu giá quyền khai thác khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }
