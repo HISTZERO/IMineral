@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
-import { MenuCpThamDoKhoangSan } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
+import { MenuCpPheDuyetTruLuongKhoangSan } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 
 @Component({
   selector: 'app-cppheduyettruluongkhoangsan-list',
@@ -16,7 +16,7 @@ export class CppheduyettruluongkhoangsanListComponent implements OnInit {
   title: string;
 
   // Chứa menu item trên subheader
-  public navArray = MenuCpThamDoKhoangSan;
+  public navArray = MenuCpPheDuyetTruLuongKhoangSan;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

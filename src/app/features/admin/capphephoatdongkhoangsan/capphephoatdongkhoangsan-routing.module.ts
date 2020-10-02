@@ -9,6 +9,8 @@ import { CppheduyettruluongkhoangsanListComponent } from 'src/app/features/admin
 import { CppheduyettruluongkhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cppheduyettruluongkhoangsan-io/cppheduyettruluongkhoangsan-io.component';
 import { CptanthukhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan-list/cptanthukhoangsan-list.component';
 import { CptanthukhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan-io/cptanthukhoangsan-io.component';
+import { CpdongcuamokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-list/cpdongcuamokhoangsan-list.component';
+import { CpdongcuamokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-io/cpdongcuamokhoangsan-io.component';
 
 
 const routes: Routes = [
@@ -25,7 +27,9 @@ const routes: Routes = [
           { path: AdminRoutingName.cppheduyettruluongkhoangsanUri, component: CppheduyettruluongkhoangsanListComponent },
           { path: AdminRoutingName.cppheduyettruluongkhoangsanchitietUri, component: CppheduyettruluongkhoangsanIoComponent },
           { path: AdminRoutingName.cptanthukhoangsanUri, component: CptanthukhoangsanListComponent },
-          { path: AdminRoutingName.cptanthukhoangsanchitietUri, component: CptanthukhoangsanIoComponent }
+          { path: AdminRoutingName.cptanthukhoangsanchitietUri, component: CptanthukhoangsanIoComponent },
+          { path: AdminRoutingName.cpdongcuamokhoangsanUri, component: CpdongcuamokhoangsanListComponent },
+          { path: AdminRoutingName.cpdongcuamokhoangsanchitietUri, component: CpdongcuamokhoangsanIoComponent }
         ]
       }
     ]
