@@ -1,14 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
-import { MenuCpTanThuKhoangSan } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
+import { MenuCpDongCuaMoKhoangSan } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 
 @Component({
-  selector: 'app-cptanthukhoangsan-list',
-  templateUrl: './cptanthukhoangsan-list.component.html',
-  styleUrls: ['./cptanthukhoangsan-list.component.scss']
+  selector: 'app-cpdongcuamokhoangsan-list',
+  templateUrl: './cpdongcuamokhoangsan-list.component.html',
+  styleUrls: ['./cpdongcuamokhoangsan-list.component.scss']
 })
-export class CptanthukhoangsanListComponent implements OnInit {
+export class CpdongcuamokhoangsanListComponent implements OnInit {
   // nhóm loại cấp phép enum
   NhomLoaiCapPhepType = NhomLoaiCapPhepEnum;
 
@@ -16,7 +16,7 @@ export class CptanthukhoangsanListComponent implements OnInit {
   title: string;
 
   // Chứa menu item trên subheader
-  public navArray = MenuCpTanThuKhoangSan;
+  public navArray = MenuCpDongCuaMoKhoangSan;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -26,7 +26,7 @@ export class CptanthukhoangsanListComponent implements OnInit {
   async ngOnInit() {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhoangsan.titleList;
+    this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.titleList;
   }
 
   /**
