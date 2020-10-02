@@ -54,6 +54,6 @@ export const ChiTietCapPhepHoatDongKS: any = {
   [NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac]: AdminRoutingName.cpdaugiaquyenchitietUri,
   [NhomLoaiCapPhepEnum.TanThuKhoangSan]: AdminRoutingName.cptanthukhoangsanchitietUri,
   [NhomLoaiCapPhepEnum.TraLaiGiayPhep]: AdminRoutingName.cptralaigiayphepchitietUri,
-  [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.cpdongcuamochiTietUri,
+  [NhomLoaiCapPhepEnum.DongCuaMo]: AdminRoutingName.cpdongcuamokhoangsanchitietUri,
   [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.cpchuyennhuongquyenchitietUri,
 };

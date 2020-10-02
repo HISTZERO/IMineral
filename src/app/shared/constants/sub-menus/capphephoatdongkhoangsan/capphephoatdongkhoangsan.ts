@@ -153,3 +153,41 @@ export const ButtonBackCpTanThuKhoangSan = [
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptanthukhoangsanUri}`
   },
 ];
+
+// Đóng cửa mỏ khoáng sản
+export const MenuCpDongCuaMoKhoangSan = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép đóng cửa mỏ khoáng sản",
+    url: "",
+  },
+];
+
+export const MenuCpDongCuaMoKhoangSanChitiet = [
+  { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
+  {
+    title: "Đăng ký hoạt động",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
+  },
+  {
+    title: "Cấp phép đóng cửa mỏ khoáng sản",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdongcuamokhoangsanUri}`,
+  },
+  {
+    title: "Chi tiết",
+    url: "",
+  },
+];
+
+export const ButtonBackCpDongCuaMoKhoangSan = [
+  {
+    title: `Cấp phép đóng cửa mỏ khoáng sản`,
+    icon: "fad fa-chevron-double-left",
+    color: "btn-primary",
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpdongcuamokhoangsanUri}`
+  },
+];
