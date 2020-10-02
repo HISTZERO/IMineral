@@ -115,7 +115,7 @@ export class SidenavComponent implements OnInit {
         {
           label: "Chuyển nhượng quyền thăm dò, khai thác",
           faIcon: "far fa-th-list",
-          link: ""
+          link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpchuyennhuongquyenthamdokhaithackhoangsanUri}`
         }
       ]
     },
