@@ -28,6 +28,8 @@ import { CpdongcuamokhoangsanIoComponent } from 'src/app/features/admin/cappheph
 import { CpdongcuamokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-list/cpdongcuamokhoangsan-list.component';
 import { CpdaugiaquyenkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-io/cpdaugiaquyenkhaithackhoangsan-io.component';
 import { CpdaugiaquyenkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-list/cpdaugiaquyenkhaithackhoangsan-list.component';
+import { CptralaigiayphepthamdokhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-io/cptralaigiayphepthamdokhaithackhoangsan-io.component';
+import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-list/cptralaigiayphepthamdokhaithackhoangsan-list.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
@@ -42,7 +44,9 @@ import { CpdaugiaquyenkhaithackhoangsanListComponent } from 'src/app/features/ad
   CpdongcuamokhoangsanListComponent,
   CpdongcuamokhoangsanIoComponent,
   CpdaugiaquyenkhaithackhoangsanListComponent,
-  CpdaugiaquyenkhaithackhoangsanIoComponent
+  CpdaugiaquyenkhaithackhoangsanIoComponent,
+  CptralaigiayphepthamdokhaithackhoangsanListComponent,
+  CptralaigiayphepthamdokhaithackhoangsanIoComponent
   ],
   exports: [
   ],

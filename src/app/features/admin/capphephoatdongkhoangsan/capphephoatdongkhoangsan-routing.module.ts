@@ -13,6 +13,8 @@ import { CpdongcuamokhoangsanListComponent } from 'src/app/features/admin/capphe
 import { CpdongcuamokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cpdongcuamokhoangsan-io/cpdongcuamokhoangsan-io.component';
 import { CpdaugiaquyenkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-io/cpdaugiaquyenkhaithackhoangsan-io.component';
 import { CpdaugiaquyenkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-list/cpdaugiaquyenkhaithackhoangsan-list.component';
+import { CptralaigiayphepthamdokhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-io/cptralaigiayphepthamdokhaithackhoangsan-io.component';
+import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-list/cptralaigiayphepthamdokhaithackhoangsan-list.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,9 @@ const routes: Routes = [
           { path: AdminRoutingName.cpdongcuamokhoangsanUri, component: CpdongcuamokhoangsanListComponent },
           { path: AdminRoutingName.cpdongcuamokhoangsanchitietUri, component: CpdongcuamokhoangsanIoComponent },
           { path: AdminRoutingName.cpdaugiaquyenkhaithackhoangsanUri, component: CpdaugiaquyenkhaithackhoangsanListComponent },
-          { path: AdminRoutingName.cpdaugiaquyenkhaithackhoangsanchitietUri, component: CpdaugiaquyenkhaithackhoangsanIoComponent }
+          { path: AdminRoutingName.cpdaugiaquyenkhaithackhoangsanchitietUri, component: CpdaugiaquyenkhaithackhoangsanIoComponent },
+          { path: AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri, component: CptralaigiayphepthamdokhaithackhoangsanListComponent },
+          { path: AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanchitietUri, component: CptralaigiayphepthamdokhaithackhoangsanIoComponent }
         ]
       }
     ]
