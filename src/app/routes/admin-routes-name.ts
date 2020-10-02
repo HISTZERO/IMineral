@@ -113,12 +113,16 @@ export class AdminRoutingName {
   public static cpkhaithackhoangsanUri = "cpkhaithackhoangsan";
   public static cppheduyettruluongkhoangsanUri = "cppheduyettruluongkhoangsan";
   public static cptanthukhoangsanUri = "cptanthukhoangsan";
+  public static cpdongcuamokhoangsanUri = "cpdongcuamokhoangsan";
+  public static cpdaugiaquyenkhaithackhoangsanUri = "cpdaugiaquyenkhaithackhoangsan";
+  public static cptralaigiayphepthamdokhaithackhoangsanUri = "cptralaigiayphepthamdokhaithackhoangsan";
+  public static cpchuyennhuongquyenthamdokhaithackhoangsanUri = "cpchuyennhuongquyenthamdokhaithackhoangsan";
   public static cpthamdokhoangsanchitietUri = "cpthamdokhoangsanchitiet";
   public static cpkhaithackhoangsanchitietUri = "cpkhaithackhoangsanchitiet";
   public static cppheduyettruluongkhoangsanchitietUri = "cppheduyettruluongkhoangsanchitiet";
-  public static cpdaugiaquyenchitietUri = "cpdaugiaquyenchitiet";
+  public static cpdaugiaquyenkhaithackhoangsanchitietUri = "cpdaugiaquyenkhaithackhoangsanchitiet";
   public static cptanthukhoangsanchitietUri = "cptanthukhoangsanchitiet";
-  public static cptralaigiayphepchitietUri = "cptralaigiayphepchitiet";
-  public static cpdongcuamochiTietUri = "cpdongcuamochitiet";
-  public static cpchuyennhuongquyenchitietUri = "cpchuyennhuongquyenchitiet";
+  public static cptralaigiayphepthamdokhaithackhoangsanchitietUri = "cptralaigiayphepthamdokhaithackhoangsanchitiet";
+  public static cpdongcuamokhoangsanchitietUri = "cpdongcuamokhoangsanchitiet";
+  public static cpchuyennhuongquyenthamdokhaithackhoangsanchitietUri = "cpchuyennhuongquyenthamdokhaithackhoangsanchitiet";
 }

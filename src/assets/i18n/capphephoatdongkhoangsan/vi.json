@@ -30,5 +30,37 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "capphepdongcuamokhoangsan": {
+    "titleList": "Danh sách cấp phép đóng cửa mỏ khoáng sản",
+    "titleAdd": "Thêm mới cấp phép đóng cửa mỏ khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép đóng cửa mỏ khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "capphepdaugiaquyenkhaithackhoangsan": {
+    "titleList": "Danh sách cấp phép đấu giá quyền khai thác khoáng sản",
+    "titleAdd": "Thêm mới cấp phép đấu giá quyền khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép đấu giá quyền khai thác khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "cappheptralaigiayphepthamdokhaithackhoangsan": {
+    "titleList": "Danh sách cấp phép trả lại giấy phép thăm dò khai thác khoáng sản",
+    "titleAdd": "Thêm mới cấp phép trả lại giấy phép thăm dò khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép trả lại giấy phép thăm dò khai thác khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "capphepchuyennhuongquyenthamdokhaithackhoangsan": {
+    "titleList": "Danh sách cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "titleAdd": "Thêm mới cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
+    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
+    "thongTinDangKyTabTitle": "Thông tin đăng ký"
   }
 }
