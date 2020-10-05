@@ -37,7 +37,7 @@ export class HosoIoComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ trạng thái enable hoặc disable chọn loại cấp phép
   // tslint:disable-next-line: no-input-rename
-  @Input ("disabledLoaiCapPhepSelectionState") disabledLoaiCapPhepSelectionState = false;
+  @Input ("disabledLoaiCapPhepSelectionState") disabledLoaiCapPhepSelectionState = true;
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
