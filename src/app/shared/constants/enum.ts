@@ -145,51 +145,51 @@ export enum DangKyKhaiThacKhoangSanTabEnum {
 export enum CpThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpKhaiThacKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpPheDuyetTruLuongKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpTanThuKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 
 export enum CpDongCuaMoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpDauGiaQuyenKhaiThacKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 
 export enum CpTraLaiGiayPhepThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpChuyenNhuongQuyenThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
-  ThongTinDangKy = 2
+  ThongTinCapPhep = 2
 }
 
 export enum CpThamDoKhoangSanTabEnum {

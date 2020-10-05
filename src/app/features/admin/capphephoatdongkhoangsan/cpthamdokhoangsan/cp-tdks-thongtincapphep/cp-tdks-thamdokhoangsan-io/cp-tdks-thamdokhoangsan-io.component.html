@@ -71,7 +71,7 @@
               <span *ngIf="formErrors.dientichthamdo" class="alert-danger">{{formErrors.dientichthamdo}}</span>
             </div>
           </div>
-          <div class="form-group row mx-0">
+          <div class="form-group row mx-0" *ngIf="!disabledDienTichTraLai">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralai" | translate }}
               <small>(*)</small>
             </label>
@@ -168,6 +168,10 @@
               <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
             </div>
           </div>
+          <div class="form-group row mx-0" *ngIf="!disabledDienTichTraLai">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"></label>
+            <div class="col-lg-8 col-md-8 col-sm-8"></div>
+          </div>
           <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusau" | translate }}
               <small>(*)</small>
@@ -184,6 +188,10 @@
               </mat-select>
               <span *ngIf="formErrors.donvichieusau" class="alert-danger">{{formErrors.donvichieusau}}</span>
             </div>
+          </div>
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"></label>
+            <div class="col-lg-8 col-md-8 col-sm-8"></div>
           </div>
           <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieu" | translate}}
