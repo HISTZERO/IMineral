@@ -6,10 +6,10 @@ import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputGiayPhepModel} from "src/app/models/admin/capphephoatdongkhoangsan/giayphep.model";
+import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {CapPhepHoatDongKhoangSanFacadeService} from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { SelectedOptionType } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
@@ -51,14 +51,14 @@ export class GiayphepOptionComponent implements OnInit {
   public itemService: any;
 
   constructor(
-    public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+    public hoSoGiayToFacadeService: HoSoGiayToFacadeService,
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     public matSidenavService: MatsidenavService,
     public router: Router,
     public formBuilder: FormBuilder) {
-      this.itemService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+      this.itemService = this.hoSoGiayToFacadeService.getGiayPhepService();
     }
 
   async ngOnInit() {

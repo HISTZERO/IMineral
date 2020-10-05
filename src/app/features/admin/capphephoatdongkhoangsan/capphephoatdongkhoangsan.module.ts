@@ -30,6 +30,10 @@ import { CpdaugiaquyenkhaithackhoangsanIoComponent } from 'src/app/features/admi
 import { CpdaugiaquyenkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cpdaugiaquyenkhaithackhoangsan-list/cpdaugiaquyenkhaithackhoangsan-list.component';
 import { CptralaigiayphepthamdokhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-io/cptralaigiayphepthamdokhaithackhoangsan-io.component';
 import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-list/cptralaigiayphepthamdokhaithackhoangsan-list.component';
+import { CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan-io/cpchuyennhuongquyenthamdokhaithackhoangsan-io.component';
+import { CpchuyennhuongquyenthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan-list/cpchuyennhuongquyenthamdokhaithackhoangsan-list.component';
+import { CpTdksThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component';
+import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
@@ -46,7 +50,11 @@ import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/fe
   CpdaugiaquyenkhaithackhoangsanListComponent,
   CpdaugiaquyenkhaithackhoangsanIoComponent,
   CptralaigiayphepthamdokhaithackhoangsanListComponent,
-  CptralaigiayphepthamdokhaithackhoangsanIoComponent
+  CptralaigiayphepthamdokhaithackhoangsanIoComponent,
+  CpchuyennhuongquyenthamdokhaithackhoangsanListComponent,
+  CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent,
+  CpTdksThongtincapphepComponent,
+  CpTdksThamdokhoangsanIoComponent
   ],
   exports: [
   ],
@@ -63,7 +71,8 @@ import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/fe
     HosoGiaytoModule
   ],
   entryComponents: [
-    HosoOptionComponent
+    HosoOptionComponent,
+    CpTdksThamdokhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

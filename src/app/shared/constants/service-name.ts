@@ -43,20 +43,21 @@ export class ServiceName {
   public static DANGKYTHAMDOKHOANGSAN = "dangkythamdo";
   public static DANGKYTHAMDOGIAHAN = "dangkythamdogiahan";
   public static DANGKYTHAMDODVHC = "dangkythamdodvhc";
-  public static DANGKYKHAITHACDVHC = "dangkykhaithacdvhc";
   public static DANGKYTHAMDOLOAIKHOANGSAN = "dangkythamdoloaikhoangsan";
-  public static DANGKYKHAITHACLOAIKHOANGSAN = "dangkykhaithacloaikhoangsan";
   public static DANGKYTHAMDOCONGTRINH = "dangkythamdocongtrinh";
-  public static DANGKYKHAITHACCONGTRINH = "dangkykhaithaccongtrinh";
   public static DANGKYTHAMDOKHUVUC = "dangkythamdokhuvuc";
   public static DANGKYTHAMDOTOADOKHUVUC = "dangkythamdotoadokhuvuc";
   // Đăng ký khai thác khoáng sản
+  public static DANGKYKHAITHACLOAIKHOANGSAN = "dangkykhaithacloaikhoangsan";
+  public static DANGKYKHAITHACDVHC = "dangkykhaithacdvhc";
   public static DANGKYKHAITHACKHOANGSAN = "dangkykhaithackhoangsan";
+  public static DANGKYKHAITHACCONGTRINH = "dangkykhaithaccongtrinh";
   public static DANGKYKHAITHACGIAHAN = "dangkykhaithacgiahan";
   public static DANGKYKHAITHACCATSOI = "dangkykhaithaccatsoi";
   public static DANGKYKHAITHACDIEUCHINH = "dangkykhaithacdieuchinh";
   public static DANGKYKHAITHACKHOANGSANDUAN = "dangkykhaithackhoangsanduan";
   public static DANGKYKHAITHACVLXD = "dangkykhaithacvlxd";
+  public static DANGKYKHAITHACKHUVUC = "dangkykhaithackhuvuc";
   // Đăng ký tận thu khoáng sản
   public static DANGKYTANTHUKHOANGSAN = "dangkytanthukhoangsan";
   public static DANGKYTANTHUGIAHAN = "dangkytanthugiahan";

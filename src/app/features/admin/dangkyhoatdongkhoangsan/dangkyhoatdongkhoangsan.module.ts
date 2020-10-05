@@ -175,6 +175,8 @@ import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtinda
     KtksLoaikhoangsanIoComponent,
     KtksCongtrinhkhaithacIoComponent,
     DangkytanthukhoangsanIoComponent,
+    KhuvuckhaithacIoComponent,
+    DangkytanthugiahanIoComponent,
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

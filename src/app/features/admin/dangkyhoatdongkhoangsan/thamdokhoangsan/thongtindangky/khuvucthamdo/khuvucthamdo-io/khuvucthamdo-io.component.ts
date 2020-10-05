@@ -47,9 +47,6 @@ export class KhuvucthamdoIoComponent implements OnInit {
   // Chứa dữ liệu input khu vực thăm dò
   public inputModelKhuVuc: InputDkThamDoKhuVucModel;
 
-  // Chứa dữ liệu input tọa độ khu vực
-  public inputModelToaDo: InputDkThamDoToaDoKhuVucModel;
-
   // Chứa danh sách Lĩnh Vực
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
@@ -165,7 +162,6 @@ export class KhuvucthamdoIoComponent implements OnInit {
    */
   bindingConfigAddOrUpdate() {
     this.inputModelKhuVuc = new InputDkThamDoKhuVucModel();
-    this.inputModelToaDo = new InputDkThamDoToaDoKhuVucModel();
     this.formOnEdit();
   }
 
@@ -202,7 +198,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
         hequychieu: this.obj.hequychieu,
       });
 
-      this.getToaDoByIdKhuVuc(this.obj.idthamdokhuvuc);
+      this.listToaDoKhuVuc = this.obj.lstToado;
     }
   }
 
@@ -220,17 +216,19 @@ export class KhuvucthamdoIoComponent implements OnInit {
   /**
    * Hàm thực thi chức năng add và edit
    */
-  private addOrUpdate(operMode: string) {
+  async addOrUpdate(operMode: string) {
+
     const dKThamDoKhuVucService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoKhuVucService();
-    const dkThamDoToaDoKhuVuc = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoToaDoKhuVucService();
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.dKThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModelKhuVuc.loaicapphep = this.obj.loaicapphep;
 
     if (operMode === "new") {
-      dKThamDoKhuVucService.addItem(this.inputModelKhuVuc).subscribe(
+      this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
+      await dKThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
-          this.addOrUpdateToaDoKhuVuc(res.idthamdokhuvuc);
+          this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -244,9 +242,10 @@ export class KhuvucthamdoIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idthamdokhuvuc;
       this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
-      dKThamDoKhuVucService.updateItem(this.inputModelKhuVuc).subscribe(
+      this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData(this.obj.iddangkythamdo);
+      dKThamDoKhuVucService.updateKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
-          this.addOrUpdateToaDoKhuVuc();
+          this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -261,6 +260,33 @@ export class KhuvucthamdoIoComponent implements OnInit {
   }
 
   /**
+   * Tạo model dữ liệu insert và update
+   */
+  async generateModelData(iddangkythamdo?: string) {
+    let listToaDo = {
+      list: []
+    };
+
+    // tạo đối tượng dữ liệu
+    for (let i of this.listToaDoKhuVuc) {
+      let item = {
+        iddangkythamdo: this.obj.iddangkythamdo,
+        idthamdokhuvuc: iddangkythamdo ? iddangkythamdo : this.obj.idthamdokhuvuc,
+        loaicapphep: this.obj.loaicapphep,
+        loaikhuvuc: this.dKThamDoKhuVucIOForm.value.loaikhuvuc,
+        sohieu: i.sohieu,
+        thutu: i.thutu,
+        toadox: i.toadox,
+        toadoy: i.toadoy,
+      };
+      // Thêm vào mảng
+      listToaDo.list.push(item);
+    }
+
+    return listToaDo;
+  }
+
+  /**
    * Hàm được gọi khi nhấn nút Lưu, Truyền vào operMode để biết là Edit hay tạo mới
    * @param operMode
    */
@@ -272,71 +298,6 @@ export class KhuvucthamdoIoComponent implements OnInit {
     }
   }
 
-  async addOrUpdateToaDoKhuVuc(idthamdokhuvuc?: string) {
-    let dataToaDo: any[] = [];
-    const loaiKhuVuc = this.dKThamDoKhuVucIOForm.value.loaikhuvuc;
-    const idDangKyThamDo = this.obj.iddangkythamdo;
-    const loaiCapPhep = this.obj.loaicapphep;
-    let test2 = {
-      list: []
-    };
-    for (let i of this.listToaDoKhuVuc) {
-      let item = {
-        iddangkythamdo: idDangKyThamDo,
-        idthamdokhuvuc: idthamdokhuvuc ? idthamdokhuvuc : this.obj.idthamdokhuvuc,
-        loaicapphep: loaiCapPhep,
-        loaikhuvuc: loaiKhuVuc,
-        sohieu: "aaaa",
-        thutu: "1",
-        toadox: "2215073",
-        toadoy: "585453",
-      };
-      test2.list.push(item);
-    }
-
-    let test = {
-      list: [
-        {
-          iddangkythamdo: idDangKyThamDo,
-          idthamdokhuvuc: idthamdokhuvuc,
-          loaicapphep: loaiCapPhep,
-          loaikhuvuc: loaiKhuVuc,
-          sohieu: "aaaa",
-          thutu: "1",
-          toadox: "2215073",
-          toadoy: "585453",
-        },
-        {
-          iddangkythamdo: idDangKyThamDo,
-          idthamdokhuvuc: idthamdokhuvuc,
-          loaicapphep: loaiCapPhep,
-          loaikhuvuc: loaiKhuVuc,
-          sohieu: "aaaa",
-          thutu: "1",
-          toadox: "2215073",
-          toadoy: "585453",
-        },
-        {
-          iddangkythamdo: idDangKyThamDo,
-          idthamdokhuvuc: idthamdokhuvuc,
-          loaicapphep: loaiCapPhep,
-          loaikhuvuc: loaiKhuVuc,
-          sohieu: "aaaa",
-          thutu: "1",
-          toadox: "2215073",
-          toadoy: "585453",
-        }
-      ]
-    };
-
-
-
-    console.log(test);
-    console.log(test2);
-    await this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoToaDoKhuVucService().addItem(test2).subscribe((res) => {
-      this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
-    });
-  }
 
   /**
    * Hàm reset form, gọi khi nhấn nút reset dữ liệu
