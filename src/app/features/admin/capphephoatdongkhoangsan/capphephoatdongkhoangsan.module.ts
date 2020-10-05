@@ -32,7 +32,8 @@ import { CptralaigiayphepthamdokhaithackhoangsanIoComponent } from 'src/app/feat
 import { CptralaigiayphepthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptralaigiayphepthamdokhaithackhoangsan/cptralaigiayphepthamdokhaithackhoangsan-list/cptralaigiayphepthamdokhaithackhoangsan-list.component';
 import { CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan-io/cpchuyennhuongquyenthamdokhaithackhoangsan-io.component';
 import { CpchuyennhuongquyenthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan-list/cpchuyennhuongquyenthamdokhaithackhoangsan-list.component';
-import { CpTdksThongtincapphepComponent } from './cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component';
+import { CpTdksThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component';
+import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
@@ -52,7 +53,8 @@ import { CpTdksThongtincapphepComponent } from './cpthamdokhoangsan/cp-tdks-thon
   CptralaigiayphepthamdokhaithackhoangsanIoComponent,
   CpchuyennhuongquyenthamdokhaithackhoangsanListComponent,
   CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent,
-  CpTdksThongtincapphepComponent
+  CpTdksThongtincapphepComponent,
+  CpTdksThamdokhoangsanIoComponent
   ],
   exports: [
   ],
@@ -69,7 +71,8 @@ import { CpTdksThongtincapphepComponent } from './cpthamdokhoangsan/cp-tdks-thon
     HosoGiaytoModule
   ],
   entryComponents: [
-    HosoOptionComponent
+    HosoOptionComponent,
+    CpTdksThamdokhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

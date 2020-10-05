@@ -62,5 +62,18 @@
     "thongTinCapPhepTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm cấp phép",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
+  },
+  "thongtincapphep": {
+    "thongTinChiTietTabTitle": "Thông tin chi tiết",
+    "donViHanhChinhTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanTabTile": "Loại khoáng sản",
+    "khuVucThamDoTabTile": "Khu vực thăm dò",
+    "congTrinhThamDoTabTitle": "Công trình thăm dò",
+    "congTrinhKhaiThacTabTitle": "Công trình khai thác",
+    "informedNotExistedGiayPhepThamDo": "Giấy phép thăm dò không tồn tại",
+    "thongTinChiTietKhaiThacTabTitle": "Thông tin chi tiết",
+    "donViHanhChinhKhaiThacTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanKhaiThacTabTile": "Loại khoáng sản",
+    "khuVucKhaiThacTabTile": "Khu vực khai thác"
   }
 }
