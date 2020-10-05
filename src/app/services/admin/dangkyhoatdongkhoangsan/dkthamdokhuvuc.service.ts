@@ -21,6 +21,22 @@ export class DkthamdokhuvucService extends RepositoryEloquentService {
     });
   }
 
+  // Hàm service thêm mới khu vực và tọa độ
+  public insertKhuVucVaToaDo(body: any) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHUVUC + "/insertkhuvuc",
+    });
+    return this.addItem(body);
+  }
+
+  // hàm service update khu vực và tọa dộ
+  public updateKhuVucVaToaDo(body: any) {
+    this.setServiceInfo({
+      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOKHUVUC + "/updatekhuvucandtoado",
+    });
+    return this.updateItem(body);
+  }
+  
   public checkBeDeleted(id: string) {
     return "ok";
   }

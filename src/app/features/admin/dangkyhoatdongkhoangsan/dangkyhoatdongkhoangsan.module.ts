@@ -168,6 +168,7 @@ import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoa
     KtksDonvihanhchinhIoComponent,
     KtksLoaikhoangsanIoComponent,
     KtksCongtrinhkhaithacIoComponent,
+    KhuvuckhaithacIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},
