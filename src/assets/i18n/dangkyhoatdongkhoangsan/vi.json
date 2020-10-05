@@ -21,7 +21,6 @@
     "loaiKhoangSanKhaiThacTabTile": "Loại khoáng sản",
     "khuVucKhaiThacTabTile": "Khu vực khai thác",
     "informedNotExistedHoSoDangKyKhaiThac": "Hồ sơ đăng ký khai thác không tồn tại"
-
   },
   "khaithackhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký khai thác khoáng sản",
@@ -516,6 +515,8 @@
     "tongkhoiluongnaovet": "Tổng khổi lượng nạo vét",
     "truluongkhaithac": "Trữ lượng khai thác",
     "donvitruluong": "Đơn vị trữ lượng",
+    "diadiem": "Địa điểm",
+    "diadiemPlaceholder": "Nhập địa điểm",
     "tenduanPlaceholder": "Nhập tên dự án",
     "soquyetdinhPlaceholder": "Nhập số quyết định",
     "ngaykyquyetdinhPlaceholder": "Chọn ngày ký quyết định",
