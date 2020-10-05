@@ -77,6 +77,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
   formErrors = {
     tenduan: "",
     soquyetdinh: "",
+    diadiem: "",
     ngaykyquyetdinh: "",
     coquanpheduyet: "",
     dientichkhaithac: "",
@@ -163,6 +164,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
       donvitruluong: [""],
       donvithoihan: [""],
       hequychieu: [""],
+      diadiem: [""]
     });
   }
 
@@ -197,6 +199,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
         donvitruluong: item.donvitruluong,
         donvithoihan: item.donvithoihan,
         hequychieu: item.hequychieu,
+        diadiem: item.diadiem
       });
     }
   }
@@ -362,6 +365,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
       donvikhoiluong: "",
       donvithoihan: "",
       hequychieu: "",
+      diadiem: ""
     });
   }
 
