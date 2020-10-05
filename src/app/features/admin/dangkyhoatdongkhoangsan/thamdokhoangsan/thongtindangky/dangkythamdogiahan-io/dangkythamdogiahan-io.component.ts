@@ -15,7 +15,7 @@ import { DangKhoangSan, DonViDienTich, DonViDoSau } from 'src/app/shared/constan
 import { MatSidenav } from '@angular/material';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
-import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
 
 
 @Component({
