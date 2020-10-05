@@ -22,7 +22,7 @@ import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogia
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
-import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 

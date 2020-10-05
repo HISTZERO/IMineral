@@ -6,7 +6,7 @@ import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputGiayPhepModel} from "src/app/models/admin/capphephoatdongkhoangsan/giayphep.model";
+import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';

@@ -16,7 +16,7 @@ import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-fa
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
-import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
+import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
