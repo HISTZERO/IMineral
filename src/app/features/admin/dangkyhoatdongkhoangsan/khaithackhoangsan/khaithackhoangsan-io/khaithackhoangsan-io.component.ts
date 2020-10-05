@@ -9,6 +9,7 @@ import { HosotailieuListComponent } from 'src/app/features/admin/hosogiayto/hoso
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
+import {KtksThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thongtindangky.component";
 
 
 @Component({
@@ -23,7 +24,7 @@ export class KhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
-  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
+  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: KtksThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuDkKhaiThacKhoangSanChitiet;
 
