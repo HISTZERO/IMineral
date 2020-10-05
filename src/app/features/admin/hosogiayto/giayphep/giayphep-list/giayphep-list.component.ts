@@ -15,7 +15,7 @@ import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { OutputGiayPhepModel } from 'src/app/models/admin/capphephoatdongkhoangsan/giayphep.model';
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
@@ -69,7 +69,7 @@ export class GiayphepListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
-  constructor(public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+  constructor(public hoSoGiayToFacadeService: HoSoGiayToFacadeService,
               public commonService: CommonServiceShared,
               public thietlapFacadeService: ThietlapFacadeService,
               private translate: TranslateService,
@@ -79,7 +79,7 @@ export class GiayphepListComponent implements OnInit {
               public dmFacadeService: DmFacadeService,
               public datePipe: DatePipe,
               public modalDialog: MatDialog) {
-    this.itemService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+    this.itemService = this.hoSoGiayToFacadeService.getGiayPhepService();
   }
 
   async ngOnInit() {
@@ -237,7 +237,7 @@ export class GiayphepListComponent implements OnInit {
    */
   async deleteItemGiayPhep(data) {
     this.selectedItem = data;
-    const canDelete: string = this.capPhepHoatDongKhoangSanFacadeService
+    const canDelete: string = this.hoSoGiayToFacadeService
       .getGiayPhepService()
       .checkBeDeleted(this.selectedItem.idgiayphep);
     this.canBeDeletedCheck(canDelete);
@@ -265,7 +265,7 @@ export class GiayphepListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.capPhepHoatDongKhoangSanFacadeService
+        await this.hoSoGiayToFacadeService
           .getGiayPhepService()
           .deleteItem({idgiayphep: this.selectedItem.idgiayphep})
           .subscribe(

@@ -7,7 +7,7 @@ import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpPheDuyetTruLuongKh
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-io/giayphep-io.component';
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { ButtonBackCpPheDuyetTruLuongKhoangSan, MenuCpPheDuyetTruLuongKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
@@ -62,7 +62,7 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
 
   constructor(public matSidenavService: MatsidenavService,
               private activatedRoute: ActivatedRoute,
-              private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+              private hoSoGiayToFacadeService: HoSoGiayToFacadeService,
               private translate: TranslateService) { }
 
   async ngOnInit() {
@@ -119,7 +119,7 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
    * @param idGiayPhep
    */
   private async getGiayPhepById(idGiayPhep: string) {
-    const giayPhepService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+    const giayPhepService = this.hoSoGiayToFacadeService.getGiayPhepService();
     const giayPhepItem = await giayPhepService.getByid(idGiayPhep).toPromise();
     return giayPhepItem;
   }

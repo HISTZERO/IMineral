@@ -191,3 +191,11 @@ export enum CpChuyenNhuongQuyenThamDoKhoangSanTabEnum {
   TaiLieuGiayPhepDinhKem = 1,
   ThongTinDangKy = 2
 }
+
+export enum CpThamDoKhoangSanTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucThamDo = 3,
+  CongTrinhThamDo = 4
+}

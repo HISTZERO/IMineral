@@ -9,8 +9,8 @@ import { GiayPhepService } from 'src/app/services/admin/capphephoatdongkhoangsan
 export class CapPhepHoatDongKhoangSanFacadeService {
   constructor(private httpClient: HttpClient) { }
 
-   // Hồ sơ service
-   public getGiayPhepService() {
-    return new GiayPhepService(this.httpClient);
-  }
+//  // Giấy phép service
+//  public getGiayPhepService() {
+//   return new GiayPhepService(this.httpClient);
+// }
 }
