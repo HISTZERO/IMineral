@@ -60,6 +60,7 @@ export class ServiceName {
   public static DANGKYKHAITHACKHUVUC = "dangkykhaithackhuvuc";
   // Giấy phép
   public static GIAYPHEP = "giayphep";
+  public static CPTHAMDOKHOANGSAN = "cpthamdokhoangsan";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
