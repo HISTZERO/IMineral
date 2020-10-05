@@ -11,7 +11,7 @@ import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
+import { DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
 import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
@@ -49,9 +49,6 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
-
-  // Dạng khoáng sản
-  public dangKhoangSanList = DangKhoangSan;
 
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
@@ -96,7 +93,6 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
     truluongkhaithac: "",
     thoihankhaithac: "",
     phuongphapkhaithac: "",
-    dangkhoangsan: "",
     congsuatkhaithac: "",
     mucsaukhaithactu: "",
     mucsaukhaithacden: "",
@@ -203,7 +199,6 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
       truluongkhaithac: [""],
       thoihankhaithac: [""],
       phuongphapkhaithac: [""],
-      dangkhoangsan: [""],
       congsuatkhaithac: [""],
       mucsaukhaithactu: [""],
       mucsaukhaithacden: [""],
@@ -249,7 +244,6 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
         mucsaukhaithacden: item.mucsaukhaithacden,
         donvitruluong: item.donvitruluong,
         donvicongsuat: item.donvicongsuat,
-        dangkhoangsan: item.dangkhoangsan,
         donvidientich: item.donvidientich,
         donvithoihan: item.donvithoihan,
         donvichieusau: item.donvichieusau,
@@ -416,7 +410,6 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
       truluongkhaithac: "",
       thoihankhaithac: "",
       phuongphapkhaithac: "",
-      dangkhoangsan: "",
       congsuatkhaithac: "",
       mucsaukhaithactu: "",
       mucsaukhaithacden: "",

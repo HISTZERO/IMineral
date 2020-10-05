@@ -15,6 +15,8 @@ export class OutputDkKhaiThacVatLieuXayDungModel {
     donvitruluong: string;
     donvicongsuat: string;
     donvichieusau: string;
+    diadiem: string;
+    phuongphapkhaithac: number;
     geom: string;
     geovn: string;
     geowgs: string;
@@ -40,6 +42,8 @@ export class InputDkKhaiThacVatLieuXayDungModel {
     donvitruluong: string;
     donvicongsuat: string;
     donvichieusau: string;
+    diadiem: string;
+    phuongphapkhaithac: number;
     hequychieu: string;
     idhoso: string;
 }

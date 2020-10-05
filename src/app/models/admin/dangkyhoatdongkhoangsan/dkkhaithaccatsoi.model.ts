@@ -13,6 +13,7 @@ export class OutputDkKhaiThacCatSoiModel {
     donvithoihan: string;
     donvitruluong: string;
     hequychieu: string;
+    diadiem: string;
     idhoso: string;
     geom: string;
     geovn: string;
@@ -36,4 +37,5 @@ export class InputDkKhaiThacCatSoiModel {
     donvitruluong: string;
     hequychieu: string;
     idhoso: string;
+    diadiem: string;
 }
