@@ -18,7 +18,7 @@ import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/c
 import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
@@ -136,7 +136,7 @@ export class GiayphepIoComponent implements OnInit {
     private dmFacadeService: DmFacadeService,
     private hethongFacadeService: HethongFacadeService,
     private thietlapFacadeService: ThietlapFacadeService,
-    private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService,
     public commonService: CommonServiceShared,
     private activatedRoute: ActivatedRoute,
     public matSidenavService: MatsidenavService,
@@ -394,7 +394,7 @@ export class GiayphepIoComponent implements OnInit {
    * @param idGiayPhep
    */
   private async getGiayPhepById(idGiayPhep: string) {
-    const giayPhepFacadeService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+    const giayPhepFacadeService = this.hoSoGiayToFacadeService.getGiayPhepService();
     const giayphepItem = await giayPhepFacadeService.getByid(idGiayPhep).toPromise();
     return giayphepItem;
   }
@@ -440,7 +440,7 @@ export class GiayphepIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const giayPhepFacadeService = this.capPhepHoatDongKhoangSanFacadeService.getGiayPhepService();
+    const giayPhepFacadeService = this.hoSoGiayToFacadeService.getGiayPhepService();
     const inputModel = this.giayPhepIOForm.value;
     const currentLoaiCapPhep = this.loaiCapPhepList.find(item => item.maloaicapphep === this.giayPhepIOForm.controls.loaicapphep.value);
     inputModel.nhomloaicapphep = currentLoaiCapPhep.nhomloaicapphep;
