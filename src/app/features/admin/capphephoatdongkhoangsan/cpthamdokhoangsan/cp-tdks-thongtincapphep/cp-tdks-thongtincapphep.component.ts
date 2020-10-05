@@ -173,7 +173,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     componentRef.instance.matSidenav =  this.matSidenav;
     componentRef.instance.content = this.content;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepThamDoFormState(event));
-    componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
+    componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
   }
 
   async tabChange(index: any) {
