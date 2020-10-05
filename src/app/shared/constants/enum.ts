@@ -199,3 +199,9 @@ export enum CpThamDoKhoangSanTabEnum {
   KhuVucThamDo = 3,
   CongTrinhThamDo = 4
 }
+
+export enum CapPhepThamDoActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
