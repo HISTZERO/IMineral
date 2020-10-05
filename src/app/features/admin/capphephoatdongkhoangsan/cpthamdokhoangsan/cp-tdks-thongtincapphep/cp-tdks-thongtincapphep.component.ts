@@ -10,7 +10,8 @@ import { ContentContainerDirective } from 'src/app/shared/directives/content-con
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
-  [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent
+  [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent
 };
 
 @Component({
@@ -94,14 +95,14 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     });
 
     if (this.idgiayphep === DefaultValue.Null || this.idgiayphep === DefaultValue.Undefined || this.idgiayphep.trim() === DefaultValue.Empty) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtindangky.informedNotExistedGiayPhepThamDo);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return;
     }
 
     this.itemGiayPhep =  await this.getGiayPhepById(this.idgiayphep);
 
     if (!this.itemGiayPhep) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtindangky.informedNotExistedGiayPhepThamDo);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return;
     }
 
@@ -169,9 +170,16 @@ export class CpTdksThongtincapphepComponent implements OnInit {
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = this.itemGiayPhep.idgiayphep;
+    componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
     componentRef.instance.matSidenav =  this.matSidenav;
     componentRef.instance.content = this.content;
+
+    if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+      componentRef.instance.disabledDienTichTraLai = false;
+    } else {
+      componentRef.instance.disabledDienTichTraLai = true;
+    }
+
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepThamDoFormState(event));
     componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
   }

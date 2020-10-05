@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
@@ -13,6 +13,7 @@ import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/ca
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { HttpErrorResponse } from '@angular/common/http';
 import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
+import { MatSidenav } from '@angular/material';
 
 @Component({
   selector: 'app-cp-tdks-thamdokhoangsan-io',
@@ -20,6 +21,8 @@ import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/
   styleUrls: ['./cp-tdks-thamdokhoangsan-io.component.scss']
 })
 export class CpTdksThamdokhoangsanIoComponent implements OnInit {
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -38,6 +41,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   public currentAction: number;
   // disable delete button
   public disabledDeleteButton = false;
+  // disable control diện tích trả lại
+  public disabledDienTichTraLai = false;
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];

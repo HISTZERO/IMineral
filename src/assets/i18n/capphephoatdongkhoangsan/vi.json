@@ -3,65 +3,65 @@
     "titleList": "Danh sách giấy phép thăm dò khoáng sản",
     "titleAdd": "Thêm mới giấy phép thăm dò khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép thăm dò khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "capphepkhaithackhoangsan": {
     "titleList": "Danh sách giấy phép khai thác khoáng sản",
     "titleAdd": "Thêm mới giấy phép khai thác khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép khai thác khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "cappheppheduyettruluongkhoangsan": {
     "titleList": "Danh sách giấy phép phê duyệt trữ lượng khoáng sản",
     "titleAdd": "Thêm mới giấy phép phê duyệt trữ lượng khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép phê duyệt trữ lượng khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "cappheptanthukhoangsan": {
     "titleList": "Danh sách giấy phép tận thu khoáng sản",
     "titleAdd": "Thêm mới giấy phép tận thu khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép tận thu khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "capphepdongcuamokhoangsan": {
     "titleList": "Danh sách giấy phép đóng cửa mỏ khoáng sản",
     "titleAdd": "Thêm mới giấy phép đóng cửa mỏ khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép đóng cửa mỏ khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "capphepdaugiaquyenkhaithackhoangsan": {
     "titleList": "Danh sách giấy phép đấu giá quyền khai thác khoáng sản",
     "titleAdd": "Thêm mới giấy phép đấu giá quyền khai thác khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép đấu giá quyền khai thác khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "cappheptralaigiayphepthamdokhaithackhoangsan": {
     "titleList": "Danh sách giấy phép trả lại giấy phép thăm dò khai thác khoáng sản",
     "titleAdd": "Thêm mới giấy phép trả lại giấy phép thăm dò khai thác khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép trả lại giấy phép thăm dò khai thác khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "capphepchuyennhuongquyenthamdokhaithackhoangsan": {
     "titleList": "Danh sách giấy phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
     "titleAdd": "Thêm mới giấy phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép chuyển nhượng quyền thăm dò khai thác khoáng sản",
-    "thongTinCapPhepTabTitle": "Thông tin chung",
+    "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinDangKyTabTitle": "Thông tin đăng ký"
+    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
   "thongtincapphep": {
     "thongTinChiTietTabTitle": "Thông tin chi tiết",

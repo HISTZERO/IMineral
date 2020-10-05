@@ -17,7 +17,7 @@
           <div class="card-body">
             <mat-tab-group mat-stretch-tabs #capPhepThamDoKhoanSanTabs [animationDuration]=""  [selectedIndex]="TabType.ThongTinGiayPhep"
               (selectedIndexChange)="tabChange($event)">
-              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepTabTitle' | translate }}">
+              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepChungTabTitle' | translate }}">
                 <app-giayphep-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepTabTitle' | translate }}"
                     [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"
                     [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false" (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
@@ -28,7 +28,7 @@
                 <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
                 </app-giaypheptailieu-list>
               </mat-tab>
-              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinDangKyTabTitle' | translate }}">
+              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepTabTitle' | translate }}">
                 <app-cp-tdks-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepThamDoFormState($event)" #thongTinCapPhepComp [allowAutoInit]="false" ></app-cp-tdks-thongtincapphep>
               </mat-tab>
             </mat-tab-group>
