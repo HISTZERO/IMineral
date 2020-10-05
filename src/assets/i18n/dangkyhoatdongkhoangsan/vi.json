@@ -743,6 +743,28 @@
     "donvicongsuat": "Đơn vị công suất",
     "donvicongsuatPlaceholder": "---Chọn đơn vị công suất---",
     "donvichieusau": "Đơn vị chiều sâu",
-    "chondonvichieusau": "---Chọn đơn vị chiều sâu---"
+    "chondonvichieusau": "---Chọn đơn vị chiều sâu---",
+    "diadiemRequired": "Địa điểm không được để trống",
+    "dientichkhaithacRequired": "Diện tích không được để trống",
+    "truluongdiachatRequired": "Trữ lượng địa chất không được để trống",
+    "truluongkhaithacRequired": "Trữ lượng khai thác không được để trống",
+    "thoihankhaithacRequired": "Thời hạn khai thác không được để trống",
+    "congsuatkhaithacRequired": "Công suất khai thác không được để trống",
+    "numberRequired": "Cần nhập kiểu số"
+  },
+  "dangkytanthugiahan": {
+    "contentDelete": "Đăng ký tận thu khoáng sản gia hạn ",
+    "titleAdd": "Thêm mới đăng ký khai thác tận thu khoáng sản gia hạn",
+    "titleEdit": "Sửa dữ liệu đăng ký khai thác tận thu khoáng sản gia hạn",
+    "truluongconlai": "Trữ lượng còn lại",
+    "truluongconlaiPlaceholder": "Nhập trữ lượng còn lại",
+    "thoihankhaithac": "Thời hạn khai thác",
+    "thoihankhaithacPlaceholder": "Nhập thời hạn khai thác",
+    "donvithoihan": "Đơn vị thời hạn",
+    "chondonvithoihan": "---Chọn đơn vị thời hạn---",
+    "donvitruluong": "Đơn vị trữ lượng",
+    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "lydogiahan": "Lý do gia hạn",
+    "lydogiahanPlaceholder": "Nhập lý do gia hạn"
   }
 }

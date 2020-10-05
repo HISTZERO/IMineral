@@ -78,6 +78,13 @@ import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoa
 import { TtksThongtindangkyComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-thongtindangky.component';
 import { DangkytanthukhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component';
 import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component';
+import { TtksDonvihanhchinhComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh.component';
+import { TtksDonvihanhchinhListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component';
+import { TtksDonvihanhchinhIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-io/ttks-donvihanhchinh-io.component';
+import { TtksLoaikhoangsanComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan.component';
+import { TtksLoaikhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-io/ttks-loaikhoangsan-io.component';
+import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component';
+
 
 
 @NgModule({
@@ -138,6 +145,12 @@ import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtinda
     TtksThongtindangkyComponent,
     DangkytanthukhoangsanIoComponent,
     DangkytanthugiahanIoComponent,
+    TtksDonvihanhchinhComponent,
+    TtksDonvihanhchinhListComponent,
+    TtksDonvihanhchinhIoComponent,
+    TtksLoaikhoangsanComponent,
+    TtksLoaikhoangsanIoComponent,
+    TtksLoaikhoangsanListComponent,
   ],
   exports: [
   ],
@@ -177,6 +190,8 @@ import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtinda
     DangkytanthukhoangsanIoComponent,
     KhuvuckhaithacIoComponent,
     DangkytanthugiahanIoComponent,
+    TtksDonvihanhchinhIoComponent,
+    TtksLoaikhoangsanIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

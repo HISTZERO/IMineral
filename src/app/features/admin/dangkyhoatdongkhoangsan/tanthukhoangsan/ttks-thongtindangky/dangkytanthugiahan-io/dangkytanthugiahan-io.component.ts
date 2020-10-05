@@ -226,7 +226,7 @@ export class DangkytanthugiahanIoComponent implements OnInit {
     return dangKyItem;
   }
 
-  async saveItemdangKyTanThuKhoangSan() {
+  async saveItemdangKyTanThuGiaHan() {
     this.logAllValidationErrorMessages();
 
     if (!this.dangKyTanThuGiaHanIOForm.valid) {
@@ -309,9 +309,9 @@ export class DangkytanthugiahanIoComponent implements OnInit {
   /**
    *
    */
-  deleteItemdangKyTanThuKhoangSan() {
+  deleteItemdangKyTanThuGiaHan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangKyTanThuKhoangSan.contentDelete,
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.contentDelete,
       this.dangKyTanThuGiaHan.tenduan
     );
     dialogRef.afterClosed().subscribe(async (result) => {

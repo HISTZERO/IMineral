@@ -1,0 +1,111 @@
+<div class="pt-3 pb-4">
+  <form [formGroup]="dangKyTanThuDvhcIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{ "COMMON.default.matinh" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" formControlName="tinhcombobox" [compareWith]="compareTinh"  placeholder="{{ 'COMMON.default.chonTinh' | translate }}"
+                        (selectionChange)="showDvhcHuyen()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcProvinceFilters" (filteredReturn)="allTinh = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonTinh" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let tinh of allTinh" [value]="{idtinh: tinh.id, matinh: tinh.matinh, tentinh: tinh.ten}">
+                {{ tinh.ten }}
+              </mat-option>
+            </mat-select>
+            <input type="hidden" class="form-control" formControlName="tinh">
+          </div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
+            <label class="m-0" *ngIf="tenTinhDisplay">{{"COMMON.default.tentinhdangdung" | translate}}:</label><br>
+            <span><b>{{tenTinhDisplay}}</b></span>
+          </div>
+        </div>
+        <span *ngIf="formErrors.tinh" class="alert-danger">{{formErrors.tinh}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{ "COMMON.default.mahuyen" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" formControlName="huyencombobox" [compareWith]="compareHuyen"  placeholder="{{ 'COMMON.default.chonHuyen' | translate }}"
+                        (selectionChange)="showDvhcXa()" *ngIf="dataTranslate">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcDistrictFilters"(filteredReturn)="allHuyen = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonHuyen" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let huyen of allHuyen" [value]="{idhuyen: huyen.id, mahuyen: huyen.mahuyen, tenhuyen: huyen.ten}">
+                {{ huyen.ten }}
+              </mat-option>
+            </mat-select>
+            <input type="hidden" class="form-control" formControlName="huyen">
+          </div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
+            <label class="m-0" *ngIf="tenHuyenDisplay">{{"COMMON.default.tenhuyendangdung" | translate}}:</label><br>
+            <span><b>{{tenHuyenDisplay}}</b></span>
+          </div>
+        </div>
+        <span *ngIf="formErrors.huyen" class="alert-danger">{{formErrors.huyen}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{"COMMON.default.maxa" | translate}}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
+            <mat-select class="form-control" formControlName="xacombobox" [compareWith]="compareXa" placeholder="{{ 'COMMON.default.chonXa' | translate }}" *ngIf="dataTranslate"
+                        (selectionChange) ="selectXa()">
+              <mat-select-filter [displayMember]="'ten'" [array]="dvhcWardFilters" (filteredReturn)="allXa = $event">
+              </mat-select-filter>
+              <mat-option value="">
+                {{ "COMMON.default.chonXa" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let xa of allXa" [value]="{idxa: xa.id, maxa: xa.maxa, tenxa: xa.ten}">
+                {{ xa.ten }}
+              </mat-option>
+            </mat-select>
+            <input type="hidden" class="form-control" formControlName="xa">
+          </div>
+          <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
+            <label class="m-0" *ngIf="tenXaDisplay">{{"COMMON.default.tenxadangdung" | translate}}:</label><br>
+            <span><b>{{tenXaDisplay}}</b></span>
+          </div>
+        </div>
+        <span *ngIf="formErrors.xa" class="alert-danger">{{formErrors.xa}}</span>
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+                    (click)="onContinueAdd(purpose)">
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'" (click)="onFormReset()">
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button class="btn btn-danger float-right mr-3" (click)="closeDkTanThuDvhcIOSidenav()">
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

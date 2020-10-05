@@ -61,6 +61,9 @@ export class ServiceName {
   // Đăng ký tận thu khoáng sản
   public static DANGKYTANTHUKHOANGSAN = "dangkytanthukhoangsan";
   public static DANGKYTANTHUGIAHAN = "dangkytanthugiahan";
+  public static DANGKYTANTHUDVHC = "dangkytanthudvhc";
+  public static DANGKYTANTHULOAIKHOANGSAN = "dangkytanthuloaikhoangsan";
+
   // Giấy phép
   public static GIAYPHEP = "giayphep";
   // Thiết lập

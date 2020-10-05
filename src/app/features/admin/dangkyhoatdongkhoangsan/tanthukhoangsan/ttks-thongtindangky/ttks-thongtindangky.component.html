@@ -8,16 +8,13 @@
           </ng-template>
         </mat-tab>
         <mat-tab [disabled]="!disabledTabState[TabType.LoaiKhoangSan]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
-<!--          <app-ktks-donvihanhchinh-list #dangKyKhaiThacKsDvhc [allowAutoInit]="false"></app-ktks-donvihanhchinh-list>-->
+          <app-ttks-donvihanhchinh-list #dangKyTanThuKsDvhc [allowAutoInit]="false"></app-ttks-donvihanhchinh-list>
         </mat-tab>
         <mat-tab  [disabled]="!disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
-<!--          <app-ktks-loaikhoangsan-list  #dangKyKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-ktks-loaikhoangsan-list>-->
+          <app-ttks-loaikhoangsan-list  #dangKyTanThuLoaiKhoangSan [allowAutoInit]="false"></app-ttks-loaikhoangsan-list>
         </mat-tab>
         <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
 <!--          <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>-->
-        </mat-tab>
-        <mat-tab  [disabled]="!disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhKhaiThacTabTitle' | translate }}">
-<!--          <app-ktks-congtrinhkhaithac-list #dangKyKhaiThacCongTrinh [allowAutoInit]="false"></app-ktks-congtrinhkhaithac-list>-->
         </mat-tab>
       </mat-tab-group>
     </div>
