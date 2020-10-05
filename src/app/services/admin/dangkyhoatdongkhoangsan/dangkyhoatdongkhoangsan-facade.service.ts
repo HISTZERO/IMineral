@@ -19,6 +19,8 @@ import {DkKhaiThacDvhcService} from "src/app/services/admin/dangkyhoatdongkhoang
 import {DkkhaithacloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.service";
 import {DkKhaiThacCongTrinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.service";
 import { DkthamdotoadokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
+import {DktanthukhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthukhoangsan.service";
+import {DktanthugiahanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthugiahan.service";
 
 
 @Injectable({
@@ -110,11 +112,18 @@ export class DangKyHoatDongKhoangSanFacadeService {
   public getDangKyKhaiThacCongTrinhService() {
     return new DkKhaiThacCongTrinhService(this.httpClient);
   }
-  
+
   // Đăng ký thăm dò tọa độ khu vực service
   public getDangKyThamDoToaDoKhuVucService() {
     return new DkthamdotoadokhuvucService(this.httpClient);
+  }
 
+  public getDangKyTanThuKhoangSanService() {
+    return new DktanthukhoangsanService(this.httpClient);
+  }
+
+  public getDangKyTanThuGiaHanService() {
+    return new DktanthugiahanService(this.httpClient);
   }
 }
 

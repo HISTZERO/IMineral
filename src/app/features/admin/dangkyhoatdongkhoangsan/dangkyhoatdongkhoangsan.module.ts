@@ -75,6 +75,9 @@ import { KtksDonvihanhchinhListComponent } from 'src/app/features/admin/dangkyho
 import { KtksLoaikhoangsanComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
 import { KtksLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
 import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
+import { TtksThongtindangkyComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-thongtindangky.component';
+import { DangkytanthukhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component';
+import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component';
 
 
 @NgModule({
@@ -132,6 +135,9 @@ import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoa
     KtksCongtrinhkhaithacComponent,
     KtksCongtrinhkhaithacIoComponent,
     KtksCongtrinhkhaithacListComponent,
+    TtksThongtindangkyComponent,
+    DangkytanthukhoangsanIoComponent,
+    DangkytanthugiahanIoComponent,
   ],
   exports: [
   ],
@@ -168,6 +174,7 @@ import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoa
     KtksDonvihanhchinhIoComponent,
     KtksLoaikhoangsanIoComponent,
     KtksCongtrinhkhaithacIoComponent,
+    DangkytanthukhoangsanIoComponent,
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},
