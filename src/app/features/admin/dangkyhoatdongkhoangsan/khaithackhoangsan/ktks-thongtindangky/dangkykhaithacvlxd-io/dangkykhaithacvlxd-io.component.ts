@@ -6,7 +6,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKhoangSanEnum, DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
+import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
@@ -16,7 +16,8 @@ import {
   DonViDienTich,
   DonViDoSau,
   DonViThoiHan,
-  DonViTruLuong
+  DonViTruLuong,
+  PhuongPhapKhaiThac
 } from 'src/app/shared/constants/common-constants';
 import { OutputDkKhaiThacVatLieuXayDungModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.model";
 
@@ -67,6 +68,9 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
   // Chứa đơn vị công suất
   public donViCongSuat = DonViCongSuat;
 
+  // Chứa phương pháp khai thác
+  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
+  
   // error message
   validationErrorMessages = {};
 
@@ -88,6 +92,8 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
     donvicongsuat: "",
     donvichieusau: "",
     hequychieu: "",
+    diadiem: "",
+    phuongphapkhaithac: ""
   };
 
   constructor(
@@ -155,8 +161,10 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
       soquyetdinh: ["", Validators.required],
       ngaykyquyetdinh: [""],
       coquanpheduyet: [""],
+      diadiem: [""],
+      phuongphapkhaithac: [""],
       dientichkhaithac: ["", Validators.required],
-      khoiluongkhaithac: ["", Validators.required],
+      truluongkhaithac: ["", Validators.required],
       congsuatkhaithac: ["", Validators.required],
       mucsaukhaithactu: [""],
       mucsaukhaithacden: [""],
@@ -204,6 +212,8 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
         donvicongsuat: item.donvicongsuat,
         donvichieusau: item.donvichieusau,
         hequychieu: item.hequychieu,
+        diadiem: item.diadiem,
+        phuongphapkhaithac: item.phuongphapkhaithac
       });
     }
   }
@@ -214,7 +224,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
   private setValidation() {
     this.validationErrorMessages = {
       dientichkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.dientichkhaithacRequired },
-      khoiluongkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.khoiluongkhaithacRequired },
+      truluongkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.truluongkhaithacRequired },
       congsuatkhaithac: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.congsuatkhaithacRequired },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvidientichRequired },
       donvitruluong: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacvlxd.donvitruluongRequired },
@@ -378,6 +388,8 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
       donvicongsuat: "",
       donvichieusau: "",
       hequychieu: "",
+      diadiem: "",
+      phuongphapkhaithac: ""
     });
   }
 
