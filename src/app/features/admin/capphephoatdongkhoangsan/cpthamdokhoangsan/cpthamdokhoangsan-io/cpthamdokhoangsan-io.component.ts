@@ -104,6 +104,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
     await this.giayPhepIOComp.manualDataInit();
     this.giayPhepIOComp.currentAction = this.currentAction;
     this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = existedCapPhepThamDo;
+    this.capPhepThamDoKhoanSanTabs.selectedIndex = this.TabType.ThongTinGiayPhep;
     this.capPhepThamDoKhoanSanTabs.realignInkBar();
   }
 
