@@ -1,17 +1,27 @@
-import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { MatSidenav } from '@angular/material';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
-import { DangkythamdogiahanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
-import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
-import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
-import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
-import { CongtrinhthamdoListComponent } from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { KhuvucthamdoListComponent } from "./khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {MatSidenav} from '@angular/material';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import {DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import {ContentContainerDirective} from 'src/app/shared/directives/content-container/content-container.directive';
+import {DangkythamdogiahanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
+import {DangkythamdokhoangsanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
+import {DonvihanhchinhListComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
+import {LoaikhoangsanListComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
+import {CongtrinhthamdoListComponent} from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
+import {KhuvucthamdoListComponent} from "./khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -25,13 +35,13 @@ export const DangKyThamDoKhoangSanComponent: any = {
 })
 export class ThongtindangkyComponent implements OnInit {
   @ViewChild('thongTinDangKyThamDoTabs', {static: false}) thongTinDangKyThamDoTabs;
-  @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-  @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
-  @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
-  @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
-  @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
+  @ViewChild(ContentContainerDirective, {static: true}) contentContainer: ContentContainerDirective;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild("dangKyThamDoDvhc", {static: false}) dangKyThamDoDvhc: DonvihanhchinhListComponent;
+  @ViewChild("dangKyThamDoLoaiKhoangSan", {static: false}) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
+  @ViewChild("dangKyThamDoCongTrinh", {static: false}) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
+  @ViewChild("dangKyThamDoKhuVuc", {static: false}) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -42,19 +52,19 @@ export class ThongtindangkyComponent implements OnInit {
   public idhoso;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
-    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet]: false,
+    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: false,
+    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: false,
+    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: false,
+    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: false
   };
 
   public disabledTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
-    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : true,
-    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : true,
-    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : true,
-    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : true
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet]: true,
+    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: true,
+    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: true,
+    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: true,
+    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: true
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -70,7 +80,8 @@ export class ThongtindangkyComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) { }
+              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+  }
 
   async ngOnInit() {
     // Lấy dữ liệu translate
@@ -103,7 +114,7 @@ export class ThongtindangkyComponent implements OnInit {
       return;
     }
 
-    this.itemHoSo =  await this.getHoSoById(this.idhoso);
+    this.itemHoSo = await this.getHoSoById(this.idhoso);
 
     if (!this.itemHoSo) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
@@ -175,7 +186,7 @@ export class ThongtindangkyComponent implements OnInit {
       const viewContainerRef = this.contentContainer.viewContainerRef;
       const componentRef: any = viewContainerRef.createComponent(factory);
       componentRef.instance.idhoso = this.itemHoSo.idhoso;
-      componentRef.instance.matSidenav =  this.matSidenav;
+      componentRef.instance.matSidenav = this.matSidenav;
       componentRef.instance.content = this.content;
       componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
       componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));

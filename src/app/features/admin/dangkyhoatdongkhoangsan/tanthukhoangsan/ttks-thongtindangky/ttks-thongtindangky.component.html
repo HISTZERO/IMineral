@@ -3,17 +3,17 @@
     <div class="card-body">
       <mat-tab-group mat-stretch-tabs #thongTinDangKyTanThuTabs [animationDuration]="" [selectedIndex]="TabType.ThongTinChiTiet"
                      (selectedIndexChange)="tabChange($event)">
-        <mat-tab  [disabled]="!disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietKhaiThacTabTitle' | translate }}">
+        <mat-tab  [disabled]="disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietKhaiThacTabTitle' | translate }}">
           <ng-template appContentContainer>
           </ng-template>
         </mat-tab>
-        <mat-tab [disabled]="!disabledTabState[TabType.LoaiKhoangSan]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
+        <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
           <app-ttks-donvihanhchinh-list #dangKyTanThuKsDvhc [allowAutoInit]="false"></app-ttks-donvihanhchinh-list>
         </mat-tab>
-        <mat-tab  [disabled]="!disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
+        <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
           <app-ttks-loaikhoangsan-list  #dangKyTanThuLoaiKhoangSan [allowAutoInit]="false"></app-ttks-loaikhoangsan-list>
         </mat-tab>
-        <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
+        <mat-tab [disabled]="disabledTabState[TabType.KhuVucThamDo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
 <!--          <app-khuvucthamdo-list #dangKyThamDoKhuVuc [allowAutoInit]="false"></app-khuvucthamdo-list>-->
         </mat-tab>
       </mat-tab-group>
