@@ -195,7 +195,8 @@ import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtind
     KhuvuckhaithacIoComponent,
     DangkytanthugiahanIoComponent,
     TtksDonvihanhchinhIoComponent,
-    TtksLoaikhoangsanIoComponent
+    TtksLoaikhoangsanIoComponent,
+    KtksThietbiIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

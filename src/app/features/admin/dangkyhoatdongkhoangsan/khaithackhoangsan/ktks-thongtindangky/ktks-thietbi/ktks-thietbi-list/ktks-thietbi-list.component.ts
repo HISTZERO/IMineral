@@ -1,18 +1,16 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {GridComponent} from "@syncfusion/ej2-angular-grids";
-import {MatSidenav} from "@angular/material/sidenav";
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {TranslateService} from "@ngx-translate/core";
-import {DonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-io/donvihanhchinh-io.component";
-import {HttpErrorResponse} from "@angular/common/http";
-import {OutputDkKhaiThacDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.model";
-import {KtksDonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component";
-import { OutputDkKhaiThacThietBiModel } from "../../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.model";
-import { KtksThietbiIoComponent } from "../ktks-thietbi-io/ktks-thietbi-io.component";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { MatSidenav } from "@angular/material/sidenav";
+import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
+
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { OutputDkKhaiThacThietBiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.model";
+import { KtksThietbiIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-io/ktks-thietbi-io.component";
 
 
 @Component({
@@ -45,11 +43,12 @@ export class KtksThietbiListComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
 
   constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService) { }
+    public cfr: ComponentFactoryResolver,
+    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService) { }
+
 
   async ngOnInit() {
     this.getDataTranslate();
@@ -75,7 +74,7 @@ export class KtksThietbiListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -85,6 +84,9 @@ export class KtksThietbiListComponent implements OnInit {
     await this.getAllDangKyKhaiThacThietBi();
   }
 
+  /**
+   * Hàm khởi tạo data
+   */
   async manualDataInit() {
     await this.getDataPageSize();
     return true;
@@ -100,7 +102,7 @@ export class KtksThietbiListComponent implements OnInit {
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyKhaiThacThietBiService()
-      .getFetchAll({ iddangkykhaithac: this.iddangkykhaithac});
+      .getFetchAll({ iddangkykhaithac: this.iddangkykhaithac });
     if (listData) {
       listData.map((thietbi, index) => {
         thietbi.serialNumber = index + 1;
@@ -127,7 +129,7 @@ export class KtksThietbiListComponent implements OnInit {
       .getByid(idKhaiThacThietBi).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.informedNotExistedDangKyThamDoDvhc);
       return;
     }
 
@@ -135,7 +137,7 @@ export class KtksThietbiListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
+    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.titleEdit);
     await this.matSidenavService.setContentComp(KtksThietbiIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -148,8 +150,8 @@ export class KtksThietbiListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(KtksThietbiIoComponent, "new", {iddangkykhaithac: this.iddangkykhaithac});
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.titleAdd);
+    this.matSidenavService.setContentComp(KtksThietbiIoComponent, "new", { iddangkykhaithac: this.iddangkykhaithac });
     this.matSidenavService.open();
   }
 
@@ -163,7 +165,7 @@ export class KtksThietbiListComponent implements OnInit {
     // Nếu đồng ý xóa
     const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyKhaiThacThietBiService()
-      .checkBeDeleted(this.selectedItem.iddangkykhaithac);
+      .checkBeDeleted(this.selectedItem.idthietbi);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -184,14 +186,14 @@ export class KtksThietbiListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.contentDelete,
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.contentDelete,
       this.selectedItem.tenthietbi
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyKhaiThacThietBiService()
-          .deleteItem({ idkhaithacdvhc: this.selectedItem.iddangkykhaithac })
+          .deleteItem({ idthietbi: this.selectedItem.idthietbi })
           .subscribe(
             () => this.getAllDangKyKhaiThacThietBi(),
             (error: HttpErrorResponse) => {

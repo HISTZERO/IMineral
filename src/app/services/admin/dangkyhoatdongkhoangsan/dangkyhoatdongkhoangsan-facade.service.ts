@@ -18,8 +18,6 @@ import {DkthamdokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoang
 import {DkKhaiThacDvhcService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.service";
 import {DkkhaithacloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.service";
 import {DkKhaiThacCongTrinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.service";
-import { DkthamdotoadokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
-import { DkkhaithackhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.service";
 import { DkkhaithacthietbiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.service";
 import {DkthamdotoadokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
 import {DktanthukhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthukhoangsan.service";
