@@ -21,6 +21,7 @@
     "donViHanhChinhKhaiThacTabTile": "Đơn vị hành chính",
     "loaiKhoangSanKhaiThacTabTile": "Loại khoáng sản",
     "khuVucKhaiThacTabTile": "Khu vực khai thác",
+    "thietBiKhaiThacTabTitle": "Thiết bị khai thác",
     "informedNotExistedHoSoDangKyKhaiThac": "Hồ sơ đăng ký khai thác không tồn tại"
   },
   "khaithackhoangsan": {
@@ -716,6 +717,17 @@
     "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
     "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
     "informedNotExistedDangKyKhaiThacLoaiKhoangSan": "Đăng ký khai thác loại khoáng sản không tồn tại"
+  },
+  "dangkykhaithacthietbi": {
+    "titleList": "Danh sách thiết bị khai thác",
+    "titleAdd": "Thêm mới thiết bị khai thác",
+    "titleEdit": "Sửa dữ liệu thiết bị khai thác",
+    "contentDelete": "Tên thiết bị: ",
+    "tenthietbi": "Tên thiết bị",
+    "mota": "Mô tả",
+    "tenthietbiPlaceholder": "Nhập tên thiết bị",
+    "motaPlaceholder": "Nhập mô tả",
+    "informedNotExistedDangKyKhaiThacThietBi": "Đăng ký khai thác thiết bị không tồn tại"
   },
   "dangkytanthukhoangsan": {
     "contentDelete": "Đăng ký tận thu khoáng sản ",

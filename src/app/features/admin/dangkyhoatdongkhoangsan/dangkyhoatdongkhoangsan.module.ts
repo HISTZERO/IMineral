@@ -75,6 +75,8 @@ import { KtksDonvihanhchinhListComponent } from 'src/app/features/admin/dangkyho
 import { KtksLoaikhoangsanComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
 import { KtksLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
 import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
+import { KtksThietbiListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-list/ktks-thietbi-list.component';
+import { KtksThietbiIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-io/ktks-thietbi-io.component';
 import { TtksThongtindangkyComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-thongtindangky.component';
 import { DangkytanthukhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component';
 import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component';
@@ -144,6 +146,8 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     KtksCongtrinhkhaithacComponent,
     KtksCongtrinhkhaithacIoComponent,
     KtksCongtrinhkhaithacListComponent,
+    KtksThietbiListComponent,
+    KtksThietbiIoComponent,
     TtksThongtindangkyComponent,
     DangkytanthukhoangsanIoComponent,
     DangkytanthugiahanIoComponent,
@@ -196,6 +200,7 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     DangkytanthugiahanIoComponent,
     TtksDonvihanhchinhIoComponent,
     TtksLoaikhoangsanIoComponent,
+    KtksThietbiIoComponent,
     TtksKhuvuctanthuIoComponent
   ],
   providers: [
