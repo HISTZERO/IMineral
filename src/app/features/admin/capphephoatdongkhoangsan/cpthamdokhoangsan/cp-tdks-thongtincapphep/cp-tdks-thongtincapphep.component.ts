@@ -10,7 +10,8 @@ import { ContentContainerDirective } from 'src/app/shared/directives/content-con
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
-  [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent
+  [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent
 };
 
 @Component({
@@ -37,7 +38,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   public idgiayphep;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
     [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
     [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
     [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
@@ -45,11 +46,11 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   };
 
   public disabledTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
-    [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [CpThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : true,
+    [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : true,
+    [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : true,
+    [CpThamDoKhoangSanTabEnum.CongTrinhThamDo] : true
   };
 
    // Lưu trữ dữ liệu action hiện tại
@@ -94,14 +95,14 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     });
 
     if (this.idgiayphep === DefaultValue.Null || this.idgiayphep === DefaultValue.Undefined || this.idgiayphep.trim() === DefaultValue.Empty) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtindangky.informedNotExistedGiayPhepThamDo);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return;
     }
 
     this.itemGiayPhep =  await this.getGiayPhepById(this.idgiayphep);
 
     if (!this.itemGiayPhep) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtindangky.informedNotExistedGiayPhepThamDo);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return;
     }
 
@@ -111,25 +112,17 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     return true;
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setDisabledTabState(actionType: number) {
     switch (actionType) {
       case CapPhepThamDoActionEnum.Add: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
-        break;
-      }
-      case CapPhepThamDoActionEnum.Edit: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
-      default: {
+      case CapPhepThamDoActionEnum.Edit: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
@@ -137,12 +130,28 @@ export class CpTdksThongtincapphepComponent implements OnInit {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
       }
+      default: {
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
+        break;
+      }
     }
+  }
+
+  private resetLoadedTabState() {
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
   getCapPhepThamDoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.setDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
@@ -169,9 +178,16 @@ export class CpTdksThongtincapphepComponent implements OnInit {
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = this.itemGiayPhep.idgiayphep;
+    componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
     componentRef.instance.matSidenav =  this.matSidenav;
     componentRef.instance.content = this.content;
+
+    if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+      componentRef.instance.disabledDienTichTraLai = false;
+    } else {
+      componentRef.instance.disabledDienTichTraLai = true;
+    }
+
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepThamDoFormState(event));
     componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
   }

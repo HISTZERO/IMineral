@@ -52,13 +52,13 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   public loadedTabState: any = {
     [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
   public disabledTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
-    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : true,
+    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : true,
+    [CpThamDoKhoangSanTabEnum.ThongTinCapPhep] : true,
   };
 
 
@@ -84,7 +84,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
 
       if (giayPhepItem) {
         this.currentAction = GiayPhepActionEnum.Edit;
-        this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+        this.setSanDisabledTabState(this.currentAction);
 
         const cpThamDoItem = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
 
@@ -96,7 +96,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
       }
     } else {
       this.currentAction = GiayPhepActionEnum.Add;
-      this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+      this.setSanDisabledTabState(this.currentAction);
     }
 
     // Khởi tạo dữ liệu ban đầu  cho form hoso
@@ -137,32 +137,38 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
     return capPhepItem;
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setSanDisabledTabState(actionType: number) {
     switch(actionType) {
       case GiayPhepActionEnum.Add: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
       case GiayPhepActionEnum.Edit: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
       default: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
     }
   }
 
+  private resetLoadedTabState() {
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
+  }
+
   getGiayPhepIoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.setSanDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
   }
 
   getIdGiayPhep(id: string) {
@@ -188,11 +194,11 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
       this.taiLieuListComp.idgiayphep = this.idgiayphep;
       this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
       this.loadedTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem]  =  await this.taiLieuListComp.manualDataInit();
-    } else if (index === CpThamDoKhoangSanTabEnum.ThongTinDangKy && !this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy]) {
+    } else if (index === CpThamDoKhoangSanTabEnum.ThongTinCapPhep && !this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep]) {
       this.thongTinCapPhepComp.matSidenav = this.matSidenav;
       this.thongTinCapPhepComp.content = this.content;
       this.thongTinCapPhepComp.idgiayphep = this.idgiayphep;
-      this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinCapPhepComp.manualDataInit();
+      this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepComp.manualDataInit();
     }
   }
 }

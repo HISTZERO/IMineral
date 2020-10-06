@@ -50,13 +50,13 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
   public loadedTabState: any = {
     [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
   public disabledTabState: any = {
     [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
 
@@ -145,19 +145,19 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
       case GiayPhepActionEnum.Add: {
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
       case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
-        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinDangKy] = true;
+        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
       default: {
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
     }

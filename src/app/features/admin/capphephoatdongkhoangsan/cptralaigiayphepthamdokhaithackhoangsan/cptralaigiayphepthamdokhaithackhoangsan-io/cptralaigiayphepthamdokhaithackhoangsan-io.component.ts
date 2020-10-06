@@ -49,13 +49,13 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
   public loadedTabState: any = {
     [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
   public disabledTabState: any = {
     [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
 
@@ -144,19 +144,19 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
       case GiayPhepActionEnum.Add: {
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
       case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
-        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinDangKy] = true;
+        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
       default: {
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
     }

@@ -49,13 +49,13 @@ export class CptanthukhoangsanIoComponent implements OnInit {
   public loadedTabState: any = {
     [CpTanThuKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpTanThuKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpTanThuKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
   public disabledTabState: any = {
     [CpTanThuKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpTanThuKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpTanThuKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
 
@@ -144,19 +144,19 @@ export class CptanthukhoangsanIoComponent implements OnInit {
       case GiayPhepActionEnum.Add: {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
       case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
-        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinDangKy] = true;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
       default: {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
     }
