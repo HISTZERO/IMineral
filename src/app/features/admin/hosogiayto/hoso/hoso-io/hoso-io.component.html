@@ -61,30 +61,48 @@
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.hoso.ngaynop" | translate}}
                     <small>(*)</small>
                   </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaynop" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1" placeholder="{{'HOSOGIAYTO.hoso.ngaynopPlaceholder' | translate}}" />
-                    <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
-                    <span *ngIf="formErrors.ngaynop" class="alert-danger">{{formErrors.ngaynop}}</span>
+                  <div class="col-lg-8 col-md-8 col-sm-8 ">
+                      <div class="d-flex">
+                          <input class="form-control mr-2" formControlName="ngaynop"
+                              [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                              placeholder="{{'HOSOGIAYTO.giayphep.ngaynopPlaceholder' | translate}}" />
+                              <span [owlDateTimeTrigger]="dt1" style="cursor: pointer;"
+                              class="btn btn-outline-secondary"><i class="fa fa-calendar"></i></span>
+                          <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
+                      </div>
+                      <span *ngIf="formErrors.ngaynop" class="alert-danger">{{formErrors.ngaynop}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.hoso.ngaytiepnhan" | translate}}
                     <small>(*)</small>
                   </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaytiepnhan" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2" placeholder="{{'HOSOGIAYTO.hoso.ngaytiepnhanPlaceholder' | translate}}" />
-                    <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
-                    <span *ngIf="formErrors.ngaytiepnhan" class="alert-danger">{{formErrors.ngaytiepnhan}}</span>
+                  <div class="col-lg-8 col-md-8 col-sm-8 ">
+                      <div class="d-flex">
+                          <input class="form-control mr-2" formControlName="ngaytiepnhan"
+                              [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                              placeholder="{{'HOSOGIAYTO.giayphep.ngaytiepnhanPlaceholder' | translate}}" />
+                              <span [owlDateTimeTrigger]="dt2" style="cursor: pointer;"
+                              class="btn btn-outline-secondary"><i class="fa fa-calendar"></i></span>
+                          <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
+                      </div>
+                      <span *ngIf="formErrors.ngaytiepnhan" class="alert-danger">{{formErrors.ngaytiepnhan}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.hoso.ngaytraketqua" | translate}}
                     <small>(*)</small>
                   </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" formControlName="ngaytraketqua" [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3" placeholder="{{'HOSOGIAYTO.hoso.ngaytraketquaPlaceholder' | translate}}" />
-                    <owl-date-time #dt3 [pickerType]="'calendar'"></owl-date-time>
-                    <span *ngIf="formErrors.ngaytraketqua" class="alert-danger">{{formErrors.ngaytraketqua}}</span>
+                  <div class="col-lg-8 col-md-8 col-sm-8 ">
+                      <div class="d-flex">
+                          <input class="form-control mr-2" formControlName="ngaytraketqua"
+                              [owlDateTimeTrigger]="dt3" [owlDateTime]="dt3"
+                              placeholder="{{'HOSOGIAYTO.giayphep.ngaytraketquaPlaceholder' | translate}}" />
+                              <span [owlDateTimeTrigger]="dt3" style="cursor: pointer;"
+                              class="btn btn-outline-secondary"><i class="fa fa-calendar"></i></span>
+                          <owl-date-time #dt3 [pickerType]="'calendar'"></owl-date-time>
+                      </div>
+                      <span *ngIf="formErrors.ngaytraketqua" class="alert-danger">{{formErrors.ngaytraketqua}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">

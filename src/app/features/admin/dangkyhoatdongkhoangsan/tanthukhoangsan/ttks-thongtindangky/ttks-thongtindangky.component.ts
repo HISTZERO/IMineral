@@ -10,7 +10,11 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {ContentContainerDirective} from "src/app/shared/directives/content-container/content-container.directive";
-import {DangKyTanThuKhoangSanTabEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum} from "src/app/shared/constants/enum";
+import {
+  DangKyTanThuKhoangSanTabEnum,
+  DangKyThamDoActionEnum,
+  LoaiCapPhepEnum
+} from "src/app/shared/constants/enum";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
@@ -20,6 +24,7 @@ import {DangkytanthukhoangsanIoComponent} from "src/app/features/admin/dangkyhoa
 import {DangkytanthugiahanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component";
 import {TtksDonvihanhchinhListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component";
 import {TtksLoaikhoangsanListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component";
+import {DangKyThamDoKhoangSanComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component";
 
 export const DangKyTanThuKhoangSanComponent: any = {
   [LoaiCapPhepEnum.KhaiThacTanThuKhoangSan]: DangkytanthukhoangsanIoComponent,
@@ -39,7 +44,6 @@ export class TtksThongtindangkyComponent implements OnInit {
   @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
   @ViewChild("dangKyTanThuKsDvhc", {static: false}) dangKyTanThuKsDvhc: TtksDonvihanhchinhListComponent;
   @ViewChild("dangKyTanThuLoaiKhoangSan", {static: false}) dangKyTanThuLoaiKhoangSan: TtksLoaikhoangsanListComponent;
-  // @ViewChild("dangKyKhaiThacCongTrinh", {static: false}) dangKyKhaiThacCongTrinh: KtksCongtrinhkhaithacListComponent;
   // @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -51,24 +55,24 @@ export class TtksThongtindangkyComponent implements OnInit {
   public idhoso;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: true,
-    [DangKyTanThuKhoangSanTabEnum.DonViHanhChinh]: false,
-    [DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan]: false,
-    [DangKyTanThuKhoangSanTabEnum.KhuVucThamDo]: false,
-  };
-
-  public disabledTabState: any = {
     [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: false,
     [DangKyTanThuKhoangSanTabEnum.DonViHanhChinh]: false,
     [DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan]: false,
     [DangKyTanThuKhoangSanTabEnum.KhuVucThamDo]: false,
   };
 
+  public disabledTabState: any = {
+    [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: true,
+    [DangKyTanThuKhoangSanTabEnum.DonViHanhChinh]: true,
+    [DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan]: true,
+    [DangKyTanThuKhoangSanTabEnum.KhuVucThamDo]: true,
+  };
+
   // Lưu trữ dữ liệu action hiện tại
   public currentAction: number;
   // Chứa dữ liệu translate
   public dataTranslate: any;
-  // Lưu trữ dữ liệu iddangkythamdo
+  // Lưu trữ dữ liệu iddangkytanthu
   private iddangkytanthu: string;
   // Lưu trữ dữ liệu hồ sơ
   private itemHoSo: any;
@@ -107,56 +111,57 @@ export class TtksThongtindangkyComponent implements OnInit {
     });
 
     if (this.idhoso === null || this.idhoso === undefined) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyKhaiThac);
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
       return;
     }
 
     this.itemHoSo = await this.getHoSoById(this.idhoso);
 
     if (!this.itemHoSo) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyKhaiThac);
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
       return;
     }
 
     await this.showDangKyViewComponent();
-
+    this.thongTinDangKyTanThuTabs.selectedIndex = this.TabType.ThongTinChiTiet;
     this.thongTinDangKyTanThuTabs.realignInkBar();
     return true;
   }
 
-  setTanThuKhoangSanDisabledTabState(actionType: number) {
+  setDisabledTabState(actionType: number) {
     switch (actionType) {
       case DangKyThamDoActionEnum.Add: {
-        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
-        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
-        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = false;
-        break;
-      }
-      case DangKyThamDoActionEnum.Edit: {
-        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = true;
         break;
       }
-      default: {
+      case DangKyThamDoActionEnum.Edit: {
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = false;
         break;
       }
+      default: {
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = true;
+        break;
+      }
     }
   }
 
-  getDangKyTanThuKhoangSanFormState(action: number) {
+  getDangKyTanThuFormState(action: number) {
     this.currentAction = action;
-    this.setTanThuKhoangSanDisabledTabState(this.currentAction);
+    this.setDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
-  getIdDangKyTanThuKhoangSan(idDangKyTanThu: string) {
+  getIdDangKyTanThu(idDangKyTanThu: string) {
     this.iddangkytanthu = idDangKyTanThu;
   }
 
@@ -172,18 +177,24 @@ export class TtksThongtindangkyComponent implements OnInit {
 
   private async showDangKyViewComponent() {
     let factory: any;
+    this.contentContainer.viewContainerRef.clear();
 
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyTanThuKhoangSanComponent[this.itemHoSo.loaicapphep]);
+      const viewContainerRef = this.contentContainer.viewContainerRef;
+      const componentRef: any = viewContainerRef.createComponent(factory);
+      componentRef.instance.idhoso = this.itemHoSo.idhoso;
+      componentRef.instance.matSidenav = this.matSidenav;
+      componentRef.instance.content = this.content;
+      componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuFormState(event));
+      componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThu(event));
     }
+  }
 
-    const viewContainerRef = this.contentContainer.viewContainerRef;
-    const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = this.itemHoSo.idhoso;
-    componentRef.instance.matSidenav = this.matSidenav;
-    componentRef.instance.content = this.content;
-    componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuKhoangSanFormState(event));
-    componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThuKhoangSan(event));
+  private resetLoadedTabState() {
+    this.loadedTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
+    this.loadedTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
+    this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = false;
   }
 
   async tabChange(index: any) {
@@ -197,17 +208,14 @@ export class TtksThongtindangkyComponent implements OnInit {
       this.dangKyTanThuLoaiKhoangSan.content = this.content;
       this.dangKyTanThuLoaiKhoangSan.iddangkytanthu = this.iddangkytanthu;
       this.loadedTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = await this.dangKyTanThuLoaiKhoangSan.manualDataInit();
-      }//  else if (index === DangKyTanThuKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo]) {
-      //     //   this.dangKyThamDoKhuVuc.matSidenav = this.matSidenav;
-      //     //   this.dangKyThamDoKhuVuc.content = this.content;
-      //     //   this.dangKyThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
-      //     //   this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
-      //   } else if (index === DangKyTanThuKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyTanThuKhoangSanTabEnum.CongTrinhThamDo]) {
-      //     this.dangKyKhaiThacCongTrinh.matSidenav = this.matSidenav;
-      //     this.dangKyKhaiThacCongTrinh.content = this.content;
-      //     this.dangKyKhaiThacCongTrinh.iddangkykhaithac = this.iddangkykhaithac;
-      //     this.loadedTabState[DangKyTanThuKhoangSanTabEnum.CongTrinhThamDo] = await this.dangKyKhaiThacCongTrinh.manualDataInit();
-      //   }
-    }
+    // } else if (index === DangKyTanThuKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo]) {
+    //   this.dangKyThamDoKhuVuc.matSidenav = this.matSidenav;
+    //   this.dangKyThamDoKhuVuc.content = this.content;
+    //   this.dangKyThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
+    //   this.dangKyThamDoKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
+    //   this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
+     }
 
   }
+
+}
