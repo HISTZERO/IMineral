@@ -42,7 +42,7 @@ export class ThongtindangkyComponent implements OnInit {
   public idhoso;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
     [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
     [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
     [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
@@ -116,7 +116,7 @@ export class ThongtindangkyComponent implements OnInit {
     return true;
   }
 
-  setDangKyThamDoKhoangSanDisabledTabState(actionType: number) {
+  setDisabledTabState(actionType: number) {
     switch (actionType) {
       case DangKyThamDoActionEnum.Add: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
@@ -147,8 +147,8 @@ export class ThongtindangkyComponent implements OnInit {
 
   getDangKyThamDoFormState(action: number) {
     this.currentAction = action;
-    this.setDangKyThamDoKhoangSanDisabledTabState(this.currentAction);
-    this.resetDangKyThamDoKhoangSanLoadedTabState();
+    this.setDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
@@ -182,7 +182,7 @@ export class ThongtindangkyComponent implements OnInit {
     }
   }
 
-  private resetDangKyThamDoKhoangSanLoadedTabState() {
+  private resetLoadedTabState() {
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;

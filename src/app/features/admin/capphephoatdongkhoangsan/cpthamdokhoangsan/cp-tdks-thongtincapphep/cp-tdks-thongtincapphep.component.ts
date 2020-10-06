@@ -38,7 +38,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   public idgiayphep;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
     [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
     [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
     [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
@@ -46,11 +46,11 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   };
 
   public disabledTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
-    [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [CpThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [CpThamDoKhoangSanTabEnum.DonViHanhChinh] : true,
+    [CpThamDoKhoangSanTabEnum.LoaiKhoangSan] : true,
+    [CpThamDoKhoangSanTabEnum.KhuVucThamDo] : true,
+    [CpThamDoKhoangSanTabEnum.CongTrinhThamDo] : true
   };
 
    // Lưu trữ dữ liệu action hiện tại
@@ -112,25 +112,17 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     return true;
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setDisabledTabState(actionType: number) {
     switch (actionType) {
       case CapPhepThamDoActionEnum.Add: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
-        break;
-      }
-      case CapPhepThamDoActionEnum.Edit: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
-      default: {
+      case CapPhepThamDoActionEnum.Edit: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
@@ -138,12 +130,28 @@ export class CpTdksThongtincapphepComponent implements OnInit {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
       }
+      default: {
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
+        break;
+      }
     }
+  }
+
+  private resetLoadedTabState() {
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
   getCapPhepThamDoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.setDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 

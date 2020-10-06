@@ -56,9 +56,9 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   };
 
   public disabledTabState: any = {
-    [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
-    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
+    [CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] : true,
+    [CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : true,
+    [CpThamDoKhoangSanTabEnum.ThongTinCapPhep] : true,
   };
 
 
@@ -84,7 +84,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
 
       if (giayPhepItem) {
         this.currentAction = GiayPhepActionEnum.Edit;
-        this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+        this.setSanDisabledTabState(this.currentAction);
 
         const cpThamDoItem = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
 
@@ -96,7 +96,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
       }
     } else {
       this.currentAction = GiayPhepActionEnum.Add;
-      this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+      this.setSanDisabledTabState(this.currentAction);
     }
 
     // Khởi tạo dữ liệu ban đầu  cho form hoso
@@ -137,32 +137,38 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
     return capPhepItem;
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setSanDisabledTabState(actionType: number) {
     switch(actionType) {
       case GiayPhepActionEnum.Add: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
-        break;
-      }
-      case GiayPhepActionEnum.Edit: {
-        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
-      default: {
+      case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
         this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
+      default: {
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
+        this.disabledTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
+        break;
+      }
     }
+  }
+
+  private resetLoadedTabState() {
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
+    this.loadedTabState[CpThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
   }
 
   getGiayPhepIoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.setSanDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
   }
 
   getIdGiayPhep(id: string) {
