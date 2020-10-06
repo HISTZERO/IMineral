@@ -214,7 +214,6 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
         hequychieu: item.hequychieu,
       });
     }
-    console.log(this.dangKyTanThuKhoangSanIOForm);
   }
 
   /**
