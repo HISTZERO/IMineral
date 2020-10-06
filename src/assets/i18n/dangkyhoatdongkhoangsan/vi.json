@@ -13,6 +13,7 @@
     "donViHanhChinhTabTile": "Đơn vị hành chính",
     "loaiKhoangSanTabTile": "Loại khoáng sản",
     "khuVucThamDoTabTile": "Khu vực thăm dò",
+    "khuVucTanThuTabTile": "Khu vực tận thu",
     "congTrinhThamDoTabTitle": "Công trình thăm dò",
     "congTrinhKhaiThacTabTitle": "Công trình khai thác",
     "informedNotExistedHoSoDangKyThamDo": "Hồ sơ đăng ký thăm dò không tồn tại",
@@ -770,5 +771,11 @@
     "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
     "lydogiahan": "Lý do gia hạn",
     "lydogiahanPlaceholder": "Nhập lý do gia hạn"
+  },
+  "dangkytanthukhuvuc": {
+    "titleList": "Danh sách khu vực đăng ký tận thu",
+    "titleAdd": "Thêm mới khu vực đăng ký tận thu",
+    "titleEdit": "Sửa dữ liệu khu vực đăng ký tận thu",
+    "contentDelete": "Khu vực đăng ký tận thu"
   }
 }

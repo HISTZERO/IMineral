@@ -84,6 +84,8 @@ import { TtksDonvihanhchinhIoComponent } from './tanthukhoangsan/ttks-thongtinda
 import { TtksLoaikhoangsanComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan.component';
 import { TtksLoaikhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-io/ttks-loaikhoangsan-io.component';
 import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component';
+import { TtksKhuvuctanthuIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component';
+import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component';
 
 
 
@@ -151,6 +153,8 @@ import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtind
     TtksLoaikhoangsanComponent,
     TtksLoaikhoangsanIoComponent,
     TtksLoaikhoangsanListComponent,
+    TtksKhuvuctanthuIoComponent,
+    TtksKhuvuctanthuListComponent,
   ],
   exports: [
   ],
@@ -191,7 +195,8 @@ import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtind
     KhuvuckhaithacIoComponent,
     DangkytanthugiahanIoComponent,
     TtksDonvihanhchinhIoComponent,
-    TtksLoaikhoangsanIoComponent
+    TtksLoaikhoangsanIoComponent,
+    TtksKhuvuctanthuIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

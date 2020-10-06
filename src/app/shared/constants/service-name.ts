@@ -63,6 +63,7 @@ export class ServiceName {
   public static DANGKYTANTHUGIAHAN = "dangkytanthugiahan";
   public static DANGKYTANTHUDVHC = "dangkytanthudvhc";
   public static DANGKYTANTHULOAIKHOANGSAN = "dangkytanthuloaikhoangsan";
+  public static DANGKYTANTHUKHUVUC = "dangkytanthukhuvuc";
 
   // Giấy phép
   public static GIAYPHEP = "giayphep";
