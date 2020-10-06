@@ -18,6 +18,7 @@ import {DkthamdokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoang
 import {DkKhaiThacDvhcService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.service";
 import {DkkhaithacloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.service";
 import {DkKhaiThacCongTrinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.service";
+import { DkkhaithacthietbiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.service";
 import {DkthamdotoadokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
 import {DktanthukhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthukhoangsan.service";
 import {DktanthugiahanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthugiahan.service";
@@ -145,6 +146,11 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký khai thác khu vực service
   public getDangkyKhaiThacKhuVucService() {
     return new DkkhaithackhuvucService(this.httpClient);
+  }
+
+  // Đăng ký khai thác thiết bị service
+  public getDangKyKhaiThacThietBiService() {
+    return new DkkhaithacthietbiService(this.httpClient);
   }
 }
 

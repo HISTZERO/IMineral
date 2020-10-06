@@ -1,0 +1,52 @@
+<div class="pt-3 pb-4">
+    <form [formGroup]="dkKhaiThacThietBiIOForm" class="pt-toolbar">
+        <div class="form-group row mx-0">
+            <label
+                class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.tenthietbi" | translate }}
+                <small>(*)</small></label>
+            <div class="col-sm-9">
+                <input class="form-control" type="text" formControlName="tenthietbi"
+                    placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.tenthietbiPlaceholder' | translate}}" />
+                <span *ngIf="formErrors.tenthietbi" class="alert-danger">{{formErrors.tenthietbi}}</span>
+            </div>
+        </div>
+
+        <div class="form-group row mx-0">
+            <label
+                class="col-sm-3 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.mota" | translate }}
+                <small>(*)</small></label>
+            <div class="col-sm-9">
+                <textarea class="form-control" formControlName="mota"
+                    placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacthietbi.motaPlaceholder' | translate}}"></textarea>
+                <span *ngIf="formErrors.mota" class="alert-danger">{{formErrors.mota}}</span>
+            </div>
+        </div>
+
+        <div class="toolbar-container py-2">
+            <div class="function-toolbar">
+                <div class="form-group row mx-0">
+                    <div class="col-12">
+                        <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+                            <i class="far fa-save"></i>
+                            {{ "COMMON.default.saveAndClose" | translate }}
+                        </button>
+                        <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+                            (click)="onContinueAdd(purpose)">
+                            <i class="far fa-download"></i>
+                            {{ "COMMON.default.saveAndRefresh" | translate }}
+                        </button>
+                        <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'"
+                            (click)="onFormReset()">
+                            <i class="far fa-sync-alt"></i>
+                            {{ "COMMON.default.refresh" | translate }}
+                        </button>
+                        <button class="btn btn-danger float-right mr-3" (click)="closeDkKhaiThacThietBiIOSidenav()">
+                            <i class="far fa-times-circle"></i>
+                            {{ "COMMON.default.cancel" | translate }}
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
