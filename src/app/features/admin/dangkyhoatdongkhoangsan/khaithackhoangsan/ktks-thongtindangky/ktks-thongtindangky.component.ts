@@ -74,12 +74,12 @@ export class KtksThongtindangkyComponent implements OnInit {
   };
 
   public disabledTabState: any = {
-    [DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet]: false,
-    [DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh]: false,
-    [DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan]: false,
-    [DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac]: false,
-    [DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac]: false,
-    [DangKyKhaiThacKhoangSanTabEnum.ThietBi]: false
+    [DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.ThietBi]: true
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -141,7 +141,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     }
 
     await this.showDangKyViewComponent();
-
+    this.thongTinDangKyKhaiThacTabs.selectedIndex = this.TabType.ThongTinChiTiet;
     this.thongTinDangKyKhaiThacTabs.realignInkBar();
     return true;
   }
@@ -149,16 +149,7 @@ export class KtksThongtindangkyComponent implements OnInit {
   setKhaiThacKhoangSanDisabledTabState(actionType: number) {
     switch (actionType) {
       case DangKyKhaiThacKsActionEnum.Add: {
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh] = false;
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan] = false;
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = false;
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = false;
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = false;
-        break;
-      }
-      case DangKyKhaiThacKsActionEnum.Edit: {
-        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = true;
@@ -166,7 +157,7 @@ export class KtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = true;
         break;
       }
-      default: {
+      case DangKyKhaiThacKsActionEnum.Edit: {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan] = false;
@@ -175,12 +166,22 @@ export class KtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = false;
         break;
       }
+      default: {
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = true;
+        break;
+      }
     }
   }
 
   getDangKyKhaiThacKhoangSanFormState(action: number) {
     this.currentAction = action;
     this.setKhaiThacKhoangSanDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
@@ -200,7 +201,8 @@ export class KtksThongtindangkyComponent implements OnInit {
 
   private async showDangKyViewComponent() {
     let factory: any;
-
+    this.contentContainer.viewContainerRef.clear();
+    
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyKhaiThacKhoangSanComponent[this.itemHoSo.loaicapphep]);
     }
@@ -212,6 +214,14 @@ export class KtksThongtindangkyComponent implements OnInit {
     componentRef.instance.content = this.content;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyKhaiThacKhoangSanFormState(event));
     componentRef.instance.selectIdDangKyKhaiThacKhoangSanEvent.subscribe(event => this.getIdDangKyKhaiThacKhoangSan(event));
+  }
+
+  private resetLoadedTabState() {
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.DonViHanhChinh] = false;
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan] = false;
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = false;
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = false;
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = false;
   }
 
   async tabChange(index: any) {

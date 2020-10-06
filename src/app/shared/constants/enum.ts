@@ -121,6 +121,13 @@ export enum ThamDoKhoangSanTabEnum {
   ThongTinDangKy = 3
 }
 
+export enum KhaiThacKhoangSanTabEnum {
+  ThongTinHoSo = 0,
+  TaiLieuHoSoDinhKem = 1,
+  TaiLieuXuLyHoSoDinhKem = 2,
+  ThongTinDangKy = 3
+}
+
 export enum DangKhoangSanEnum {
   KhoangSanRan = 1,
   KhoangSanNuocNong = 2
