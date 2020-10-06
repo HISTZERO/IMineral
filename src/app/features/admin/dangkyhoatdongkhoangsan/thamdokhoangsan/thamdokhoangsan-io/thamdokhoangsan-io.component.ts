@@ -85,7 +85,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
       if (hoSoItem) {
         this.currentAction = HoSoActionEnum.Edit;
-        this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+        this.setDisabledTabState(this.currentAction);
 
         const dkThamDoItem = await this.getDangKyThamDoByIdHoSo(hoSoItem.loaicapphep, this.idhoso);
 
@@ -97,7 +97,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
       }
     } else {
       this.currentAction = HoSoActionEnum.Add;
-      this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+      this.setDisabledTabState(this.currentAction);
     }
 
     // Khởi tạo dữ liệu ban đầu  cho form hoso
@@ -145,7 +145,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     }
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setDisabledTabState(actionType: number) {
     switch(actionType) {
       case HoSoActionEnum.Add: {
         this.disabledTabState[ThamDoKhoangSanTabEnum.ThongTinHoSo] = false;
@@ -171,7 +171,7 @@ export class ThamdokhoangsanIoComponent implements OnInit {
     }
   }
 
-  private resetThamDoKhoangSanLoadedTabState() {
+  private resetLoadedTabState() {
     this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem] = false;
     this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = false;
     this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
@@ -179,8 +179,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
 
   getHoSoIoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
-    this.resetThamDoKhoangSanLoadedTabState();
+    this.setDisabledTabState(this.currentAction);
+    this.resetLoadedTabState();
   }
 
   getIdHoSo(id: string) {
