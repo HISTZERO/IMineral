@@ -50,11 +50,11 @@ export class ThongtindangkyComponent implements OnInit {
   };
 
   public disabledTabState: any = {
-    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
-    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : false,
-    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : false,
-    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : false,
-    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : false
+    [DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] : true,
+    [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] : true,
+    [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] : true,
+    [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] : true,
+    [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] : true
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -111,30 +111,22 @@ export class ThongtindangkyComponent implements OnInit {
     }
 
     await this.showDangKyViewComponent();
-
+    this.thongTinDangKyThamDoTabs.selectedIndex = this.TabType.ThongTinChiTiet;
     this.thongTinDangKyThamDoTabs.realignInkBar();
     return true;
   }
 
-  setThamDoKhoangSanDisabledTabState(actionType: number) {
+  setDangKyThamDoKhoangSanDisabledTabState(actionType: number) {
     switch (actionType) {
       case DangKyThamDoActionEnum.Add: {
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
-        break;
-      }
-      case DangKyThamDoActionEnum.Edit: {
-        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
-      default: {
+      case DangKyThamDoActionEnum.Edit: {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
@@ -142,12 +134,21 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
       }
+      default: {
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.ThongTinChiTiet] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
+        break;
+      }
     }
   }
 
   getDangKyThamDoFormState(action: number) {
     this.currentAction = action;
-    this.setThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.setDangKyThamDoKhoangSanDisabledTabState(this.currentAction);
+    this.resetDangKyThamDoKhoangSanLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
@@ -167,18 +168,25 @@ export class ThongtindangkyComponent implements OnInit {
 
   private async showDangKyViewComponent() {
     let factory: any;
+    this.contentContainer.viewContainerRef.clear();
 
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[this.itemHoSo.loaicapphep]);
+      const viewContainerRef = this.contentContainer.viewContainerRef;
+      const componentRef: any = viewContainerRef.createComponent(factory);
+      componentRef.instance.idhoso = this.itemHoSo.idhoso;
+      componentRef.instance.matSidenav =  this.matSidenav;
+      componentRef.instance.content = this.content;
+      componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
+      componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
     }
+  }
 
-    const viewContainerRef = this.contentContainer.viewContainerRef;
-    const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idhoso = this.itemHoSo.idhoso;
-    componentRef.instance.matSidenav =  this.matSidenav;
-    componentRef.instance.content = this.content;
-    componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
-    componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
+  private resetDangKyThamDoKhoangSanLoadedTabState() {
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
   async tabChange(index: any) {
