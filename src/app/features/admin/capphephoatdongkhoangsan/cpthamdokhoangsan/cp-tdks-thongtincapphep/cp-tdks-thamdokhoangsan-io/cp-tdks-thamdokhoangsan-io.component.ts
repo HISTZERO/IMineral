@@ -168,22 +168,41 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   private formInit() {
-    this.capPhepThamDoIOForm = this.formBuilder.group({
-      tenkhuvucthamdo: [DefaultValue.Empty, Validators.required],
-      diadiem: [DefaultValue.Empty, Validators.required],
-      dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      dientichtralai: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdotu: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdoden: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      thoihanthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      ngaybdthamdo: [DefaultValue.Empty, Validators.required],
-      ngayktthamdo: [DefaultValue.Empty, Validators.required],
-      mucdichsudungkhoangsan: [DefaultValue.Empty, Validators.required],
-      donvidientich: [DefaultValue.Empty, Validators.required],
-      donvithoihan: [DefaultValue.Empty, Validators.required],
-      donvichieusau: [DefaultValue.Empty, Validators.required],
-      hequychieu: [DefaultValue.Empty, Validators.required]
-    });
+    if (this.disabledDienTichTraLai) {
+      this.capPhepThamDoIOForm = this.formBuilder.group({
+        tenkhuvucthamdo: [DefaultValue.Empty, Validators.required],
+        diadiem: [DefaultValue.Empty, Validators.required],
+        dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        dientichtralai: [DefaultValue.Empty],
+        chieusauthamdotu: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        chieusauthamdoden: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        thoihanthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        ngaybdthamdo: [DefaultValue.Empty, Validators.required],
+        ngayktthamdo: [DefaultValue.Empty, Validators.required],
+        mucdichsudungkhoangsan: [DefaultValue.Empty, Validators.required],
+        donvidientich: [DefaultValue.Empty, Validators.required],
+        donvithoihan: [DefaultValue.Empty, Validators.required],
+        donvichieusau: [DefaultValue.Empty, Validators.required],
+        hequychieu: [DefaultValue.Empty, Validators.required]
+      });
+    } else {
+      this.capPhepThamDoIOForm = this.formBuilder.group({
+        tenkhuvucthamdo: [DefaultValue.Empty, Validators.required],
+        diadiem: [DefaultValue.Empty, Validators.required],
+        dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        dientichtralai: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        chieusauthamdotu: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        chieusauthamdoden: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        thoihanthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+        ngaybdthamdo: [DefaultValue.Empty, Validators.required],
+        ngayktthamdo: [DefaultValue.Empty, Validators.required],
+        mucdichsudungkhoangsan: [DefaultValue.Empty, Validators.required],
+        donvidientich: [DefaultValue.Empty, Validators.required],
+        donvithoihan: [DefaultValue.Empty, Validators.required],
+        donvichieusau: [DefaultValue.Empty, Validators.required],
+        hequychieu: [DefaultValue.Empty, Validators.required]
+      });
+    }
   }
 
   /**

@@ -106,7 +106,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
       return;
     }
 
-    await this.showDangKyViewComponent();
+    await this.showCapPhepViewComponent();
 
     this.thongTinCapPhepThamDoTabs.realignInkBar();
     return true;
@@ -169,8 +169,9 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     return itemGiayPhep;
   }
 
-  private async showDangKyViewComponent() {
+  private async showCapPhepViewComponent() {
     let factory: any;
+    this.contentContainer.viewContainerRef.clear();
 
     if (this.itemGiayPhep) {
       factory = this.cfr.resolveComponentFactory(CapPhepThamDoKhoangSanComponent[this.itemGiayPhep.loaicapphep]);
