@@ -49,13 +49,13 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
   public loadedTabState: any = {
     [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
   public disabledTabState: any = {
     [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinGiayPhep] : false,
     [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinDangKy] : false,
+    [CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinCapPhep] : false,
   };
 
 
@@ -144,19 +144,19 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
       case GiayPhepActionEnum.Add: {
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
       case GiayPhepActionEnum.Edit: {
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinGiayPhep] = true;
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = true;
-        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinDangKy] = true;
+        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinCapPhep] = true;
         break;
       }
       default: {
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinGiayPhep] = false;
         this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = false;
-        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinDangKy] = false;
+        this.disabledTabState[CpChuyenNhuongQuyenThamDoKhoangSanTabEnum.ThongTinCapPhep] = false;
         break;
       }
     }

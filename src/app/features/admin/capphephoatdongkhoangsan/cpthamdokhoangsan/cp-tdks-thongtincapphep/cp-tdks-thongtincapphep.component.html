@@ -1,22 +1,22 @@
 <div class="mt-3">
   <div class="card border">
     <div class="card-body">
-      <mat-tab-group mat-stretch-tabs #thongTinDangKyThamDoTabs [animationDuration]="" [selectedIndex]="TabType.ThongTinChiTiet"
+      <mat-tab-group mat-stretch-tabs #thongTinCapPhepThamDoTabs [animationDuration]="" [selectedIndex]="TabType.ThongTinChiTiet"
         (selectedIndexChange)="tabChange($event)">
-        <mat-tab  [disabled]="!disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietTabTitle' | translate }}">
+        <mat-tab  [disabled]="disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thongTinChiTietTabTitle' | translate }}">
           <ng-template appContentContainer>
           </ng-template>
         </mat-tab>
-        <mat-tab [disabled]="!disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhTabTile' | translate }}">
+        <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhTabTile' | translate }}">
 
         </mat-tab>
-        <mat-tab  [disabled]="!disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanTabTile' | translate }}">
+        <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanTabTile' | translate }}">
 
         </mat-tab>
-        <mat-tab [disabled]="!disabledTabState[TabType.KhuVucThamDo]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtindangky.khuVucThamDoTabTile' | translate }}">
+        <mat-tab [disabled]="disabledTabState[TabType.KhuVucThamDo]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucThamDoTabTile' | translate }}">
 
         </mat-tab>
-        <mat-tab  [disabled]="!disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtindangky.congTrinhThamDoTabTitle' | translate }}">
+        <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhThamDoTabTitle' | translate }}">
 
         </mat-tab>
       </mat-tab-group>

@@ -1,4 +1,4 @@
-<!-- <div class="card border mt-3">
+<div class="card border mt-3">
   <div class="card-header">
     <div class="row">
       <div class="col-lg-9 col-md-9 col-sm-9">
@@ -25,16 +25,41 @@
     </div>
   </div>
   <div class="card-body">
-    <form [formGroup]="dangKyThamDoIOForm">
+    <form [formGroup]="capPhepThamDoIOForm">
       <div class="row">
         <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiem" | translate }}
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdo" | translate }}
               <small>(*)</small>
             </label>
             <div class="col-lg-8 col-md-8 col-sm-8">
-              <input class="form-control" type="text" formControlName="diadiem" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemPlaceholder' | translate}}" />
-              <span *ngIf="formErrors.diadiem" class="alert-danger">{{formErrors.diadiem}}</span>
+              <input class="form-control" type="text" formControlName="tenkhuvucthamdo" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdoPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.tenkhuvucthamdo" class="alert-danger">{{formErrors.tenkhuvucthamdo}}</span>
+            </div>
+          </div>
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdo" | translate }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input class="form-control" type="text" formControlName="thoihanthamdo" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.thoihanthamdo" class="alert-danger">{{formErrors.thoihanthamdo}}</span>
+            </div>
+          </div>
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdo" | translate}}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+                <div class="d-flex">
+                    <input class="form-control mr-2" formControlName="ngaybdthamdo"
+                        [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
+                        placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdoPlaceholder' | translate}}" />
+                        <span [owlDateTimeTrigger]="dt1" style="cursor: pointer;"
+                        class="btn btn-outline-secondary"><i class="fa fa-calendar"></i></span>
+                    <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
+                </div>
+                <span *ngIf="formErrors.ngaybdthamdo" class="alert-danger">{{formErrors.ngaybdthamdo}}</span>
             </div>
           </div>
           <div class="form-group row mx-0">
@@ -46,13 +71,13 @@
               <span *ngIf="formErrors.dientichthamdo" class="alert-danger">{{formErrors.dientichthamdo}}</span>
             </div>
           </div>
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdo" | translate }}
+          <div class="form-group row mx-0" *ngIf="!disabledDienTichTraLai">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralai" | translate }}
               <small>(*)</small>
             </label>
             <div class="col-lg-8 col-md-8 col-sm-8">
-              <input class="form-control" type="text" formControlName="thoihanthamdo" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoPlaceholder' | translate}}" />
-              <span *ngIf="formErrors.thoihanthamdo" class="alert-danger">{{formErrors.thoihanthamdo}}</span>
+              <input class="form-control" type="text" formControlName="dientichtralai" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.dientichtralai" class="alert-danger">{{formErrors.dientichtralai}}</span>
             </div>
           </div>
           <div class="form-group row mx-0">
@@ -73,8 +98,6 @@
               <span *ngIf="formErrors.chieusauthamdoden" class="alert-danger">{{formErrors.chieusauthamdoden}}</span>
             </div>
           </div>
-        </div>
-        <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsan" | translate }}
               <small>(*)</small>
@@ -84,21 +107,15 @@
               <span *ngIf="formErrors.mucdichsudungkhoangsan" class="alert-danger">{{formErrors.mucdichsudungkhoangsan}}</span>
             </div>
           </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientich" | translate }}
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiem" | translate }}
               <small>(*)</small>
             </label>
             <div class="col-lg-8 col-md-8 col-sm-8">
-              <mat-select class="form-control" formControlName="donvidientich"
-                *ngIf="dataTranslate" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chondonvidientich' | translate}}">
-                <mat-option value="">
-                  {{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chondonvidientich" | translate }}
-                </mat-option>
-                <mat-option *ngFor="let donViDienTich of donViDienTichList" [value]="donViDienTich.id">
-                  {{ donViDienTich.name }}
-                </mat-option>
-              </mat-select>
-              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
+              <input class="form-control" type="text" formControlName="diadiem" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.diadiem" class="alert-danger">{{formErrors.diadiem}}</span>
             </div>
           </div>
           <div class="form-group row mx-0">
@@ -119,6 +136,43 @@
             </div>
           </div>
           <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdo" | translate}}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8 ">
+                <div class="d-flex">
+                    <input class="form-control mr-2" formControlName="ngayktthamdo"
+                        [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
+                        placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdoPlaceholder' | translate}}" />
+                        <span [owlDateTimeTrigger]="dt2" style="cursor: pointer;"
+                        class="btn btn-outline-secondary"><i class="fa fa-calendar"></i></span>
+                    <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
+                </div>
+                <span *ngIf="formErrors.ngayktthamdo" class="alert-danger">{{formErrors.ngayktthamdo}}</span>
+            </div>
+          </div>
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientich" | translate }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <mat-select class="form-control" formControlName="donvidientich"
+                *ngIf="dataTranslate" placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chondonvidientich' | translate}}">
+                <mat-option value="">
+                  {{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chondonvidientich" | translate }}
+                </mat-option>
+                <mat-option *ngFor="let donViDienTich of donViDienTichList" [value]="donViDienTich.id">
+                  {{ donViDienTich.name }}
+                </mat-option>
+              </mat-select>
+              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
+            </div>
+          </div>
+          <div class="form-group row mx-0" *ngIf="!disabledDienTichTraLai">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"></label>
+            <div class="col-lg-8 col-md-8 col-sm-8"></div>
+          </div>
+          <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusau" | translate }}
               <small>(*)</small>
             </label>
@@ -134,6 +188,10 @@
               </mat-select>
               <span *ngIf="formErrors.donvichieusau" class="alert-danger">{{formErrors.donvichieusau}}</span>
             </div>
+          </div>
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"></label>
+            <div class="col-lg-8 col-md-8 col-sm-8"></div>
           </div>
           <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieu" | translate}}
@@ -158,4 +216,3 @@
   </div>
 </div>
 
- -->
