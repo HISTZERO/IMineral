@@ -16,16 +16,17 @@
                   </span>
                 </h3>
               </div>
-              <div class="card-body">
-                <mat-tab-group mat-stretch-tabs [animationDuration]=""  [selectedIndex]="selectedDefaultTab"
+              <div class="card-body"> 
+                <mat-tab-group mat-stretch-tabs #dangKyKhaiThacKhoanSanTabs [animationDuration]=""
                   (selectedIndexChange)="tabChange($event)">
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.thongTinHoSoTabTitle' | translate }}">
+                  <mat-tab [disabled]="disabledTabState[TabType.ThongTinHoSo]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.thongTinHoSoTabTitle' | translate }}">
                     <app-hoso-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.KhaiThacKhoangSan"
-                      [insertedState]="insertedState.SaveAndEdit" (selectCurrentFormStateEvent)="getHoSoIoFormState($event)"
-                      (selectNewInsertedHoSoEvent)="getIdHoSo($event)">
+                      [insertedState]="insertedState.SaveAndEdit" 
+                      [allowAutoInit]="false" (selectCurrentFormStateEvent)="getHoSoIoFormState($event)"
+                      (selectNewInsertedHoSoEvent)="getIdHoSo($event)" #hoSoIOComp>
                     </app-hoso-io>
                   </mat-tab>
-                  <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
+                  <mat-tab [disabled]="disabledTabState[TabType.TaiLieuHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.taiLieuDinhKemHoSoTabTile' | translate }}">
                     <app-hosotailieu-list [disabledMatsidenav]="true" #taiLieuBatBuocListComp [allowAutoInit]="false"
                       [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuBatBuoc">
                     </app-hosotailieu-list>
@@ -33,13 +34,13 @@
                       [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuKhongBatBuoc">
                     </app-hosotailieu-list>
                   </mat-tab>
-                  <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
+                  <mat-tab [disabled]="disabledTabState[TabType.TaiLieuXuLyHoSoDinhKem]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.taiLieuXuLyHoSoTabTile' | translate }}">
                     <app-hosotailieu-list [disabledMatsidenav]="true" #taiLieuXuLyHoSoListComp [allowAutoInit]="false"
                       [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuXuLyHoSo">
                     </app-hosotailieu-list>
                   </mat-tab>
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.thongTinDangKyTabTitle' | translate }}">
-                    <app-ktks-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky>
+                  <mat-tab [disabled]="disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.khaithackhoangsan.thongTinDangKyTabTitle' | translate }}">
+                    <app-ktks-thongtindangky (selectCurrentFormStateEvent)="getThongTinDangKyKhaiThacFormState($event)"  #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky>
                   </mat-tab>
                 </mat-tab-group>
               </div>
@@ -48,7 +49,7 @@
         </div> -->
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 600px;">
+        style="width: 700px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title fixed-top">
           <button class="btn btn-sm btn-light" (click)="closeIOSidenav()">
             <i class="fad fa-chevron-double-right"></i>
