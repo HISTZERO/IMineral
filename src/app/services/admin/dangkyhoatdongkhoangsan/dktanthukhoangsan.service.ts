@@ -29,4 +29,27 @@ export class DktanthukhoangsanService extends RepositoryEloquentService {
     return "ok";
   }
 
+  public getDangKyTanThuByIdHoSo(idHoSo: any) {
+    try {
+      return this.httpClient.get(`${this.apiUrl}?idhoso=${idHoSo}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
+
+  public deleteDangKyTanThuByIdHoSo(idHoSo: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTANTHUKHOANGSAN + "/deletebyidhoso"
+      });
+
+      return this.httpClient.delete<any>(`${this.apiUrl}?idhoso=${idHoSo}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
