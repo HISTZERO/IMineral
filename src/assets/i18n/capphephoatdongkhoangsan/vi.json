@@ -151,5 +151,25 @@
     "mahuyenRequired": "Yêu cầu phải chọn huyện",
     "maxaRequired": "Yêu cầu phải chọn xã",
     "informedNotExistedCapPhepThamDoDvhc": "Cấp phép thăm dò đợn vị hành chính không tồn tại"
+  },
+  "capphepthamdoloaikhoangsan": {
+    "titleList": "Danh sách loại khoáng sản",
+    "titleAdd": "Thêm mới loại khoáng sản",
+    "titleEdit": "Sửa dữ liệu loại khoáng sản",
+    "contentDelete": "Loại khoáng sản: ",
+    "tenloaikhoangsan": "Loại khoáng sản",
+    "tennhomkhoangsan": "Nhóm khoáng sản",
+    "tenkhoangsan": "Tên khoáng sản",
+    "truluong": "Trữ lượng",
+    "donvitruluong": "Đơn vị trữ lượng",
+    "chonloaikhoangsan": "---Chọn loại khoáng sản---",
+    "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
+    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "tenkhoangsanRequired": "Yêu cầu phải nhập tên khoáng sản",
+    "tenkhoangsanPlaceholder": "Nhập tên khoáng sản",
+    "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
+    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Cấp phép thăm dò loại khoáng sản không tồn tại"
   }
 }

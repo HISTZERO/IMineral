@@ -7,38 +7,38 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { CpTdksLoaikhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-io/cp-tdks-loaikhoangsan-io.component';
+import { OutputCpThamDoLoaiKhoangSanModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.model';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { CpTdksDonvihanhchinhIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-io/cp-tdks-donvihanhchinh-io.component';
-import {OutputCpThamDoDvhcModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdodvhc.model';
 
 @Component({
-  selector: 'app-cp-tdks-donvihanhchinh-list',
-  templateUrl: './cp-tdks-donvihanhchinh-list.component.html',
-  styleUrls: ['./cp-tdks-donvihanhchinh-list.component.scss']
+  selector: 'app-cp-tdks-loaikhoangsan-list',
+  templateUrl: './cp-tdks-loaikhoangsan-list.component.html',
+  styleUrls: ['./cp-tdks-loaikhoangsan-list.component.scss']
 })
-export class CpTdksDonvihanhchinhListComponent implements OnInit {
-  @ViewChild("gridCapPhepThamDoDvhc", { static: false }) public gridCapPhepThamDoDvhc: GridComponent;
+export class CpTdksLoaikhoangsanListComponent implements OnInit {
+  // Viewchild template
+  @ViewChild("gridCpThamDoLoaiKhoangSan", { static: false }) public gridCpThamDoLoaiKhoangSan: GridComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  // tslint:disable-next-line: no-input-rename
+  @Input("allowAutoInit") allowAutoInit = true;
 
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
   // Chứa dữ liệu danh sách đơn vị
-  public listCapPhepThamDoDvhc: OutputCpThamDoDvhcModel[];
+  public listCpThamDoLoaiKhoangSan: OutputCpThamDoLoaiKhoangSanModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputCpThamDoDvhcModel;
+  public selectedItem: OutputCpThamDoLoaiKhoangSanModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
   // Chứa dữ liệu Iddangkythamdo
   public idcapphepthamdo: string;
-
-  // tslint:disable-next-line: no-input-rename
-  @Input("allowAutoInit") allowAutoInit = true;
 
   constructor(public matSidenavService: MatsidenavService,
               public cfr: ComponentFactoryResolver,
@@ -53,6 +53,11 @@ export class CpTdksDonvihanhchinhListComponent implements OnInit {
     if (this.allowAutoInit) {
       await this.manualDataInit();
     }
+  }
+
+  async manualDataInit() {
+    await this.getDataPageSize();
+    return true;
   }
 
   /**
@@ -78,53 +83,48 @@ export class CpTdksDonvihanhchinhListComponent implements OnInit {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
     // Gọi hàm lấy dữ liệu cá nhân
-    await this.getAllCapPhepThamDoDvhc();
-  }
-
-  async manualDataInit() {
-    await this.getDataPageSize();
-    return true;
+    await this.getAllCpThamDoLoaiKhoangSan();
   }
 
   /**
    * Hàm lấy dữ liệu Dvdc
    */
-  async getAllCapPhepThamDoDvhc() {
-    if (this.idcapphepthamdo === DefaultValue.Null || this.idcapphepthamdo === DefaultValue.Undefined
-         || this.idcapphepthamdo.trim() === DefaultValue.Empty) {
+  async getAllCpThamDoLoaiKhoangSan() {
+    if (this.idcapphepthamdo === null || this.idcapphepthamdo === undefined) {
       return;
     }
 
     const listData: any = await this.capPhepHoatDongKhoangSanFacadeService
-      .getCapPhepThamDoDvhcService()
-      .getCapPhepThamDoDvhcByIdCapPhepThamDo(this.idcapphepthamdo).toPromise();
+      .getCapPhepThamDoLoaiKhoangSanService()
+      .getCapPhepThamDoLoaiKhoangSanByIdCapPhepThamDo(this.idcapphepthamdo).toPromise();
     if (listData) {
-      listData.map((dvhc, index) => {
-        dvhc.serialNumber = index + 1;
+      listData.map((loaiKhoangSan, index) => {
+        loaiKhoangSan.serialNumber = index + 1;
       });
     }
-    this.listCapPhepThamDoDvhc = listData;
+    this.listCpThamDoLoaiKhoangSan = listData;
   }
+
 
   /**
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.getAllCapPhepThamDoDvhc();
+    this.getAllCpThamDoLoaiKhoangSan();
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCapPhepThamDoDvhc(idThamDoDvhc: any) {
+  async editItemCpThamDoLoaiKhoangSan(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.capPhepHoatDongKhoangSanFacadeService
-    .getCapPhepThamDoDvhcService()
-    .getByid(idThamDoDvhc).toPromise();
+    .getCapPhepThamDoLoaiKhoangSanService()
+    .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.informedNotExistedCapPhepThamDoDvhc);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.informedNotExistedCapPhepThamDoLoaiKhoangSan);
       return;
     }
 
@@ -132,35 +132,35 @@ export class CpTdksDonvihanhchinhListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.titleEdit );
-    await this.matSidenavService.setContentComp(CpTdksDonvihanhchinhIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle( this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleEdit );
+    await this.matSidenavService.setContentComp(CpTdksLoaikhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openCapPhepThamDoDvhcIOSidenav() {
+  public openCpThamDoLoaiKhoangSanIOSidenav() {
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(CpTdksDonvihanhchinhIoComponent, "new", {idcapphepthamdo: this.idcapphepthamdo});
+    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleAdd);
+    this.matSidenavService.setContentComp(CpTdksLoaikhoangsanIoComponent, "new", {idcapphepthamdo: this.idcapphepthamdo});
     this.matSidenavService.open();
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemCapPhepThamDoDvhc(data) {
+  async deleteItemCapPhepThamDoLoaiKhoangSan(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.capPhepHoatDongKhoangSanFacadeService
-      .getCapPhepThamDoDvhcService()
-      .checkBeDeleted(this.selectedItem.idthamdodvhc);
+      .getCapPhepThamDoLoaiKhoangSanService()
+      .checkBeDeleted(this.selectedItem.idthamdoloaikhoangsan);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -181,16 +181,16 @@ export class CpTdksDonvihanhchinhListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.contentDelete,
-      this.selectedItem.tentinh + " - " + this.selectedItem.tenhuyen + " - " + this.selectedItem.tenxa
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.contentDelete,
+      this.selectedItem.tenloaikhoangsan
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.capPhepHoatDongKhoangSanFacadeService
-          .getCapPhepThamDoDvhcService()
-          .deleteItem({ idthamdodvhc: this.selectedItem.idthamdodvhc })
+          .getCapPhepThamDoLoaiKhoangSanService()
+          .deleteItem({ idthamdoloaikhoangsan: this.selectedItem.idthamdoloaikhoangsan })
           .subscribe(
-            () => this.getAllCapPhepThamDoDvhc(),
+            () => this.getAllCpThamDoLoaiKhoangSan(),
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },

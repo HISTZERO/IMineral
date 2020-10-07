@@ -9,6 +9,7 @@ import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogia
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 import { CpTdksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component';
+import { CpTdksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
@@ -26,7 +27,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("capPhepThamDoDvhc", { static: false }) capPhepThamDoDvhc: CpTdksDonvihanhchinhListComponent;
-  @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: any;
+  @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: CpTdksLoaikhoangsanListComponent;
   @ViewChild("capPhepThamDoCongTrinh", { static: false }) capPhepThamDoCongTrinh: any;
   @ViewChild("capPhepThamDoKhuVuc", { static: false }) capPhepThamDoKhuVuc: any;
   // tslint:disable-next-line: no-input-rename

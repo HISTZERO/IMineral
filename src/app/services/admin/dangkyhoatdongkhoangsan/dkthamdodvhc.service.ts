@@ -34,18 +34,4 @@ export class DkThamDoDvhcService extends RepositoryEloquentService {
 
     }
   }
-
-  // public getDangKyThamDoDvhcById(idThamDoDvhc: any) {
-  //   this.setServiceInfo({
-  //     apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDODVHC + "/GetDkThamDoDVHCById"
-  //   });
-
-  //   try {
-  //     return this.httpClient.get(`${this.apiUrl}?idthamdodvhc=${idThamDoDvhc}`, {
-  //       headers: this.headers,
-  //     });
-  //   } catch (error) {
-
-  //   }
-  // }
 }
