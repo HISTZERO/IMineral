@@ -109,6 +109,12 @@ export enum DangKyKhaiThacKsActionEnum {
   Edit = 2
 }
 
+export enum DangKyTraLaiGiayPhepActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum ThongTinKhoangSanTabEnum {
   ThongTinChung = 0,
   ToaDo = 1
@@ -122,6 +128,13 @@ export enum ThamDoKhoangSanTabEnum {
 }
 
 export enum KhaiThacKhoangSanTabEnum {
+  ThongTinHoSo = 0,
+  TaiLieuHoSoDinhKem = 1,
+  TaiLieuXuLyHoSoDinhKem = 2,
+  ThongTinDangKy = 3
+}
+
+export enum TraLaiGiayPhepTabEnum {
   ThongTinHoSo = 0,
   TaiLieuHoSoDinhKem = 1,
   TaiLieuXuLyHoSoDinhKem = 2,
@@ -148,6 +161,14 @@ export enum DangKyKhaiThacKhoangSanTabEnum {
   KhuVucKhaiThac = 3,
   CongTrinhKhaiThac = 4,
   ThietBi = 5
+}
+
+export enum DangKyTraLaiGiayPhepTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucKhaiThac = 3,
+  CongTrinhKhaiThac = 4,
 }
 
 export enum DangKyTanThuKhoangSanTabEnum {

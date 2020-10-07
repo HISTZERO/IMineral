@@ -88,6 +88,10 @@ import { TtksLoaikhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindan
 import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component';
 import { TtksKhuvuctanthuIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component';
 import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component';
+import { TlgpKhaithactralaiIoComponent } from './tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-khaithactralai-io/tlgp-khaithactralai-io.component';
+import { TlgpThamdotralaiIoComponent } from './tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-thamdotralai-io/tlgp-thamdotralai-io.component';
+import { TlgpTanthutralaiIoComponent } from './tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-tanthutralai-io/tlgp-tanthutralai-io.component';
+import { TralaigiayphepThongtindangkyComponent } from './tralaigiayphep/tralaigiayphep-thongtindangky/tralaigiayphep-thongtindangky.component';
 
 
 
@@ -159,6 +163,10 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     TtksLoaikhoangsanListComponent,
     TtksKhuvuctanthuIoComponent,
     TtksKhuvuctanthuListComponent,
+    TlgpKhaithactralaiIoComponent,
+    TlgpThamdotralaiIoComponent,
+    TlgpTanthutralaiIoComponent,
+    TralaigiayphepThongtindangkyComponent,
   ],
   exports: [
   ],
@@ -201,7 +209,10 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     TtksDonvihanhchinhIoComponent,
     TtksLoaikhoangsanIoComponent,
     KtksThietbiIoComponent,
-    TtksKhuvuctanthuIoComponent
+    TtksKhuvuctanthuIoComponent,
+    TlgpKhaithactralaiIoComponent,
+    TlgpThamdotralaiIoComponent,
+    TlgpTanthutralaiIoComponent,
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},
