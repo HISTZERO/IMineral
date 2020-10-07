@@ -27,7 +27,7 @@ export class DkThamDoDvhcService extends RepositoryEloquentService {
 
   public getDangKyThamDoDvhcByIdDangKyThamDo(idDangKyThamDo: any) {
     try {
-      return this.httpClient.get(`${this.apiUrl}?Iddangkythamdo=${idDangKyThamDo}`, {
+      return this.httpClient.get(`${this.apiUrl}?iddangkythamdo=${idDangKyThamDo}`, {
         headers: this.headers,
       });
     } catch (error) {
@@ -35,17 +35,17 @@ export class DkThamDoDvhcService extends RepositoryEloquentService {
     }
   }
 
-  public getDangKyThamDoDvhcById(idThamDoDvhc: any) {
-    this.setServiceInfo({
-      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDODVHC + "/GetDkThamDoDVHCById"
-    });
+  // public getDangKyThamDoDvhcById(idThamDoDvhc: any) {
+  //   this.setServiceInfo({
+  //     apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDODVHC + "/GetDkThamDoDVHCById"
+  //   });
 
-    try {
-      return this.httpClient.get(`${this.apiUrl}?idthamdodvhc=${idThamDoDvhc}`, {
-        headers: this.headers,
-      });
-    } catch (error) {
+  //   try {
+  //     return this.httpClient.get(`${this.apiUrl}?idthamdodvhc=${idThamDoDvhc}`, {
+  //       headers: this.headers,
+  //     });
+  //   } catch (error) {
 
-    }
-  }
+  //   }
+  // }
 }
