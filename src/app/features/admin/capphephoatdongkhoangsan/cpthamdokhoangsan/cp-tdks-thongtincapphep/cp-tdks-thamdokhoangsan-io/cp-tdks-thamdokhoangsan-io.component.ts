@@ -5,7 +5,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { CapPhepThamDoActionEnum } from 'src/app/shared/constants/enum';
+import { CapPhepThamDoActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { OutputCpThamDoKhoangSanModel} from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model';
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
@@ -14,6 +14,8 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { HttpErrorResponse } from '@angular/common/http';
 import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
 import { MatSidenav } from '@angular/material';
+import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
+import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
 
 @Component({
   selector: 'app-cp-tdks-thamdokhoangsan-io',
@@ -54,6 +56,10 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   public donViThoiHanList = DonViThoiHan;
   // lưu dữ liệu đơn vị diện tích
   public donViDoSauList = DonViDoSau;
+  // tile form
+  public title: string;
+  // giấy phep item
+  private itemGiayPhep: OutputGiayPhepModel;
   // form errors
   formErrors = {
     tenkhuvucthamdo: DefaultValue.Empty,
@@ -83,6 +89,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public matSidenavService: MatsidenavService,
     private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService,
     public cfr: ComponentFactoryResolver) { }
 
   async ngOnInit() {
@@ -140,16 +147,24 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       }
     });
 
-    if (this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined && this.idgiayphep.trim() !== DefaultValue.Empty) {
+    if ((this.itemGiayPhep === DefaultValue.Null ||  this.itemGiayPhep === DefaultValue.Undefined)
+        && this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
+        && this.idgiayphep.trim() !== DefaultValue.Empty) {
+      this.itemGiayPhep = await this.hoSoGiayToFacadeService.getGiayPhepService().getByid(this.idgiayphep).toPromise() as OutputGiayPhepModel;
+    }
+
+    if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan)) {
       this.capPhepThamDoKhoangSan = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
 
       if (this.capPhepThamDoKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();
         this.selectCurrentFormState();
+        this.setFormTitle();
       } else {
         this.currentAction = CapPhepThamDoActionEnum.Add;
         this.selectCurrentFormState();
+        this.setFormTitle();
       }
     } else {
       this.currentAction = CapPhepThamDoActionEnum.None;
@@ -162,6 +177,29 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
     await this.formOnEdit(this.capPhepThamDoKhoangSan);
 
     return true;
+  }
+
+  /**
+   * set form title
+   */
+  private setFormTitle() {
+    if (this.currentAction === CapPhepThamDoActionEnum.Edit) {
+      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
+        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.titleEdit;
+      } else if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdogiahan.titleEdit;
+      } else {
+        this.title = DefaultValue.Empty;
+      }
+    } else if (this.currentAction === CapPhepThamDoActionEnum.Add) {
+      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan) {
+        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.titleAdd;
+      } else if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
+        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdogiahan.titleAdd;
+      } else {
+        this.title = DefaultValue.Empty;
+      }
+    }
   }
 
   /**

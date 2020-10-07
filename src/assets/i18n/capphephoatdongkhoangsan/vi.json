@@ -134,5 +134,9 @@
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
     "ngaybdthamdoRequired": "Ngày bắt đầu thăm dò không được để trống",
     "ngayktthamdoRequired": "Ngày kết thúc thăm dò không được để trống"
+  },
+  "cptdksthamdogiahan": {
+    "titleAdd": "Thêm mới cấp phép chi tiết thăm dò gia hạn",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết thăm dò gia hạn"
   }
 }
