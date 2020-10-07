@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import {InputDkThamDoCongTrinh, OutputDkThamDoCongTrinh } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
+import {InputDkThamDoCongTrinhModel, OutputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 
@@ -15,8 +15,8 @@ export class DkThamDoCongTrinhService extends RepositoryEloquentService {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputDkThamDoCongTrinh(),
-      outputModelName: new OutputDkThamDoCongTrinh(),
+      inputModelName: new InputDkThamDoCongTrinhModel(),
+      outputModelName: new OutputDkThamDoCongTrinhModel(),
       apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOCONGTRINH
     });
   }
