@@ -259,7 +259,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
         ngaybdthamdo: item.ngaybdthamdo,
         ngayktthamdo: item.ngayktthamdo,
         mucdichsudungkhoangsan: item.mucdichsudungkhoangsan,
-        dangkhoangsan: item.dangkhoangsan,
+        // dangkhoangsan: item.dangkhoangsan,
         donvidientich: item.donvidientich,
         donvithoihan: item.donvithoihan,
         donvichieusau: item.donvichieusau,

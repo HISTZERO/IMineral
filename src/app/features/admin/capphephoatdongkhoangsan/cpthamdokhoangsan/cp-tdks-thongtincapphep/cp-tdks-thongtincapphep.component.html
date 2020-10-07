@@ -8,7 +8,7 @@
           </ng-template>
         </mat-tab>
         <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhTabTile' | translate }}">
-
+          <app-cp-tdks-donvihanhchinh-list #capPhepThamDoDvhc [allowAutoInit]="false"></app-cp-tdks-donvihanhchinh-list>
         </mat-tab>
         <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanTabTile' | translate }}">
 
