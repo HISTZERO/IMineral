@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoCongTrinh } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
+import { InputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { KhuvuctoadoService } from "src/app/services/admin/khuvuckhoangsan/khuvuctoado.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -28,7 +28,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
   public purpose: string;
 
   // Chứa dữ liệu input
-  public inputModel: InputDkThamDoCongTrinh;
+  public inputModel: InputDkThamDoCongTrinhModel;
 
   // Chứa danh sách Lĩnh Vực
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
@@ -100,7 +100,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.inputModel = new InputDkThamDoCongTrinh();
+    this.inputModel = new InputDkThamDoCongTrinhModel();
     this.formOnEdit();
   }
 

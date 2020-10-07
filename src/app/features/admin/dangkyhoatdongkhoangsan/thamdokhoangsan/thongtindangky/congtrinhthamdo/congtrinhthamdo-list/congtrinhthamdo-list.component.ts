@@ -8,7 +8,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { CongtrinhthamdoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-io/congtrinhthamdo-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputDkThamDoCongTrinh } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model';
+import { OutputDkThamDoCongTrinhModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 
 @Component({
@@ -33,10 +33,10 @@ export class CongtrinhthamdoListComponent implements OnInit {
   public listDataSelect: any[];
 
   // Chứa danh sách khu vực tọa độ
-  public listDkThamDoCongTrinh: OutputDkThamDoCongTrinh[];
+  public listDkThamDoCongTrinh: OutputDkThamDoCongTrinhModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDkThamDoCongTrinh;
+  public selectedItem: OutputDkThamDoCongTrinhModel;
 
   // Chứa danh sách dữ liệu
   public listData: any;
