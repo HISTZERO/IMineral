@@ -25,9 +25,9 @@ export class DkThamDoLoaiKhoangSanService extends RepositoryEloquentService {
     return "ok";
   }
 
-  public getDangKyThamDoLoaiKhoangSanByIdDangKyThamDo(idhoso: any) {
+  public getDangKyThamDoLoaiKhoangSanByIdDangKyThamDo(idDangKyThamDo: any) {
     try {
-      return this.httpClient.get(`${this.apiUrl}?Iddangkythamdo=${idhoso}`, {
+      return this.httpClient.get(`${this.apiUrl}?iddangkythamdo=${idDangKyThamDo}`, {
         headers: this.headers,
       });
     } catch (error) {

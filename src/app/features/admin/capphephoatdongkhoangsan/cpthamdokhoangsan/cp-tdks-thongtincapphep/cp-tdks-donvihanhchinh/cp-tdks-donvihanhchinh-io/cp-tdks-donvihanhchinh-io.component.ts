@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputCpThamDoDvhc } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdodvhc.model";
+import { InputCpThamDoDvhcModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdodvhc.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -30,7 +30,7 @@ export class CpTdksDonvihanhchinhIoComponent implements OnInit {
   public editMode: boolean;
 
   // Chứa dữ liệu input
-  public inputModel: InputCpThamDoDvhc;
+  public inputModel: InputCpThamDoDvhcModel;
 
   // Chứa danh sách Dvhc Tỉnh
   public allTinh: any;
@@ -120,7 +120,7 @@ export class CpTdksDonvihanhchinhIoComponent implements OnInit {
   async bindingConfigAddOrUpdate() {
     await this.showDvhcTinh();
     this.editMode = false;
-    this.inputModel = new InputCpThamDoDvhc();
+    this.inputModel = new InputCpThamDoDvhcModel();
     // check edit
     await this.formOnEdit();
   }
