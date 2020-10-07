@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDkThamDoLoaiKhoangSan } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
+import { OutputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { LoaikhoangsanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
@@ -30,10 +30,10 @@ export class LoaikhoangsanListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa dữ liệu danh sách đơn vị
-  public listDkThamDoLoaiKhoangSan: OutputDkThamDoLoaiKhoangSan[];
+  public listDkThamDoLoaiKhoangSan: OutputDkThamDoLoaiKhoangSanModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDkThamDoLoaiKhoangSan;
+  public selectedItem: OutputDkThamDoLoaiKhoangSanModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

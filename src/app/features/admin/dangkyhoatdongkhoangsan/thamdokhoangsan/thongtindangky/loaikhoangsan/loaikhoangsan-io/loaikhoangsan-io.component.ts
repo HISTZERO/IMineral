@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoLoaiKhoangSan } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
+import { InputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -32,7 +32,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
   public dataTranslate: any;
 
   // Chứa dữ liệu input
-  public inputModel: InputDkThamDoLoaiKhoangSan;
+  public inputModel: InputDkThamDoLoaiKhoangSanModel;
 
   // Chứa danh sách Dvhc Tỉnh
   public allNhomKhoangSan: OutputDmNhomKhoangSanModel[];
@@ -158,7 +158,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   async bindingConfigAddOrUpdate() {
-    this.inputModel = new InputDkThamDoLoaiKhoangSan();
+    this.inputModel = new InputDkThamDoLoaiKhoangSanModel();
     // check edit
     await this.formOnEdit();
   }
