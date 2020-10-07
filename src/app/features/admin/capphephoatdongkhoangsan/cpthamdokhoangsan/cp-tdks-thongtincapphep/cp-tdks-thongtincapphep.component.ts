@@ -182,6 +182,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
     componentRef.instance.matSidenav =  this.matSidenav;
     componentRef.instance.content = this.content;
+    componentRef.instance.itemGiayPhep = this.itemGiayPhep;
 
     if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
       componentRef.instance.disabledDienTichTraLai = false;
