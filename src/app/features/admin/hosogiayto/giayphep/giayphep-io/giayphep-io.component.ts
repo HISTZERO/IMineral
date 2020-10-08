@@ -265,6 +265,23 @@ export class GiayphepIoComponent implements OnInit {
     }
   }
 
+  private disableHoSoGiayPhepLichSu(loaiCapPhep: string) {
+    if (loaiCapPhep ===  DefaultValue.Empty || loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      ) {
+      this.disabledHoSo = false;
+      this.disabledGiayPhepLichSu = false;
+    } else {
+      this.disabledHoSo = false;
+      this.disabledGiayPhepLichSu = true;
+    }
+  }
+
   /**
    * hàm set value cho form
    */
@@ -340,6 +357,7 @@ export class GiayphepIoComponent implements OnInit {
           ghichu: inputModel.ghichu
         });
 
+        this.disableHoSoGiayPhepLichSu(inputModel.loaicapphep);
         this.tenLoaiCapPhep = inputModel.tenloaicapphep;
       }
     }
@@ -630,11 +648,10 @@ export class GiayphepIoComponent implements OnInit {
    */
   public selectItemLoaiCapPhepChange(item: any) {
     this.disabledLoaiDoiTuong = false;
-    this.disabledHoSo = false;
     this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
-    this.disabledGiayPhepLichSu = false;
     this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
     this.ClearThongTinCaNhanToChucOnUI();
+    this.disableHoSoGiayPhepLichSu(item.value);
   }
 
   /**
