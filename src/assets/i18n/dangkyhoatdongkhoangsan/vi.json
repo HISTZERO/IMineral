@@ -789,5 +789,28 @@
     "titleAdd": "Thêm mới khu vực đăng ký tận thu",
     "titleEdit": "Sửa dữ liệu khu vực đăng ký tận thu",
     "contentDelete": "Khu vực đăng ký tận thu"
+  },
+  "dangkykhaithactralai": {
+    "titleAdd": "Thêm mới đăng ký trả lại giấy phép khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký trả lại giấy phép khai thác khoáng sản",
+    "contentDelete": "Đăng ký trả lại giấy phép khai thác khoáng sản: ",
+    "dangkhoangsan": "Dạng khoáng sản",
+    "titleGiayPhepSelect": "Chọn giấy phép",
+    "donvidientich": "Đơn vị diện tích",
+    "hequychieu": "Hệ quy chiếu",
+    "sogiayphep": "Giấy phép",
+    "sogiayphepPlaceholder": "Nhập giấy phép",
+    "dientichkhaithac": "Diện tích khai thác",
+    "dientichdacapphep": "Diện tích đã cấp phép",
+    "dientichtralai": "Diện tích trả lại",
+    "lydotralai": "Thời hạn khai thác",
+    "dientichkhaithacPlaceholder": "Nhập diện tích khai thác",
+    "dientichdacapphepPlaceholder": "Nhập diện tích đã cấp phép",
+    "dientichtralaiPlaceholder": "Nhập diện tích trả lại",
+    "lydotralaiPlaceholder": "Nhập lý do trả lại",
+    "chondonvidientich": "---Chọn đơn vị diện tích---",
+    "donvidientichRequired": "Đơn vị điện tích không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "chonhequychieu": "---chọn hệ quy chiếu---"
   }
 }
