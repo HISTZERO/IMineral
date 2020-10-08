@@ -10,6 +10,7 @@ import { ContentContainerDirective } from 'src/app/shared/directives/content-con
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
 import { CpTdksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component';
 import { CpTdksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component';
+import { CpTdksCongtrinhthamdoListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-list/cp-tdks-congtrinhthamdo-list.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
@@ -28,7 +29,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("capPhepThamDoDvhc", { static: false }) capPhepThamDoDvhc: CpTdksDonvihanhchinhListComponent;
   @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: CpTdksLoaikhoangsanListComponent;
-  @ViewChild("capPhepThamDoCongTrinh", { static: false }) capPhepThamDoCongTrinh: any;
+  @ViewChild("capPhepThamDoCongTrinh", { static: false }) capPhepThamDoCongTrinh: CpTdksCongtrinhthamdoListComponent;
   @ViewChild("capPhepThamDoKhuVuc", { static: false }) capPhepThamDoKhuVuc: any;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;

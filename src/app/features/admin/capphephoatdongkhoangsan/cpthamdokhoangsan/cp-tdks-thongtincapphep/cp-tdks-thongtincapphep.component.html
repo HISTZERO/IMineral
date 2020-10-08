@@ -17,7 +17,7 @@
 
         </mat-tab>
         <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhThamDoTabTitle' | translate }}">
-
+          <app-cp-tdks-congtrinhthamdo-list #capPhepThamDoCongTrinh [allowAutoInit]="false"></app-cp-tdks-congtrinhthamdo-list>
         </mat-tab>
       </mat-tab-group>
     </div>
