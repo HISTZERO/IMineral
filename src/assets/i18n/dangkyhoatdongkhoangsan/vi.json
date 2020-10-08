@@ -376,7 +376,8 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "toadoxIsNumber": "Tọa độ x phải là kiểu số",
     "toadoyIsNumber": "Tọa độ y phải là kiểu số",
-    "dientichIsNumber": "Diện tích phải là kiểu số"
+    "dientichIsNumber": "Diện tích phải là kiểu số",
+    "informedNotExistedDangKyThamDoKhuVuc": "Đăng ký thăm dò khu vực không tồn tại"
   },
   "dangkykhaithackhuvuc": {
     "titleList": "Danh sách khu vực đăng ký khai thác",

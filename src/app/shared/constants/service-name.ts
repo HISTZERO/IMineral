@@ -75,13 +75,16 @@ export class ServiceName {
   public static CPTHAMDODVHC = "cpthamdodvhc";
   public static CPTHAMDOLOAIKHOANGSAN = "cpthamdoloaikhoangsan";
   public static CPTHAMDOCONGTRINH = "cpthamdocongtrinh";
+  public static CPTHAMDOKHUVUC = "cpthamdokhuvuc";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
   public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static COQUANBANHANH = "vbcoquanbanhanh";
   public static COQUANCAPPHEP = "cpcoquancapphep";
   public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
+  public static GETALLCOQUANBANHANH = "getallcoquanbanhanh";
   public static GETALLCOQUANCAPPHEP = "getallcoquancapphep";
 
 
