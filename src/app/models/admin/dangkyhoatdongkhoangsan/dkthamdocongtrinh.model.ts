@@ -1,4 +1,4 @@
-export class OutputDkThamDoCongTrinh {
+export class OutputDkThamDoCongTrinhModel {
   idcongtrinh: string;
   sohieu: string;
   chieusau: number;
@@ -13,7 +13,7 @@ export class OutputDkThamDoCongTrinh {
   siteid: string;
 }
 
-export class InputDkThamDoCongTrinh {
+export class InputDkThamDoCongTrinhModel {
   idcongtrinh: string;
   sohieu: string;
   chieusau: number;

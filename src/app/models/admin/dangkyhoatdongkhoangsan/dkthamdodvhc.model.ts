@@ -1,4 +1,4 @@
-export class OutputDkThamDoDvhc {
+export class OutputDkThamDoDvhcModel {
     idthamdodvhc: string;
     idxa: string;
     idhuyen: string;
@@ -13,7 +13,7 @@ export class OutputDkThamDoDvhc {
     siteid: string;
 }
 
-export class InputDkThamDoDvhc {
+export class InputDkThamDoDvhcModel {
     idthamdodvhc: string;
     idxa: string;
     idhuyen: string;

@@ -4,7 +4,7 @@ import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDkThamDoDvhc } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
+import { OutputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { DonvihanhchinhIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-io/donvihanhchinh-io.component";
@@ -27,10 +27,10 @@ export class DonvihanhchinhListComponent implements OnInit {
   public settingsCommon = new SettingsCommon();
 
   // Chứa dữ liệu danh sách đơn vị
-  public listDangKyThamDoDvhc: OutputDkThamDoDvhc[];
+  public listDangKyThamDoDvhc: OutputDkThamDoDvhcModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDkThamDoDvhc;
+  public selectedItem: OutputDkThamDoDvhcModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;

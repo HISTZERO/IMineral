@@ -1,0 +1,49 @@
+<div class="card border mt-3">
+  <div class="card-header">
+    <h3>
+      <div class="row">
+        <div class="col-md-4 mb-sm-1">
+          <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.titleList" | translate }}</span>
+        </div>
+        <div class="col-md-8">
+          <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCapPhepThamDoDvhcIOSidenav()">
+            <i class="fal fa-plus-square"></i>
+            {{ "COMMON.default.add" | translate }}
+          </button>
+          <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+            <i class="far fa-sync-alt"></i>
+            {{ "COMMON.default.load" | translate }}
+          </button>
+        </div>
+      </div>
+    </h3>
+  </div>
+  <div class="card-body">
+    <ejs-grid #gridCapPhepThamDoDvhc *ngIf="listCapPhepThamDoDvhc" [dataSource]="listCapPhepThamDoDvhc"
+      [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
+      [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
+      [allowResizing]="true">
+      <e-columns>
+        <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+        <e-column field="tentinh" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.tentinh' | translate }}"></e-column>
+        <e-column field="tenhuyen" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.tenhuyen' | translate }}"></e-column>
+        <e-column field="tenxa" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.tenxa' | translate }}"></e-column>
+        <e-column field="idthamdodvhc" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+          <ng-template #template let-data>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+                (click)="editItemCapPhepThamDoDvhc(data.idthamdodvhc)">
+                <i class="far fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                (click)="deleteItemCapPhepThamDoDvhc(data)">
+                <i class="far fa-trash"></i>
+              </button>
+            </div>
+          </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>
+

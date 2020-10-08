@@ -8,16 +8,16 @@
           </ng-template>
         </mat-tab>
         <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhTabTile' | translate }}">
-
+          <app-cp-tdks-donvihanhchinh-list #capPhepThamDoDvhc [allowAutoInit]="false"></app-cp-tdks-donvihanhchinh-list>
         </mat-tab>
         <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanTabTile' | translate }}">
-
+          <app-cp-tdks-loaikhoangsan-list #capPhepThamDoLoaiKhoangSan [allowAutoInit]="false"></app-cp-tdks-loaikhoangsan-list>
         </mat-tab>
         <mat-tab [disabled]="disabledTabState[TabType.KhuVucThamDo]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucThamDoTabTile' | translate }}">
 
         </mat-tab>
         <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhThamDo]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhThamDoTabTitle' | translate }}">
-
+          <app-cp-tdks-congtrinhthamdo-list #capPhepThamDoCongTrinh [allowAutoInit]="false"></app-cp-tdks-congtrinhthamdo-list>
         </mat-tab>
       </mat-tab-group>
     </div>

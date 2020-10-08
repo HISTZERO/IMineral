@@ -4,7 +4,7 @@ import { AdminRoutingName } from 'src/app/routes/admin-routes-name';
 export const MenuCpThamDoKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -16,7 +16,7 @@ export const MenuCpThamDoKhoangSan = [
 export const MenuCpThamDoKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -43,7 +43,7 @@ export const ButtonBackCpThamDoKhoangSan = [
 export const MenuCpKhaiThacKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -55,7 +55,7 @@ export const MenuCpKhaiThacKhoangSan = [
 export const MenuCpKhaiThacKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -81,7 +81,7 @@ export const ButtonBackCpKhaiThacKhoangSan = [
 export const MenuCpPheDuyetTruLuongKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -93,7 +93,7 @@ export const MenuCpPheDuyetTruLuongKhoangSan = [
 export const MenuCpPheDuyetTruLuongKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -120,7 +120,7 @@ export const ButtonBackCpPheDuyetTruLuongKhoangSan = [
 export const MenuCpTanThuKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -132,7 +132,7 @@ export const MenuCpTanThuKhoangSan = [
 export const MenuCpTanThuKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -158,7 +158,7 @@ export const ButtonBackCpTanThuKhoangSan = [
 export const MenuCpDongCuaMoKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -170,7 +170,7 @@ export const MenuCpDongCuaMoKhoangSan = [
 export const MenuCpDongCuaMoKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -196,7 +196,7 @@ export const ButtonBackCpDongCuaMoKhoangSan = [
 export const MenuCpDauGiaQuyenKhaiThacKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -208,7 +208,7 @@ export const MenuCpDauGiaQuyenKhaiThacKhoangSan = [
 export const MenuCpDauGiaQuyenKhaiThacKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -234,7 +234,7 @@ export const ButtonBackCpDauGiaQuyenKhaiThacKhoangSan = [
 export const MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -246,7 +246,7 @@ export const MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSan = [
 export const MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -272,7 +272,7 @@ export const ButtonBackCpTraLaiGiayPhepThamDoKhaiThacKhoangSan = [
 export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {
@@ -284,7 +284,7 @@ export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan = [
 export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet = [
   { title: "Quản trị", url: `/${AdminRoutingName.adminUri}` },
   {
-    title: "Đăng ký hoạt động",
+    title: "Cấp phép hoạt động",
     url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}`,
   },
   {

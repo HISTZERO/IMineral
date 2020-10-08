@@ -72,6 +72,9 @@ export class ServiceName {
   // Giấy phép
   public static GIAYPHEP = "giayphep";
   public static CPTHAMDOKHOANGSAN = "cpthamdokhoangsan";
+  public static CPTHAMDODVHC = "cpthamdodvhc";
+  public static CPTHAMDOLOAIKHOANGSAN = "cpthamdoloaikhoangsan";
+  public static CPTHAMDOCONGTRINH = "cpthamdocongtrinh";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";

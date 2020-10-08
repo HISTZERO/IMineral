@@ -34,6 +34,15 @@ import { CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent } from 'src/app/f
 import { CpchuyennhuongquyenthamdokhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan-list/cpchuyennhuongquyenthamdokhaithackhoangsan-list.component';
 import { CpTdksThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component';
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
+import { CpTdksDonvihanhchinhIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-io/cp-tdks-donvihanhchinh-io.component';
+import { CpTdksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component';
+import { CpTdksDonvihanhchinhComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh.component';
+import { CpTdksLoaikhoangsanComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan.component';
+import { CpTdksLoaikhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-io/cp-tdks-loaikhoangsan-io.component';
+import { CpTdksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component';
+import { CpTdksCongtrinhthamdoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo.component';
+import { CpTdksCongtrinhthamdoIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-io/cp-tdks-congtrinhthamdo-io.component';
+import { CpTdksCongtrinhthamdoListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-list/cp-tdks-congtrinhthamdo-list.component';
 @NgModule({
   declarations: [
   CapphephoatdongkhoangsanComponent,
@@ -54,7 +63,16 @@ import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphep
   CpchuyennhuongquyenthamdokhaithackhoangsanListComponent,
   CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent,
   CpTdksThongtincapphepComponent,
-  CpTdksThamdokhoangsanIoComponent
+  CpTdksThamdokhoangsanIoComponent,
+  CpTdksDonvihanhchinhComponent,
+  CpTdksDonvihanhchinhListComponent,
+  CpTdksDonvihanhchinhIoComponent,
+  CpTdksLoaikhoangsanComponent,
+  CpTdksLoaikhoangsanListComponent,
+  CpTdksLoaikhoangsanIoComponent,
+  CpTdksCongtrinhthamdoComponent,
+  CpTdksCongtrinhthamdoListComponent,
+  CpTdksCongtrinhthamdoIoComponent
   ],
   exports: [
   ],
@@ -72,7 +90,10 @@ import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphep
   ],
   entryComponents: [
     HosoOptionComponent,
-    CpTdksThamdokhoangsanIoComponent
+    CpTdksThamdokhoangsanIoComponent,
+    CpTdksDonvihanhchinhIoComponent,
+    CpTdksLoaikhoangsanIoComponent,
+    CpTdksCongtrinhthamdoIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
