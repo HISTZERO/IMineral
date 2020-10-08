@@ -6,10 +6,10 @@
             <h3 class="card-title">
                 <div class="row">
                     <div class="col-md-8 mb-sm-1">
-                      <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleList" | translate }}</span>
+                      <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.titleList" | translate }}</span>
                     </div>
                     <div class="col-md-4">
-                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openDkThamDoKhuVucIOSidenav()">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCpThamDoKhuVucIOSidenav()">
                         <i class="fal fa-plus-square"></i>
                         {{ "COMMON.default.add" | translate }}
                       </button>
@@ -22,17 +22,17 @@
             </h3>
           </div>
           <div class="card-body">
-            <ejs-grid #gridDkThamDoKhuVuc *ngIf="listDkThamDoKhuVuc" [dataSource]="listDkThamDoKhuVuc"
+            <ejs-grid #gridCpThamDoKhuVuc *ngIf="listCpThamDoKhuVuc" [dataSource]="listCpThamDoKhuVuc"
               [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
               [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"  [allowResizing]="true" >
               <ng-template #detailTemplate let-obj>
                 <table class="table table-striped">
                   <thead class="thead-secondary">
                     <tr>
-                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.thutu' | translate }}</th>
-                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.sohieu' | translate }}</th>
-                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadox' | translate }}</th>
-                      <th scope="col">{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.toadoy' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutu' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieu' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadox' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoy' | translate }}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -47,18 +47,18 @@
               </ng-template>
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-                <e-column field="tenkhuvuc" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.tenkhuvuc' | translate }}"></e-column>
-                <e-column field="dientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.dientich' | translate }}"></e-column>
-                <e-column field="donvidientich" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.donvidientich' | translate }}"></e-column>
+                <e-column field="tenkhuvuc" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvuc' | translate }}"></e-column>
+                <e-column field="dientich" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientich' | translate }}"></e-column>
+                <e-column field="donvidientich" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientich' | translate }}"></e-column>
                 <e-column field="idthamdokhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">
                       <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
-                      (click)="editItemDkThamDoKhuVuc(data.idthamdokhuvuc)">
+                      (click)="editItemCpThamDoKhuVuc(data.idthamdokhuvuc)">
                         <i class="far fa-edit"></i>
                       </button>
                       <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
-                        (click)="deleteItemDangKyThamDoKhuVuc(data)">
+                        (click)="deleteItemCpThamDoKhuVuc(data)">
                         <i class="far fa-trash"></i>
                       </button>
                     </div>
