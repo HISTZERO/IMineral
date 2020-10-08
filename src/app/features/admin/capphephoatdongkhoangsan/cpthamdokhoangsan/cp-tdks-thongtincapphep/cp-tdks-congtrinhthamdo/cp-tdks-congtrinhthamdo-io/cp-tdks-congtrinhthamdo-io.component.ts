@@ -2,24 +2,23 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
+import { InputCpThamDoCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { KhuvuctoadoService } from "src/app/services/admin/khuvuckhoangsan/khuvuctoado.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 
 @Component({
-  selector: 'app-congtrinhthamdo-io',
-  templateUrl: './congtrinhthamdo-io.component.html',
-  styleUrls: ['./congtrinhthamdo-io.component.scss']
+  selector: 'app-cp-tdks-congtrinhthamdo-io',
+  templateUrl: './cp-tdks-congtrinhthamdo-io.component.html',
+  styleUrls: ['./cp-tdks-congtrinhthamdo-io.component.scss']
 })
-export class CongtrinhthamdoIoComponent implements OnInit {
+export class CpTdksCongtrinhthamdoIoComponent implements OnInit {
 
   // Chứa dữ liệu Form
-  public dKThamDoCongTrinhIOForm: FormGroup;
+  public cpThamDoCongTrinhIOForm: FormGroup;
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -28,7 +27,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
   public purpose: string;
 
   // Chứa dữ liệu input
-  public inputModel: InputDkThamDoCongTrinhModel;
+  public inputModel: InputCpThamDoCongTrinhModel;
 
   // Chứa danh sách Lĩnh Vực
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
@@ -54,7 +53,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+              public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
               public dmFacadeService: DmFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
@@ -88,11 +87,11 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      sohieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.sohieuRequired},
-      chieusau: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauRequired , pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauFormat },
-      toadox: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxRequired , pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxFormat },
-      toadoy: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyRequired , pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyFormat },
-      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.hequychieuRequired},
+      sohieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.sohieuRequired},
+      chieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.chieusauRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.chieusauFormat },
+      toadox: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoxRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoxFormat },
+      toadoy: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoyRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoyFormat },
+      hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.hequychieuRequired},
     };
   }
 
@@ -100,7 +99,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    * Hàm khởi tạo form theo dạng edit
    */
   bindingConfigAddOrUpdate() {
-    this.inputModel = new InputDkThamDoCongTrinhModel();
+    this.inputModel = new InputCpThamDoCongTrinhModel();
     this.formOnEdit();
   }
 
@@ -108,7 +107,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    * Hàm khởi tạo form
    */
   formInit() {
-    this.dKThamDoCongTrinhIOForm = this.formBuilder.group({
+    this.cpThamDoCongTrinhIOForm = this.formBuilder.group({
       sohieu: ["", Validators.required],
       chieusau: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
@@ -123,7 +122,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   formOnEdit() {
     if (this.obj && this.purpose === 'edit') {
-      this.dKThamDoCongTrinhIOForm.setValue({
+      this.cpThamDoCongTrinhIOForm.setValue({
         sohieu: this.obj.sohieu,
         chieusau: this.obj.chieusau,
         toadox: this.obj.toadox,
@@ -149,13 +148,13 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   private addOrUpdate(operMode: string) {
-    const dKThamDoCongTrinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoCongTrinhService();
+    const cpThamDoCongTrinhService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepThamDoCongTrinhService();
     // Gán dữ liệu input vào model
-    this.inputModel = this.dKThamDoCongTrinhIOForm.value;
-    this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
+    this.inputModel = this.cpThamDoCongTrinhIOForm.value;
+    this.inputModel.idcapphepthamdo = this.obj.idcapphepthamdo;
     if (operMode === "new") {
-      dKThamDoCongTrinhService.addItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoCongTrinh"),
+      cpThamDoCongTrinhService.addItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllCpThamDoCongTrinh"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -167,8 +166,8 @@ export class CongtrinhthamdoIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModel.idcongtrinh = this.obj.idcongtrinh;
-      dKThamDoCongTrinhService.updateItem(this.inputModel).subscribe(
-        (res) => this.matSidenavService.doParentFunction("getAllDkThamDoCongTrinh"),
+      cpThamDoCongTrinhService.updateItem(this.inputModel).subscribe(
+        (res) => this.matSidenavService.doParentFunction("getAllCpThamDoCongTrinh"),
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
         },
@@ -187,7 +186,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKThamDoCongTrinhIOForm.valid === true) {
+    if (this.cpThamDoCongTrinhIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.matSidenavService.close();
     }
@@ -198,7 +197,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   public onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
-    this.dKThamDoCongTrinhIOForm.reset();
+    this.cpThamDoCongTrinhIOForm.reset();
   }
 
   /**
@@ -207,7 +206,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKThamDoCongTrinhIOForm.valid === true) {
+    if (this.cpThamDoCongTrinhIOForm.valid === true) {
       this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
@@ -219,7 +218,7 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   public logAllValidationErrorMessages() {
     validationAllErrorMessagesService(
-      this.dKThamDoCongTrinhIOForm,
+      this.cpThamDoCongTrinhIOForm,
       this.validationErrorMessages,
       this.formErrors
     );

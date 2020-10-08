@@ -2,22 +2,22 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import {InputDkThamDoCongTrinhModel, OutputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model";
+import {InputCpThamDoCongTrinhModel, OutputCpThamDoCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 
 @Injectable({
   providedIn: 'root'
 })
-export class DkThamDoCongTrinhService extends RepositoryEloquentService {
+export class CpThamDoCongTrinhService extends RepositoryEloquentService {
 
   constructor(public httpClient: HttpClient) {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputDkThamDoCongTrinhModel(),
-      outputModelName: new OutputDkThamDoCongTrinhModel(),
-      apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOCONGTRINH
+      inputModelName: new InputCpThamDoCongTrinhModel(),
+      outputModelName: new OutputCpThamDoCongTrinhModel(),
+      apiUrl: environment.apiIMineral + ServiceName.CPTHAMDOCONGTRINH
     });
   }
 
@@ -25,9 +25,9 @@ export class DkThamDoCongTrinhService extends RepositoryEloquentService {
     return "ok";
   }
 
-  public getDangKyThamDoCongTrinhByIdDangKyThamDo(idDangKyThamDo: any) {
+  public getCapPhepThamDoCongTrinhByIdCapPhepThamDo(idCapPhepThamDo: any) {
     try {
-      return this.httpClient.get(`${this.apiUrl}?iddangkythamdo=${idDangKyThamDo}`, {
+      return this.httpClient.get(`${this.apiUrl}/getbyidcapphepthamdo?idcapphepthamdo=${idCapPhepThamDo}`, {
         headers: this.headers,
       });
     } catch (error) {
