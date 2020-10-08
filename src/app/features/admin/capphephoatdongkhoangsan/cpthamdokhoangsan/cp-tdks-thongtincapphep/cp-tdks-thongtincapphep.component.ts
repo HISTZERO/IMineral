@@ -11,6 +11,7 @@ import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphep
 import { CpTdksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component';
 import { CpTdksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component';
 import { CpTdksCongtrinhthamdoListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-list/cp-tdks-congtrinhthamdo-list.component';
+import { CpTdksKhuvucthamdoListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo-list/cp-tdks-khuvucthamdo-list.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
@@ -30,7 +31,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @ViewChild("capPhepThamDoDvhc", { static: false }) capPhepThamDoDvhc: CpTdksDonvihanhchinhListComponent;
   @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: CpTdksLoaikhoangsanListComponent;
   @ViewChild("capPhepThamDoCongTrinh", { static: false }) capPhepThamDoCongTrinh: CpTdksCongtrinhthamdoListComponent;
-  @ViewChild("capPhepThamDoKhuVuc", { static: false }) capPhepThamDoKhuVuc: any;
+  @ViewChild("capPhepThamDoKhuVuc", { static: false }) capPhepThamDoKhuVuc: CpTdksKhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
