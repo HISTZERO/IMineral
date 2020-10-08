@@ -6,16 +6,16 @@
             <ng-template appContentContainer>
             </ng-template>
           </mat-tab>
-          <mat-tab [disabled]="disabledTabState[TabType.LoaiKhoangSan]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
+          <mat-tab *ngIf="showTab" [disabled]="disabledTabState[TabType.LoaiKhoangSan]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.donViHanhChinhKhaiThacTabTile' | translate }}">
             <app-ktks-donvihanhchinh-list #dangKyKhaiThacKsDvhc [allowAutoInit]="false"></app-ktks-donvihanhchinh-list>
           </mat-tab>
-          <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
+          <mat-tab *ngIf="showTab"  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.loaiKhoangSanKhaiThacTabTile' | translate }}">
             <app-ktks-loaikhoangsan-list  #dangKyKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-ktks-loaikhoangsan-list>
           </mat-tab>
-          <mat-tab [disabled]="disabledTabState[TabType.KhuVucKhaiThac]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
+          <mat-tab  *ngIf="showTab"  [disabled]="disabledTabState[TabType.KhuVucKhaiThac]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucKhaiThacTabTile' | translate }}">
             <app-khuvuckhaithac-list #dangKyKhaiThacKhuVuc [allowAutoInit]="false"></app-khuvuckhaithac-list>
           </mat-tab>
-          <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhKhaiThac]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhKhaiThacTabTitle' | translate }}">
+          <mat-tab  *ngIf="showTab"  [disabled]="disabledTabState[TabType.CongTrinhKhaiThac]"  label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.congTrinhKhaiThacTabTitle' | translate }}">
             <app-ktks-congtrinhkhaithac-list #dangKyKhaiThacCongTrinh [allowAutoInit]="false"></app-ktks-congtrinhkhaithac-list>
           </mat-tab>
         </mat-tab-group>

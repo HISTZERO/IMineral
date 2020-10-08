@@ -94,7 +94,6 @@ import { TlgpTanthutralaiIoComponent } from './tralaigiayphep/tralaigiayphep-tho
 import { TralaigiayphepThongtindangkyComponent } from './tralaigiayphep/tralaigiayphep-thongtindangky/tralaigiayphep-thongtindangky.component';
 
 
-
 @NgModule({
   declarations: [
     ThamdokhoangsanIoComponent,

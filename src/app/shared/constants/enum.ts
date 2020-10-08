@@ -109,6 +109,24 @@ export enum DangKyKhaiThacKsActionEnum {
   Edit = 2
 }
 
+export enum DangKyKhaiThacTraLaiActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
+export enum DangKyTanThuTraLaiActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
+export enum DangKyThamDoTraLaiActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum DangKyTraLaiGiayPhepActionEnum {
   None = 0,
   Add = 1,

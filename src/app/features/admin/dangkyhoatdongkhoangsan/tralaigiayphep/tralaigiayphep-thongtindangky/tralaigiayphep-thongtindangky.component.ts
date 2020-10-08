@@ -12,7 +12,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import { MatSidenav } from '@angular/material';
+import { MatSidenav, MatTabGroup } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
@@ -28,6 +28,8 @@ export const DangKyTraLaiGiayPhepComponent: any = {
   [LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan]: TlgpKhaithactralaiIoComponent,
   [LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan]: TlgpThamdotralaiIoComponent,
   [LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan]: TlgpTanthutralaiIoComponent,
+  [LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan]: TlgpKhaithactralaiIoComponent,
+  [LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan]: TlgpThamdotralaiIoComponent
 };
 
 @Component({
@@ -58,7 +60,10 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
 
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
-  
+
+  // Chứa dữ liệu hiển thị Tab
+  public showTab: boolean = false;
+
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyTraLaiGiayPhepTabEnum.ThongTinChiTiet]: false,
@@ -128,6 +133,9 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
 
     this.itemHoSo = await this.getHoSoById(this.idhoso);
 
+    if (this.itemHoSo && (this.itemHoSo.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || this.itemHoSo.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan)) {
+      this.showTab = true;
+    }
 
     if (!this.itemHoSo) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyKhaiThac);
@@ -205,7 +213,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
   private async showDangKyViewComponent() {
     let factory: any;
     this.contentContainer.viewContainerRef.clear();
-    
+
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyTraLaiGiayPhepComponent[this.itemHoSo.loaicapphep]);
     }
@@ -215,6 +223,12 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     componentRef.instance.idhoso = this.itemHoSo.idhoso;
     componentRef.instance.matSidenav = this.matSidenav;
     componentRef.instance.content = this.content;
+    if (this.itemHoSo.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+      componentRef.instance.isTraLaiDienTichKhaiThac = true;
+    }
+    if (this.itemHoSo.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan) {
+
+    }
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTraLaiGiayPhepFormState(event));
     componentRef.instance.selectIdDangKyKhaiThacTraLaiEvent.subscribe(event => this.getIdDangKyTraLaiGiayPhep(event));
   }

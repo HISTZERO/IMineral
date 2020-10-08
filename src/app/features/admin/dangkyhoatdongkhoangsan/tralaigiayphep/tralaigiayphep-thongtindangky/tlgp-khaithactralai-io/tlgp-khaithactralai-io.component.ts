@@ -3,20 +3,19 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
+import { MatSidenav } from "@angular/material";
 
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKyKhaiThacKsActionEnum, DangKyTraLaiGiayPhepActionEnum } from 'src/app/shared/constants/enum';
+import { DangKyKhaiThacTraLaiActionEnum, DangKyTraLaiGiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.model";
-import { OutputDkKhaiThacTraLaiModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkkhaithactralai.model";
-import { GiayphepOptionComponent } from "../../../../hosogiayto/giayphep/giayphep-option/giayphep-option.component";
-import { MatSidenav } from "@angular/material";
-import { MatsidenavService } from "../../../../../../services/utilities/matsidenav.service";
-import { OutputGiayPhepModel } from "../../../../../../models/admin/hosogiayto/giayphep.model";
+import { OutputDkKhaiThacTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithactralai.model";
+import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
+import { OutputDmHeQuyChieuModel } from "../../../../../../models/admin/danhmuc/hequychieu.model";
+import { DonViDienTich } from "../../../../../../shared/constants/common-constants";
+import { DmFacadeService } from "../../../../../../services/admin/danhmuc/danhmuc-facade.service";
 
 @Component({
   selector: 'app-tlgp-khaithactralai-io',
@@ -38,22 +37,11 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
 
-  // Nhóm loại cấp phép
-  // tslint:disable-next-line: no-input-rename
-  @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
-
   // Chứa dữ liệu Form
   public dangKyKhaiThacTraLaiIOForm: FormGroup;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
-
-  // Chứa danh sách Hệ quy chiếu
-  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
-  public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
-
-  // Dạng khoáng sản
-  public dangKhoangSanList = DangKhoangSan;
 
   // chứa dữ liệu Id Hồ sơ
   public idhoso: string;
@@ -65,28 +53,20 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
   public currentAction: number;
 
   // Action đăng ký khai thác trả lại
-  public ActionType = DangKyKhaiThacKsActionEnum;
-
-  // Chứa phương pháp khai thác
-  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
+  public ActionType = DangKyKhaiThacTraLaiActionEnum;
 
   // disable delete button
   public disabledDeleteButton = false;
 
+  // Chứa giá trị xác định loại khai thác trả lại
+  public isTraLaiDienTichKhaiThac: boolean = false;
+
+  // Chứa danh sách Hệ quy chiếu
+  public allHeQuyChieu: OutputDmHeQuyChieuModel[];
+  public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
-
-  // Chứa đon vị trữ lượng
-  public donViTruLuongList = DonViTruLuong;
-
-  // Lưu trữ đơn vị thời hạn
-  public donViThoiHanList = DonViThoiHan;
-
-  // lưu dữ liệu đơn vị diện tích
-  public donViDoSauList = DonViDoSau;
-
-  // Chứa đơn vị công suất
-  public donViCongSuat = DonViCongSuat;
 
   // error message
   validationErrorMessages = {};
@@ -98,10 +78,9 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
     dientichtralai: "",
     donvidientich: "",
     lydotralai: "",
-    hequychieu: "",
-    loaitralai: "",
     idgiayphep: "",
-    sogiayphep: ""
+    sogiayphep: "",
+    hequychieu: ""
   };
 
   constructor(
@@ -173,10 +152,9 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
       dientichtralai: [""],
       donvidientich: [""],
       lydotralai: [""],
-      hequychieu: [""],
-      loaitralai: [""],
       idgiayphep: [""],
-      sogiayphep: ["", Validators.required]
+      sogiayphep: ["", Validators.required],
+      hequychieu: [""]
     });
     this.dangKyKhaiThacTraLaiIOForm.controls.sogiayphep.disable({ onlySelf: true });
   }
@@ -206,10 +184,9 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
         dientichtralai: item.dientichtralai,
         donvidientich: item.donvidientich,
         lydotralai: item.lydotralai,
-        hequychieu: item.hequychieu,
-        loaitralai: item.loaitralai,
         idgiayphep: item.idgiayphep,
-        sogiayphep: item.sogiayphep
+        sogiayphep: item.sogiayphep,
+        hequychieu: item.hequychieu
       });
     }
   }
@@ -219,22 +196,12 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      diadiem: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.diadiemRequired },
-      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.dientichthamdoFormat },
-      chieusauthamdotu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdotuFormat },
-      chieusauthamdoden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.chieusauthamdodenFormat },
-      thoihanthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.thoihanthamdoFormat },
-      mucdichsudungkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.mucdichsudungkhoangsanRequired },
-      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvidientichRequired },
-      donvithoihan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvithoihanRequired },
-      donvichieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.donvichieusauRequired },
-      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.hequychieuRequired },
     };
   }
 
   /**
-   * Hàm lấy danh sách Lĩnh Vực
-   */
+     * Hàm lấy danh sách Hệ quy chiếu
+     */
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
@@ -248,8 +215,8 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getDangKyKhaiThacTraLaiByIdHoSo(idHoSo: string) {
-    const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
-    const dangKyItem = await dkKhaiThacKhoangSanService.getFetchAll({ Idhoso: idHoSo });
+    const dkKhaiThacTraLaiService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacTraLaiService();
+    const dangKyItem = await dkKhaiThacTraLaiService.getFetchAll({ idhoso: idHoSo });
     return dangKyItem;
   }
 
@@ -267,12 +234,12 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
     const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacTraLaiService();
     const inputModel = this.dangKyKhaiThacTraLaiIOForm.value;
     inputModel.idhoso = this.idhoso;
-    if (this.currentAction === DangKyKhaiThacKsActionEnum.Add) {
+    if (this.currentAction === DangKyKhaiThacTraLaiActionEnum.Add) {
       dkKhaiThacKhoangSanService.addItem(inputModel).subscribe(
         async (res) => {
           this.dangKyKhaiThacTraLai = inputModel;
           this.dangKyKhaiThacTraLai.iddangkykhaithac = res.iddangkykhaithac;
-          this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
+          this.currentAction = DangKyKhaiThacTraLaiActionEnum.Edit;
           this.selectCurrentFormState();
           this.selectIdDangKyKhaiThacTraLai();
         },
@@ -285,12 +252,12 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
             2000
           )
       );
-    } else if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
+    } else if (this.currentAction === DangKyKhaiThacTraLaiActionEnum.Edit) {
       inputModel.iddangkykhaithac = this.dangKyKhaiThacTraLai.iddangkykhaithac;
       dkKhaiThacKhoangSanService.updateItem(inputModel).subscribe(
         async (res) => {
           this.dangKyKhaiThacTraLai = inputModel;
-          this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
+          this.currentAction = DangKyKhaiThacTraLaiActionEnum.Edit;
           this.selectCurrentFormState();
         },
         (error: HttpErrorResponse) => {
@@ -313,7 +280,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.titleGiayPhepSelect);
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithactralai.titleGiayPhepSelect);
     this.matSidenavService.setContentComp(GiayphepOptionComponent, "select");
     this.matSidenavService.open();
   }
@@ -327,7 +294,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
       this.dangKyKhaiThacTraLaiIOForm.controls.idgiayphep.setValue(item.idgiayphep);
     }
   }
-  
+
   /**
    * Hàm kiểm tra validation form
    */
@@ -343,7 +310,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
    * Select inserted state of form
    */
   private selectCurrentFormState() {
-    if (this.currentAction === DangKyKhaiThacKsActionEnum.Edit) {
+    if (this.currentAction === DangKyKhaiThacTraLaiActionEnum.Edit) {
       this.disabledDeleteButton = false;
     } else {
       this.disabledDeleteButton = true;
@@ -364,8 +331,8 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
    */
   deleteItemDangKyKhaiThacTraLai() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsan.contentDelete,
-      this.dangKyKhaiThacTraLai.diadiem
+      this.isTraLaiDienTichKhaiThac ? this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithactralai.contentDeleteTraLaiDienTich : this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithactralai.contentDelete,
+      ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
@@ -375,7 +342,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
           .subscribe(
             () => {
               this.dangKyKhaiThacTraLai = null;
-              this.currentAction = DangKyKhaiThacKsActionEnum.Add;
+              this.currentAction = DangKyKhaiThacTraLaiActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
             },
@@ -403,9 +370,9 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
       dientichtralai: "",
       donvidientich: "",
       lydotralai: "",
-      hequychieu: "",
-      loaitralai: "",
       idgiayphep: "",
+      sogiayphep: "",
+      hequychieu: ""
     });
   }
 
