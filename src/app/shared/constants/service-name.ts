@@ -76,8 +76,10 @@ export class ServiceName {
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
   public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static COQUANBANHANH = "vbcoquanbanhanh";
   public static COQUANCAPPHEP = "cpcoquancapphep";
   public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
+  public static GETALLCOQUANBANHANH = "getallcoquanbanhanh";
   public static GETALLCOQUANCAPPHEP = "getallcoquancapphep";
 
 

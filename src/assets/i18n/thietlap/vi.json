@@ -53,5 +53,14 @@
   "titleDsCoQuanCapPhep": "Danh sách cơ quan cấp phép",
   "save": "Lưu",
   "tencoquanquanly": "Tên cơ quan quản lý"
-}
+},
+  "coquanbanhanh": {
+    "titleList": "Danh sách cơ quan ban hành",
+    "tencoquanbanhanh": "Tên cơ quan ban hành",
+    "titleCauHinhCoQuanBanHanh": "CẤU HÌNH CƠ QUAN BAN HÀNH",
+    "titleDsCoQuanQuanLy": "Danh sách cơ quan quản lý",
+    "titleDsCoQuanBanHanh": "Danh sách cơ quan ban hành",
+    "save": "Lưu",
+    "tencoquanquanly": "Tên cơ quan quản lý"
+  }
 }

@@ -1,0 +1,49 @@
+<!-- Page header -->
+<app-sub-header [menuItems]="navArray"></app-sub-header>
+<!-- /page header -->
+<div class="content pt-3">
+  <mat-sidenav-container class="sidenav-container" hasBackdrop="false">
+    <mat-sidenav-content>
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12 px-0">
+            <div class="card border">
+              <div class="card-header">
+                <h3>
+                  <div class="row">
+                    <div class="col-md-6 mb-sm-1">
+                      <span class="title">{{ "THIETLAP.coquanbanhanh.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-6">
+                      <button class="btn btn-primary" style="float: right;" (click)="showMatDialog()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                    </div>
+                  </div>
+                </h3>
+              </div>
+              <div class="card-body">
+                <ejs-grid #gridCoQuanBanHanh *ngIf="listCoQuanBanHanh" [dataSource]="listCoQuanBanHanh"
+                          [allowTextWrap]="true" [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
+                          [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
+                          class="table-striped" [allowResizing]="true" [toolbar]="settingsCommon.toolbar">
+                  <e-columns>
+                    <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}">
+                    </e-column>
+                    <e-column field="tencoquanquanly"
+                              headerText="{{ 'THIETLAP.coquanbanhanh.tencoquanbanhanh' | translate }}" [customAttributes]="{class: 'column-ten'}" ></e-column>
+                  </e-columns>
+                </ejs-grid>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+</div>

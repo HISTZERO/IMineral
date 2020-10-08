@@ -6,6 +6,8 @@ import { CauhinhtailieuListComponent } from "src/app/features/admin/thietlap/cau
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
 import { CoquantiepnhanListComponent } from "src/app/features/admin/thietlap/coquantiepnhan/coquantiepnhan-list/coquantiepnhan-list.component";
 import {CoquancapphepListComponent} from "src/app/features/admin/thietlap/coquancapphep/coquancapphep-list/coquancapphep-list.component";
+import {CoquanbanhanhIoComponent} from "src/app/features/admin/thietlap/coquanbanhanh/coquanbanhanh-io/coquanbanhanh-io.component";
+import {CoquanbanhanhListComponent} from "src/app/features/admin/thietlap/coquanbanhanh/coquanbanhanh-list/coquanbanhanh-list.component";
 
 const thietlapRoutes: Routes = [
   {
@@ -15,6 +17,7 @@ const thietlapRoutes: Routes = [
       { path: AdminRoutingName.CauHinhTaiLieu, component: CauhinhtailieuListComponent},
       { path: AdminRoutingName.CoQuanTiepNhan, component: CoquantiepnhanListComponent},
       { path: AdminRoutingName.CoQuanCapPhep, component: CoquancapphepListComponent},
+      { path: AdminRoutingName.CoQuanBanHanh, component: CoquanbanhanhListComponent},
     ],
   },
 ];
