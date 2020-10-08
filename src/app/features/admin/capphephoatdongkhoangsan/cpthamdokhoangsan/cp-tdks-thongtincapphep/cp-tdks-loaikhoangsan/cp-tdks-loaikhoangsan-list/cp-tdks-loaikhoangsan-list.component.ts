@@ -1,25 +1,24 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input, Type} from "@angular/core";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { CongtrinhthamdoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-io/congtrinhthamdo-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputDkThamDoCongTrinhModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { CpTdksLoaikhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-io/cp-tdks-loaikhoangsan-io.component';
+import { OutputCpThamDoLoaiKhoangSanModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.model';
+import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 
 @Component({
-  selector: 'app-congtrinhthamdo-list',
-  templateUrl: './congtrinhthamdo-list.component.html',
-  styleUrls: ['./congtrinhthamdo-list.component.scss']
+  selector: 'app-cp-tdks-loaikhoangsan-list',
+  templateUrl: './cp-tdks-loaikhoangsan-list.component.html',
+  styleUrls: ['./cp-tdks-loaikhoangsan-list.component.scss']
 })
-export class CongtrinhthamdoListComponent implements OnInit {
-
+export class CpTdksLoaikhoangsanListComponent implements OnInit {
   // Viewchild template
-  @ViewChild("gridDkThamDoCongTrinh", { static: false }) public gridDkThamDoCongTrinh: GridComponent;
+  @ViewChild("gridCpThamDoLoaiKhoangSan", { static: false }) public gridCpThamDoLoaiKhoangSan: GridComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
@@ -29,36 +28,24 @@ export class CongtrinhthamdoListComponent implements OnInit {
   // Chứa thiết lập grid
   public settingsCommon = new SettingsCommon();
 
-  // Chứa danh sách item đã chọn
-  public listDataSelect: any[];
-
-  // Chứa danh sách khu vực tọa độ
-  public listDkThamDoCongTrinh: OutputDkThamDoCongTrinhModel[];
+  // Chứa dữ liệu danh sách đơn vị
+  public listCpThamDoLoaiKhoangSan: OutputCpThamDoLoaiKhoangSanModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputDkThamDoCongTrinhModel;
-
-  // Chứa danh sách dữ liệu
-  public listData: any;
+  public selectedItem: OutputCpThamDoLoaiKhoangSanModel;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
-  // Chứa kiểu wrap text trên grid
-  public wrapSettings: TextWrapSettingsModel;
-
   // Chứa dữ liệu Iddangkythamdo
-  public iddangkythamdo: string;
+  public idcapphepthamdo: string;
 
-  // Contructor
-  constructor(
-    public matSidenavService: MatsidenavService,
-    public cfr: ComponentFactoryResolver,
-    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-    public commonService: CommonServiceShared,
-    public thietlapFacadeService: ThietlapFacadeService,
-    private translate: TranslateService
-  ) { }
+  constructor(public matSidenavService: MatsidenavService,
+              public cfr: ComponentFactoryResolver,
+              public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+              public commonService: CommonServiceShared,
+              public thietlapFacadeService: ThietlapFacadeService,
+              private translate: TranslateService) { }
 
   async ngOnInit() {
     this.getDataTranslate();
@@ -69,7 +56,6 @@ export class CongtrinhthamdoListComponent implements OnInit {
   }
 
   async manualDataInit() {
-    // Gọi hàm lấy dữ liệu pagesize
     await this.getDataPageSize();
     return true;
   }
@@ -96,48 +82,49 @@ export class CongtrinhthamdoListComponent implements OnInit {
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu tọa độ
-    await this.getAllDkThamDoCongTrinh();
-  }
-
-  /**
-   * Hàm load lại dữ liệu grid
-   */
-  public reloadDataGrid() {
-    this.getAllDkThamDoCongTrinh();
+    // Gọi hàm lấy dữ liệu cá nhân
+    await this.getAllCpThamDoLoaiKhoangSan();
   }
 
   /**
    * Hàm lấy dữ liệu Dvdc
    */
-  async getAllDkThamDoCongTrinh() {
-    if (this.iddangkythamdo === null || this.iddangkythamdo === undefined) {
+  async getAllCpThamDoLoaiKhoangSan() {
+    if (this.idcapphepthamdo === null || this.idcapphepthamdo === undefined) {
       return;
     }
 
-    const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
-      .getDangKyThamDoCongTrinhService()
-      .getDangKyThamDoCongTrinhByIdDangKyThamDo(this.iddangkythamdo).toPromise();
+    const listData: any = await this.capPhepHoatDongKhoangSanFacadeService
+      .getCapPhepThamDoLoaiKhoangSanService()
+      .getCapPhepThamDoLoaiKhoangSanByIdCapPhepThamDo(this.idcapphepthamdo).toPromise();
     if (listData) {
-      listData.map((congtrinh, index) => {
-        congtrinh.serialNumber = index + 1;
+      listData.map((loaiKhoangSan, index) => {
+        loaiKhoangSan.serialNumber = index + 1;
       });
     }
-    this.listDkThamDoCongTrinh = listData;
+    this.listCpThamDoLoaiKhoangSan = listData;
+  }
+
+
+  /**
+   * Hàm load lại dữ liệu grid
+   */
+  public reloadDataGrid() {
+    this.getAllCpThamDoLoaiKhoangSan();
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemDkThamDoCongTrinh(id: any) {
+  async editItemCpThamDoLoaiKhoangSan(id: any) {
     // Lấy dữ liệu cá nhân theo id
-    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-    .getDangKyThamDoCongTrinhService()
+    const dataItem: any = await this.capPhepHoatDongKhoangSanFacadeService
+    .getCapPhepThamDoLoaiKhoangSanService()
     .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.informedNotExistedDangKyThamDoCongTrinh);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.informedNotExistedCapPhepThamDoLoaiKhoangSan);
       return;
     }
 
@@ -145,35 +132,35 @@ export class CongtrinhthamdoListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit );
-    await this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle( this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleEdit );
+    await this.matSidenavService.setContentComp(CpTdksLoaikhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openDkThamDoCongTrinhIOSidenav() {
+  public openCpThamDoLoaiKhoangSanIOSidenav() {
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleAdd);
-    this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
+    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleAdd);
+    this.matSidenavService.setContentComp(CpTdksLoaikhoangsanIoComponent, "new", {idcapphepthamdo: this.idcapphepthamdo});
     this.matSidenavService.open();
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemDangKyThamDoCongTrinh(data) {
+  async deleteItemCapPhepThamDoLoaiKhoangSan(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
-    const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
-      .getDangKyThamDoCongTrinhService()
-      .checkBeDeleted(this.selectedItem.idcongtrinh);
+    const canDelete: string = this.capPhepHoatDongKhoangSanFacadeService
+      .getCapPhepThamDoLoaiKhoangSanService()
+      .checkBeDeleted(this.selectedItem.idthamdoloaikhoangsan);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -194,16 +181,16 @@ export class CongtrinhthamdoListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.contentDelete,
-      this.selectedItem.sohieu
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.contentDelete,
+      this.selectedItem.tenloaikhoangsan
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dangKyHoatDongKhoangSanFacadeService
-          .getDangKyThamDoCongTrinhService()
-          .deleteItem({ idcongtrinh: this.selectedItem.idcongtrinh })
+        await this.capPhepHoatDongKhoangSanFacadeService
+          .getCapPhepThamDoLoaiKhoangSanService()
+          .deleteItem({ idthamdoloaikhoangsan: this.selectedItem.idthamdoloaikhoangsan })
           .subscribe(
-            () => this.getAllDkThamDoCongTrinh(),
+            () => this.getAllCpThamDoLoaiKhoangSan(),
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -225,7 +212,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
   }
 
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
-  doFunction(methodName, obj) {
-    this[methodName](obj);
+  doFunction(methodName) {
+    this[methodName]();
   }
 }

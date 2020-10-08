@@ -1,4 +1,4 @@
-export class OutputDkThamDoDvhcModel {
+export class OutputCpThamDoDvhcModel {
     idthamdodvhc: string;
     idxa: string;
     idhuyen: string;
@@ -6,14 +6,14 @@ export class OutputDkThamDoDvhcModel {
     maxa: string;
     mahuyen: string;
     matinh: string;
-    iddangkythamdo: string;
+    idcapphepthamdo: string;
     tentinh: string;
     tenhuyen: string;
     tenxa: string;
     siteid: string;
 }
 
-export class InputDkThamDoDvhcModel {
+export class InputCpThamDoDvhcModel {
     idthamdodvhc: string;
     idxa: string;
     idhuyen: string;
@@ -21,6 +21,6 @@ export class InputDkThamDoDvhcModel {
     maxa: string;
     mahuyen: string;
     matinh: string;
-    iddangkythamdo: string;
+    idcapphepthamdo: string;
     siteid: string;
 }

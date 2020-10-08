@@ -134,5 +134,42 @@
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
     "ngaybdthamdoRequired": "Ngày bắt đầu thăm dò không được để trống",
     "ngayktthamdoRequired": "Ngày kết thúc thăm dò không được để trống"
+  },
+  "cptdksthamdogiahan": {
+    "titleAdd": "Thêm mới cấp phép chi tiết thăm dò gia hạn",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết thăm dò gia hạn"
+  },
+  "capphepthamdodvhc": {
+    "titleList": "Danh sách đơn vị hành chính",
+    "titleAdd": "Thêm mới đơn vị hành chính",
+    "titleEdit": "Sửa dữ liệu đơn vị hành chính",
+    "contentDelete": "Đơn vị hành chính: ",
+    "tentinh": "Tên tỉnh",
+    "tenhuyen": "Tên huyện",
+    "tenxa": "Tên xã",
+    "matinhRequired": "Yêu cầu phải chọn tỉnh",
+    "mahuyenRequired": "Yêu cầu phải chọn huyện",
+    "maxaRequired": "Yêu cầu phải chọn xã",
+    "informedNotExistedCapPhepThamDoDvhc": "Cấp phép thăm dò đợn vị hành chính không tồn tại"
+  },
+  "capphepthamdoloaikhoangsan": {
+    "titleList": "Danh sách loại khoáng sản",
+    "titleAdd": "Thêm mới loại khoáng sản",
+    "titleEdit": "Sửa dữ liệu loại khoáng sản",
+    "contentDelete": "Loại khoáng sản: ",
+    "tenloaikhoangsan": "Loại khoáng sản",
+    "tennhomkhoangsan": "Nhóm khoáng sản",
+    "tenkhoangsan": "Tên khoáng sản",
+    "truluong": "Trữ lượng",
+    "donvitruluong": "Đơn vị trữ lượng",
+    "chonloaikhoangsan": "---Chọn loại khoáng sản---",
+    "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
+    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "tenkhoangsanRequired": "Yêu cầu phải nhập tên khoáng sản",
+    "tenkhoangsanPlaceholder": "Nhập tên khoáng sản",
+    "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
+    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Cấp phép thăm dò loại khoáng sản không tồn tại"
   }
 }

@@ -8,6 +8,8 @@ import { DefaultValue } from 'src/app/shared/constants/global-var';
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
 import { CpTdksThamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thamdokhoangsan-io/cp-tdks-thamdokhoangsan-io.component';
+import { CpTdksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component';
+import { CpTdksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component';
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
@@ -24,8 +26,8 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-  @ViewChild("capPhepThamDoDvhc", { static: false }) capPhepThamDoDvhc: any;
-  @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: any;
+  @ViewChild("capPhepThamDoDvhc", { static: false }) capPhepThamDoDvhc: CpTdksDonvihanhchinhListComponent;
+  @ViewChild("capPhepThamDoLoaiKhoangSan", { static: false }) capPhepThamDoLoaiKhoangSan: CpTdksLoaikhoangsanListComponent;
   @ViewChild("capPhepThamDoCongTrinh", { static: false }) capPhepThamDoCongTrinh: any;
   @ViewChild("capPhepThamDoKhuVuc", { static: false }) capPhepThamDoKhuVuc: any;
   // tslint:disable-next-line: no-input-rename
@@ -182,6 +184,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
     componentRef.instance.matSidenav =  this.matSidenav;
     componentRef.instance.content = this.content;
+    componentRef.instance.itemGiayPhep = this.itemGiayPhep;
 
     if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
       componentRef.instance.disabledDienTichTraLai = false;

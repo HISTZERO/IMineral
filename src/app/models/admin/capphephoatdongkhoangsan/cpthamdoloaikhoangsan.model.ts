@@ -1,16 +1,16 @@
-export class OutputDkThamDoLoaiKhoangSanModel {
+export class OutputCpThamDoLoaiKhoangSanModel {
   idthamdoloaikhoangsan: string;
   idloaikhoangsan: string;
   tenloaikhoangsan: string;
-  iddangkythamdo: string;
+  idcapphepthamdo: string;
   tenkhoangsan: string;
   siteid: string;
 }
 
-export class InputDkThamDoLoaiKhoangSanModel {
+export class InputCpThamDoLoaiKhoangSanModel {
   idthamdoloaikhoangsan: string;
   idloaikhoangsan: string;
-  iddangkythamdo: string;
+  idcapphepthamdo: string;
   tenkhoangsan: string;
   siteid: string;
 }
