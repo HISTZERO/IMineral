@@ -138,7 +138,7 @@ export class CpTdksCongtrinhthamdoListComponent implements OnInit {
     .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.informedNotExistedCapPhepThamDoCongTrinh);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.informedNotExistedCapPhepThamDoCongTrinh);
       return;
     }
 
@@ -146,7 +146,7 @@ export class CpTdksCongtrinhthamdoListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleEdit );
+    await this.matSidenavService.setTitle( this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.titleEdit );
     await this.matSidenavService.setContentComp(CpTdksCongtrinhthamdoIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -159,7 +159,7 @@ export class CpTdksCongtrinhthamdoListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.titleAdd);
     this.matSidenavService.setContentComp(CpTdksCongtrinhthamdoIoComponent, "new", {idcapphepthamdo: this.idcapphepthamdo});
     this.matSidenavService.open();
   }
