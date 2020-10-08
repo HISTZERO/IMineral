@@ -1,17 +1,19 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
-import { ThietlaphethongService } from "src/app/services/admin/thietlap/thietlaphethong.service";
-import { CauhinhtailieuService } from "./cauhinhtailieu.service";
-import { CoquantiepnhanService } from "./coquantiepnhan.service";
+import {ThietlaphethongService} from "src/app/services/admin/thietlap/thietlaphethong.service";
+import {CauhinhtailieuService} from "./cauhinhtailieu.service";
+import {CoquantiepnhanService} from "./coquantiepnhan.service";
 import {CoquancapphepService} from "src/app/services/admin/thietlap/coquancapphep.service";
+import {CoquanbanhanhService} from "src/app/services/admin/thietlap/coquanbanhanh.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ThietlapFacadeService {
 
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   // Thiết lập hệ thống service
   public getThietLapHeThongService() {
@@ -26,6 +28,11 @@ export class ThietlapFacadeService {
   // Cơ quan tiếp nhận service
   public getCoQuanTiepNhanService() {
     return new CoquantiepnhanService(this.httpClient);
+  }
+
+  // Cơ quan ban hanh service
+  public getCoQuanBanHanhService() {
+    return new CoquanbanhanhService(this.httpClient);
   }
 
   // Cơ quan cấp phép service

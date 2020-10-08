@@ -1,0 +1,69 @@
+<div class="container-fluid content-wrapper" style="position: relative;">
+  <button class="btn" style="position: absolute; right: 0; top: 0;" (click)="closeMatDialog()"><i class="fas fa-times"></i></button>
+  <h3 class="text-center mb-3 text-bold">{{ 'THIETLAP.coquanbanhanh.titleCauHinhCoQuanBanHanh' | translate}}</h3>
+  <div class="row">
+    <div class="col-5">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="m-0">{{ 'THIETLAP.coquanbanhanh.titleDsCoQuanQuanLy' | translate}}</h4>
+        </div>
+        <div class="card-body">
+          <ejs-grid #gridCoQuanQuanLy *ngIf="listCoQuanQuanLy" [dataSource]="listCoQuanQuanLy" [allowTextWrap]="true"
+                    [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true"
+                    [allowSelection]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
+                    [toolbar]="settingsCommon.toolbar" [allowResizing]='true' (rowSelected)="rowSelectedCoQuanQuanLy()"
+                    (rowDeselected)="rowSelectedCoQuanQuanLy()" class="table-striped">
+            <e-columns>
+              <e-column field="tencoquanquanly" headerText="{{ 'THIETLAP.coquanbanhanh.tencoquanquanly' | translate}}"
+                        [customAttributes]="{class: 'grid-tencoquan'}"></e-column>
+              <e-column type="checkbox" isPrimaryKey='true' [customAttributes]="{class: 'grid-checkbox'}">
+              </e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+
+      </div>
+    </div>
+    <div class="col-1 text-center">
+      <div class="d-inline-flex flex-column mt-5">
+        <button class="btn btn-outline-secondary" [disabled]="disableBtnRight" (click)="btnDoubleRight()">
+          <i class="fas fa-angle-double-right"></i>
+        </button>
+        <button class="btn btn-outline-secondary mt-3" [disabled]="disableBtnLeft" (click)="btnDoubleLeft()">
+          <i class="fas fa-angle-double-left"></i>
+        </button>
+      </div>
+    </div>
+    <div class="col-6">
+      <div class="card">
+        <div class="card-header">
+          <h4 class="m-0">
+            <div class="row">
+              <div class="col-md-7 mb-sm-1">
+                <span class="title">{{ 'THIETLAP.coquanbanhanh.titleDsCoQuanBanHanh' | translate}}</span>
+              </div>
+              <div class="col-md-5">
+                <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="cauHinhHsCoQuanBanHanh()">
+                  {{ 'THIETLAP.coquanbanhanh.save' | translate}}
+                </button>
+              </div>
+            </div>
+          </h4>
+        </div>
+        <div class="card-body">
+          <ejs-grid #gridCoQuanBanHanh *ngIf="listCoQuanQuanLy" [dataSource]="listCoQuanBanHanh" [allowTextWrap]="true"
+                    [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" [allowResizing]='true'
+                    (rowSelected)="rowSelectedCoQuanBanHanh()" (rowDeselected)="rowSelectedCoQuanBanHanh()"
+                    class="table-striped">
+            <e-columns>
+              <e-column field="tencoquanquanly" headerText="{{ 'THIETLAP.coquanbanhanh.tencoquanbanhanh' | translate}}"
+                        isPrimaryKey='true' [customAttributes]="{class: 'grid-tencoquan'}"></e-column>
+              <e-column type="checkbox" [allowEditing]='false'
+                        [customAttributes]="{class: 'grid-checkbox'}"></e-column>
+            </e-columns>
+          </ejs-grid>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
