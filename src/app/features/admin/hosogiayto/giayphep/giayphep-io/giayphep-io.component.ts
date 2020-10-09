@@ -300,9 +300,10 @@ export class GiayphepIoComponent implements OnInit {
         const giayPhepLichSu = Object.assign(new OutputGiayPhepModel(), inputModel);
 
         if (inputModel.idgiayphepls && inputModel.idgiayphepls.trim() !== DefaultValue.Empty) {
-          this.disabledHoSo = true;
           giayPhepLichSu.idgiayphep = inputModel.idgiayphepls;
           this.AddOrUpdateThongTinGiayPhepLichSuList(giayPhepLichSu);
+          this.disabledLoaiDoiTuong = true;
+          this.disabledHoSo = true;
         }
 
         this.giayPhepIOForm.setValue({
@@ -629,12 +630,30 @@ export class GiayphepIoComponent implements OnInit {
    * Sử kiện được kích hoạt sau khi chọn loại cấp phép trên combobox UI
    */
   public selectItemLoaiCapPhepChange(item: any) {
-    this.disabledLoaiDoiTuong = false;
-    this.disabledHoSo = false;
-    this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
-    this.disabledGiayPhepLichSu = false;
-    this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
-    this.ClearThongTinCaNhanToChucOnUI();
+    if (this.currentAction === GiayPhepActionEnum.Add) {
+      this.disabledLoaiDoiTuong = false;
+      this.hoSoList = [];
+      this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
+      this.giayPhepLichSuList = [];
+      this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
+      this.ClearThongTinCaNhanToChucOnUI();
+
+      const loaiCapPhep = item.value;
+      if (loaiCapPhep ===  DefaultValue.Empty || loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+        || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+        ) {
+        this.disabledHoSo = false;
+        this.disabledGiayPhepLichSu = false;
+      } else {
+        this.disabledHoSo = false;
+        this.disabledGiayPhepLichSu = true;
+      }
+    }
   }
 
   /**
