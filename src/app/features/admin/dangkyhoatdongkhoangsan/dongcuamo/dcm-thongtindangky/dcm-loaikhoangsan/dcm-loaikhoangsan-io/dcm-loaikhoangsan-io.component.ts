@@ -1,17 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InputDkKhaiThacLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.model";
-import {OutputDmNhomKhoangSanModel} from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
-import {OutputDmLoaiKhoangSanModel} from "src/app/models/admin/danhmuc/loaikhoangsan.model";
-import {DonViTruLuong} from "src/app/shared/constants/common-constants";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {TranslateService} from "@ngx-translate/core";
-import {Paging, TrangThaiEnum} from "src/app/shared/constants/enum";
-import {HttpErrorResponse} from "@angular/common/http";
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { HttpErrorResponse } from "@angular/common/http";
+import { TranslateService } from "@ngx-translate/core";
+
+import { OutputDmNhomKhoangSanModel } from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
+import { OutputDmLoaiKhoangSanModel } from "src/app/models/admin/danhmuc/loaikhoangsan.model";
+import { DonViTruLuong } from "src/app/shared/constants/common-constants";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { Paging, TrangThaiEnum } from "src/app/shared/constants/enum";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { InputDkKhaiThacLoaiKhoangSan } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacloaikhoangsan.model";
 
 @Component({
   selector: 'app-dcm-loaikhoangsan-io',
@@ -69,11 +70,11 @@ export class DcmLoaikhoangsanIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dmFacadeService: DmFacadeService,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService) {
+    public dmFacadeService: DmFacadeService,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService) {
   }
 
   async ngOnInit() {
@@ -129,11 +130,11 @@ export class DcmLoaikhoangsanIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      idloaikhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.loaikhoangsanRequired},
-      tenkhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsanRequired},
-      nhomkhoangsan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.nhomkhoangsanRequired},
-      truluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongFormat},
-      donvitruluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.donvitruluongRequired},
+      idloaikhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.loaikhoangsanRequired },
+      tenkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.tenkhoangsanRequired },
+      nhomkhoangsan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.nhomkhoangsanRequired },
+      truluong: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.truluongFormat },
+      donvitruluong: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacloaikhoangsan.donvitruluongRequired },
     };
   }
 
@@ -158,9 +159,9 @@ export class DcmLoaikhoangsanIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       this.classColWithFiftyPercentForCombobox = true;
       this.dkKhaiThacLoaiKhoangSanIOForm.setValue({
-        nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
+        nhomkhoangsan: { idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan },
         idloaikhoangsan: this.obj.idloaikhoangsan,
-        loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan},
+        loaikhoangsan: { idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan },
         tenkhoangsan: this.obj.tenkhoangsan,
         truluong: this.obj.truluong,
         donvitruluong: this.obj.donvitruluong,
@@ -183,7 +184,7 @@ export class DcmLoaikhoangsanIoComponent implements OnInit {
   async geAllNhomKhoangSan() {
     const allNhomKhoangSanData: any = await this.dmFacadeService
       .getDmNhomKhoangSanService()
-      .getFetchAll({Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1});
+      .getFetchAll({ Trangthai: TrangThaiEnum.Active, PageNumber: 1, PageSize: -1 });
     this.allNhomKhoangSan = allNhomKhoangSanData.items;
     this.nhomKhoangSanFilters = allNhomKhoangSanData.items;
   }

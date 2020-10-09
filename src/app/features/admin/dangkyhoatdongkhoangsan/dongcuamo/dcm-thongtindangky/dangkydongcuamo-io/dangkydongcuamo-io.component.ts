@@ -11,7 +11,7 @@ import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
 import {DefaultValue} from "src/app/shared/constants/global-var";
-import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkdongcuamo.model";
+import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.model";
 
 @Component({
   selector: 'app-dangkydongcuamo-io',

@@ -9,7 +9,7 @@ import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.ser
 import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ActivatedRoute} from "@angular/router";
-import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkdongcuamo.model";
+import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.model";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
 

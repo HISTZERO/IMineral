@@ -1,19 +1,19 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OutputDkThamDoToaDoKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
-import {LoaiCapPhepEnum} from "src/app/shared/constants/enum";
+import {TranslateService} from "@ngx-translate/core";
+import {HttpErrorResponse} from "@angular/common/http";
+
 import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
-import {DonViDienTich, LoaiKhuVucThamDo} from "src/app/shared/constants/common-constants";
+import {DonViDienTich} from "src/app/shared/constants/common-constants";
 import {SettingsCommon} from "src/app/shared/constants/setting-common";
 import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
 import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {TranslateService} from "@ngx-translate/core";
-import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {InputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthukhuvuc.model";
+import {InputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
+import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
 
 @Component({
   selector: 'app-ttks-khuvuctanthu-io',

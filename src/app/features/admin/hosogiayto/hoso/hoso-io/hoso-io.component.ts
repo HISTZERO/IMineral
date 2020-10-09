@@ -4,6 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
@@ -11,7 +12,6 @@ import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.s
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coquantiepnhan.model';
 import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
@@ -20,6 +20,7 @@ import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/t
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 @Component({
   selector: 'app-hoso-io',
@@ -110,11 +111,11 @@ export class HosoIoComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dmFacadeService: DmFacadeService,
     private hethongFacadeService: HethongFacadeService,
-    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
     private activatedRoute: ActivatedRoute,
     public matSidenavService: MatsidenavService,
-    public cfr: ComponentFactoryResolver) { }
+    public cfr: ComponentFactoryResolver,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -299,7 +300,7 @@ export class HosoIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoFacadeService = this.hoSoGiayToFacadeService.getHoSoService();
     const hosoItem = await hoSoFacadeService.getByid(idHoSo).toPromise();
     return hosoItem;
   }
@@ -312,7 +313,7 @@ export class HosoIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const hoSoFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoFacadeService = this.hoSoGiayToFacadeService.getHoSoService();
     const inputModel = this.hosoIOForm.value;
     const currentLoaiCapPhep = this.loaiCapPhepList.find(item => item.maloaicapphep === this.hosoIOForm.controls.loaicapphep.value);
     inputModel.idthutuchanhchinh = currentLoaiCapPhep.idthutuchanhchinh;

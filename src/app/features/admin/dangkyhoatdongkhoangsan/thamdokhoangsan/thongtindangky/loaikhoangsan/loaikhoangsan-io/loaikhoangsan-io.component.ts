@@ -2,8 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
-import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
+
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -12,6 +11,7 @@ import { Paging, TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { OutputDmNhomKhoangSanModel } from 'src/app/models/admin/danhmuc/nhomkhoangsan.model';
 import { OutputDmLoaiKhoangSanModel } from 'src/app/models/admin/danhmuc/loaikhoangsan.model';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { InputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdoloaikhoangsan.model";
 
 @Component({
   selector: 'app-loaikhoangsan-io',
@@ -63,11 +63,11 @@ export class LoaikhoangsanIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dmFacadeService: DmFacadeService,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService) { }
+    public dmFacadeService: DmFacadeService,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -146,10 +146,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
     if (this.obj && this.purpose === 'edit') {
       this.classColWithFiftyPercentForCombobox = true;
       this.dKThamDoLoaiKhoangSanIOForm.setValue({
-        nhomkhoangsan: {idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan},
+        nhomkhoangsan: { idnhomkhoangsan: this.obj.idnhomkhoangsan, tennhomkhoangsan: this.obj.tennhomkhoangsan },
         tenkhoangsan: this.obj.tenkhoangsan,
         idloaikhoangsan: this.obj.idloaikhoangsan,
-        loaikhoangsan: {idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan}
+        loaikhoangsan: { idloaikhoangsan: this.obj.idloaikhoangsan, tenloaikhoangsan: this.obj.tenloaikhoangsan }
       });
     }
   }
@@ -180,7 +180,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
   async geAllLoaiKhoangSan(idNhomKhoangSan: string) {
     const allLoaikhoangSanData: any = await this.dmFacadeService
       .getDmLoaiKhoangSanService()
-      .getFetchAll({Idnhomkhoangsan: idNhomKhoangSan, Trangthai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({ Idnhomkhoangsan: idNhomKhoangSan, Trangthai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
     this.allLoaiKhoangSan = allLoaikhoangSanData.items;
     this.loaiKhoangSanFilters = allLoaikhoangSanData.items;
   }
@@ -227,13 +227,13 @@ export class LoaikhoangsanIoComponent implements OnInit {
       } else {
         if (this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
           this.dKThamDoLoaiKhoangSanIOForm.controls
-          .idloaikhoangsan
-          .setValue("");
+            .idloaikhoangsan
+            .setValue("");
           this.tenLoaiKhoangSanDisplay = "";
         } else {
           this.dKThamDoLoaiKhoangSanIOForm.controls
-          .idloaikhoangsan
-          .setValue(this.obj.idloaikhoangsan);
+            .idloaikhoangsan
+            .setValue(this.obj.idloaikhoangsan);
           this.tenLoaiKhoangSanDisplay = this.obj.tenloaikhoangsan;
         }
       }
@@ -244,8 +244,8 @@ export class LoaikhoangsanIoComponent implements OnInit {
           .setValue(this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.value.idloaikhoangsan);
       } else {
         this.dKThamDoLoaiKhoangSanIOForm.controls
-                                      .idloaikhoangsan
-                                      .setValue("");
+          .idloaikhoangsan
+          .setValue("");
       }
 
       this.tenLoaiKhoangSanDisplay = "";

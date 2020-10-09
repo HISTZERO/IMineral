@@ -1,16 +1,16 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { LoaikhoangsanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-io/loaikhoangsan-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { OutputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdoloaikhoangsan.model";
 
 @Component({
   selector: 'app-loaikhoangsan-list',
@@ -42,11 +42,11 @@ export class LoaikhoangsanListComponent implements OnInit {
   public iddangkythamdo: string;
 
   constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService) { }
+    public cfr: ComponentFactoryResolver,
+    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService) { }
 
   async ngOnInit() {
     this.getDataTranslate();
@@ -67,8 +67,8 @@ export class LoaikhoangsanListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -77,7 +77,7 @@ export class LoaikhoangsanListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -121,8 +121,8 @@ export class LoaikhoangsanListComponent implements OnInit {
   async editItemDkThamDoLoaiKhoangSan(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-    .getDangKyThamDoLoaiKhoangSanService()
-    .getByid(id).toPromise();
+      .getDangKyThamDoLoaiKhoangSanService()
+      .getByid(id).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.informedNotExistedDangKyThamDoLoaiKhoangSan);
@@ -133,7 +133,7 @@ export class LoaikhoangsanListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.titleEdit );
+    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.titleEdit);
     await this.matSidenavService.setContentComp(LoaikhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -147,7 +147,7 @@ export class LoaikhoangsanListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdoloaikhoangsan.titleAdd);
-    this.matSidenavService.setContentComp(LoaikhoangsanIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
+    this.matSidenavService.setContentComp(LoaikhoangsanIoComponent, "new", { iddangkythamdo: this.iddangkythamdo });
     this.matSidenavService.open();
   }
 

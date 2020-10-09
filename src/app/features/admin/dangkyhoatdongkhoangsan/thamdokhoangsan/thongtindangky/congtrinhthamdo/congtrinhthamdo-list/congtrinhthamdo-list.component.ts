@@ -1,15 +1,16 @@
-import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input, Type} from "@angular/core";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input, Type } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CongtrinhthamdoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-io/congtrinhthamdo-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputDkThamDoCongTrinhModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.model';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { OutputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdocongtrinh.model";
 
 @Component({
   selector: 'app-congtrinhthamdo-list',
@@ -80,8 +81,8 @@ export class CongtrinhthamdoListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -90,7 +91,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -133,8 +134,8 @@ export class CongtrinhthamdoListComponent implements OnInit {
   async editItemDkThamDoCongTrinh(id: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-    .getDangKyThamDoCongTrinhService()
-    .getByid(id).toPromise();
+      .getDangKyThamDoCongTrinhService()
+      .getByid(id).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.informedNotExistedDangKyThamDoCongTrinh);
@@ -145,7 +146,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit );
+    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit);
     await this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -159,7 +160,7 @@ export class CongtrinhthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleAdd);
-    this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
+    this.matSidenavService.setContentComp(CongtrinhthamdoIoComponent, "new", { iddangkythamdo: this.iddangkythamdo });
     this.matSidenavService.open();
   }
 

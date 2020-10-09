@@ -1,0 +1,71 @@
+<div class="card border mt-3">
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9">
+        <h4>
+          <span class="title" *ngIf="currentAction === ActionType.Add">
+            {{ 'DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.titleAdd' | translate}}
+          </span>
+          <span class="title" *ngIf="currentAction === ActionType.Edit">
+            {{ 'DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.titleEdit' | translate}}
+          </span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="saveItemDangKyTanThuTraLai()">
+          <i class="fal fa-save"></i>
+          {{ "COMMON.default.save" | translate }}
+        </button>
+        <button *ngIf="!disabledDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;"
+          (click)="deleteItemDangKyKhaiThacTraLai()">
+          <i class="far fa-trash"></i>
+          {{ "COMMON.default.delete" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+  <div class="card-body">
+    <form [formGroup]="dangKyTanThuTraLaiIOForm">
+      <div class="container-fluid p-0">
+        <!-- Số Giấy tờ-->
+        <div class=" row">
+          <div class="col-lg-7 col-md-7 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.sogiayphep" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-6 col-md-6 col-sm-6">
+                <input type="hidden" formControlName="idgiayphep">
+                <input class="form-control" type="text" formControlName="sogiayphep"
+                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.sogiayphepPlaceholder' | translate}}" />
+                <span *ngIf="formErrors.idgiayphep || formErrors.sogiayphep"
+                  class="alert-danger">{{formErrors.sogiayphep}}</span>
+              </div>
+              <div class="col-lg-2 col-md-2 col-sm-2">
+                <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openGiayPhepIOSidenav()">
+                  <i class="fal fa-plus-square"></i>
+                  {{ "COMMON.default.select" | translate }}
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!--  Lý do trả lại-->
+        <div class=" row">
+          <div class="col-lg-7 col-md-7 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.lydotralai" | translate}}</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <textarea class="form-control" formControlName="lydotralai"
+                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkytanthutralai.lydotralaiPlaceholder' | translate}}"></textarea>
+                <span *ngIf="formErrors.lydotralai" class="alert-danger">{{formErrors.lydotralai}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

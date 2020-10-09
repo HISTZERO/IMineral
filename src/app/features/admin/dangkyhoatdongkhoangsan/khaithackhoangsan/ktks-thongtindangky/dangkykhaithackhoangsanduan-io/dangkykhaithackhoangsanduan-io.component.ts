@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -19,7 +19,7 @@ import {
   DonViTruLuong,
   PhuongPhapKhaiThac
 } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacKhoangSanDuAnModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.model";
+import { OutputDkKhaiThacKhoangSanDuAnModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhoangsanduan.model";
 
 
 

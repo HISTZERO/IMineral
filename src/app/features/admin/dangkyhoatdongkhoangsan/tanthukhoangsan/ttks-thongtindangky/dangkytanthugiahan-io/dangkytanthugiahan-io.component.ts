@@ -16,7 +16,7 @@ import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {OutputDkTanThuGiaHanModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthugiahan.model";
+import {OutputDkTanThuGiaHanModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthugiahan.model";
 
 
 @Component({
