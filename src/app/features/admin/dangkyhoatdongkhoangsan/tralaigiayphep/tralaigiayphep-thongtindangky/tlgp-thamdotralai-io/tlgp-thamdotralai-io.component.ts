@@ -12,7 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
-import { OutputDkThamDoTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotralai.model";
+import { OutputDkThamDoTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytralai/dkthamdotralai.model";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DonViDienTich } from "src/app/shared/constants/common-constants";

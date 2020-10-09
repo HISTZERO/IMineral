@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {TrangThaiEnum} from "src/app/shared/constants/enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {InputDkTanThuDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthudvhc.model";
+import {InputDkTanThuDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthudvhc.model";
 
 @Component({
   selector: 'app-ttks-donvihanhchinh-io',

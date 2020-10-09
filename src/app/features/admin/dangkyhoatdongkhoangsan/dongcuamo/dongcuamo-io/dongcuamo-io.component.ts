@@ -1,7 +1,7 @@
-import {Component, OnInit, ViewChild, ViewContainerRef} from '@angular/core';
-import {TranslateService} from '@ngx-translate/core';
-import {MatSidenav} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
+import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
+import { TranslateService } from '@ngx-translate/core';
+import { MatSidenav } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
 
 import {
   ButtonBackDongCuaMo,
@@ -15,12 +15,13 @@ import {
   NhomTaiLieuEnum,
   ThamDoKhoangSanTabEnum
 } from 'src/app/shared/constants/enum';
-import {HosotailieuListComponent} from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-list/hosotailieu-list.component';
-import {MatsidenavService} from 'src/app/services/utilities/matsidenav.service';
-import {NhomLoaiCapPhepEnum} from "src/app/shared/constants/nhomloaicapphep-constants";
-import {HosoIoComponent} from "src/app/features/admin/hosogiayto/hoso/hoso-io/hoso-io.component";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {DcmThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-thongtindangky.component";
+import { HosotailieuListComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-list/hosotailieu-list.component';
+import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { HosoIoComponent } from "src/app/features/admin/hosogiayto/hoso/hoso-io/hoso-io.component";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { DcmThongtindangkyComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-thongtindangky.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 @Component({
   selector: 'app-dongcuamo-io',
@@ -29,14 +30,14 @@ import {DcmThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongk
 })
 export class DongcuamoIoComponent implements OnInit {
 
-  @ViewChild('dangKyDongCuaMoTabs', {static: false}) dangKyDongCuaMoTabs;
-  @ViewChild("aside", {static: true}) public matSidenav: MatSidenav;
-  @ViewChild("compio", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
-  @ViewChild("hoSoIOComp", {static: false}) hoSoIOComp: HosoIoComponent;
-  @ViewChild("taiLieuBatBuocListComp", {static: false}) taiLieuBatBuocListComp: HosotailieuListComponent;
-  @ViewChild("taiLieuKhacListComp", {static: false}) taiLieuKhacListComp: HosotailieuListComponent;
-  @ViewChild("taiLieuXuLyHoSoListComp", {static: false}) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
-  @ViewChild("thongTinDangKyComp", {static: false}) thongTinDangKyComp: DcmThongtindangkyComponent;
+  @ViewChild('dangKyDongCuaMoTabs', { static: false }) dangKyDongCuaMoTabs;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("hoSoIOComp", { static: false }) hoSoIOComp: HosoIoComponent;
+  @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
+  @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
+  @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
+  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: DcmThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuDkDongCuaMoChitiet;
 
@@ -76,9 +77,10 @@ export class DongcuamoIoComponent implements OnInit {
 
 
   constructor(public matSidenavService: MatsidenavService,
-              private activatedRoute: ActivatedRoute,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              private translate: TranslateService) {
+    private activatedRoute: ActivatedRoute,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    private translate: TranslateService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -136,8 +138,8 @@ export class DongcuamoIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
-    const hosoItem = await dangKyHoatDongKhoangSanFacadeService.getByid(idHoSo).toPromise();
+    const hoSoGiayToFacadeService = this.hoSoGiayToFacadeService.getHoSoService();
+    const hosoItem = await hoSoGiayToFacadeService.getByid(idHoSo).toPromise();
     return hosoItem;
   }
 

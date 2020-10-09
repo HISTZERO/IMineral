@@ -1,25 +1,24 @@
 import { Component, ComponentFactoryResolver, Input, OnInit, ViewChild, ViewContainerRef } from "@angular/core";
 import { Observable } from "rxjs";
 import { DataStateChangeEventArgs, QueryCellInfoEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { MenuKhuVucDauGia } from "src/app/shared/constants/sub-menus/khuvuckhoangsan/khuvuckhoangsan";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
+import { OutputHsTaiLieuModel } from "src/app/models/admin/hosogiayto/tailieu.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { HosotailieuIoComponent } from "src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
-import { FileService } from 'src/app/services/admin/common/file.service';
 import { CommonFacadeService } from 'src/app/services/admin/common/common-facade.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 @Component({
@@ -80,19 +79,19 @@ export class HosotailieuListComponent implements OnInit {
   public nhomTaiLieuEnum = NhomTaiLieuEnum;
 
   constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService,
-              public commonFacadeService: CommonFacadeService,
-              public router: Router,
-              private activatedRoute: ActivatedRoute
+    public cfr: ComponentFactoryResolver,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService,
+    public commonFacadeService: CommonFacadeService,
+    public router: Router,
+    private activatedRoute: ActivatedRoute,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService
   ) {
 
-    this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
+    this.itemService = this.hoSoGiayToFacadeService.getTaiLieuService();
   }
 
   async ngOnInit() {
@@ -207,14 +206,14 @@ export class HosotailieuListComponent implements OnInit {
       return;
     }
 
-    const dataItem = {idhoso: this.idhoso, nhomtailieu: this.nhomTaiLieu};
+    const dataItem = { idhoso: this.idhoso, nhomtailieu: this.nhomTaiLieu };
     this.matSidenavService.setContentComp(HosotailieuIoComponent, "new", dataItem);
     this.matSidenavService.open();
   }
 
   async uploadFileItemTaiLieu(idTaiLieu: string) {
-     // Lấy dữ liệu cá nhân theo id
-    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+    // Lấy dữ liệu cá nhân theo id
+    const dataItem: any = await this.hoSoGiayToFacadeService
       .getTaiLieuService()
       .getByid(idTaiLieu).toPromise();
 
@@ -248,7 +247,7 @@ export class HosotailieuListComponent implements OnInit {
    */
   async editItemTaiLieu(idTaiLieu: string) {
     // Lấy dữ liệu cá nhân theo id
-    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+    const dataItem: any = await this.hoSoGiayToFacadeService
       .getTaiLieuService()
       .getByid(idTaiLieu).toPromise();
 
@@ -258,7 +257,7 @@ export class HosotailieuListComponent implements OnInit {
     }
 
     if (dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuKhongBatBuoc
-        && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
+      && dataItem.nhomtailieu !== this.nhomTaiLieuEnum.TaiLieuXuLyHoSo) {
       return;
     }
 
@@ -286,24 +285,24 @@ export class HosotailieuListComponent implements OnInit {
   async updateHoSoCauHinhToHsTaiLieu() {
     const idItems: string[] = [];
     const dialogRef = this.commonService.confirmSaveDiaLogService
-                              (DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
-                              this.dataTranslate.HOSOGIAYTO.tailieu.informedDialogTitle);
+      (DefaultValue.Empty, this.dataTranslate.HOSOGIAYTO.tailieu.confirmedContentOfRequiredRecordUpdateDialog,
+        this.dataTranslate.HOSOGIAYTO.tailieu.informedDialogTitle);
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
-        .updateHsCauHinhToHsTaiLieu({idhoso: this.idhoso})
-        .subscribe(
-          () => {
-            this.getAllTaiLieu();
-          },
-          (error: HttpErrorResponse) => {
-            this.commonService.showDialogWarning(error.error.errors);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.successAdd,
-              2000
-        ));
+        this.hoSoGiayToFacadeService.getTaiLieuService()
+          .updateHsCauHinhToHsTaiLieu({ idhoso: this.idhoso })
+          .subscribe(
+            () => {
+              this.getAllTaiLieu();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successAdd,
+                2000
+              ));
       }
     });
   }
@@ -312,7 +311,7 @@ export class HosotailieuListComponent implements OnInit {
    * Download tài liệu
    */
   async downloadTaiLieuHoSo(idTaiLieu: string) {
-    const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
+    const dataItem: any = await this.hoSoGiayToFacadeService
       .getTaiLieuService()
       .getByid(idTaiLieu).toPromise();
 
@@ -323,23 +322,23 @@ export class HosotailieuListComponent implements OnInit {
 
     if (dataItem && dataItem.duongdan && dataItem.filedinhkem) {
       await this.commonFacadeService.getFileService()
-                .downloadFile({uri: dataItem.duongdan, filename: dataItem.filedinhkem}).subscribe(
-                  (data) => {
-                    const localBlobData = new Blob([data], { type: 'application/octet-stream' });
-                    if (data) {
-                      const localDowloadLink = document.createElement('a');
-                      const localUrl = window.URL.createObjectURL(localBlobData);
-                      localDowloadLink.href = localUrl;
-                      localDowloadLink.setAttribute('download', dataItem.filedinhkem);
-                      document.body.appendChild(localDowloadLink);
-                      localDowloadLink.click();
-                      document.body.removeChild(localDowloadLink);
-                    }
-                  },
-                  (error: HttpErrorResponse) => {
-                    this.commonService.showDialogWarning(error.error.errors);
-                  }
-                );
+        .downloadFile({ uri: dataItem.duongdan, filename: dataItem.filedinhkem }).subscribe(
+          (data) => {
+            const localBlobData = new Blob([data], { type: 'application/octet-stream' });
+            if (data) {
+              const localDowloadLink = document.createElement('a');
+              const localUrl = window.URL.createObjectURL(localBlobData);
+              localDowloadLink.href = localUrl;
+              localDowloadLink.setAttribute('download', dataItem.filedinhkem);
+              document.body.appendChild(localDowloadLink);
+              localDowloadLink.click();
+              document.body.removeChild(localDowloadLink);
+            }
+          },
+          (error: HttpErrorResponse) => {
+            this.commonService.showDialogWarning(error.error.errors);
+          }
+        );
     } else {
       this.commonService.showDialogWarning(this.dataTranslate.COMMON.default.informedNotExistedFile);
     }
@@ -368,20 +367,20 @@ export class HosotailieuListComponent implements OnInit {
           list: idItems,
         };
 
-        this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService()
-        .deleteItemsTaiLieu(dataBody)
-        .subscribe(
-          () => {
-            this.getAllTaiLieu();
-          },
-          (error: HttpErrorResponse) => {
-            this.commonService.showDialogWarning(error.error.errors);
-          },
-          () =>
-            this.commonService.showeNotiResult(
-              this.dataTranslate.COMMON.default.successDelete,
-              2000
-        ));
+        this.hoSoGiayToFacadeService.getTaiLieuService()
+          .deleteItemsTaiLieu(dataBody)
+          .subscribe(
+            () => {
+              this.getAllTaiLieu();
+            },
+            (error: HttpErrorResponse) => {
+              this.commonService.showDialogWarning(error.error.errors);
+            },
+            () =>
+              this.commonService.showeNotiResult(
+                this.dataTranslate.COMMON.default.successDelete,
+                2000
+              ));
       }
     });
   }
@@ -401,7 +400,7 @@ export class HosotailieuListComponent implements OnInit {
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
-    const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
+    const canDelete: string = this.hoSoGiayToFacadeService
       .getTaiLieuService()
       .checkBeDeleted(this.selectedItem.idtailieu);
     this.canBeDeletedCheck(canDelete);
@@ -429,7 +428,7 @@ export class HosotailieuListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dangKyHoatDongKhoangSanFacadeService
+        await this.hoSoGiayToFacadeService
           .getTaiLieuService()
           .deleteItem({ idtailieu: this.selectedItem.idtailieu })
           .subscribe(
