@@ -3,13 +3,14 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 import { DatePipe } from "@angular/common";
-import { InputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
-import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+
+import { InputHsTaiLieuModel } from "src/app/models/admin/hosogiayto/tailieu.model";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { NhomTaiLieuEnum } from 'src/app/shared/constants/enum';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 @Component({
@@ -52,11 +53,11 @@ export class HosotailieuIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
               private formBuilder: FormBuilder,
               public commonService: CommonServiceShared,
               private translate: TranslateService,
-              public datePipe: DatePipe
+              public datePipe: DatePipe,
+              private hoSoGiayToFacadeService: HoSoGiayToFacadeService
               ) { }
 
   async ngOnInit() {
@@ -163,7 +164,7 @@ export class HosotailieuIoComponent implements OnInit {
     }
 
     // Gán dữ liệu input vào model
-    const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
+    const dkhdksService = this.hoSoGiayToFacadeService.getTaiLieuService();
     this.inputModel = this.tailieuIOForm.value;
 
     const formData: FormData = new FormData();
@@ -247,7 +248,7 @@ export class HosotailieuIoComponent implements OnInit {
       );
       dialogRef.afterClosed().subscribe(async (result) => {
         if (result === "confirm") {
-          const dkhdksService = this.dangKyHoatDongKhoangSanFacadeService.getTaiLieuService();
+          const dkhdksService = this.hoSoGiayToFacadeService.getTaiLieuService();
           dkhdksService.removeFileHsTaiLieu({ idtailieu: this.obj.idtailieu }).subscribe(
             (res) => {
               this.obj.duongdan = DefaultValue.Empty;

@@ -1,16 +1,17 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {DetailRowService, GridComponent, GridModel, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputDkKhaiThacKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.model";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
-import {KhuvuckhaithacIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component";
-import {HttpErrorResponse} from "@angular/common/http";
-import {MatSidenav} from "@angular/material/sidenav";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { HttpErrorResponse } from "@angular/common/http";
+import { MatSidenav } from "@angular/material/sidenav";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute } from "@angular/router";
+
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { KhuvuckhaithacIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component";
+import { OutputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
 
 @Component({
   selector: 'app-dcm-khuvuckhaithac-list',

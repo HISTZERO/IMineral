@@ -9,7 +9,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {MatSidenav} from "@angular/material/sidenav";
-import {OutputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthukhuvuc.model";
+import {OutputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
 import {TtksKhuvuctanthuIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component";
 
 @Component({

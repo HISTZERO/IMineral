@@ -12,7 +12,7 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
-import { OutputDkTanThuTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthutralai.model";
+import { OutputDkTanThuTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytralai/dktanthutralai.model";
 
 @Component({
   selector: 'app-tlgp-tanthutralai-io',

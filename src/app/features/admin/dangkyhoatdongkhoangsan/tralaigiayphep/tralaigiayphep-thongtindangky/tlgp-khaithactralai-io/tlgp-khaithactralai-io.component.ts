@@ -9,7 +9,7 @@ import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dan
 import { DangKyKhaiThacTraLaiActionEnum, DangKyTraLaiGiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { OutputDkKhaiThacTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithactralai.model";
+import { OutputDkKhaiThacTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytralai/dkkhaithactralai.model";
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";

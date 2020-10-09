@@ -8,7 +8,7 @@ import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormGroup, FormBuilder } from "@angular/forms";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputHsTaiLieuModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/tailieu.model";
+import { OutputHsTaiLieuModel } from "src/app/models/admin/hosogiayto/tailieu.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import { GiaypheptailieuIoComponent } from "src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-io/giaypheptailieu-io.component";
