@@ -819,7 +819,10 @@
   "dangkythamdotralai": {
     "titleAdd": "Thêm mới đăng ký trả lại giấy phép thăm dò khoáng sản",
     "titleEdit": "Sửa dữ liệu đăng ký trả lại giấy phép thăm dò khoáng sản",
+    "titleAddTraLaiDienTich": "Thêm mới đăng ký trả lại diện tích thăm dò khoáng sản",
+    "titleEditTraLaiDienTich": "Sửa dữ liệu đăng ký trả lại diện tích thăm dò khoáng sản",
     "contentDelete": "Đăng ký trả lại giấy phép thăm dò khoáng sản: ",
+    "contentDeleteTraLaiDienTich": "Đăng ký trả lại diện tích thăm dò khoáng sản: ",
     "titleGiayPhepSelect": "Chọn giấy phép",
     "donvidientich": "Đơn vị diện tích",
     "hequychieu": "Hệ quy chiếu",

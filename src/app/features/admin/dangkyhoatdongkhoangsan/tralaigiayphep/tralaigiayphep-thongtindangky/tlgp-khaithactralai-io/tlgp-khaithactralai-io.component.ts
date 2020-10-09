@@ -32,7 +32,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
 
   // tslint:disable-next-line: no-output-rename
-  @Output("selectIdDangKyKhaiThacTraLaiEvent") selectIdDangKyKhaiThacTraLaiEvent: EventEmitter<string> = new EventEmitter();
+  @Output("selectIdDangKyTraLaiEvent") selectIdDangKyTraLaiEvent: EventEmitter<string> = new EventEmitter();
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -323,7 +323,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
    * Lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
    */
   private selectIdDangKyKhaiThacTraLai() {
-    this.selectIdDangKyKhaiThacTraLaiEvent.emit(this.dangKyKhaiThacTraLai.iddangkykhaithac);
+    this.selectIdDangKyTraLaiEvent.emit(this.dangKyKhaiThacTraLai.iddangkykhaithac);
   }
 
   /**

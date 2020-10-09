@@ -185,8 +185,8 @@ export enum DangKyTraLaiGiayPhepTabEnum {
   ThongTinChiTiet = 0,
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
-  KhuVucKhaiThac = 3,
-  CongTrinhKhaiThac = 4,
+  KhuVuc = 3,
+  CongTrinh = 4,
 }
 
 export enum DangKyTanThuKhoangSanTabEnum {

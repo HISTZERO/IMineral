@@ -9,14 +9,13 @@ import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dan
 import { DangKyThamDoTraLaiActionEnum, DangKyTraLaiGiayPhepActionEnum } from 'src/app/shared/constants/enum';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { OutputDkKhaiThacTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithactralai.model";
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
-import { OutputDkThamDoTraLaiModel } from "../../../../../../models/admin/dangkyhoatdongkhoangsan/dkthamdotralai.model";
-import { OutputDmHeQuyChieuModel } from "../../../../../../models/admin/danhmuc/hequychieu.model";
-import { DmFacadeService } from "../../../../../../services/admin/danhmuc/danhmuc-facade.service";
-import { DonViDienTich } from "../../../../../../shared/constants/common-constants";
+import { OutputDkThamDoTraLaiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotralai.model";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DonViDienTich } from "src/app/shared/constants/common-constants";
 
 @Component({
   selector: 'app-tlgp-thamdotralai-io',
@@ -62,6 +61,9 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
 
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
+
+  // Chứa giá trị xác định loại thăm dò trả lại
+  public isTraLaiDienTichThamDo: boolean = false;
 
   // disable delete button
   public disabledDeleteButton = false;
@@ -172,14 +174,14 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
   /**
      * Hàm lấy danh sách Hệ quy chiếu
      */
-    async geAllHeQuyChieu() {
-      const allHeQuyChieuData: any = await this.dmFacadeService
-        .getDmHeQuyChieuService()
-        .getFetchAll({ PageNumber: 1, PageSize: -1 });
-      this.allHeQuyChieu = allHeQuyChieuData.items;
-      this.HeQuyChieuFilters = allHeQuyChieuData.items;
-    }
-  
+  async geAllHeQuyChieu() {
+    const allHeQuyChieuData: any = await this.dmFacadeService
+      .getDmHeQuyChieuService()
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+    this.allHeQuyChieu = allHeQuyChieuData.items;
+    this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
+
   /**
    * Hàm set value cho form
    */
@@ -327,7 +329,7 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
    */
   deleteItemDangKyThamDoTraLai() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.contentDelete,
+      this.isTraLaiDienTichThamDo ? this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.contentDeleteTraLaiDienTich : this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.contentDelete,
       ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {

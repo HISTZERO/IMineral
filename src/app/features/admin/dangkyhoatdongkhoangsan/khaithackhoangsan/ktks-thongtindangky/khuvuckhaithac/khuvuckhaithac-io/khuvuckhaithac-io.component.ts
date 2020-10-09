@@ -206,7 +206,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
   /**
   * Tạo model dữ liệu insert và update
   */
-  async generateModelData(idkhaithackhuvuc?: string) {
+  async generateModelData() {
     let listToaDo = {
       list: []
     };
@@ -215,7 +215,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
     for (let i of this.listToaDoKhuVuc) {
       let item = {
         iddangkykhaithac: this.obj.iddangkykhaithac,
-        idkhaithackhuvuc: idkhaithackhuvuc ? idkhaithackhuvuc : this.obj.idkhaithackhuvuc,
+        idkhaithackhuvuc: this.obj && this.obj.idkhaithackhuvuc ? this.obj.idkhaithackhuvuc : "",
         loaicapphep: this.obj.loaicapphep,
         loaikhuvuc: this.dKKhaiThacKhuVucIOForm.value.loaikhuvuc,
         sohieu: i.sohieu,
@@ -269,7 +269,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModelKhuVuc.idkhaithackhuvuc = this.obj.idkhaithackhuvuc;
       this.inputModelKhuVuc.iddangkykhaithac = this.obj.iddangkykhaithac;
-      this.inputModelKhuVuc.toado = await this.generateModelData(this.obj.iddangkykhaithac);
+      this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
