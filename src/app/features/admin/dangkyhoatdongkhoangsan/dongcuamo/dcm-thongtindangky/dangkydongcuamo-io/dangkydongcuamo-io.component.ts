@@ -1,5 +1,5 @@
 import {Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
 import {DonViDienTich} from "src/app/shared/constants/common-constants";
 import {DangKyKhaiThacKsActionEnum} from "src/app/shared/constants/enum";
@@ -126,9 +126,9 @@ export class DangkydongcuamoIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyDongCuaIOForm = this.formBuilder.group({
-      dientichdongcua: [DefaultValue.Empty],
-      donvidientich: [DefaultValue.Empty],
-      hequychieu: [DefaultValue.Empty],
+      dientichdongcua: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      hequychieu: [DefaultValue.Empty, Validators.required],
       loaidongcua: [DefaultValue.Empty],
       dientichkhaithac: [DefaultValue.Empty]
     });
@@ -167,7 +167,14 @@ export class DangkydongcuamoIoComponent implements OnInit {
    * Hàm set validate
    */
   private setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      dientichdongcua: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.dientichdongcuaRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.numberRequired
+      },
+      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.donvidientichRequired},
+      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.hequychieuRequired},
+    };
   }
 
   /**

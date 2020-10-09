@@ -62,7 +62,7 @@ export class KtksThongtindangkyComponent implements OnInit {
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
   // Chứa thuộc tính hiển thị tab Thiết bị
-  public showTabThietBi: boolean = false;
+  public showTabThietBi = false;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet]: true,
@@ -202,7 +202,7 @@ export class KtksThongtindangkyComponent implements OnInit {
   private async showDangKyViewComponent() {
     let factory: any;
     this.contentContainer.viewContainerRef.clear();
-    
+
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyKhaiThacKhoangSanComponent[this.itemHoSo.loaicapphep]);
     }

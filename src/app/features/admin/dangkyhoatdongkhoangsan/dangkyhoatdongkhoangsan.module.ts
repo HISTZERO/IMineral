@@ -81,6 +81,15 @@ import {TtksKhuvuctanthuListComponent} from './tanthukhoangsan/ttks-thongtindang
 import {DcmThongtindangkyComponent} from './dongcuamo/dcm-thongtindangky/dcm-thongtindangky.component';
 import {DangkydongcuamoIoComponent} from './dongcuamo/dcm-thongtindangky/dangkydongcuamo-io/dangkydongcuamo-io.component';
 import { DangkydongcuadientichIoComponent } from './dongcuamo/dcm-thongtindangky/dangkydongcuadientich-io/dangkydongcuadientich-io.component';
+import { DcmKhuvuckhaithacIoComponent } from './dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-io/dcm-khuvuckhaithac-io.component';
+import { DcmKhuvuckhaithacListComponent } from './dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-list/dcm-khuvuckhaithac-list.component';
+import { DcmDonvihanhchinhIoComponent } from './dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-io/dcm-donvihanhchinh-io.component';
+import { DcmDonvihanhchinhListComponent } from './dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-list/dcm-donvihanhchinh-list.component';
+import { DcmLoaikhoangsanIoComponent } from './dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-io/dcm-loaikhoangsan-io.component';
+import { DcmLoaikhoangsanListComponent } from './dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-list/dcm-loaikhoangsan-list.component';
+import { DcmCongtrinhkhaithacIoComponent } from './dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-io/dcm-congtrinhkhaithac-io.component';
+import { DcmCongtrinhkhaithacListComponent } from './dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-list/dcm-congtrinhkhaithac-list.component';
+
 
 
 @NgModule({
@@ -154,6 +163,15 @@ import { DangkydongcuadientichIoComponent } from './dongcuamo/dcm-thongtindangky
     DcmThongtindangkyComponent,
     DangkydongcuamoIoComponent,
     DangkydongcuadientichIoComponent,
+    DcmKhuvuckhaithacIoComponent,
+    DcmKhuvuckhaithacListComponent,
+    DcmDonvihanhchinhIoComponent,
+    DcmDonvihanhchinhListComponent,
+    DcmLoaikhoangsanIoComponent,
+    DcmLoaikhoangsanListComponent,
+    DcmCongtrinhkhaithacIoComponent,
+    DcmCongtrinhkhaithacListComponent,
+
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

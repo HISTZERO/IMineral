@@ -159,9 +159,9 @@ export enum DangKyTanThuKhoangSanTabEnum {
 
 export enum DangKyDongCuaMoTabEnum {
   ThongTinChiTiet = 0,
-  DonViHanhChinh = 1,
-  LoaiKhoangSan = 2,
-  KhuVucKhaiThac = 3,
+  KhuVucKhaiThac = 1,
+  DonViHanhChinh = 2,
+  LoaiKhoangSan = 3,
   CongTrinhKhaiThac = 4,
 }
 
