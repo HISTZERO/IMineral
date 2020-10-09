@@ -7,7 +7,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { InputDkKhaiThacThietBiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.model";
+import { InputDkKhaiThacThietBiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacthietbi.model";
 
 @Component({
   selector: 'app-ktks-thietbi-io',

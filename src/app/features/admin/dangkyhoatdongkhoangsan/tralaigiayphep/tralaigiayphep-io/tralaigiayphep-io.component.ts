@@ -11,6 +11,7 @@ import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-co
 import { HosoIoComponent } from "src/app/features/admin/hosogiayto/hoso/hoso-io/hoso-io.component";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { TralaigiayphepThongtindangkyComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tralaigiayphep/tralaigiayphep-thongtindangky/tralaigiayphep-thongtindangky.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 @Component({
   selector: 'app-tralaigiayphep-io',
@@ -79,7 +80,8 @@ export class TralaigiayphepIoComponent implements OnInit {
     public matSidenavService: MatsidenavService,
     private activatedRoute: ActivatedRoute,
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService
   ) { }
 
   async ngOnInit() {
@@ -138,8 +140,8 @@ export class TralaigiayphepIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
-    const hosoItem = await dangKyHoatDongKhoangSanFacadeService.getByid(idHoSo).toPromise();
+    const hoSoGiayToFacadeService = this.hoSoGiayToFacadeService.getHoSoService();
+    const hosoItem = await hoSoGiayToFacadeService.getByid(idHoSo).toPromise();
     return hosoItem;
   }
 

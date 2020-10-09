@@ -11,7 +11,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.model";
+import { OutputDkKhaiThacKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhoangsan.model";
 
 @Component({
   selector: 'app-dangkykhaithackhoangsan-io',

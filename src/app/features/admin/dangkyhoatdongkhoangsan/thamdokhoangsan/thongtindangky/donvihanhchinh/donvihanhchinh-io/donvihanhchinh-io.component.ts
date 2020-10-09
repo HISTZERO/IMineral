@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
+
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -10,6 +10,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { InputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdodvhc.model";
 
 @Component({
   selector: 'app-donvihanhchinh-io',

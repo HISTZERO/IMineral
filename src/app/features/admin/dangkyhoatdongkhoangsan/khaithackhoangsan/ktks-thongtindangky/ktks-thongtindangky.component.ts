@@ -12,7 +12,7 @@ import {
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+
 import { DangKyKhaiThacKhoangSanTabEnum, DangKyKhaiThacKsActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
@@ -26,7 +26,8 @@ import { KtksDonvihanhchinhListComponent } from "src/app/features/admin/dangkyho
 import { KtksLoaikhoangsanListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component";
 import { KtksCongtrinhkhaithacListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-list/ktks-congtrinhkhaithac-list.component";
 import { KhuvuckhaithacListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-list/khuvuckhaithac-list.component";
-import { KtksThietbiListComponent } from "./ktks-thietbi/ktks-thietbi-list/ktks-thietbi-list.component";
+import { KtksThietbiListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-list/ktks-thietbi-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 export const DangKyKhaiThacKhoangSanComponent: any = {
@@ -95,7 +96,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute,
     public commonService: CommonServiceShared,
-    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -194,7 +195,7 @@ export class KtksThongtindangkyComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoService = this.hoSoGiayToFacadeService.getHoSoService();
     const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
     return itemHoSo;
   }

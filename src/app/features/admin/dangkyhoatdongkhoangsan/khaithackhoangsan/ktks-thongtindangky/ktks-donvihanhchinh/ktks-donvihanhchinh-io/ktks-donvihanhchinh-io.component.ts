@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
+
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -9,7 +10,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import {InputDkKhaiThacDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.model";
+import { InputDkKhaiThacDvhc } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdvhc.model";
 
 @Component({
   selector: 'app-ktks-donvihanhchinh-io',
@@ -77,11 +78,11 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dmFacadeService: DmFacadeService,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService) { }
+    public dmFacadeService: DmFacadeService,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -224,7 +225,7 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
         this.dangKyKhaiThacDvhcIOForm.controls.xacombobox.setValue("");
       }
     }
-    if ( this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox && this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
+    if (this.dangKyKhaiThacDvhcIOForm.value.tinhcombobox && this.dangKyKhaiThacDvhcIOForm.value.huyencombobox) {
       if (this.editMode === true) {
         this.dangKyKhaiThacDvhcIOForm.controls.xacombobox.setValue("");
       }

@@ -19,7 +19,7 @@ import {
   DonViTruLuong,
   PhuongPhapKhaiThac
 } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacVatLieuXayDungModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.model";
+import { OutputDkKhaiThacVatLieuXayDungModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacvlxd.model";
 
 @Component({
   selector: 'app-dangkykhaithacvlxd-io',
@@ -70,7 +70,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
 
   // Chứa phương pháp khai thác
   public phuongPhapKhaiThac = PhuongPhapKhaiThac;
-  
+
   // error message
   validationErrorMessages = {};
 

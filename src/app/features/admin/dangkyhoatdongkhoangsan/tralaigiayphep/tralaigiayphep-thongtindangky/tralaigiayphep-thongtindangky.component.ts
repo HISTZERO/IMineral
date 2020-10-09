@@ -3,7 +3,6 @@ import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { DangKyTraLaiGiayPhepTabEnum, DangKyTraLaiGiayPhepActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
@@ -18,6 +17,7 @@ import { DonvihanhchinhListComponent } from "src/app/features/admin/dangkyhoatdo
 import { LoaikhoangsanListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component";
 import { CongtrinhthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component";
 import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 export const DangKyTraLaiGiayPhepComponent: any = {
   [LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan]: TlgpKhaithactralaiIoComponent,
@@ -109,7 +109,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute,
     public commonService: CommonServiceShared,
-    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -226,7 +226,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoService = this.hoSoGiayToFacadeService.getHoSoService();
     const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
     return itemHoSo;
   }

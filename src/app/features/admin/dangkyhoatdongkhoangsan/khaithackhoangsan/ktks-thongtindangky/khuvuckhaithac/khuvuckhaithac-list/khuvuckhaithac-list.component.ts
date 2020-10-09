@@ -11,8 +11,8 @@ import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.model";
 import { KhuvuckhaithacIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component";
+import { OutputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
 
 @Component({
   selector: 'app-khuvuckhaithac-list',

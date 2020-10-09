@@ -1,15 +1,16 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {MatSidenav} from "@angular/material/sidenav";
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputDkKhaiThacCongTrinh} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.model";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {TranslateService} from "@ngx-translate/core";
-import {KtksCongtrinhkhaithacIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component";
-import {HttpErrorResponse} from "@angular/common/http";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { MatSidenav } from "@angular/material/sidenav";
+import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
+
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { KtksCongtrinhkhaithacIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component";
+import { OutputDkKhaiThacCongTrinh } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithaccongtrinh.model";
 
 @Component({
   selector: 'app-dcm-congtrinhkhaithac-list',
@@ -91,7 +92,7 @@ export class DcmCongtrinhkhaithacListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -146,7 +147,7 @@ export class DcmCongtrinhkhaithacListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit );
+    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit);
     await this.matSidenavService.setContentComp(KtksCongtrinhkhaithacIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -160,7 +161,7 @@ export class DcmCongtrinhkhaithacListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleAdd);
-    this.matSidenavService.setContentComp(KtksCongtrinhkhaithacIoComponent, "new", {iddangkykhaithac: this.iddangkykhaithac});
+    this.matSidenavService.setContentComp(KtksCongtrinhkhaithacIoComponent, "new", { iddangkykhaithac: this.iddangkykhaithac });
     this.matSidenavService.open();
   }
 
