@@ -52,6 +52,13 @@ const adminRoutes: Routes = [
           ),
       },
       {
+        path: AdminRoutingName.tinhtiencapquyenUri,
+        loadChildren: () =>
+          import("src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen.module").then(
+            (mod) => mod.TinhtiencapquyenModule
+          ),
+      },
+      {
         path: AdminRoutingName.mapUri,
         loadChildren: () =>
           import("src/app/features/admin/map/map.module").then(
