@@ -12,6 +12,7 @@ export class AdminRoutingName {
   public static baocaoUri = "baocao";
   public static dangkyhoatdongkhoangsanUri = "dangkyhoatdongkhoangsan";
   public static capphephoatdongkhoangsanUri = "capphephoatdongkhoangsan";
+  public static tinhtiencapquyenUri = "tinhtiencapquyen";
   public static thietlapUri = "thietlap";
   public static thuvienUri = "thuvien";
   public static tinbaiUri = "tinbai";
@@ -126,4 +127,7 @@ export class AdminRoutingName {
   public static cptralaigiayphepthamdokhaithackhoangsanchitietUri = "cptralaigiayphepthamdokhaithackhoangsanchitiet";
   public static cpdongcuamokhoangsanchitietUri = "cpdongcuamokhoangsanchitiet";
   public static cpchuyennhuongquyenthamdokhaithackhoangsanchitietUri = "cpchuyennhuongquyenthamdokhaithackhoangsanchitiet";
+  // 1.13 Routes tính tiền cấp quyền
+  public static danhsachtinhtiencapquyennUri = "danhsachtinhtiencapquyen";
+  public static tinhtiencapquyenchitietnUri = "tinhtiencapquyenchitiet";
 }

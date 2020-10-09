@@ -29,6 +29,8 @@ import {DktanthukhuvucService} from "src/app/services/admin/dangkyhoatdongkhoang
 import { DkkhaithactralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithactralai.service";
 import { DkthamdotralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotralai.service";
 import { DktanthutralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthutralai.service";
+import {DkdongcuamoService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkdongcuamo.service";
+
 
 
 @Injectable({
@@ -161,6 +163,7 @@ export class DangKyHoatDongKhoangSanFacadeService {
     return new DkkhaithacthietbiService(this.httpClient);
   }
 
+
   // Đăng ký khai thác trả lại service
   public getDangKyKhaiThacTraLaiService() {
     return new DkkhaithactralaiService(this.httpClient);
@@ -174,6 +177,12 @@ export class DangKyHoatDongKhoangSanFacadeService {
   // Đăng ký Tận thu trả lại service
   public getDangKyTanThuTraLaiService() {
     return new DktanthutralaiService(this.httpClient);
+
+
+  // Đăng ký đóng cửa mỏ
+  public getDangKyDongCuaMoService() {
+    return new DkdongcuamoService(this.httpClient);
+
   }
 }
 
