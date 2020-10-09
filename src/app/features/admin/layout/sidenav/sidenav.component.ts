@@ -122,7 +122,7 @@ export class SidenavComponent implements OnInit {
     {
       label: "TÍNH TIỀN CẤP QUYỀN",
       faIcon: "fal fa-newspaper",
-      link: ""
+      link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${AdminRoutingName.danhsachtinhtiencapquyennUri}`
     },
     {
       label: "KHU VỰC KHOÁNG SẢN",
