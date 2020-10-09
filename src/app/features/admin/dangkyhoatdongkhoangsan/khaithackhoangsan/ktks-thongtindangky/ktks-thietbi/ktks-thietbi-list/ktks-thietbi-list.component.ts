@@ -9,8 +9,8 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputDkKhaiThacThietBiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.model";
 import { KtksThietbiIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-io/ktks-thietbi-io.component";
+import { OutputDkKhaiThacThietBiModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacthietbi.model";
 
 
 @Component({

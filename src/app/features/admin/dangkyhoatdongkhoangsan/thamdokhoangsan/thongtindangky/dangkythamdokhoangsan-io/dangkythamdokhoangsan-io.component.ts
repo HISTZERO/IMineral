@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { ActivatedRoute } from '@angular/router';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputDkThamDoKhoangSanModel, OutputDkThamDoKhoangSanModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.model';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MatSidenav } from '@angular/material';
+
+import { DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
-import { MatSidenav } from '@angular/material';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { OutputDkThamDoKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhoangsan.model";
 
 @Component({
   selector: 'app-dangkythamdokhoangsan-io',

@@ -9,24 +9,25 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {ContentContainerDirective} from "src/app/shared/directives/content-container/content-container.directive";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute } from "@angular/router";
+import { MatSidenav } from "@angular/material/sidenav";
+
+import { ContentContainerDirective } from "src/app/shared/directives/content-container/content-container.directive";
 import {
   DangKyDongCuaMoTabEnum,
   DangKyKhaiThacKhoangSanTabEnum,
   DangKyThamDoActionEnum,
   LoaiCapPhepEnum
 } from "src/app/shared/constants/enum";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {MatSidenav} from "@angular/material/sidenav";
-import {DangkydongcuamoIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuamo-io/dangkydongcuamo-io.component";
-import {DangkydongcuadientichIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuadientich-io/dangkydongcuadientich-io.component";
-import {DcmKhuvuckhaithacListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-list/dcm-khuvuckhaithac-list.component";
-import {DcmDonvihanhchinhListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-list/dcm-donvihanhchinh-list.component";
-import {DcmLoaikhoangsanListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-list/dcm-loaikhoangsan-list.component";
-import {DcmCongtrinhkhaithacListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-list/dcm-congtrinhkhaithac-list.component";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { DangkydongcuamoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuamo-io/dangkydongcuamo-io.component";
+import { DangkydongcuadientichIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuadientich-io/dangkydongcuadientich-io.component";
+import { DcmKhuvuckhaithacListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-list/dcm-khuvuckhaithac-list.component";
+import { DcmDonvihanhchinhListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-list/dcm-donvihanhchinh-list.component";
+import { DcmLoaikhoangsanListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-list/dcm-loaikhoangsan-list.component";
+import { DcmCongtrinhkhaithacListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-list/dcm-congtrinhkhaithac-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 export const DangKyDongCuaMoComponent: any = {
   [LoaiCapPhepEnum.DongCuaMoKhoangSan]: DangkydongcuamoIoComponent,
@@ -39,14 +40,14 @@ export const DangKyDongCuaMoComponent: any = {
   styleUrls: ['./dcm-thongtindangky.component.scss']
 })
 export class DcmThongtindangkyComponent implements OnInit {
-  @ViewChild('thongTinDangKyDongCuaMoTabs', {static: false}) thongTinDangKyDongCuaMoTabs;
-  @ViewChild(ContentContainerDirective, {static: true}) contentContainer: ContentContainerDirective;
-  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
-  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
-  @ViewChild("dangKyKhaiThacDvhc", {static: false}) dangKyKhaiThacDvhc: DcmDonvihanhchinhListComponent;
-  @ViewChild("dangKyKhaiThacLoaiKhoangSan", {static: false}) dangKyKhaiThacLoaiKhoangSan: DcmLoaikhoangsanListComponent;
-  @ViewChild("dangKyKhaiThacKhuVuc", {static: false}) dangKyKhaiThacKhuVuc: DcmKhuvuckhaithacListComponent;
-  @ViewChild("dangKyKhaiThacCongTrinh", {static: false}) dangKyKhaiThacCongTrinh: DcmCongtrinhkhaithacListComponent;
+  @ViewChild('thongTinDangKyDongCuaMoTabs', { static: false }) thongTinDangKyDongCuaMoTabs;
+  @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("dangKyKhaiThacDvhc", { static: false }) dangKyKhaiThacDvhc: DcmDonvihanhchinhListComponent;
+  @ViewChild("dangKyKhaiThacLoaiKhoangSan", { static: false }) dangKyKhaiThacLoaiKhoangSan: DcmLoaikhoangsanListComponent;
+  @ViewChild("dangKyKhaiThacKhuVuc", { static: false }) dangKyKhaiThacKhuVuc: DcmKhuvuckhaithacListComponent;
+  @ViewChild("dangKyKhaiThacCongTrinh", { static: false }) dangKyKhaiThacCongTrinh: DcmCongtrinhkhaithacListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -84,10 +85,10 @@ export class DcmThongtindangkyComponent implements OnInit {
   private itemHoSo: any;
 
   constructor(private cfr: ComponentFactoryResolver,
-              private translate: TranslateService,
-              private activatedRoute: ActivatedRoute,
-              public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute,
+    public commonService: CommonServiceShared,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -183,7 +184,7 @@ export class DcmThongtindangkyComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoService = this.hoSoGiayToFacadeService.getHoSoService();
     const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
     return itemHoSo;
   }

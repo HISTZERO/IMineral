@@ -1,32 +1,34 @@
-import {Injectable} from "@angular/core";
-import {HttpClient} from "@angular/common/http";
+import { Injectable } from "@angular/core";
+import { HttpClient } from "@angular/common/http";
 
-import {HosoService} from "src/app/services/admin/dangkyhoatdongkhoangsan/hoso.service";
-import {TaiLieuSerVice} from 'src/app/services/admin/dangkyhoatdongkhoangsan/tailieu.service';
-import {DkThamDoKhoangSanService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.service';
-import {DkThamDoGiaHanService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdogiahan.service';
-import {DkThamDoDvhcService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.service';
-import {DkThamDoLoaiKhoangSanService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdoloaikhoangsan.service';
-import {DkThamDoCongTrinhService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdocongtrinh.service';
-import {DkkhaithaccatsoiService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccatsoi.service";
-import {DkkhaithacdieuchinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.service";
-import {DkkhaithacgiahanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacgiahan.service";
-import {DkkhaithackhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsan.service";
-import {DkkhaithackhoangsanduanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhoangsanduan.service";
-import {DkkhaithacvlxdService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacvlxd.service";
-import {DkthamdokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdokhuvuc.service";
-import {DkKhaiThacDvhcService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.service";
-import {DkkhaithacloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.service";
-import {DkKhaiThacCongTrinhService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.service";
-import { DkkhaithacthietbiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithacthietbi.service";
-import {DkthamdotoadokhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.service";
-import {DktanthukhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthukhoangsan.service";
-import {DktanthugiahanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthugiahan.service";
-import {DkkhaithackhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.service";
-import {DktanthudvhcService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthudvhc.service";
-import {DktanthuloaikhoangsanService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthuloaikhoangsan.service";
-import {DktanthukhuvucService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dktanthukhuvuc.service";
-import {DkdongcuamoService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dkdongcuamo.service";
+import { DkkhaithaccatsoiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithaccatsoi.service";
+import { DkkhaithacdieuchinhService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdieuchinh.service";
+import { DkkhaithacvlxdService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacvlxd.service";
+import { DkKhaiThacDvhcService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdvhc.service";
+import { DkKhaiThacCongTrinhService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithaccongtrinh.service";
+import { DkkhaithackhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.service";
+import { DkkhaithactralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytralaigiayphep/dkkhaithactralai.service";
+import { DkthamdotralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytralaigiayphep/dkthamdotralai.service";
+import { DktanthutralaiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytralaigiayphep/dktanthutralai.service";
+import { DkdongcuamoService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.service";
+import { DkkhaithacgiahanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacgiahan.service";
+import { DkkhaithackhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhoangsan.service";
+import { DkkhaithackhoangsanduanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhoangsanduan.service";
+import { DkkhaithacthietbiService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacthietbi.service";
+import { DkkhaithacloaikhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacloaikhoangsan.service";
+import { DkThamDoKhoangSanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhoangsan.service";
+import { DkThamDoGiaHanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdogiahan.service";
+import { DkThamDoDvhcService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdodvhc.service";
+import { DkThamDoLoaiKhoangSanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdoloaikhoangsan.service";
+import { DkThamDoCongTrinhService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdocongtrinh.service";
+import { DkthamdokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhuvuc.service";
+import { DkthamdotoadokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.service";
+import { DktanthukhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhoangsan.service";
+import { DktanthugiahanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthugiahan.service";
+import { DktanthudvhcService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dktanthudvhc.service";
+import { DktanthuloaikhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthuloaikhoangsan.service";
+import { DktanthukhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.service";
+
 
 
 @Injectable({
@@ -35,16 +37,6 @@ import {DkdongcuamoService} from "src/app/services/admin/dangkyhoatdongkhoangsan
 
 export class DangKyHoatDongKhoangSanFacadeService {
   constructor(private httpClient: HttpClient) {
-  }
-
-  // Hồ sơ service
-  public getHoSoService() {
-    return new HosoService(this.httpClient);
-  }
-
-  // Tài liệu service
-  public getTaiLieuService() {
-    return new TaiLieuSerVice(this.httpClient);
   }
 
   // Đăng ký thăm dò service
@@ -160,9 +152,26 @@ export class DangKyHoatDongKhoangSanFacadeService {
   }
 
 
+  // Đăng ký khai thác trả lại service
+  public getDangKyKhaiThacTraLaiService() {
+    return new DkkhaithactralaiService(this.httpClient);
+  }
+
+  // Đăng ký thăm dò trả lại service
+  public getDangKyThamDoTraLaiService() {
+    return new DkthamdotralaiService(this.httpClient);
+  }
+
+  // Đăng ký Tận thu trả lại service
+  public getDangKyTanThuTraLaiService() {
+    return new DktanthutralaiService(this.httpClient);
+
+  }
+
   // Đăng ký đóng cửa mỏ
   public getDangKyDongCuaMoService() {
     return new DkdongcuamoService(this.httpClient);
+
   }
 }
 

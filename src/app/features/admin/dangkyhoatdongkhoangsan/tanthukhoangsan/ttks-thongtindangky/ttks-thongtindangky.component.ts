@@ -9,14 +9,15 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
+import {TranslateService} from "@ngx-translate/core";
+import {ActivatedRoute} from "@angular/router";
+
 import {ContentContainerDirective} from "src/app/shared/directives/content-container/content-container.directive";
 import {
   DangKyTanThuKhoangSanTabEnum,
   DangKyThamDoActionEnum,
   LoaiCapPhepEnum
 } from "src/app/shared/constants/enum";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import {MatSidenav} from "@angular/material/sidenav";
@@ -24,8 +25,8 @@ import {DangkytanthukhoangsanIoComponent} from "src/app/features/admin/dangkyhoa
 import {DangkytanthugiahanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component";
 import {TtksDonvihanhchinhListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component";
 import {TtksLoaikhoangsanListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component";
-import {DangKyThamDoKhoangSanComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component";
 import {TtksKhuvuctanthuListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 export const DangKyTanThuKhoangSanComponent: any = {
   [LoaiCapPhepEnum.KhaiThacTanThuKhoangSan]: DangkytanthukhoangsanIoComponent,
@@ -82,7 +83,8 @@ export class TtksThongtindangkyComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+              private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -171,7 +173,7 @@ export class TtksThongtindangkyComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoService = this.hoSoGiayToFacadeService.getHoSoService();
     const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
     return itemHoSo;
   }

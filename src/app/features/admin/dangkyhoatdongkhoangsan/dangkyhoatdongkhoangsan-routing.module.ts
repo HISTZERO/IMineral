@@ -14,10 +14,10 @@ import { DongcuamoListComponent } from "src/app/features/admin/dangkyhoatdongkho
 import { DongcuamoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dongcuamo-io/dongcuamo-io.component";
 import { ChuyennhuongquyenListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/chuyennhuongquyen/chuyennhuongquyen-list/chuyennhuongquyen-list.component";
 import { ChuyennhuongquyenIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/chuyennhuongquyen/chuyennhuongquyen-io/chuyennhuongquyen-io.component";
-import {PheduyettruluongkhoangsanListComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component";
-import {PheduyettruluongkhoangsanIoComponent} from "./pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
-import {DaugiaquyenListComponent} from "./daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
-import {DaugiaquyenIoComponent} from "./daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
+import { PheduyettruluongkhoangsanListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-list/pheduyettruluongkhoangsan-list.component";
+import { PheduyettruluongkhoangsanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
+import { DaugiaquyenListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
+import { DaugiaquyenIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
 
 
 const routes: Routes = [
@@ -39,10 +39,10 @@ const routes: Routes = [
           { path: AdminRoutingName.dkDongcuamoChiTiet, component: DongcuamoIoComponent },
           { path: AdminRoutingName.dkChuyennhuongquyenUri, component: ChuyennhuongquyenListComponent },
           { path: AdminRoutingName.dkChuyennhuongquyenChiTiet, component: ChuyennhuongquyenIoComponent },
-          {path: AdminRoutingName.dkPheDuyetTruLuongUri, component: PheduyettruluongkhoangsanListComponent},
-          {path: AdminRoutingName.dkPheDuyetTruLuongChitiet, component: PheduyettruluongkhoangsanIoComponent},
-          {path: AdminRoutingName.dkDauGiaQuyenUri, component: DaugiaquyenListComponent},
-          {path: AdminRoutingName.dkDauGiaQuyenChitiet, component: DaugiaquyenIoComponent},
+          { path: AdminRoutingName.dkPheDuyetTruLuongUri, component: PheduyettruluongkhoangsanListComponent },
+          { path: AdminRoutingName.dkPheDuyetTruLuongChitiet, component: PheduyettruluongkhoangsanIoComponent },
+          { path: AdminRoutingName.dkDauGiaQuyenUri, component: DaugiaquyenListComponent },
+          { path: AdminRoutingName.dkDauGiaQuyenChitiet, component: DaugiaquyenIoComponent },
         ]
       }
     ]

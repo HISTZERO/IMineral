@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
+import { DataStateChangeEventArgs } from '@syncfusion/ej2-angular-grids';
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import {OutputCpTaiLieuModel, InputCpTaiLieuModel } from "src/app/models/admin/hosogiayto/cptailieu.model";
+import { OutputCpTaiLieuModel, InputCpTaiLieuModel } from "src/app/models/admin/hosogiayto/cptailieu.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
-import { DataStateChangeEventArgs } from '@syncfusion/ej2-angular-grids';
 
 @Injectable({
   providedIn: 'root'
@@ -26,9 +26,9 @@ export class GiayPhepTaiLieuSerVice extends RepositoryEloquentService {
     return "ok";
   }
 
-   /**
-    * Lấy về danh sách tài liệu
-    */
+  /**
+   * Lấy về danh sách tài liệu
+   */
   public getCpTaiLieuPage(state: DataStateChangeEventArgs, params: object = {}) {
     this.setServiceInfo({
       apiUrl: environment.apiIMineral + ServiceName.CPTAILIEU + "/" + "getcptailieupage"

@@ -19,7 +19,7 @@ import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/t
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
-import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
+import { OutputHsHoSoModel } from 'src/app/models/admin/hosogiayto/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
 import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';

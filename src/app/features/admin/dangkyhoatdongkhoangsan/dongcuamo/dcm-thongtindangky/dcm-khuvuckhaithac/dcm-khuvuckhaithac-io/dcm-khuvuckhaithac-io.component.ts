@@ -1,18 +1,19 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OutputDkThamDoToaDoKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
-import {InputDkKhaiThacKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.model";
-import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
-import {DonViDienTich} from "src/app/shared/constants/common-constants";
-import {SettingsCommon} from "src/app/shared/constants/setting-common";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {TranslateService} from "@ngx-translate/core";
-import {HttpErrorResponse} from "@angular/common/http";
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
+
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DonViDienTich } from "src/app/shared/constants/common-constants";
+import { SettingsCommon } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
+import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
 
 @Component({
   selector: 'app-dcm-khuvuckhaithac-io',
@@ -22,7 +23,7 @@ import {validationAllErrorMessagesService} from "src/app/services/utilities/vali
 export class DcmKhuvuckhaithacIoComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridDkToaDoKhuVuc", {static: false}) public gridDkToaDoKhuVuc: GridComponent;
+  @ViewChild("gridDkToaDoKhuVuc", { static: false }) public gridDkToaDoKhuVuc: GridComponent;
 
   // Chứa dữ liệu Form khu vực
   public dKKhaiThacKhuVucIOForm: FormGroup;
@@ -88,11 +89,11 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public dmFacadeService: DmFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService) {
+    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public dmFacadeService: DmFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService) {
   }
 
   async ngOnInit() {
@@ -127,10 +128,10 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
   setValidation() {
     // Error message khu vực
     this.validationErrorMessages = {
-      tenkhuvuc: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.tenkhuvucRequired},
-      dientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.dientichRequired},
-      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.donvidientichRequired},
-      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.hequychieuRequired},
+      tenkhuvuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.tenkhuvucRequired },
+      dientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.dientichRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.donvidientichRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.hequychieuRequired },
     };
 
     // Error message Tọa độ
@@ -139,7 +140,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutuRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutuIsNumber
       },
-      sohieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieuRequired},
+      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieuRequired },
       toadox: {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadoxRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadoxIsNumber,
@@ -229,7 +230,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -407,7 +408,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
   async getToaDoByIdKhuVuc(idthamdokhuvuc: string) {
     let listToaDo: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoToaDoKhuVucService()
-      .getFetchAll({idthamdokhuvuc: idthamdokhuvuc});
+      .getFetchAll({ idthamdokhuvuc: idthamdokhuvuc });
     this.listToaDoKhuVuc = listToaDo;
   }
 
