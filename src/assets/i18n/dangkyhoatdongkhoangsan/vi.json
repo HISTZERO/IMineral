@@ -61,6 +61,31 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "dangkydongcuamo": {
+    "titleAdd": "Thêm mới đăng ký đóng cửa mỏ khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký đóng cửa mỏ khoáng sản",
+    "dientichdongcua": "Diện tích đóng cửa",
+    "dientichdongcuaPlaceholder": "Nhập diện tích đóng cửa",
+    "dientichdongcuaRequired": "Diện tích đóng cửa không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "donvidientichRequired": "Đơn vị diện tích không được để trống",
+    "numberRequired": "Cần nhập dạng số",
+    "contentDelete": "Đăng ký đóng cửa mỏ khoáng sản"
+  },
+  "dangkydongcuadientich": {
+    "titleAdd": "Thêm mới đăng ký đóng cửa một phần diện tích khu vực khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký đóng cửa một phần diện tích khu vực khai thác khoáng sản",
+    "contentDelete": "Đăng ký đóng cửa một phần diện tích khu vực khai thác khoáng sản",
+    "dientichdongcua": "Diện tích đóng cửa",
+    "dientichdongcuaPlaceholder": "Nhập diện tích đóng cửa",
+    "dientichkhaithac": "Diện tích khai thác",
+    "dientichkhaithacPlaceholder": "Nhập diện tích khai thác",
+    "dientichdongcuaRequired": "Diện tích đóng cửa không được để trống",
+    "dientichkhaithacRequired": "Diện tích khai thác không được để trống",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "donvidientichRequired": "Đơn vị diện tích không được để trống",
+    "numberRequired": "Cần nhập dạng số"
+  },
   "chuyennhuongquyen": {
     "titleList": "Danh sách hồ sơ đăng ký chuyển nhượng quyền thăm dò, khai thác",
     "titleAdd": "Thêm mới hồ sơ đăng ký chuyển nhượng quyền thăm dò, khai thác",
