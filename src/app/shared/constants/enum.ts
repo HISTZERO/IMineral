@@ -157,6 +157,14 @@ export enum DangKyTanThuKhoangSanTabEnum {
   KhuVucTanThu = 3,
 }
 
+export enum DangKyDongCuaMoTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucKhaiThac = 3,
+  CongTrinhKhaiThac = 4,
+}
+
 export enum CpThamDoKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
   TaiLieuGiayPhepDinhKem = 1,
