@@ -178,7 +178,8 @@ export class DangKyHoatDongKhoangSanFacadeService {
   public getDangKyTanThuTraLaiService() {
     return new DktanthutralaiService(this.httpClient);
 
-
+  }
+  
   // Đăng ký đóng cửa mỏ
   public getDangKyDongCuaMoService() {
     return new DkdongcuamoService(this.httpClient);
