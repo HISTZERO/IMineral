@@ -133,7 +133,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
     this.dangKyThamDoIOForm = this.formBuilder.group({
       dientichcapphep: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       dientichthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      dientichtralai: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      dientichtralai: ["",  Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
       donvidientich: ["", Validators.required],
       giahandenngay: ["", Validators.required],
       lydogiahan: ["", Validators.required],
@@ -183,7 +183,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
     this.validationErrorMessages = {
       dientichcapphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepFormat },
       dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdotuFormat },
-      dientichtralai: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiFormat },
+      dientichtralai: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiFormat },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.donvidientichRequired },
       giahandenngay: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.giahandenngayRequired },
       lydogiahan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.lydogiahanRequired },
