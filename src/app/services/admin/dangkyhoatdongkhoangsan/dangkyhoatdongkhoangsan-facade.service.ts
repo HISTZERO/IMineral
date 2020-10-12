@@ -25,9 +25,9 @@ import { DkthamdokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoa
 import { DkthamdotoadokhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.service";
 import { DktanthukhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhoangsan.service";
 import { DktanthugiahanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthugiahan.service";
-import { DktanthudvhcService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkythamdo/dktanthudvhc.service";
 import { DktanthuloaikhoangsanService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthuloaikhoangsan.service";
 import { DktanthukhuvucService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.service";
+import { DktanthudvhcService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthudvhc.service";
 
 
 
