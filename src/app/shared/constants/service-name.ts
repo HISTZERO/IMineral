@@ -78,6 +78,8 @@ export class ServiceName {
   public static CPTHAMDOLOAIKHOANGSAN = "cpthamdoloaikhoangsan";
   public static CPTHAMDOCONGTRINH = "cpthamdocongtrinh";
   public static CPTHAMDOKHUVUC = "cpthamdokhuvuc";
+  // Cấp phép khai thác khoáng sản
+  public static CPKHAITHACKHOANGSAN = "cpkhaithackhoangsan";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";

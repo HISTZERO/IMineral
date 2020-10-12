@@ -5,6 +5,7 @@ import { CpThamDoDvhcService } from 'src/app/services/admin/capphephoatdongkhoan
 import { CpThamDoLoaiKhoangSanService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.service';
 import { CpThamDoCongTrinhService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.service';
 import { CpthamdokhuvucService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.service';
+import { CpkhaithackhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan.service";
 
 @Injectable({
   providedIn: "root",
@@ -36,5 +37,10 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   // cấp phép thăm dò khu vực service
   public getCapPhepThamDoKhuVucService() {
     return new CpthamdokhuvucService(this.httpClient);
+  }
+
+  // Cấp phép khai thác khoáng sản service
+  public getCapPhepKhaiThacKhoangSanService() {
+    return new CpkhaithackhoangsanService(this.httpClient);
   }
 }
