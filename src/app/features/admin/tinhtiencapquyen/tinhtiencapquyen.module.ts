@@ -12,6 +12,7 @@ import { TranslateModule } from "@ngx-translate/core";
 import { AdminSharedModule } from "src/app/features/admin/admin-shared.module";
 import { ExComponentFactoryResolverService } from "src/app/services/utilities/ex-component-factory-resolver.service";
 import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
+import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { TinhtiencapquyenRoutingModule } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-routing.module';
 import { TinhtiencapquyenComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen.component';
 import { TinhtiencapquyenListComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-list/tinhtiencapquyen-list.component';
@@ -33,6 +34,7 @@ import { TinhtiencapquyenIoComponent } from 'src/app/features/admin/tinhtiencapq
     OwlMomentDateTimeModule,
     TranslateModule,
     DanhmucModule,
+    HosoGiaytoModule
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
