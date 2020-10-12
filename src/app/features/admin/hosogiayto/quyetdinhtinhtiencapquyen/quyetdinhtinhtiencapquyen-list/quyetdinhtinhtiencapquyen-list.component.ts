@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-import {ChiTietCapPhepHoatDongKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
+import {ChiTietTinhTienCapQuyenHoatDongKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
@@ -20,15 +20,14 @@ import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.mo
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 
 
 @Component({
-  selector: 'app-giayphep-list',
-  templateUrl: './giayphep-list.component.html',
-  styleUrls: ['./giayphep-list.component.scss']
+  selector: 'app-quyetdinhtinhtiencapquyen-list',
+  templateUrl: './quyetdinhtinhtiencapquyen-list.component.html',
+  styleUrls: ['./quyetdinhtinhtiencapquyen-list.component.scss']
 })
-export class GiayphepListComponent implements OnInit {
+export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep: number;
@@ -119,14 +118,7 @@ export class GiayphepListComponent implements OnInit {
   }
 
   checkValidNhomLoaiCapPhep() {
-    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TraLaiGiayPhep
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DongCuaMo
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
-      || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
+    if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TinhTienCapQuyen) {
       return true;
     }
 
@@ -135,7 +127,6 @@ export class GiayphepListComponent implements OnInit {
 
   async manualDataInit() {
     if (this.checkValidNhomLoaiCapPhep()) {
-      // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
       await this.getDataPageSize();
@@ -171,7 +162,6 @@ export class GiayphepListComponent implements OnInit {
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
       .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1});
-
     this.loaiCapPhepFilters = listData.items;
     this.allLoaiCapPhep = listData.items;
   }
@@ -225,7 +215,7 @@ export class GiayphepListComponent implements OnInit {
    */
   addItemGiayPhep() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenHoatDongKS[this.nhomLoaiCapPhep]}`]);
   }
 
   /**
@@ -234,7 +224,7 @@ export class GiayphepListComponent implements OnInit {
    */
   async editItemGiayPhep(id: any) {
     this.router.navigate([
-        `${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${ChiTietCapPhepHoatDongKS[this.nhomLoaiCapPhep]}`],
+        `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenHoatDongKS[this.nhomLoaiCapPhep]}`],
       {queryParams: {idgiayphep: id}});
   }
 
@@ -266,7 +256,7 @@ export class GiayphepListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.HOSOGIAYTO.giayphep.contentDelete,
+      this.dataTranslate.HOSOGIAYTO.giayphep.quyetdinhContentDelete,
       this.selectedItem.sogiayphep
     );
     dialogRef.afterClosed().subscribe(async (result) => {

@@ -9,6 +9,7 @@ export class NhomLoaiCapPhepEnum {
     public static TraLaiGiayPhep = 6;
     public static DongCuaMo = 7;
     public static ChuyenNhuongThamDoKhaiThac = 8;
+    public static TinhTienCapQuyen = 10;
 }
 
 export const ChiTietDangKyHoatDongKS: any = {
