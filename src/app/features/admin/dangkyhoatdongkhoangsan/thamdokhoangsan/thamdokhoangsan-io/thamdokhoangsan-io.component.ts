@@ -75,7 +75,8 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   };
 
 
-  constructor(public matSidenavService: MatsidenavService,
+  constructor(
+    public matSidenavService: MatsidenavService,
     private activatedRoute: ActivatedRoute,
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     private translate: TranslateService,

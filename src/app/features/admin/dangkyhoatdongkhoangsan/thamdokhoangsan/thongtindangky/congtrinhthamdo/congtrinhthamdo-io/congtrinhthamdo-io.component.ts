@@ -10,6 +10,7 @@ import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dan
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
 import { InputDkThamDoCongTrinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdocongtrinh.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-congtrinhthamdo-io',
@@ -45,15 +46,16 @@ export class CongtrinhthamdoIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    sohieu: "",
-    chieusau: "",
-    toadox: "",
-    toadoy: "",
-    hequychieu: "",
-    ghichu: ""
+    sohieu: DefaultValue.Empty,
+    chieusau: DefaultValue.Empty,
+    toadox: DefaultValue.Empty,
+    toadoy: DefaultValue.Empty,
+    hequychieu: DefaultValue.Empty,
+    ghichu: DefaultValue.Empty
   };
 
-  constructor(public matSidenavService: MatsidenavService,
+  constructor(
+    public matSidenavService: MatsidenavService,
     public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
@@ -109,12 +111,12 @@ export class CongtrinhthamdoIoComponent implements OnInit {
    */
   formInit() {
     this.dKThamDoCongTrinhIOForm = this.formBuilder.group({
-      sohieu: ["", Validators.required],
-      chieusau: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      hequychieu: ["", Validators.required],
-      ghichu: [""]
+      sohieu: [DefaultValue.Empty, Validators.required],
+      chieusau: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      toadox: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      toadoy: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      hequychieu: [DefaultValue.Empty, Validators.required],
+      ghichu: [DefaultValue.Empty]
     });
   }
 

@@ -3,7 +3,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
