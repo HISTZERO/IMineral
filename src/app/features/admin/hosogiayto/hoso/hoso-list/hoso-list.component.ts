@@ -84,12 +84,12 @@ export class HosoListComponent implements OnInit {
   }
 
   async ngOnInit() {
-
     // Setting wrap mode
     this.wrapSettings = {wrapMode: 'Both'};
-
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -127,10 +127,7 @@ export class HosoListComponent implements OnInit {
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
+
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize

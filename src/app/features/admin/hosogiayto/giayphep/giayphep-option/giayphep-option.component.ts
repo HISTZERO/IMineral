@@ -64,7 +64,7 @@ export class GiayphepOptionComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     this.formInit();
-    // Lấy danh sách Tỉnh
+    // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };

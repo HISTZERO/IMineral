@@ -78,7 +78,8 @@ export class HosotailieuListComponent implements OnInit {
   // nhóm tài liệu enum
   public nhomTaiLieuEnum = NhomTaiLieuEnum;
 
-  constructor(public matSidenavService: MatsidenavService,
+  constructor(
+    public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
     public commonService: CommonServiceShared,
     public thietlapFacadeService: ThietlapFacadeService,
@@ -102,7 +103,7 @@ export class HosotailieuListComponent implements OnInit {
     });
 
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
     // Thiết lập hiển thị checkbox trên grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu pagesize

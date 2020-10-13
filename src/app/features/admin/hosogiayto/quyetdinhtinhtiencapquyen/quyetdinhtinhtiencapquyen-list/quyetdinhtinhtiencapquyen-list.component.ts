@@ -8,7 +8,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
-import {ChiTietTinhTienCapQuyenHoatDongKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
+import {ChiTietTinhTienCapQuyenKhaiThacKS } from "src/app/shared/constants/nhomloaigiayphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
@@ -88,7 +88,7 @@ export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
     // Khởi tạo form
     this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -180,7 +180,7 @@ export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
     };
 
     this.itemService
-      .getDataFromServer({skip: 0, take: this.settingsCommon.pageSettings.pageSize}, searchModel);
+      .geAllQuyetDinhTinhTienCapQuyen({skip: 0, take: this.settingsCommon.pageSettings.pageSize}, searchModel);
   }
 
   /*
@@ -194,7 +194,7 @@ export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
       Keyword: this.formSearch.controls.Keyword.value,
     };
 
-    this.itemService.getDataFromServer(state, searchModel);
+    this.itemService.geAllQuyetDinhTinhTienCapQuyen(state, searchModel);
   }
 
   /**
@@ -215,7 +215,7 @@ export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
    */
   addItemGiayPhep() {
     this.router.navigate([
-      `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenHoatDongKS[this.nhomLoaiCapPhep]}`]);
+      `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenKhaiThacKS[this.nhomLoaiCapPhep]}`]);
   }
 
   /**
@@ -224,7 +224,7 @@ export class QuyetdinhtinhtiencapquyenListComponent implements OnInit {
    */
   async editItemGiayPhep(id: any) {
     this.router.navigate([
-        `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenHoatDongKS[this.nhomLoaiCapPhep]}`],
+        `${AdminRoutingName.adminUri}/${AdminRoutingName.tinhtiencapquyenUri}/${ChiTietTinhTienCapQuyenKhaiThacKS[this.nhomLoaiCapPhep]}`],
       {queryParams: {idgiayphep: id}});
   }
 
