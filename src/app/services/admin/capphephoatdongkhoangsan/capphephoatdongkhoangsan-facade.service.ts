@@ -1,10 +1,16 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
+
 import { CpThamDoKhoangSanService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.service';
 import { CpThamDoDvhcService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdodvhc.service';
 import { CpThamDoLoaiKhoangSanService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.service';
 import { CpThamDoCongTrinhService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.service';
 import { CpthamdokhuvucService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.service';
+import { CpkhaithackhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan.service";
+import { CpkhaithacdvhcService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacdvhc.service";
+import { CpkhaithaccongtrinhService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.service";
+import { CpkhaithackhuvucService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.service";
+import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
 
 @Injectable({
   providedIn: "root",
@@ -37,4 +43,30 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepThamDoKhuVucService() {
     return new CpthamdokhuvucService(this.httpClient);
   }
+
+  // Cấp phép khai thác khoáng sản service
+  public getCapPhepKhaiThacKhoangSanService() {
+    return new CpkhaithackhoangsanService(this.httpClient);
+  }
+
+  // Cấp phép khai thác đvhc service
+  public getCapPhepKhaiThacDVHCService() {
+    return new CpkhaithacdvhcService(this.httpClient);
+  }
+
+  // Cấp phép khai thác công trình service
+  public getCapPhepKhaiThacCongTrinhService() {
+    return new CpkhaithaccongtrinhService(this.httpClient);
+  }
+
+  // Cấp phép khai thác khu vực service
+  public getCapPhepKhaiThacKhuVucService() {
+    return new CpkhaithackhuvucService(this.httpClient);
+  }
+
+  // Cấp phép khai thác loại khoáng sản service
+  public getCapPhepKhaiThacLoaiKhoangSanService() {
+    return new CpkhaithacloaikhoangsanService(this.httpClient);
+  }
+
 }
