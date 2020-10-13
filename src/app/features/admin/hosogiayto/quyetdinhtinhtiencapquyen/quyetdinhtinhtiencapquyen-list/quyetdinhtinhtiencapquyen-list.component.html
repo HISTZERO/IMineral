@@ -50,7 +50,7 @@
           <div class="row">
             <div class="col-md-7 mb-sm-1">
               <span class="title" *ngIf="title">{{ title }}</span>
-              <span class="title" *ngIf="!title">{{ "HOSOGIAYTO.giayphep.titleList" | translate }}</span>
+              <span class="title" *ngIf="!title">{{ "HOSOGIAYTO.giayphep.titleTinhTienCapQuyenList" | translate }}</span>
             </div>
             <div class="col-md-5">
               <button class="btn btn-primary mb-sm-1" *ngIf="checkValidNhomLoaiCapPhep()" style="float: right;" (click)="addItemGiayPhep()">
@@ -72,15 +72,14 @@
           [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
           <e-columns>
             <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-            <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.giayphep.tencanhantochuc' | translate }}"></e-column>
-            <e-column field="sogiayphep" headerText="{{ ('HOSOGIAYTO.giayphep.sogiayphep' | translate) + '/' + ('HOSOGIAYTO.giayphep.soquyetdinh' | translate) }}"></e-column>
-            <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.giayphep.loaicapphep' | translate }}"></e-column>
-            <e-column field="diachi" headerText="{{ 'HOSOGIAYTO.giayphep.diachi' | translate }}"></e-column>
-            <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.giayphep.ngaycapphep' | translate }}">
+            <e-column field="sogiayphep" headerText="{{ 'HOSOGIAYTO.giayphep.soquyetdinh' | translate }}"></e-column>
+            <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.giayphep.ngayquyetdinh' | translate }}">
               <ng-template #template let-data>
                 {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
               </ng-template>
             </e-column>
+            <e-column field="coquancapphep" headerText="{{ 'HOSOGIAYTO.giayphep.coquanquyetdinh' | translate }}"></e-column>
+            <e-column field="sogiayphepls" headerText="{{ 'HOSOGIAYTO.giayphep.sogiayphep' | translate }}"></e-column>
             <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
               <ng-template #template let-data>
                 <div class="btn-group">

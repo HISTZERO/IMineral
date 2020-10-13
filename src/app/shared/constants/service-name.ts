@@ -84,6 +84,8 @@ export class ServiceName {
   public static CPKHAITHACCONGTRINH = "cpkhaithaccongtrinh";
   public static CPKHAITHACLOAIKHOANGSAN = "cpkhaithacloaikhoangsan";
   public static CPKHAITHACKHUVUC = "cpkhaithackhuvuc";
+  // Tính tiền cấp quyền
+  public static TTTINHTIENCAPQUYEN = "tttinhtiencapquyen";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";

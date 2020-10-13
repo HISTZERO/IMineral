@@ -66,7 +66,9 @@ export enum LoaiCapPhepEnum {
   KhaiThacTanThuKhoangSanGiaHan = "19",
   TraLaiGiayPhepTanThuKhoangSan = "20",
   DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan = "21",
-  DongCuaMoKhoangSan = "22"
+  DongCuaMoKhoangSan = "22",
+  ChapThuanKhaoSatLayMau = "23",
+  TinhTienCapQuyen = "24"
 }
 
 export enum NhomTaiLieuEnum {
@@ -83,6 +85,13 @@ export enum TrangThaiCauHinh {
 export enum LoaiDoiTuongEnum {
   CaNhan = 1,
   ToChuc = 2
+}
+
+export enum LoaiVanBanEnum {
+  GiayPhep = 1,
+  QuyetDinh = 2,
+  BanXacNhan = 3,
+  VanBanTuChoi = 4
 }
 
 export enum HoSoActionEnum {
@@ -276,8 +285,22 @@ export enum CapPhepThamDoActionEnum {
   Edit = 2
 }
 
+
+export enum TinhTienCapQuyenKhaiThacKhoangSanTabEnum {
+  ThongTinQuyeDinh = 0,
+  TaiLieuDinhKem = 1,
+  ThongTinTinhTienHangNam = 2
+}
+
+export enum TinhTienCapQuyenKhaiThacKhoangSanActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 export enum CapPhepKhaiThacActionEnum {
   None = 0,
   Add = 1,
   Edit = 2
 }
+
