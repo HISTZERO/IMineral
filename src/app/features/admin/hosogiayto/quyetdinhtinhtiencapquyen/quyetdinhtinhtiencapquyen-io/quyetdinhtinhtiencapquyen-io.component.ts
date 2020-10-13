@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum, LoaiVanBanEnum } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan, DonViThoiHan, LoaiVanBan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -27,11 +27,11 @@ import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayp
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
-  selector: 'app-giayphep-io',
-  templateUrl: './giayphep-io.component.html',
-  styleUrls: ['./giayphep-io.component.scss']
+  selector: 'app-quyetdinhtinhtiencapquyen-io',
+  templateUrl: './quyetdinhtinhtiencapquyen-io.component.html',
+  styleUrls: ['./quyetdinhtinhtiencapquyen-io.component.scss']
 })
-export class GiayphepIoComponent implements OnInit {
+export class QuyetdinhtinhtiencapquyenIoComponent implements OnInit {
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
@@ -61,7 +61,7 @@ export class GiayphepIoComponent implements OnInit {
   // Chứa loại đối tượng
   public loaiDoiTuongList = LoaiDoiTuong;
   // Chứa dữ liệu loại văn bản
-  public loaiVanBanList = LoaiVanBan;
+  public loaiVanBanList: any;
   // Chứa dữ liệu loại đối tượng
   public dangKhoangSanList = DangKhoangSan;
   // Chứa dữ liệu loại giấy tờ
@@ -79,8 +79,7 @@ export class GiayphepIoComponent implements OnInit {
   // Chứa dữ liệu cơ quan tiếp nhận
   public allCoQuanCapPhep: OutputHsCoQuanTiepNhanModel[];
   public coQuanCapPhepFilters: OutputHsCoQuanTiepNhanModel[];
-  // Chứa dữ liệu hồ sơ
-  public hoSoList: OutputHsHoSoModel[];
+
   // Chứa dữ liệu Giấy phép lịch sử
   public giayPhepLichSuList: OutputGiayPhepModel[];
   // chứa dữ liệu Id Hồ sơ
@@ -89,12 +88,8 @@ export class GiayphepIoComponent implements OnInit {
   public tenLoaiCapPhep: string;
   // Lưu trữ đơn vị thời hạn
   public donViThoiHanList = DonViThoiHan;
-  // disable số giấy phép lịch sử
-  public disabledGiayPhepLichSu = false;
-  // disable số giấy phép lịch sử
-  public disabledHoSo = false;
   // disable loại đối tượng
-  public disabledLoaiDoiTuong = false;
+  public disabledLoaiDoiTuong = true;
   // error message
   validationErrorMessages = {};
 
@@ -102,10 +97,6 @@ export class GiayphepIoComponent implements OnInit {
   formErrors = {
     sogiayphep: DefaultValue.Empty,
     ngaycapphep: DefaultValue.Empty,
-    ngaybdhieuluc: DefaultValue.Empty,
-    ngaykthieuluc: DefaultValue.Empty,
-    thoihan: DefaultValue.Empty,
-    donvithoihan: DefaultValue.Empty,
     idcoquancapphep: DefaultValue.Empty,
     coquancapphep: DefaultValue.Empty,
     chucvunguoiky: DefaultValue.Empty,
@@ -124,7 +115,6 @@ export class GiayphepIoComponent implements OnInit {
     email: DefaultValue.Empty,
     website: DefaultValue.Empty,
     loaidoituong: DefaultValue.Empty,
-    idhoso: DefaultValue.Empty,
     idgiayphepls: DefaultValue.Empty,
     trangthai: DefaultValue.Empty,
     ghichu: DefaultValue.Empty
@@ -172,8 +162,10 @@ export class GiayphepIoComponent implements OnInit {
     } else {
       this.currentAction = GiayPhepActionEnum.Add;
     }
-
+    // Lấy dữ liệu loại cấp phép
     await this.getLoaiCapPhepAll();
+    // Lấy dữ liệu loại văn bản
+    this.getLoaiVanBanAll();
     // Lấy dữ liệu cơ quan tiếp nhận
     await this.getCoQuanCapPhepAll();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
@@ -187,10 +179,6 @@ export class GiayphepIoComponent implements OnInit {
     this.giayPhepIOForm = this.formBuilder.group({
       sogiayphep: [DefaultValue.Empty, Validators.required],
       ngaycapphep: [DefaultValue.Empty, Validators.required],
-      ngaybdhieuluc: [DefaultValue.Empty, Validators.required],
-      ngaykthieuluc: [DefaultValue.Empty, Validators.required],
-      thoihan: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
-      donvithoihan: [DefaultValue.Empty, Validators.required],
       idcoquancapphep: [DefaultValue.Empty, Validators.required],
       chucvunguoiky: [DefaultValue.Empty, Validators.required],
       tennguoiky: [DefaultValue.Empty, Validators.required],
@@ -213,8 +201,7 @@ export class GiayphepIoComponent implements OnInit {
       email: [DefaultValue.Empty],
       website: [DefaultValue.Empty],
       loaidoituong: [LoaiDoiTuongEnum.ToChuc, Validators.required],
-      idhoso: [DefaultValue.Empty],
-      idgiayphepls: [DefaultValue.Empty],
+      idgiayphepls:  [LoaiDoiTuongEnum.ToChuc, Validators.required],
       trangthai: [DefaultValue.Empty],
       ghichu: [DefaultValue.Empty]
     });
@@ -240,19 +227,6 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   /**
-   * thêm mới hoặc sửa đôi dữ liệu vào danh hồ sơ
-   */
-  private AddOrUpdateThongTinHoSoList(item: OutputHsHoSoModel) {
-    if (item && item.idhoso && item.idhoso.trim() !== DefaultValue.Empty) {
-      if (this.hoSoList === DefaultValue.Null || this.hoSoList === DefaultValue.Undefined || this.hoSoList.length > 0) {
-        this.hoSoList = [];
-      }
-
-      this.hoSoList.push(item);
-    }
-  }
-
-  /**
    * thêm mới hoặc sửa đôi dữ liệu vào danh giấy phép
    */
   private AddOrUpdateThongTinGiayPhepLichSuList(item: OutputGiayPhepModel) {
@@ -273,46 +247,16 @@ export class GiayphepIoComponent implements OnInit {
       const inputModel = await this.getGiayPhepById(this.idgiayphep);
 
       if (inputModel) {
-        if (inputModel.idhoso && inputModel.idhoso.trim() !== DefaultValue.Empty) {
-          const hoSoItem = {
-            idhoso: inputModel.idhoso,
-            mahoso: inputModel.mahoso,
-            idcanhantochuc: inputModel.idcanhantochuc,
-            tencanhantochuc: inputModel.tencanhantochuc,
-            sogiayto: inputModel.sogiayto,
-            loaigiayto: inputModel.loaigiayto,
-            ngaycap:  inputModel.ngaycap,
-            noicap: inputModel.noicap,
-            diachi: inputModel.diachi,
-            dienthoai: inputModel.dienthoai,
-            email: inputModel.email,
-            fax: inputModel.fax,
-            website: inputModel.website,
-            loaidoituong: inputModel.loaidoituong
-
-          } as OutputHsHoSoModel;
-
-          this.AddOrUpdateThongTinHoSoList(hoSoItem);
-          this.disabledLoaiDoiTuong = true;
-          this.disabledGiayPhepLichSu = true;
-        }
-
         const giayPhepLichSu = Object.assign(new OutputGiayPhepModel(), inputModel);
 
         if (inputModel.idgiayphepls && inputModel.idgiayphepls.trim() !== DefaultValue.Empty) {
           giayPhepLichSu.idgiayphep = inputModel.idgiayphepls;
           this.AddOrUpdateThongTinGiayPhepLichSuList(giayPhepLichSu);
-          this.disabledLoaiDoiTuong = true;
-          this.disabledHoSo = true;
         }
 
         this.giayPhepIOForm.setValue({
           sogiayphep: inputModel.sogiayphep,
           ngaycapphep: inputModel.ngaycapphep,
-          ngaybdhieuluc: inputModel.ngaybdhieuluc,
-          ngaykthieuluc: inputModel.ngaykthieuluc,
-          thoihan: inputModel.thoihan,
-          donvithoihan: inputModel.donvithoihan,
           idcoquancapphep: inputModel.idcoquancapphep,
           chucvunguoiky: inputModel.chucvunguoiky,
           tennguoiky: inputModel.tennguoiky,
@@ -335,7 +279,6 @@ export class GiayphepIoComponent implements OnInit {
           email: inputModel.email,
           website: inputModel.website,
           loaidoituong: inputModel.loaidoituong,
-          idhoso: inputModel.idhoso,
           idgiayphepls: inputModel.idgiayphepls,
           trangthai: inputModel.trangthai,
           ghichu: inputModel.ghichu
@@ -351,13 +294,9 @@ export class GiayphepIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      sogiayphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.sogiayphepRequired },
-      ngaycapphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.ngaycapphepRequired },
-      ngaybdhieuluc: { required: this.dataTranslate.HOSOGIAYTO.giayphep.ngaybdhieulucRequired },
-      ngaykthieuluc: { required: this.dataTranslate.HOSOGIAYTO.giayphep.ngaykthieulucRequired },
-      thoihan: { required: this.dataTranslate.HOSOGIAYTO.giayphep.thoihanRequired, pattern: this.dataTranslate.HOSOGIAYTO.giayphep.thoihanIsNumber },
-      donvithoihan: { required: this.dataTranslate.HOSOGIAYTO.giayphep.donvithoihanRequired },
-      idcoquancapphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.coquancapphepRequired },
+      sogiayphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.soquyetdinhRequired },
+      ngaycapphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.ngayquyetdinhRequired },
+      idcoquancapphep: { required: this.dataTranslate.HOSOGIAYTO.giayphep.coquanquyetdinhRequired },
       chucvunguoiky: { required: this.dataTranslate.HOSOGIAYTO.giayphep.chucvunguoikyRequired },
       tennguoiky: { required: this.dataTranslate.HOSOGIAYTO.giayphep.tennguoikyRequired },
       loaivanban: { required: this.dataTranslate.HOSOGIAYTO.giayphep.loaivanbanRequired },
@@ -370,8 +309,14 @@ export class GiayphepIoComponent implements OnInit {
       noicap: { required: this.dataTranslate.HOSOGIAYTO.giayphep.noicapRequired },
       diachi: { required: this.dataTranslate.HOSOGIAYTO.giayphep.diachiRequired },
       dienthoai:  { pattern: this.dataTranslate.HOSOGIAYTO.giayphep.dienthoaiIsNumber },
-      loaidoituong: { required: this.dataTranslate.HOSOGIAYTO.giayphep.loaidoituongRequired }
+      loaidoituong: { required: this.dataTranslate.HOSOGIAYTO.giayphep.loaidoituongRequired },
+      idgiayphepls: { required: this.dataTranslate.HOSOGIAYTO.giayphep.sogiayphepRequired },
     };
+  }
+
+  async getLoaiVanBanAll() {
+    // lấy loại văn bản quyết định
+    this.loaiVanBanList = LoaiVanBan.filter(item => item.id === LoaiVanBanEnum.QuyetDinh);
   }
 
   async getLoaiCapPhepAll() {
@@ -402,12 +347,7 @@ export class GiayphepIoComponent implements OnInit {
 
   private validatLoaiCapPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan  && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
+    if (loaiCapPhep !== LoaiCapPhepEnum.TinhTienCapQuyen) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedInvalidSelection,
@@ -415,33 +355,6 @@ export class GiayphepIoComponent implements OnInit {
 
       return false;
     }
-
-    return true;
-  }
-
-  private validateInvalidHoSoGiayPhepSelection() {
-    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan  || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      ) {
-        const idHoSo = this.giayPhepIOForm.controls.idhoso.value;
-        const idGiayPhepLS = this.giayPhepIOForm.controls.idgiayphepls.value;
-        if ((idHoSo === DefaultValue.Null || idHoSo === DefaultValue.Undefined  || idHoSo.trim() === DefaultValue.Empty)
-            && (idGiayPhepLS === DefaultValue.Null || idGiayPhepLS === DefaultValue.Undefined  || idGiayPhepLS.trim() === DefaultValue.Empty)) {
-          this.commonService.informationDiaLogService(
-            DefaultValue.Empty,
-            this.dataTranslate.HOSOGIAYTO.giayphep.hosogiaytoInformedRequiredSelection,
-            this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle
-          );
-          return false;
-        }
-
-        return true;
-      }
 
     return true;
   }
@@ -455,10 +368,6 @@ export class GiayphepIoComponent implements OnInit {
     }
 
     if (!this.validatLoaiCapPhepSelection()) {
-      return;
-    }
-
-    if (!this.validateInvalidHoSoGiayPhepSelection()) {
       return;
     }
 
@@ -532,7 +441,6 @@ export class GiayphepIoComponent implements OnInit {
     this.giayPhepIOForm.controls.loaigiaytoDisplay.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.loaicapphep.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.idcoquancapphep.setValue(DefaultValue.Empty);
-    this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.loaivanban.setValue(DefaultValue.Empty);
     this.giayPhepIOForm.controls.donvithoihan.setValue(DefaultValue.Empty);
@@ -615,66 +523,13 @@ export class GiayphepIoComponent implements OnInit {
   }
 
   /**
-   * lấy item dữ liệu đối tượng hồ sơ từ popup
-   */
-  private selectItemHoSo(item: OutputHsHoSoModel) {
-    if (item !== DefaultValue.Null && item !== DefaultValue.Undefined) {
-      this.giayPhepIOForm.controls.idhoso.setValue(item.idhoso);
-      this.AddOrUpdateThongTinHoSoList(item);
-      this.selectItemHoSoChange({value: item.idhoso});
-    }
-  }
-
-  /**
-   * Sử kiện được kích hoạt sau khi chọn hồ sơ trên UI
-   */
-  public selectItemHoSoChange(item: any) {
-    if (item.value !== DefaultValue.Empty) {
-      this.disabledGiayPhepLichSu = true;
-      this.disabledLoaiDoiTuong = true;
-      const caNhanToChucItem = this.hoSoList.find(data => data.idhoso === item.value);
-
-      if (caNhanToChucItem) {
-        this.CreateThongTinCaNhanToChucOnUI(caNhanToChucItem, caNhanToChucItem.loaidoituong);
-      } else {
-        this.ClearThongTinCaNhanToChucOnUI();
-      }
-    } else {
-      this.disabledGiayPhepLichSu = false;
-      this.disabledLoaiDoiTuong = false;
-      this.ClearThongTinCaNhanToChucOnUI();
-    }
-
-    this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
-  }
-
-  /**
    * Sử kiện được kích hoạt sau khi chọn loại cấp phép trên combobox UI
    */
   public selectItemLoaiCapPhepChange(item: any) {
     if (this.currentAction === GiayPhepActionEnum.Add) {
-      this.disabledLoaiDoiTuong = false;
-      this.hoSoList = [];
-      this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
       this.giayPhepLichSuList = [];
       this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
       this.ClearThongTinCaNhanToChucOnUI();
-
-      const loaiCapPhep = item.value;
-      if (loaiCapPhep ===  DefaultValue.Empty || loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-        || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
-        || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
-        || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
-        || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-        || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
-        || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-        ) {
-        this.disabledHoSo = false;
-        this.disabledGiayPhepLichSu = false;
-      } else {
-        this.disabledHoSo = false;
-        this.disabledGiayPhepLichSu = true;
-      }
     }
   }
 
@@ -694,8 +549,6 @@ export class GiayphepIoComponent implements OnInit {
    */
   public selectItemGiayPhepLichSuChange(item: any) {
     if (item.value !== DefaultValue.Empty) {
-      this.disabledHoSo = true;
-      this.disabledLoaiDoiTuong = true;
       const caNhanToChucItem = this.giayPhepLichSuList.find(data => data.idgiayphep === item.value);
 
       if (caNhanToChucItem) {
@@ -705,12 +558,8 @@ export class GiayphepIoComponent implements OnInit {
       }
 
     } else {
-      this.disabledHoSo = false;
-      this.disabledLoaiDoiTuong = false;
       this.ClearThongTinCaNhanToChucOnUI();
     }
-
-    this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
   }
 
   /**
@@ -752,30 +601,6 @@ export class GiayphepIoComponent implements OnInit {
    */
   private selectNewInsertedGiayPhep() {
     this.selectNewInsertedGiayPhepEvent.emit(this.idgiayphep);
-  }
-
-  /**
-   * Hàm open sidenav chọn hồ sơ
-   */
-  openHoSoIOSidenav() {
-    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-
-    if (!loaiCapPhep) {
-      this.commonService.informationDiaLogService(
-        DefaultValue.Empty,
-        this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedRequiredSelection,
-        this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle
-      );
-      return;
-    }
-
-    // clear Sidenav
-    this.matSidenavService.clearSidenav();
-    // Khởi tạo sidenav
-    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.HOSOGIAYTO.giayphep.titleHoSoSelect);
-    this.matSidenavService.setContentComp(HosoOptionComponent, "select", {nhomloaicapphep: this.nhomLoaiCapPhep, loaicapphep: loaiCapPhep});
-    this.matSidenavService.open();
   }
 
   /**

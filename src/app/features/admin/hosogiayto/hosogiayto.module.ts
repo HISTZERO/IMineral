@@ -22,8 +22,10 @@ import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosota
 import { HosotailieuListComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-list/hosotailieu-list.component';
 import { DmCanhanOptionComponent } from 'src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component';
 import { DmTochucOptionComponent } from 'src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component';
-import { GiaypheptailieuIoComponent } from './giaypheptailieu/giaypheptailieu-io/giaypheptailieu-io.component';
-import { GiaypheptailieuListComponent } from './giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
+import { GiaypheptailieuIoComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-io/giaypheptailieu-io.component';
+import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
+import { QuyetdinhtinhtiencapquyenListComponent } from 'src/app/features/admin/hosogiayto/quyetdinhtinhtiencapquyen/quyetdinhtinhtiencapquyen-list/quyetdinhtinhtiencapquyen-list.component';
+import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hosogiayto/quyetdinhtinhtiencapquyen/quyetdinhtinhtiencapquyen-io/quyetdinhtinhtiencapquyen-io.component';
 
 
 @NgModule({
@@ -37,7 +39,9 @@ import { GiaypheptailieuListComponent } from './giaypheptailieu/giaypheptailieu-
     HosotailieuIoComponent,
     HosotailieuListComponent,
     GiaypheptailieuIoComponent,
-    GiaypheptailieuListComponent
+    GiaypheptailieuListComponent,
+    QuyetdinhtinhtiencapquyenListComponent,
+    QuyetdinhtinhtiencapquyenIoComponent
   ],
   exports: [
     GiayphepListComponent,
@@ -49,7 +53,8 @@ import { GiaypheptailieuListComponent } from './giaypheptailieu/giaypheptailieu-
     HosotailieuIoComponent,
     HosotailieuListComponent,
     GiaypheptailieuIoComponent,
-    GiaypheptailieuListComponent
+    GiaypheptailieuListComponent,
+    QuyetdinhtinhtiencapquyenListComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

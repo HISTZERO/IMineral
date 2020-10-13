@@ -1,6 +1,6 @@
 export class OutputDmLoaiCapPhepModel {
     idloaicapphep: string;
-    maloaicapphep: number;
+    maloaicapphep: string;
     tenloaicapphep: string;
     nhomloaicapphep: number;
     idthutuchanhchinh: string;
@@ -11,7 +11,7 @@ export class OutputDmLoaiCapPhepModel {
 
 export class InputDmLoaiCapPhepModel {
     idloaicapphep: string;
-    maloaicapphep: number;
+    maloaicapphep: string;
     tenloaicapphep: string;
     nhomloaicapphep: number;
     idthutuchanhchinh: string;
