@@ -212,6 +212,7 @@ export class HosoListComponent implements OnInit {
       GTEqualNgaytiepnhan: DefaultValue.Empty,
       LTEqualNgaytiepnhan: DefaultValue.Empty,
       Loaicapphep: DefaultValue.Empty,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     });
     this.getAllHoSo();
   }
