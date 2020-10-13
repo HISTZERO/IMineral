@@ -189,28 +189,28 @@ export class CpKtksThongtincapphepComponent implements OnInit {
   }
 
   async tabChange(index: any) {
-    // if (index === CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh]) {
-    //   this.capPhepKhaiThacDvhc.matSidenav = this.matSidenav;
-    //   this.capPhepKhaiThacDvhc.content = this.content;
-    //   this.capPhepKhaiThacDvhc.idcapphepthamdo = this.idcapphepthamdo;
-    //   this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh] = await this.capPhepKhaiThacDvhc.manualDataInit();
-    // } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan]) {
-    //   this.capPhepKhaiThacLoaiKhoangSan.matSidenav = this.matSidenav;
-    //   this.capPhepKhaiThacLoaiKhoangSan.content = this.content;
-    //   this.capPhepKhaiThacLoaiKhoangSan.idcapphepthamdo = this.idcapphepthamdo;
-    //   this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan] = await this.capPhepKhaiThacLoaiKhoangSan.manualDataInit();
-    // } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.KhuVucThamDo && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.KhuVucThamDo]) {
-    //   this.capPhepKhaiThacKhuVuc.matSidenav = this.matSidenav;
-    //   this.capPhepKhaiThacKhuVuc.content = this.content;
-    //   this.capPhepKhaiThacKhuVuc.idcapphepthamdo = this.idcapphepthamdo;
-    //   this.capPhepKhaiThacKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
-    //   this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.KhuVucThamDo] = await this.capPhepKhaiThacKhuVuc.manualDataInit();
-    // } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhThamDo && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhThamDo]) {
-    //   this.capPhepCongTrinhKhaiThac.matSidenav = this.matSidenav;
-    //   this.capPhepCongTrinhKhaiThac.content = this.content;
-    //   this.capPhepCongTrinhKhaiThac.idcapphepthamdo = this.idcapphepthamdo;
-    //   this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhThamDo] = await this.capPhepCongTrinhKhaiThac.manualDataInit();
-    // }
+    if (index === CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh]) {
+      this.capPhepKhaiThacDvhc.matSidenav = this.matSidenav;
+      this.capPhepKhaiThacDvhc.content = this.content;
+      this.capPhepKhaiThacDvhc.idcapphepkhaithac = this.idcapphepkhaithac;
+      this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.DonViHanhChinh] = await this.capPhepKhaiThacDvhc.manualDataInit();
+    } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan]) {
+      this.capPhepKhaiThacLoaiKhoangSan.matSidenav = this.matSidenav;
+      this.capPhepKhaiThacLoaiKhoangSan.content = this.content;
+      this.capPhepKhaiThacLoaiKhoangSan.idcapphepkhaithac = this.idcapphepkhaithac;
+      this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.LoaiKhoangSan] = await this.capPhepKhaiThacLoaiKhoangSan.manualDataInit();
+    } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.KhuVucKhaiThac && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.KhuVucKhaiThac]) {
+      this.capPhepKhaiThacKhuVuc.matSidenav = this.matSidenav;
+      this.capPhepKhaiThacKhuVuc.content = this.content;
+      this.capPhepKhaiThacKhuVuc.idcapphepkhaithac = this.idcapphepkhaithac;
+      this.capPhepKhaiThacKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
+      this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.KhuVucKhaiThac] = await this.capPhepKhaiThacKhuVuc.manualDataInit();
+    } else if (index === CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhKhaiThac && !this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhKhaiThac]) {
+      this.capPhepCongTrinhKhaiThac.matSidenav = this.matSidenav;
+      this.capPhepCongTrinhKhaiThac.content = this.content;
+      this.capPhepCongTrinhKhaiThac.idcapphepkhaithac = this.idcapphepkhaithac;
+      this.loadedTabState[CpKhaiThacKhoangSanChiTietTabEnum.CongTrinhKhaiThac] = await this.capPhepCongTrinhKhaiThac.manualDataInit();
+    }
   }
 
 }

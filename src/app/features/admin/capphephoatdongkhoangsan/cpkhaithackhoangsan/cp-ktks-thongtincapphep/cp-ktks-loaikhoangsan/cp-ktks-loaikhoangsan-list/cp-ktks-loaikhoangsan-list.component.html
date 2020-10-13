@@ -1,1 +1,56 @@
-<p>cp-ktks-loaikhoangsan-list works!</p>
+
+<div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <div class="row">
+                <div class="col-md-4 mb-sm-1">
+                  <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleList" | translate }}</span>
+                </div>
+                <div class="col-md-8">
+                  <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCpKhaiThacLoaiKhoangSanIOSidenav()">
+                    <i class="fal fa-plus-square"></i>
+                    {{ "COMMON.default.add" | translate }}
+                  </button>
+                  <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                    <i class="far fa-sync-alt"></i>
+                    {{ "COMMON.default.load" | translate }}
+                  </button>
+                </div>
+              </div>
+            </h3>
+          </div>
+          <div class="card-body">
+            <ejs-grid #gridCpKhaiThacLoaiKhoangSan *ngIf="listCpKhaiThacLoaiKhoangSan" [dataSource]="listCpKhaiThacLoaiKhoangSan"
+              [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
+              [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
+              [allowResizing]="true">
+              <e-columns>
+                <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+                <e-column field="tenkhoangsan" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenkhoangsan' | translate }}"></e-column>
+                <e-column field="tenloaikhoangsan" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenloaikhoangsan' | translate }}"></e-column>
+                <e-column field="tennhomkhoangsan" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tennhomkhoangsan' | translate }}"></e-column>
+                <e-column field="idkhaithacloaikhoangsan" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                  <ng-template #template let-data>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+                        (click)="editItemCpKhaiThacLoaiKhoangSan(data.idkhaithacloaikhoangsan)">
+                        <i class="far fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                        (click)="deleteItemCapPhepKhaiThacLoaiKhoangSan(data)">
+                        <i class="far fa-trash"></i>
+                      </button>
+                    </div>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
