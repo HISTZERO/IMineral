@@ -89,7 +89,7 @@ export class GiayphepListComponent implements OnInit {
     // Khởi tạo form
     this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();

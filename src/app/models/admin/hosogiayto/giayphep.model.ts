@@ -27,6 +27,7 @@ export class OutputGiayPhepModel {
   loaidoituong: number;
   idhoso: string;
   idgiayphepls: string;
+  sogiayphepls: string;
   trangthai: number;
   ghichu: string;
   siteid: string;

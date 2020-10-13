@@ -94,7 +94,7 @@ export class GiaypheptailieuListComponent implements OnInit {
     });
 
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
     // Thiết lập hiển thị checkbox trên grid
     await this.setDisplayOfCheckBoxkOnGrid(true);
     // Gọi hàm lấy dữ liệu pagesize

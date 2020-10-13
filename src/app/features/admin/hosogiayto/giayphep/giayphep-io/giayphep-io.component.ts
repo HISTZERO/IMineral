@@ -257,7 +257,7 @@ export class GiayphepIoComponent implements OnInit {
    */
   private AddOrUpdateThongTinGiayPhepLichSuList(item: OutputGiayPhepModel) {
     if (item && item.idgiayphep && item.idgiayphep.trim() !== DefaultValue.Empty) {
-      if (this.giayPhepLichSuList === null || this.giayPhepLichSuList === undefined || this.giayPhepLichSuList.length > 0) {
+      if (this.giayPhepLichSuList === null || this.giayPhepLichSuList === DefaultValue.Undefined || this.giayPhepLichSuList.length > 0) {
         this.giayPhepLichSuList = [];
       }
 
@@ -301,6 +301,7 @@ export class GiayphepIoComponent implements OnInit {
 
         if (inputModel.idgiayphepls && inputModel.idgiayphepls.trim() !== DefaultValue.Empty) {
           giayPhepLichSu.idgiayphep = inputModel.idgiayphepls;
+          giayPhepLichSu.sogiayphep = inputModel.sogiayphepls;
           this.AddOrUpdateThongTinGiayPhepLichSuList(giayPhepLichSu);
           this.disabledLoaiDoiTuong = true;
           this.disabledHoSo = true;
@@ -402,16 +403,16 @@ export class GiayphepIoComponent implements OnInit {
 
   private validatLoaiCapPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan  && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+    if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.ThamDoKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
+      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedInvalidSelection,
-        this.dataTranslate);
+        this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle);
 
       return false;
     }
@@ -421,9 +422,9 @@ export class GiayphepIoComponent implements OnInit {
 
   private validateInvalidHoSoGiayPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan  || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan

@@ -83,10 +83,10 @@ export class HosoOptionComponent implements OnInit {
   async ngOnInit() {
     // Setting wrap mode
     this.wrapSettings = { wrapMode: 'Both' };
-    // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
     // Khởi tạo form
     this.formInit();
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
 
     if (this.selectedOptionType === SelectedOptionType.Popup) {
       if (this.obj) {

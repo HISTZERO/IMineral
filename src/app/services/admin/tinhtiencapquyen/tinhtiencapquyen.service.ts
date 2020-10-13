@@ -26,7 +26,7 @@ export class TinhTienCapQuyenService extends RepositoryEloquentService {
 
   public getTinhTienCapQuyenByIdGiayPhep(idGiayPhep: any) {
     try {
-      return this.httpClient.get(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+      return this.httpClient.get(`${this.apiUrl}/getbyidgiayphep?idgiayphep=${idGiayPhep}`, {
         headers: this.headers,
       });
     } catch (error) {
