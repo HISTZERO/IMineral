@@ -119,7 +119,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * Lấy dữ liệu giấy phép theo idGiayPhep
    * @param idGiayPhep
    */
   private async getGiayPhepById(idGiayPhep: string) {
@@ -129,7 +129,7 @@ export class CpthamdokhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * Lấy dữ liệu cấp phép thăm dò theo idGiayPhep
    * @param idGiayPhep
    */
   private async getCapPhepThamDoByIdGiayPhep(idGiayPhep: string) {
