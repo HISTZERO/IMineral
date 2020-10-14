@@ -153,6 +153,7 @@ export class HosoIoComponent implements OnInit {
     await this.getCoQuanTiepNhanAll();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit();
+    return true;
   }
 
   /**

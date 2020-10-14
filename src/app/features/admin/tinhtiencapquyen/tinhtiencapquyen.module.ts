@@ -17,13 +17,15 @@ import { TinhtiencapquyenRoutingModule } from 'src/app/features/admin/tinhtienca
 import { TinhtiencapquyenComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen.component';
 import { TinhtiencapquyenListComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-list/tinhtiencapquyen-list.component';
 import { TinhtiencapquyenIoComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-io/tinhtiencapquyen-io.component';
+import { TinhtiencapquyentheonamIoComponent } from './tinhtiencapquyentheonam-io/tinhtiencapquyentheonam-io.component';
 
 
 @NgModule({
   declarations: [
     TinhtiencapquyenComponent,
     TinhtiencapquyenListComponent,
-    TinhtiencapquyenIoComponent
+    TinhtiencapquyenIoComponent,
+    TinhtiencapquyentheonamIoComponent
   ],
   imports: [
     CommonModule,
