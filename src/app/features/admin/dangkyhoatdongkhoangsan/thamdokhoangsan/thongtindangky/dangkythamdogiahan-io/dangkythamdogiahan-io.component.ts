@@ -120,7 +120,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
 
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
-    // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
+    // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu đăng ký thăm dò
     await this.formOnEdit(this.dangKyThamDoGiaHan);
 
     return true;

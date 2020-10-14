@@ -1,3 +1,5 @@
+import { OutputTtTinhTienTheoNamModel } from './tttientheonam.model';
+
 export class OutputTtTinhTienCapQuyenModel {
   idtinhtiencapquyen: string;
   giatinhtienlandau: string;
@@ -12,6 +14,7 @@ export class OutputTtTinhTienCapQuyenModel {
   coquancapphep: string;
   sogiayphepls: string;
   siteid: string;
+  listtinhtientheonam: OutputTtTinhTienTheoNamModel[] = [];
 }
 
 export class InputTtTinhTienCapQuyenModel {

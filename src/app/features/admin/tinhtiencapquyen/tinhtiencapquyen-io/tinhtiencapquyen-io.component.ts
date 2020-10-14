@@ -11,6 +11,7 @@ import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/
 import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hosogiayto/quyetdinhtinhtiencapquyen/quyetdinhtinhtiencapquyen-io/quyetdinhtinhtiencapquyen-io.component';
 import { ButtonBackTinhTienCapQuyenKhaiThacKhoangSan, MenuTinhTienCapQuyenChiTietKhaiThacKhoangSan } from 'src/app/shared/constants/sub-menus/tinhtiencapquyen/tinhtiencapquyen';
 import { TinhTienCapQuyenFacadeService } from 'src/app/services/admin/tinhtiencapquyen/tinhtiencapquyen-facade.service';
+import { TinhtiencapquyentheonamIoComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyentheonam-io/tinhtiencapquyentheonam-io.component';
 
 @Component({
   selector: 'app-tinhtiencapquyen-io',
@@ -24,6 +25,7 @@ export class TinhtiencapquyenIoComponent implements OnInit {
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("quyetDinhIOComp", { static: false }) quyetDinhIOComp: QuyetdinhtinhtiencapquyenIoComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
+  @ViewChild("tinhTienCapQuyenTheoNamComp", { static: false }) tinhTienCapQuyenTheoNamComp: TinhtiencapquyentheonamIoComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuTinhTienCapQuyenChiTietKhaiThacKhoangSan;
 
@@ -193,7 +195,10 @@ export class TinhtiencapquyenIoComponent implements OnInit {
       this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
       this.loadedTabState[TinhTienCapQuyenKhaiThacKhoangSanTabEnum.TaiLieuDinhKem]  =  await this.taiLieuListComp.manualDataInit();
     } else if (index === TinhTienCapQuyenKhaiThacKhoangSanTabEnum.ThongTinTinhTienHangNam && !this.loadedTabState[TinhTienCapQuyenKhaiThacKhoangSanTabEnum.ThongTinTinhTienHangNam]) {
-
+      this.tinhTienCapQuyenTheoNamComp.matSidenav = this.matSidenav;
+      this.tinhTienCapQuyenTheoNamComp.content = this.content;
+      this.tinhTienCapQuyenTheoNamComp.idgiayphep = this.idgiayphep;
+      this.loadedTabState[TinhTienCapQuyenKhaiThacKhoangSanTabEnum.ThongTinTinhTienHangNam] = await this.tinhTienCapQuyenTheoNamComp.manualDataInit();
     }
   }
 }

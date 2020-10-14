@@ -70,7 +70,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
               private translate: TranslateService,
               private activatedRoute: ActivatedRoute,
               public commonService: CommonServiceShared,
-              private hoSoGiayToFacadeService: HoSoGiayToFacadeService,) { }
+              private hoSoGiayToFacadeService: HoSoGiayToFacadeService) { }
 
   async ngOnInit() {
     // Lấy dữ liệu translate
@@ -100,14 +100,14 @@ export class CpTdksThongtincapphepComponent implements OnInit {
 
     if (this.idgiayphep === DefaultValue.Null || this.idgiayphep === DefaultValue.Undefined || this.idgiayphep.trim() === DefaultValue.Empty) {
       this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
-      return;
+      return false;
     }
 
     this.itemGiayPhep =  await this.getGiayPhepById(this.idgiayphep);
 
     if (!this.itemGiayPhep) {
       this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
-      return;
+      return false;
     }
 
     await this.showCapPhepViewComponent();
@@ -164,7 +164,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   }
 
   /**
-   * Lấy dữ liệu hồ sơ theo IdGiayPhep
+   * Lấy dữ liệu giấy phép theo IdGiayPhep
    * @param IdGiayPhep
    */
   private async getGiayPhepById(IdGiayPhep: string) {
