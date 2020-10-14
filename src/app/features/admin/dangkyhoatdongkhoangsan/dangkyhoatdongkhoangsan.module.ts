@@ -96,6 +96,9 @@ import { DcmLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdo
 import { DcmLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-list/dcm-loaikhoangsan-list.component';
 import { DcmCongtrinhkhaithacIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-io/dcm-congtrinhkhaithac-io.component';
 import { DcmCongtrinhkhaithacListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-list/dcm-congtrinhkhaithac-list.component';
+import { DangkythamdochuyennhuongIoComponent } from './chuyennhuongquyen/cnq-thongtindangky/dangkythamdochuyennhuong-io/dangkythamdochuyennhuong-io.component';
+import { DangkykhaithacchuyennhuongIoComponent } from './chuyennhuongquyen/cnq-thongtindangky/dangkykhaithacchuyennhuong-io/dangkykhaithacchuyennhuong-io.component';
+import {CnqThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/chuyennhuongquyen/cnq-thongtindangky/cnq-thongtindangky.component";
 
 
 
@@ -182,6 +185,9 @@ import { DcmCongtrinhkhaithacListComponent } from 'src/app/features/admin/dangky
     DcmLoaikhoangsanListComponent,
     DcmCongtrinhkhaithacIoComponent,
     DcmCongtrinhkhaithacListComponent,
+    DangkythamdochuyennhuongIoComponent,
+    DangkykhaithacchuyennhuongIoComponent,
+    CnqThongtindangkyComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
@@ -228,7 +234,9 @@ import { DcmCongtrinhkhaithacListComponent } from 'src/app/features/admin/dangky
     TlgpThamdotralaiIoComponent,
     TlgpTanthutralaiIoComponent,
     DangkydongcuamoIoComponent,
-    DangkydongcuadientichIoComponent
+    DangkydongcuadientichIoComponent,
+    DangkythamdochuyennhuongIoComponent,
+    DangkykhaithacchuyennhuongIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

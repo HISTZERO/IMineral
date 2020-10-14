@@ -886,5 +886,29 @@
     "donvidientichRequired": "Đơn vị điện tích không được để trống",
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
     "chonhequychieu": "---chọn hệ quy chiếu---"
+  },
+  "dangkythamdochuyennhuong": {
+    "titleAdd": "Thêm mới đăng ký chuyển nhượng quyền thăm dò khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký chuyển nhượng quyền thăm dò khoáng sản",
+    "contentDelete": "Đăng ký chuyển nhượng quyền thăm dò khoáng sản: ",
+    "titleGiayPhepSelect": "Chọn giấy phép",
+    "sogiayphep": "Số giấy phép chuyển nhượng",
+    "sohopdong": "Số hợp đồng chuyển nhượng",
+    "sohopdongPlaceholder": "Nhập số hợp đồng chuyển nhượng",
+    "sogiayphepPlaceholder": "Nhập giấy phép",
+    "ngayhopdong": "Ngày hợp đồng",
+    "ngayhopdongPlaceholder": "Chọn ngày hợp đồng"
+  },
+  "dangkykhaithacchuyennhuong": {
+    "titleAdd": "Thêm mới đăng ký chuyển nhượng quyền khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký chuyển nhượng quyền khai thác khoáng sản",
+    "contentDelete": "Đăng ký chuyển nhượng quyền khai thác khoáng sản: ",
+    "titleGiayPhepSelect": "Chọn giấy phép",
+    "sogiayphep": "Số giấy phép chuyển nhượng",
+    "sohopdong": "Số hợp đồng chuyển nhượng",
+    "sohopdongPlaceholder": "Nhập số hợp đồng chuyển nhượng",
+    "sogiayphepPlaceholder": "Nhập giấy phép",
+    "ngayhopdong": "Ngày hợp đồng",
+    "ngayhopdongPlaceholder": "Chọn ngày hợp đồng"
   }
 }

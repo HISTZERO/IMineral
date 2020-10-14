@@ -71,6 +71,9 @@ export class ServiceName {
   public static DANGKYTANTHUTRALAI = "dangkytanthutralai";
   // Đăng ký đóng cửa mỏ
   public static DANGKYDONGCUAMO = "dangkyskhaithacdongcuamo";
+  // Đăng ký chuyển nhượng quyền
+  public static DANGKYTHAMDOCHUYENNHUONG = "thamdochuyennhuong";
+  public static DANGKYKHAITHACCHUYENNHUONG = "dangkykhaithacchuyennhuong";
   // Giấy phép
   public static GIAYPHEP = "giayphep";
   public static CPTHAMDOKHOANGSAN = "cpthamdokhoangsan";
