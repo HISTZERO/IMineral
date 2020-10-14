@@ -322,6 +322,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.capPhepThamDoKhoangSan.idcapphepthamdo = res.idcapphepthamdo;
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.setFormTitle();
           this.selectIdCapPhepThamDo();
         },
         (error: HttpErrorResponse) => {
@@ -340,6 +341,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.capPhepThamDoKhoangSan = inputModel;
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.setFormTitle();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -372,6 +374,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
               this.currentAction = CapPhepThamDoActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
+              this.setFormTitle();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
