@@ -2,14 +2,14 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputCpThamDoCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.model";
+
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
-import { InputCpKhaiThacCongTrinhModel } from "../../../../../../../models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.model";
+import { InputCpKhaiThacCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.model";
 
 @Component({
   selector: 'app-cp-ktks-congtrinhkhaithac-io',
@@ -50,15 +50,19 @@ export class CpKtksCongtrinhkhaithacIoComponent implements OnInit {
     toadox: "",
     toadoy: "",
     hequychieu: "",
-    ghichu: ""
+    ghichu: "",
+    luuluong: "",
+    chedokhaithac: "",
+    hathap: "",
+    mucnuoctinh: "",
   };
 
   constructor(public matSidenavService: MatsidenavService,
-              public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
-              public dmFacadeService: DmFacadeService,
-              private formBuilder: FormBuilder,
-              public commonService: CommonServiceShared,
-              private translate: TranslateService) { }
+    public capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
+    public dmFacadeService: DmFacadeService,
+    private formBuilder: FormBuilder,
+    public commonService: CommonServiceShared,
+    private translate: TranslateService) { }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -77,8 +81,8 @@ export class CpKtksCongtrinhkhaithacIoComponent implements OnInit {
   async getDataTranslate() {
     // Lấy ra biến translate của hệ thống
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
     // Hàm set validation cho form
     await this.setValidation();
   }
@@ -88,11 +92,11 @@ export class CpKtksCongtrinhkhaithacIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      sohieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.sohieuRequired},
-      chieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.chieusauRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.chieusauFormat },
-      toadox: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoxRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoxFormat },
-      toadoy: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoyRequired , pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.toadoyFormat },
-      hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.hequychieuRequired},
+      sohieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.sohieuRequired },
+      chieusau: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.chieusauRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.chieusauFormat },
+      toadox: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.toadoxRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.toadoxFormat },
+      toadoy: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.toadoyRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.toadoyFormat },
+      hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithaccongtrinh.hequychieuRequired },
     };
   }
 
@@ -114,7 +118,11 @@ export class CpKtksCongtrinhkhaithacIoComponent implements OnInit {
       toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       hequychieu: ["", Validators.required],
-      ghichu: [""]
+      ghichu: [""],
+      luuluong: [""],
+      chedokhaithac: [""],
+      hathap: [""],
+      mucnuoctinh: [""],
     });
   }
 
@@ -129,7 +137,11 @@ export class CpKtksCongtrinhkhaithacIoComponent implements OnInit {
         toadox: this.obj.toadox,
         toadoy: this.obj.toadoy,
         hequychieu: this.obj.hequychieu,
-        ghichu: this.obj.ghichu
+        ghichu: this.obj.ghichu,
+        luuluong: this.obj.luuluong,
+        chedokhaithac: this.obj.chedokhaithac,
+        hathap: this.obj.hathap,
+        mucnuoctinh: this.obj.mucnuoctinh,
       });
     }
   }

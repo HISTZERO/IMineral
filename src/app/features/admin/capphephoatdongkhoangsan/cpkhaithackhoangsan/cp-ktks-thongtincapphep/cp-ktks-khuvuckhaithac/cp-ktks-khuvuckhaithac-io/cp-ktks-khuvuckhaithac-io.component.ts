@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+
 import { OutputCpThamDoToaDoKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdotoadokhuvuc.model";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -14,8 +15,7 @@ import { SettingsCommon } from "src/app/shared/constants/setting-common";
 import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { InputCpThamDoKhuVucModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.model';
-import { InputCpKhaiThacKhuVucModel } from "../../../../../../../models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.model";
+import { InputCpKhaiThacKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.model";
 
 @Component({
   selector: 'app-cp-ktks-khuvuckhaithac-io',
@@ -135,26 +135,26 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
  setValidation() {
    // Error message khu vực
    this.validationErrorMessages = {
-     tenkhuvuc: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvucRequired },
-     dientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientichRequired },
-     donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientichRequired },
-     hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieuRequired },
+     tenkhuvuc: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.tenkhuvucRequired },
+     dientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.dientichRequired },
+     donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.donvidientichRequired },
+     hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.hequychieuRequired },
    };
 
    // Error message Tọa độ
    this.validationErrorToaDo = {
      thutu: {
-       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuRequired,
-       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuIsNumber
+       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutuRequired,
+       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutuIsNumber
      },
-     sohieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieuRequired },
+     sohieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieuRequired },
      toadox: {
-       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoxRequired,
-       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoxIsNumber,
+       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoxRequired,
+       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoxIsNumber,
      },
      toadoy: {
-       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoyRequired,
-       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoyIsNumber
+       required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoyRequired,
+       pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoyIsNumber
      }
    }
  }
@@ -374,7 +374,7 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
    // Check dữ liệu thứ tự có trùng không
    for (let i = this.listToaDoKhuVuc.length; i--;) {
      if (dataToaDo.find(item => item.thutu === this.listToaDoKhuVuc[i].thutu)) {
-       this.errorThuTu = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuDuplicate;
+       this.errorThuTu = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutuDuplicate;
        status = false;
      }
    }
