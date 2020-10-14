@@ -408,7 +408,8 @@ export class GiayphepIoComponent implements OnInit {
       && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
+      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSan ) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedInvalidSelection,
@@ -428,6 +429,7 @@ export class GiayphepIoComponent implements OnInit {
       || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSan
       ) {
         const idHoSo = this.giayPhepIOForm.controls.idhoso.value;
         const idGiayPhepLS = this.giayPhepIOForm.controls.idgiayphepls.value;
