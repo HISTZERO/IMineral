@@ -1,19 +1,13 @@
-import {
-  NgModule,
-  CUSTOM_ELEMENTS_SCHEMA,
-  ComponentFactoryResolver
-} from "@angular/core";
+import {ComponentFactoryResolver, CUSTOM_ELEMENTS_SCHEMA, NgModule} from "@angular/core";
 import {CommonModule} from '@angular/common';
 import {NgbModule} from "@ng-bootstrap/ng-bootstrap";
-import {DateTimeAdapter, OWL_DATE_TIME_FORMATS, OWL_DATE_TIME_LOCALE, OwlDateTimeModule} from "ng-pick-datetime";
+import {OWL_DATE_TIME_FORMATS, OwlDateTimeModule} from "ng-pick-datetime";
 import {
-  MomentDateTimeAdapter,
   OwlMomentDateTimeModule,
   OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS
 } from "ng-pick-datetime-moment";
-import {MY_CUSTOM_FORMATS} from "src/app/features/admin/admin-shared.module";
+import {AdminSharedModule, MY_CUSTOM_FORMATS} from "src/app/features/admin/admin-shared.module";
 import {TranslateModule} from "@ngx-translate/core";
-import {AdminSharedModule} from "src/app/features/admin/admin-shared.module";
 import {ExComponentFactoryResolverService} from "src/app/services/utilities/ex-component-factory-resolver.service";
 import {DangkyhoatdongkhoangsanRoutingModule} from 'src/app/features/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-routing.module';
 import {ThamdokhoangsanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thamdokhoangsan-io/thamdokhoangsan-io.component';
@@ -57,16 +51,15 @@ import {PheduyettruluongkhoangsanListComponent} from "src/app/features/admin/dan
 import {PheduyettruluongkhoangsanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/pheduyettruluongkhoangsan/pheduyettruluongkhoangsan-io/pheduyettruluongkhoangsan-io.component";
 import {DaugiaquyenListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/daugiaquyen/daugiaquyen-list/daugiaquyen-list.component";
 import {DaugiaquyenIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/daugiaquyen/daugiaquyen-io/daugiaquyen-io.component";
-import { DangkykhaithaccaisoiIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component';
-import { DangkykhaithacdieuchinhIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
-import { DangkykhaithacvlxdIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
-import { DangkykhaithackhoangsanduanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
+import {DangkykhaithaccaisoiIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithaccaisoi-io/dangkykhaithaccaisoi-io.component';
+import {DangkykhaithacdieuchinhIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacdieuchinh-io/dangkykhaithacdieuchinh-io.component';
+import {DangkykhaithacvlxdIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithacvlxd-io/dangkykhaithacvlxd-io.component';
+import {DangkykhaithackhoangsanduanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/dangkykhaithackhoangsanduan-io/dangkykhaithackhoangsanduan-io.component';
 import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
-import { HosotailieuIoComponent } from 'src/app/features/admin/hosogiayto/hosotailieu/hosotailieu-io/hosotailieu-io.component';
-import { KtksCongtrinhkhaithacComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac.component';
-import { KtksCongtrinhkhaithacIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component';
-import { KtksCongtrinhkhaithacListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-list/ktks-congtrinhkhaithac-list.component';
+import { KtksCongtrinhkhaithacComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac.component';
+import { KtksCongtrinhkhaithacIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component';
+import { KtksCongtrinhkhaithacListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-list/ktks-congtrinhkhaithac-list.component';
 import { KhuvuckhaithacListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-list/khuvuckhaithac-list.component';
 import { KhuvuckhaithacIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/khuvuckhaithac/khuvuckhaithac-io/khuvuckhaithac-io.component';
 import { KtksDonvihanhchinhComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh.component';
@@ -75,19 +68,37 @@ import { KtksDonvihanhchinhListComponent } from 'src/app/features/admin/dangkyho
 import { KtksLoaikhoangsanComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan.component';
 import { KtksLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-io/ktks-loaikhoangsan-io.component';
 import { KtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-loaikhoangsan/ktks-loaikhoangsan-list/ktks-loaikhoangsan-list.component';
-import { KtksThietbiListComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-list/ktks-thietbi-list.component';
-import { KtksThietbiIoComponent } from './khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-io/ktks-thietbi-io.component';
-import { TtksThongtindangkyComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-thongtindangky.component';
-import { DangkytanthukhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component';
-import { DangkytanthugiahanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component';
-import { TtksDonvihanhchinhComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh.component';
-import { TtksDonvihanhchinhListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component';
-import { TtksDonvihanhchinhIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-io/ttks-donvihanhchinh-io.component';
-import { TtksLoaikhoangsanComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan.component';
-import { TtksLoaikhoangsanIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-io/ttks-loaikhoangsan-io.component';
-import { TtksLoaikhoangsanListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component';
-import { TtksKhuvuctanthuIoComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component';
-import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component';
+import { KtksThietbiListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-list/ktks-thietbi-list.component';
+import { KtksThietbiIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thietbi/ktks-thietbi-io/ktks-thietbi-io.component';
+import { TtksThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-thongtindangky.component';
+import { DangkytanthukhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component';
+import { DangkytanthugiahanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component';
+import { TtksDonvihanhchinhComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh.component';
+import { TtksDonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component';
+import { TtksDonvihanhchinhIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-io/ttks-donvihanhchinh-io.component';
+import { TtksLoaikhoangsanComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan.component';
+import { TtksLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-io/ttks-loaikhoangsan-io.component';
+import { TtksLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component';
+import { TtksKhuvuctanthuIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component';
+import { TtksKhuvuctanthuListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component';
+import { TlgpKhaithactralaiIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-khaithactralai-io/tlgp-khaithactralai-io.component';
+import { TlgpThamdotralaiIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-thamdotralai-io/tlgp-thamdotralai-io.component';
+import { TlgpTanthutralaiIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tralaigiayphep/tralaigiayphep-thongtindangky/tlgp-tanthutralai-io/tlgp-tanthutralai-io.component';
+import { TralaigiayphepThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/tralaigiayphep/tralaigiayphep-thongtindangky/tralaigiayphep-thongtindangky.component';
+import {DcmThongtindangkyComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-thongtindangky.component';
+import {DangkydongcuamoIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuamo-io/dangkydongcuamo-io.component';
+import { DangkydongcuadientichIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dangkydongcuadientich-io/dangkydongcuadientich-io.component';
+import { DcmKhuvuckhaithacIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-io/dcm-khuvuckhaithac-io.component';
+import { DcmKhuvuckhaithacListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-khuvuckhaithac/dcm-khuvuckhaithac-list/dcm-khuvuckhaithac-list.component';
+import { DcmDonvihanhchinhIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-io/dcm-donvihanhchinh-io.component';
+import { DcmDonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-donvihanhchinh/dcm-donvihanhchinh-list/dcm-donvihanhchinh-list.component';
+import { DcmLoaikhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-io/dcm-loaikhoangsan-io.component';
+import { DcmLoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-loaikhoangsan/dcm-loaikhoangsan-list/dcm-loaikhoangsan-list.component';
+import { DcmCongtrinhkhaithacIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-io/dcm-congtrinhkhaithac-io.component';
+import { DcmCongtrinhkhaithacListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/dongcuamo/dcm-thongtindangky/dcm-congtrinhkhaithac/dcm-congtrinhkhaithac-list/dcm-congtrinhkhaithac-list.component';
+import { DangkythamdochuyennhuongIoComponent } from './chuyennhuongquyen/cnq-thongtindangky/dangkythamdochuyennhuong-io/dangkythamdochuyennhuong-io.component';
+import { DangkykhaithacchuyennhuongIoComponent } from './chuyennhuongquyen/cnq-thongtindangky/dangkykhaithacchuyennhuong-io/dangkykhaithacchuyennhuong-io.component';
+import {CnqThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/chuyennhuongquyen/cnq-thongtindangky/cnq-thongtindangky.component";
 
 
 
@@ -159,9 +170,26 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     TtksLoaikhoangsanListComponent,
     TtksKhuvuctanthuIoComponent,
     TtksKhuvuctanthuListComponent,
+    TlgpKhaithactralaiIoComponent,
+    TlgpThamdotralaiIoComponent,
+    TlgpTanthutralaiIoComponent,
+    TralaigiayphepThongtindangkyComponent,
+    DcmThongtindangkyComponent,
+    DangkydongcuamoIoComponent,
+    DangkydongcuadientichIoComponent,
+    DcmKhuvuckhaithacIoComponent,
+    DcmKhuvuckhaithacListComponent,
+    DcmDonvihanhchinhIoComponent,
+    DcmDonvihanhchinhListComponent,
+    DcmLoaikhoangsanIoComponent,
+    DcmLoaikhoangsanListComponent,
+    DcmCongtrinhkhaithacIoComponent,
+    DcmCongtrinhkhaithacListComponent,
+    DangkythamdochuyennhuongIoComponent,
+    DangkykhaithacchuyennhuongIoComponent,
+    CnqThongtindangkyComponent
   ],
-  exports: [
-  ],
+  exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
     CommonModule,
@@ -201,7 +229,14 @@ import { TtksKhuvuctanthuListComponent } from './tanthukhoangsan/ttks-thongtinda
     TtksDonvihanhchinhIoComponent,
     TtksLoaikhoangsanIoComponent,
     KtksThietbiIoComponent,
-    TtksKhuvuctanthuIoComponent
+    TtksKhuvuctanthuIoComponent,
+    TlgpKhaithactralaiIoComponent,
+    TlgpThamdotralaiIoComponent,
+    TlgpTanthutralaiIoComponent,
+    DangkydongcuamoIoComponent,
+    DangkydongcuadientichIoComponent,
+    DangkythamdochuyennhuongIoComponent,
+    DangkykhaithacchuyennhuongIoComponent
   ],
   providers: [
     {provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: {useUtc: true}},

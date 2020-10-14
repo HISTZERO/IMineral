@@ -12,6 +12,7 @@ export class AdminRoutingName {
   public static baocaoUri = "baocao";
   public static dangkyhoatdongkhoangsanUri = "dangkyhoatdongkhoangsan";
   public static capphephoatdongkhoangsanUri = "capphephoatdongkhoangsan";
+  public static tinhtiencapquyenUri = "tinhtiencapquyen";
   public static thietlapUri = "thietlap";
   public static thuvienUri = "thuvien";
   public static tinbaiUri = "tinbai";
@@ -61,6 +62,7 @@ export class AdminRoutingName {
   public static CauHinhTaiLieu = "cauhinhtailieu";
   public static CoQuanTiepNhan = "coquantiepnhan";
   public static CoQuanCapPhep = "coquancapphep";
+  public static CoQuanBanHanh = "coquanbanhanh";
 
   // 1.5 Routes hệ thống
   public static hethongLog = "hethonglog";
@@ -125,4 +127,7 @@ export class AdminRoutingName {
   public static cptralaigiayphepthamdokhaithackhoangsanchitietUri = "cptralaigiayphepthamdokhaithackhoangsanchitiet";
   public static cpdongcuamokhoangsanchitietUri = "cpdongcuamokhoangsanchitiet";
   public static cpchuyennhuongquyenthamdokhaithackhoangsanchitietUri = "cpchuyennhuongquyenthamdokhaithackhoangsanchitiet";
+  // 1.13 Routes tính tiền cấp quyền
+  public static danhsachtinhtiencapquyennUri = "danhsachtinhtiencapquyen";
+  public static tinhtiencapquyenchitietnUri = "tinhtiencapquyenchitiet";
 }

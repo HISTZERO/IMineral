@@ -1,17 +1,16 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from "@angular/core";
+import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from "@angular/core";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { OutputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { DonvihanhchinhIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-io/donvihanhchinh-io.component";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import { Paging } from 'src/app/shared/constants/enum';
+import { OutputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdodvhc.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-donvihanhchinh-list',
@@ -41,15 +40,16 @@ export class DonvihanhchinhListComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
 
-  constructor(public matSidenavService: MatsidenavService,
-              public cfr: ComponentFactoryResolver,
-              public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService) { }
+  constructor(
+    public matSidenavService: MatsidenavService,
+    public cfr: ComponentFactoryResolver,
+    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService) { }
 
   async ngOnInit() {
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -62,8 +62,8 @@ export class DonvihanhchinhListComponent implements OnInit {
   async getDataTranslate() {
     // Get all langs
     this.dataTranslate = await this.translate
-    .getTranslation(this.translate.getDefaultLang())
-    .toPromise();
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
   }
 
   /**
@@ -72,7 +72,7 @@ export class DonvihanhchinhListComponent implements OnInit {
   async getDataPageSize() {
     const dataSetting: any = await this.thietlapFacadeService
       .getThietLapHeThongService()
-      .getByid(ThietLapHeThong.defaultPageSize ).toPromise();
+      .getByid(ThietLapHeThong.defaultPageSize).toPromise();
     if (dataSetting) {
       this.settingsCommon.pageSettings.pageSize = +dataSetting.settingValue;
     } else {
@@ -91,7 +91,8 @@ export class DonvihanhchinhListComponent implements OnInit {
    * Hàm lấy dữ liệu Dvdc
    */
   async getAllDangKyThamDoDvhc() {
-    if (this.iddangkythamdo === null || this.iddangkythamdo === undefined) {
+    if (this.iddangkythamdo === DefaultValue.Null || this.iddangkythamdo === DefaultValue.Undefined
+        || this.iddangkythamdo.trim() === DefaultValue.Empty) {
       return;
     }
 
@@ -120,8 +121,8 @@ export class DonvihanhchinhListComponent implements OnInit {
   async editItemDangKyThamDoDvhc(idThamDoDvhc: any) {
     // Lấy dữ liệu cá nhân theo id
     const dataItem: any = await this.dangKyHoatDongKhoangSanFacadeService
-    .getDangKyThamDoDvhcService()
-    .getByid(idThamDoDvhc).toPromise();
+      .getDangKyThamDoDvhcService()
+      .getByid(idThamDoDvhc).toPromise();
 
     if (!dataItem) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
@@ -132,7 +133,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
+    await this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit);
     await this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -146,7 +147,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
-    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new", {iddangkythamdo: this.iddangkythamdo});
+    this.matSidenavService.setContentComp(DonvihanhchinhIoComponent, "new", { iddangkythamdo: this.iddangkythamdo });
     this.matSidenavService.open();
   }
 

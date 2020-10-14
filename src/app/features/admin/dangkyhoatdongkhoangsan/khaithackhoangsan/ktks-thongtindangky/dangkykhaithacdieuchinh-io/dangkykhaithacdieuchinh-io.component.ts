@@ -12,10 +12,10 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
-import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdieuchinh.model";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdieuchinh.model";
 
 @Component({
   selector: 'app-dangkykhaithacdieuchinh-io',

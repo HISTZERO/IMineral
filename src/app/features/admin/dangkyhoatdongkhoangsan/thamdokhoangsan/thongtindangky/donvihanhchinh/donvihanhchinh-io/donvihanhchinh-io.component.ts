@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdodvhc.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -10,6 +9,8 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { InputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdodvhc.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-donvihanhchinh-io',
@@ -70,9 +71,9 @@ export class DonvihanhchinhIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    tinh: "",
-    huyen: "",
-    xa: ""
+    tinh: DefaultValue.Empty,
+    huyen: DefaultValue.Empty,
+    xa: DefaultValue.Empty
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -130,12 +131,12 @@ export class DonvihanhchinhIoComponent implements OnInit {
    */
   formInit() {
     this.dangKyThamDoDvhcIOForm = this.formBuilder.group({
-      tinh: ["", Validators.required],
-      tinhcombobox: [""],
-      huyen: ["", Validators.required],
-      huyencombobox: [""],
-      xa: ["", Validators.required],
-      xacombobox: [""]
+      tinh: [DefaultValue.Empty, Validators.required],
+      tinhcombobox: [DefaultValue.Empty],
+      huyen: [DefaultValue.Empty, Validators.required],
+      huyencombobox: [DefaultValue.Empty],
+      xa: [DefaultValue.Empty, Validators.required],
+      xacombobox: [DefaultValue.Empty]
     });
   }
 
@@ -194,12 +195,12 @@ export class DonvihanhchinhIoComponent implements OnInit {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
+        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue(DefaultValue.Empty);
       }
     }
     if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue("");
+        this.dangKyThamDoDvhcIOForm.controls.huyencombobox.setValue(DefaultValue.Empty);
       }
       this.allXa = [];
       this.dvhcWardFilters = [];
@@ -220,12 +221,12 @@ export class DonvihanhchinhIoComponent implements OnInit {
       this.allXa = [];
       this.dvhcWardFilters = [];
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue(DefaultValue.Empty);
       }
     }
     if ( this.dangKyThamDoDvhcIOForm.value.tinhcombobox && this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
       if (this.editMode === true) {
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue(DefaultValue.Empty);
       }
       this.allXa = await this.dmFacadeService
         .getWardService()
@@ -247,10 +248,10 @@ export class DonvihanhchinhIoComponent implements OnInit {
           matinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.matinh
         });
         this.tenTinhDisplay = this.dangKyThamDoDvhcIOForm.value.tinhcombobox.tentinh;
-        this.dangKyThamDoDvhcIOForm.controls.huyen.setValue("");
-        this.tenHuyenDisplay = "";
-        this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
-        this.tenXaDisplay = "";
+        this.dangKyThamDoDvhcIOForm.controls.huyen.setValue(DefaultValue.Empty);
+        this.tenHuyenDisplay = DefaultValue.Empty;
+        this.dangKyThamDoDvhcIOForm.controls.xa.setValue(DefaultValue.Empty);
+        this.tenXaDisplay = DefaultValue.Empty;
       } else {
         this.dangKyThamDoDvhcIOForm.controls.tinh.setValue({
           idtinh: this.dataComboboxModel.idtinh,
@@ -264,7 +265,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
         idtinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.idtinh,
         matinh: this.dangKyThamDoDvhcIOForm.value.tinhcombobox.matinh
       });
-      this.tenTinhDisplay = "";
+      this.tenTinhDisplay = DefaultValue.Empty;
     }
   }
 
@@ -279,12 +280,12 @@ export class DonvihanhchinhIoComponent implements OnInit {
           mahuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.mahuyen
         });
         this.tenHuyenDisplay = this.dangKyThamDoDvhcIOForm.value.huyencombobox.tenhuyen;
-        this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
-        this.tenXaDisplay = "";
+        this.dangKyThamDoDvhcIOForm.controls.xa.setValue(DefaultValue.Empty);
+        this.tenXaDisplay = DefaultValue.Empty;
       } else {
         if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox) {
-          this.dangKyThamDoDvhcIOForm.controls.huyen.setValue("");
-          this.tenHuyenDisplay = "";
+          this.dangKyThamDoDvhcIOForm.controls.huyen.setValue(DefaultValue.Empty);
+          this.tenHuyenDisplay = DefaultValue.Empty;
         } else {
           this.dangKyThamDoDvhcIOForm.controls.huyen.setValue({
             idhuyen: this.dataComboboxModel.idhuyen,
@@ -292,7 +293,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
           });
           this.tenHuyenDisplay = this.dataComboboxModel.tenhuyen;
         }
-        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue("");
+        this.dangKyThamDoDvhcIOForm.controls.xacombobox.setValue(DefaultValue.Empty);
         this.selectXa();
       }
     } else {
@@ -300,7 +301,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
         idhuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.idhuyen,
         mahuyen: this.dangKyThamDoDvhcIOForm.value.huyencombobox.mahuyen
       });
-      this.tenHuyenDisplay = "";
+      this.tenHuyenDisplay = DefaultValue.Empty;
     }
   }
 
@@ -317,8 +318,8 @@ export class DonvihanhchinhIoComponent implements OnInit {
         this.tenXaDisplay = this.dangKyThamDoDvhcIOForm.value.xacombobox.tenxa;
       } else {
         if (this.dangKyThamDoDvhcIOForm.value.tinhcombobox || this.dangKyThamDoDvhcIOForm.value.huyencombobox) {
-          this.dangKyThamDoDvhcIOForm.controls.xa.setValue("");
-          this.tenXaDisplay = "";
+          this.dangKyThamDoDvhcIOForm.controls.xa.setValue(DefaultValue.Empty);
+          this.tenXaDisplay = DefaultValue.Empty;
         } else {
           this.dangKyThamDoDvhcIOForm.controls.xa.setValue({
             idxa: this.dataComboboxModel.idxa,
@@ -332,7 +333,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
         idxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.idxa,
         maxa: this.dangKyThamDoDvhcIOForm.value.xacombobox.maxa
       });
-      this.tenXaDisplay = "";
+      this.tenXaDisplay = DefaultValue.Empty;
     }
   }
 
@@ -351,7 +352,7 @@ export class DonvihanhchinhIoComponent implements OnInit {
     this.inputModel.maxa = this.dangKyThamDoDvhcIOForm.value.xa.maxa;
     this.inputModel.idtinh = idtinh;
     this.inputModel.idhuyen = idhuyen;
-    this.inputModel.idxa = idxa ? idxa : "";
+    this.inputModel.idxa = idxa ? idxa : DefaultValue.Empty;
     this.inputModel.iddangkythamdo = this.obj.iddangkythamdo;
     if (operMode === "new") {
       dkThamDoDvhcService.addItem(this.inputModel).subscribe(

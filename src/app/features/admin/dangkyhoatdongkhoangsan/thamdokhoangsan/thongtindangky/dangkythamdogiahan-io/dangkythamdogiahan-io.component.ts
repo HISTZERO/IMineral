@@ -1,22 +1,22 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
+import { DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { ActivatedRoute } from '@angular/router';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { OutputDkThamDoGiaHanModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdogiahan.model';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { ActivatedRoute } from '@angular/router';
+
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DangKhoangSan, DonViDienTich, DonViDoSau } from 'src/app/shared/constants/common-constants';
+import { DangKhoangSan, DonViDienTich } from 'src/app/shared/constants/common-constants';
 import { MatSidenav } from '@angular/material';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { GiayphepOptionComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component';
 import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
-
+import { OutputDkThamDoGiaHanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdogiahan.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-dangkythamdogiahan-io',
@@ -61,15 +61,15 @@ export class DangkythamdogiahanIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    dientichcapphep: "",
-    dientichthamdo: "",
-    dientichtralai: "",
-    donvidientich: "",
-    giahandenngay: "",
-    lydogiahan: "",
-    hequychieu: "",
-    sogiayphep: "",
-    idgiayphep: "",
+    dientichcapphep: DefaultValue.Empty,
+    dientichthamdo: DefaultValue.Empty,
+    dientichtralai: DefaultValue.Empty,
+    donvidientich: DefaultValue.Empty,
+    giahandenngay: DefaultValue.Empty,
+    lydogiahan: DefaultValue.Empty,
+    hequychieu: DefaultValue.Empty,
+    sogiayphep: DefaultValue.Empty,
+    idgiayphep: DefaultValue.Empty,
   };
 
   constructor(private translate: TranslateService,
@@ -102,7 +102,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       }
     });
 
-    if (this.idhoso !== null && this.idhoso !== undefined) {
+    if (this.idhoso !== DefaultValue.Null && this.idhoso !== DefaultValue.Undefined && this.idhoso.trim() !== DefaultValue.Empty) {
       this.dangKyThamDoGiaHan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoGiaHan) {
@@ -131,15 +131,15 @@ export class DangkythamdogiahanIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyThamDoIOForm = this.formBuilder.group({
-      dientichcapphep: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      dientichthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      dientichtralai: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      donvidientich: ["", Validators.required],
-      giahandenngay: ["", Validators.required],
-      lydogiahan: ["", Validators.required],
-      hequychieu: ["", Validators.required],
-      sogiayphep: ["", Validators.required],
-      idgiayphep: ["", Validators.required]
+      dientichcapphep: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      dientichtralai: [DefaultValue.Empty,  Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      giahandenngay: [DefaultValue.Empty, Validators.required],
+      lydogiahan: [DefaultValue.Empty, Validators.required],
+      hequychieu: [DefaultValue.Empty, Validators.required],
+      sogiayphep: [DefaultValue.Empty, Validators.required],
+      idgiayphep: [DefaultValue.Empty, Validators.required]
     });
 
     this.dangKyThamDoIOForm.controls.sogiayphep.disable({ onlySelf: true });
@@ -183,7 +183,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
     this.validationErrorMessages = {
       dientichcapphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepFormat },
       dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdotuFormat },
-      dientichtralai: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiFormat },
+      dientichtralai: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiFormat },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.donvidientichRequired },
       giahandenngay: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.giahandenngayRequired },
       lydogiahan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.lydogiahanRequired },

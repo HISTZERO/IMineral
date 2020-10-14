@@ -9,19 +9,20 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {MatSidenav} from '@angular/material';
-import {ActivatedRoute} from '@angular/router';
-import {TranslateService} from '@ngx-translate/core';
-import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import {DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum} from 'src/app/shared/constants/enum';
-import {ContentContainerDirective} from 'src/app/shared/directives/content-container/content-container.directive';
-import {DangkythamdogiahanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
-import {DangkythamdokhoangsanIoComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
-import {DonvihanhchinhListComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
-import {LoaikhoangsanListComponent} from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
-import {CongtrinhthamdoListComponent} from './congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
-import {CommonServiceShared} from 'src/app/services/utilities/common-service';
-import {KhuvucthamdoListComponent} from "./khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
+import { MatSidenav } from '@angular/material';
+import { ActivatedRoute } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+
+import { DangKyThamDoActionEnum, DangKyThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
+import { DangkythamdogiahanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdogiahan-io/dangkythamdogiahan-io.component';
+import { DangkythamdokhoangsanIoComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/dangkythamdokhoangsan-io/dangkythamdokhoangsan-io.component';
+import { DonvihanhchinhListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-list/donvihanhchinh-list.component';
+import { LoaikhoangsanListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/loaikhoangsan/loaikhoangsan-list/loaikhoangsan-list.component';
+import { CongtrinhthamdoListComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/congtrinhthamdo/congtrinhthamdo-list/congtrinhthamdo-list.component';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
+import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -34,14 +35,14 @@ export const DangKyThamDoKhoangSanComponent: any = {
   styleUrls: ['./thongtindangky.component.scss']
 })
 export class ThongtindangkyComponent implements OnInit {
-  @ViewChild('thongTinDangKyThamDoTabs', {static: false}) thongTinDangKyThamDoTabs;
-  @ViewChild(ContentContainerDirective, {static: true}) contentContainer: ContentContainerDirective;
-  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
-  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
-  @ViewChild("dangKyThamDoDvhc", {static: false}) dangKyThamDoDvhc: DonvihanhchinhListComponent;
-  @ViewChild("dangKyThamDoLoaiKhoangSan", {static: false}) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
-  @ViewChild("dangKyThamDoCongTrinh", {static: false}) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
-  @ViewChild("dangKyThamDoKhuVuc", {static: false}) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
+  @ViewChild('thongTinDangKyThamDoTabs', { static: false }) thongTinDangKyThamDoTabs;
+  @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("dangKyThamDoDvhc", { static: false }) dangKyThamDoDvhc: DonvihanhchinhListComponent;
+  @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
+  @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
+  @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -76,11 +77,12 @@ export class ThongtindangkyComponent implements OnInit {
   // Lưu trữ dữ liệu hồ sơ
   private itemHoSo: any;
 
-  constructor(private cfr: ComponentFactoryResolver,
-              private translate: TranslateService,
-              private activatedRoute: ActivatedRoute,
-              public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService) {
+  constructor(
+    private cfr: ComponentFactoryResolver,
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute,
+    public commonService: CommonServiceShared,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -172,7 +174,7 @@ export class ThongtindangkyComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const hoSoService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const hoSoService = this.hoSoGiayToFacadeService.getHoSoService();
     const itemHoSo = await hoSoService.getByid(idHoSo).toPromise();
     return itemHoSo;
   }

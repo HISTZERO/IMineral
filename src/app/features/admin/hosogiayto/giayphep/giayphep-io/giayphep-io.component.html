@@ -33,15 +33,6 @@
                   </div>
                 </div>
                 <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayphep" | translate }}
-                    <small>(*)</small>
-                  </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8">
-                    <input class="form-control" type="text" formControlName="sogiayphep" placeholder="{{'HOSOGIAYTO.giayphep.sogiayphepPlaceholder' | translate}}" />
-                    <span *ngIf="formErrors.sogiayphep" class="alert-danger">{{formErrors.sogiayphep}}</span>
-                  </div>
-                </div>
-                <div class="form-group row mx-0">
                   <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.loaicapphep" | translate}}
                     <small>(*)</small>
                   </label>
@@ -105,6 +96,15 @@
                       <i class="fal fa-plus-square"></i>
                       {{ "COMMON.default.select" | translate }}
                     </button>
+                  </div>
+                </div>
+                <div class="form-group row mx-0">
+                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "HOSOGIAYTO.giayphep.sogiayphep" | translate }}
+                    <small>(*)</small>
+                  </label>
+                  <div class="col-lg-8 col-md-8 col-sm-8">
+                    <input class="form-control" type="text" formControlName="sogiayphep" placeholder="{{'HOSOGIAYTO.giayphep.sogiayphepPlaceholder' | translate}}" />
+                    <span *ngIf="formErrors.sogiayphep" class="alert-danger">{{formErrors.sogiayphep}}</span>
                   </div>
                 </div>
                 <div class="form-group row mx-0">

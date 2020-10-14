@@ -1,19 +1,19 @@
 import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output, Type } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { InsertedState, DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { ActivatedRoute } from '@angular/router';
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { InputDkThamDoKhoangSanModel, OutputDkThamDoKhoangSanModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdokhoangsan.model';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { HttpErrorResponse } from '@angular/common/http';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
+import { MatSidenav } from '@angular/material';
+import { DangKyThamDoActionEnum, DangKhoangSanEnum } from 'src/app/shared/constants/enum';
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
 import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
-import { MatSidenav } from '@angular/material';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
+import { OutputDkThamDoKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhoangsan.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-dangkythamdokhoangsan-io',
@@ -62,17 +62,17 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    diadiem: "",
-    dientichthamdo: "",
-    chieusauthamdotu: "",
-    chieusauthamdoden: "",
-    thoihanthamdo: "",
-    mucdichsudungkhoangsan: "",
-    dangkhoangsan: "",
-    donvidientich: "",
-    donvithoihan: "",
-    donvichieusau: "",
-    hequychieu: ""
+    diadiem: DefaultValue.Empty,
+    dientichthamdo: DefaultValue.Empty,
+    chieusauthamdotu: DefaultValue.Empty,
+    chieusauthamdoden: DefaultValue.Empty,
+    thoihanthamdo: DefaultValue.Empty,
+    mucdichsudungkhoangsan: DefaultValue.Empty,
+    dangkhoangsan: DefaultValue.Empty,
+    donvidientich: DefaultValue.Empty,
+    donvithoihan: DefaultValue.Empty,
+    donvichieusau: DefaultValue.Empty,
+    hequychieu: DefaultValue.Empty
   };
 
   constructor(private translate: TranslateService,
@@ -105,7 +105,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       }
     });
 
-    if (this.idhoso !== null && this.idhoso !== undefined) {
+    if (this.idhoso !== DefaultValue.Null && this.idhoso !== DefaultValue.Undefined && this.idhoso.trim() !== DefaultValue.Empty) {
       this.dangKyThamDoKhoangSan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoKhoangSan) {
@@ -134,17 +134,17 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyThamDoIOForm = this.formBuilder.group({
-      diadiem: ["", Validators.required],
-      dientichthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdotu: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdoden: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      thoihanthamdo: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      mucdichsudungkhoangsan: ["", Validators.required],
+      diadiem: [DefaultValue.Empty, Validators.required],
+      dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      chieusauthamdotu: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      chieusauthamdoden: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      thoihanthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      mucdichsudungkhoangsan: [DefaultValue.Empty, Validators.required],
       dangkhoangsan: [DangKhoangSanEnum.KhoangSanRan, Validators.required],
-      donvidientich: ["", Validators.required],
-      donvithoihan: ["", Validators.required],
-      donvichieusau: ["", Validators.required],
-      hequychieu: ["", Validators.required]
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      donvithoihan: [DefaultValue.Empty, Validators.required],
+      donvichieusau: [DefaultValue.Empty, Validators.required],
+      hequychieu: [DefaultValue.Empty, Validators.required]
     });
   }
 

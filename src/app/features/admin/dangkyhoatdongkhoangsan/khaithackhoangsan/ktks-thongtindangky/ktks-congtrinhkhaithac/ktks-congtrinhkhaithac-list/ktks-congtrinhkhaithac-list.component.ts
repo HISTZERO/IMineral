@@ -8,8 +8,8 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import {OutputDkKhaiThacCongTrinh} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithaccongtrinh.model";
 import {KtksCongtrinhkhaithacIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-congtrinhkhaithac/ktks-congtrinhkhaithac-io/ktks-congtrinhkhaithac-io.component";
+import { OutputDkKhaiThacCongTrinh } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithaccongtrinh.model";
 
 @Component({
   selector: 'app-ktks-congtrinhkhaithac-list',

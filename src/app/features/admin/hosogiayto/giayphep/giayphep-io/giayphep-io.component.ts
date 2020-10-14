@@ -19,7 +19,7 @@ import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/t
 import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
 import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
-import { OutputHsHoSoModel } from 'src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model';
+import { OutputHsHoSoModel } from 'src/app/models/admin/hosogiayto/hoso.model';
 import { ThietlapFacadeService } from 'src/app/services/admin/thietlap/thietlap-facade.service';
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
 import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
@@ -257,7 +257,7 @@ export class GiayphepIoComponent implements OnInit {
    */
   private AddOrUpdateThongTinGiayPhepLichSuList(item: OutputGiayPhepModel) {
     if (item && item.idgiayphep && item.idgiayphep.trim() !== DefaultValue.Empty) {
-      if (this.giayPhepLichSuList === null || this.giayPhepLichSuList === undefined || this.giayPhepLichSuList.length > 0) {
+      if (this.giayPhepLichSuList === null || this.giayPhepLichSuList === DefaultValue.Undefined || this.giayPhepLichSuList.length > 0) {
         this.giayPhepLichSuList = [];
       }
 
@@ -300,9 +300,11 @@ export class GiayphepIoComponent implements OnInit {
         const giayPhepLichSu = Object.assign(new OutputGiayPhepModel(), inputModel);
 
         if (inputModel.idgiayphepls && inputModel.idgiayphepls.trim() !== DefaultValue.Empty) {
-          this.disabledHoSo = true;
           giayPhepLichSu.idgiayphep = inputModel.idgiayphepls;
+          giayPhepLichSu.sogiayphep = inputModel.sogiayphepls;
           this.AddOrUpdateThongTinGiayPhepLichSuList(giayPhepLichSu);
+          this.disabledLoaiDoiTuong = true;
+          this.disabledHoSo = true;
         }
 
         this.giayPhepIOForm.setValue({
@@ -399,11 +401,29 @@ export class GiayphepIoComponent implements OnInit {
     return giayphepItem;
   }
 
-  private validateSaveItemGiayPhep() {
+  private validatLoaiCapPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
+    if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.ThamDoKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
+      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
+      this.commonService.informationDiaLogService(
+        DefaultValue.Empty,
+        this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedInvalidSelection,
+        this.dataTranslate.HOSOGIAYTO.giayphep.informedDialogTitle);
+
+      return false;
+    }
+
+    return true;
+  }
+
+  private validateInvalidHoSoGiayPhepSelection() {
+    const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
+    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
       || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
       || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
@@ -435,7 +455,11 @@ export class GiayphepIoComponent implements OnInit {
       return;
     }
 
-    if (!this.validateSaveItemGiayPhep()) {
+    if (!this.validatLoaiCapPhepSelection()) {
+      return;
+    }
+
+    if (!this.validateInvalidHoSoGiayPhepSelection()) {
       return;
     }
 
@@ -629,12 +653,30 @@ export class GiayphepIoComponent implements OnInit {
    * Sử kiện được kích hoạt sau khi chọn loại cấp phép trên combobox UI
    */
   public selectItemLoaiCapPhepChange(item: any) {
-    this.disabledLoaiDoiTuong = false;
-    this.disabledHoSo = false;
-    this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
-    this.disabledGiayPhepLichSu = false;
-    this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
-    this.ClearThongTinCaNhanToChucOnUI();
+    if (this.currentAction === GiayPhepActionEnum.Add) {
+      this.disabledLoaiDoiTuong = false;
+      this.hoSoList = [];
+      this.giayPhepIOForm.controls.idhoso.setValue(DefaultValue.Empty);
+      this.giayPhepLichSuList = [];
+      this.giayPhepIOForm.controls.idgiayphepls.setValue(DefaultValue.Empty);
+      this.ClearThongTinCaNhanToChucOnUI();
+
+      const loaiCapPhep = item.value;
+      if (loaiCapPhep ===  DefaultValue.Empty || loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+        || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
+        || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+        ) {
+        this.disabledHoSo = false;
+        this.disabledGiayPhepLichSu = false;
+      } else {
+        this.disabledHoSo = false;
+        this.disabledGiayPhepLichSu = true;
+      }
+    }
   }
 
   /**

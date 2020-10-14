@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {InputDkKhaiThacLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacloaikhoangsan.model";
 import {OutputDmNhomKhoangSanModel} from "src/app/models/admin/danhmuc/nhomkhoangsan.model";
 import {OutputDmLoaiKhoangSanModel} from "src/app/models/admin/danhmuc/loaikhoangsan.model";
 import {DonViTruLuong} from "src/app/shared/constants/common-constants";
@@ -12,7 +11,7 @@ import {TranslateService} from "@ngx-translate/core";
 import {Paging, TrangThaiEnum} from "src/app/shared/constants/enum";
 import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {InputDkTanThuLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthuloaikhoangsan.model";
+import {InputDkTanThuLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthuloaikhoangsan.model";
 
 @Component({
   selector: 'app-ttks-loaikhoangsan-io',

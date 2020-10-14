@@ -8,7 +8,7 @@ import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
 import {TranslateService} from "@ngx-translate/core";
 import {HttpErrorResponse} from "@angular/common/http";
-import {OutputDkTanThuLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dktanthuloaikhoangsan.model";
+import {OutputDkTanThuLoaiKhoangSan} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthuloaikhoangsan.model";
 import {TtksLoaikhoangsanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-io/ttks-loaikhoangsan-io.component";
 
 @Component({

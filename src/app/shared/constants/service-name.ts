@@ -65,19 +65,39 @@ export class ServiceName {
   public static DANGKYTANTHUDVHC = "dangkytanthudvhc";
   public static DANGKYTANTHULOAIKHOANGSAN = "dangkytanthuloaikhoangsan";
   public static DANGKYTANTHUKHUVUC = "dangkytanthukhuvuc";
-
+  // Đăng ký trả lại giấy phép
+  public static DANGKYKHAITHACTRALAI = "dangkykhaithactralai";
+  public static DANGKYTHAMDOTRALAI = "dangkythamdotralai";
+  public static DANGKYTANTHUTRALAI = "dangkytanthutralai";
+  // Đăng ký đóng cửa mỏ
+  public static DANGKYDONGCUAMO = "dangkyskhaithacdongcuamo";
+  // Đăng ký chuyển nhượng quyền
+  public static DANGKYTHAMDOCHUYENNHUONG = "thamdochuyennhuong";
+  public static DANGKYKHAITHACCHUYENNHUONG = "dangkykhaithacchuyennhuong";
   // Giấy phép
   public static GIAYPHEP = "giayphep";
   public static CPTHAMDOKHOANGSAN = "cpthamdokhoangsan";
   public static CPTHAMDODVHC = "cpthamdodvhc";
   public static CPTHAMDOLOAIKHOANGSAN = "cpthamdoloaikhoangsan";
+  public static CPTHAMDOCONGTRINH = "cpthamdocongtrinh";
+  public static CPTHAMDOKHUVUC = "cpthamdokhuvuc";
+  // Cấp phép khai thác khoáng sản
+  public static CPKHAITHACKHOANGSAN = "cpkhaithackhoangsan";
+  public static CPKHAITHACDVHC = "cpkhaithacdvhc";
+  public static CPKHAITHACCONGTRINH = "cpkhaithaccongtrinh";
+  public static CPKHAITHACLOAIKHOANGSAN = "cpkhaithacloaikhoangsan";
+  public static CPKHAITHACKHUVUC = "cpkhaithackhuvuc";
+  // Tính tiền cấp quyền
+  public static TTTINHTIENCAPQUYEN = "tttinhtiencapquyen";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
   public static STATUSCAUHINHTAILIEU = "getallstatushscauhinhtailieu";
   public static COQUANTIEPNHAN = "coquantiepnhan";
+  public static COQUANBANHANH = "vbcoquanbanhanh";
   public static COQUANCAPPHEP = "cpcoquancapphep";
   public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
+  public static GETALLCOQUANBANHANH = "getallcoquanbanhanh";
   public static GETALLCOQUANCAPPHEP = "getallcoquancapphep";
 
 

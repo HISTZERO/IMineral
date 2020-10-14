@@ -4,7 +4,6 @@ import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 
-import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkthamdotoadokhuvuc.model";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -14,7 +13,8 @@ import { validationAllErrorMessagesService } from "src/app/services/utilities/va
 import { DonViDienTich, LoaiKhuVucThamDo } from "src/app/shared/constants/common-constants";
 import { SettingsCommon } from "src/app/shared/constants/setting-common";
 import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
-import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithackhuvuc.model";
+import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
+import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
 
 
 @Component({
@@ -206,7 +206,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
   /**
   * Tạo model dữ liệu insert và update
   */
-  async generateModelData(idkhaithackhuvuc?: string) {
+  async generateModelData() {
     let listToaDo = {
       list: []
     };
@@ -215,7 +215,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
     for (let i of this.listToaDoKhuVuc) {
       let item = {
         iddangkykhaithac: this.obj.iddangkykhaithac,
-        idkhaithackhuvuc: idkhaithackhuvuc ? idkhaithackhuvuc : this.obj.idkhaithackhuvuc,
+        idkhaithackhuvuc: this.obj && this.obj.idkhaithackhuvuc ? this.obj.idkhaithackhuvuc : "",
         loaicapphep: this.obj.loaicapphep,
         loaikhuvuc: this.dKKhaiThacKhuVucIOForm.value.loaikhuvuc,
         sohieu: i.sohieu,
@@ -269,7 +269,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
     } else if (operMode === "edit") {
       this.inputModelKhuVuc.idkhaithackhuvuc = this.obj.idkhaithackhuvuc;
       this.inputModelKhuVuc.iddangkykhaithac = this.obj.iddangkykhaithac;
-      this.inputModelKhuVuc.toado = await this.generateModelData(this.obj.iddangkykhaithac);
+      this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");

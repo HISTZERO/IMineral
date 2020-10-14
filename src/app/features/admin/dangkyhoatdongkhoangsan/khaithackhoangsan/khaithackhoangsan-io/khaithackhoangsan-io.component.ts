@@ -11,6 +11,7 @@ import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-co
 import { KtksThongtindangkyComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-thongtindangky.component";
 import { HosoIoComponent } from "src/app/features/admin/hosogiayto/hoso/hoso-io/hoso-io.component";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 @Component({
@@ -79,7 +80,8 @@ export class KhaithackhoangsanIoComponent implements OnInit {
   constructor(public matSidenavService: MatsidenavService,
     private activatedRoute: ActivatedRoute,
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) { }
 
   async ngOnInit() {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
@@ -136,7 +138,7 @@ export class KhaithackhoangsanIoComponent implements OnInit {
    * @param idHoSo
    */
   private async getHoSoById(idHoSo: string) {
-    const dangKyHoatDongKhoangSanFacadeService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+    const dangKyHoatDongKhoangSanFacadeService = this.hoSoGiayToFacadeService.getHoSoService();
     const hosoItem = await dangKyHoatDongKhoangSanFacadeService.getByid(idHoSo).toPromise();
     return hosoItem;
   }
@@ -148,31 +150,31 @@ export class KhaithackhoangsanIoComponent implements OnInit {
   private async getDangKyKhaiThacByIdHoSo(loaiCapPhep: string, idHoSo: string) {
     if (loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSan) {
       const dkKhaiThacKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanService();
-      const dangKyItem = await dkKhaiThacKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     } else if (loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu) {
       const dkKhaiThacDuanKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacKhoangSanDuAnService();
-      const dangKyItem = await dkKhaiThacDuanKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacDuanKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     }
     else if (loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung) {
       const dkKhaiThacVLXDKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangkyKhaiThacVLXDService();
-      const dangKyItem = await dkKhaiThacVLXDKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacVLXDKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     }
     else if (loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac) {
       const dkKhaiThacDieuChinhKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
-      const dangKyItem = await dkKhaiThacDieuChinhKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacDieuChinhKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     }
     else if (loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
       const dkKhaiThacGiaHanKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacGiaHanService();
-      const dangKyItem = await dkKhaiThacGiaHanKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacGiaHanKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     }
     else if (loaiCapPhep === LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong) {
       const dkKhaiThacCatSoiKhoangSanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacCatSoiService();
-      const dangKyItem = await dkKhaiThacCatSoiKhoangSanService.getAll({idhoso: idHoSo}).toPromise();
+      const dangKyItem = await dkKhaiThacCatSoiKhoangSanService.getAll({ idhoso: idHoSo }).toPromise();
       return dangKyItem;
     }
   }
@@ -186,21 +188,21 @@ export class KhaithackhoangsanIoComponent implements OnInit {
       case HoSoActionEnum.Add: {
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinHoSo] = false;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuHoSoDinhKem] = true,
-        this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = true;
+          this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = true;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinDangKy] = true;
         break;
       }
       case HoSoActionEnum.Edit: {
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinHoSo] = false;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuHoSoDinhKem] = false,
-        this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = false;
+          this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = false;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinDangKy] = false;
         break;
       }
       default: {
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinHoSo] = true;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuHoSoDinhKem] = true,
-        this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = true;
+          this.disabledTabState[KhaiThacKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem] = true;
         this.disabledTabState[KhaiThacKhoangSanTabEnum.ThongTinDangKy] = true;
         break;
       }

@@ -1,16 +1,16 @@
 import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
+import {TranslateService} from "@ngx-translate/core";
+import {HttpErrorResponse} from "@angular/common/http";
 import {MatSidenav} from "@angular/material/sidenav";
+
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
 import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {TranslateService} from "@ngx-translate/core";
-import {DonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/donvihanhchinh/donvihanhchinh-io/donvihanhchinh-io.component";
-import {HttpErrorResponse} from "@angular/common/http";
-import {OutputDkKhaiThacDvhc} from "src/app/models/admin/dangkyhoatdongkhoangsan/dkkhaithacdvhc.model";
 import {KtksDonvihanhchinhIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/khaithackhoangsan/ktks-thongtindangky/ktks-donvihanhchinh/ktks-donvihanhchinh-io/ktks-donvihanhchinh-io.component";
+import { OutputDkKhaiThacDvhc } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdvhc.model";
 
 @Component({
   selector: 'app-ktks-donvihanhchinh-list',

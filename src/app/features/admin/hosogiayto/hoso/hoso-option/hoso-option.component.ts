@@ -1,23 +1,25 @@
-import {Component, OnInit, Input, ViewChild, Output, EventEmitter} from '@angular/core';
-import {DatePipe} from '@angular/common';
-import {DataStateChangeEventArgs, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {Observable} from "rxjs";
-import {MatDialog} from "@angular/material";
-import {TranslateService} from "@ngx-translate/core";
-import {FormGroup, FormBuilder} from "@angular/forms";
-import {GridComponent} from "@syncfusion/ej2-angular-grids";
-import {Router} from "@angular/router";
-import { NhomLoaiCapPhepEnum} from "src/app/shared/constants/nhomloaicapphep-constants";
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputHsHoSoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
+import { DatePipe } from '@angular/common';
+import { DataStateChangeEventArgs, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { Observable } from "rxjs";
+import { MatDialog } from "@angular/material";
+import { TranslateService } from "@ngx-translate/core";
+import { FormGroup, FormBuilder } from "@angular/forms";
+import { GridComponent } from "@syncfusion/ej2-angular-grids";
+import { Router } from "@angular/router";
+
+import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { OutputHsHoSoModel } from "src/app/models/admin/hosogiayto/hoso.model";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { SelectedOptionType } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 @Component({
@@ -29,7 +31,7 @@ export class HosoOptionComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep: number;
   // tslint:disable-next-line: no-input-rename
-  @Input("loaiCapPhep") loaiCapPhep: number;
+  @Input("loaiCapPhep") loaiCapPhep: string;
   // tslint:disable-next-line: no-output-rename
   @Output("selectItemHoSoEvent") selectItemHoSoEvent: EventEmitter<OutputHsHoSoModel> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
@@ -37,7 +39,7 @@ export class HosoOptionComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("title") title: string;
   // Viewchild template
-  @ViewChild("gridHoSo", {static: false}) public gridHoSo: GridComponent;
+  @ViewChild("gridHoSo", { static: false }) public gridHoSo: GridComponent;
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
 
@@ -62,35 +64,37 @@ export class HosoOptionComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
-  constructor(public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              public commonService: CommonServiceShared,
-              public thietlapFacadeService: ThietlapFacadeService,
-              private translate: TranslateService,
-              public router: Router,
-              public formBuilder: FormBuilder,
-              public generalClientService: GeneralClientService,
-              public dmFacadeService: DmFacadeService,
-              public datePipe: DatePipe,
-              public matSidenavService: MatsidenavService,
-              public modalDialog: MatDialog) {
-    this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+  constructor(
+    public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    public commonService: CommonServiceShared,
+    public thietlapFacadeService: ThietlapFacadeService,
+    private translate: TranslateService,
+    public router: Router,
+    public formBuilder: FormBuilder,
+    public generalClientService: GeneralClientService,
+    public dmFacadeService: DmFacadeService,
+    public datePipe: DatePipe,
+    public matSidenavService: MatsidenavService,
+    public modalDialog: MatDialog,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
+    this.itemService = this.hoSoGiayToFacadeService.getHoSoService();
   }
 
   async ngOnInit() {
     // Setting wrap mode
-    this.wrapSettings = {wrapMode: 'Both'};
-    // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo form
     this.formInit();
+    // Gọi hàm lấy dữ liệu translate
+    await this.getDataTranslate();
 
     if (this.selectedOptionType === SelectedOptionType.Popup) {
       if (this.obj) {
-        if (this.obj.nhomloaicapphep !== undefined && this.obj.nhomloaicapphep !== null) {
+        if (this.obj.nhomloaicapphep !== DefaultValue.Undefined && this.obj.nhomloaicapphep !== DefaultValue.Null) {
           this.nhomLoaiCapPhep = this.obj.nhomloaicapphep;
         }
 
-        if (this.obj.loaicapphep !== undefined && this.obj.loaicapphep !== null) {
+        if (this.obj.loaicapphep !== DefaultValue.Undefined && this.obj.loaicapphep !== DefaultValue.Null && this.obj.loaicapphep.trim() !== DefaultValue.Empty) {
           this.loaiCapPhep = this.obj.loaicapphep;
         }
       }
@@ -114,7 +118,6 @@ export class HosoOptionComponent implements OnInit {
    */
   formInit() {
     this.formSearch = this.formBuilder.group({
-      Loaicapphep: [DefaultValue.Empty],
       Keyword: [DefaultValue.Empty]
     });
   }
@@ -157,7 +160,7 @@ export class HosoOptionComponent implements OnInit {
     };
 
     this.itemService
-      .getDataFromServer({skip: 0, take: this.settingsCommon.pageSettings.pageSize}, searchModel);
+      .getDataFromServer({ skip: 0, take: this.settingsCommon.pageSettings.pageSize }, searchModel);
   }
 
   /*
@@ -165,7 +168,9 @@ export class HosoOptionComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      Keyword: this.formSearch.controls.Keyword.value
+      Loaicapphep: this.loaiCapPhep,
+      Keyword: this.formSearch.controls.Keyword.value,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     };
 
     this.itemService.getDataFromServer(state, searchModel);
@@ -191,7 +196,8 @@ export class HosoOptionComponent implements OnInit {
   reloadDataGrid() {
     this.formSearch.reset({
       Keyword: DefaultValue.Empty,
-      Loaicapphep: DefaultValue.Empty
+      Loaicapphep: this.loaiCapPhep,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     });
     this.getAllHoSo();
   }

@@ -20,6 +20,7 @@ import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.mo
 import { NhomLoaiCapPhepEnum } from 'src/app/shared/constants/nhomloaicapphep-constants';
 import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 
 
 @Component({
@@ -83,12 +84,12 @@ export class GiayphepListComponent implements OnInit {
   }
 
   async ngOnInit() {
-
     // Setting wrap mode
     this.wrapSettings = {wrapMode: 'Both'};
-
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -117,7 +118,7 @@ export class GiayphepListComponent implements OnInit {
       .toPromise();
   }
 
-  async manualDataInit() {
+  checkValidNhomLoaiCapPhep() {
     if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ThamDoKhoangSan
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.KhaiThacKhoangSan
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.TanThuKhoangSan
@@ -126,10 +127,14 @@ export class GiayphepListComponent implements OnInit {
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
+      return true;
+    }
+
+    return false;
+  }
+
+  async manualDataInit() {
+    if (this.checkValidNhomLoaiCapPhep()) {
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
@@ -166,6 +171,7 @@ export class GiayphepListComponent implements OnInit {
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
       .getFetchAll({Nhomloaicapphep: this.nhomLoaiCapPhep, PageNumber: 1, PageSize: -1});
+
     this.loaiCapPhepFilters = listData.items;
     this.allLoaiCapPhep = listData.items;
   }
@@ -192,10 +198,11 @@ export class GiayphepListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     };
 
     this.itemService.getDataFromServer(state, searchModel);
@@ -209,7 +216,8 @@ export class GiayphepListComponent implements OnInit {
       Keyword: DefaultValue.Empty,
       GTEqualNgaycapphep: DefaultValue.Empty,
       LTEqualNgaycapphep: DefaultValue.Empty,
-      Loaicapphep: DefaultValue.Empty
+      Loaicapphep: DefaultValue.Empty,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     });
     this.getAllGiayPhep();
   }

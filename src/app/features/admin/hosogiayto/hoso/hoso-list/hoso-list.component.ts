@@ -8,9 +8,10 @@ import {TranslateService} from "@ngx-translate/core";
 import {FormGroup, FormBuilder} from "@angular/forms";
 import {GridComponent} from "@syncfusion/ej2-angular-grids";
 import {Router} from "@angular/router";
+
 import { NhomLoaiCapPhepEnum, ChiTietDangKyHoatDongKS } from "src/app/shared/constants/nhomloaicapphep-constants";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {OutputHsHoSoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/hoso.model";
+import {OutputHsHoSoModel} from "src/app/models/admin/hosogiayto/hoso.model";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
@@ -19,6 +20,7 @@ import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangk
 import {AdminRoutingName} from 'src/app/routes/admin-routes-name';
 import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 
 @Component({
@@ -76,17 +78,18 @@ export class HosoListComponent implements OnInit {
               public generalClientService: GeneralClientService,
               public dmFacadeService: DmFacadeService,
               public datePipe: DatePipe,
-              public modalDialog: MatDialog) {
-    this.itemService = this.dangKyHoatDongKhoangSanFacadeService.getHoSoService();
+              public modalDialog: MatDialog,
+              private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
+    this.itemService = this.hoSoGiayToFacadeService.getHoSoService();
   }
 
   async ngOnInit() {
-
     // Setting wrap mode
     this.wrapSettings = {wrapMode: 'Both'};
-
+    // Khởi tạo form
+    this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -124,10 +127,7 @@ export class HosoListComponent implements OnInit {
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.PheDuyetTruLuong
       || this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac) {
-      // Khởi tạo form
-      this.formInit();
-      // Gọi hàm lấy dữ liệu translate
-      await this.getDataTranslate();
+
       // Gọi hàm lấy dữ liệu danh sách loại cấp phép
       await this.getAllLoaiCapPhep();
       // Gọi hàm lấy dữ liệu pagesize
@@ -209,6 +209,7 @@ export class HosoListComponent implements OnInit {
       GTEqualNgaytiepnhan: DefaultValue.Empty,
       LTEqualNgaytiepnhan: DefaultValue.Empty,
       Loaicapphep: DefaultValue.Empty,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     });
     this.getAllHoSo();
   }
@@ -236,7 +237,7 @@ export class HosoListComponent implements OnInit {
    */
   async deleteItemHoSo(data) {
     this.selectedItem = data;
-    const canDelete: string = this.dangKyHoatDongKhoangSanFacadeService
+    const canDelete: string = this.hoSoGiayToFacadeService
       .getHoSoService()
       .checkBeDeleted(this.selectedItem.idhoso);
     this.canBeDeletedCheck(canDelete);
@@ -264,7 +265,7 @@ export class HosoListComponent implements OnInit {
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
-        await this.dangKyHoatDongKhoangSanFacadeService
+        await this.hoSoGiayToFacadeService
           .getHoSoService()
           .deleteItem({idhoso: this.selectedItem.idhoso})
           .subscribe(
