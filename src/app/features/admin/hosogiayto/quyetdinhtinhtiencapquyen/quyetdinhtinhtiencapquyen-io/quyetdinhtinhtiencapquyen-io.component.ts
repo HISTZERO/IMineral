@@ -137,9 +137,6 @@ export class QuyetdinhtinhtiencapquyenIoComponent implements OnInit {
     this.formInit();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-    // Khởi tạo sidenav
-    // this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    // Lấy dữ liệu loại cấp phép
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -201,7 +198,7 @@ export class QuyetdinhtinhtiencapquyenIoComponent implements OnInit {
       email: [DefaultValue.Empty],
       website: [DefaultValue.Empty],
       loaidoituong: [LoaiDoiTuongEnum.ToChuc, Validators.required],
-      idgiayphepls:  [LoaiDoiTuongEnum.ToChuc, Validators.required],
+      idgiayphepls:  [DefaultValue.Empty, Validators.required],
       trangthai: [DefaultValue.Empty],
       ghichu: [DefaultValue.Empty]
     });
@@ -231,7 +228,7 @@ export class QuyetdinhtinhtiencapquyenIoComponent implements OnInit {
    */
   private AddOrUpdateThongTinGiayPhepLichSuList(item: OutputGiayPhepModel) {
     if (item && item.idgiayphep && item.idgiayphep.trim() !== DefaultValue.Empty) {
-      if (this.giayPhepLichSuList === null || this.giayPhepLichSuList === undefined || this.giayPhepLichSuList.length > 0) {
+      if (this.giayPhepLichSuList === DefaultValue.Null || this.giayPhepLichSuList === DefaultValue.Undefined || this.giayPhepLichSuList.length > 0) {
         this.giayPhepLichSuList = [];
       }
 
@@ -251,6 +248,7 @@ export class QuyetdinhtinhtiencapquyenIoComponent implements OnInit {
 
         if (inputModel.idgiayphepls && inputModel.idgiayphepls.trim() !== DefaultValue.Empty) {
           giayPhepLichSu.idgiayphep = inputModel.idgiayphepls;
+          giayPhepLichSu.sogiayphep = inputModel.sogiayphepls;
           this.AddOrUpdateThongTinGiayPhepLichSuList(giayPhepLichSu);
         }
 

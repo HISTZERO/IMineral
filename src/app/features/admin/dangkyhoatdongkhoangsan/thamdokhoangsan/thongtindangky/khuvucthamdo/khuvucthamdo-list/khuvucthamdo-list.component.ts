@@ -5,7 +5,6 @@ import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { ActivatedRoute } from "@angular/router";
-
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -13,6 +12,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { KhuvucthamdoIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-io/khuvucthamdo-io.component";
 import { OutputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhuvuc.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-khuvucthamdo-list',
@@ -75,7 +75,8 @@ export class KhuvucthamdoListComponent implements OnInit {
   ) { }
 
   async ngOnInit() {
-    this.getDataTranslate();
+    await this.getDataTranslate();
+
     if (this.allowAutoInit) {
       await this.manualDataInit();
     }
@@ -136,6 +137,11 @@ export class KhuvucthamdoListComponent implements OnInit {
    * Hàm lấy dữ liệu Dvdc
    */
   async getAllDkThamDoKhuVuc() {
+    if (this.iddangkythamdo === DefaultValue.Null || this.iddangkythamdo === DefaultValue.Undefined
+      || this.iddangkythamdo.trim() === DefaultValue.Empty) {
+    return;
+    }
+
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoKhuVucService()
       .getFetchAll({ iddangkythamdo: this.iddangkythamdo });

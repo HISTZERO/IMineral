@@ -89,7 +89,7 @@ export class GiayphepListComponent implements OnInit {
     // Khởi tạo form
     this.formInit();
     // Gọi hàm lấy dữ liệu translate
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -198,10 +198,11 @@ export class GiayphepListComponent implements OnInit {
    */
   dataStateChange(state: DataStateChangeEventArgs): void {
     const searchModel = {
-      GTEqualNgaytiepnhan: this.formSearch.controls.GTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
-      LTEqualNgaytiepnhan: this.formSearch.controls.LTEqualNgaytiepnhan.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaytiepnhan.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaytiepnhan.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      GTEqualNgaycapphep: this.formSearch.controls.GTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.GTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.GTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
+      LTEqualNgaycapphep: this.formSearch.controls.LTEqualNgaycapphep.value !== DefaultValue.Null && this.formSearch.controls.LTEqualNgaycapphep.value.trim() !== DefaultValue.Empty ? this.datePipe.transform(this.formSearch.controls.LTEqualNgaycapphep.value, "MM-dd-yyyy") : DefaultValue.Empty,
       Loaicapphep: this.formSearch.controls.Loaicapphep.value,
       Keyword: this.formSearch.controls.Keyword.value,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     };
 
     this.itemService.getDataFromServer(state, searchModel);
@@ -215,7 +216,8 @@ export class GiayphepListComponent implements OnInit {
       Keyword: DefaultValue.Empty,
       GTEqualNgaycapphep: DefaultValue.Empty,
       LTEqualNgaycapphep: DefaultValue.Empty,
-      Loaicapphep: DefaultValue.Empty
+      Loaicapphep: DefaultValue.Empty,
+      Nhomloaicapphep: this.nhomLoaiCapPhep
     });
     this.getAllGiayPhep();
   }

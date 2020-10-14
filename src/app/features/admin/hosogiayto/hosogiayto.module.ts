@@ -54,7 +54,8 @@ import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hos
     HosotailieuListComponent,
     GiaypheptailieuIoComponent,
     GiaypheptailieuListComponent,
-    QuyetdinhtinhtiencapquyenListComponent
+    QuyetdinhtinhtiencapquyenListComponent,
+    QuyetdinhtinhtiencapquyenIoComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [

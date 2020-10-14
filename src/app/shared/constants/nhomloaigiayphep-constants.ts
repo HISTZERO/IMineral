@@ -58,6 +58,6 @@ export const ChiTietCapPhepHoatDongKS: any = {
   [NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac]: AdminRoutingName.cpchuyennhuongquyenthamdokhaithackhoangsanchitietUri,
 };
 
-export const ChiTietTinhTienCapQuyenHoatDongKS: any = {
+export const ChiTietTinhTienCapQuyenKhaiThacKS: any = {
   [NhomLoaiCapPhepEnum.TinhTienCapQuyen]: AdminRoutingName.tinhtiencapquyenchitietnUri,
 };

@@ -77,7 +77,8 @@ export class ThongtindangkyComponent implements OnInit {
   // Lưu trữ dữ liệu hồ sơ
   private itemHoSo: any;
 
-  constructor(private cfr: ComponentFactoryResolver,
+  constructor(
+    private cfr: ComponentFactoryResolver,
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute,
     public commonService: CommonServiceShared,

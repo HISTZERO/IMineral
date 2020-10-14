@@ -18,8 +18,7 @@
             <mat-tab-group mat-stretch-tabs #capPhepThamDoKhoanSanTabs [animationDuration]=""
               (selectedIndexChange)="tabChange($event)">
               <mat-tab [disabled]="disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepChungTabTitle' | translate }}">
-                <app-giayphep-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhoangsan.thongTinCapPhepTabTitle' | translate }}"
-                    [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"
+                <app-giayphep-io [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ThamDoKhoangSan"
                     [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false" (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
                     (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
                 </app-giayphep-io>

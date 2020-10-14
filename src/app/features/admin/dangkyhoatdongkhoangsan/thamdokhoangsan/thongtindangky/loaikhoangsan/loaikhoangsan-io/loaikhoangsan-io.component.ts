@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
@@ -12,6 +11,7 @@ import { OutputDmNhomKhoangSanModel } from 'src/app/models/admin/danhmuc/nhomkho
 import { OutputDmLoaiKhoangSanModel } from 'src/app/models/admin/danhmuc/loaikhoangsan.model';
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { InputDkThamDoLoaiKhoangSanModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdoloaikhoangsan.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-loaikhoangsan-io',
@@ -58,11 +58,12 @@ export class LoaikhoangsanIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    idloaikhoangsan: "",
-    tenkhoangsan: "",
+    idloaikhoangsan: DefaultValue.Empty,
+    tenkhoangsan: DefaultValue.Empty,
   };
 
-  constructor(public matSidenavService: MatsidenavService,
+  constructor(
+    public matSidenavService: MatsidenavService,
     public dmFacadeService: DmFacadeService,
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     private formBuilder: FormBuilder,
@@ -132,10 +133,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
    */
   formInit() {
     this.dKThamDoLoaiKhoangSanIOForm = this.formBuilder.group({
-      nhomkhoangsan: [""],
-      loaikhoangsan: [""],
-      tenkhoangsan: ["", Validators.required],
-      idloaikhoangsan: ["", Validators.required],
+      nhomkhoangsan: [DefaultValue.Empty],
+      loaikhoangsan: [DefaultValue.Empty],
+      tenkhoangsan: [DefaultValue.Empty, Validators.required],
+      idloaikhoangsan: [DefaultValue.Empty, Validators.required],
     });
   }
 
@@ -189,10 +190,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
     if (!this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
       this.allLoaiKhoangSan = [];
       this.loaiKhoangSanFilters = [];
-      this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
+      this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue(DefaultValue.Empty);
     } else {
       if (!inittState) {
-        this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue("");
+        this.dKThamDoLoaiKhoangSanIOForm.controls.loaikhoangsan.setValue(DefaultValue.Empty);
       }
 
       const nhomKhoangSan = this.dKThamDoLoaiKhoangSanIOForm.controls.nhomkhoangsan.value;
@@ -211,7 +212,7 @@ export class LoaikhoangsanIoComponent implements OnInit {
       }
 
     } else {
-      this.tenNhomKhoangSanDisplay = "";
+      this.tenNhomKhoangSanDisplay = DefaultValue.Empty;
     }
 
     await this.selectLoaiKhoangSan();
@@ -228,8 +229,8 @@ export class LoaikhoangsanIoComponent implements OnInit {
         if (this.dKThamDoLoaiKhoangSanIOForm.value.nhomkhoangsan) {
           this.dKThamDoLoaiKhoangSanIOForm.controls
             .idloaikhoangsan
-            .setValue("");
-          this.tenLoaiKhoangSanDisplay = "";
+            .setValue(DefaultValue.Empty);
+          this.tenLoaiKhoangSanDisplay = DefaultValue.Empty;
         } else {
           this.dKThamDoLoaiKhoangSanIOForm.controls
             .idloaikhoangsan
@@ -245,10 +246,10 @@ export class LoaikhoangsanIoComponent implements OnInit {
       } else {
         this.dKThamDoLoaiKhoangSanIOForm.controls
           .idloaikhoangsan
-          .setValue("");
+          .setValue(DefaultValue.Empty);
       }
 
-      this.tenLoaiKhoangSanDisplay = "";
+      this.tenLoaiKhoangSanDisplay = DefaultValue.Empty;
     }
   }
 

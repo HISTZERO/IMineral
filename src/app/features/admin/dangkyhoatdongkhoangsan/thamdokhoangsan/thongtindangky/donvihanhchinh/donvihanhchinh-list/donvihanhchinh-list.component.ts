@@ -3,7 +3,6 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent } from "@syncfusion/ej2-angular-grids";
-
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
@@ -11,6 +10,7 @@ import { DonvihanhchinhIoComponent } from "src/app/features/admin/dangkyhoatdong
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
 import { OutputDkThamDoDvhcModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdodvhc.model";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-donvihanhchinh-list',
@@ -40,7 +40,8 @@ export class DonvihanhchinhListComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
 
-  constructor(public matSidenavService: MatsidenavService,
+  constructor(
+    public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
     public dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
@@ -48,7 +49,7 @@ export class DonvihanhchinhListComponent implements OnInit {
     private translate: TranslateService) { }
 
   async ngOnInit() {
-    this.getDataTranslate();
+    await this.getDataTranslate();
 
     if (this.allowAutoInit) {
       await this.manualDataInit();
@@ -90,7 +91,8 @@ export class DonvihanhchinhListComponent implements OnInit {
    * Hàm lấy dữ liệu Dvdc
    */
   async getAllDangKyThamDoDvhc() {
-    if (this.iddangkythamdo === null || this.iddangkythamdo === undefined) {
+    if (this.iddangkythamdo === DefaultValue.Null || this.iddangkythamdo === DefaultValue.Undefined
+        || this.iddangkythamdo.trim() === DefaultValue.Empty) {
       return;
     }
 

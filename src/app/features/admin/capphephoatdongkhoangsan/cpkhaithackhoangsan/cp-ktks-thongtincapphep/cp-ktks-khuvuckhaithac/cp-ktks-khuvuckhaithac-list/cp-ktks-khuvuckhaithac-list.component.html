@@ -1,0 +1,74 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-lg-12" style="padding: 0px;">
+        <div class="card border">
+          <div class="card-header">
+            <h3 class="card-title">
+                <div class="row">
+                    <div class="col-md-8 mb-sm-1">
+                      <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.titleList" | translate }}</span>
+                    </div>
+                    <div class="col-md-4">
+                      <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCpKhaiThacKhuVucIOSidenav()">
+                        <i class="fal fa-plus-square"></i>
+                        {{ "COMMON.default.add" | translate }}
+                      </button>
+                      <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="reloadDataGrid()">
+                        <i class="far fa-sync-alt"></i>
+                        {{ "COMMON.default.load" | translate }}
+                      </button>
+                    </div>
+                </div>
+            </h3>
+          </div>
+          <div class="card-body">
+            <ejs-grid #gridCpKhaiThacKhuVuc *ngIf="listCpKhaiThacKhuVuc" [dataSource]="listCpKhaiThacKhuVuc"
+              [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true" [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
+              [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"  [allowResizing]="true" >
+              <ng-template #detailTemplate let-obj>
+                <table class="table table-striped">
+                  <thead class="thead-secondary">
+                    <tr>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutu' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieu' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadox' | translate }}</th>
+                      <th scope="col">{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoy' | translate }}</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let i of obj.listtoado">
+                      <th scope="row">{{i.thutu}}</th>
+                      <td>{{i.sohieu}}</td>
+                      <td>{{i.toadox}}</td>
+                      <td>{{i.toadoy}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ng-template>
+              <e-columns>
+                <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+                <e-column field="tenkhuvuc" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvuc' | translate }}"></e-column>
+                <e-column field="dientich" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientich' | translate }}"></e-column>
+                <e-column field="donvidientich" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientich' | translate }}"></e-column>
+                <e-column field="idkhaithackhuvuc"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+                  <ng-template #template let-data>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+                      (click)="editItemCpKhaiThacKhuVuc(data.idkhaithackhuvuc)">
+                        <i class="far fa-edit"></i>
+                      </button>
+                      <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+                        (click)="deleteItemCpKhaiThacKhuVuc(data)">
+                        <i class="far fa-trash"></i>
+                      </button>
+                    </div>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
