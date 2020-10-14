@@ -28,7 +28,7 @@
                 </app-giaypheptailieu-list>
               </mat-tab>
               <mat-tab [disabled]="disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhoangsan.thongTinCapPhepTabTitle' | translate }}">
-<!--                <app-cp-tdks-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepTanThuFormState($event)" #thongTinCapPhepComp [allowAutoInit]="false" ></app-cp-tdks-thongtincapphep>-->
+                <app-cp-ttks-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepTanThuFormState($event)" #thongTinCapPhepComp [allowAutoInit]="false" ></app-cp-ttks-thongtincapphep>
               </mat-tab>
             </mat-tab-group>
           </div>

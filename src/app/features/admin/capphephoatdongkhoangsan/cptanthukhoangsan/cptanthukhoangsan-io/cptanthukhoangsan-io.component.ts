@@ -20,6 +20,7 @@ import {
 import {DefaultValue} from 'src/app/shared/constants/global-var';
 import {GiaypheptailieuListComponent} from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
 import {CapPhepHoatDongKhoangSanFacadeService} from "src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
+import {CpTtksThongtincapphepComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component";
 
 @Component({
   selector: 'app-cptanthukhoangsan-io',
@@ -32,7 +33,7 @@ export class CptanthukhoangsanIoComponent implements OnInit {
   @ViewChild("compio", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
   @ViewChild("giayPhepIOComp", {static: false}) giayPhepIOComp: GiayphepIoComponent;
   @ViewChild("taiLieuListComp", {static: false}) taiLieuListComp: GiaypheptailieuListComponent;
- // @ViewChild("thongTinCapPhepComp", {static: false}) thongTinCapPhepComp: CpTdksThongtincapphepComponent;
+ @ViewChild("thongTinCapPhepComp", {static: false}) thongTinCapPhepComp: CpTtksThongtincapphepComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpTanThuKhoangSanChitiet;
 
@@ -203,11 +204,11 @@ export class CptanthukhoangsanIoComponent implements OnInit {
       this.taiLieuListComp.idgiayphep = this.idgiayphep;
       this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
       this.loadedTabState[CpTanThuKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = await this.taiLieuListComp.manualDataInit();
-    // } else if (index === CpTanThuKhoangSanTabEnum.ThongTinCapPhep && !this.loadedTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep]) {
-    //   this.thongTinCapPhepComp.matSidenav = this.matSidenav;
-    //   this.thongTinCapPhepComp.content = this.content;
-    //   this.thongTinCapPhepComp.idgiayphep = this.idgiayphep;
-    //   this.loadedTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepComp.manualDataInit();
+    } else if (index === CpTanThuKhoangSanTabEnum.ThongTinCapPhep && !this.loadedTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep]) {
+      this.thongTinCapPhepComp.matSidenav = this.matSidenav;
+      this.thongTinCapPhepComp.content = this.content;
+      this.thongTinCapPhepComp.idgiayphep = this.idgiayphep;
+      this.loadedTabState[CpTanThuKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepComp.manualDataInit();
     }
   }
 }
