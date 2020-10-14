@@ -259,6 +259,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           this.itemTinhTienCapQuyen.idtinhtiencapquyen = res.idtinhtiencapquyen;
           this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit;
           this.selectCurrentFormState();
+          this.setFormTitle();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -276,6 +277,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           this.itemTinhTienCapQuyen = inputModel;
           this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit;
           this.selectCurrentFormState();
+          this.setFormTitle();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -308,6 +310,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
               this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
+              this.setFormTitle()
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);

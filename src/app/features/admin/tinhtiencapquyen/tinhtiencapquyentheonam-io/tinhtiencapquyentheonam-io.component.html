@@ -22,51 +22,59 @@
   <div class="card-body">
     <form [formGroup]="tinhTienTheoNamIOForm">
       <div class="row">
-        <div class="col-lg-12 col-md-12 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-6">
           <div class="row form-group mx-0">
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.tongtienphainop" | translate }}
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.tongtienphainop" | translate }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-8 col-md-8 col-sm-8">
               <input class="form-control" type="text" formControlName="tongtienphainop" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.tongtienphainopPlaceholder' | translate}}" />
               <span *ngIf="formErrors.tongtienphainop" class="alert-danger">{{formErrors.tongtienphainop}}</span>
             </div>
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.solannop" | translate }}
+          </div>
+          <div class="row form-group mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.namnoplandau" | translate }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input class="form-control" type="text" formControlName="namnoplandau" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.namnoplandauPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.namnoplandau" class="alert-danger">{{formErrors.namnoplandau}}</span>
+            </div>
+          </div>
+          <div class="row form-group mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienlandau" | translate }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input class="form-control" type="text" formControlName="sotienlandau" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienlandauPlaceholder' | translate}}" />
+              <span *ngIf="formErrors.sotienlandau" class="alert-danger">{{formErrors.sotienlandau}}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <div class="row form-group mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.solannop" | translate }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
               <input class="form-control" type="text" formControlName="solannop" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.solannopPlaceholder' | translate}}" />
               <span *ngIf="formErrors.solannop" class="alert-danger">{{formErrors.solannop}}</span>
             </div>
           </div>
           <div class="row form-group mx-0">
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.namnoplandau" | translate }}
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.giatinhtienlandau" | translate }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <input class="form-control" type="text" formControlName="namnoplandau" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.namnoplandauPlaceholder' | translate}}" />
-              <span *ngIf="formErrors.namnoplandau" class="alert-danger">{{formErrors.namnoplandau}}</span>
-            </div>
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.giatinhtienlandau" | translate }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-8 col-md-8 col-sm-8">
               <input class="form-control" type="text" formControlName="giatinhtienlandau" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.giatinhtienlandauPlaceholder' | translate}}" />
               <span *ngIf="formErrors.giatinhtienlandau" class="alert-danger">{{formErrors.giatinhtienlandau}}</span>
             </div>
           </div>
           <div class="row form-group mx-0">
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienlandau" | translate }}
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienhangnam" | translate }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
-              <input class="form-control" type="text" formControlName="sotienlandau" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienlandauPlaceholder' | translate}}" />
-              <span *ngIf="formErrors.sotienlandau" class="alert-danger">{{formErrors.sotienlandau}}</span>
-            </div>
-            <label class="col-lg-2 col-md-4 col-sm-2 col-form-label text-right">{{ "TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienhangnam" | translate }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-4 col-md-4 col-sm-4">
+            <div class="col-lg-8 col-md-8 col-sm-8">
               <input class="form-control" type="text" formControlName="sotienhangnam" placeholder="{{'TINHTIENCAPQUYEN.tinhtiencapquyentheonam.sotienhangnamPlaceholder' | translate}}" />
               <span *ngIf="formErrors.sotienhangnam" class="alert-danger">{{formErrors.sotienhangnam}}</span>
             </div>
