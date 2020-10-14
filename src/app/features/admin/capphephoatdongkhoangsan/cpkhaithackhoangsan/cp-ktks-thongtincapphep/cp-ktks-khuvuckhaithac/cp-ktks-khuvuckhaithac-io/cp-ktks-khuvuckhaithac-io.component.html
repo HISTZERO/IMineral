@@ -2,34 +2,34 @@
     <form [formGroup]="cpKhaiThacKhuVucIOForm" class="pt-toolbar">
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvuc" | translate }}
+                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.tenkhuvuc" | translate }}
                 <small>(*)</small></label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="tenkhuvuc"
-                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvucPlaceholder' | translate}}" />
+                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.tenkhuvucPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.tenkhuvuc" class="alert-danger">{{formErrors.tenkhuvuc}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientich" | translate}}
+                class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.dientich" | translate}}
                 <small>(*)</small></label>
             <div class="col-sm-9">
                 <input class="form-control" type="text" formControlName="dientich"
-                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientichPlaceholder' | translate}}" />
+                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.dientichPlaceholder' | translate}}" />
                 <span *ngIf="formErrors.dientich" class="alert-danger">{{formErrors.dientich}}</span>
             </div>
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientich" | translate }}
+                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.donvidientich" | translate }}
                 <small>(*)</small>
             </label>
             <div class="col-sm-9">
                 <mat-select class="form-control" formControlName="donvidientich" *ngIf="dataTranslate"
-                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chondonvidientich' | translate}}">
+                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chondonvidientich' | translate}}">
                     <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chondonvidientich" | translate }}
+                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chondonvidientich" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let donViDienTich of donViDienTichList" [value]="donViDienTich.id">
                         {{ donViDienTich.name }}
@@ -40,14 +40,14 @@
         </div>
         <div class="form-group row mx-0" *ngIf="obj.loaicapphep === loaiCapPhep.ThamDoGiaHan">
             <label
-                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.loaikhuvuc" | translate }}
+                class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.loaikhuvuc" | translate }}
                 <small>(*)</small>
             </label>
             <div class="col-sm-9">
                 <mat-select class="form-control" formControlName="loaikhuvuc" *ngIf="dataTranslate"
-                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chonloaikhuvuc' | translate}}">
+                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chonloaikhuvuc' | translate}}">
                     <mat-option [value]="0">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chonloaikhuvuc" | translate }}
+                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chonloaikhuvuc" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let loaiKV of loaiKhuVuc" [value]="loaiKV.id">
                         {{ loaiKV.name }}
@@ -58,15 +58,15 @@
         </div>
         <div class="form-group row mx-0">
             <label
-                class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieu" | translate}}
+                class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.hequychieu" | translate}}
                 <small>(*)</small>
             </label>
             <div class="col-sm-9">
                 <mat-select class="form-control"
-                    placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chonhequychieu' | translate }}"
+                    placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chonhequychieu' | translate }}"
                     formControlName="hequychieu" *ngIf="dataTranslate">
                     <mat-option value="">
-                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chonhequychieu" | translate }}
+                        {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.chonhequychieu" | translate }}
                     </mat-option>
                     <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
                         {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
@@ -85,9 +85,9 @@
                             <div class="row">
                                 <div class="col-2">
                                     <div class="form-group mb-1">
-                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutu' | translate}}:</label>
+                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutu' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="thutu"
-                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuPlaceholder' | translate}}">
+                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutuPlaceholder' | translate}}">
                                         <span *ngIf="formErrorsToaDo.thutu"
                                             class="alert-danger">{{formErrorsToaDo.thutu}}</span>
                                         <span *ngIf="errorThuTu" class="alert-danger">{{errorThuTu}}</span>
@@ -95,27 +95,27 @@
                                 </div>
                                 <div class="col-2">
                                     <div class="form-group mb-1">
-                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieu' | translate}}:</label>
+                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieu' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="sohieu"
-                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieuPlaceholder' | translate}}">
+                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieuPlaceholder' | translate}}">
                                             <span *ngIf="formErrorsToaDo.sohieu"
                                             class="alert-danger">{{formErrorsToaDo.sohieu}}</span>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group mb-1">
-                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadox' | translate}}:</label>
+                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadox' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="toadox"
-                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoxPlaceholder' | translate}}">
+                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoxPlaceholder' | translate}}">
                                             <span *ngIf="formErrorsToaDo.toadox"
                                             class="alert-danger">{{formErrorsToaDo.toadox}}</span>
                                     </div>
                                 </div>
                                 <div class="col-3">
                                     <div class="form-group mb-1">
-                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoy' | translate}}:</label>
+                                        <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoy' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="toadoy"
-                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoyPlaceholder' | translate}}">
+                                            placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoyPlaceholder' | translate}}">
                                             <span *ngIf="formErrorsToaDo.toadoy"
                                             class="alert-danger">{{formErrorsToaDo.toadoy}}</span>
                                     </div>
@@ -124,7 +124,6 @@
                                     <button class="btn btn-success" style="position: absolute;top: 28px;"
                                         (click)="saveToaDoKhuVuc()">{{ 'COMMON.default.save' | translate }}</button>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -135,16 +134,16 @@
                             [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowResizing]="true">
                             <e-columns>
                                 <e-column field="thutu"
-                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutu' | translate }}">
+                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutu' | translate }}">
                                 </e-column>
                                 <e-column field="sohieu"
-                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieu' | translate }}">
+                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieu' | translate }}">
                                 </e-column>
                                 <e-column field="toadox"
-                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadox' | translate }}">
+                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadox' | translate }}">
                                 </e-column>
                                 <e-column field="toadoy"
-                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoy' | translate }}">
+                                    headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoy' | translate }}">
                                 </e-column>
                                 <e-column field="idthamdokhuvuc" isPrimaryKey='true'
                                     headerText="{{ 'COMMON.default.action' | translate }}">

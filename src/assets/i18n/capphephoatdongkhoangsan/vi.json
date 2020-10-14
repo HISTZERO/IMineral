@@ -301,7 +301,7 @@
     "matinhRequired": "Yêu cầu phải chọn tỉnh",
     "mahuyenRequired": "Yêu cầu phải chọn huyện",
     "maxaRequired": "Yêu cầu phải chọn xã",
-    "informedNotExistedCapPhepThamDoDvhc": "Cấp phép khai thác đơn vị hành chính không tồn tại"
+    "informedNotExistedCapPhepKhaiThacDvhc": "Cấp phép khai thác đơn vị hành chính không tồn tại"
   },
   "capphepkhaithacloaikhoangsan": {
     "titleList": "Danh sách loại khoáng sản",
@@ -312,16 +312,17 @@
     "tennhomkhoangsan": "Nhóm khoáng sản",
     "tenkhoangsan": "Tên khoáng sản",
     "truluong": "Trữ lượng",
+    "truluongPlaceholder": "Nhập trữ lượng",
     "donvitruluong": "Đơn vị trữ lượng",
     "chonloaikhoangsan": "---Chọn loại khoáng sản---",
     "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
-    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "donvitruluongPlaceholder": "---Chọn đơn vị trữ lượng---",
     "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
     "tenkhoangsanRequired": "Yêu cầu phải nhập tên khoáng sản",
     "tenkhoangsanPlaceholder": "Nhập tên khoáng sản",
     "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
     "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
-    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Cấp phép khai thác loại khoáng sản không tồn tại"
+    "informedNotExistedCapPhepKhaiThacLoaiKhoangSan": "Cấp phép khai thác loại khoáng sản không tồn tại"
   },
   "capphepkhaithaccongtrinh": {
     "titleList": "Danh sách công trình",
@@ -334,6 +335,14 @@
     "toadoy": "Tọa độ y",
     "hequychieu": "Hệ quy chiếu",
     "ghichu": "Ghi chú",
+    "luuluong": "Lưu lượng",
+    "chedokhaithac": "Chế độ khai thác",
+    "hathap": "Hạ thấp",
+    "mucnuoctinh": "Mực nước tính",
+    "luuluongPlaceholder": "Nhập lưu lượng",
+    "chedokhaithacPlaceholder": "Nhập chế độ khai thác",
+    "hathapPlaceholder": "Nhập hạ thấp",
+    "mucnuoctinhPlaceholder": "Nhập mực nước tính",
     "sohieuPlaceholder": "Nhập số hiệu",
     "chieusauPlaceholder": "Nhập chiều sâu",
     "toadoxPlaceholder": "Nhập tọa độ x",
@@ -348,7 +357,7 @@
     "toadoyRequired": "Tọa độ y không được để trống",
     "toadoyFormat": "Tọa độ y chưa đúng định dạng yêu cầu",
     "hequychieuRequired": "Hệ quy chiếu không được để trống",
-    "informedNotExistedCapPhepThamDoCongTrinh": "Cấp phép khai thác công trình không tồn tại"
+    "informedNotExistedCapPhepKhaiThacCongTrinh": "Cấp phép khai thác công trình không tồn tại"
   },
   "capphepkhaithackhuvuc": {
     "titleList": "Danh sách khu vực cấp phép khai thác",
@@ -386,6 +395,17 @@
     "toadoxIsNumber": "Tọa độ x phải là kiểu số",
     "toadoyIsNumber": "Tọa độ y phải là kiểu số",
     "dientichIsNumber": "Diện tích phải là kiểu số",
-    "informedNotExistedCapPhepThamDoKhuVuc": "Cấp phép khai thác khu vực không tồn tại"
+    "informedNotExistedCapPhepKhaiThacKhuVuc": "Cấp phép khai thác khu vực không tồn tại"
+  },
+  "capphepkhaithacthietbi": {
+    "titleList": "Danh sách thiết bị khai thác",
+    "titleAdd": "Thêm mới thiết bị khai thác",
+    "titleEdit": "Sửa dữ liệu thiết bị khai thác",
+    "contentDelete": "Tên thiết bị: ",
+    "tenthietbi": "Tên thiết bị",
+    "mota": "Mô tả",
+    "tenthietbiPlaceholder": "Nhập tên thiết bị",
+    "motaPlaceholder": "Nhập mô tả",
+    "informedNotExistedCapPhepKhaiThacThietBi": "Cấp phépkhai thác thiết bị không tồn tại"
   }
 }
