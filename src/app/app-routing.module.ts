@@ -3,13 +3,12 @@ import { Routes, RouterModule } from "@angular/router";
 
 import { CoreRoutingName } from "src/app/routes/core-routes-name";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
-import { PublicRoutingName } from "src/app/routes/public-routes-name";
 
 const appRoutes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: PublicRoutingName.taiNguyenNuoc,
+    redirectTo: AdminRoutingName.bandoUri,
   },
   {
     path: AdminRoutingName.adminUri,

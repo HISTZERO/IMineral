@@ -16,7 +16,7 @@ import { DanhmucModule } from "src/app/features/admin/danhmuc/danhmuc.module";
 import { CapphephoatdongkhoangsanComponent } from "src/app/features/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan.component";
 import { CpthamdokhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-list/cpthamdokhoangsan-list.component';
 import { CpthamdokhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cpthamdokhoangsan-io/cpthamdokhoangsan-io.component';
-import {HosoGiaytoModule} from "src/app/features/admin/hosogiayto/hosogiayto.module";
+import { HosoGiaytoModule } from "src/app/features/admin/hosogiayto/hosogiayto.module";
 import { HosoOptionComponent } from 'src/app/features/admin/hosogiayto/hoso/hoso-option/hoso-option.component';
 import { CpkhaithackhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-list/cpkhaithackhoangsan-list.component';
 import { CpkhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan-io/cpkhaithackhoangsan-io.component';
@@ -46,40 +46,64 @@ import { CpTdksCongtrinhthamdoListComponent } from 'src/app/features/admin/capph
 import { CpTdksKhuvucthamdoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo.component';
 import { CpTdksKhuvucthamdoIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo-io/cp-tdks-khuvucthamdo-io.component';
 import { CpTdksKhuvucthamdoListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo-list/cp-tdks-khuvucthamdo-list.component';
+import { CpKtksThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thongtincapphep.component';
+import { CpKtksKhaithackhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-khaithackhoangsan-io/cp-ktks-khaithackhoangsan-io.component';
+import { CpKtksCongtrinhkhaithacIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-congtrinhkhaithac/cp-ktks-congtrinhkhaithac-io/cp-ktks-congtrinhkhaithac-io.component';
+import { CpKtksCongtrinhkhaithacListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-congtrinhkhaithac/cp-ktks-congtrinhkhaithac-list/cp-ktks-congtrinhkhaithac-list.component';
+import { CpKtksDonvihanhchinhListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-donvihanhchinh/cp-ktks-donvihanhchinh-list/cp-ktks-donvihanhchinh-list.component';
+import { CpKtksDonvihanhchinhIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-donvihanhchinh/cp-ktks-donvihanhchinh-io/cp-ktks-donvihanhchinh-io.component';
+import { CpKtksKhuvuckhaithacListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-khuvuckhaithac/cp-ktks-khuvuckhaithac-list/cp-ktks-khuvuckhaithac-list.component';
+import { CpKtksKhuvuckhaithacIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-khuvuckhaithac/cp-ktks-khuvuckhaithac-io/cp-ktks-khuvuckhaithac-io.component';
+import { CpKtksLoaikhoangsanListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-loaikhoangsan/cp-ktks-loaikhoangsan-list/cp-ktks-loaikhoangsan-list.component';
+import { CpKtksLoaikhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-loaikhoangsan/cp-ktks-loaikhoangsan-io/cp-ktks-loaikhoangsan-io.component';
+import { CpKtksThietbikhaithacListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thietbikhaithac/cp-ktks-thietbikhaithac-list/cp-ktks-thietbikhaithac-list.component';
+import { CpKtksThietbikhaithacIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thietbikhaithac/cp-ktks-thietbikhaithac-io/cp-ktks-thietbikhaithac-io.component';
 
 @NgModule({
   declarations: [
-  CapphephoatdongkhoangsanComponent,
-  CpthamdokhoangsanListComponent,
-  CpthamdokhoangsanIoComponent,
-  CpkhaithackhoangsanListComponent,
-  CpkhaithackhoangsanIoComponent,
-  CppheduyettruluongkhoangsanListComponent,
-  CppheduyettruluongkhoangsanIoComponent,
-  CptanthukhoangsanListComponent,
-  CptanthukhoangsanIoComponent,
-  CpdongcuamokhoangsanListComponent,
-  CpdongcuamokhoangsanIoComponent,
-  CpdaugiaquyenkhaithackhoangsanListComponent,
-  CpdaugiaquyenkhaithackhoangsanIoComponent,
-  CptralaigiayphepthamdokhaithackhoangsanListComponent,
-  CptralaigiayphepthamdokhaithackhoangsanIoComponent,
-  CpchuyennhuongquyenthamdokhaithackhoangsanListComponent,
-  CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent,
-  CpTdksThongtincapphepComponent,
-  CpTdksThamdokhoangsanIoComponent,
-  CpTdksDonvihanhchinhComponent,
-  CpTdksDonvihanhchinhListComponent,
-  CpTdksDonvihanhchinhIoComponent,
-  CpTdksLoaikhoangsanComponent,
-  CpTdksLoaikhoangsanListComponent,
-  CpTdksLoaikhoangsanIoComponent,
-  CpTdksCongtrinhthamdoComponent,
-  CpTdksCongtrinhthamdoListComponent,
-  CpTdksCongtrinhthamdoIoComponent,
-  CpTdksKhuvucthamdoComponent,
-  CpTdksKhuvucthamdoListComponent,
-  CpTdksKhuvucthamdoIoComponent
+    CapphephoatdongkhoangsanComponent,
+    CpthamdokhoangsanListComponent,
+    CpthamdokhoangsanIoComponent,
+    CpkhaithackhoangsanListComponent,
+    CpkhaithackhoangsanIoComponent,
+    CppheduyettruluongkhoangsanListComponent,
+    CppheduyettruluongkhoangsanIoComponent,
+    CptanthukhoangsanListComponent,
+    CptanthukhoangsanIoComponent,
+    CpdongcuamokhoangsanListComponent,
+    CpdongcuamokhoangsanIoComponent,
+    CpdaugiaquyenkhaithackhoangsanListComponent,
+    CpdaugiaquyenkhaithackhoangsanIoComponent,
+    CptralaigiayphepthamdokhaithackhoangsanListComponent,
+    CptralaigiayphepthamdokhaithackhoangsanIoComponent,
+    CpchuyennhuongquyenthamdokhaithackhoangsanListComponent,
+    CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent,
+    CpTdksThongtincapphepComponent,
+    CpTdksThamdokhoangsanIoComponent,
+    CpTdksDonvihanhchinhComponent,
+    CpTdksDonvihanhchinhListComponent,
+    CpTdksDonvihanhchinhIoComponent,
+    CpTdksLoaikhoangsanComponent,
+    CpTdksLoaikhoangsanListComponent,
+    CpTdksLoaikhoangsanIoComponent,
+    CpTdksCongtrinhthamdoComponent,
+    CpTdksCongtrinhthamdoListComponent,
+    CpTdksCongtrinhthamdoIoComponent,
+    CpTdksKhuvucthamdoComponent,
+    CpTdksKhuvucthamdoListComponent,
+    CpTdksKhuvucthamdoIoComponent,
+    CpKtksThongtincapphepComponent,
+    CpKtksKhaithackhoangsanIoComponent,
+    CpKtksCongtrinhkhaithacIoComponent,
+    CpKtksCongtrinhkhaithacListComponent,
+    CpKtksDonvihanhchinhListComponent,
+    CpKtksDonvihanhchinhIoComponent,
+    CpKtksKhuvuckhaithacListComponent,
+    CpKtksKhuvuckhaithacIoComponent,
+    CpKtksLoaikhoangsanListComponent,
+    CpKtksLoaikhoangsanIoComponent,
+    CpKtksThietbikhaithacListComponent,
+    CpKtksThietbikhaithacIoComponent
   ],
   exports: [
   ],
@@ -101,7 +125,14 @@ import { CpTdksKhuvucthamdoListComponent } from 'src/app/features/admin/cappheph
     CpTdksDonvihanhchinhIoComponent,
     CpTdksLoaikhoangsanIoComponent,
     CpTdksCongtrinhthamdoIoComponent,
-    CpTdksKhuvucthamdoIoComponent
+    CpTdksKhuvucthamdoIoComponent,
+    CpKtksThietbikhaithacIoComponent,
+    CpKtksLoaikhoangsanIoComponent,
+    CpKtksCongtrinhkhaithacIoComponent,
+    CpKtksKhuvuckhaithacIoComponent,
+    CpKtksDonvihanhchinhIoComponent,
+    CpKtksKhaithackhoangsanIoComponent
+
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

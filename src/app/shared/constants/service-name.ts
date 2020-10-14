@@ -71,6 +71,9 @@ export class ServiceName {
   public static DANGKYTANTHUTRALAI = "dangkytanthutralai";
   // Đăng ký đóng cửa mỏ
   public static DANGKYDONGCUAMO = "dangkyskhaithacdongcuamo";
+  // Đăng ký chuyển nhượng quyền
+  public static DANGKYTHAMDOCHUYENNHUONG = "thamdochuyennhuong";
+  public static DANGKYKHAITHACCHUYENNHUONG = "dangkykhaithacchuyennhuong";
   // Giấy phép
   public static GIAYPHEP = "giayphep";
   public static CPTHAMDOKHOANGSAN = "cpthamdokhoangsan";
@@ -78,6 +81,12 @@ export class ServiceName {
   public static CPTHAMDOLOAIKHOANGSAN = "cpthamdoloaikhoangsan";
   public static CPTHAMDOCONGTRINH = "cpthamdocongtrinh";
   public static CPTHAMDOKHUVUC = "cpthamdokhuvuc";
+  // Cấp phép khai thác khoáng sản
+  public static CPKHAITHACKHOANGSAN = "cpkhaithackhoangsan";
+  public static CPKHAITHACDVHC = "cpkhaithacdvhc";
+  public static CPKHAITHACCONGTRINH = "cpkhaithaccongtrinh";
+  public static CPKHAITHACLOAIKHOANGSAN = "cpkhaithacloaikhoangsan";
+  public static CPKHAITHACKHUVUC = "cpkhaithackhuvuc";
   // Tính tiền cấp quyền
   public static TTTINHTIENCAPQUYEN = "tttinhtiencapquyen";
   // Thiết lập
