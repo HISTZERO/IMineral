@@ -50,7 +50,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
   // Chứa danh sách Lĩnh Vực
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
 
-  // Filter Lĩnh Vực
+  // Filter hệ quy chiếu
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
 
   // Chứa dữ liệu translate
