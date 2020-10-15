@@ -152,26 +152,26 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       tenkhuvuctanthu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.tenkhuvuctanthuRequired},
       diadiem: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.diadiemRequired},
       dientichkhaithac: {
-        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.dientichkhaithacRequired,
-        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.dientichkhaithacRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
       },
       truluongdiachat: {
-        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.truluongdiachatRequired,
-        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.truluongdiachatRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
       },
       truluongkhaithac: {
-        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.truluongkhaithacRequired,
-        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.truluongkhaithacRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
       },
-      congsuatkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.congsuatkhaithacRequired},
-      mucsaukhaithactu: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
-      mucsaukhaithacden: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
+      congsuatkhaithac: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.congsuatkhaithacRequired},
+      mucsaukhaithactu: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
+      mucsaukhaithacden: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
       donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvidientichRequired},
       donvithoihan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvithoihanRequired},
       donvichieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvichieusauRequired},
       hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.hequychieuRequired},
-      donvitruluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvitruluongRequired},
-      donvicongsuat: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvicongsuatRequired},
+      donvitruluong: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvitruluongRequired},
+      donvicongsuat: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvicongsuatRequired},
     };
   }
 

@@ -20,8 +20,13 @@ import {ActivatedRoute} from "@angular/router";
 import {CommonServiceShared} from "src/app/services/utilities/common-service";
 import {HoSoGiayToFacadeService} from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import {DefaultValue} from "src/app/shared/constants/global-var";
-import {CapPhepThamDoKhoangSanComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component";
 import {MatSidenav} from "@angular/material/sidenav";
+import {CpTtksTanthukhoangsanIoComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component";
+
+export const CapPhepTanThuKhoangSanComponent: any = {
+  [LoaiCapPhepEnum.KhaiThacTanThuKhoangSan]: CpTtksTanthukhoangsanIoComponent,
+  [LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan]: CpTtksTanthukhoangsanIoComponent,
+}
 
 @Component({
   selector: 'app-cp-ttks-thongtincapphep',
@@ -179,7 +184,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     this.contentContainer.viewContainerRef.clear();
 
     if (this.itemGiayPhep) {
-      factory = this.cfr.resolveComponentFactory(CapPhepThamDoKhoangSanComponent[this.itemGiayPhep.loaicapphep]);
+      factory = this.cfr.resolveComponentFactory(CapPhepTanThuKhoangSanComponent[this.itemGiayPhep.loaicapphep]);
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
@@ -196,26 +201,26 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     }
 
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepTanThuFormState(event));
-    componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepTanThu(event));
+    componentRef.instance.selectIdCapPhepTanThuEvent.subscribe(event => this.getIdCapPhepTanThu(event));
   }
 
   async tabChange(index: any) {
-  //   if (index === CpTanThuKhoangSanTabEnum.DonViHanhChinh && !this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh]) {
-  //     this.capPhepThamDoDvhc.matSidenav = this.matSidenav;
-  //     this.capPhepThamDoDvhc.content = this.content;
-  //     this.capPhepThamDoDvhc.idcappheptanthu = this.idcappheptanthu;
-  //     this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = await this.capPhepThamDoDvhc.manualDataInit();
-  //   } else if (index === CpTanThuKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan]) {
-  //     this.capPhepThamDoLoaiKhoangSan.matSidenav = this.matSidenav;
-  //     this.capPhepThamDoLoaiKhoangSan.content = this.content;
-  //     this.capPhepThamDoLoaiKhoangSan.idcappheptanthu = this.idcappheptanthu;
-  //     this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepThamDoLoaiKhoangSan.manualDataInit();
-  //   } else if (index === CpTanThuKhoangSanTabEnum.KhuVucTanThu && !this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu]) {
-  //     this.capPhepThamDoKhuVuc.matSidenav = this.matSidenav;
-  //     this.capPhepThamDoKhuVuc.content = this.content;
-  //     this.capPhepThamDoKhuVuc.idcappheptanthu = this.idcappheptanthu;
-  //     this.capPhepThamDoKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
-  //     this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.capPhepThamDoKhuVuc.manualDataInit();
-  //   }
+    //   if (index === CpTanThuKhoangSanTabEnum.DonViHanhChinh && !this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh]) {
+    //     this.capPhepThamDoDvhc.matSidenav = this.matSidenav;
+    //     this.capPhepThamDoDvhc.content = this.content;
+    //     this.capPhepThamDoDvhc.idcappheptanthu = this.idcappheptanthu;
+    //     this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = await this.capPhepThamDoDvhc.manualDataInit();
+    //   } else if (index === CpTanThuKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan]) {
+    //     this.capPhepThamDoLoaiKhoangSan.matSidenav = this.matSidenav;
+    //     this.capPhepThamDoLoaiKhoangSan.content = this.content;
+    //     this.capPhepThamDoLoaiKhoangSan.idcappheptanthu = this.idcappheptanthu;
+    //     this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepThamDoLoaiKhoangSan.manualDataInit();
+    //   } else if (index === CpTanThuKhoangSanTabEnum.KhuVucTanThu && !this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu]) {
+    //     this.capPhepThamDoKhuVuc.matSidenav = this.matSidenav;
+    //     this.capPhepThamDoKhuVuc.content = this.content;
+    //     this.capPhepThamDoKhuVuc.idcappheptanthu = this.idcappheptanthu;
+    //     this.capPhepThamDoKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
+    //     this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.capPhepThamDoKhuVuc.manualDataInit();
+    //   }
   }
 }

@@ -135,8 +135,8 @@ import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-th
     CpKtksCongtrinhkhaithacIoComponent,
     CpKtksKhuvuckhaithacIoComponent,
     CpKtksDonvihanhchinhIoComponent,
-    CpKtksKhaithackhoangsanIoComponent
-
+    CpKtksKhaithackhoangsanIoComponent,
+    CpTtksTanthukhoangsanIoComponent,
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
