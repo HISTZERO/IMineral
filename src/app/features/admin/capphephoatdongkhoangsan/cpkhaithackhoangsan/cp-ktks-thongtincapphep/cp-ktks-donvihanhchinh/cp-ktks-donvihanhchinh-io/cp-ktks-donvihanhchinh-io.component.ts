@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { InputCpThamDoDvhcModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdodvhc.model";
 import { OutputDmDvhcModel } from "src/app/models/admin/danhmuc/dvhc.model";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -10,7 +9,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { InputCpKhaiThacDVHCModel } from "../../../../../../../models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacdvhc.model";
+import { InputCpKhaiThacDVHCModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacdvhc.model";
 
 @Component({
   selector: 'app-cp-ktks-donvihanhchinh-io',
@@ -110,9 +109,9 @@ export class CpKtksDonvihanhchinhIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tinh: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.matinhRequired },
-      huyen: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.mahuyenRequired },
-      xa: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdodvhc.maxaRequired }
+      tinh: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacdvhc.matinhRequired },
+      huyen: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacdvhc.mahuyenRequired },
+      xa: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacdvhc.maxaRequired }
     };
   }
 

@@ -51,7 +51,10 @@ export class KtksCongtrinhkhaithacIoComponent implements OnInit {
     toadox: "",
     toadoy: "",
     hequychieu: "",
-    ghichu: ""
+    ghichu: "",
+    luuluong: "",
+    hathap: "",
+    mucnuoctinh: "",
   };
 
   constructor(public matSidenavService: MatsidenavService,
@@ -89,11 +92,11 @@ export class KtksCongtrinhkhaithacIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.sohieuRequired },
-      chieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusauFormat },
-      toadox: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoxFormat },
-      toadoy: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoyFormat },
-      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.hequychieuRequired },
+      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.sohieuRequired },
+      chieusau: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.chieusauRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.chieusauFormat },
+      toadox: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadoxRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadoxFormat },
+      toadoy: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadoyRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadoyFormat },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.hequychieuRequired },
     };
   }
 
@@ -115,7 +118,10 @@ export class KtksCongtrinhkhaithacIoComponent implements OnInit {
       toadox: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       toadoy: ["", [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       hequychieu: ["", Validators.required],
-      ghichu: [""]
+      ghichu: [""],
+      luuluong: [""],
+      hathap: [""],
+      mucnuoctinh: [""],
     });
   }
 
@@ -130,7 +136,10 @@ export class KtksCongtrinhkhaithacIoComponent implements OnInit {
         toadox: this.obj.toadox,
         toadoy: this.obj.toadoy,
         hequychieu: this.obj.hequychieu,
-        ghichu: this.obj.ghichu
+        ghichu: this.obj.ghichu,
+        luuluong: this.obj.luuluong,
+        hathap: this.obj.hathap,
+        mucnuoctinh: this.obj.mucnuoctinh,
       });
     }
   }

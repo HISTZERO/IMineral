@@ -68,6 +68,8 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
   public title: string;
   // giấy phep item
   private itemGiayPhep: OutputGiayPhepModel;
+  // Chứa thuộc tính hiển thị tab thiết bị
+  public showFormInput: boolean = false;
   // form errors
   formErrors = {
     tenmo: DefaultValue.Empty,
@@ -158,6 +160,10 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
 
     if (this.itemGiayPhep) {
       this.capPhepKhaiThacKhoangSan = await this.getCapPhepKhaiThacByIdGiayPhep(this.idgiayphep);
+
+      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+        this.showFormInput = true;
+      }
 
       if (this.capPhepKhaiThacKhoangSan) {
         this.currentAction = CapPhepKhaiThacActionEnum.Edit;
@@ -379,7 +385,7 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
   deleteItemCapPhepKhaiThacKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
       this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.contentDelete,
-      "this.capPhepKhaiThacKhoangSan.diadiem"
+      ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {

@@ -124,7 +124,7 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
       .getByid(idKhaiThacDvhc).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.informedNotExistedDangKyThamDoDvhc);
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.informedNotExistedDangKyKhaiThacDvhc);
       return;
     }
 
@@ -132,7 +132,7 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleEdit );
+    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.titleEdit );
     await this.matSidenavService.setContentComp(KtksDonvihanhchinhIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -145,7 +145,7 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.titleAdd);
     this.matSidenavService.setContentComp(KtksDonvihanhchinhIoComponent, "new", {iddangkykhaithac: this.iddangkykhaithac});
     this.matSidenavService.open();
   }
@@ -181,7 +181,7 @@ export class KtksDonvihanhchinhListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.contentDelete,
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.contentDelete,
       this.selectedItem.tentinh + " - " + this.selectedItem.tenhuyen + " - " + this.selectedItem.tenxa
     );
     dialogRef.afterClosed().subscribe(async (result) => {

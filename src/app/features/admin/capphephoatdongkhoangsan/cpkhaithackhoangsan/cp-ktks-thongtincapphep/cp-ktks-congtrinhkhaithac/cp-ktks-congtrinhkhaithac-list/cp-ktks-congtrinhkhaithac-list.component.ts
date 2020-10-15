@@ -3,16 +3,15 @@ import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+
 import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { OutputCpThamDoCongTrinhModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.model';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { CpTdksCongtrinhthamdoIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-io/cp-tdks-congtrinhthamdo-io.component';
-import { OutputCpKhaiThacCongTrinhModel } from "../../../../../../../models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.model";
-import { CpKtksCongtrinhkhaithacIoComponent } from "../cp-ktks-congtrinhkhaithac-io/cp-ktks-congtrinhkhaithac-io.component";
+import { OutputCpKhaiThacCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.model";
+import { CpKtksCongtrinhkhaithacIoComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-congtrinhkhaithac/cp-ktks-congtrinhkhaithac-io/cp-ktks-congtrinhkhaithac-io.component";
 
 @Component({
   selector: 'app-cp-ktks-congtrinhkhaithac-list',
@@ -140,7 +139,7 @@ export class CpKtksCongtrinhkhaithacListComponent implements OnInit {
     .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.informedNotExistedCapPhepThamDoCongTrinh);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdocongtrinh.informedNotExistedCapPhepKhaiThacCongTrinh);
       return;
     }
 

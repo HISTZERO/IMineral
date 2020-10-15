@@ -6,7 +6,7 @@
           <h3 class="card-title">
             <div class="row">
               <div class="col-md-4 mb-sm-1">
-                <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleList" | translate }}</span>
+                <span class="title">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.titleList" | translate }}</span>
               </div>
               <div class="col-md-8">
                 <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openDkKhaiThacCongTrinhIOSidenav()">
@@ -27,10 +27,10 @@
                     [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true" >
             <e-columns>
               <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-              <e-column field="sohieu" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.sohieu' | translate }}"></e-column>
-              <e-column field="chieusau" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.chieusau' | translate }}"></e-column>
-              <e-column field="toadox" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadox' | translate }}"></e-column>
-              <e-column field="toadoy" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.toadoy' | translate }}"></e-column>
+              <e-column field="sohieu" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.sohieu' | translate }}"></e-column>
+              <e-column field="chieusau" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.chieusau' | translate }}"></e-column>
+              <e-column field="toadox" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadox' | translate }}"></e-column>
+              <e-column field="toadoy" headerText="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.toadoy' | translate }}"></e-column>
               <e-column field="idcongtrinh"  isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                 <ng-template #template let-data>
                   <div class="btn-group">

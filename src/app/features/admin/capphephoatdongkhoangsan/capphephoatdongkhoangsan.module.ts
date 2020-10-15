@@ -58,6 +58,7 @@ import { CpKtksLoaikhoangsanListComponent } from 'src/app/features/admin/capphep
 import { CpKtksLoaikhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-loaikhoangsan/cp-ktks-loaikhoangsan-io/cp-ktks-loaikhoangsan-io.component';
 import { CpKtksThietbikhaithacListComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thietbikhaithac/cp-ktks-thietbikhaithac-list/cp-ktks-thietbikhaithac-list.component';
 import { CpKtksThietbikhaithacIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thietbikhaithac/cp-ktks-thietbikhaithac-io/cp-ktks-thietbikhaithac-io.component';
+import { CpDongcuamoThongtincapphepComponent } from './cpdongcuamokhoangsan/cp-dongcuamo-thongtincapphep/cp-dongcuamo-thongtincapphep.component';
 import { CpTtksThongtincapphepComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component';
 import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component';
 
@@ -106,6 +107,7 @@ import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-th
     CpKtksLoaikhoangsanIoComponent,
     CpKtksThietbikhaithacListComponent,
     CpKtksThietbikhaithacIoComponent,
+    CpDongcuamoThongtincapphepComponent,
     CpTtksThongtincapphepComponent,
     CpTtksTanthukhoangsanIoComponent
   ],
