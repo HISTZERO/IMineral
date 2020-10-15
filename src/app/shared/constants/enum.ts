@@ -280,6 +280,14 @@ export enum CpKhaiThacKhoangSanChiTietTabEnum {
   ThietBiKhaiThac = 5
 }
 
+export enum CpDongCuaMoChiTietTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucDongCuaMo = 3,
+  CongTrinhDongCuaMo = 4,
+}
+
 export enum CapPhepThamDoActionEnum {
   None = 0,
   Add = 1,

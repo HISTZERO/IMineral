@@ -70,13 +70,20 @@
     "khuVucThamDoTabTile": "Khu vực thăm dò",
     "congTrinhThamDoTabTitle": "Công trình thăm dò",
     "congTrinhKhaiThacTabTitle": "Công trình khai thác",
+    "congTrinhDongCuaMoTabTitle": "Công trình đóng cửa mỏ",
     "informedNotExistedGiayPhepThamDo": "Giấy phép thăm dò không tồn tại",
     "informedNotExistedGiayPhepKhaiThac": "Giấy phép khai thác không tồn tại",
     "thongTinChiTietKhaiThacTabTitle": "Thông tin chi tiết",
     "donViHanhChinhKhaiThacTabTile": "Đơn vị hành chính",
     "loaiKhoangSanKhaiThacTabTile": "Loại khoáng sản",
     "khuVucKhaiThacTabTile": "Khu vực khai thác",
-    "thietBiKhaiThacTabTitle": "Thiết bị khai thác"
+    "thietBiKhaiThacTabTitle": "Thiết bị khai thác",
+    "informedNotExistedGiayPhepDongCuaMo": "Giấy phép đóng cửa mỏ không tồn tại",
+    "thongTinChiTietDongCuaMoTabTitle": "Thông tin chi tiết",
+    "donViHanhChinhDongCuaMoTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanDongCuaMoTabTile": "Loại khoáng sản",
+    "khuVucDongCuaMoTabTile": "Khu vực đóng cửa mỏ",
+    "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác"
   },
   "cptdksthamdokhoangsan": {
     "titleAdd": "Thêm mới cấp phép chi tiết thăm dò khoáng sản",
