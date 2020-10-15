@@ -1,5 +1,5 @@
 export class OutputDmHeQuyChieuModel {
-  srid: number;
+  srid: string;
   prjname: string;
   srtext: string;
   proj4text: string;
@@ -9,7 +9,7 @@ export class OutputDmHeQuyChieuModel {
 }
 
 export class InputDmHeQuyChieuModel {
-  srid: number;
+  srid: string;
   prjname: string;
   srtext: string;
   proj4text: string;
