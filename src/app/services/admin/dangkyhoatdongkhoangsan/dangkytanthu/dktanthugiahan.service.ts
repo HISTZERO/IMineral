@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from '@angular/core';
+import {HttpClient} from "@angular/common/http";
 
-import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import { environment } from "src/environments/environment";
-import { ServiceName } from "src/app/shared/constants/service-name";
+import {RepositoryEloquentService} from "src/app/services/data/baserepository.service";
+import {environment} from "src/environments/environment";
+import {ServiceName} from "src/app/shared/constants/service-name";
 import {
   InputDkTanThuGiaHanModel,
   OutputDkTanThuGiaHanModel
@@ -39,6 +39,19 @@ export class DktanthugiahanService extends RepositoryEloquentService {
     }
   }
 
+  public getDangKyTanThuGiaHanByIdGiayPhep(idGiayPhep: any) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTANTHUGIAHAN + "/getdktanthugiahanbyidgiayphep"
+      });
+
+      return this.httpClient.get(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+    }
+  }
+
   public deleteDangKyTanThuByIdHoSo(idHoSo: string) {
     try {
       this.setServiceInfo({
@@ -52,5 +65,6 @@ export class DktanthugiahanService extends RepositoryEloquentService {
 
     }
   }
+
 
 }

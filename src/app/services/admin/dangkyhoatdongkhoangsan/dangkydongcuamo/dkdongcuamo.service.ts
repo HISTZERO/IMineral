@@ -38,4 +38,17 @@ export class DkdongcuamoService extends RepositoryEloquentService {
     }
   }
 
+  public getDangKyDongCuaMoByIdGiayPhep(idGiayPhep: any) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYDONGCUAMO + "/getdkkhaithacdongcuamobyidgiayphep"
+      });
+
+      return this.httpClient.get(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+    }
+  }
+
 }

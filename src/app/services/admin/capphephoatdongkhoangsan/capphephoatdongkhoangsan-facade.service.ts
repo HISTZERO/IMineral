@@ -12,6 +12,7 @@ import { CpkhaithaccongtrinhService } from "src/app/services/admin/capphephoatdo
 import { CpkhaithackhuvucService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.service";
 import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
 import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
+import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
 
 @Injectable({
   providedIn: "root",
@@ -73,6 +74,11 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   // Cấp phép khai thác thiết bị service
   public getCapPhepKhaiThacThietBiService() {
     return new CpkhaithacthietbiService(this.httpClient);
+  }
+
+  // Cấp phép  tận thu service
+  public getCapPhepTanThuKhoangSanService() {
+    return new CpTanThuKhoangSanService(this.httpClient);
   }
 
 }
