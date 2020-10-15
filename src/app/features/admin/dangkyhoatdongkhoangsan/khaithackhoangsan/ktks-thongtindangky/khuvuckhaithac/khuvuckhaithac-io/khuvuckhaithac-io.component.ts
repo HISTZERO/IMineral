@@ -259,6 +259,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.insertKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -276,6 +277,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -326,7 +328,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       toadoy: "",
     });
 
-    this.listToaDoKhuVuc = [];
+
   }
 
   /**
