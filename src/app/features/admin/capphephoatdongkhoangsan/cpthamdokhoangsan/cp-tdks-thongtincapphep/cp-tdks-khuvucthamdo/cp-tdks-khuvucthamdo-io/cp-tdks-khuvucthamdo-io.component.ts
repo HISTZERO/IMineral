@@ -75,15 +75,17 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
   validationErrorMessages = {};
 
   // Chứa error tọa độ khu vực
-  public validationErrorToaDo = {}
+  public validationErrorToaDo = {};
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
 
   // Form errors khu vực
   formErrors = {
     tenkhuvuc: DefaultValue.Empty,
     dientich: DefaultValue.Empty,
     donvidientich: DefaultValue.Empty,
-    loaikhuvuc: DefaultValue.Empty,
-    hequychieu: DefaultValue.Empty,
+    loaikhuvuc: DefaultValue.Empty
+    // hequychieu: DefaultValue.Empty,
   };
 
   // Form errors tọa độ
@@ -105,15 +107,12 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-
-    // Khởi tạo form theo dạng add or edit
-    await this.bindingConfigAddOrUpdate();
-
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
+    // Khởi tạo form theo dạng add or edit
+    await this.bindingConfigAddOrUpdate();
   }
 
   /**
@@ -136,8 +135,8 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvucRequired },
       dientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientichRequired },
-      donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientichRequired },
-      hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieuRequired },
+      donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientichRequired }
+      // hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieuRequired },
     };
 
     // Error message Tọa độ
@@ -164,6 +163,10 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.inputModelKhuVuc = new InputCpThamDoKhuVucModel();
     this.formOnEdit();
+
+    if (this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(this.obj.hequychieu);
+    }
   }
 
   /**
@@ -174,8 +177,8 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
       tenkhuvuc: [DefaultValue.Empty, Validators.required],
       dientich: [DefaultValue.Empty, [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
       donvidientich: [DefaultValue.Empty, Validators.required],
-      loaikhuvuc: [0],
-      hequychieu: [DefaultValue.Empty, Validators.required],
+      loaikhuvuc: [DefaultValue.Zero]
+      // hequychieu: [DefaultValue.Empty, Validators.required],
     });
 
     this.cpThamDoToaDoKhuVucIOForm = this.formBuilder.group({
@@ -196,11 +199,27 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
         dientich: this.obj.dientich,
         donvidientich: this.obj.donvidientich,
         loaikhuvuc: this.obj.loaikhuvuc,
-        hequychieu: this.obj.hequychieu,
+        // hequychieu: this.obj.hequychieu,
       });
-
       this.listToaDoKhuVuc = this.obj.listtoado;
     }
+  }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
   }
 
   /**
@@ -224,7 +243,7 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
     this.inputModelKhuVuc = this.cpThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.idcapphepthamdo = this.obj.idcapphepthamdo;
     this.inputModelKhuVuc.loaicapphep = this.obj.loaicapphep;
-
+    this.inputModelKhuVuc.hequychieu = this.obj.hequychieu;
     if (operMode === "new") {
       this.inputModelKhuVuc.listtoado = await this.generateModelData();
       await cpThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
@@ -307,7 +326,7 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
       tenkhuvuc: DefaultValue.Empty,
       dientich: DefaultValue.Empty,
       donvidientich: DefaultValue.Empty,
-      loaikhuvuc: 0,
+      loaikhuvuc: DefaultValue.Zero,
       hequychieu: DefaultValue.Empty,
     });
 

@@ -38,6 +38,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
+  @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
   @Output("selectIdCapPhepThamDoEvent") selectIdCapPhepThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -55,9 +57,13 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   public disabledDeleteButton = false;
   // disable control diện tích trả lại
   public disabledDienTichTraLai = false;
+  // disable control hệ quy chiếu
+  public disabledHeQuyChieu= false;
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
   // Action cấp thăm dò
   public ActionType = CapPhepThamDoActionEnum;
   // lưu dữ liệu đơn vị diện tích
@@ -182,6 +188,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       if (this.capPhepThamDoKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();
+        this.selectHeQuyChieu();
         this.selectCurrentFormState();
         this.setFormTitle();
       } else {
@@ -269,8 +276,31 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
         donvichieusau: item.donvichieusau,
         hequychieu: item.hequychieu
       });
+
+      if (item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
+        this.disabledHeQuyChieu = true;
+        this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
+      }
     }
   }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
+  }
+
 
   /**
    * Hàm lấy danh sách Lĩnh Vực
@@ -298,6 +328,13 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
    */
   private selectIdCapPhepThamDo() {
     this.selectIdCapPhepThamDoEvent.emit(this.capPhepThamDoKhoangSan.idcapphepthamdo);
+  }
+
+  /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectHeQuyChieu() {
+    this.selectHeQuyChieuEvent.emit(this.capPhepThamDoKhoangSan.hequychieu);
   }
 
   /**
@@ -347,6 +384,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.selectCurrentFormState();
           this.setFormTitle();
           this.selectIdCapPhepThamDo();
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -365,6 +403,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
           this.setFormTitle();
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);

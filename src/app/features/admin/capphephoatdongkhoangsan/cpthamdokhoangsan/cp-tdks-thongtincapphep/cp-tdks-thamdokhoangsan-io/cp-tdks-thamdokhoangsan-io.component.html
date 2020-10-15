@@ -197,7 +197,7 @@
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieu" | translate}}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledHeQuyChieu">
               <mat-select class="form-control" placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chonhequychieu' | translate }}"
                 formControlName="hequychieu" *ngIf="dataTranslate">
                 <mat-option value="">
@@ -208,6 +208,9 @@
                 </mat-option>
               </mat-select>
               <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
+            </div>
+            <div class="col-lg-8 col-md-8 col-sm-8 font-weight-bold" style="padding-top: 9px;" *ngIf="disabledHeQuyChieu">
+              {{tenHeQuyChieu}}
             </div>
           </div>
         </div>
