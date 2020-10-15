@@ -129,7 +129,7 @@
                       <mat-select-filter [displayMember]="'tencoquanquanly'" [array]="coQuanCapPhepFilters" (filteredReturn)="allCoQuanCapPhep = $event">
                       </mat-select-filter>
                       <mat-option value="">
-                        {{ "HOSOGIAYTO.giayphep.choncoquancapphep" | translate }}
+                        {{ "HOSOGIAYTO.giayphep.choncoquanquyetdinh" | translate }}
                       </mat-option>
                       <mat-option *ngFor="let coQuanCapPhep of allCoQuanCapPhep" [value]="coQuanCapPhep.idcoquanquanly">
                         {{ coQuanCapPhep.tencoquanquanly }}

@@ -27,6 +27,10 @@
                 <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
                 </app-giaypheptailieu-list>
               </mat-tab>
+              <mat-tab [disabled]="disabledTabState[TabType.ThongTinTinhTienHangNam]" label="{{ 'TINHTIENCAPQUYEN.tinhtiencapquyenkhaithackhoangsan.thongTinTinhTienHangNamTabTitle' | translate }}">
+                <app-tinhtiencapquyentheonam-io  #tinhTienCapQuyenTheoNamComp [allowAutoInit]="false">
+                </app-tinhtiencapquyentheonam-io>
+              </mat-tab>
             </mat-tab-group>
           </div>
         </div>
