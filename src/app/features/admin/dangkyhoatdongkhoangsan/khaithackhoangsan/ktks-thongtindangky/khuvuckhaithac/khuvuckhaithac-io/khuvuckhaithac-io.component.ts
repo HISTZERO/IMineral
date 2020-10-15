@@ -15,6 +15,7 @@ import { SettingsCommon } from "src/app/shared/constants/setting-common";
 import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
 import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
+import { DefaultValue } from "src/app/shared/constants/global-var";
 
 
 @Component({
@@ -74,6 +75,9 @@ export class KhuvuckhaithacIoComponent implements OnInit {
 
   // error message
   validationErrorMessages = {};
+
+  // Chứa thông báo lỗi item tọa độ
+  public errorToaDo = DefaultValue.Empty;
 
   // Chứa error tọa độ khu vực
   public validationErrorToaDo = {}
@@ -292,9 +296,13 @@ export class KhuvuckhaithacIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKKhaiThacKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
-      this.matSidenavService.close();
+    if (this.listToaDoKhuVuc.length >= 3) {
+      if (this.dKKhaiThacKhuVucIOForm.valid === true) {
+        this.addOrUpdate(operMode);
+        this.matSidenavService.close();
+      }
+    } else {
+      this.errorToaDo = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.errorToaDo;
     }
   }
 
@@ -327,10 +335,14 @@ export class KhuvuckhaithacIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKKhaiThacKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
-      this.onFormReset();
-      this.purpose = "new";
+    if (this.listToaDoKhuVuc.length >= 3) {
+      if (this.dKKhaiThacKhuVucIOForm.valid === true) {
+        this.addOrUpdate(operMode);
+        this.onFormReset();
+        this.purpose = "new";
+      }
+    } else {
+      this.errorToaDo = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.errorToaDo;
     }
   }
 

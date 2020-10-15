@@ -125,6 +125,9 @@
                                         (click)="saveToaDoKhuVuc()">{{ 'COMMON.default.save' | translate }}</button>
                                 </div>
                             </div>
+                            <div class="text-center alert-danger" *ngIf="errorToaDo">
+                                {{errorToaDo}}
+                            </div>
                         </form>
                     </div>
                     <div class="card-body">

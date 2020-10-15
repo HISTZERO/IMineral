@@ -402,7 +402,8 @@
     "toadoxIsNumber": "Tọa độ x phải là kiểu số",
     "toadoyIsNumber": "Tọa độ y phải là kiểu số",
     "dientichIsNumber": "Diện tích phải là kiểu số",
-    "informedNotExistedCapPhepKhaiThacKhuVuc": "Cấp phép khai thác khu vực không tồn tại"
+    "informedNotExistedCapPhepKhaiThacKhuVuc": "Cấp phép khai thác khu vực không tồn tại",
+    "errorToaDo": "Tọa độ phải nhiều hơn hoặc bằng 3"
   },
   "capphepkhaithacthietbi": {
     "titleList": "Danh sách thiết bị khai thác",
