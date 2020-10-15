@@ -113,14 +113,14 @@ export class ThongtindangkyComponent implements OnInit {
 
     if (this.idhoso === null || this.idhoso === undefined) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
-      return;
+      return false;
     }
 
     this.itemHoSo = await this.getHoSoById(this.idhoso);
 
     if (!this.itemHoSo) {
       this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongtindangky.informedNotExistedHoSoDangKyThamDo);
-      return;
+      return false;
     }
 
     await this.showDangKyViewComponent();

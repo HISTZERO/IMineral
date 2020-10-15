@@ -178,6 +178,7 @@ export class GiayphepIoComponent implements OnInit {
     await this.getCoQuanCapPhepAll();
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
     await this.formOnEdit();
+    return true;
   }
 
   /**
