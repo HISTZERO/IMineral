@@ -159,10 +159,15 @@ export class SidenavComponent implements OnInit {
           faIcon: "far fa-th-list",
           link: ``
         },
+        {
+          label: "Khu vực tận thu khoáng sản",
+          faIcon: "far fa-th-list",
+          link: ``
+        },
       ]
     },
     {
-      label: "MỎ QUẶNG, ĐIỂM QUẶNG",
+      label: "MỎ KHOÁNG SẢN",
       faIcon: "fal fa-newspaper",
       link: "",
       items: [
@@ -172,7 +177,7 @@ export class SidenavComponent implements OnInit {
           link: ``
         },
         {
-          label: "Quản lý điểm quặng",
+          label: "Quản lý điểm khoáng sản",
           faIcon: "far fa-th-list",
           link: `${AdminRoutingName.adminUri}/${AdminRoutingName.diemquangmoquangUri}/${AdminRoutingName.diemquangUri}`
         },
@@ -181,7 +186,7 @@ export class SidenavComponent implements OnInit {
     {
       label: "QUY HOẠCH KHOÁNG SẢN",
       faIcon: "fal fa-newspaper",
-      link: ""
+      link: `${AdminRoutingName.adminUri}/${AdminRoutingName.baocaoUri}/${AdminRoutingName.danhsach}/${AdminRoutingName.quyhoachUri}`,
     },
     {
       label: "DỮ LIỆU KHÔNG GIAN",
