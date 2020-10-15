@@ -138,7 +138,7 @@ export class KtksCongtrinhkhaithacListComponent implements OnInit {
       .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.informedNotExistedDangKyThamDoCongTrinh);
+      this.commonService.showDialogWarning(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.informedNotExistedDangKyKhaiThacCongTrinh);
       return;
     }
 
@@ -146,7 +146,7 @@ export class KtksCongtrinhkhaithacListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleEdit );
+    await this.matSidenavService.setTitle( this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.titleEdit );
     await this.matSidenavService.setContentComp(KtksCongtrinhkhaithacIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -159,7 +159,7 @@ export class KtksCongtrinhkhaithacListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.titleAdd);
     this.matSidenavService.setContentComp(KtksCongtrinhkhaithacIoComponent, "new", {iddangkykhaithac: this.iddangkykhaithac});
     this.matSidenavService.open();
   }
@@ -195,7 +195,7 @@ export class KtksCongtrinhkhaithacListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdocongtrinh.contentDelete,
+      this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithaccongtrinh.contentDelete,
       this.selectedItem.sohieu
     );
     dialogRef.afterClosed().subscribe(async (result) => {

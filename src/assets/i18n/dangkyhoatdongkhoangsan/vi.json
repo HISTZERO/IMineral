@@ -317,7 +317,7 @@
     "matinhRequired": "Yêu cầu phải chọn tỉnh",
     "mahuyenRequired": "Yêu cầu phải chọn huyện",
     "maxaRequired": "Yêu cầu phải chọn xã",
-    "informedNotExistedDangKyThamDoDvhc": "Đăng ký thăm dò đợn vị hành chính không tồn tại"
+    "informedNotExistedDangKyThamDoDvhc": "Đăng ký thăm dò đơn vị hành chính không tồn tại"
   },
   "dangkythamdoloaikhoangsan": {
     "titleList": "Danh sách loại khoáng sản",
@@ -910,5 +910,51 @@
     "sogiayphepPlaceholder": "Nhập giấy phép",
     "ngayhopdong": "Ngày hợp đồng",
     "ngayhopdongPlaceholder": "Chọn ngày hợp đồng"
+  },
+  "dangkykhaithaccongtrinh": {
+    "titleList": "Danh sách công trình",
+    "titleAdd": "Thêm mới công trình",
+    "titleEdit": "Sửa dữ liệu công trình",
+    "contentDelete": "công trình: ",
+    "sohieu": "Số hiệu",
+    "chieusau": "Chiều sâu",
+    "toadox": "Tọa độ x",
+    "toadoy": "Tọa độ y",
+    "hequychieu": "Hệ quy chiếu",
+    "ghichu": "Ghi chú",
+    "luuluong": "Lưu lượng",
+    "hathap": "Hạ thấp",
+    "mucnuoctinh": "Mực nước tính",
+    "luuluongPlaceholder": "Nhập lưu lượng",
+    "hathapPlaceholder": "Nhập hạ thấp",
+    "mucnuoctinhPlaceholder": "Nhập mực nước tính",
+    "sohieuPlaceholder": "Nhập số hiệu",
+    "chieusauPlaceholder": "Nhập chiều sâu",
+    "toadoxPlaceholder": "Nhập tọa độ x",
+    "toadoyPlaceholder": "Nhập tọa độ y",
+    "chonhequychieu": "---chọn hệ quy chiếu---",
+    "ghichuPlaceholder": "Nhập ghi chú",
+    "sohieuRequired": "Số hiệu không được để trống",
+    "chieusauRequired": "Chiều sâu khai thác không được để trống",
+    "chieusauFormat": "Chiều sâu khai thác chưa đúng định dạng yêu cầu",
+    "toadoxRequired": "Tọa độ x không được để trống",
+    "toadoxFormat": "Tọa độ x chưa đúng định dạng yêu cầu",
+    "toadoyRequired": "Tọa độ y không được để trống",
+    "toadoyFormat": "Tọa độ y chưa đúng định dạng yêu cầu",
+    "hequychieuRequired": "Hệ quy chiếu không được để trống",
+    "informedNotExistedDangKyKhaiThacCongTrinh": "Đăng ký khai thác công trình không tồn tại"
+  },
+  "dangkykhaithacdvhc": {
+      "titleList": "Danh sách đơn vị hành chính",
+      "titleAdd": "Thêm mới đơn vị hành chính",
+      "titleEdit": "Sửa dữ liệu đơn vị hành chính",
+      "contentDelete": "Đơn vị hành chính: ",
+      "tentinh": "Tên tỉnh",
+      "tenhuyen": "Tên huyện",
+      "tenxa": "Tên xã",
+      "matinhRequired": "Yêu cầu phải chọn tỉnh",
+      "mahuyenRequired": "Yêu cầu phải chọn huyện",
+      "maxaRequired": "Yêu cầu phải chọn xã",
+      "informedNotExistedDangKyKhaiThacDvhc": "Đăng ký khai thác đơn vị hành chính không tồn tại"
   }
 }

@@ -317,6 +317,8 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       toadox: "",
       toadoy: "",
     });
+
+    this.listToaDoKhuVuc = [];
   }
 
   /**
