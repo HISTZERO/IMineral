@@ -2,19 +2,19 @@
     <form [formGroup]="cpKhaiThacLoaiKhoangSanIOForm" class="pt-toolbar">
       <div class="form-group row mx-0">
         <label
-          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tennhomkhoangsan" | translate }}
+          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.tennhomkhoangsan" | translate }}
           <small>(*)</small></label>
         <div class="col-sm-9">
           <div class="row">
             <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
               <mat-select class="form-control" formControlName="nhomkhoangsan" [compareWith]="compareNhomKhoangSan"
-                          placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.chonnhomkhoangsan' | translate }}"
+                          placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.chonnhomkhoangsan' | translate }}"
                           (selectionChange)="showLoaiKhoangSan()" *ngIf="dataTranslate">
                 <mat-select-filter [displayMember]="'tennhomkhoangsan'" [array]="nhomKhoangSanFilters"
                                    (filteredReturn)="allNhomKhoangSan = $event">
                 </mat-select-filter>
                 <mat-option value="">
-                  {{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.chonnhomkhoangsan" | translate }}
+                  {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.chonnhomkhoangsan" | translate }}
                 </mat-option>
                 <mat-option *ngFor="let nhomKhoangSan of allNhomKhoangSan"
                             [value]="{idnhomkhoangsan: nhomKhoangSan.idnhomkhoangsan, tennhomkhoangsan: nhomKhoangSan.tennhomkhoangsan}">
@@ -24,7 +24,7 @@
             </div>
             <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
               <label class="m-0"
-                     *ngIf="tenNhomKhoangSanDisplay">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.nhomkhoangsandangdung" | translate}}
+                     *ngIf="tenNhomKhoangSanDisplay">{{"CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.nhomkhoangsandangdung" | translate}}
                 :</label><br>
               <span><b>{{tenNhomKhoangSanDisplay}}</b></span>
             </div>
@@ -33,19 +33,19 @@
       </div>
       <div class="form-group row mx-0">
         <label
-          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenloaikhoangsan" | translate }}
+          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.tenloaikhoangsan" | translate }}
           <small>(*)</small></label>
         <div class="col-sm-9">
           <div class="row">
             <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : 'col-sm-12'}}">
               <mat-select class="form-control" formControlName="loaikhoangsan" [compareWith]="compareLoaiKhoangSan"
-                          placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.chonloaikhoangsan' | translate }}"
+                          placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.chonloaikhoangsan' | translate }}"
                           (selectionChange)="selectLoaiKhoangSan()" *ngIf="dataTranslate">
                 <mat-select-filter [displayMember]="'tenloaikhoangsan'" [array]="loaiKhoangSanFilters"
                                    (filteredReturn)="allLoaiKhoangSan = $event">
                 </mat-select-filter>
                 <mat-option value="">
-                  {{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.chonloaikhoangsan" | translate }}
+                  {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.chonloaikhoangsan" | translate }}
                 </mat-option>
                 <mat-option *ngFor="let loaiKhoangSan of allLoaiKhoangSan"
                             [value]="{idloaikhoangsan: loaiKhoangSan.idloaikhoangsan, tenloaikhoangsan: loaiKhoangSan.tenloaikhoangsan}">
@@ -56,7 +56,7 @@
             </div>
             <div class="{{classColWithFiftyPercentForCombobox ? 'col-sm-6' : ''}}">
               <label class="m-0"
-                     *ngIf="tenLoaiKhoangSanDisplay">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.loaikhoangsandangdung" | translate}}
+                     *ngIf="tenLoaiKhoangSanDisplay">{{"CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.loaikhoangsandangdung" | translate}}
                 :</label><br>
               <span><b>{{tenLoaiKhoangSanDisplay}}</b></span>
             </div>
@@ -67,36 +67,36 @@
   
       <div class="form-group row mx-0">
         <label
-          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenkhoangsan" | translate }}
+          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.tenkhoangsan" | translate }}
           <small>(*)</small></label>
         <div class="col-sm-9">
           <input class="form-control" type="text" formControlName="tenkhoangsan"
-                 placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenkhoangsanPlaceholder' | translate}}"/>
+                 placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.tenkhoangsanPlaceholder' | translate}}"/>
           <span *ngIf="formErrors.tenkhoangsan" class="alert-danger">{{formErrors.tenkhoangsan}}</span>
         </div>
       </div>
 
       <div class="form-group row mx-0">
         <label
-          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.truluong" | translate }}
+          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.truluong" | translate }}
           <small>(*)</small></label>
         <div class="col-sm-9">
           <input class="form-control" type="text" formControlName="truluong"
-                 placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.truluongPlaceholder' | translate}}"/>
+                 placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.truluongPlaceholder' | translate}}"/>
           <span *ngIf="formErrors.truluong" class="alert-danger">{{formErrors.truluong}}</span>
         </div>
       </div>
 
       <div class="form-group row mx-0">
         <label
-          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cpkhaithacloaikhoangsan.donvitruluong" | translate }}
+          class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.donvitruluong" | translate }}
           <small>(*)</small>
         </label>
         <div class="col-sm-9">
           <mat-select class="form-control" formControlName="donvitruluong" *ngIf="dataTranslate"
-            placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cpkhaithacloaikhoangsan.donvitruluongPlaceholder' | translate}}">
+            placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.donvitruluongPlaceholder' | translate}}">
             <mat-option value="">
-              {{ "CAPPHEPHOATDONGKHOANGSAN.cpkhaithacloaikhoangsan.donvitruluongPlaceholder" | translate }}
+              {{ "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.donvitruluongPlaceholder" | translate }}
             </mat-option>
             <mat-option *ngFor="let dvtl of donViTruLuong" [value]="dvtl.id">
               {{ dvtl.name }}

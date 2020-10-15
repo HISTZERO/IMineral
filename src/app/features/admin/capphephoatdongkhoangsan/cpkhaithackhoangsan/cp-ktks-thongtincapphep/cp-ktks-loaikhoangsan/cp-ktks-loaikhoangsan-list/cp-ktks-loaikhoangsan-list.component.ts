@@ -132,7 +132,7 @@ export class CpKtksLoaikhoangsanListComponent implements OnInit {
       .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.informedNotExistedCapPhepThamDoLoaiKhoangSan);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.informedNotExistedCapPhepKhaiThacLoaiKhoangSan);
       return;
     }
 
@@ -140,7 +140,7 @@ export class CpKtksLoaikhoangsanListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleEdit);
+    await this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.titleEdit);
     await this.matSidenavService.setContentComp(CpKtksLoaikhoangsanIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
@@ -153,7 +153,7 @@ export class CpKtksLoaikhoangsanListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.titleAdd);
+    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.titleAdd);
     this.matSidenavService.setContentComp(CpKtksLoaikhoangsanIoComponent, "new", { idcapphepkhaithac: this.idcapphepkhaithac });
     this.matSidenavService.open();
   }
@@ -189,7 +189,7 @@ export class CpKtksLoaikhoangsanListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.contentDelete,
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.contentDelete,
       this.selectedItem.tenloaikhoangsan
     );
     dialogRef.afterClosed().subscribe(async (result) => {
