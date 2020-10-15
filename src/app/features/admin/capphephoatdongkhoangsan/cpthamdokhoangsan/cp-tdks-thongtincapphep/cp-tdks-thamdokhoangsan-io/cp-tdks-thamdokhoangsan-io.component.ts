@@ -1,21 +1,31 @@
-import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { CapPhepThamDoActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { OutputCpThamDoKhoangSanModel} from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model';
-import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { HttpErrorResponse } from '@angular/common/http';
-import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
-import { MatSidenav } from '@angular/material';
-import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
-import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {DmFacadeService} from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
+import {MatsidenavService} from 'src/app/services/utilities/matsidenav.service';
+import {CapPhepThamDoActionEnum, LoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import {DefaultValue} from 'src/app/shared/constants/global-var';
+import {OutputCpThamDoKhoangSanModel} from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model';
+import {OutputDmHeQuyChieuModel} from 'src/app/models/admin/danhmuc/hequychieu.model';
+import {CapPhepHoatDongKhoangSanFacadeService} from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import {HttpErrorResponse} from '@angular/common/http';
+import {DonViDienTich, DonViDoSau, DonViThoiHan} from 'src/app/shared/constants/common-constants';
+import {MatSidenav} from '@angular/material';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
+import {OutputGiayPhepModel} from 'src/app/models/admin/hosogiayto/giayphep.model';
 
 @Component({
   selector: 'app-cp-tdks-thamdokhoangsan-io',
@@ -23,8 +33,8 @@ import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.mo
   styleUrls: ['./cp-tdks-thamdokhoangsan-io.component.scss']
 })
 export class CpTdksThamdokhoangsanIoComponent implements OnInit {
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -96,7 +106,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
     public matSidenavService: MatsidenavService,
     private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
     private hoSoGiayToFacadeService: HoSoGiayToFacadeService,
-    public cfr: ComponentFactoryResolver) { }
+    public cfr: ComponentFactoryResolver) {
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -126,20 +137,32 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      tenkhuvucthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdoRequired },
-      diadiem: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemRequired },
-      dientichthamdo: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoFormat },
-      dientichtralai: { pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiFormat },
-      chieusauthamdotu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuFormat },
-      chieusauthamdoden: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenFormat },
-      thoihanthamdo: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoFormat  },
-      ngaybdthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdoRequired },
-      ngayktthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdoRequired },
-      mucdichsudungkhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsanRequired },
-      donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientichRequired },
-      donvithoihan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvithoihanRequired },
-      donvichieusau: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusauRequired },
-      hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieuRequired }
+      tenkhuvucthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdoRequired},
+      diadiem: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemRequired},
+      dientichthamdo: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoFormat
+      },
+      dientichtralai: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiFormat},
+      chieusauthamdotu: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuFormat
+      },
+      chieusauthamdoden: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenFormat
+      },
+      thoihanthamdo: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoFormat
+      },
+      ngaybdthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdoRequired},
+      ngayktthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdoRequired},
+      mucdichsudungkhoangsan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsanRequired},
+      donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientichRequired},
+      donvithoihan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvithoihanRequired},
+      donvichieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusauRequired},
+      hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieuRequired}
     };
   }
 
@@ -153,9 +176,9 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       }
     });
 
-    if ((this.itemGiayPhep === DefaultValue.Null ||  this.itemGiayPhep === DefaultValue.Undefined)
-        && this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
-        && this.idgiayphep.trim() !== DefaultValue.Empty) {
+    if ((this.itemGiayPhep === DefaultValue.Null || this.itemGiayPhep === DefaultValue.Undefined)
+      && this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
+      && this.idgiayphep.trim() !== DefaultValue.Empty) {
       this.itemGiayPhep = await this.hoSoGiayToFacadeService.getGiayPhepService().getByid(this.idgiayphep).toPromise() as OutputGiayPhepModel;
     }
 
@@ -285,7 +308,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll({PageNumber: 1, PageSize: -1});
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
