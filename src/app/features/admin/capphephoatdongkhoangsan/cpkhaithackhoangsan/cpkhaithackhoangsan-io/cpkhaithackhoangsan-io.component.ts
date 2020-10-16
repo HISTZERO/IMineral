@@ -12,7 +12,7 @@ import { ButtonBackCpKhaiThacKhoangSan, MenuCpKhaiThacKhoangSanChitiet } from 's
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
 import { CpKtksThongtincapphepComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thongtincapphep.component";
-import { CapPhepHoatDongKhoangSanFacadeService } from "../../../../../services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
+import { CapPhepHoatDongKhoangSanFacadeService } from "src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
 
 @Component({
   selector: 'app-cpkhaithackhoangsan-io',
@@ -78,7 +78,7 @@ export class CpkhaithackhoangsanIoComponent implements OnInit {
 
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
-    let existedCapPhepThamDo = false;
+    let existedCapPhepKhaiThac = false;
 
     if (this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined && this.idgiayphep.trim() !== DefaultValue.Empty) {
       const giayPhepItem = await this.getGiayPhepById(this.idgiayphep);
@@ -90,7 +90,7 @@ export class CpkhaithackhoangsanIoComponent implements OnInit {
         const cpThamDoItem = await this.getCapPhepKhaiThacByIdGiayPhep(this.idgiayphep);
 
         if (cpThamDoItem) {
-          existedCapPhepThamDo = true;
+          existedCapPhepKhaiThac = true;
         }
 
       } else {
@@ -105,7 +105,7 @@ export class CpkhaithackhoangsanIoComponent implements OnInit {
     this.giayPhepIOComp.idgiayphep = this.idgiayphep;
     await this.giayPhepIOComp.manualDataInit();
     this.giayPhepIOComp.currentAction = this.currentAction;
-    this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = existedCapPhepThamDo;
+    this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = existedCapPhepKhaiThac;
     this.capPhepKhaiThacKhoangSanTabs.realignInkBar();
   }
 
@@ -185,7 +185,7 @@ export class CpkhaithackhoangsanIoComponent implements OnInit {
    * Hàm lấy trạng thái thông tin đăng ký
    * @param action 
    */
-  getThongTinDangKyKhaiThacFormState(action: number) {
+  getThongTinCapPhepKhaiThacFormState(action: number) {
     if (action === CapPhepKhaiThacActionEnum.Edit) {
       this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = true;
     } else {

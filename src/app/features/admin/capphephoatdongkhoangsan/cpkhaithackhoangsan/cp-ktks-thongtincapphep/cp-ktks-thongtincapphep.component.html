@@ -19,6 +19,9 @@
           <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhKhaiThacTabTitle' | translate }}">
             <app-cp-ktks-congtrinhkhaithac-list #capPhepCongTrinhKhaiThac [allowAutoInit]="false"></app-cp-ktks-congtrinhkhaithac-list>
           </mat-tab>
+          <mat-tab *ngIf="showTabThietBi" [disabled]="disabledTabState[TabType.ThietBiKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thietBiKhaiThacTabTitle' | translate }}">
+            <app-cp-ktks-thietbikhaithac-list #capPhepKhaiThacThietBi [allowAutoInit]="false"></app-cp-ktks-thietbikhaithac-list>
+          </mat-tab>
         </mat-tab-group>
       </div>
     </div>

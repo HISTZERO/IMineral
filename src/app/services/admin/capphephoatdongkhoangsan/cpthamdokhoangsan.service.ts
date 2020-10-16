@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import { OutputCpThamDoKhoangSanModel,InputCpThamDoKhoangSanModel} from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model";
+import { OutputCpThamDoKhoangSanModel, InputCpThamDoKhoangSanModel} from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 

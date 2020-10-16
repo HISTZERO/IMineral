@@ -1,4 +1,14 @@
-import {Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
 import {DonViDienTich} from "src/app/shared/constants/common-constants";
@@ -12,6 +22,10 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
 import {DefaultValue} from "src/app/shared/constants/global-var";
 import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.model";
+import {GiayphepOptionComponent} from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {MatSidenav} from "@angular/material/sidenav";
+import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
 
 @Component({
   selector: 'app-dangkydongcuamo-io',
@@ -20,7 +34,8 @@ import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangs
 })
 export class DangkydongcuamoIoComponent implements OnInit {
 
-
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -60,6 +75,8 @@ export class DangkydongcuamoIoComponent implements OnInit {
     donvidientich: DefaultValue.Empty,
     hequychieu: DefaultValue.Empty,
     loaidongcua: DefaultValue.Empty,
+    idgiayphep: DefaultValue.Empty,
+    sogiayphep: DefaultValue.Empty
   };
 
   constructor(
@@ -69,7 +86,8 @@ export class DangkydongcuamoIoComponent implements OnInit {
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     public commonService: CommonServiceShared,
     private activatedRoute: ActivatedRoute,
-    public cfr: ComponentFactoryResolver
+    public cfr: ComponentFactoryResolver,
+    public matSidenavService: MatsidenavService
   ) {
   }
 
@@ -130,7 +148,9 @@ export class DangkydongcuamoIoComponent implements OnInit {
       donvidientich: [DefaultValue.Empty, Validators.required],
       hequychieu: [DefaultValue.Empty, Validators.required],
       loaidongcua: [DefaultValue.Empty],
-      dientichkhaithac: [DefaultValue.Empty]
+      dientichkhaithac: [DefaultValue.Empty],
+      idgiayphep: [DefaultValue.Empty],
+      sogiayphep: [DefaultValue.Empty],
     });
   }
 
@@ -159,6 +179,8 @@ export class DangkydongcuamoIoComponent implements OnInit {
         hequychieu: item.hequychieu,
         loaidongcua: item.loaidongcua,
         dientichkhaithac: item.dientichkhaithac,
+        idgiayphep: item.idgiayphep,
+        sogiayphep: item.sogiayphep,
       });
     }
   }
@@ -327,4 +349,41 @@ export class DangkydongcuamoIoComponent implements OnInit {
     });
   }
 
+  /**
+   * Mở sidenav giấy phép
+   */
+  openGiayPhepIOSidenav() {
+    // clear Sidenav
+    this.matSidenavService.clearSidenav();
+    // Khởi tạo sidenav
+    this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
+    this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.titleGiayPhepSelect);
+    this.matSidenavService.setContentComp(GiayphepOptionComponent, "select");
+    this.matSidenavService.open();
+  }
+
+  /**
+   * lấy item dữ liệu đối tượng cá nhân từ popup
+   */
+  private async selectItemGiayPhep(item: OutputGiayPhepModel) {
+    if (item !== null && item !== undefined) {
+      this.dangKyDongCuaIOForm.controls.sogiayphep.setValue(item.sogiayphep);
+      this.dangKyDongCuaIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+      const itemDongCua: any = await this.fillItemGiaHan(item.idgiayphep);
+      this.dangKyDongCuaIOForm.controls.dientichdongcua.setValue(itemDongCua.dientichdongcua);
+      this.dangKyDongCuaIOForm.controls.donvidientich.setValue(itemDongCua.donvidientich);
+      this.dangKyDongCuaIOForm.controls.hequychieu.setValue(itemDongCua.hequychieu);
+    }
+  }
+
+  // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
+  doFunction(methodName, obj) {
+    this[methodName](obj);
+  }
+
+  private async fillItemGiaHan(idGiayPhep: string) {
+    const dkDongCuaMoService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyDongCuaMoService();
+    const itemDongCua = await dkDongCuaMoService.getDangKyDongCuaMoByIdGiayPhep(idGiayPhep).toPromise();
+    return itemDongCua;
+  }
 }
