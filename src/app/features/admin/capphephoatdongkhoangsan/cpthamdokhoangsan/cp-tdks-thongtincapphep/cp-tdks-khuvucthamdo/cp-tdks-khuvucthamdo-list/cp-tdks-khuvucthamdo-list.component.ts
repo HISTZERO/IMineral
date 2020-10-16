@@ -149,6 +149,8 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
 
     if (this.listCpThamDoKhuVuc) {
       this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(this.listCpThamDoKhuVuc.length);
+    } else {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
     }
   }
 

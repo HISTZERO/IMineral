@@ -36,8 +36,6 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
-  // tslint:disable-next-line: no-output-rename
-  @Output("getNumberOfDataKhuVucThamDoEvent") getNumberOfDataKhuVucThamDoEvent: EventEmitter<number> = new EventEmitter();
   // Lưu trữ thông tin đăng ký tab
   public TabType = CpThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id giấy phép

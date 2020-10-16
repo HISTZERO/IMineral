@@ -254,10 +254,15 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
         hequychieu: item.hequychieu
       });
 
-      if (item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
-        this.disabledHeQuyChieu = true;
-        this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
-      }
+      this.showViewOfHeQuyChieu(item);
+    }
+  }
+
+  private showViewOfHeQuyChieu(item: OutputCpThamDoKhoangSanModel) {
+    if (item && item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
+    } else {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(DefaultValue.Empty);
     }
   }
 
@@ -308,10 +313,14 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   }
 
   /**
-   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   * lấy thông tin hệ quy chiếu
    */
   private selectHeQuyChieu() {
-    this.selectHeQuyChieuEvent.emit(this.capPhepThamDoKhoangSan.hequychieu);
+    if (this.capPhepThamDoKhoangSan) {
+      this.selectHeQuyChieuEvent.emit(this.capPhepThamDoKhoangSan.hequychieu);
+    } else {
+      this.selectHeQuyChieuEvent.emit(DefaultValue.Empty);
+    }
   }
 
   /**
@@ -361,6 +370,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.selectCurrentFormState();
           this.setFormTitle();
           this.selectIdCapPhepThamDo();
+          this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
           this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
@@ -380,6 +390,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
           this.setFormTitle();
+          this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
           this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
@@ -409,11 +420,13 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           .deleteCapPhepThamDoByIdGiayPhep(this.idgiayphep)
           .subscribe(
             () => {
-              this.capPhepThamDoKhoangSan = null;
+              this.capPhepThamDoKhoangSan = DefaultValue.Null;
               this.currentAction = CapPhepThamDoActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
               this.setFormTitle();
+              this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
+              this.selectHeQuyChieu();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
@@ -434,5 +447,10 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.capPhepThamDoIOForm.reset();
+    this.disabledHeQuyChieu = false;
+    this.capPhepThamDoIOForm.controls.donvidientich.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.donvithoihan.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.donvichieusau.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.hequychieu.setValue(DefaultValue.Empty);
   }
 }
