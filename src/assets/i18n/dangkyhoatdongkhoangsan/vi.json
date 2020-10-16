@@ -439,8 +439,7 @@
     "thutuIsNumber": "Thứ tự phải là kiểu số",
     "toadoxIsNumber": "Tọa độ x phải là kiểu số",
     "toadoyIsNumber": "Tọa độ y phải là kiểu số",
-    "dientichIsNumber": "Diện tích phải là kiểu số",
-    "errorToaDo": "Tọa độ phải nhiều hơn hoặc bằng 3"
+    "dientichIsNumber": "Diện tích phải là kiểu số"
   },
   "dangkykhaithackhoangsan": {
     "titleAdd": "Thêm mới đăng ký khai thác khoáng sản",

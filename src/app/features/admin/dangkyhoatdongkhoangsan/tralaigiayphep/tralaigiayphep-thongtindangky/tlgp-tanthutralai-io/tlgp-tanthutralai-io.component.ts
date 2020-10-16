@@ -245,12 +245,32 @@ export class TlgpTanthutralaiIoComponent implements OnInit {
   }
 
   /**
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
+   */
+  private async cloneThongTinDangKyTanthuTraLaiFromGiayPhepLS(idGiayPhep: string) {
+    const tanThuTraLaiService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyTanThuTraLaiService();
+    const dkTanThuTraLaiItem = await tanThuTraLaiService.cloneThongTinDangKyTanThuTraLaiFromGiayPhepLS(idGiayPhep).toPromise();
+
+    if (dkTanThuTraLaiItem) {
+      return dkTanThuTraLaiItem as OutputDkTanThuTraLaiModel;
+    }
+    return null;
+  }
+
+  /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
-  private selectItemGiayPhep(item: OutputGiayPhepModel) {
+  async selectItemGiayPhep(item: OutputGiayPhepModel) {
     if (item !== null && item !== undefined) {
       this.dangKyTanThuTraLaiIOForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.dangKyTanThuTraLaiIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+
+      const data = await this.cloneThongTinDangKyTanthuTraLaiFromGiayPhepLS(item.idgiayphep);
+
+      if (data) {
+        this.dangKyTanThuTraLaiIOForm.controls.dientichdacapphep.setValue(data.lydotralai);
+      }
     }
   }
 
