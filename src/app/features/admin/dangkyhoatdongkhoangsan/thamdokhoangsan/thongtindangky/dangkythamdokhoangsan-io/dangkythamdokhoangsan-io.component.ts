@@ -60,7 +60,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
   // lưu dữ liệu đơn vị diện tích
   public donViDoSauList = DonViDoSau;
   // disable control hệ quy chiếu
-  public disabledHeQuyChieu= false;
+  public disabledHeQuyChieu = false;
   // Lưu tên hệ quy chiếu sử dụng hiện tại
   public tenHeQuyChieu = DefaultValue.Empty;
   // error message
@@ -243,6 +243,20 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
+
+  /**
+   * set default hệ quy chiếu
+   */
+
+  setDefaultHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const data = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (data) {
+        this.dangKyThamDoIOForm.controls.hequychieu.setValue(srid);
+      }
+    }
   }
 
   /**

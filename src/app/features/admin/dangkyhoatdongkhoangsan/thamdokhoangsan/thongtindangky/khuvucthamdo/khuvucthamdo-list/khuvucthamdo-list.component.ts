@@ -27,7 +27,7 @@ export class KhuvucthamdoListComponent implements OnInit {
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
-  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<number> = new EventEmitter();
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-input-rename
@@ -155,9 +155,9 @@ export class KhuvucthamdoListComponent implements OnInit {
     this.listDkThamDoKhuVuc = listData;
 
     if (this.listDkThamDoKhuVuc) {
-      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(this.listDkThamDoKhuVuc.length);
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({iddangkythamdo: this.iddangkythamdo, hequychieu: this.heQuyChieu, count: this.listDkThamDoKhuVuc.length});
     } else {
-      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Null);
     }
   }
 

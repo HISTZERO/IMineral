@@ -5,7 +5,6 @@ import { DangKyThamDoActionEnum } from 'src/app/shared/constants/enum';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { HttpErrorResponse } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
-
 import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
@@ -30,6 +29,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
    // tslint:disable-next-line: no-output-rename
   @Output("selectIdDangKyThamDoEvent") selectIdDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -54,8 +55,12 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   public ActionType = DangKyThamDoActionEnum;
   // disable delete button
   public disabledDeleteButton = false;
+  // disable control hệ quy chiếu
+  public disabledHeQuyChieu = false;
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
   // error message
   validationErrorMessages = {};
 
@@ -108,6 +113,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       if (this.dangKyThamDoGiaHan) {
         this.currentAction = DangKyThamDoActionEnum.Edit;
         this.selectIdDangKyThamDo();
+        this.selectHeQuyChieu();
         this.selectCurrentFormState();
       } else {
         this.currentAction = DangKyThamDoActionEnum.Add;
@@ -173,8 +179,35 @@ export class DangkythamdogiahanIoComponent implements OnInit {
         sogiayphep: item.sogiayphep,
         idgiayphep: item.idgiayphep
       });
+
+      this.showViewOfHeQuyChieu(item);
     }
   }
+
+  private showViewOfHeQuyChieu(item: OutputDkThamDoGiaHanModel) {
+    if (item && item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
+    } else {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(DefaultValue.Empty);
+    }
+  }
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
+  }
+
 
   /**
    * Hàm set validate
@@ -202,6 +235,20 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
+
+  /**
+   * set default hệ quy chiếu
+   */
+
+  setDefaultHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const data = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (data) {
+        this.dangKyThamDoIOForm.controls.hequychieu.setValue(srid);
+      }
+    }
   }
 
   /**
@@ -253,6 +300,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
           this.selectIdDangKyThamDo();
+          this.showViewOfHeQuyChieu(this.dangKyThamDoGiaHan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -269,6 +318,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
         async (res) => {
           this.currentAction = DangKyThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.showViewOfHeQuyChieu(this.dangKyThamDoGiaHan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -314,6 +365,17 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   }
 
   /**
+   * lấy thông tin id hồ sơ sau khi thêm mới một hồ sơ
+   */
+  private selectHeQuyChieu() {
+    if (this.dangKyThamDoGiaHan) {
+      this.selectHeQuyChieuEvent.emit(this.dangKyThamDoGiaHan.hequychieu);
+    } else {
+      this.selectHeQuyChieuEvent.emit(DefaultValue.Empty);
+    }
+  }
+
+  /**
    * Xóa đăng ky thăm do theo ID hồ sơ
    */
   deleteItemDangKyThamDoGiaHan() {
@@ -332,6 +394,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
               this.currentAction = DangKyThamDoActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
+              this.showViewOfHeQuyChieu(this.dangKyThamDoGiaHan);
+              this.selectHeQuyChieu();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);

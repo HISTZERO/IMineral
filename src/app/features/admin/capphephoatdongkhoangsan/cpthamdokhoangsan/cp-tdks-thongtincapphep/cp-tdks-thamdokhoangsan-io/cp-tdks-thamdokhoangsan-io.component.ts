@@ -319,6 +319,20 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   }
 
   /**
+   * set default hệ quy chiếu
+   */
+
+  setDefaultHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const data = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (data) {
+        this.capPhepThamDoIOForm.controls.hequychieu.setValue(srid);
+      }
+    }
+  }
+
+  /**
    * Lấy dữ liệu hồ sơ theo idGiayPhep
    * @param idGiayPhep
    */
