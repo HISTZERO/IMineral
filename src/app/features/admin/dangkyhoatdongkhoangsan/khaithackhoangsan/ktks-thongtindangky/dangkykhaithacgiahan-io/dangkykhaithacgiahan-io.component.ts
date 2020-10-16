@@ -251,12 +251,41 @@ export class DangkykhaithacgiahanIoComponent implements OnInit {
   }
 
   /**
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
+   */
+  private async cloneThongTinDangKyKhaiThacFromGiayPhepLS(idGiayPhep: string) {
+    const khaiThacGiahanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacGiaHanService();
+    const dkKhaiThacItem = await khaiThacGiahanService.cloneThongTinDangKyKhaiThacFromGiayPhepLS(idGiayPhep).toPromise();
+
+    if (dkKhaiThacItem) {
+      return dkKhaiThacItem as OutputDkKhaiThacGiaHanModel;
+    }
+    return null;
+  }
+
+  /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
-  private selectItemGiayPhep(item: OutputGiayPhepModel) {
+  async selectItemGiayPhep(item: OutputGiayPhepModel) {
     if (item !== null && item !== undefined) {
       this.dangKyKhaiThacGiaHanIOForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.dangKyKhaiThacGiaHanIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+
+      const data = await this.cloneThongTinDangKyKhaiThacFromGiayPhepLS(item.idgiayphep);
+
+      if (data) {
+        this.dangKyKhaiThacGiaHanIOForm.controls.truluongdacapphep.setValue(data.truluongdacapphep);
+        this.dangKyKhaiThacGiaHanIOForm.controls.truluongkhaithac.setValue(data.truluongkhaithac);
+        this.dangKyKhaiThacGiaHanIOForm.controls.thoihankhaithac.setValue(data.thoihankhaithac);
+        this.dangKyKhaiThacGiaHanIOForm.controls.giahandenngay.setValue(data.giahandenngay);
+        this.dangKyKhaiThacGiaHanIOForm.controls.donvitruluong.setValue(data.donvitruluong);
+        this.dangKyKhaiThacGiaHanIOForm.controls.donvidientich.setValue(data.donvidientich);
+        this.dangKyKhaiThacGiaHanIOForm.controls.donvithoihan.setValue(data.donvithoihan);
+        this.dangKyKhaiThacGiaHanIOForm.controls.lydogiahan.setValue(data.lydogiahan);
+        this.dangKyKhaiThacGiaHanIOForm.controls.hequychieu.setValue(data.hequychieu);
+      }
+
     }
   }
 

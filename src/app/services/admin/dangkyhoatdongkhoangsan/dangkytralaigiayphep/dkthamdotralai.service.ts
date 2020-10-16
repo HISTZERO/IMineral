@@ -25,4 +25,18 @@ export class DkthamdotralaiService extends RepositoryEloquentService {
     return "ok";
   }
 
+  // Lấy thông tin đăng ký trả lại giấy phép thăm dò từ id giấy phép
+  public cloneThongTinDangKyThamDoTraLaiFromGiayPhepLS(idGiayPhep: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOTRALAI + "/clonethongtindangkythamdofromgiayphepls"
+      });
+
+      return this.httpClient.get<any>(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }

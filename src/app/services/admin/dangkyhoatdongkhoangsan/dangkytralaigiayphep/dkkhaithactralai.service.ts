@@ -24,4 +24,19 @@ export class DkkhaithactralaiService extends RepositoryEloquentService {
   public checkBeDeleted(id: string) {
     return "ok";
   }
+
+  // Lấy thông tin đăng ký trả lại giấy phép khai thác từ id giấy phép
+  public cloneThongTinDangKyKhaiThacTraLaiFromGiayPhepLS(idGiayPhep: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYKHAITHACTRALAI + "/clonethongtindangkykhaithacfromgiayphepls"
+      });
+
+      return this.httpClient.get<any>(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
