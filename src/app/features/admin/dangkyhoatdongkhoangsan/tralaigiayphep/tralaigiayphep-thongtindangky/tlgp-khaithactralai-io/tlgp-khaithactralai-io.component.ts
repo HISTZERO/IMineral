@@ -13,9 +13,9 @@ import { OutputDkKhaiThacTraLaiModel } from "src/app/models/admin/dangkyhoatdong
 import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
-import { OutputDmHeQuyChieuModel } from "../../../../../../models/admin/danhmuc/hequychieu.model";
-import { DonViDienTich } from "../../../../../../shared/constants/common-constants";
-import { DmFacadeService } from "../../../../../../services/admin/danhmuc/danhmuc-facade.service";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DonViDienTich } from "src/app/shared/constants/common-constants";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 
 @Component({
   selector: 'app-tlgp-khaithactralai-io',
@@ -286,12 +286,37 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
   }
 
   /**
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
+   */
+  private async cloneThongTinDangKyKhaiThacTraLaiFromGiayPhepLS(idGiayPhep: string) {
+    const khaiThacTraLaiService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacTraLaiService();
+    const dkKhaiThacTraLaiItem = await khaiThacTraLaiService.cloneThongTinDangKyKhaiThacTraLaiFromGiayPhepLS(idGiayPhep).toPromise();
+
+    if (dkKhaiThacTraLaiItem) {
+      return dkKhaiThacTraLaiItem as OutputDkKhaiThacTraLaiModel;
+    }
+    return null;
+  }
+
+  /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
-  private selectItemGiayPhep(item: OutputGiayPhepModel) {
+  async selectItemGiayPhep(item: OutputGiayPhepModel) {
     if (item !== null && item !== undefined) {
       this.dangKyKhaiThacTraLaiIOForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.dangKyKhaiThacTraLaiIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+
+      const data = await this.cloneThongTinDangKyKhaiThacTraLaiFromGiayPhepLS(item.idgiayphep);
+
+      if (data) {
+        this.dangKyKhaiThacTraLaiIOForm.controls.dientichdacapphep.setValue(data.dientichdacapphep);
+        this.dangKyKhaiThacTraLaiIOForm.controls.dientichkhaithac.setValue(data.dientichkhaithac);
+        this.dangKyKhaiThacTraLaiIOForm.controls.dientichtralai.setValue(data.dientichtralai);
+        this.dangKyKhaiThacTraLaiIOForm.controls.donvidientich.setValue(data.donvidientich);
+        this.dangKyKhaiThacTraLaiIOForm.controls.lydotralai.setValue(data.lydotralai);
+        this.dangKyKhaiThacTraLaiIOForm.controls.hequychieu.setValue(data.hequychieu);
+      }
     }
   }
 

@@ -26,6 +26,8 @@ import { GiaypheptailieuIoComponent } from 'src/app/features/admin/hosogiayto/gi
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
 import { QuyetdinhtinhtiencapquyenListComponent } from 'src/app/features/admin/hosogiayto/quyetdinhtinhtiencapquyen/quyetdinhtinhtiencapquyen-list/quyetdinhtinhtiencapquyen-list.component';
 import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hosogiayto/quyetdinhtinhtiencapquyen/quyetdinhtinhtiencapquyen-io/quyetdinhtinhtiencapquyen-io.component';
+import { QuyetdinhListComponent } from 'src/app/features/admin/hosogiayto/quyetdinh/quyetdinh-list/quyetdinh-list.component';
+import { QuyetdinhIoComponent } from 'src/app/features/admin/hosogiayto/quyetdinh/quyetdinh-io/quyetdinh-io.component';
 
 
 @NgModule({
@@ -41,7 +43,9 @@ import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hos
     GiaypheptailieuIoComponent,
     GiaypheptailieuListComponent,
     QuyetdinhtinhtiencapquyenListComponent,
-    QuyetdinhtinhtiencapquyenIoComponent
+    QuyetdinhtinhtiencapquyenIoComponent,
+    QuyetdinhListComponent,
+    QuyetdinhIoComponent
   ],
   exports: [
     GiayphepListComponent,
@@ -55,7 +59,9 @@ import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hos
     GiaypheptailieuIoComponent,
     GiaypheptailieuListComponent,
     QuyetdinhtinhtiencapquyenListComponent,
-    QuyetdinhtinhtiencapquyenIoComponent
+    QuyetdinhtinhtiencapquyenIoComponent,
+    QuyetdinhListComponent,
+    QuyetdinhIoComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   imports: [
@@ -73,7 +79,9 @@ import { QuyetdinhtinhtiencapquyenIoComponent } from 'src/app/features/admin/hos
     HosoOptionComponent,
     HosotailieuIoComponent,
     GiayphepOptionComponent,
-    GiaypheptailieuIoComponent
+    GiaypheptailieuIoComponent,
+    QuyetdinhListComponent,
+    QuyetdinhIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

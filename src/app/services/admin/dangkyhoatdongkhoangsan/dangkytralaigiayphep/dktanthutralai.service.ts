@@ -26,4 +26,18 @@ export class DktanthutralaiService extends RepositoryEloquentService {
     return "ok";
   }
 
+  // Lấy thông tin đăng ký trả lại giấy phép tận thu từ id giấy phép
+  public cloneThongTinDangKyTanThuTraLaiFromGiayPhepLS(idGiayPhep: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTANTHUTRALAI + "/clonethongtindangkytanthufromgiayphepls"
+      });
+
+      return this.httpClient.get<any>(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
