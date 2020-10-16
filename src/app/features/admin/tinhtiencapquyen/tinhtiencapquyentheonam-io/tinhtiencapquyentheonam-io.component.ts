@@ -13,6 +13,7 @@ import { OutputTtTinhTienCapQuyenModel } from 'src/app/models/admin/tinhtiencapq
 import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { HttpErrorResponse } from '@angular/common/http';
+import { ChitiettinhtiencapquyentheonamListComponent } from './chitiettinhtiencapquyentheonam/chitiettinhtiencapquyentheonam-list/chitiettinhtiencapquyentheonam-list.component';
 
 @Component({
   selector: 'app-tinhtiencapquyentheonam-io',
@@ -21,7 +22,7 @@ import { HttpErrorResponse } from '@angular/common/http';
 })
 export class TinhtiencapquyentheonamIoComponent implements OnInit {
   // Viewchild template
-  @ViewChild("griTinhTienTheoNam", { static: false }) public griTinhTienTheoNam: GridComponent;
+  @ViewChild("chiTietTinhTienTheoNam", { static: false }) public chiTietTinhTienTheoNam: ChitiettinhtiencapquyentheonamListComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-input-rename
@@ -68,7 +69,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
 
   async ngOnInit() {
     // Khởi tạo form
-    this. formInit();
+    this.formInit();
     // Lấy dữ liệu translate
     await this.getDataTranslate();
 
@@ -109,12 +110,15 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
       return false;
     }
 
+    this.chiTietTinhTienTheoNam.matSidenav = this.matSidenav;
+    this.chiTietTinhTienTheoNam.content = this.content;
     this.itemTinhTienCapQuyen = await this.getTinhTienCapQuyenByIdGiayPhep(this.idgiayphep);
 
     if (this.itemTinhTienCapQuyen) {
       this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit;
       this.selectCurrentFormState();
       this.setFormTitle();
+      this.chiTietTinhTienTheoNam.idtinhtiencapquyen = this.itemTinhTienCapQuyen.idtinhtiencapquyen;
     } else {
       this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Add;
       this.selectCurrentFormState();
@@ -123,9 +127,42 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
 
     // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu tính tiền cấp quyền
     await this.formOnEdit(this.itemTinhTienCapQuyen);
+    this.showViewChiTietTinhTienTheoNam();
 
     return true;
   }
+
+  private showViewChiTietTinhTienTheoNam() {
+    if (this.currentAction === TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit) {
+      this.chiTietTinhTienTheoNam.disabledAddButton = false;
+      this.chiTietTinhTienTheoNam.disabledReloadButton = false;
+    } else {
+      this.chiTietTinhTienTheoNam.disabledAddButton = true;
+      this.chiTietTinhTienTheoNam.disabledReloadButton = true;
+    }
+
+    if (this.itemTinhTienCapQuyen) {
+      this.chiTietTinhTienTheoNam.setDataChiTietTinhTienTheoNam(this.itemTinhTienCapQuyen.listtinhtientheonam);
+    } else {
+    }
+
+    this.chiTietTinhTienTheoNam.gridChiTietTinhTienTheoNam.refresh();
+  }
+
+  private async showViewChiTietTinhTienTheoNamByIdTinhTienCapQuyen(idTinhTienCapQuyen: string) {
+    if (this.currentAction === TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit) {
+      this.chiTietTinhTienTheoNam.disabledAddButton = false;
+      this.chiTietTinhTienTheoNam.disabledReloadButton = false;
+    } else {
+      this.chiTietTinhTienTheoNam.disabledAddButton = true;
+      this.chiTietTinhTienTheoNam.disabledReloadButton = true;
+    }
+
+    this.chiTietTinhTienTheoNam.idtinhtiencapquyen = idTinhTienCapQuyen;
+    await this.chiTietTinhTienTheoNam.getAllChiTietTinhTienTheoNam();
+    this.chiTietTinhTienTheoNam.gridChiTietTinhTienTheoNam.refresh();
+  }
+
 
   /**
    * Hàm khởi tạo form
@@ -260,6 +297,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit;
           this.selectCurrentFormState();
           this.setFormTitle();
+          await this.showViewChiTietTinhTienTheoNamByIdTinhTienCapQuyen(this.itemTinhTienCapQuyen.idtinhtiencapquyen);
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -278,6 +316,7 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Edit;
           this.selectCurrentFormState();
           this.setFormTitle();
+          await this.showViewChiTietTinhTienTheoNamByIdTinhTienCapQuyen(this.itemTinhTienCapQuyen.idtinhtiencapquyen);
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -305,12 +344,13 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           .getTinhTienCapQuyenKhaiThacKhoangSanService()
           .deleteItem({idtinhtiencapquyen: this.itemTinhTienCapQuyen.idtinhtiencapquyen})
           .subscribe(
-            () => {
+            async () => {
+              await this.showViewChiTietTinhTienTheoNamByIdTinhTienCapQuyen(this.itemTinhTienCapQuyen.idtinhtiencapquyen);
               this.itemTinhTienCapQuyen = null;
               this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
-              this.setFormTitle()
+              this.setFormTitle();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
