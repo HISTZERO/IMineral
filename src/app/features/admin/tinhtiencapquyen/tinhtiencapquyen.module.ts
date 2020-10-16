@@ -17,15 +17,20 @@ import { TinhtiencapquyenRoutingModule } from 'src/app/features/admin/tinhtienca
 import { TinhtiencapquyenComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen.component';
 import { TinhtiencapquyenListComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-list/tinhtiencapquyen-list.component';
 import { TinhtiencapquyenIoComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyen-io/tinhtiencapquyen-io.component';
-import { TinhtiencapquyentheonamIoComponent } from './tinhtiencapquyentheonam-io/tinhtiencapquyentheonam-io.component';
-
+import { TinhtiencapquyentheonamIoComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyentheonam-io/tinhtiencapquyentheonam-io.component';
+import { ChitiettinhtiencapquyentheonamComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyentheonam-io/chitiettinhtiencapquyentheonam/chitiettinhtiencapquyentheonam.component';
+import { ChitiettinhtiencapquyentheonamListComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyentheonam-io/chitiettinhtiencapquyentheonam/chitiettinhtiencapquyentheonam-list/chitiettinhtiencapquyentheonam-list.component';
+import { ChitiettinhtiencapquyentheonamIoComponent } from 'src/app/features/admin/tinhtiencapquyen/tinhtiencapquyentheonam-io/chitiettinhtiencapquyentheonam/chitiettinhtiencapquyentheonam-io/chitiettinhtiencapquyentheonam-io.component';
 
 @NgModule({
   declarations: [
     TinhtiencapquyenComponent,
     TinhtiencapquyenListComponent,
     TinhtiencapquyenIoComponent,
-    TinhtiencapquyentheonamIoComponent
+    TinhtiencapquyentheonamIoComponent,
+    ChitiettinhtiencapquyentheonamComponent,
+    ChitiettinhtiencapquyentheonamListComponent,
+    ChitiettinhtiencapquyentheonamIoComponent
   ],
   imports: [
     CommonModule,
@@ -37,6 +42,9 @@ import { TinhtiencapquyentheonamIoComponent } from './tinhtiencapquyentheonam-io
     TranslateModule,
     DanhmucModule,
     HosoGiaytoModule
+  ],
+  entryComponents: [
+    ChitiettinhtiencapquyentheonamIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
