@@ -7,17 +7,8 @@
             <ng-template appContentContainer>
             </ng-template>
           </mat-tab>
-          <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhDongCuaMoTabTile' | translate }}">
-            <app-cp-ktks-donvihanhchinh-list #capPhepDongCuaMoDvhc [allowAutoInit]="false"></app-cp-ktks-donvihanhchinh-list>
-          </mat-tab>
-          <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanDongCuaMoTabTile' | translate }}">
-            <app-cp-ktks-loaikhoangsan-list #capPhepDongCuaMoLoaiKhoangSan [allowAutoInit]="false"></app-cp-ktks-loaikhoangsan-list>
-          </mat-tab>
           <mat-tab [disabled]="disabledTabState[TabType.KhuVucDongCuaMo]" label="{{ titleNameTabKhuVuc }}">
             <app-cp-ktks-khuvuckhaithac-list #capPhepDongCuaMoKhuVuc [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
-          </mat-tab>
-          <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhDongCuaMo]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhDongCuaMoTabTitle' | translate }}">
-            <app-cp-ktks-congtrinhkhaithac-list #capPhepCongTrinhDongCuaMo [allowAutoInit]="false"></app-cp-ktks-congtrinhkhaithac-list>
           </mat-tab>
         </mat-tab-group>
       </div>
