@@ -257,8 +257,12 @@ export class DangkythamdogiahanIoComponent implements OnInit {
    */
   private async getDangKyThamDoByIdHoSo(idHoSo: string) {
     const thamDoGiahanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoGiaHanService();
-    const dangKyItem = await thamDoGiahanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise() as OutputDkThamDoGiaHanModel;
-    return dangKyItem;
+    const dangKyItem = await thamDoGiahanService.getDangKyThamDoByIdHoSo(idHoSo).toPromise()
+
+    if (dangKyItem) {
+      return dangKyItem as OutputDkThamDoGiaHanModel;
+    }
+    return null;
   }
 
   openGiayPhepIOSidenav() {
@@ -272,12 +276,37 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   }
 
   /**
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
+   */
+
+  private async cloneThongTinDangKyThamDoFromGiayPhepLS(idGiayPhep: string) {
+    const thamDoGiahanService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoGiaHanService();
+    const cpThamDoItem = await thamDoGiahanService.cloneThongTinDangKyThamDoFromGiayPhepLS(idGiayPhep).toPromise();
+
+    if (cpThamDoItem) {
+      return cpThamDoItem as OutputDkThamDoGiaHanModel;
+    }
+    return null;
+  }
+
+  /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
-  private selectItemGiayPhep(item: OutputGiayPhepModel) {
-    if (item !== null && item !== undefined) {
+  private async selectItemGiayPhep(item: OutputGiayPhepModel) {
+    if (item !== DefaultValue.Null && item !== DefaultValue.Undefined) {
       this.dangKyThamDoIOForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.dangKyThamDoIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+
+      const data = await this.cloneThongTinDangKyThamDoFromGiayPhepLS(item.idgiayphep);
+
+      if (data) {
+        this.dangKyThamDoIOForm.controls.donvidientich.setValue(data.donvidientich);
+        this.dangKyThamDoIOForm.controls.dientichtralai.setValue(data.dientichtralai);
+        this.dangKyThamDoIOForm.controls.dientichthamdo.setValue(data.dientichthamdo);
+        this.dangKyThamDoIOForm.controls.dientichcapphep.setValue(data.dientichcapphep);
+        this.dangKyThamDoIOForm.controls.hequychieu.setValue(data.hequychieu);
+      }
     }
   }
 
