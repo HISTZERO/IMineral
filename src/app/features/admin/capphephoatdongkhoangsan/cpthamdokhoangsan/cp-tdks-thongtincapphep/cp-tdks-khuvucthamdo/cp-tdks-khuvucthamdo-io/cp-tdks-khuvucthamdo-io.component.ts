@@ -164,7 +164,7 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
     this.inputModelKhuVuc = new InputCpThamDoKhuVucModel();
     this.formOnEdit();
 
-    if (this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
+    if (this.obj && this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
       this.tenHeQuyChieu = this.getTenHeQuyChieu(this.obj.hequychieu);
     }
   }
@@ -246,8 +246,9 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
     this.inputModelKhuVuc.hequychieu = this.obj.hequychieu;
     if (operMode === "new") {
       this.inputModelKhuVuc.listtoado = await this.generateModelData();
-      await cpThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
+      cpThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllCpThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -265,6 +266,7 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
       this.inputModelKhuVuc.listtoado = await this.generateModelData();
       cpThamDoKhuVucService.updateKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllCpThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -345,7 +347,7 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
     if (this.cpThamDoKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
+      await this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
     }

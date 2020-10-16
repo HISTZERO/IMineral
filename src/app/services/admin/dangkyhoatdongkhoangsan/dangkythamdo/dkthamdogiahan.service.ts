@@ -48,4 +48,18 @@ export class DkThamDoGiaHanService extends RepositoryEloquentService {
 
     }
   }
+
+  public cloneThongTinDangKyThamDoFromGiayPhepLS(idGiayPhep: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTHAMDOGIAHAN + "/clonethongtindangkythamdofromgiayphepls"
+      });
+
+      return this.httpClient.get<any>(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }
