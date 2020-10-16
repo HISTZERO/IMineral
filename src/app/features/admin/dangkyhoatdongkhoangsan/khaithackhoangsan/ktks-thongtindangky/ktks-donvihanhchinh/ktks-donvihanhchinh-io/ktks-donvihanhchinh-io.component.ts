@@ -110,9 +110,9 @@ export class KtksDonvihanhchinhIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      tinh: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.matinhRequired },
-      huyen: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.mahuyenRequired },
-      xa: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdodvhc.maxaRequired }
+      tinh: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.matinhRequired },
+      huyen: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.mahuyenRequired },
+      xa: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdvhc.maxaRequired }
     };
   }
 

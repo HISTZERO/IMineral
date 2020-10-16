@@ -23,6 +23,7 @@ import { CongtrinhthamdoListComponent } from 'src/app/features/admin/dangkyhoatd
 import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -76,6 +77,10 @@ export class ThongtindangkyComponent implements OnInit {
   private iddangkythamdo: string;
   // Lưu trữ dữ liệu hồ sơ
   private itemHoSo: any;
+  // lưu dữ liệu hệ quy chiếu
+  private heQuyChieu = DefaultValue.Empty;
+  // lưu trữ componentRef
+  private componentRef: any;
 
   constructor(
     private cfr: ComponentFactoryResolver,
@@ -158,16 +163,31 @@ export class ThongtindangkyComponent implements OnInit {
     }
   }
 
-  getDangKyThamDoFormState(action: number) {
+  private getDangKyThamDoFormState(action: number) {
     this.currentAction = action;
     this.setDisabledTabState(this.currentAction);
     this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
-  getIdDangKyThamDo(idDangKyThamDo: string) {
+  private getIdDangKyThamDo(idDangKyThamDo: string) {
     this.iddangkythamdo = idDangKyThamDo;
   }
+
+  private getHeQuyChieu(heQuyChieu: string) {
+    this.heQuyChieu = heQuyChieu;
+  }
+
+  getNumberOfDataKhuVucThamDo(data: number) {
+    if (this.componentRef && this.componentRef.instance) {
+      if (data > DefaultValue.Zero) {
+        this.componentRef.instance.disabledHeQuyChieu = true;
+      } else {
+        this.componentRef.instance.disabledHeQuyChieu = false;
+      }
+    }
+  }
+
 
   /**
    * Lấy dữ liệu hồ sơ theo IdHoSo
@@ -186,12 +206,13 @@ export class ThongtindangkyComponent implements OnInit {
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyThamDoKhoangSanComponent[this.itemHoSo.loaicapphep]);
       const viewContainerRef = this.contentContainer.viewContainerRef;
-      const componentRef: any = viewContainerRef.createComponent(factory);
-      componentRef.instance.idhoso = this.itemHoSo.idhoso;
-      componentRef.instance.matSidenav = this.matSidenav;
-      componentRef.instance.content = this.content;
-      componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
-      componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
+      this.componentRef = viewContainerRef.createComponent(factory);
+      this.componentRef.instance.idhoso = this.itemHoSo.idhoso;
+      this.componentRef.instance.matSidenav = this.matSidenav;
+      this.componentRef.instance.content = this.content;
+      this.componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
+      this.componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
+      this.componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
     }
   }
 
@@ -218,6 +239,7 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoKhuVuc.content = this.content;
       this.dangKyThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
       this.dangKyThamDoKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
+      this.dangKyThamDoKhuVuc.heQuyChieu = this.heQuyChieu;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;

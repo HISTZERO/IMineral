@@ -280,12 +280,28 @@ export enum CpThamDoKhoangSanTabEnum {
   CongTrinhThamDo = 4
 }
 
+export enum CpTanThuKhoangSanTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucTanThu = 3,
+}
+
 export enum CpKhaiThacKhoangSanChiTietTabEnum {
   ThongTinChiTiet = 0,
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucKhaiThac = 3,
-  CongTrinhKhaiThac = 4
+  CongTrinhKhaiThac = 4,
+  ThietBiKhaiThac = 5
+}
+
+export enum CpDongCuaMoChiTietTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucDongCuaMo = 3,
+  CongTrinhDongCuaMo = 4,
 }
 
 export enum CapPhepThamDoActionEnum {

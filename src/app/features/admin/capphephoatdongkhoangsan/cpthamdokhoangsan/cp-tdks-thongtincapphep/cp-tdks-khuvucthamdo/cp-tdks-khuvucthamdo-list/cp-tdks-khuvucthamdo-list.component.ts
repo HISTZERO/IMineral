@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { ComponentFactoryResolver, Input, Type, ViewChild, ViewContainerRef } from "@angular/core";
+import { ComponentFactoryResolver, EventEmitter, Input, Output, Type, ViewChild, ViewContainerRef } from "@angular/core";
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
@@ -12,6 +12,7 @@ import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/settin
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { OutputCpThamDoKhuVucModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.model';
 import { CpTdksKhuvucthamdoIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo-io/cp-tdks-khuvucthamdo-io.component';
+import { DefaultValue } from 'src/app/shared/constants/global-var';
 
 @Component({
   selector: 'app-cp-tdks-khuvucthamdo-list',
@@ -25,10 +26,12 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   @ViewChild("gridCpThamDoKhuVuc", { static: false }) public gridCpThamDoKhuVuc: GridComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
+  // tslint:disable-next-line: no-output-rename
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
   // Chứa loại cấp phép
   public loaicapphep: number;
 
@@ -143,6 +146,12 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
       });
     }
     this.listCpThamDoKhuVuc = listData;
+
+    if (this.listCpThamDoKhuVuc) {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(this.listCpThamDoKhuVuc.length);
+    } else {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
+    }
   }
 
   /**
@@ -178,7 +187,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.titleAdd);
-    this.matSidenavService.setContentComp(CpTdksKhuvucthamdoIoComponent, "new", { idcapphepthamdo: this.idcapphepthamdo, loaicapphep: this.loaicapphep });
+    this.matSidenavService.setContentComp(CpTdksKhuvucthamdoIoComponent, "new", { idcapphepthamdo: this.idcapphepthamdo, loaicapphep: this.loaicapphep, hequychieu: this.heQuyChieu });
     this.matSidenavService.open();
   }
 

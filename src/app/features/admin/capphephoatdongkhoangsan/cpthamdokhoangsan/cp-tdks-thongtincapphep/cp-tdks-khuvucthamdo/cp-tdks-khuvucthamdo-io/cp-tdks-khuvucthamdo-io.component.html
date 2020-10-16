@@ -57,11 +57,10 @@
             </div>
         </div>
         <div class="form-group row mx-0">
-            <label
-                class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieu" | translate}}
+            <label class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieu" | translate}}
                 <small>(*)</small>
             </label>
-            <div class="col-sm-9">
+            <!-- <div class="col-sm-9">
                 <mat-select class="form-control"
                     placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.chonhequychieu' | translate }}"
                     formControlName="hequychieu" *ngIf="dataTranslate">
@@ -73,6 +72,9 @@
                     </mat-option>
                 </mat-select>
                 <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
+            </div> -->
+            <div class="col-sm-9 font-weight-bold" style="padding-top: 9px;">
+              {{tenHeQuyChieu}}
             </div>
         </div>
     </form>

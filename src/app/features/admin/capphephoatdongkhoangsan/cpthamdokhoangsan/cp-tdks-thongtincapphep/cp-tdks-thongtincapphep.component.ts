@@ -40,6 +40,8 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   public TabType = CpThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id giấy phép
   public idgiayphep;
+  // lưu dữ liệu hệ quy chiếu
+  private heQuyChieu = DefaultValue.Empty;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [CpThamDoKhoangSanTabEnum.ThongTinChiTiet] : false,
@@ -65,6 +67,8 @@ export class CpTdksThongtincapphepComponent implements OnInit {
    private idcapphepthamdo: string;
    // Lưu trữ dữ liệu giấy phép
    private itemGiayPhep: any;
+   // lưu trữ componentRef
+   private componentRef: any;
 
   constructor(private cfr: ComponentFactoryResolver,
               private translate: TranslateService,
@@ -152,15 +156,19 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     this.loadedTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
-  getCapPhepThamDoFormState(action: number) {
+  private getCapPhepThamDoFormState(action: number) {
     this.currentAction = action;
     this.setDisabledTabState(this.currentAction);
     this.resetLoadedTabState();
     this.selectCurrentFormStateEvent.emit(this.currentAction);
   }
 
-  getIdCapPhepThamDo(idCapPhepThamDo: string) {
+  private getIdCapPhepThamDo(idCapPhepThamDo: string) {
     this.idcapphepthamdo = idCapPhepThamDo;
+  }
+
+  private getHeQuyChieu(heQuyChieu: string) {
+    this.heQuyChieu = heQuyChieu;
   }
 
   /**
@@ -182,20 +190,36 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     }
 
     const viewContainerRef = this.contentContainer.viewContainerRef;
-    const componentRef: any = viewContainerRef.createComponent(factory);
-    componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
-    componentRef.instance.matSidenav =  this.matSidenav;
-    componentRef.instance.content = this.content;
-    componentRef.instance.itemGiayPhep = this.itemGiayPhep;
+    this.componentRef = viewContainerRef.createComponent(factory);
+    this.componentRef.instance.idgiayphep = this.itemGiayPhep.idgiayphep;
+    this.componentRef.instance.matSidenav =  this.matSidenav;
+    this.componentRef.instance.content = this.content;
+    this.componentRef.instance.itemGiayPhep = this.itemGiayPhep;
 
     if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-      componentRef.instance.disabledDienTichTraLai = false;
+      this.componentRef.instance.disabledDienTichTraLai = false;
     } else {
-      componentRef.instance.disabledDienTichTraLai = true;
+      this.componentRef.instance.disabledDienTichTraLai = true;
     }
 
-    componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepThamDoFormState(event));
-    componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
+    this.componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepThamDoFormState(event));
+    this.componentRef.instance.selectIdCapPhepThamDoEvent.subscribe(event => this.getIdCapPhepThamDo(event));
+    this.componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
+  }
+
+  /**
+   * lấy tổng số dữ liệu khu vực
+   * @param data
+   */
+
+  getNumberOfDataKhuVucThamDo(data: number) {
+    if (this.componentRef && this.componentRef.instance) {
+      if (data > DefaultValue.Zero) {
+        this.componentRef.instance.disabledHeQuyChieu = true;
+      } else {
+        this.componentRef.instance.disabledHeQuyChieu = false;
+      }
+    }
   }
 
   async tabChange(index: any) {
@@ -214,6 +238,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
       this.capPhepThamDoKhuVuc.content = this.content;
       this.capPhepThamDoKhuVuc.idcapphepthamdo = this.idcapphepthamdo;
       this.capPhepThamDoKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
+      this.capPhepThamDoKhuVuc.heQuyChieu = this.heQuyChieu;
       this.loadedTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.capPhepThamDoKhuVuc.manualDataInit();
     } else if (index === CpThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[CpThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.capPhepThamDoCongTrinh.matSidenav = this.matSidenav;

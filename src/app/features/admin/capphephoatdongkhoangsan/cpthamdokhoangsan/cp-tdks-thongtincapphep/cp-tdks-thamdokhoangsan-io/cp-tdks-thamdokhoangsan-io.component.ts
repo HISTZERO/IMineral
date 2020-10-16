@@ -1,21 +1,31 @@
-import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { DmFacadeService } from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { CapPhepThamDoActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
-import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { OutputCpThamDoKhoangSanModel} from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model';
-import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { HttpErrorResponse } from '@angular/common/http';
-import { DangKhoangSan, DonViDienTich, DonViDoSau, DonViThoiHan } from 'src/app/shared/constants/common-constants';
-import { MatSidenav } from '@angular/material';
-import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
-import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.model';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute} from '@angular/router';
+import {TranslateService} from '@ngx-translate/core';
+import {DmFacadeService} from 'src/app/services/admin/danhmuc/danhmuc-facade.service';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
+import {MatsidenavService} from 'src/app/services/utilities/matsidenav.service';
+import {CapPhepThamDoActionEnum, LoaiCapPhepEnum} from 'src/app/shared/constants/enum';
+import {DefaultValue} from 'src/app/shared/constants/global-var';
+import {OutputCpThamDoKhoangSanModel} from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.model';
+import {OutputDmHeQuyChieuModel} from 'src/app/models/admin/danhmuc/hequychieu.model';
+import {CapPhepHoatDongKhoangSanFacadeService} from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import {HttpErrorResponse} from '@angular/common/http';
+import {DonViDienTich, DonViDoSau, DonViThoiHan} from 'src/app/shared/constants/common-constants';
+import {MatSidenav} from '@angular/material';
+import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
+import {OutputGiayPhepModel} from 'src/app/models/admin/hosogiayto/giayphep.model';
 
 @Component({
   selector: 'app-cp-tdks-thamdokhoangsan-io',
@@ -23,10 +33,12 @@ import { OutputGiayPhepModel } from 'src/app/models/admin/hosogiayto/giayphep.mo
   styleUrls: ['./cp-tdks-thamdokhoangsan-io.component.scss']
 })
 export class CpTdksThamdokhoangsanIoComponent implements OnInit {
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  // tslint:disable-next-line: no-output-rename
+  @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
   @Output("selectIdCapPhepThamDoEvent") selectIdCapPhepThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
@@ -45,9 +57,13 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   public disabledDeleteButton = false;
   // disable control diện tích trả lại
   public disabledDienTichTraLai = false;
+  // disable control hệ quy chiếu
+  public disabledHeQuyChieu= false;
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
   // Action cấp thăm dò
   public ActionType = CapPhepThamDoActionEnum;
   // lưu dữ liệu đơn vị diện tích
@@ -90,7 +106,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
     public matSidenavService: MatsidenavService,
     private capPhepHoatDongKhoangSanFacadeService: CapPhepHoatDongKhoangSanFacadeService,
     private hoSoGiayToFacadeService: HoSoGiayToFacadeService,
-    public cfr: ComponentFactoryResolver) { }
+    public cfr: ComponentFactoryResolver) {
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -120,20 +137,32 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      tenkhuvucthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdoRequired },
-      diadiem: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemRequired },
-      dientichthamdo: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoFormat },
-      dientichtralai: { pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiFormat },
-      chieusauthamdotu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuFormat },
-      chieusauthamdoden: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenFormat },
-      thoihanthamdo: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoRequired, pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoFormat  },
-      ngaybdthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdoRequired },
-      ngayktthamdo:  { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdoRequired },
-      mucdichsudungkhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsanRequired },
-      donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientichRequired },
-      donvithoihan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvithoihanRequired },
-      donvichieusau: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusauRequired },
-      hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieuRequired }
+      tenkhuvucthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.tenkhuvucthamdoRequired},
+      diadiem: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.diadiemRequired},
+      dientichthamdo: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichthamdoFormat
+      },
+      dientichtralai: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiFormat},
+      chieusauthamdotu: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuFormat
+      },
+      chieusauthamdoden: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenFormat
+      },
+      thoihanthamdo: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.thoihanthamdoFormat
+      },
+      ngaybdthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngaybdthamdoRequired},
+      ngayktthamdo: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.ngayktthamdoRequired},
+      mucdichsudungkhoangsan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsanRequired},
+      donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientichRequired},
+      donvithoihan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvithoihanRequired},
+      donvichieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusauRequired},
+      hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieuRequired}
     };
   }
 
@@ -147,9 +176,9 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       }
     });
 
-    if ((this.itemGiayPhep === DefaultValue.Null ||  this.itemGiayPhep === DefaultValue.Undefined)
-        && this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
-        && this.idgiayphep.trim() !== DefaultValue.Empty) {
+    if ((this.itemGiayPhep === DefaultValue.Null || this.itemGiayPhep === DefaultValue.Undefined)
+      && this.idgiayphep !== DefaultValue.Null && this.idgiayphep !== DefaultValue.Undefined
+      && this.idgiayphep.trim() !== DefaultValue.Empty) {
       this.itemGiayPhep = await this.hoSoGiayToFacadeService.getGiayPhepService().getByid(this.idgiayphep).toPromise() as OutputGiayPhepModel;
     }
 
@@ -159,6 +188,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       if (this.capPhepThamDoKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();
+        this.selectHeQuyChieu();
         this.selectCurrentFormState();
         this.setFormTitle();
       } else {
@@ -246,8 +276,36 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
         donvichieusau: item.donvichieusau,
         hequychieu: item.hequychieu
       });
+
+      this.showViewOfHeQuyChieu(item);
     }
   }
+
+  private showViewOfHeQuyChieu(item: OutputCpThamDoKhoangSanModel) {
+    if (item && item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
+    } else {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(DefaultValue.Empty);
+    }
+  }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
+  }
+
 
   /**
    * Hàm lấy danh sách Lĩnh Vực
@@ -255,7 +313,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll({PageNumber: 1, PageSize: -1});
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -275,6 +333,17 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
    */
   private selectIdCapPhepThamDo() {
     this.selectIdCapPhepThamDoEvent.emit(this.capPhepThamDoKhoangSan.idcapphepthamdo);
+  }
+
+  /**
+   * lấy thông tin hệ quy chiếu
+   */
+  private selectHeQuyChieu() {
+    if (this.capPhepThamDoKhoangSan) {
+      this.selectHeQuyChieuEvent.emit(this.capPhepThamDoKhoangSan.hequychieu);
+    } else {
+      this.selectHeQuyChieuEvent.emit(DefaultValue.Empty);
+    }
   }
 
   /**
@@ -324,6 +393,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.selectCurrentFormState();
           this.setFormTitle();
           this.selectIdCapPhepThamDo();
+          this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -342,6 +413,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
           this.setFormTitle();
+          this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -370,11 +443,13 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
           .deleteCapPhepThamDoByIdGiayPhep(this.idgiayphep)
           .subscribe(
             () => {
-              this.capPhepThamDoKhoangSan = null;
+              this.capPhepThamDoKhoangSan = DefaultValue.Null;
               this.currentAction = CapPhepThamDoActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
               this.setFormTitle();
+              this.showViewOfHeQuyChieu(this.capPhepThamDoKhoangSan);
+              this.selectHeQuyChieu();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
@@ -395,5 +470,10 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.capPhepThamDoIOForm.reset();
+    this.disabledHeQuyChieu = false;
+    this.capPhepThamDoIOForm.controls.donvidientich.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.donvithoihan.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.donvichieusau.setValue(DefaultValue.Empty);
+    this.capPhepThamDoIOForm.controls.hequychieu.setValue(DefaultValue.Empty);
   }
 }
