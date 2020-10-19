@@ -20,11 +20,11 @@
                 <mat-tab-group mat-stretch-tabs #capPhepTraLaiGiayPhepThamDoKhaiThacKhoanSanTabs [animationDuration]=""  [selectedIndex]="TabType.ThongTinGiayPhep"
                   (selectedIndexChange)="tabChange($event)">
                   <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptralaigiayphepthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                    <app-giayphep-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptralaigiayphepthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}"
+                    <app-quyetdinh-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptralaigiayphepthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}"
                         [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.TraLaiGiayPhep"
                         [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false" (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
                         (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
-                    </app-giayphep-io>
+                    </app-quyetdinh-io>
                   </mat-tab>
                   <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuGiayPhepDinhKem]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptralaigiayphepthamdokhaithackhoangsan.taiLieuDinhKemCapPhepTabTile' | translate }}">
                     <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">

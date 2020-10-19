@@ -267,7 +267,7 @@ export class QuyetdinhListComponent implements OnInit {
     */
    confirmDeleteDiaLog() {
      const dialogRef = this.commonService.confirmDeleteDiaLogService(
-       this.dataTranslate.HOSOGIAYTO.giayphep.contentDelete,
+       this.dataTranslate.HOSOGIAYTO.quyetdinh.contentDelete,
        this.selectedItem.sogiayphep
      );
      dialogRef.afterClosed().subscribe(async (result) => {
