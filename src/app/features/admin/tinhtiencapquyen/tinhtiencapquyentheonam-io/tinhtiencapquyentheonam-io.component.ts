@@ -143,7 +143,6 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
 
     if (this.itemTinhTienCapQuyen) {
       this.chiTietTinhTienTheoNam.setDataChiTietTinhTienTheoNam(this.itemTinhTienCapQuyen.listtinhtientheonam);
-    } else {
     }
 
     this.chiTietTinhTienTheoNam.gridChiTietTinhTienTheoNam.refresh();
@@ -345,9 +344,9 @@ export class TinhtiencapquyentheonamIoComponent implements OnInit {
           .deleteItem({idtinhtiencapquyen: this.itemTinhTienCapQuyen.idtinhtiencapquyen})
           .subscribe(
             async () => {
+              this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Add;
               await this.showViewChiTietTinhTienTheoNamByIdTinhTienCapQuyen(this.itemTinhTienCapQuyen.idtinhtiencapquyen);
               this.itemTinhTienCapQuyen = null;
-              this.currentAction = TinhTienCapQuyenKhaiThacKhoangSanActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
               this.setFormTitle();
