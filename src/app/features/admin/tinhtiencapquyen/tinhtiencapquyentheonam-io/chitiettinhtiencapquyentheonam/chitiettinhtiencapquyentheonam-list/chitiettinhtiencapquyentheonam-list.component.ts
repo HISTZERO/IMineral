@@ -207,7 +207,7 @@ export class ChitiettinhtiencapquyentheonamListComponent implements OnInit {
       if (result === "confirm") {
         await this.tinhTienCapQuyenFacadeService
           .getChiTietTinhTienTheoNamService()
-          .deleteItem({ idthamdoloaikhoangsan: this.selectedItem.idtientheonam })
+          .deleteItem({ idtientheonam: this.selectedItem.idtientheonam })
           .subscribe(
             () => this.getAllChiTietTinhTienTheoNam(),
             (error: HttpErrorResponse) => {
