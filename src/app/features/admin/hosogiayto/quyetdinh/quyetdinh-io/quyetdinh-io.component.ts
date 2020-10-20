@@ -191,10 +191,10 @@ export class QuyetdinhIoComponent implements OnInit {
     this.giayPhepIOForm = this.formBuilder.group({
       sogiayphep: [DefaultValue.Empty, Validators.required],
       ngaycapphep: [DefaultValue.Empty, Validators.required],
-      ngaybdhieuluc: [DefaultValue.Empty, Validators.required],
-      ngaykthieuluc: [DefaultValue.Empty, Validators.required],
-      thoihan: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
-      donvithoihan: [DefaultValue.Empty, Validators.required],
+      ngaybdhieuluc: [DefaultValue.Empty],
+      ngaykthieuluc: [DefaultValue.Empty],
+      thoihan: [DefaultValue.Empty, [Validators.pattern("^[0-9-+]+$")]],
+      donvithoihan: [DefaultValue.Empty],
       idcoquancapphep: [DefaultValue.Empty, Validators.required],
       chucvunguoiky: [DefaultValue.Empty, Validators.required],
       tennguoiky: [DefaultValue.Empty, Validators.required],
@@ -420,13 +420,11 @@ export class QuyetdinhIoComponent implements OnInit {
 
   private validatLoaiCapPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.ThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSan ) {
+    if (loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.PheDuyetTruLuongKhoangSan
+      ) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.quyetdinh.loaicapphepInformedInvalidSelection,
@@ -440,13 +438,10 @@ export class QuyetdinhIoComponent implements OnInit {
 
   private validateInvalidHoSoGiayPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSan
+    if (loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
       ) {
         const idHoSo = this.giayPhepIOForm.controls.idhoso.value;
         const idGiayPhepLS = this.giayPhepIOForm.controls.idgiayphepls.value;
