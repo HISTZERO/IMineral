@@ -35,5 +35,20 @@
     "sotienhangnamRequired": "Số tiền nộp hàng năm không được để trống",
     "sotienhangnamFormat": "Số tiền nộp hàng năm chưa đúng định dạng yêu cầu",
     "informedNotExistedQuyetDinhTinhTienCapQuyen": "Quyết định tính tiền cấp quyền không tồn tại"
+  },
+  "chitiettinhtiencapquyentheonam": {
+    "titleList": "Danh sách chi tiết số tiền theo năm",
+    "titleAdd": "Thêm chi tiết số tiền theo năm",
+    "titleEdit": "Sửa dữ liệu chi tiết số tiền theo năm",
+    "contentDelete": "Năm: ",
+    "namnoptien": "Năm tính tiền",
+    "sotienhangnam": "Số tiền",
+    "namnoptienPlaceholder": "Nhập Năm tính tiền",
+    "sotienhangnamPlaceholder": "Nhập số tiền",
+    "namnoptienRequired": "Năm tính tiền không được để trống",
+    "namnoptienFormat": "Năm tính tiền chưa đúng định dạng yêu cầu",
+    "sotienhangnamRequired": "Số tiền không được để trống",
+    "sotienhangnamFormat": "Số tiền chưa đúng định dạng yêu cầu",
+    "informedNotExistedChiTietTinhTienTheoNam": "Không tồn tại chi tiết tiết tính tền theo năm"
   }
 }
