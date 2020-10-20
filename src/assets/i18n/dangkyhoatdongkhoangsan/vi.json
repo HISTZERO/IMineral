@@ -104,6 +104,24 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
   },
+  "thongtinchitietpheduyettruluongks":{
+    "titleAdd": "Thêm mới dữ liệu đăng ký phê duyệt trữ lượng khoáng sản",
+    "titleEdit": "Sửa dữ liệu đăng ký phê duyệt trữ lượng khoáng sản",
+    "sogiayphepthamdo":"Số giấy phép thăm dò",
+    "sogiayphepthamdoRequired":"Số giấy phép thăm dò không được để trống",
+    "ngaycapphep":"Ngày cấp phép",
+    "coquancapphep":"Cơ quan câp phép",
+    "tenbaocaothamdo":"Tên báo cáo thăm dò",
+    "tenbaocaothamdoRequired":"Tên báo cáo thăm dò không được để trống",
+    "tenbaocaothamdoPlaceholder":"Nhập tên báo cáo thăm dò",
+    "ngaylapbaocao":"Ngày lập báo cáo",
+    "ngaylapbaocaoRequired":"Ngày lập báo cáo không được để trống",
+    "ngaylapbaocaoPlaceholder":"Nhập ngày lập báo cáo",
+    "donvituvan":"Đơn vị tư vấn",
+    "donvituvanRequired":"Đơn vị tư vấn không được để trống",
+    "donvituvanPlaceholder":"Nhập đơn vị tư vấn",
+    "contentDelete":"Hồ sơ đăng ký phê duyệt trữ lượng khoáng sản"
+  },
   "daugiaquyen": {
     "titleList": "Danh sách hồ sơ đăng ký đấu giá quyền khai thác khoáng sản",
     "titleAdd": "Thêm mới hồ sơ đăng ký đấu giá quyền khai thác khoáng sản",

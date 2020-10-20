@@ -61,6 +61,7 @@ export class ServiceName {
   public static DANGKYKHAITHACTHIETBI = "dangkykhaithacthietbi";
   //Đăng ký đấu giá quyền khai thác khoáng sản
   public static DANGKYDAUGIAQUYENKHAITHAC="daugiakhaithac";
+  public static DANGKYPHEDUYETTRULUONGKS="dkpheduyettruluong";
   // Đăng ký tận thu khoáng sản
   public static DANGKYTANTHUKHOANGSAN = "dangkytanthukhoangsan";
   public static DANGKYTANTHUGIAHAN = "dangkytanthugiahan";
