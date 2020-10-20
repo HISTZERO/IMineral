@@ -5,24 +5,24 @@
           <h4>{{ 'COMMON.default.timkiemnangcao' | translate }}</h4>
           <div class="row" [formGroup]="formSearch">
             <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-              <label class="col-form-label text-right">{{"HOSOGIAYTO.giayphep.tungay" | translate}}</label>
+              <label class="col-form-label text-right">{{"HOSOGIAYTO.quyetdinh.tungay" | translate}}</label>
               <input class="form-control" formControlName="GTEqualNgaycapphep" [owlDateTimeTrigger]="dt1" [owlDateTime]="dt1"
-                placeholder="{{'HOSOGIAYTO.giayphep.tungayPlaceholder' | translate}}" />
+                placeholder="{{'HOSOGIAYTO.quyetdinh.tungayPlaceholder' | translate}}" />
               <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
             </div>
             <div class="col-lg-2 col-md-2 col-sm-2 form-group">
-              <label class="col-form-label text-right">{{"HOSOGIAYTO.giayphep.denngay" | translate}}</label>
+              <label class="col-form-label text-right">{{"HOSOGIAYTO.quyetdinh.denngay" | translate}}</label>
               <input class="form-control" formControlName="LTEqualNgaycapphep" [owlDateTimeTrigger]="dt2" [owlDateTime]="dt2"
-                placeholder="{{'HOSOGIAYTO.giayphep.denngayPlaceholder' | translate}}" />
+                placeholder="{{'HOSOGIAYTO.quyetdinh.denngayPlaceholder' | translate}}" />
               <owl-date-time #dt2 [pickerType]="'calendar'"></owl-date-time>
             </div>
             <div class="col-lg-2 col-md-3 col-sm-4 form-group">
-              <label class="col-form-label text-right">{{ "HOSOGIAYTO.giayphep.loaicapphep" | translate }}:</label>
-                <mat-select class="form-control" formControlName="Loaicapphep"  placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaicapphep' | translate }}"  *ngIf="dataTranslate">
+              <label class="col-form-label text-right">{{ "HOSOGIAYTO.quyetdinh.loaicapphep" | translate }}:</label>
+                <mat-select class="form-control" formControlName="Loaicapphep"  placeholder="{{ 'HOSOGIAYTO.quyetdinh.chonloaicapphep' | translate }}"  *ngIf="dataTranslate">
                   <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="allLoaiCapPhep = $event">
                   </mat-select-filter>
                   <mat-option value="">
-                    {{ "HOSOGIAYTO.giayphep.chonloaicapphep" | translate }}
+                    {{ "HOSOGIAYTO.quyetdinh.chonloaicapphep" | translate }}
                   </mat-option>
                   <mat-option *ngFor="let loaiCapPhep of allLoaiCapPhep" [value]="loaiCapPhep.maloaicapphep">
                     {{ loaiCapPhep.tenloaicapphep }}
@@ -50,7 +50,7 @@
             <div class="row">
               <div class="col-md-7 mb-sm-1">
                 <span class="title" *ngIf="title">{{ title }}</span>
-                <span class="title" *ngIf="!title">{{ "HOSOGIAYTO.giayphep.titleList" | translate }}</span>
+                <span class="title" *ngIf="!title">{{ "HOSOGIAYTO.quyetdinh.titleList" | translate }}</span>
               </div>
               <div class="col-md-5">
                 <button class="btn btn-primary mb-sm-1" *ngIf="checkValidNhomLoaiCapPhep()" style="float: right;" (click)="addItemGiayPhep()">
@@ -72,11 +72,11 @@
             [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
             <e-columns>
               <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-              <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.giayphep.tencanhantochuc' | translate }}"></e-column>
-              <e-column field="sogiayphep" headerText="{{ ('HOSOGIAYTO.giayphep.sogiayphep' | translate) + '/' + ('HOSOGIAYTO.giayphep.soquyetdinh' | translate) }}"></e-column>
-              <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.giayphep.loaicapphep' | translate }}"></e-column>
-              <e-column field="diachi" headerText="{{ 'HOSOGIAYTO.giayphep.diachi' | translate }}"></e-column>
-              <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.giayphep.ngaycapphep' | translate }}">
+              <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.quyetdinh.tencanhantochuc' | translate }}"></e-column>
+              <e-column field="sogiayphep" headerText="{{ ('HOSOGIAYTO.quyetdinh.sogiayphep' | translate) + '/' + ('HOSOGIAYTO.quyetdinh.soquyetdinh' | translate) }}"></e-column>
+              <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.quyetdinh.loaicapphep' | translate }}"></e-column>
+              <e-column field="diachi" headerText="{{ 'HOSOGIAYTO.quyetdinh.diachi' | translate }}"></e-column>
+              <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.quyetdinh.ngaycapphep' | translate }}">
                 <ng-template #template let-data>
                   {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
                 </ng-template>
