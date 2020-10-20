@@ -190,6 +190,15 @@ export enum DangKyKhaiThacKhoangSanTabEnum {
   ThietBi = 5
 }
 
+export enum DangKyDauGiaKTKSTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucKhaiThac = 3,
+  CongTrinhKhaiThac = 4,
+  ThietBi = 5
+}
+
 export enum DangKyTraLaiGiayPhepTabEnum {
   ThongTinChiTiet = 0,
   DonViHanhChinh = 1,
