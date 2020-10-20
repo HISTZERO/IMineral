@@ -313,10 +313,7 @@ export enum CpKhaiThacKhoangSanChiTietTabEnum {
 
 export enum CpDongCuaMoChiTietTabEnum {
   ThongTinChiTiet = 0,
-  DonViHanhChinh = 1,
-  LoaiKhoangSan = 2,
-  KhuVucDongCuaMo = 3,
-  CongTrinhDongCuaMo = 4,
+  KhuVucDongCuaMo = 1,
 }
 
 export enum CapPhepThamDoActionEnum {

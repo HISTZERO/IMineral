@@ -297,6 +297,34 @@
     "donvitruluongPlaceholder": "---Chọn đơn vị trữ lượng---",
     "donvicongsuatPlaceholder": "---Chọn đơn vị công suất---"
   },
+  "cpktkskhaithacgiahan": {
+    "titleAdd": "Thêm mới cấp phép chi tiết khai thác khoáng sản gia hạn",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết khai thác khoáng sản gia hạn"
+  },
+  "cpktkskhaithacvlxd": {
+    "titleAdd": "Thêm mới cấp phép chi tiết khai thác khoáng sản làm vật liệu xây dựng thông thường trong diện tích dự án xây dựng công trình",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết khai thác khoáng sản làm vật liệu xây dựng thông thường trong diện tích dự án xây dựng công trình"
+  },
+  "cpktkskhaithacduan": {
+    "titleAdd": "Thêm mới cấp phép chi tiết khai thác khoáng sản khu vực có dự án đầu tư xây dựng công trình",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết khai thác khoáng sản khu vực có dự án đầu tư xây dựng công trình"
+  },
+  "cpktkskhaithacdieuchinh": {
+    "titleAdd": "Thêm mới cấp phép chi tiết Điều chỉnh Giấy phép khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết Điều chỉnh Giấy phép khai thác khoáng sản"
+  },
+  "cpktkskhaithaccatsoi": {
+    "titleAdd": "Thêm mới cấp phép chi tiết Thu hồi cát, sỏi trong quá trình thực hiện dự án nạo vét, khơi thông luồng lạch",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết Thu hồi cát, sỏi trong quá trình thực hiện dự án nạo vét, khơi thông luồng lạch"
+  },
+  "cpdongcuamo": {
+    "titleAdd": "Thêm mới cấp phép chi tiết Đóng cửa mỏ khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết Đóng cửa mỏ khoáng sản"
+  },
+  "cpdongcuamomotphan": {
+    "titleAdd": "Thêm mới cấp phép chi tiết Đóng cửa một phần diện tích khu vực khai thác khoáng sản",
+    "titleEdit": "Sửa dữ liệu cấp phép chi tiết Đóng cửa một phần diện tích khu vực khai thác khoáng sản"
+  },
   "capphepkhaithacdvhc": {
     "titleList": "Danh sách đơn vị hành chính",
     "titleAdd": "Thêm mới đơn vị hành chính",

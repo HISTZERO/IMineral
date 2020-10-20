@@ -212,12 +212,18 @@ export class CpTdksThongtincapphepComponent implements OnInit {
    * @param data
    */
 
-  getNumberOfDataKhuVucThamDo(data: number) {
+  getNumberOfDataKhuVucThamDo(data: any) {
     if (this.componentRef && this.componentRef.instance) {
-      if (data > DefaultValue.Zero) {
-        this.componentRef.instance.disabledHeQuyChieu = true;
-      } else {
-        this.componentRef.instance.disabledHeQuyChieu = false;
+      if (data) {
+        if (data.count && data.count > DefaultValue.Zero) {
+          this.componentRef.instance.disabledHeQuyChieu = true;
+        } else {
+          this.componentRef.instance.disabledHeQuyChieu = false;
+        }
+
+        if (data.hequychieu) {
+          this.componentRef.instance.setDefaultHeQuyChieu(data.hequychieu);
+        }
       }
     }
   }

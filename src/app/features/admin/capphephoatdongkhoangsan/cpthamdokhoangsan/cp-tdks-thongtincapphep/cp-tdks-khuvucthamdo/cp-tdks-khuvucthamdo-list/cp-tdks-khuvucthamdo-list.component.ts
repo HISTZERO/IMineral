@@ -27,7 +27,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
-  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<number> = new EventEmitter();
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-input-rename
@@ -137,6 +137,11 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
    * Hàm lấy dữ liệu Dvdc
    */
   async getAllCpThamDoKhuVuc() {
+    if (this.idcapphepthamdo === DefaultValue.Null || this.idcapphepthamdo === DefaultValue.Undefined
+      || this.idcapphepthamdo.trim() === DefaultValue.Empty) {
+    return;
+    }
+
     const listData: any = await this.capPhepHoatDongKhoangSanFacadeService
       .getCapPhepThamDoKhuVucService()
       .getCapPhepThamDoKhuVucByIdCapPhepThamDo(this.idcapphepthamdo).toPromise();
@@ -148,7 +153,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
     this.listCpThamDoKhuVuc = listData;
 
     if (this.listCpThamDoKhuVuc) {
-      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(this.listCpThamDoKhuVuc.length);
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({idcapphepthamdo: this.idcapphepthamdo, hequychieu: this.heQuyChieu, count: this.listCpThamDoKhuVuc.length});
     } else {
       this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
     }

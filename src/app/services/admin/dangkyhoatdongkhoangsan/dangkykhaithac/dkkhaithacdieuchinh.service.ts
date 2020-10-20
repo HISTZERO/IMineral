@@ -25,4 +25,18 @@ export class DkkhaithacdieuchinhService extends RepositoryEloquentService {
     return "ok";
   }
 
+  // Lấy thông tin đăng ký khai thác điều chỉnh từ id giấy phép
+  public cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(idGiayPhep: string) {
+    try {
+      this.setServiceInfo({
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYKHAITHACDIEUCHINH + "/getcpkhaithackhoangsanbyidgiayphep"
+      });
+
+      return this.httpClient.get<any>(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
 }

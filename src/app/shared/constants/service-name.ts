@@ -95,6 +95,8 @@ export class ServiceName {
   public static CPTANTHUKHOANGSAN = "cptanthukhoangsan";
   // Tính tiền cấp quyền
   public static TTTINHTIENCAPQUYEN = "tttinhtiencapquyen";
+  // Tính tiền cấp quyền theo năm
+  public static TTTIENTHEONAM = "tttientheonam";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";
