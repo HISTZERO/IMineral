@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum, LoaiVanBanEnum } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan, DonViThoiHan, LoaiVanBan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -198,7 +198,7 @@ export class QuyetdinhIoComponent implements OnInit {
       idcoquancapphep: [DefaultValue.Empty, Validators.required],
       chucvunguoiky: [DefaultValue.Empty, Validators.required],
       tennguoiky: [DefaultValue.Empty, Validators.required],
-      loaivanban: [DefaultValue.Empty, Validators.required],
+      loaivanban: [LoaiVanBanEnum.QuyetDinh, Validators.required],
       loaicapphep: [DefaultValue.Empty, Validators.required],
       idcanhantochuc: [DefaultValue.Empty, Validators.required],
       tencanhantochuc: [DefaultValue.Empty, Validators.required],
@@ -229,6 +229,7 @@ export class QuyetdinhIoComponent implements OnInit {
     this.giayPhepIOForm.controls.ngaycapDisplay.disable({ onlySelf: true });
     this.giayPhepIOForm.controls.noicapDisplay.disable({ onlySelf: true });
     this.giayPhepIOForm.controls.diachiDisplay.disable({ onlySelf: true });
+    this.giayPhepIOForm.controls.loaivanban.disable({ onlySelf: true });
   }
 
   /**
@@ -275,6 +276,8 @@ export class QuyetdinhIoComponent implements OnInit {
   public checkLoaiCapPhep(idLoaiCapPhep: string) {
     if (idLoaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || idLoaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || idLoaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan || idLoaiCapPhep === LoaiCapPhepEnum.PheDuyetTruLuongKhoangSan) {
       this.showInput = true;
+    } else {
+      this.showInput = false;
     }
   }
 
