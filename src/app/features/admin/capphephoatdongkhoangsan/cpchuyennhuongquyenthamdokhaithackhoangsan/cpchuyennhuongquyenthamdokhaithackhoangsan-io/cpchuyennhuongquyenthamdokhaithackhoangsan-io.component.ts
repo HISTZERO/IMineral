@@ -10,7 +10,7 @@ import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogia
 import { ButtonBackCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan, MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet} from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
-
+import {CpChuyennhuongThongtincapphepComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-chuyennhuong-thongtincapphep.component"
 @Component({
   selector: 'app-cpchuyennhuongquyenthamdokhaithackhoangsan-io',
   templateUrl: './cpchuyennhuongquyenthamdokhaithackhoangsan-io.component.html',
@@ -22,6 +22,7 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
+  @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpChuyenNhuongQuyenThamDoKhoangSanTabEnum;
   // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet;

@@ -298,6 +298,14 @@ export enum CapPhepThamDoActionEnum {
   Edit = 2
 }
 
+export enum CpChuyenNhuongThamDoKhaiThacChiTietTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucKhaiThac = 3,
+  CongTrinhKhaiThac = 4,
+  ThietBiKhaiThac = 5
+}
 
 export enum TinhTienCapQuyenKhaiThacKhoangSanTabEnum {
   ThongTinQuyeDinh = 0,
