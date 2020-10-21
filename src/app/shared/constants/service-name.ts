@@ -91,6 +91,8 @@ export class ServiceName {
   public static CPKHAITHACLOAIKHOANGSAN = "cpkhaithacloaikhoangsan";
   public static CPKHAITHACKHUVUC = "cpkhaithackhuvuc";
   public static CPKHAITHACTHIETBI = "cpkhaithacthietbi";
+  //Cấp phép phê duyệt trữ lượng khoáng sản
+  public static CAPPHEPPHEDUYETTLKS="cppheduyettruluong";
   // Cấp phép tận thu khoáng sản
   public static CPTANTHUKHOANGSAN = "cptanthukhoangsan";
   // Tính tiền cấp quyền

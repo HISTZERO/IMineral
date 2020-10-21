@@ -30,4 +30,14 @@ export class DKPheDuyetTruLuongKhoangSanService extends RepositoryEloquentServic
   
       }
     }
+    //Lấy thông tin của 1 giấy phép theo id
+    public layThongTinGiayPhepThamDo(id: any){
+      try {
+        return this.httpClient.get(`${this.apiUrl}/clonethongtindangkypheduyetfromgiayphepls?idgiayphep=${id}`, {
+          headers: this.headers,
+        });
+      } catch (error) {
+  
+      }
+    }
 }

@@ -254,6 +254,12 @@ export enum CpPheDuyetTruLuongKhoangSanTabEnum {
   TaiLieuGiayPhepDinhKem = 1,
   ThongTinCapPhep = 2
 }
+export enum CpPheDuyetTLKS_ThongTinQuyetDinhTabEnum{
+  ThongTinChiTiet=0,
+  LoaiKhoangSan=1,
+  TruLuongKhuVuc=2,
+  KhoiLuongTruLuong=3
+}
 
 export enum CpTanThuKhoangSanTabEnum {
   ThongTinGiayPhep = 0,

@@ -68,7 +68,6 @@ export class PdtlThongtinchitietComponent implements OnInit {
   constructor(
     private translate: TranslateService,
     private formBuilder: FormBuilder,
-    private dmFacadeService: DmFacadeService,
     public commonService: CommonServiceShared,
     private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
     private activatedRoute: ActivatedRoute,
@@ -197,7 +196,7 @@ export class PdtlThongtinchitietComponent implements OnInit {
           ngaylapbaocao: this.dangKyPheDuyetTruLuongKSItem.ngaylapbaocao,
           donvituvan: this.dangKyPheDuyetTruLuongKSItem.donvituvan,
           sogiayphep: this.dangKyPheDuyetTruLuongKSItem.sogiayphep,
-          ngaycapphep: this.dangKyPheDuyetTruLuongKSItem.ngaycapphep,
+          ngaycapphep: this.datePipe.transform(this.dangKyPheDuyetTruLuongKSItem.ngaycapphep, "dd-MM-yyyy"),
           coquancapphep: this.dangKyPheDuyetTruLuongKSItem.coquancapphep,
         });
       }
@@ -283,10 +282,10 @@ export class PdtlThongtinchitietComponent implements OnInit {
       console.log(item);
       this.pheDuyetTruLuongKSForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.idgiayphep=item.idgiayphep;
-      this.pheDuyetTruLuongKSForm.controls.ngaycapphep.setValue(this.datePipe.transform(item.ngaycapphep, "dd-MM-yyyy"));
-      this.pheDuyetTruLuongKSForm.controls.coquancapphep.setValue(item.coquancapphep);
-      // this.AddOrUpdateThongTinGiayPhepLichSuList(item);
-      // this.selectItemGiayPhepLichSuChange({value: item.idgiayphep});
+      //Lấy thông tin Giấy phép từ API + bind ra giao diện
+      this.layThongTinGiayPhepThamDo();
+      // this.pheDuyetTruLuongKSForm.controls.ngaycapphep.setValue(this.datePipe.transform(item.ngaycapphep, "dd-MM-yyyy"));
+      // this.pheDuyetTruLuongKSForm.controls.coquancapphep.setValue(item.coquancapphep);
     }
   }
   
@@ -307,12 +306,21 @@ export class PdtlThongtinchitietComponent implements OnInit {
   }
   //Lấy thông tin hồ sơ bind lên giao diện khi người dùng nhập tay số giấy phép thăm dò
   async layThongTinGiayPhepThamDo(){
-    var sogiayphepthamdo= this.pheDuyetTruLuongKSForm.controls.sogiayphep;
-    if(sogiayphepthamdo){
+    var idgiayphepthamdo= this.idgiayphep;
+    if(idgiayphepthamdo){
       const dkPheDuyetTruLuongService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyPheDuyetTruLuongKSService();
       const sogiayphepItem = (await dkPheDuyetTruLuongService
-        .getByIdHoSo(sogiayphepthamdo)
+        .layThongTinGiayPhepThamDo(idgiayphepthamdo)
         .toPromise()) as OutputDKPheDuyetTruLuongKSModel;
+        if(sogiayphepItem){
+          this.pheDuyetTruLuongKSForm.controls.ngaycapphep.setValue(this.datePipe.transform(sogiayphepItem.ngaycapphep, "dd-MM-yyyy"));
+          this.pheDuyetTruLuongKSForm.controls.coquancapphep.setValue(sogiayphepItem.coquancapphep);
+        }
+        else{
+          this.pheDuyetTruLuongKSForm.controls.ngaycapphep.setValue("");
+          this.pheDuyetTruLuongKSForm.controls.coquancapphep.setValue("");
+        }
+      
       console.log(sogiayphepItem);
     }
    
