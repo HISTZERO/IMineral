@@ -111,7 +111,7 @@ import { CpChuyennhuongThongtincapphepComponent } from './cpchuyennhuongquyentha
     CpDongcuamoThongtincapphepComponent,
     CpTtksThongtincapphepComponent,
     CpTtksTanthukhoangsanIoComponent,
-    CpChuyennhuongThongtincapphepComponent
+    CpChuyennhuongThongtincapphepComponent  
   ],
   exports: [
   ],
