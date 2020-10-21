@@ -2,7 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpTraLaiGiayPhepThamDoKhoangSanTabEnum } from 'src/app/shared/constants/enum';
+import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpTraLaiGiayPhepThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-io/giayphep-io.component';
@@ -10,6 +10,7 @@ import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogia
 import { ButtonBackCpTraLaiGiayPhepThamDoKhaiThacKhoangSan, MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
+import { LoaiCapPhep } from "../../../../../shared/constants/loaicapphep-constans";
 
 @Component({
   selector: 'app-cptralaigiayphepthamdokhaithackhoangsan-io',
@@ -42,6 +43,8 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
   public nhomLoaiCapPhepEnum = NhomLoaiCapPhepEnum;
 
   public nhomTaiLieuEnum = NhomTaiLieuEnum;
+
+  public showTabThongTin: boolean = false;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -81,6 +84,12 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
       if (giayPhepItem) {
         this.currentAction = GiayPhepActionEnum.Edit;
         this.setTraLaiGiayPhepThamDoKhoangSanDisabledTabState(this.currentAction);
+
+        if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan) {
+          this.showTabThongTin = true;
+        } else {
+          this.showTabThongTin = false;
+        }
 
         // const cpThamDoItem = await this.getCapPhepThamDoByIdGiayPhep(giayPhepItem.loaicapphep, this.idgiayphep);
 

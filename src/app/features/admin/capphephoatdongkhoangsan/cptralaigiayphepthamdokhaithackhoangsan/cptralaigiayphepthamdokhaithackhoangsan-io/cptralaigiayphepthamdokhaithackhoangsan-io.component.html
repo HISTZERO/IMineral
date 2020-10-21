@@ -30,9 +30,9 @@
                     <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
                     </app-giaypheptailieu-list>
                   </mat-tab>
-                  <!--<mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinDangKyTabTitle' | translate }}">
-                    <app-thongtindangky (selectCurrentFormStateEvent)="getThongTinDangKyThamDoFormState($event)" #thongTinDangKyComp [allowAutoInit]="false" ></app-thongtindangky>
-                  </mat-tab> -->
+                  <mat-tab *ngIf="showTabThongTin" [disabled]="!disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptralaigiayphepthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                    <app-thongtindangky #thongTinDangKyComp [allowAutoInit]="false" ></app-thongtindangky>
+                  </mat-tab>
                 </mat-tab-group>
               </div>
             </div>
