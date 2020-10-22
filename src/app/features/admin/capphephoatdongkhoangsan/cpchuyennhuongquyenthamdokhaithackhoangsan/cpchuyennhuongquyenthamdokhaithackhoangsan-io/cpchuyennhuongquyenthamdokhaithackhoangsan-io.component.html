@@ -31,9 +31,9 @@
                     </app-giaypheptailieu-list>
                   </mat-tab>
 
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                    <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
-                    </app-giaypheptailieu-list>
+                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                    <app-cp-chuyennhuong-thongtincapphep  [disabledMatsidenav]="true" #thongTinCapPhepComp [allowAutoInit]="false">
+                    </app-cp-chuyennhuong-thongtincapphep>
                   </mat-tab>
                 </mat-tab-group>
               </div>

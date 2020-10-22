@@ -1,1 +1,28 @@
-<p>cp-chuyennhuong-thongtincapphep works!</p>
+<div class="mt-3">
+  <div class="card border">
+    <div class="card-body">
+      <mat-tab-group mat-stretch-tabs #thongTinCapPhepKhaiThacTabs [animationDuration]=""
+        (selectedIndexChange)="tabChange($event)">
+        <mat-tab  [disabled]="disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thongTinChiTietKhaiThacTabTitle' | translate }}">
+          <ng-template appContentContainer>
+          </ng-template>
+        </mat-tab>
+        <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhKhaiThacTabTile' | translate }}">
+          <app-cp-ktks-donvihanhchinh-list #capPhepKhaiThacDvhc [allowAutoInit]="false"></app-cp-ktks-donvihanhchinh-list>
+        </mat-tab>
+        <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanKhaiThacTabTile' | translate }}">
+          <app-cp-ktks-loaikhoangsan-list #capPhepKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-cp-ktks-loaikhoangsan-list>
+        </mat-tab>
+        <mat-tab [disabled]="disabledTabState[TabType.KhuVucKhaiThac]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucKhaiThacTabTile' | translate }}">
+          <app-cp-ktks-khuvuckhaithac-list #capPhepKhaiThacKhuVuc [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
+        </mat-tab>
+        <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhKhaiThacTabTitle' | translate }}">
+          <app-cp-ktks-congtrinhkhaithac-list #capPhepCongTrinhKhaiThac [allowAutoInit]="false"></app-cp-ktks-congtrinhkhaithac-list>
+        </mat-tab>
+        <mat-tab *ngIf="showTabThietBi" [disabled]="disabledTabState[TabType.ThietBiKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thietBiKhaiThacTabTitle' | translate }}">
+          <app-cp-ktks-thietbikhaithac-list #capPhepKhaiThacThietBi [allowAutoInit]="false"></app-cp-ktks-thietbikhaithac-list>
+        </mat-tab>
+      </mat-tab-group>
+    </div>
+  </div>
+</div>

@@ -334,3 +334,10 @@ export enum CapPhepKhaiThacActionEnum {
   Edit = 2
 }
 
+export enum CpChuyenNhuongThamDoKhaiThacActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
+

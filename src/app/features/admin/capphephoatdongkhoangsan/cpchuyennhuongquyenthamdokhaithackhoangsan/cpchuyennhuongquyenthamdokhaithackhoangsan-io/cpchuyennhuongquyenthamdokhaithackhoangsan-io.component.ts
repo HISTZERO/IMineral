@@ -23,7 +23,7 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
   @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpChuyenNhuongQuyenThamDoKhoangSanTabEnum;
-  // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
+
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet;
 

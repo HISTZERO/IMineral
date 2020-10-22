@@ -62,7 +62,9 @@ import { CpDongcuamoThongtincapphepComponent } from './cpdongcuamokhoangsan/cp-d
 import { CpTtksThongtincapphepComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component';
 import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component';
 import { CpChuyennhuongThongtincapphepComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-chuyennhuong-thongtincapphep.component';
-import { CpChuyennhuongCongtrinhkhaithacComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-chuyennhuong-congtrinhkhaithac/cp-chuyennhuong-congtrinhkhaithac.component';
+import { CpCnThamdokhaithacIoComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-thamdokhaithac-io/cp-cn-thamdokhaithac-io.component';
+import { CpCnCongtrinhIoComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-congtrinh/cp-cn-congtrinh-io/cp-cn-congtrinh-io.component';
+import { CpCnCongtrinhListComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-congtrinh/cp-cn-congtrinh-list/cp-cn-congtrinh-list.component';
 
 @NgModule({
   declarations: [
@@ -113,7 +115,9 @@ import { CpChuyennhuongCongtrinhkhaithacComponent } from './cpchuyennhuongquyent
     CpTtksThongtincapphepComponent,
     CpTtksTanthukhoangsanIoComponent,
     CpChuyennhuongThongtincapphepComponent,
-    CpChuyennhuongCongtrinhkhaithacComponent  
+    CpCnThamdokhaithacIoComponent,
+    CpCnCongtrinhIoComponent,
+    CpCnCongtrinhListComponent
   ],
   exports: [
   ],
