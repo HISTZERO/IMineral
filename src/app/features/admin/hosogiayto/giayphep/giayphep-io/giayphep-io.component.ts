@@ -414,11 +414,10 @@ export class GiayphepIoComponent implements OnInit {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
     if (loaiCapPhep !== LoaiCapPhepEnum.ThamDoGiaHan && loaiCapPhep !== LoaiCapPhepEnum.ThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMoKhoangSan
-      && loaiCapPhep !== LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSan ) {
+      && loaiCapPhep !== LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu
+      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.KhaiThacTanThuKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
         this.dataTranslate.HOSOGIAYTO.giayphep.loaicapphepInformedInvalidSelection,
@@ -433,12 +432,11 @@ export class GiayphepIoComponent implements OnInit {
   private validateInvalidHoSoGiayPhepSelection() {
     const loaiCapPhep = this.giayPhepIOForm.controls.loaicapphep.value;
     if (loaiCapPhep === LoaiCapPhepEnum.ThamDoGiaHan || loaiCapPhep === LoaiCapPhepEnum.ThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSanGiaHan
       || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.DongCuaMoKhoangSan
-      || loaiCapPhep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
-      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSan
+      || loaiCapPhep === LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu || loaiCapPhep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan
+      || loaiCapPhep === LoaiCapPhepEnum.KhaiThacTanThuKhoangSan || loaiCapPhep === LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong
       ) {
         const idHoSo = this.giayPhepIOForm.controls.idhoso.value;
         const idGiayPhepLS = this.giayPhepIOForm.controls.idgiayphepls.value;

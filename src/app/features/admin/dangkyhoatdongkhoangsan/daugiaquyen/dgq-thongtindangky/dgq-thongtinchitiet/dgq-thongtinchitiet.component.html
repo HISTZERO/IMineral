@@ -1,0 +1,272 @@
+<div class="card border mt-3">
+  <!-- header -->
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9">
+        <h4>
+          <span class="title" *ngIf="currentAction === ActionType.Add">
+            {{
+              "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.titleAdd"
+                | translate
+            }}
+          </span>
+          <span class="title" *ngIf="currentAction === ActionType.Edit">
+            {{
+              "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.titleEdit"
+                | translate
+            }}
+          </span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <button
+          class="btn btn-primary mb-sm-1"
+          style="float: right"
+          (click)="saveDangKyDauGiaKhaiThacKS()"
+        >
+          <i class="fal fa-save"></i>
+          {{ "COMMON.default.save" | translate }}
+        </button>
+        <button
+          *ngIf="!disabledDeleteButton"
+          class="btn btn-outline-danger mr-2"
+          style="float: right"
+          (click)="deleteDangKyDauGiaKhaiThacKS()"
+        >
+          <i class="far fa-trash"></i>
+          {{ "COMMON.default.delete" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nội dung form -->
+  <div class="card-body">
+    <form [formGroup]="dangKyDauGiaKhaiThacForm">
+      <div class="row">
+        <!-- Cột trái -->
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <!-- tên khu vực đấu giá -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenKhuVucDauGia"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="tenkhuvucdaugia"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenKhuVucDauGiaPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.tenkhuvucdaugia" class="alert-danger">{{
+          formErrors.tenkhuvucdaugia
+        }}</span>
+            </div>
+          </div>
+
+          <!-- Diện tích khu vực -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVuc"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="dientichkhuvuc"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVucPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.dientichkhuvuc" class="alert-danger">{{
+                  formErrors.dientichkhuvuc
+                }}</span>
+            </div>
+          </div>
+
+          <!-- Tên loại khoáng sản -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSan"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="tenloaikhoangsan"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSanPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.tenloaikhoangsan" class="alert-danger">{{
+        formErrors.tenloaikhoangsan
+      }}</span>
+            </div>
+          </div>
+
+          <!-- cơ quan thông báo -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBao"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="coquanthongbao"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBaoPlaceHolder'
+                    | translate
+                }}"
+              />
+              <!-- <span *ngIf="formErrors.diadiem" class="alert-danger">{{
+                    formErrors.diadiem
+                  }}</span> -->
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <!-- địa điểm -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.diaDiem"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="diadiem"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.diaDiemPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.diadiem" class="alert-danger">{{
+                  formErrors.diadiem
+                }}</span>
+            </div>
+          </div>
+
+          <!-- Đơn vị diện tích -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.donViDienTich"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <mat-select
+                class="form-control"
+                formControlName="donvidientich"
+                *ngIf="dataTranslate"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.chondonvidientich'
+                    | translate
+                }}"
+              >
+                <mat-option value="">
+                  {{
+                    "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.chondonvidientich"
+                      | translate
+                  }}
+                </mat-option>
+                <mat-option
+                  *ngFor="let donViDienTich of donViDienTichList"
+                  [value]="donViDienTich.id"
+                >
+                  {{ donViDienTich.name }}
+                </mat-option>
+              </mat-select>
+              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
+            </div>
+          </div>
+
+          <!-- Số thông báo -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.soThongBao"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="sothongbao"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.soThongBaoPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.sothongbao" class="alert-danger">{{
+          formErrors.sothongbao
+        }}</span>
+            </div>
+          </div>
+
+          <!-- ngày thông báo -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.ngayThongBao"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <div class="d-flex">
+                <input
+                  class="form-control mr-2"
+                  formControlName="ngaythongbao"
+                  [owlDateTimeTrigger]="dt1"
+                  [owlDateTime]="dt1"
+                  placeholder="{{
+                    'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.ngayThongBaoPlaceHolder'
+                      | translate
+                  }}"
+                />
+                <span
+                  [owlDateTimeTrigger]="dt1"
+                  style="cursor: pointer"
+                  class="btn btn-outline-secondary"
+                  ><i class="fa fa-calendar"></i
+                ></span>
+                <owl-date-time #dt1 [pickerType]="'calendar'"></owl-date-time>
+              </div>
+              <!-- <span *ngIf="formErrors.ngaynop" class="alert-danger">{{formErrors.ngaynop}}</span> -->
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

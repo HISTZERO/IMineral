@@ -39,8 +39,9 @@
                     </app-hosotailieu-list>
                   </mat-tab>
                   <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.daugiaquyen.thongTinDangKyTabTitle' | translate }}">
-                    <app-ktks-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky>
+                    <!-- <app-ktks-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky> -->
                     <!-- <app-thongtindangky #thongTinDangKyComp [allowAutoInit]="false" ></app-thongtindangky> -->
+                    <app-dgq-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-dgq-thongtindangky>
                   </mat-tab>
                 </mat-tab-group>
               </div>
