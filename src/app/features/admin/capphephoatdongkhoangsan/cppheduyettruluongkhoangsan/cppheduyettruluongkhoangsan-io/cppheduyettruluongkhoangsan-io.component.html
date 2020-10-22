@@ -74,8 +74,9 @@
 
                 <!-- Tab "Thông tin quyết định" -->
               </mat-tab>
-
+              <!-- tab Thông tin quyết định -->
               <mat-tab
+              [disabled]="!disabledTabState[TabType.ThongTinCapPhep]"
                 label="{{
                   'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan.thongTinCapPhepTabTitle'
                     | translate

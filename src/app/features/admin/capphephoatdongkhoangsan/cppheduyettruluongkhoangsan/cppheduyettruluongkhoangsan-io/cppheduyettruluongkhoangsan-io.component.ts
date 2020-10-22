@@ -55,8 +55,8 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
 
   public disabledTabState: any = {
     [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinGiayPhep] : false,
-    [CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : false,
-    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] : false,
+    [CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] : true,
+    [CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep] : true,
   };
 
 
@@ -69,6 +69,9 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
     this.activatedRoute.queryParamMap.subscribe((param: any) => {
       if (param && param.params && param.params.idgiayphep) {
         this.idgiayphep = param.params.idgiayphep;
+        if(this.idgiayphep){
+          this.disabledTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep]=false;
+        }
       }
     });
 
