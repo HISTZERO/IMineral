@@ -15,7 +15,8 @@ import { CpTdksKhuvucthamdoListComponent } from 'src/app/features/admin/cappheph
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
-  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent
+  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent
 };
 
 @Component({

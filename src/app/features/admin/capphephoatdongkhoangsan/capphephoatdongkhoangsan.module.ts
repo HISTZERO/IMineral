@@ -109,7 +109,7 @@ import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-th
     CpKtksThietbikhaithacIoComponent,
     CpDongcuamoThongtincapphepComponent,
     CpTtksThongtincapphepComponent,
-    CpTtksTanthukhoangsanIoComponent
+    CpTtksTanthukhoangsanIoComponent,
   ],
   exports: [
   ],
@@ -139,6 +139,7 @@ import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-th
     CpKtksDonvihanhchinhIoComponent,
     CpKtksKhaithackhoangsanIoComponent,
     CpTtksTanthukhoangsanIoComponent,
+    CpTdksThongtincapphepComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
