@@ -101,6 +101,8 @@ import { DangkykhaithacchuyennhuongIoComponent } from './chuyennhuongquyen/cnq-t
 import {CnqThongtindangkyComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/chuyennhuongquyen/cnq-thongtindangky/cnq-thongtindangky.component";
 import { DgqThongtindangkyComponent } from './daugiaquyen/dgq-thongtindangky/dgq-thongtindangky.component';
 import { DgqThongtinchitietComponent } from './daugiaquyen/dgq-thongtindangky/dgq-thongtinchitiet/dgq-thongtinchitiet.component';
+import { PdtlThongtindangkyComponent } from './pheduyettruluongkhoangsan/pdtl-thongtindangky/pdtl-thongtindangky.component';
+import { PdtlThongtinchitietComponent } from './pheduyettruluongkhoangsan/pdtl-thongtindangky/pdtl-thongtinchitiet/pdtl-thongtinchitiet.component';
 
 
 
@@ -191,7 +193,9 @@ import { DgqThongtinchitietComponent } from './daugiaquyen/dgq-thongtindangky/dg
     DangkykhaithacchuyennhuongIoComponent,
     CnqThongtindangkyComponent,
     DgqThongtindangkyComponent,
-    DgqThongtinchitietComponent
+    DgqThongtinchitietComponent,
+    PdtlThongtindangkyComponent,
+    PdtlThongtinchitietComponent
   ],
   exports: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

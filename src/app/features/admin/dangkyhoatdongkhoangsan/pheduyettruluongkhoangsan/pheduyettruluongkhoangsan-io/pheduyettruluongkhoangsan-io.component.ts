@@ -9,6 +9,7 @@ import { HosotailieuListComponent } from 'src/app/features/admin/hosogiayto/hoso
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { ThongtindangkyComponent } from 'src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
+import { PdtlThongtindangkyComponent } from '../pdtl-thongtindangky/pdtl-thongtindangky.component';
 
 @Component({
   selector: 'app-pheduyettruluongkhoangsan-io',
@@ -23,7 +24,7 @@ export class PheduyettruluongkhoangsanIoComponent implements OnInit {
   @ViewChild("taiLieuBatBuocListComp", { static: false }) taiLieuBatBuocListComp: HosotailieuListComponent;
   @ViewChild("taiLieuKhacListComp", { static: false }) taiLieuKhacListComp: HosotailieuListComponent;
   @ViewChild("taiLieuXuLyHoSoListComp", { static: false }) taiLieuXuLyHoSoListComp: HosotailieuListComponent;
-  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
+  @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: PdtlThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuDkPheDuyetTruLuongKhoangSanChitiet;
 
@@ -162,8 +163,8 @@ export class PheduyettruluongkhoangsanIoComponent implements OnInit {
     } else if (index === ThamDoKhoangSanTabEnum.ThongTinDangKy && !this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy]) {
       // this.thongTinDangKyComp.matSidenav = this.matSidenav;
       // this.thongTinDangKyComp.content = this.content;
-      this.thongTinDangKyComp.idhoso = this.idhoso;
-      this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinDangKyComp.manualDataInit();
+      // this.thongTinDangKyComp.idhoso = this.idhoso;
+      // this.loadedTabState[ThamDoKhoangSanTabEnum.ThongTinDangKy] = await this.thongTinDangKyComp.manualDataInit();
     }
   }
 
