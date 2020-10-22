@@ -62,9 +62,6 @@ import { CpDongcuamoThongtincapphepComponent } from './cpdongcuamokhoangsan/cp-d
 import { CpTtksThongtincapphepComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component';
 import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component';
 import { CpChuyennhuongThongtincapphepComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-chuyennhuong-thongtincapphep.component';
-import { CpCnThamdokhaithacIoComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-thamdokhaithac-io/cp-cn-thamdokhaithac-io.component';
-import { CpCnCongtrinhIoComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-congtrinh/cp-cn-congtrinh-io/cp-cn-congtrinh-io.component';
-import { CpCnCongtrinhListComponent } from './cpchuyennhuongquyenthamdokhaithackhoangsan/cp-chuyennhuong-thongtincapphep/cp-cn-congtrinh/cp-cn-congtrinh-list/cp-cn-congtrinh-list.component';
 
 @NgModule({
   declarations: [
@@ -114,10 +111,7 @@ import { CpCnCongtrinhListComponent } from './cpchuyennhuongquyenthamdokhaithack
     CpDongcuamoThongtincapphepComponent,
     CpTtksThongtincapphepComponent,
     CpTtksTanthukhoangsanIoComponent,
-    CpChuyennhuongThongtincapphepComponent,
-    CpCnThamdokhaithacIoComponent,
-    CpCnCongtrinhIoComponent,
-    CpCnCongtrinhListComponent
+    CpChuyennhuongThongtincapphepComponent
   ],
   exports: [
   ],
@@ -146,7 +140,7 @@ import { CpCnCongtrinhListComponent } from './cpchuyennhuongquyenthamdokhaithack
     CpKtksKhuvuckhaithacIoComponent,
     CpKtksDonvihanhchinhIoComponent,
     CpKtksKhaithackhoangsanIoComponent,
-    CpTtksTanthukhoangsanIoComponent,
+    CpTtksTanthukhoangsanIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

@@ -83,7 +83,14 @@
     "donViHanhChinhDongCuaMoTabTile": "Đơn vị hành chính",
     "loaiKhoangSanDongCuaMoTabTile": "Loại khoáng sản",
     "khuVucDongCuaMoTabTile": "Khu vực đóng cửa mỏ",
-    "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác"
+    "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác",
+  
+    "donViHanhChinhChuyenNhuongTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanChuyenNhuongTabTile": "Loại khoáng sản",
+    "khuVucChuyenNhuongTabTile": "Khu vực khai thác",
+    "congTrinhChuyenNhuongTabTitle": "Công trình chuyển nhượng",
+    "thongTinChiTietChuyenNhuongTabTitle": "Thông tin chi tiết"
+
   },
   "cptdksthamdokhoangsan": {
     "titleAdd": "Thêm mới cấp phép chi tiết thăm dò khoáng sản",
