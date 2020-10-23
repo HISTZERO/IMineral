@@ -107,7 +107,6 @@ export class CpKtksThongtincapphepComponent implements OnInit {
 
     this.itemGiayPhep = await this.getGiayPhepById(this.idgiayphep);
 
-    console.log(this.itemGiayPhep);
     if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong)) {
       this.showTabThietBi = true;
     }

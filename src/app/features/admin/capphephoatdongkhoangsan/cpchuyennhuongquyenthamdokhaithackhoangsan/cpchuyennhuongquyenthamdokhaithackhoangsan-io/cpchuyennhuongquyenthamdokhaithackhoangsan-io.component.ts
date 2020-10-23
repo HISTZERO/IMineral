@@ -104,8 +104,6 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
         }
 
         const cpThamDoKhaiThacItem = await this.getCapPhepThamDoKhaiThacByIdGiayPhep(this.idgiayphep);
-
-        console.log(cpThamDoKhaiThacItem);
         if (cpThamDoKhaiThacItem) {
           existedCapPhepThamDo = true;
         }

@@ -111,7 +111,9 @@ export class CpTdksThongtincapphepComponent implements OnInit {
 
     this.itemGiayPhep =  await this.getGiayPhepById(this.idgiayphep);
 
+    console.log(this.itemGiayPhep);
     if (!this.itemGiayPhep) {
+      
       this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return false;
     }
