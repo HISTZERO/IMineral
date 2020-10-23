@@ -5,40 +5,46 @@
       <div class="container-fluid">
         <!-- <div class="row">
           <div class="col-12 px-0"> -->
-            <div class="card border">
-              <div class="card-header">
-                <h3>
-                  <span class="title" *ngIf="currentAction === ActionType.Add">
-                    {{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.titleAdd' | translate}}
-                  </span>
-                  <span class="title" *ngIf="currentAction === ActionType.Edit">
-                    {{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.titleEdit' | translate}}
-                  </span>
-                </h3>
-              </div>
-              <div class="card-body">
-                <mat-tab-group mat-stretch-tabs #capPhepChuyenNhuongQuyenThamDoKhaiThacKhoanSanTabs [animationDuration]=""  [selectedIndex]="TabType.ThongTinGiayPhep"
-                  (selectedIndexChange)="tabChange($event)">
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                    <app-giayphep-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}"
-                        [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac"
-                        [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false" (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
-                        (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
-                    </app-giayphep-io>
-                  </mat-tab>
-                  <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuGiayPhepDinhKem]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.taiLieuDinhKemCapPhepTabTile' | translate }}">
-                    <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
-                    </app-giaypheptailieu-list>
-                  </mat-tab>
+        <div class="card border">
+          <div class="card-header">
+            <h3>
+              <span class="title" *ngIf="currentAction === ActionType.Add">
+                {{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.titleAdd' | translate}}
+              </span>
+              <span class="title" *ngIf="currentAction === ActionType.Edit">
+                {{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.titleEdit' | translate}}
+              </span>
+            </h3>
+          </div>
+          <div class="card-body">
+            <mat-tab-group mat-stretch-tabs #capPhepChuyenNhuongQuyenThamDoKhaiThacKhoanSanTabs [animationDuration]=""
+              [selectedIndex]="TabType.ThongTinGiayPhep" (selectedIndexChange)="tabChange($event)">
+              <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]"
+                label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                <app-giayphep-io [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]"
+                  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}"
+                  [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac"
+                  [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false"
+                  (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
+                  (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
+                </app-giayphep-io>
+              </mat-tab>
+              <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuGiayPhepDinhKem]"
+                label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.taiLieuDinhKemCapPhepTabTile' | translate }}">
+                <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
+                </app-giaypheptailieu-list>
+              </mat-tab>
 
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                    <app-cp-chuyennhuong-thongtincapphep  [disabledMatsidenav]="true" #thongTinCapPhepComp [allowAutoInit]="false">
-                    </app-cp-chuyennhuong-thongtincapphep>
-                  </mat-tab>
-                </mat-tab-group>
-              </div>
-            </div>
-          <!-- </div>
+              <mat-tab *ngIf="showTabThongTin" [disabled]="!disabledTabState[TabType.ThongTinCapPhep]"
+                label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                <app-cp-tdks-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepThamDoFormState($event)"
+                  #thongTinCapPhepComp [allowAutoInit]="false"></app-cp-tdks-thongtincapphep>
+              </mat-tab>
+
+            </mat-tab-group>
+          </div>
+        </div>
+        <!-- </div>
         </div> -->
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
@@ -55,4 +61,3 @@
     </mat-sidenav-content>
   </mat-sidenav-container>
 </div>
-
