@@ -11,9 +11,9 @@ import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosog
 import { ButtonBackCpTraLaiGiayPhepThamDoKhaiThacKhoangSan, MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
-import { CpTdksThongtincapphepComponent } from "../../cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component";
-import { CapPhepHoatDongKhoangSanFacadeService } from "../../../../../services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
-import { CpKtksThongtincapphepComponent } from "../../cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thongtincapphep.component";
+import { CpTdksThongtincapphepComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component";
+import { CapPhepHoatDongKhoangSanFacadeService } from "src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
+import { CpKtksThongtincapphepComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thongtincapphep.component";
 
 @Component({
   selector: 'app-cptralaigiayphepthamdokhaithackhoangsan-io',
@@ -153,11 +153,11 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
    * @param idGiayPhep
    */
   private async getCapPhepThamDoByIdGiayPhep(idGiayPhep: string) {
-    if (idGiayPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan) {
+    if (this.isThamDo) {
       const cpThamDoKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepThamDoKhoangSanService();
       const capPhepItem = await cpThamDoKhoangSanService.getCapPhepThamDoByIdGiayPhep(idGiayPhep).toPromise();
       return capPhepItem;
-    } else if (idGiayPhep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+    } else if (this.isKhaiThac) {
       const cpKhaiThacKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepKhaiThacKhoangSanService();
       const capPhepItem = await cpKhaiThacKhoangSanService.getCapPhepKhaiThacByIdGiayPhep(idGiayPhep).toPromise();
       return capPhepItem;
