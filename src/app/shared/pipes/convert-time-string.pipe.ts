@@ -9,14 +9,14 @@ export class ConvertTimeString implements PipeTransform {
       // Lấy ra dữ liệu dạng ngày tháng năm
       case "datetime":
         if (value) {
-          const [date, hour]: string[] = value.split(" ");
+          const [date, hour]: string[] = value.split("T");
           if (date) {
             const [year, month, day]: string[] = date.split("-");
             if (year.length === 4) {
-              const datetiime = `${day}-${month}-${year}`;
+              const datetiime = `${day}/${month}/${year}`;
               return datetiime;
             } else {
-              const datetiime = `${year}-${month}-${day}`;
+              const datetiime = `${year}/${month}/${day}`;
               return datetiime;
             }
           } else {

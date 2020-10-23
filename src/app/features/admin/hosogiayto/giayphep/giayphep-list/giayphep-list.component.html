@@ -72,15 +72,15 @@
           [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
           <e-columns>
             <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
-            <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.giayphep.tencanhantochuc' | translate }}"></e-column>
-            <e-column field="sogiayphep" headerText="{{ ('HOSOGIAYTO.giayphep.sogiayphep' | translate) + '/' + ('HOSOGIAYTO.giayphep.soquyetdinh' | translate) }}"></e-column>
-            <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.giayphep.loaicapphep' | translate }}"></e-column>
+            <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.giayphep.canhantochuc' | translate }}"></e-column>
             <e-column field="diachi" headerText="{{ 'HOSOGIAYTO.giayphep.diachi' | translate }}"></e-column>
-            <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.giayphep.ngaycapphep' | translate }}">
+            <e-column field="sogiayphep" headerText="{{ ('HOSOGIAYTO.giayphep.sogiayphepList' | translate) }}"></e-column>
+            <e-column field="ngaycap" headerText="{{ 'HOSOGIAYTO.giayphep.ngaycapphepList' | translate }}">
               <ng-template #template let-data>
                 {{ data.ngaycap ? (data.ngaycap | date: 'dd-MM-yyyy') : "" }}
               </ng-template>
             </e-column>
+            <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.giayphep.loaicapphep' | translate }}"></e-column>
             <e-column field="idgiayphep" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
               <ng-template #template let-data>
                 <div class="btn-group">
