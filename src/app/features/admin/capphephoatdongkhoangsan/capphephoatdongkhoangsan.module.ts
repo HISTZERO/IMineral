@@ -140,7 +140,9 @@ import { CpChuyennhuongThongtincapphepComponent } from './cpchuyennhuongquyentha
     CpKtksKhuvuckhaithacIoComponent,
     CpKtksDonvihanhchinhIoComponent,
     CpKtksKhaithackhoangsanIoComponent,
-    CpTtksTanthukhoangsanIoComponent
+    CpTtksTanthukhoangsanIoComponent,
+    CpTtksTanthukhoangsanIoComponent,
+    CpTdksThongtincapphepComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },
