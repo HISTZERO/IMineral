@@ -178,9 +178,6 @@ export class CpTdksThongtincapphepComponent implements OnInit {
    * @param IdGiayPhep
    */
   private async getGiayPhepById(IdGiayPhep: string) {
-    const giayPhepService = this.hoSoGiayToFacadeService.getGiayPhepService();
-    const itemGiayPhep = await giayPhepService.getByid(IdGiayPhep).toPromise();
-    return itemGiayPhep;
   }
 
   private async showCapPhepViewComponent() {

@@ -37,8 +37,11 @@
 
               <mat-tab *ngIf="showTabThongTin" [disabled]="!disabledTabState[TabType.ThongTinCapPhep]"
                 label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                <app-cp-tdks-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepThamDoFormState($event)"
-                  #thongTinCapPhepComp [allowAutoInit]="false"></app-cp-tdks-thongtincapphep>
+                <app-cp-tdks-thongtincapphep *ngIf="isThamDo" (selectCurrentFormStateEvent)="getThongTinCapPhepChuyenNhuongFormState($event)"
+                  #thongTinCapPhepChuyenNhuongThamDoComp [allowAutoInit]="false"></app-cp-tdks-thongtincapphep>
+
+                  <app-cp-ktks-thongtincapphep *ngIf="isKhaiThac" (selectCurrentFormStateEvent)="getThongTinCapPhepChuyenNhuongFormState($event)"
+                  #thongTinCapPhepChuyenNhuongKhaiThacComp [allowAutoInit]="false"></app-cp-ktks-thongtincapphep>
               </mat-tab>
 
             </mat-tab-group>

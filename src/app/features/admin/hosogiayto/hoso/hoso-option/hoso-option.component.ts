@@ -191,7 +191,7 @@ export class HosoOptionComponent implements OnInit {
         if (this.loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
           data = await this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoChuyenNhuongService().getDangKyChuyenNhuongByIdHoSo(data.idhoso).toPromise();
         } else if (this.loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan) {
-          data = await this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacChuyenNhuongService().getDangKyChuyenNhuongByIdHoSo(data.idhoso);
+          data = await this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacChuyenNhuongService().getDangKyChuyenNhuongByIdHoSo(data.idhoso).toPromise();
         }
         data.mahoso = mahoso;
         data.idhoso = idhoso;
