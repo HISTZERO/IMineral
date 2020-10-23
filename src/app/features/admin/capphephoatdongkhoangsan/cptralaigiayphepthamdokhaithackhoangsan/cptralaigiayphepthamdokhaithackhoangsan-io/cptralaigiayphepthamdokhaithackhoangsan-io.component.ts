@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
+
 import { InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpTraLaiGiayPhepThamDoKhoangSanTabEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
@@ -10,10 +11,9 @@ import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosog
 import { ButtonBackCpTraLaiGiayPhepThamDoKhaiThacKhoangSan, MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
-import { LoaiCapPhep } from "../../../../../shared/constants/loaicapphep-constans";
-import { ThongtindangkyComponent } from "../../../dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/thongtindangky.component";
 import { CpTdksThongtincapphepComponent } from "../../cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-thongtincapphep.component";
 import { CapPhepHoatDongKhoangSanFacadeService } from "../../../../../services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
+import { CpKtksThongtincapphepComponent } from "../../cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-thongtincapphep.component";
 
 @Component({
   selector: 'app-cptralaigiayphepthamdokhaithackhoangsan-io',
@@ -27,6 +27,8 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
   @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpTdksThongtincapphepComponent;
+  @ViewChild("thongTinCapPhepKTComp", { static: false }) thongTinCapPhepKTComp: CpKtksThongtincapphepComponent;
+
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpTraLaiGiayPhepThamDoKhaiThacKhoangSanChitiet;
 
@@ -48,6 +50,10 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
   public nhomTaiLieuEnum = NhomTaiLieuEnum;
 
   public showTabThongTin: boolean = false;
+
+  public isThamDo: boolean = false;
+
+  public isKhaiThac: boolean = false;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -91,6 +97,12 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
 
         if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan || giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan) {
           this.showTabThongTin = true;
+          if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+            this.isKhaiThac = true;
+          }
+          if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan) {
+            this.isThamDo = true;
+          }
         } else {
           this.showTabThongTin = false;
         }
@@ -184,7 +196,7 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
     this.idgiayphep = id;
   }
 
-  getThongTinCapPhepThamDoFormState(action: number) {
+  getThongTinCapPhepTraLaiFormState(action: number) {
     if (action === GiayPhepActionEnum.Edit) {
       this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = true;
     } else {
@@ -204,10 +216,19 @@ export class CptralaigiayphepthamdokhaithackhoangsanIoComponent implements OnIni
       this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
       this.loadedTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.TaiLieuGiayPhepDinhKem] = await this.taiLieuListComp.manualDataInit();
     } else if (index === CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep && !this.loadedTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep]) {
-      this.thongTinCapPhepComp.matSidenav = this.matSidenav;
-      this.thongTinCapPhepComp.content = this.content;
-      this.thongTinCapPhepComp.idgiayphep = this.idgiayphep;
-      this.loadedTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepComp.manualDataInit();
+      if (this.isKhaiThac) {
+        this.thongTinCapPhepKTComp.matSidenav = this.matSidenav;
+        this.thongTinCapPhepKTComp.content = this.content;
+        this.thongTinCapPhepKTComp.idgiayphep = this.idgiayphep;
+        this.loadedTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepKTComp.manualDataInit();
+      }
+      if (this.isThamDo) {
+        this.thongTinCapPhepComp.matSidenav = this.matSidenav;
+        this.thongTinCapPhepComp.content = this.content;
+        this.thongTinCapPhepComp.idgiayphep = this.idgiayphep;
+        this.loadedTabState[CpTraLaiGiayPhepThamDoKhoangSanTabEnum.ThongTinCapPhep] = await this.thongTinCapPhepComp.manualDataInit();
+      }
+
     }
   }
 }
