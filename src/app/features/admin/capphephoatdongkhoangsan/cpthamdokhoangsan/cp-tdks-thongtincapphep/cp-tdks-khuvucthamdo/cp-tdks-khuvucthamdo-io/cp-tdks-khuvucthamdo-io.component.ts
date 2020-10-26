@@ -237,7 +237,6 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
    * Hàm thực thi chức năng add và edit
    */
   async addOrUpdate(operMode: string) {
-    debugger;
     const cpThamDoKhuVucService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepThamDoKhuVucService();
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.cpThamDoKhuVucIOForm.value;
@@ -312,7 +311,6 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
    * @param operMode
    */
   async onSubmit(operMode: string) {
-    debugger;
     this.logAllValidationErrorMessages();
     if (this.cpThamDoKhuVucIOForm.valid === true) {
       this.addOrUpdate(operMode);

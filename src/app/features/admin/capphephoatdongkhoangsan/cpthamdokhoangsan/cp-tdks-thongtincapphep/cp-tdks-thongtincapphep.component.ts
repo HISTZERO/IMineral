@@ -243,6 +243,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
       this.capPhepThamDoLoaiKhoangSan.idcapphepthamdo = this.idcapphepthamdo;
       this.loadedTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepThamDoLoaiKhoangSan.manualDataInit();
     } else if (index === CpThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo]) {
+      
       this.capPhepThamDoKhuVuc.matSidenav = this.matSidenav;
       this.capPhepThamDoKhuVuc.content = this.content;
       this.capPhepThamDoKhuVuc.idcapphepthamdo = this.idcapphepthamdo;
