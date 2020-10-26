@@ -61,11 +61,8 @@ import { CpKtksThietbikhaithacIoComponent } from 'src/app/features/admin/capphep
 import { CpDongcuamoThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdongcuamokhoangsan/cp-dongcuamo-thongtincapphep/cp-dongcuamo-thongtincapphep.component';
 import { CpTtksThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component';
 import { CpTtksTanthukhoangsanIoComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component';
-import { CpDongcuamoThongtincapphepComponent } from './cpdongcuamokhoangsan/cp-dongcuamo-thongtincapphep/cp-dongcuamo-thongtincapphep.component';
-import { CpTtksThongtincapphepComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-thongtincapphep.component';
-import { CpTtksTanthukhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-tanthukhoangsan-io/cp-ttks-tanthukhoangsan-io.component';
-import { CpPdtlksThongtinquyetdinhComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-thongtinquyetdinh.component';
-import { CpPdtlksThongtinchitietComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-thongtinchitiet/cp-pdtlks-thongtinchitiet.component';
+import { CpPdtlksThongtinquyetdinhComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-thongtinquyetdinh.component';
+import { CpPdtlksThongtinchitietComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-thongtinchitiet/cp-pdtlks-thongtinchitiet.component';
 
 @NgModule({
   declarations: [
