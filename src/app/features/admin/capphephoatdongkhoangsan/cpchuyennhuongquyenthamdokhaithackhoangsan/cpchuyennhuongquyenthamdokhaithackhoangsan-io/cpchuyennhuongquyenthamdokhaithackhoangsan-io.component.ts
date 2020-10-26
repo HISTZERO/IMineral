@@ -152,7 +152,6 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
     if (this.isThamDo) {
       const cpThamDoKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepThamDoKhoangSanService();
       const capPhepItem = await cpThamDoKhoangSanService.getCapPhepThamDoByIdGiayPhep(idGiayPhep).toPromise();
-      //console.log("ThamDo");
       return capPhepItem;
     } else if (this.isKhaiThac) {
       const cpKhaiThacKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepKhaiThacKhoangSanService();
@@ -186,9 +185,11 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
     }
   }
 
-  getGiayPhepIoFormState(action: number) {
+  getGiayPhepIoFormState(action: any) {
+    //console.log(action);
     this.currentAction = action;
     this.setChuyenNhuongGiayPhepThamDoKhoangSanDisabledTabState(this.currentAction);
+    
   }
 
   getIdGiayPhep(id: string) {

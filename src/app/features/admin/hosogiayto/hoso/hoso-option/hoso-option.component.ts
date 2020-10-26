@@ -185,7 +185,6 @@ export class HosoOptionComponent implements OnInit {
       this.selectItemHoSoEvent.emit(data);
     } else if (this.selectedOptionType === SelectedOptionType.Popup) {
       if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac) {
-        console.log(data);
         var mahoso = data.mahoso;
         var idhoso = data.idhoso;
         if (this.loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
