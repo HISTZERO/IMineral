@@ -434,7 +434,7 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
    */
   deleteItemCapPhepKhaiThacKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdkskhaithackhoangsan.contentDelete,
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.contentDelete,
       ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {
