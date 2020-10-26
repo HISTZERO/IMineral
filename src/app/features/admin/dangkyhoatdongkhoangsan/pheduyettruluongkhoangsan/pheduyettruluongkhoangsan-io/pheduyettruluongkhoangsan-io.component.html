@@ -38,9 +38,13 @@
                                           [nhomTaiLieu]="nhomTaiLieuEnum.TaiLieuXuLyHoSo">
                     </app-hosotailieu-list>
                   </mat-tab>
-                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.pheduyettruluongkhoangsan.thongTinDangKyTabTitle' | translate }}">
+                  <!-- <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.pheduyettruluongkhoangsan.thongTinDangKyTabTitle' | translate }}">
                     <app-ktks-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky>
+                  </mat-tab> -->
+                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.pheduyettruluongkhoangsan.thongTinDangKyTabTitle' | translate }}">
+                    <!-- <app-ktks-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-ktks-thongtindangky> -->
                     <!-- <app-thongtindangky #thongTinDangKyComp [allowAutoInit]="false" ></app-thongtindangky> -->
+                    <app-pdtl-thongtindangky #thongTinDangKyComp [allowAutoInit]="false"></app-pdtl-thongtindangky>
                   </mat-tab>
                 </mat-tab-group>
               </div>

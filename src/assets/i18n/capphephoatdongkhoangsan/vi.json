@@ -15,13 +15,37 @@
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
     "thongTinCapPhepTabTitle": "Thông tin cấp phép"
   },
+  "thongtinchitiet_capphepktks":{
+    "thongTinChiTietTabTitle":"Thông tin chi tiết",
+    "khuvucthamdoTabTitle":"Khu vực thăm dò",
+    "truluongtheoloaikhoangsanTabtile":"Trữ lượng theo loại khoáng sản",
+    "truluongtheokhoitruluongTabTitle":"Trũ lượng theo khối trữ lượng"
+  },
   "cappheppheduyettruluongkhoangsan": {
     "titleList": "Danh sách giấy phép phê duyệt trữ lượng khoáng sản",
     "titleAdd": "Thêm mới giấy phép phê duyệt trữ lượng khoáng sản",
     "titleEdit": "Sửa dữ liệu giấy phép phê duyệt trữ lượng khoáng sản",
     "thongTinCapPhepChungTabTitle": "Thông tin chung",
     "taiLieuDinhKemCapPhepTabTile": "Tài liệu đính kèm giấy phép",
-    "thongTinCapPhepTabTitle": "Thông tin cấp phép"
+    "thongTinCapPhepTabTitle": "Thông tin quyết định"
+  },
+  "cappheppheduyettruluongkhoangsan_thongtinchitiet":{
+    "titleAdd":"Thêm mới cấp phép phê duyệt trữ lượng khoáng sản",
+    "titleEdit":"Sửa dữ liệu cấp phép phê duyệt trữ lượng khoáng sản",
+    "tenkhuvucthamdo":"Tên khu vực",
+    "diadiem":"Địa điểm",
+    "dientichthamdo":"Diện tích thăm dò",
+    "donvidientich":"Đơn vị diện tích",
+    "tenkhuvucthamdoRequired":"Tên khu vực không được để trống",
+    "diadiemRequired":"Địa điểm không được để trống",
+    "dientichthamdoRequired":"Diện tích thăm dò không được để trống",
+    "dientichthamdoIsNumber":"Diện tích thăm dò phải là kiểu số",
+    "DonvidientichRequired":"Đơn vị diện tích không được để trống",
+    "tenkhuvucthamdoPlaceholder":"Nhập tên khu vực",
+    "diadiemPlaceholder":"Nhập địa điểm",
+    "dientichthamdoPlaceholder":"Nhập diện tích thăm dò",
+    "chondonvidientich":"---Chọn đơn vị diện tích---"
+    
   },
   "cappheptanthukhoangsan": {
     "titleList": "Danh sách giấy phép tận thu khoáng sản",
