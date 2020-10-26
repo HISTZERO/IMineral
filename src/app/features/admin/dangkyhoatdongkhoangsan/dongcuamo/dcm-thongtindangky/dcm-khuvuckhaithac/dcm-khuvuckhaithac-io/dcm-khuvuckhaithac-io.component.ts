@@ -303,6 +303,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
       donvidientich: "",
       loaikhuvuc: 0,
       hequychieu: "",
+      toadokhuvuc: []
     });
 
     this.dkKhaiThacToaDoKhuVucIOForm.reset({
