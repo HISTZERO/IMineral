@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 import { MatSidenav } from "@angular/material/sidenav";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, GridComponent, SearchEventArgs } from "@syncfusion/ej2-angular-grids";
 
 import {
   LayerStatus,
@@ -21,15 +21,10 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 import { LayerIoComponent } from "src/app/features/admin/map/layer/layer-io/layer-io.component";
-import {
-  _canAddLayersAction,
-  _canDeleteLayersAction,
-  _canDetailLayersAction,
-  _canEditLayersAction,
-  _canListLayersAction,
-} from "src/app/shared/constants/actions/map/layers";
-import { _canListHeToaDoAction } from "src/app/shared/constants/actions/map/hetoado";
+// import { LayerAction } from "src/app/shared/constants/actions/map/layers";
+// import { HeToaDoAction } from "src/app/shared/constants/actions/map/hetoado";
 import { MenuListLayer } from "src/app/shared/constants/sub-menus/map/layer";
+import { ActionGrid } from "src/app/shared/constants/share-component-constants";
 
 @Component({
   selector: "app-layer-list",
@@ -53,11 +48,11 @@ export class LayerListComponent implements OnInit {
   public layerStatus = LayerStatus;
 
   // Kiểm tra quyền
-  canAddLayersAction: boolean = _canAddLayersAction;
-  canDeleteLayersAction: boolean = _canDeleteLayersAction;
-  canEditLayersAction: boolean = _canEditLayersAction;
-  canListLayersAction: boolean = _canListLayersAction;
-  listHeToaDoAction: boolean = _canListHeToaDoAction;
+  public canAddLayersAction: boolean;
+  public canDeleteLayersAction: boolean;
+  public canEditLayersAction: boolean;
+  public canListLayersAction: boolean;
+  public listHeToaDoAction: boolean;
 
   // List projection
   public listProjections: Object[] = [];
@@ -71,12 +66,16 @@ export class LayerListComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
   public content: ViewContainerRef;
+  @ViewChild("grid", {static: false}) public grid: GridComponent;
+
 
   constructor(
     public cfr: ComponentFactoryResolver,
     public mapFaceService: MapFacadeService,
+    // private layerAction: LayerAction,
+    // private heToaDoAction: HeToaDoAction,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
+    public matSidenavService: MatsidenavService,
     private translate: TranslateService
   ) {
     // Get new service
@@ -84,18 +83,29 @@ export class LayerListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.canAddLayersAction = await this.layerAction.canAddLayersAction();
+    // this.canDeleteLayersAction = await this.layerAction.canDeleteLayersAction();
+    // this.canEditLayersAction = await this.layerAction.canEditLayersAction();
+    // this.canListLayersAction = await this.layerAction.canListLayersAction();
+    // this.listHeToaDoAction = await this.heToaDoAction.canAddHeToaDoAction();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
     this.getAllItems();
-    this.matsidenavService.setSidenav(
+
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
       this.cfr
     );
+
     this.getListProjections();
   }
 
@@ -123,21 +133,21 @@ export class LayerListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.layer.titleAdd);
-    this.matsidenavService.setContentComp(LayerIoComponent, "new", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.layer.titleAdd);
+    this.matSidenavService.setContentComp(LayerIoComponent, "new", {
       listProjections: this.listProjections,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.layer.titleEdit);
-    this.matsidenavService.setContentComp(LayerIoComponent, "edit", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.layer.titleEdit);
+    this.matSidenavService.setContentComp(LayerIoComponent, "edit", {
       data: data,
       listProjections: this.listProjections,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // delete

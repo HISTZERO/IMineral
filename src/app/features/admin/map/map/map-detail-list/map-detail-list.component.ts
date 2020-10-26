@@ -6,7 +6,7 @@ import {
   ViewChild,
   ViewContainerRef,
 } from "@angular/core";
-import * as cloneDeep from "lodash.cloneDeep";
+import cloneDeep from "lodash/cloneDeep";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -20,20 +20,15 @@ import { GisBaseMapService } from "src/app/services/admin/map/gisbasemap.service
 import { LayerTreeComponent } from "src/app/shared/components/layer-tree/layer-tree.component";
 import { MapDetailAddLayerIoComponent } from "src/app/features/admin/map/map/map-detail-add-layer-io/map-detail-add-layer-io.component";
 import { MapDetailAddNewGroupIoComponent } from "src/app/features/admin/map/map/map-detail-add-new-group-io/map-detail-add-new-group-io.component";
-import { MapDetailEditLayergroupPropertiesComponent } from "../map-detail-edit-layergroup-properties/map-detail-edit-layergroup-properties.component";
 import { MapDetailAddLayerGroupIoComponent } from "src/app/features/admin/map/map/map-detail-add-layer-group-io/map-detail-add-layer-group-io.component";
 import { MapDetailEditLayerPropertiesComponent } from "src/app/features/admin/map/map/map-detail-edit-layer-properties/map-detail-edit-layer-properties.component";
+import { MapDetailEditLayergroupPropertiesComponent } from "src/app/features/admin/map/map/map-detail-edit-layergroup-properties/map-detail-edit-layergroup-properties.component";
 
-import { _addLayerGroupsAction } from "src/app/shared/constants/actions/map/layer-groups";
-import {
-  _canListLayersAction,
-  _listLayersGetAllIdNameAction,
-} from "src/app/shared/constants/actions/map/layers";
-import {
-  _addMapLayerLayerIdsAction,
-  _addMapLayerLayerGroupIdsAction,
-} from "src/app/shared/constants/actions/map/map-layer";
+// import { LayerAction } from "src/app/shared/constants/actions/map/layers";
+// import { MapLayerAction } from "src/app/shared/constants/actions/map/map-layer";
+// import { LayerGroupAction } from "src/app/shared/constants/actions/map/layer-groups";
 import { MenuListMapDetail } from "src/app/shared/constants/sub-menus/map/map";
+import { TreeGridComponent } from "@syncfusion/ej2-angular-treegrid";
 
 @Component({
   selector: "app-map-detail-list",
@@ -78,24 +73,27 @@ export class MapDetailListComponent implements OnInit {
   public dataTranslate: any;
 
   // Các quyền
-  addLayerGroupsAction = _addLayerGroupsAction;
-  addMapLayerLayerIdsAction = _addMapLayerLayerIdsAction;
-  listLayersGetAllIdNameAction = _listLayersGetAllIdNameAction;
-  addMapLayerLayerGroupIdsAction = _addMapLayerLayerGroupIdsAction;
+  public addLayerGroupsAction: boolean;
+  public addMapLayerLayerIdsAction: boolean;
+  public listLayersGetAllIdNameAction: boolean;
+  public addMapLayerLayerGroupIdsAction: boolean;
 
+  public treeGrid: TreeGridComponent;
   public navArray = MenuListMapDetail;
 
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(LayerTreeComponent, { static: false }) child: LayerTreeComponent;
-  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("layerTree", { static: false }) layerTree: LayerTreeComponent;
+  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   constructor(
     private route: ActivatedRoute,
     public cfr: ComponentFactoryResolver,
+    // private layerAction: LayerAction,
+    // private mapLayerAction: MapLayerAction,
+    // private layerGroupAction: LayerGroupAction,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
+    public matSidenavService: MatsidenavService,
     public gisBaseMapService: GisBaseMapService,
     private translate: TranslateService
   ) {
@@ -104,24 +102,35 @@ export class MapDetailListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.addLayerGroupsAction = await this.layerGroupAction.addLayerGroupsAction();
+    // this.addMapLayerLayerIdsAction = await this.mapLayerAction.addMapLayerLayerIdsAction();
+    // this.listLayersGetAllIdNameAction = await this.layerAction.listLayersGetAllIdNameAction();
+    // this.addMapLayerLayerGroupIdsAction = await this.mapLayerAction.addMapLayerLayerGroupIdsAction();
+
+    // Show map
+    this.showMap();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
     // Get map detail by id
-    await this.getMapDetail();
+    this.getMapDetail();
 
     // Sidenav
-    this.matsidenavService.setSidenav(
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
       this.cfr
     );
 
-    // Show map
-    await this.showMap();
+    // Tree grid
+    this.treeGrid = this.layerTree.getTreeGrid();
   }
 
   // Show map
@@ -152,6 +161,7 @@ export class MapDetailListComponent implements OnInit {
    * Dựa vào treeLayer json để định dạng lại cây lớp/nhóm lớp
    */
   async getLayerAndGroup() {
+
     // Lấy tất cả lớp & nhóm lớp của bản đồ
     this.listLayersAndLayerGroups = await this.mapFaceService
       .getMapService()
@@ -181,17 +191,12 @@ export class MapDetailListComponent implements OnInit {
   public recursiveAddNewProps(listLayersAndLayerGroups, listItems) {
     if (!listItems) return;
     listItems.map((item) => {
-      // Gán thêm props cho item
       Object.keys(listLayersAndLayerGroups[item.guid]).map((key) => {
         if (!item[key]) {
           item[key] = listLayersAndLayerGroups[item.guid][key];
         }
       });
-
-      // Đệ quy
-      if (item.childs) {
-        this.recursiveAddNewProps(listLayersAndLayerGroups, item.childs);
-      }
+      this.recursiveAddNewProps(listLayersAndLayerGroups, item.childs);
     });
   }
 
@@ -199,8 +204,7 @@ export class MapDetailListComponent implements OnInit {
    * Hàm callback của các sự kiện bên tree-layer component
    * @param args Giá trị trả về của sự kiện bên tree-layer
    */
-  async rowDataBound(event: any) {
-    let args: any = await cloneDeep(event);
+  async rowDataBound(args: any) {
     switch (args.eventName.trim()) {
       case "update":
         await this.editItem(args.rowData);
@@ -215,15 +219,15 @@ export class MapDetailListComponent implements OnInit {
         await this.addExistingLayerGroup(args.rowData);
         break;
       case "allRowsHasBeenDisplayed":
-        await this.allRowsHasBeenDisplayed(args.currentViewRecords);
+        await this.allRowsHasBeenDisplayed();
         if (!this.isDrop) return;
-        await this.treeGridRowDrop(args);
+        await this.treeGridRowDrop();
         break;
       case "treeGridRowDrop":
         this.isDrop = true;
         break;
       case "treeGridRowDelete":
-        this.treeGridRowDelete(args);
+        this.treeGridRowDelete(args.rowData);
         break;
     }
   }
@@ -234,8 +238,9 @@ export class MapDetailListComponent implements OnInit {
    * Sau khi người dùng kéo thả
    * @param args Dữ liệu trả về
    */
-  async treeGridRowDrop(args: any) {
-    await this.calculatingListItems(args.currentViewRecords);
+  async treeGridRowDrop() {
+    let currentViewRecords: any[] = this.treeGrid.getCurrentViewRecords();
+    await this.calculatingListItems(currentViewRecords);
     this.isDrop = false;
   }
 
@@ -293,10 +298,10 @@ export class MapDetailListComponent implements OnInit {
    * Sau khi người dùng kéo thả
    * @param args Dữ liệu trả về
    */
-  async treeGridRowDelete(args: any) {
+  async treeGridRowDelete(item: any) {
     // Xóa item
     let listItemsTmp: any[] = cloneDeep(this.listItems);
-    await this.recursiveDeleteItem(listItemsTmp, args.rowData.guid);
+    await this.recursiveDeleteItem(listItemsTmp, item.guid);
 
     // Gán lại giá trị
     this.listItems = listItemsTmp;
@@ -332,7 +337,11 @@ export class MapDetailListComponent implements OnInit {
    * Hàm kích hoạt khi cây layertree đã render xong
    * @param args Giá trị trả về
    */
-  allRowsHasBeenDisplayed(currentViewRecords: any) {
+  allRowsHasBeenDisplayed() {
+    console.log('allRowsHasBeenDisplayed');
+    // List view items
+    let currentViewRecords: any[] = this.treeGrid.getCurrentViewRecords();
+
     // Lấy id của các row được chọn
     this.getSelectedItemIds(currentViewRecords);
 
@@ -440,6 +449,7 @@ export class MapDetailListComponent implements OnInit {
    */
   async updateListItems(args: any) {
     this.listItems = cloneDeep(args);
+    console.log(this.listItems, 'this.listItems');
   }
 
   /**
@@ -473,6 +483,7 @@ export class MapDetailListComponent implements OnInit {
    * Lưu lớp và nhóm lớp cho bản đồ
    */
   async saveLayerAndGroup() {
+
     // Định dạng lại dữ liệu cho layerTree
     this.treeLayer = cloneDeep(this.listItems);
     await this.recursiveFormat(this.treeLayer);
@@ -505,11 +516,13 @@ export class MapDetailListComponent implements OnInit {
    * Thêm mới nhóm lớp bản đồ
    */
   addNewLayerGroup(parentItem: any = { id: null, name: "root" }) {
+
     // Show popup
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.mapDetail.addNewLayerGroupTitle
     );
-    this.matsidenavService.setContentComp(
+
+    this.matSidenavService.setContentComp(
       MapDetailAddNewGroupIoComponent,
       "new",
       {
@@ -518,7 +531,7 @@ export class MapDetailListComponent implements OnInit {
         listItems: [...this.listItems],
       }
     );
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   /**
@@ -527,26 +540,26 @@ export class MapDetailListComponent implements OnInit {
   addExistingLayer(
     parentItem: any = { id: null, name: "root", childs: this.listItems }
   ) {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.mapDetail.addExistingLayerTitle
     );
-    this.matsidenavService.setContentComp(MapDetailAddLayerIoComponent, "new", {
+    this.matSidenavService.setContentComp(MapDetailAddLayerIoComponent, "new", {
       mapId: this.mapId,
       parentItem: parentItem,
       listItems: [...this.listItems],
       selectedChildIds: this.selectedChildIds,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   /**
    * Thêm một nhóm lớp có sẵn vào bản đồ
    */
   addExistingLayerGroup(parentItem: any = { id: null, name: "root" }) {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.mapDetail.addExistingLayerGroupTitle
     );
-    this.matsidenavService.setContentComp(
+    this.matSidenavService.setContentComp(
       MapDetailAddLayerGroupIoComponent,
       "new",
       {
@@ -556,7 +569,7 @@ export class MapDetailListComponent implements OnInit {
         selectedParentIds: this.selectedParentIds,
       }
     );
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   /**
@@ -595,30 +608,30 @@ export class MapDetailListComponent implements OnInit {
    * @param item Map layer
    */
   editItem(item) {
-    if (!item.childs) {
-      this.matsidenavService.setTitle(
+    if (item.groupType === undefined) {
+      this.matSidenavService.setTitle(
         this.dataTranslate.MAP.mapDetail.editLayer
       );
-      this.matsidenavService.setContentComp(
+      this.matSidenavService.setContentComp(
         MapDetailEditLayerPropertiesComponent,
         "update",
         {
           data: this.listLayersAndLayerGroups[item.guid],
         }
       );
-      this.matsidenavService.open();
+      this.matSidenavService.open();
     } else {
-      this.matsidenavService.setTitle(
+      this.matSidenavService.setTitle(
         this.dataTranslate.MAP.mapDetail.editLayerGroup
       );
-      this.matsidenavService.setContentComp(
+      this.matSidenavService.setContentComp(
         MapDetailEditLayergroupPropertiesComponent,
         "update",
         {
           data: this.listLayersAndLayerGroups[item.guid],
         }
       );
-      this.matsidenavService.open();
+      this.matSidenavService.open();
     }
   }
 

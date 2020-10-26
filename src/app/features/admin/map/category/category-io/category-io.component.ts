@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -11,6 +11,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import {
   validationAllErrorMessagesService,
 } from "src/app/services/utilities/validatorService";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-category-io",
@@ -63,11 +64,26 @@ export class CategoryIoComponent implements OnInit {
   async ngOnInit() {
     await this.formInit();
 
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
+    await this.setValidation();
+
+  }
+
+  // Hàm set validate
+  setValidation() {
+    this.validationErrorMessages = {
+      catName: {
+        maxlength: this.dataTranslate.COMMON.default.maxLength
+      },
+      slug: {
+        maxlength: this.dataTranslate.COMMON.default.maxLength
+      },
+
+    };
   }
 
   // init FormControl
@@ -77,8 +93,8 @@ export class CategoryIoComponent implements OnInit {
       parentId: [],
       catType: [],
       catOrder: [],
-      catName: [],
-      slug: [],
+      catName: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      slug: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
     });
 
     // Set data

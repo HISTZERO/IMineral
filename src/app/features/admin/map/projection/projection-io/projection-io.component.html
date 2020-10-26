@@ -1,9 +1,8 @@
 <div class="pt-3" style="width: 510px !important;">
   <form [formGroup]="createForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.projection.projectionName" | translate }}:</label
-      >
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "MAP.projection.projectionName" | translate }}<small>(*)</small>:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="prjName" />
         <span *ngIf="formErrors.prjName" class="alert-danger">{{
@@ -12,9 +11,8 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.projection.srid" | translate }}:</label
-      >
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "MAP.projection.srid" | translate }}<small>(*)</small>:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="srid" />
         <span *ngIf="formErrors.srid" class="alert-danger">{{
@@ -23,9 +21,8 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.projection.proj4Params" | translate }}:</label
-      >
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "MAP.projection.proj4Params" | translate }}<small>(*)</small>:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="proj4Params" />
         <span *ngIf="formErrors.proj4Params" class="alert-danger">{{
@@ -34,9 +31,8 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.projection.extent" | translate }}:</label
-      >
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "MAP.projection.extent" | translate }}<small>(*)</small>:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="extent" />
         <span *ngIf="formErrors.extent" class="alert-danger">{{
@@ -45,23 +41,13 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.projection.status" | translate }}:
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.projection.status" | translate }}<small>(*)</small>:
       </label>
       <div class="col-sm-9">
-        <mat-select
-          placeholder="{{ 'MAP.projection.statusPlaceHolder' | translate }}"
-          class="form-control"
-          formControlName="status"
-        >
-          <mat-select-filter
-            [displayMember]="'name'"
-            [array]="projectionStatus"
-          ></mat-select-filter>
-          <mat-option
-            *ngFor="let layerStt of projectionStatus"
-            [value]="layerStt.index"
-          >
+        <mat-select placeholder="{{ 'MAP.projection.statusPlaceHolder' | translate }}" class="form-control"
+          formControlName="status">
+          <mat-select-filter [displayMember]="'name'" [array]="projectionStatus"></mat-select-filter>
+          <mat-option *ngFor="let layerStt of projectionStatus" [value]="layerStt.index">
             {{ layerStt.name }}
           </mat-option>
         </mat-select>
@@ -79,25 +65,16 @@
               <i class="far fa-save"></i>
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
-            <button
-              class="btn btn-outline-primary float-right mr-3"
-              *ngIf="purpose === 'new'"
-              (click)="onContinueAdd()"
-            >
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd()">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>
-            <button
-              class="btn btn-outline-info float-right mr-3"
-              (click)="onFormReset()"
-            >
+            <button class="btn btn-outline-info float-right mr-3" (click)="onFormReset()">
               <i class="far fa-sync-alt"></i>
               {{ "COMMON.default.refresh" | translate }}
             </button>
-            <button
-              class="btn btn-danger float-right mr-3"
-              (click)="closeIOSidebar()"
-            >
+            <button class="btn btn-danger float-right mr-3" (click)="closeIOSidebar()">
               <i class="far fa-times-circle"></i>
               {{ "COMMON.default.cancel" | translate }}
             </button>

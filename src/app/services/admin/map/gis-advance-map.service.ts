@@ -15,6 +15,7 @@ import Extent from "esri/geometry/Extent";
 import Circle from "esri/geometry/Circle";
 import WMSLayer from "esri/layers/WMSLayer";
 import CSVLayer from "esri/layers/CSVLayer";
+import FeatureLayer from "esri/layers/FeatureLayer";
 import GeoJSONLayer from "esri/layers/GeoJSONLayer";
 import GraphicsLayer from "esri/layers/GraphicsLayer";
 import BasemapGallery from "esri/widgets/BasemapGallery";
@@ -25,25 +26,21 @@ import ZoomBox from "src/app/shared/components/map/widgets/ZoomBox";
 import AddLayer from "src/app/shared/components/map/widgets/AddLayer";
 import Statistics from "src/app/shared/components/map/widgets/Statistics";
 import FeatureInfo from "src/app/shared/components/map/widgets/FeatureInfo";
-
-
-import { environment } from "src/environments/environment";
-import { ServiceName } from "src/app/shared/constants/service-name";
 import {
-  SimpleSymbol,
   BaseMap,
-  WMSLayerFeatureInfo,
-  DefaultRenderer,
-  MettersPerPixelByZeroZoomLevel,
   WidgetItems,
+  SimpleSymbol,
   CallbackTypes,
   DefaultCenter,
+  DefaultRenderer,
+  WMSLayerFeatureInfo,
+  MettersPerPixelByZeroZoomLevel,
 } from "src/app/shared/constants/map-constants";
+import { environment } from "src/environments/environment";
+import { ServiceName } from "src/app/shared/constants/service-name";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import {
-  InputMapLayerModel,
-  OutputMapLayerModel,
-} from "src/app/models/admin/map/map-layer.model";
+import { InputMapLayerModel, OutputMapLayerModel, } from "src/app/models/admin/map/map-layer.model";
+
 
 @Injectable({
   providedIn: "root",
@@ -72,7 +69,10 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
   // Lưu lại fieldInfos và fieldlabels
   // Định dạng {1 (layerId): {fields: ['name', 'year',...]}}
-  private listFieldsMapByLayerId: any = {};
+  public listFieldsMapByLayerId: any = {};
+
+  // Danh sách features của wms layer
+  public wmsLayerFeatures: any[] = [];
 
   // Observable string sources
   // Observable string streams
@@ -104,9 +104,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     this.drawRect = this.drawRect.bind(this);
     this.zoomIn = this.zoomIn.bind(this);
     this.zoomOut = this.zoomOut.bind(this);
-    this.geojsonLayerAndCsvLayerGetFeatureInfos = this.geojsonLayerAndCsvLayerGetFeatureInfos.bind(
-      this
-    );
+    this.geojsonGetFeatureInfos = this.geojsonGetFeatureInfos.bind(this);
   }
 
   /**
@@ -210,7 +208,10 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    */
   changeLayerOpacity(id: string, opacity: number) {
     try {
-      this.view.map.findLayerById(id).opacity = opacity;
+      let layer = this.view.map.findLayerById(id);
+      if (layer) {
+        layer.opacity = opacity;
+      }
     } catch (error) {
       console.log(error);
     }
@@ -230,6 +231,9 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
         break;
       case "csv":
         this.addCSVLayer(layer);
+        break;
+      case "feature":
+        this.addFeatureLayer(layer);
         break;
     }
   }
@@ -350,6 +354,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param position Vị trí hiển thị của widget
    */
   toggleSketchWidget(widget: any) {
+
     // Thay đổi trạng thái hiển thị
     widget.display != widget.display;
 
@@ -357,6 +362,9 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
+
+      if (this.sketch) return;
+
       // Tạo mới graphic layer và thêm vào map
       let graphicLayer = new GraphicsLayer();
       this.view.map.add(graphicLayer);
@@ -372,6 +380,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
       this.view.ui.add(this.sketch, widget.position);
     } else if (this.sketch) {
       this.sketch.destroy();
+      delete this.sketch;
     }
   }
 
@@ -383,49 +392,88 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param widget Đối tượng widget
    */
   toggleStatisticsWidget(widget: any) {
+
     // Kiểm tra trạng thái
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
+
+      if (this.statistics) return;
+
       this.statistics = new Statistics({
         service: this,
+        widget: widget,
         iconClass: widget.iconClass,
       });
 
       // Thêm statistics widget vào view
       this.view.ui.add(this.statistics, widget.position);
+
     } else if (this.statistics) {
       this.statistics.destroy();
+      delete this.statistics;
     }
   }
 
+  // // Kết quả quan trắc widget
+  // public monitoringWidget: Monitoring;
+
+  // /**
+  //  * Widget thống kê
+  //  * @param widget Đối tượng widget
+  //  */
+  // toggleMonitoringWidget(widget: any) {
+
+  //   // Kiểm tra trạng thái
+  //   // 1 => Hiển thị widget
+  //   // 2 => Ẩn widget
+  //   if (widget.display) {
+
+  //     if (this.monitoringWidget) return;
+
+  //     this.monitoringWidget = new Monitoring({
+  //       service: this,
+  //       widget: widget,
+  //       iconClass: widget.iconClass,
+  //     });
+
+  //     // Thêm Kết quả quan trắc widget
+  //     this.view.ui.add(this.monitoringWidget, widget.position);
+  //   } else if (this.monitoringWidget) {
+  //     this.monitoringWidget.destroy();
+  //     delete this.monitoringWidget;
+  //   }
+  // }
+
   // monitoringWidget widget
-  public basemapGallery: BasemapGallery;
+  public bgExpand: Expand;
 
   /**
    * Hàm toggle bản đồ cơ sở
    * @param widget Đối tượng widget
    */
   toggleBaseMapWidget(widget: any) {
+
     // Kiểm tra trạng thái
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
-      this.basemapGallery = new BasemapGallery({
+
+      if (this.bgExpand) return;
+
+      var basemapGallery = new BasemapGallery({
         view: this.view,
       });
 
-      // Thêm base map widget vào view
-      // this.view.ui.add(this.basemapGallery, widget.position);
-
-      var bgExpand = new Expand({
+      this.bgExpand = new Expand({
         view: this.view,
-        content: this.basemapGallery,
+        content: basemapGallery,
       });
 
-      this.view.ui.add(bgExpand, widget.position);
-    } else if (this.basemapGallery) {
-      this.basemapGallery.destroy();
+      this.view.ui.add(this.bgExpand, widget.position);
+    } else if (this.bgExpand) {
+      this.bgExpand.destroy();
+      delete this.bgExpand;
     }
   }
 
@@ -437,10 +485,14 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param widget Đối tượng widget
    */
   toggleZoomBoxWidget(widget: any) {
+
     // Kiểm tra trạng thái
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
+
+      if (this.zoombox) return;
+
       this.zoombox = new ZoomBox({
         service: this,
         iconClass: widget.iconClass,
@@ -448,8 +500,10 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
       // Thêm zoombox widget vào view
       this.view.ui.add(this.zoombox, widget.position);
+
     } else if (this.zoombox) {
       this.zoombox.destroy();
+      delete this.zoombox;
     }
   }
 
@@ -461,10 +515,14 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param widget Đối tượng widget
    */
   toggleFeatureInfoWidget(widget: any) {
+
     // Kiểm tra trạng thái
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
+
+      if (this.featureInfo) return;
+
       this.featureInfo = new FeatureInfo({
         service: this,
         iconClass: widget.iconClass,
@@ -472,8 +530,10 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
       // Thêm featureInfo widget vào view
       this.view.ui.add(this.featureInfo, widget.position);
+
     } else if (this.featureInfo) {
       this.featureInfo.destroy();
+      delete this.featureInfo;
     }
   }
 
@@ -485,10 +545,14 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param widget Đối tượng widget
    */
   toggleAddLayerWidget(widget: any) {
+
     // Kiểm tra trạng thái
     // 1 => Hiển thị widget
     // 2 => Ẩn widget
     if (widget.display) {
+
+      if (this.addLayerWidget) return;
+
       this.addLayerWidget = new AddLayer({
         service: this,
         widget: widget,
@@ -497,8 +561,10 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
       // Thêm thêm lớp widget vào view
       this.view.ui.add(this.addLayerWidget, widget.position);
+
     } else if (this.addLayerWidget) {
       this.addLayerWidget.destroy();
+      delete this.addLayerWidget;
     }
   }
 
@@ -710,6 +776,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * Hàm bắt đầu chức năng zoom im
    */
   public startZoomIn() {
+
     // Tắt chức năng view panning
     this.disableViewPanning();
 
@@ -772,29 +839,28 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * Sự kiện lắng nghe click trên map view
    */
   async triggerClickOnView() {
+
     try {
+
       // Lắng nghe sự kiến click trên bản đồ
       await this.view.on("click", async (evt: any) => {
+
         // Kiểm tra điều kiện để get features info
-        if (
-          [WidgetItems.GET_FEATURE_INFO, WidgetItems.STATISTICS].indexOf(
-            this.currentWidget
-          ) !== -1
-        ) {
-          // Lặp qua từng layer đang được hiển thị trên bản đồ
+        if ([
+          WidgetItems.GET_FEATURE_INFO,
+          WidgetItems.STATISTICS
+        ].indexOf(this.currentWidget) !== -1) {
+
           const promises = await this.view.map.layers
             .toArray()
-            .map(async (layer) => {
+            .map(async layer => {
               if (layer.opacity > 0) {
                 switch (layer.type) {
                   case "wms":
                     return await this.wmsLayerGetFeatureInfos(layer, evt);
                   case "csv":
                   case "geojson":
-                    return await this.geojsonLayerAndCsvLayerGetFeatureInfos(
-                      layer,
-                      evt
-                    );
+                    return await this.geojsonGetFeatureInfos(layer, evt);
                 }
               }
             });
@@ -829,19 +895,18 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param features Danh sách chức năng
    */
   showSatisticsFeaturesInfo(features) {
+
     // Lấy danh sách các features thuộc lớp wms
-    let wmsLayerFeatures = features.filter((feature) => {
-      return feature.layerObject.type === "wms";
+    this.wmsLayerFeatures = features.filter((feature) => {
+      return feature.layerType === "wms";
     });
 
     // Nếu không có feature nào thuộc lớp wms thì dừng lại
-    if (!wmsLayerFeatures.length) return;
+    if (!this.wmsLayerFeatures) return;
 
     // Hiển thị thống kê của lớp bản đồ
     return this.componentMethodCallSource.next({
-      data: wmsLayerFeatures,
       type: CallbackTypes.FEATURE,
-      listFieldsMapByLayerId: this.listFieldsMapByLayerId,
     });
   }
 
@@ -851,9 +916,9 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param evt Sự kiện click chuột
    */
   async showPopupFeaturesInfo(features, evt) {
-    // Nếu có features
+
     if (features.length > 0) {
-      // Chứa graphics
+
       let graphics: any[] = [];
 
       // Lặp qua từng feature
@@ -861,7 +926,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
       features.map((feature) => {
         let fields = Object.keys(feature.attributes);
         graphics.push(
-          this.createNewGraphic(fields, feature.layerObject, feature)
+          this.createNewGraphic(fields, feature.layerId, feature.layerType, feature)
         );
       });
 
@@ -891,25 +956,38 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param screenPoint Điểm click
    */
   async wmsLayerGetFeatureInfos(layer, evt) {
-    // Thông tin truy vấn get featureinfo
-    this.setServiceInfo({ apiUrl: layer.url });
-    let data = WMSLayerFeatureInfo(
-      layer,
-      this.view,
-      this.srid,
-      evt.screenPoint
-    );
 
-    // Gọi api get featureinfo
-    let response: any = await this.getFetchAll(data);
-    let features = response.features ? response.features : [];
+    let features = [];
 
-    // Định dạng features trả về
-    features.map((feature) => {
-      feature.layerObject = layer;
-      feature.attributes = feature.properties;
-      delete feature.properties;
-    });
+    try {
+
+      // Thông tin truy vấn get featureinfo
+      this.setServiceInfo({ apiUrl: layer.url });
+      let data = WMSLayerFeatureInfo(
+        layer,
+        this.view,
+        this.srid,
+        evt.screenPoint
+      );
+
+      // Gọi api get featureinfo
+      let response: any = await this.getFetchAll(data);
+      features = response.features ? response.features : [];
+
+      // Fields and labels config
+      let fieldsAndLabels = this.listFieldsMapByLayerId[layer.id] ?
+        this.listFieldsMapByLayerId[layer.id] : [];
+
+      // Định dạng features trả về
+      features.map((feature) => {
+        feature.layerId = layer.id;
+        feature.layerType = layer.type;
+        feature.attributes = feature.properties;
+        feature.fieldsAndLabels = fieldsAndLabels;
+        delete feature.properties;
+      });
+
+    } catch (error) { }
 
     return await features;
   }
@@ -919,7 +997,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param layer Lớp bản đồ
    * @param evt Sự kiện click vào bản đồ
    */
-  async geojsonLayerAndCsvLayerGetFeatureInfos(layer, evt) {
+  async geojsonGetFeatureInfos(layer, evt) {
     // Tạo ra một circle
     // Center là điểm đang click trên bản đồ
     // Radius được tính toán dựa trên view zoom và một thuật toán scale
@@ -939,7 +1017,8 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
       // Định dạng dữ liệu trả về
       features = response.features ? response.features : [];
       features.map((feature) => {
-        feature.layerObject = layer;
+        feature.layerId = layer.id;
+        feature.layerType = layer.type;
       });
     });
 
@@ -952,16 +1031,16 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param layer Lớp bản đồ
    * @param feature Chức năng của lớp bản đồ
    */
-  createNewGraphic(fields, layer, feature) {
-    let layerFields = this.configFieldsByLayerFields(fields, layer.id);
+  createNewGraphic(fields, layerId, layerTitle, feature) {
+
+    let layerFields = this.configFieldsByLayerFields(fields, layerId);
 
     // Nội dung
     var textContent = `<table class="esri-widget__table"><tbody>`;
     layerFields.map((field) => {
       textContent += `<tr>
           <th class="esri-feature__field-header">${field.label}</th>
-          <td class="esri-feature__field-data">${
-        feature.attributes[field.name]
+          <td class="esri-feature__field-data">${feature.attributes[field.name]
         }</td>
       </tr>`;
     });
@@ -971,7 +1050,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     let graphic = new Graphic({
       popupTemplate: {
         outFields: ["*"],
-        title: layer.title,
+        title: layerTitle,
         content: [{ type: "text", text: textContent }],
       },
     });
@@ -994,9 +1073,11 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param fields Danh sách các trường chức năng lớp bản đồ
    */
   configFieldsByLayerFields(fields, layerId) {
+
     let resultFields = [];
 
     if (this.listFieldsMapByLayerId[layerId]) {
+
       // Cắt chuỗi
       let splitFieldsInfo: string[] = this.listFieldsMapByLayerId[layerId]
         .fields;
@@ -1163,28 +1244,53 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
   }
 
   /**
+   * Chuyển tọa độ từ lat long sang x,y
+   * @param toado Tọa độ X,Y
+   */
+  degrees2meters(toado) {
+    let x: any = toado.long * 20037508.34 / 180;
+    let y: any = Math.log(Math.tan((90 + toado.lat) * Math.PI / 360)) / (Math.PI / 180);
+    y = y * 20037508.34 / 180;
+    return {
+      lat: parseInt(x),
+      long: parseInt(y),
+    }
+  }
+
+  /**
    * Hàm thay đổi view bản đồ
    * @param X - Tọa độ X
    * @param Y - Tọa độ Y
    * @param zLevel - zoom Level
    */
-  public setView(center: string, zLevel: number = 4, srid: number = this.srid) {
+  public setView(center: string, zLevel: number = 4, kieuToaDo: string = 'xy', srid: number = this.srid) {
     try {
+
       // Gán lại hệ tọa độ
       if (srid) this.spatialReference = new SpatialReference({ wkid: srid });
 
-      // Gán lại center
-      center = center ? center : DefaultCenter;
+      // Tọa độ
+      let splitCenter = center.split(",");
+      let toado: { lat: number, long: number } = {
+        lat: parseInt(splitCenter[0]),
+        long: parseInt(splitCenter[1]),
+      }
+
+      // Convert tọa độ latlng to xy
+      if (kieuToaDo === 'latlng') {
+        toado = this.degrees2meters(toado);
+      }
 
       // Gán điểm trung tâm bản đồ
       this.view.center = new Point({
-        x: parseInt(center.split(",")[0]),
-        y: parseInt(center.split(",")[1]),
+        x: toado.lat,
+        y: toado.long,
         spatialReference: this.spatialReference,
       });
 
       // Set zoom level
       this.view.zoom = zLevel;
+
     } catch (error) {
       console.log(error);
     }
@@ -1195,6 +1301,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    * @param layer Lớp bản đồ
    */
   mapFieldsByLayerId(layer) {
+
     let splitFieldsInfo: string[] = [];
     let splitFieldsDisplay: string[] = [];
 
@@ -1251,6 +1358,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
    */
   async addWMSLayer(obj: any) {
     try {
+
       // Lưu lại fields cấu hình bởi người dùng
       await this.mapFieldsByLayerId(obj);
 
@@ -1273,6 +1381,7 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
       });
 
       this.view.map.add(wmsLayer);
+
     } catch (error) {
       console.log(error);
     }
@@ -1349,6 +1458,28 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
       // Thêm lớp vào bản đồ
       this.view.map.add(csvLayer);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
+  /**
+   * Hàm add lên bản đồ một lớp Feature vừa được truyền vào
+   * @param obj - Layer object
+   */
+  async addFeatureLayer(obj: any) {
+    try {
+      // Lưu lại fields cấu hình bởi người dùng
+      await this.mapFieldsByLayerId(obj);
+
+      // Typical usage
+      // Create featurelayer from feature service
+      const featureLayer = new FeatureLayer({
+        url: obj.featureUrl
+      });
+
+      // Thêm lớp vào bản đồ
+      this.view.map.add(featureLayer);
     } catch (error) {
       console.log(error);
     }

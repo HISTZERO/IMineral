@@ -20,6 +20,10 @@ export const LayerTypes = [
     index: "csv",
     name: "CSV FILE",
   },
+  {
+    index: "feature",
+    name: "FEATURE LAYER",
+  },
 ];
 
 export const DefaultCenter: string = "11744206.278690362, 1827895.5331194468";
@@ -150,6 +154,56 @@ export const BaseMap = {
   // description: 'Open Street Map'
 };
 
+export const WidgetPositions = {
+  TOP_RIGHT: 'top-right',
+  TOP_LEFT: 'top-left',
+  BOTTOM_RIGHT: 'bottom-right',
+  BOTTOM_LEFT: 'bottom-left'
+}
+
+export const ToolbarActions = {
+  LAYER_LIST: 'LAYER_LIST',
+  MAP_LIST: 'MAP_LIST',
+  ADD_LAYER: 'ADD_LAYER',
+  WIDGET_LIST: 'WIDGET_LIST',
+  MONITORING: 'MONITORING'
+}
+
+export const ToolbarItems = [
+  {
+    class: '',
+    name: 'Danh sách bản đồ',
+    iconClass: 'fal fa-map-marked-alt',
+    action: ToolbarActions.MAP_LIST
+  },
+  {
+    class: '',
+    name: 'Lớp bản đồ',
+    iconClass: 'fal fa-layer-group',
+    action: ToolbarActions.LAYER_LIST
+  },
+  {
+    class: '',
+    name: 'Thêm lớp bản đồ',
+    iconClass: 'fal fa-layer-plus',
+    action: ToolbarActions.ADD_LAYER
+  },
+  {
+    class: '',
+    name: 'Widgets',
+    group: 'ONLY_ONE_DISPLAYED',
+    iconClass: 'fal fa-qrcode',
+    action: ToolbarActions.WIDGET_LIST
+  },
+  {
+    class: '',
+    name: 'Thông tin quan trắc',
+    group: 'ONLY_ONE_DISPLAYED',
+    iconClass: 'fal fa-chart-pie-alt',
+    action: ToolbarActions.MONITORING
+  }
+]
+
 export const WidgetItems = {
   PAN: "PAN",
   ZOOM_IN: "ZOOM_IN",
@@ -168,19 +222,19 @@ export const Widgets = [
     display: true,
     slug: WidgetItems.ZOOM_BOX,
     name: "Thu phóng",
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     iconClass: "esri-icon-zoom-out-fixed",
   },
   {
     display: true,
     slug: WidgetItems.ADD_LAYER,
     name: "Thêm lớp",
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     iconClass: "esri-icon-add-attachment",
   },
   {
     display: true,
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     slug: WidgetItems.GET_FEATURE_INFO,
     name: "Thông tin lớp bản đồ",
     iconClass: "esri-icon-description",
@@ -188,32 +242,41 @@ export const Widgets = [
   {
     display: false,
     slug: WidgetItems.SKETCH,
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     name: "Sketch widget",
     iconClass: "esri-icon-sketch-rectangle",
   },
   {
     display: true,
     slug: WidgetItems.STATISTICS,
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     name: "Thống kê chức năng lớp bản đồ",
     iconClass: "esri-icon-chart",
   },
   {
     display: true,
     slug: WidgetItems.MONITORING,
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     name: "Kết quả quan trắc",
     iconClass: "esri-icon-review",
   },
   {
     display: false,
     slug: WidgetItems.BASE_MAP,
-    position: "top-right",
+    position: WidgetPositions.TOP_RIGHT,
     name: "Lớp bản đồ nền",
     iconClass: "esri-icon-basemap",
   },
 ];
+
+export const MapAreas = {
+  LAYER: 0,
+  MAP: 100,
+  TOOLBAR: 5,
+  RIGHTCONTENT: 95,
+  VERTICALWIDGET: 0,
+  HORIZONTALWIGET: 0,
+}
 
 export function WMSLayerFeatureInfo(layer, view, srid, screenPoint) {
   return {

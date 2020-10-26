@@ -18,6 +18,7 @@ import {
   validationAllErrorMessagesService,
 } from "src/app/services/utilities/validatorService";
 import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-layer-io",
@@ -38,7 +39,7 @@ export class LayerIoComponent implements OnInit {
   public layerStatus = LayerStatus;
 
   // List projection
-  public listProjections: Object[];
+  public listProjections: any[];
 
   // Data Translate
   public dataTranslate: any;
@@ -54,6 +55,8 @@ export class LayerIoComponent implements OnInit {
     bingKey: "",
     bingImageryset: "",
     mapquestLayer: "",
+    featureUrl: "",
+    featureLayer: "",
     wmsServertype: "",
     wmsUrl: "",
     wmsInfoUrl: "",
@@ -125,7 +128,7 @@ export class LayerIoComponent implements OnInit {
   async ngOnInit() {
     await this.formInit();
 
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
@@ -139,10 +142,12 @@ export class LayerIoComponent implements OnInit {
       id: [],
       layerType: ["", Validators.required],
       projectionId: [""],
-      layerName: ["", Validators.required],
+      layerName: ["", [Validators.required, Validators.maxLength(ValidateMaxLength.longText)]],
       bingKey: [],
       bingImageryset: [],
       mapquestLayer: [],
+      featureUrl: [],
+      featureLayer: [],
       wmsServertype: [],
       wmsUrl: [],
       wmsInfoUrl: [],
@@ -176,10 +181,10 @@ export class LayerIoComponent implements OnInit {
       geopackageTable: [],
       geopackageFields: [],
       hasz: [""],
-      copyright: [""],
+      copyright: ["", Validators.maxLength(ValidateMaxLength.longText)],
       moreSettings: [""],
       description: [""],
-      layerTitle: [""],
+      layerTitle: ["",],
       opacity: [""],
       status: [""],
       extentMinx: [""],
@@ -188,9 +193,9 @@ export class LayerIoComponent implements OnInit {
       extentMaxy: [""],
       minResolution: [""],
       maxResolution: [""],
-      fieldsInfo: [""],
-      fieldsDisplay: [""],
-      fieldsInfoFormat: [""],
+      fieldsInfo: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
+      fieldsDisplay: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      fieldsInfoFormat: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       fieldsInfoTemplate: [""],
     });
 
@@ -212,7 +217,14 @@ export class LayerIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       layerType: { required: this.dataTranslate.MAP.layer.layerTypeRequired },
-      layerName: { required: this.dataTranslate.MAP.layer.layerNameRequired },
+      layerName: {
+        required: this.dataTranslate.MAP.layer.layerNameRequired,
+        maxlength: this.dataTranslate.COMMON.default.maxLength
+      },
+      copyright: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsInfo: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsDisplay: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsInfoFormat: { maxlength: this.dataTranslate.COMMON.default.maxLength },
     };
   }
 
