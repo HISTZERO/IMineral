@@ -36,8 +36,6 @@ export class CpTdksThongtincapphepComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
-  // tslint:disable-next-line: no-output-rename
-  @Output("getNumberOfDataKhuVucThamDoEvent") getNumberOfDataKhuVucThamDoEvent: EventEmitter<number> = new EventEmitter();
   // Lưu trữ thông tin đăng ký tab
   public TabType = CpThamDoKhoangSanTabEnum;
   // Lưu trữ dữ liệu id giấy phép
@@ -214,12 +212,18 @@ export class CpTdksThongtincapphepComponent implements OnInit {
    * @param data
    */
 
-  getNumberOfDataKhuVucThamDo(data: number) {
+  getNumberOfDataKhuVucThamDo(data: any) {
     if (this.componentRef && this.componentRef.instance) {
-      if (data > DefaultValue.Zero) {
-        this.componentRef.instance.disabledHeQuyChieu = true;
-      } else {
-        this.componentRef.instance.disabledHeQuyChieu = false;
+      if (data) {
+        if (data.count && data.count > DefaultValue.Zero) {
+          this.componentRef.instance.disabledHeQuyChieu = true;
+        } else {
+          this.componentRef.instance.disabledHeQuyChieu = false;
+        }
+
+        if (data.hequychieu) {
+          this.componentRef.instance.setDefaultHeQuyChieu(data.hequychieu);
+        }
       }
     }
   }

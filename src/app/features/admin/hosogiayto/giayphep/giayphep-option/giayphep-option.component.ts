@@ -149,6 +149,7 @@ export class GiayphepOptionComponent implements OnInit {
     if (this.selectedOptionType === SelectedOptionType.NoPopup) {
       this.selectItemGiayPhepEvent.emit(data);
     } else if (this.selectedOptionType === SelectedOptionType.Popup) {
+      console.log("kích hoạt sự kiện");
       this.matSidenavService.doParentFunction("selectItemGiayPhep", data);
       this.closeGiayPhepIOSidenav();
     }

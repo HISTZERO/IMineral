@@ -76,14 +76,15 @@ export class KhuvucthamdoIoComponent implements OnInit {
 
   // Chứa error tọa độ khu vực
   public validationErrorToaDo = {}
-
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
   // Form errors khu vực
   formErrors = {
     tenkhuvuc: DefaultValue.Empty,
     dientich: DefaultValue.Empty,
     donvidientich: DefaultValue.Empty,
-    loaikhuvuc: DefaultValue.Empty,
-    hequychieu: DefaultValue.Empty,
+    loaikhuvuc: DefaultValue.Empty
+    // hequychieu: DefaultValue.Empty,
   };
 
   // Form errors tọa độ
@@ -92,7 +93,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
     sohieu: DefaultValue.Empty,
     toadox: DefaultValue.Empty,
     toadoy: DefaultValue.Empty,
-  }
+  };
 
   constructor(
     public matSidenavService: MatsidenavService,
@@ -105,15 +106,12 @@ export class KhuvucthamdoIoComponent implements OnInit {
   async ngOnInit() {
     // Khởi tạo form
     await this.formInit();
-
-    // Khởi tạo form theo dạng add or edit
-    await this.bindingConfigAddOrUpdate();
-
     // Lấy dữ liệu translate
     await this.getDataTranslate();
-
     // Lấy dữ liệu hệ quy chiếu
     await this.geAllHeQuyChieu();
+    // Khởi tạo form theo dạng add or edit
+    await this.bindingConfigAddOrUpdate();
   }
 
   /**
@@ -136,8 +134,8 @@ export class KhuvucthamdoIoComponent implements OnInit {
     this.validationErrorMessages = {
       tenkhuvuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.tenkhuvucRequired },
       dientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.dientichRequired },
-      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.donvidientichRequired },
-      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.hequychieuRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.donvidientichRequired }
+      // hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.hequychieuRequired },
     };
 
     // Error message Tọa độ
@@ -164,6 +162,27 @@ export class KhuvucthamdoIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.inputModelKhuVuc = new InputDkThamDoKhuVucModel();
     this.formOnEdit();
+
+    if (this.obj && this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(this.obj.hequychieu);
+    }
+  }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
   }
 
   /**
@@ -174,8 +193,8 @@ export class KhuvucthamdoIoComponent implements OnInit {
       tenkhuvuc: [DefaultValue.Empty, Validators.required],
       dientich: [DefaultValue.Empty, [Validators.required, Validators.pattern(/^[-+]?\d*\.?\d*$/)]],
       donvidientich: [DefaultValue.Empty, Validators.required],
-      loaikhuvuc: [0],
-      hequychieu: [DefaultValue.Empty, Validators.required],
+      loaikhuvuc: [DefaultValue.Zero]
+      // hequychieu: [DefaultValue.Empty, Validators.required],
     });
 
     this.dkThamDoToaDoKhuVucIOForm = this.formBuilder.group({
@@ -195,8 +214,8 @@ export class KhuvucthamdoIoComponent implements OnInit {
         tenkhuvuc: this.obj.tenkhuvuc,
         dientich: this.obj.dientich,
         donvidientich: this.obj.donvidientich,
-        loaikhuvuc: this.obj.loaikhuvuc,
-        hequychieu: this.obj.hequychieu,
+        loaikhuvuc: this.obj.loaikhuvuc
+        // hequychieu: this.obj.hequychieu
       });
 
       this.listToaDoKhuVuc = this.obj.lstToado;
@@ -224,11 +243,12 @@ export class KhuvucthamdoIoComponent implements OnInit {
     this.inputModelKhuVuc = this.dKThamDoKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
     this.inputModelKhuVuc.loaicapphep = this.obj.loaicapphep;
-
+    this.inputModelKhuVuc.hequychieu = this.obj.hequychieu;
     if (operMode === "new") {
       this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
-      await dKThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
+      dKThamDoKhuVucService.insertKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -246,6 +266,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
       this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -328,7 +349,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
     if (this.dKThamDoKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
+      await this.addOrUpdate(operMode);
       this.onFormReset();
       this.purpose = "new";
     }

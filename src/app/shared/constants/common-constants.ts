@@ -1,3 +1,4 @@
+import { LoaiVanBanEnum } from "./enum";
 
 export const LoaiDoiTuong = [
     {
@@ -114,19 +115,19 @@ export const LoaiKhuVucKhaiThac = [
 
 export const LoaiVanBan = [
     {
-        id: 1,
+        id: LoaiVanBanEnum.GiayPhep,
         name: "Giấy phép"
     },
     {
-        id: 2,
+        id: LoaiVanBanEnum.QuyetDinh,
         name: "Quyết định"
     },
     {
-        id: 3,
+        id: LoaiVanBanEnum.BanXacNhan,
         name: "Bản xác nhận"
     },
     {
-        id: 4,
+        id: LoaiVanBanEnum.VanBanTuChoi,
         name: "Văn bản từ chối"
     }
 ];

@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { ComponentFactoryResolver, Input, Type, ViewChild, ViewContainerRef } from "@angular/core";
+import { ComponentFactoryResolver, EventEmitter, Input, Output, Type, ViewChild, ViewContainerRef } from "@angular/core";
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
@@ -26,10 +26,12 @@ export class KhuvucthamdoListComponent implements OnInit {
   @ViewChild("gridDkThamDoKhuVuc", { static: false }) public gridDkThamDoKhuVuc: GridComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-
+  // tslint:disable-next-line: no-output-rename
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
   // Chứa loại cấp phép
   public loaicapphep: number;
 
@@ -151,6 +153,12 @@ export class KhuvucthamdoListComponent implements OnInit {
       });
     }
     this.listDkThamDoKhuVuc = listData;
+
+    if (this.listDkThamDoKhuVuc) {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({iddangkythamdo: this.iddangkythamdo, hequychieu: this.heQuyChieu, count: this.listDkThamDoKhuVuc.length});
+    } else {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Null);
+    }
   }
 
   /**
@@ -186,7 +194,7 @@ export class KhuvucthamdoListComponent implements OnInit {
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdokhuvuc.titleAdd);
-    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.iddangkythamdo, loaicapphep: this.loaicapphep });
+    this.matSidenavService.setContentComp(KhuvucthamdoIoComponent, "new", { iddangkythamdo: this.iddangkythamdo, loaicapphep: this.loaicapphep, hequychieu: this.heQuyChieu });
     this.matSidenavService.open();
   }
 

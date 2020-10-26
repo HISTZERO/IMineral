@@ -20,19 +20,19 @@
                 <mat-tab-group mat-stretch-tabs #capPhepDongCuaMoKhoanSanTabs [animationDuration]=""  [selectedIndex]="TabType.ThongTinGiayPhep"
                   (selectedIndexChange)="tabChange($event)">
                   <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.thongTinCapPhepTabTitle' | translate }}">
-                    <app-giayphep-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.thongTinCapPhepTabTitle' | translate }}"
+                    <app-quyetdinh-io  [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.thongTinCapPhepTabTitle' | translate }}"
                         [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.DongCuaMo"
                         [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false" (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
                         (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
-                    </app-giayphep-io>
+                    </app-quyetdinh-io>
                   </mat-tab>
                   <mat-tab [disabled]="!disabledTabState[TabType.TaiLieuGiayPhepDinhKem]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.taiLieuDinhKemCapPhepTabTile' | translate }}">
                     <app-giaypheptailieu-list [disabledMatsidenav]="true" #taiLieuListComp [allowAutoInit]="false">
                     </app-giaypheptailieu-list>
                   </mat-tab>
-                  <!--<mat-tab [disabled]="!disabledTabState[TabType.ThongTinDangKy]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thamdokhoangsan.thongTinDangKyTabTitle' | translate }}">
-                    <app-thongtindangky (selectCurrentFormStateEvent)="getThongTinDangKyThamDoFormState($event)" #thongTinDangKyComp [allowAutoInit]="false" ></app-thongtindangky>
-                  </mat-tab> -->
+                  <mat-tab [disabled]="!disabledTabState[TabType.ThongTinCapPhep]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepdongcuamokhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                    <app-cp-dongcuamo-thongtincapphep (selectCurrentFormStateEvent)="getThongTinCapPhepDongCuaMoFormState($event)" #thongTinCapPhepComp [allowAutoInit]="false" ></app-cp-dongcuamo-thongtincapphep>
+                  </mat-tab>
                 </mat-tab-group>
               </div>
             </div>

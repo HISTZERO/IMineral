@@ -165,14 +165,46 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
     return true;
   }
 
+  /**
+     * Lấy dữ liệu hồ sơ theo idGiayPhep
+     * @param idGiayPhep
+     */
+  private async cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(idGiayPhep: string) {
+    const khaiThacDieuChinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
+    const dkKhaiThacItem = await khaiThacDieuChinhService.cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(idGiayPhep).toPromise();
+
+    if (dkKhaiThacItem) {
+      return dkKhaiThacItem as OutputDkKhaiThacDieuChinhModel;
+    }
+    return null;
+  }
 
   /**
    * lấy item dữ liệu đối tượng cá nhân từ popup
    */
-  private selectItemGiayPhep(item: OutputGiayPhepModel) {
+  async selectItemGiayPhep(item: OutputGiayPhepModel) {
     if (item !== null && item !== undefined) {
       this.dangKyKhaiThacDieuChinhIOForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.dangKyKhaiThacDieuChinhIOForm.controls.idgiayphep.setValue(item.idgiayphep);
+
+      const data = await this.cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(item.idgiayphep);
+
+      if (data) {
+        this.dangKyKhaiThacDieuChinhIOForm.controls.dientichkhaithac.setValue(data.dientichkhaithac);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.truluongdiachat.setValue(data.truluongdiachat);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.truluongkhaithac.setValue(data.truluongkhaithac);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.thoihankhaithac.setValue(data.thoihankhaithac);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.phuongphapkhaithac.setValue(data.phuongphapkhaithac);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.congsuatkhaithac.setValue(data.congsuatkhaithac);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.mucsaukhaithactu.setValue(data.mucsaukhaithactu);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.mucsaukhaithacden.setValue(data.mucsaukhaithacden);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.donvitruluong.setValue(data.donvitruluong);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.donvicongsuat.setValue(data.donvicongsuat);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.donvidientich.setValue(data.donvidientich);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.donvithoihan.setValue(data.donvithoihan);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.donvichieusau.setValue(data.donvichieusau);
+        this.dangKyKhaiThacDieuChinhIOForm.controls.hequychieu.setValue(data.hequychieu);
+      }
     }
   }
 

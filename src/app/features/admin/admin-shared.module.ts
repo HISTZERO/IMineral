@@ -1,6 +1,5 @@
 import { TranslateModule } from '@ngx-translate/core';
 import { NgModule } from "@angular/core";
-import { TagInputModule } from "ngx-chips";
 import { RouterModule } from "@angular/router";
 import { CommonModule, DatePipe } from "@angular/common";
 import { FormsModule, ReactiveFormsModule } from "@angular/forms";
@@ -55,7 +54,6 @@ export const MY_CUSTOM_FORMATS = {
 };
 @NgModule({
   imports: [
-    TagInputModule,
     CommonModule,
     GridModule,
     MatSidenavModule,
@@ -76,7 +74,6 @@ export const MY_CUSTOM_FORMATS = {
     TranslateModule
   ],
   exports: [
-    TagInputModule,
     MatDialogModule,
     MatProgressSpinnerModule,
     MatSidenavModule,

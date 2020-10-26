@@ -11,7 +11,9 @@ import { CpkhaithacdvhcService } from "src/app/services/admin/capphephoatdongkho
 import { CpkhaithaccongtrinhService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.service";
 import { CpkhaithackhuvucService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.service";
 import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
+import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
 import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
+import { CpPheDuyetTLKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
 
 @Injectable({
   providedIn: "root",
@@ -34,7 +36,9 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepThamDoLoaiKhoangSanService() {
     return new CpThamDoLoaiKhoangSanService(this.httpClient);
   }
-
+  public getCapPhepPheDuyetTLKSService(){
+    return new CpPheDuyetTLKSService(this.httpClient)
+  }
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {
     return new CpThamDoCongTrinhService(this.httpClient);
@@ -70,8 +74,14 @@ export class CapPhepHoatDongKhoangSanFacadeService {
     return new CpkhaithacloaikhoangsanService(this.httpClient);
   }
 
+  // Cấp phép khai thác thiết bị service
+  public getCapPhepKhaiThacThietBiService() {
+    return new CpkhaithacthietbiService(this.httpClient);
+  }
+
   // Cấp phép  tận thu service
   public getCapPhepTanThuKhoangSanService() {
     return new CpTanThuKhoangSanService(this.httpClient);
   }
+
 }

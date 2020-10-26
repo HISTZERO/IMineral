@@ -59,6 +59,9 @@ export class ServiceName {
   public static DANGKYKHAITHACVLXD = "dangkykhaithacvlxd";
   public static DANGKYKHAITHACKHUVUC = "dangkykhaithackhuvuc";
   public static DANGKYKHAITHACTHIETBI = "dangkykhaithacthietbi";
+  //Đăng ký đấu giá quyền khai thác khoáng sản
+  public static DANGKYDAUGIAQUYENKHAITHAC="daugiakhaithac";
+  public static DANGKYPHEDUYETTRULUONGKS="dkpheduyettruluong";
   // Đăng ký tận thu khoáng sản
   public static DANGKYTANTHUKHOANGSAN = "dangkytanthukhoangsan";
   public static DANGKYTANTHUGIAHAN = "dangkytanthugiahan";
@@ -87,10 +90,15 @@ export class ServiceName {
   public static CPKHAITHACCONGTRINH = "cpkhaithaccongtrinh";
   public static CPKHAITHACLOAIKHOANGSAN = "cpkhaithacloaikhoangsan";
   public static CPKHAITHACKHUVUC = "cpkhaithackhuvuc";
+  public static CPKHAITHACTHIETBI = "cpkhaithacthietbi";
+  //Cấp phép phê duyệt trữ lượng khoáng sản
+  public static CAPPHEPPHEDUYETTLKS="cppheduyettruluong";
   // Cấp phép tận thu khoáng sản
   public static CPTANTHUKHOANGSAN = "cptanthukhoangsan";
   // Tính tiền cấp quyền
   public static TTTINHTIENCAPQUYEN = "tttinhtiencapquyen";
+  // Tính tiền cấp quyền theo năm
+  public static TTTIENTHEONAM = "tttientheonam";
   // Thiết lập
   public static THIETLAPHETHONG = "settings";
   public static CAUHINHTAILIEU = "cauhinhtailieu";

@@ -17,7 +17,7 @@ export const idNhomBaoCao: any = {
 }
 
 export const nameNhomBaoCao: any = {
-    [keyNhomBaoCao.QuyHoach]: "Quy hoạch",
+    [keyNhomBaoCao.QuyHoach]: "Quy hoạch khoáng sản",
     [keyNhomBaoCao.BanDo]: "Bản đồ",
     [keyNhomBaoCao.BaoCaoDieuTraKhaoSat]: "Báo cáo điều tra khảo sát",
     [keyNhomBaoCao.BaoCaoHoatDong]: "Báo cáo định kỳ hoạt động",

@@ -15,6 +15,7 @@ import { SettingsCommon } from "src/app/shared/constants/setting-common";
 import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
 import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
+import { DefaultValue } from "src/app/shared/constants/global-var";
 
 
 @Component({
@@ -75,8 +76,14 @@ export class KhuvuckhaithacIoComponent implements OnInit {
   // error message
   validationErrorMessages = {};
 
+  // Chứa thông báo lỗi item tọa độ
+  public errorToaDo = DefaultValue.Empty;
+
   // Chứa error tọa độ khu vực
-  public validationErrorToaDo = {}
+  public validationErrorToaDo = {};
+
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
 
   // Form errors khu vực
   formErrors = {
@@ -164,6 +171,27 @@ export class KhuvuckhaithacIoComponent implements OnInit {
   bindingConfigAddOrUpdate() {
     this.inputModelKhuVuc = new InputDkKhaiThacKhuVucModel();
     this.formOnEdit();
+
+    if (this.obj && this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(this.obj.hequychieu);
+    }
+  }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
   }
 
   /**
@@ -255,6 +283,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.insertKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -272,6 +301,7 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       this.inputModelKhuVuc.toado = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
+          this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
         },
         (error: HttpErrorResponse) => {
@@ -292,9 +322,13 @@ export class KhuvuckhaithacIoComponent implements OnInit {
    */
   async onSubmit(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKKhaiThacKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
-      this.matSidenavService.close();
+    if (this.listToaDoKhuVuc.length >= 3) {
+      if (this.dKKhaiThacKhuVucIOForm.valid === true) {
+        this.addOrUpdate(operMode);
+        this.matSidenavService.close();
+      }
+    } else {
+      this.errorToaDo = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.errorToaDo;
     }
   }
 
@@ -317,6 +351,8 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       toadox: "",
       toadoy: "",
     });
+
+
   }
 
   /**
@@ -325,10 +361,14 @@ export class KhuvuckhaithacIoComponent implements OnInit {
    */
   async onContinueAdd(operMode: string) {
     this.logAllValidationErrorMessages();
-    if (this.dKKhaiThacKhuVucIOForm.valid === true) {
-      this.addOrUpdate(operMode);
-      this.onFormReset();
-      this.purpose = "new";
+    if (this.listToaDoKhuVuc.length >= 3) {
+      if (this.dKKhaiThacKhuVucIOForm.valid === true) {
+        this.addOrUpdate(operMode);
+        this.onFormReset();
+        this.purpose = "new";
+      }
+    } else {
+      this.errorToaDo = this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.errorToaDo;
     }
   }
 

@@ -56,6 +56,7 @@ export class AdminRoutingName {
   public static baocaohoatdongdinhkyUri = keyNhomBaoCao.BaoCaoHoatDong;
   public static giamsathoatdongUri = keyNhomBaoCao.BaoCaoGiamSatHoatDong;
   public static thongtintulieuUri = keyNhomBaoCao.ThongTinTuLieu;
+  public static quyhoachUri = keyNhomBaoCao.QuyHoach;
 
   // 1.4 Routes thiết lập
   public static ThietLapHeThong = "thietlaphethong";

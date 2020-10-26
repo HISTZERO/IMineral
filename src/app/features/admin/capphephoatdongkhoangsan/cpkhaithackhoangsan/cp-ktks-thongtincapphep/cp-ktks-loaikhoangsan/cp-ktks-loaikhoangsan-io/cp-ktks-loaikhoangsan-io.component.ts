@@ -11,10 +11,9 @@ import { Paging, TrangThaiEnum } from 'src/app/shared/constants/enum';
 import { OutputDmNhomKhoangSanModel } from 'src/app/models/admin/danhmuc/nhomkhoangsan.model';
 import { OutputDmLoaiKhoangSanModel } from 'src/app/models/admin/danhmuc/loaikhoangsan.model';
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { InputCpThamDoLoaiKhoangSanModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.model';
-import { InputCpKhaiThacLoaiKhoangSanModel } from "../../../../../../../models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.model";
-import { DonViTruLuong } from "../../../../../../../shared/constants/common-constants";
-import { DefaultValue } from "../../../../../../../shared/constants/global-var";
+import { InputCpKhaiThacLoaiKhoangSanModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.model";
+import { DonViTruLuong } from "src/app/shared/constants/common-constants";
+import { DefaultValue } from "src/app/shared/constants/global-var";
 
 @Component({
   selector: 'app-cp-ktks-loaikhoangsan-io',
@@ -86,11 +85,11 @@ export class CpKtksLoaikhoangsanIoComponent implements OnInit {
     // Lấy dữ liệu translate
     await this.getDataTranslate();
 
-    // Khởi tạo form theo dạng add or edit
-    await this.bindingConfigAddOrUpdate();
-
     // Lấy dữ liệu nhóm khoáng sản
     await this.geAllNhomKhoangSan();
+
+    // Khởi tạo form theo dạng add or edit
+    await this.bindingConfigAddOrUpdate();
 
     // Lấy dữ liệu loại khoáng sản
     await this.showLoaiKhoangSan(true);
@@ -136,8 +135,8 @@ export class CpKtksLoaikhoangsanIoComponent implements OnInit {
    */
   setValidation() {
     this.validationErrorMessages = {
-      idloaikhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.loaikhoangsanRequired },
-      tenkhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdoloaikhoangsan.tenkhoangsanRequired },
+      idloaikhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.loaikhoangsanRequired },
+      tenkhoangsan: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithacloaikhoangsan.tenkhoangsanRequired },
     };
   }
 
@@ -155,7 +154,7 @@ export class CpKtksLoaikhoangsanIoComponent implements OnInit {
     });
   }
 
-  /**
+  /**  
    * hàm set value cho form
    */
   async formOnEdit() {

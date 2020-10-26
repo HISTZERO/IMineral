@@ -68,6 +68,10 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
   public title: string;
   // giấy phep item
   private itemGiayPhep: OutputGiayPhepModel;
+  // Chứa thuộc tính hiển thị đóng cửa mỏ 1 phần
+  public isDongCuaMoMotPhan: boolean = false;
+  // Chứa thuốc tính hiển thị đóng cửa mỏ
+  public isDongCuaMo: boolean = false;
   // form errors
   formErrors = {
     tenmo: DefaultValue.Empty,
@@ -159,6 +163,14 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
     if (this.itemGiayPhep) {
       this.capPhepKhaiThacKhoangSan = await this.getCapPhepKhaiThacByIdGiayPhep(this.idgiayphep);
 
+      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.DongCuaMoKhoangSan) {
+        this.isDongCuaMo = true;
+      }
+
+      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+        this.isDongCuaMoMotPhan = true;
+      }
+
       if (this.capPhepKhaiThacKhoangSan) {
         this.currentAction = CapPhepKhaiThacActionEnum.Edit;
         this.selectIdCapPhepKhaiThac();
@@ -187,20 +199,64 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
    */
   private setFormTitle() {
     if (this.currentAction === CapPhepKhaiThacActionEnum.Edit) {
-      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.KhaiThacKhoangSan) {
-        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.titleEdit;
-      } else if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdogiahan.titleEdit;
-      } else {
-        this.title = DefaultValue.Empty;
+      switch (this.itemGiayPhep.loaicapphep) {
+        case LoaiCapPhepEnum.KhaiThacKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.titleEdit;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacgiahan.titleEdit;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacduan.titleEdit;
+          break;
+        case LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithaccatsoi.titleEdit;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacvlxd.titleEdit;
+          break;
+        case LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacdieuchinh.titleEdit;
+          break;
+        case LoaiCapPhepEnum.DongCuaMoKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpdongcuamo.titleEdit;
+          break;
+        case LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpdongcuamomotphan.titleEdit;
+          break;
+        default:
+          this.title = DefaultValue.Empty;
+          break;
       }
     } else if (this.currentAction === CapPhepKhaiThacActionEnum.Add) {
-      if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan) {
-        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.titleAdd;
-      } else if (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan) {
-        this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdogiahan.titleAdd;
-      } else {
-        this.title = DefaultValue.Empty;
+      switch (this.itemGiayPhep.loaicapphep) {
+        case LoaiCapPhepEnum.KhaiThacKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.titleAdd;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanGiaHan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacgiahan.titleAdd;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanCoDuAnDauTu:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacduan.titleAdd;
+          break;
+        case LoaiCapPhepEnum.ThuHoiCatSoiDuAnNaoVetKhoiThong:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithaccatsoi.titleAdd;
+          break;
+        case LoaiCapPhepEnum.KhaiThacKhoangSanLamVatLieuXayDung:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacvlxd.titleAdd;
+          break;
+        case LoaiCapPhepEnum.DieuChinhGiayPhepKhaiThac:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithacdieuchinh.titleAdd;
+          break;
+        case LoaiCapPhepEnum.DongCuaMoKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpdongcuamo.titleAdd;
+          break;
+        case LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan:
+          this.title = this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpdongcuamomotphan.titleAdd;
+          break;
+        default:
+          this.title = DefaultValue.Empty;
+          break;
       }
     }
   }
@@ -378,8 +434,8 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
    */
   deleteItemCapPhepKhaiThacKhoangSan() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.contentDelete,
-      "this.capPhepKhaiThacKhoangSan.diadiem"
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdkskhaithackhoangsan.contentDelete,
+      ""
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {

@@ -42,7 +42,6 @@
     "moment-mini": "^2.24.0",
     "ng-pick-datetime": "^7.0.0",
     "ng-pick-datetime-moment": "^1.0.8",
-    "ngx-chips": "^2.1.0",
     "oidc-client": "^1.10.1",
     "rxjs": "~6.4.0",
     "simplebar-angular": "^2.1.0",
