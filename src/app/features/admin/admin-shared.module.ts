@@ -41,6 +41,7 @@ import {
 import { MomentDateTimeAdapter, OwlMomentDateTimeModule, OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS } from "ng-pick-datetime-moment";
 import { HeaderComponent } from "src/app/features/admin/layout/header/header.component";
 import { PheduyetDulieuComponent } from "src/app/shared/components/pheduyet-dulieu/pheduyet-dulieu.component";
+import { ToadokhuvucComponent } from "src/app/shared/components/toadokhuvuc/toadokhuvuc.component";
 
 // Format custom
 export const MY_CUSTOM_FORMATS = {
@@ -90,14 +91,17 @@ export const MY_CUSTOM_FORMATS = {
     MatSlideToggleModule,
     MatTabsModule,
     HeaderComponent,
+    ToadokhuvucComponent
   ],
   declarations: [
     SubHeaderComponent,
     PheduyetDulieuComponent,
     HeaderComponent,
+    ToadokhuvucComponent
   ],
   entryComponents: [
     SubHeaderComponent,
+    ToadokhuvucComponent
   ],
   providers: [
     MatdialogService,
