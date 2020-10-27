@@ -158,7 +158,7 @@ import { CpPdtlksThongtinchitietComponent } from 'src/app/features/admin/capphep
     CpTtksTanthukhoangsanIoComponent,
     CpTtksTanthukhoangsanIoComponent,
     CpTdksThongtincapphepComponent,
-    CpKtksThongtincapphepComponent
+    CpKtksThongtincapphepComponent,
     CpTtksDonvihanhchinhIoComponent,
     CpTtksLoaikhoangsanIoComponent,
     CpTtksKhuvuctanthuIoComponent,
