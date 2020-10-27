@@ -14,6 +14,7 @@ import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphepho
 import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
 import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
 import { CpPheDuyetTLKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
+import { CpPheDuyetTLKSLoaiKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_loaiks.service';
 import {CpTanThuDvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthudvhc.service";
 import {CpTanThuLoaiKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthuloaikhoangsan.service";
 import {CptanthukhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.service";
@@ -41,6 +42,10 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   }
   public getCapPhepPheDuyetTLKSService(){
     return new CpPheDuyetTLKSService(this.httpClient)
+  }
+  //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
+  public getCapPhepPheDuyetTLKS_loaiKSService(){
+    return new CpPheDuyetTLKSLoaiKSService(this.httpClient);
   }
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {

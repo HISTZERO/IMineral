@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from "@angular/core";
+import { Component, EventEmitter, Input, OnInit, Output } from "@angular/core";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { ActivatedRoute } from "@angular/router";
 import { TranslateService } from "@ngx-translate/core";
@@ -19,6 +19,9 @@ import { DefaultValue } from "src/app/shared/constants/global-var";
 export class CpPdtlksThongtinchitietComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  @Output() thongTinChiTietTonTaiTrigger = new EventEmitter();
+  @Output() thongTinChiTietKhongTonTaiTrigger = new EventEmitter();
+
   public currentAction: number = 2;
 
   public disabledDeleteButton: boolean = true;
@@ -146,6 +149,8 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
 
       if (this.capPhepPheDuyetTruLuongKSItem) {
         this.currentAction = ActionDataEnum.Edit;
+        //fire sự kiện : bản ghi thông tin chi tiết tồn tại, đồng thời truyền theo ID của bản ghi Thông tin
+         this.thongTinChiTietTonTaiTrigger.emit(this.capPhepPheDuyetTruLuongKSItem.idpheduyettruluong);
         // Khởi tạo dữ liệu form trong trường hợp sửa dữ liệu Hồ Sơ
         await this.formOnEdit();
       } else {
@@ -203,6 +208,8 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
          this.capPhepPheDuyetTruLuongKSItem.idpheduyettruluong = res.idpheduyettruluong;
          this.currentAction = ActionDataEnum.Edit;
          this.selectCurrentFormState();
+         //fire sự kiện : bản ghi thông tin chi tiết tồn tại, đồng thời truyền theo ID của bản ghi Thông tin
+      this.thongTinChiTietTonTaiTrigger.emit(this.capPhepPheDuyetTruLuongKSItem.idpheduyettruluong);
        },
        (error: HttpErrorResponse) => {
          this.commonService.showDialogWarning(error.error.errors);
@@ -254,6 +261,7 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
               this.currentAction = ActionDataEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
+              this.thongTinChiTietKhongTonTaiTrigger.emit(null);
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
@@ -281,6 +289,7 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
   private selectCurrentFormState() {
     if (this.currentAction === ActionDataEnum.Edit) {
       this.disabledDeleteButton = false;
+      
     } else {
       this.disabledDeleteButton = true;
     }
