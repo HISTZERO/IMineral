@@ -24,6 +24,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { ToadokhuvucComponent } from "../../../../../shared/components/toadokhuvuc/toadokhuvuc.component";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -44,6 +45,7 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
   @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
   @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
+  @ViewChild("banDoThamDoKhuVuc", { static: false }) banDoThamDoKhuVuc: ToadokhuvucComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -58,6 +60,7 @@ export class ThongtindangkyComponent implements OnInit {
     [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: false,
     [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: false,
     [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: false,
+    [DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]: false,
     [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: false
   };
 
@@ -66,6 +69,7 @@ export class ThongtindangkyComponent implements OnInit {
     [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: true,
     [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: true,
     [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: true,
+    [DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]: true,
     [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: true
   };
 
@@ -141,6 +145,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
@@ -149,6 +154,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
       }
@@ -157,6 +163,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
@@ -226,6 +233,7 @@ export class ThongtindangkyComponent implements OnInit {
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
@@ -247,6 +255,9 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
       this.dangKyThamDoKhuVuc.heQuyChieu = this.heQuyChieu;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
+    } else if (index === DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]) {
+      // this.banDoThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
+      // this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = await this.banDoThamDoKhuVuc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;
       this.dangKyThamDoCongTrinh.content = this.content;

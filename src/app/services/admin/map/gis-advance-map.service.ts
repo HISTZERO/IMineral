@@ -35,12 +35,22 @@ import {
   DefaultRenderer,
   WMSLayerFeatureInfo,
   MettersPerPixelByZeroZoomLevel,
+  fillSymbolPolygon,
 } from "src/app/shared/constants/map-constants";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
 import { InputMapLayerModel, OutputMapLayerModel, } from "src/app/models/admin/map/map-layer.model";
+import { Polygon } from "esri/geometry";
 
+export const fillSymbolPolyline = {
+  type: "simple-fill",
+  color: [227, 139, 79, 0.8],
+  outline: {
+    color: [34, 139, 34],
+    width: 2
+  }
+};
 
 @Injectable({
   providedIn: "root",
@@ -1483,5 +1493,63 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     } catch (error) {
       console.log(error);
     }
+  }
+
+  /**
+   * Vẽ graphic dựa trên geometry
+   */
+  async drawGraphicByGeoMetry(geometry) {
+
+    try {
+
+      // Remove all graphics
+      this.view.graphics.removeAll();
+
+      switch (geometry.type) {
+        case 'Polygon':
+        case 'MultiPolygon':
+          await this.addPolygonFromCoordinates(geometry.coordinates);
+          break;
+        case 'MultiLineString':
+          // await this.addPolylineFromCoordinates(geometry.coordinates);
+          break;
+      }
+
+    } catch (error) {
+      console.log(`Draw graphic by geometry error: ${error}`);
+    }
+
+  }
+
+  /**
+   * Vẽ polygon theo cách add Rings
+   * @params cooordinates Danh sách tọa độ
+   * @by: dzung
+   */
+  async addPolygonFromCoordinates(coordinates) {
+
+    // Create a symbol for rendering the graphic
+    var fillSymbol = fillSymbolPolygon
+    let newPolygon = new Polygon({
+      rings: [],
+      spatialReference: this.spatialReference
+    });
+
+    //Duyệt các coordinates truyền vào, với mỗi item add item[0] vào rings
+    coordinates.map(coordinate => {
+      newPolygon.addRing(coordinate[0]);
+    });
+
+    //Vẽ toàn bộ các rings và add vào graphics
+    let newGraphic = new Graphic({
+      geometry: newPolygon,
+      symbol: fillSymbol
+    });
+
+    // Add graphic
+    this.view.graphics.add(newGraphic);
+
+    //Zoom đến extent của đối tượng vừa được add vào graphic
+    this.view.goTo(newGraphic);
   }
 }

@@ -338,3 +338,25 @@ export function DefaultRenderer() {
 }
 
 export const MettersPerPixelByZeroZoomLevel = 156412;
+
+//Fill symbol for Polyline
+//Dùng để vẽ tạm đối tượng polyline lên Graphic
+export const fillSymbolPolyline = {
+  type: "simple-fill",
+  color: [227, 139, 79, 0.8],
+  outline: {
+    color: [34, 139, 34],
+    width: 2
+  }
+};
+
+//Fill symbol for Polygon
+//Dùng để vẽ tạm đối tượng Polygon, polyline lên Graphic
+export const fillSymbolPolygon = {
+  type: "simple-fill",
+  color: [0, 255, 255, 0],
+  outline: {
+    color: [0, 255, 255],
+    width: 2
+  }
+};

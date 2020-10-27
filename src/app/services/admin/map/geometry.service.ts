@@ -21,9 +21,9 @@ export class GeometryService extends RepositoryEloquentService {
   }
 
   // Get geoJson by list item
-  public getGeoJsonByListItem(listItem: any) {
+  public getGeoJsonByListItem(listItem: any, srid: number) {
     this.setServiceInfo({
-      apiUrl: `${environment.apiIMineral + ServiceName.GEOMETRY}/GetGeotryjson`
+      apiUrl: `${environment.apiIMineral + ServiceName.GEOMETRY}/GetGeotryjson?srid=${srid}`
     });
     return this.addItem(listItem);
   }
