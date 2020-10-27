@@ -25,7 +25,7 @@
                   label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepChungTabTitle' | translate }}"
                   [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac"
                   [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false"
-                  (selectCurrentChuyenNhuongFormStateEvent)="getGiayPhepIoFormState($event)"
+                  (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
                   (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
                 </app-giayphep-io>
               </mat-tab>
