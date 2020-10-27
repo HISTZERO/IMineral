@@ -289,7 +289,7 @@ export const MenuCpChuyenNhuongQuyenThamDoKhaiThacKhoangSanChitiet = [
   },
   {
     title: "Cấp phép chuyển nhượng quyền thăm dò, khai thác khoáng sản",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`,
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpchuyennhuongquyenthamdokhaithackhoangsanUri}`,
   },
   {
     title: "Chi tiết",
@@ -302,6 +302,6 @@ export const ButtonBackCpChuyenNhuongQuyenThamDoKhaiThacKhoangSan = [
     title: "Cấp phép chuyển nhượng quyền thăm dò, khai thác khoáng sản",
     icon: "fad fa-chevron-double-left",
     color: "btn-primary",
-    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`
+    url: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cpchuyennhuongquyenthamdokhaithackhoangsanUri}`
   },
 ];

@@ -182,9 +182,9 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       this.itemGiayPhep = await this.hoSoGiayToFacadeService.getGiayPhepService().getByid(this.idgiayphep).toPromise() as OutputGiayPhepModel;
     }
 
-    if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan)) {
+    if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan)) {
       this.capPhepThamDoKhoangSan = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
-
+     // console.log(this.capPhepThamDoKhoangSan);
       if (this.capPhepThamDoKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();
