@@ -1,0 +1,54 @@
+<div class="card border mt-3">
+  <div class="card-header">
+    <h3>
+      <div class="row">
+        <div class="col-md-4 mb-sm-1">
+          <span class="title">{{ "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.titleList" | translate }}</span>
+        </div>
+        <div class="col-md-8">
+          <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openCpThamDoLoaiKhoangSanIOSidenav()">
+            <i class="fal fa-plus-square"></i>
+            {{ "COMMON.default.add" | translate }}
+          </button>
+          <button class="btn btn-outline-primary mr-2" style="float: right;" (click)="getAllLoaiKhoangSanTheoPheDuyetTruLuong()">
+            <i class="far fa-sync-alt"></i>
+            {{ "COMMON.default.load" | translate }}
+          </button> 
+        </div>
+      </div>
+    </h3>
+  </div>
+  <div class="card-body">
+    <ejs-grid #gridLoaiKhoangSan *ngIf="listLoaiKhoangSan" [dataSource]="listLoaiKhoangSan"
+              [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
+              [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar" class="table-striped"
+              [allowResizing]="true">
+      <e-columns>
+        <e-column field="thutu" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+        <e-column field="tenkhoangsan" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.tenkhoangsanHeader' | translate }}"></e-column>
+        <e-column field="tenloaikhoangsan" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.tenloaikhoangsanHeader' | translate }}"></e-column>
+        <e-column field="macaptruluong" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.captruluongHeader' | translate }}"></e-column>
+        <e-column field="truluong" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.truluongHeader' | translate }}"></e-column>
+        <e-column field="donvitruluong" headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.donvitruluongHeader' | translate }}"></e-column>
+        <e-column field="idpheduyettruluongloaikhoangsan" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
+          <ng-template #template let-data>
+            <div class="btn-group">
+              <button class="btn btn-sm btn-primary" title="{{ 'COMMON.default.edit' | translate }}"
+              (click)="suaKhoangSan(data.idpheduyettruluongloaikhoangsan)"
+                      >
+                <i class="far fa-edit"></i>
+              </button>
+              <button class="btn btn-sm btn-danger" title="{{ 'COMMON.default.delete' | translate }}"
+              (click)="xoaKhoangSan(data.idpheduyettruluongloaikhoangsan)"
+                      >
+                <i class="far fa-trash"></i>
+              </button>
+            </div>
+          </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>
+
+

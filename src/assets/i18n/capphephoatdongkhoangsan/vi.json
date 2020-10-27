@@ -47,6 +47,44 @@
     "chondonvidientich":"---Chọn đơn vị diện tích---"
     
   },
+  "cappheppheduyettruluong_loaikhoangsan":{
+    "titleList": "Danh sách loại khoáng sản",
+    "titleAdd": "Thêm mới loại khoáng sản",
+    "titleEdit": "Sửa dữ liệu loại khoáng sản",
+    "contentDelete": "Loại khoáng sản: ",
+    "tenloaikhoangsan": "Loại khoáng sản",
+    "tennhomkhoangsan": "Nhóm khoáng sản",
+    "tenkhoangsan": "Tên khoáng sản",
+    "truluong": "Trữ lượng",
+    "truluongPlaceholder":"Nhập trữ lượng",
+    "donvitruluong": "Đơn vị trữ lượng",
+    "captruluong":"Cấp trữ lượng",
+    "choncaptruluong":"---Chọn cấp trữ lượng---",
+    "phanloai":"Phân loại",
+    "chonphanloai":"---Chọn phân loại---",
+    "chonloaikhoangsan": "---Chọn loại khoáng sản---",
+    "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
+    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "tenkhoangsanRequired": "Yêu cầu phải nhập tên khoáng sản",
+    "nhomkhoangsanRequired":"Yêu cầu chọn nhóm khoáng sản",
+    "tenkhoangsanPlaceholder": "Nhập tên khoáng sản",
+    "captruluongRequired":"Yêu cầu nhập cấp trữ lượng",
+    "donvitruluongRequired":"Yêu cầu chọn đơn vị trữ lượng",
+    "phanloaiRequired":"Yêu cầu chọn phân loại",
+    "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
+    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Cấp phép thăm dò loại khoáng sản không tồn tại"
+  },
+  "cappheppheduyettruluongkhoangsan_khuvucthamdo":{
+    "titleList":"Danh sách trữ lượng khoáng sản",
+    "tenkhoangsanHeader":"Tên khoáng sản",
+    "tenloaikhoangsanHeader":"Phân loại",
+    "captruluongHeader":"Cấp trữ lượng",
+    "truluongHeader":"Trữ lượng",
+    "donvitruluongHeader":"Đơn vị trữ lượng"
+
+  },
   "cappheptanthukhoangsan": {
     "titleList": "Danh sách giấy phép tận thu khoáng sản",
     "titleAdd": "Thêm mới giấy phép tận thu khoáng sản",
