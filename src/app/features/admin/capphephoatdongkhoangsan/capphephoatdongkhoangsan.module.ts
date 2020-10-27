@@ -71,6 +71,9 @@ import { CpTtksLoaikhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thon
 import { CpTtksLoaikhoangsanListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-loaikhoangsan/cp-ttks-loaikhoangsan-list/cp-ttks-loaikhoangsan-list.component';
 import { CpTtksKhuvuctanthuIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-io/cp-ttks-khuvuctanthu-io.component';
 import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-list/cp-ttks-khuvuctanthu-list.component';
+import { CpDaugiakhaithacThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-thongtincapphep.component';
+import { CpDaugiakhaithacIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component';
+import { CpDaugiakhaithacKhuvucComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc.component';
 
 
 @NgModule({
@@ -130,7 +133,10 @@ import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-tho
     CpTtksLoaikhoangsanIoComponent,
     CpTtksLoaikhoangsanListComponent,
     CpTtksKhuvuctanthuIoComponent,
-    CpTtksKhuvuctanthuListComponent
+    CpTtksKhuvuctanthuListComponent,
+    CpDaugiakhaithacThongtincapphepComponent,
+    CpDaugiakhaithacIoComponent,
+    CpDaugiakhaithacKhuvucComponent
   ],
   exports: [
   ],
@@ -167,7 +173,8 @@ import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-tho
     CpTtksDonvihanhchinhIoComponent,
     CpTtksLoaikhoangsanIoComponent,
     CpTtksKhuvuctanthuIoComponent,
-    CpTdksThongtincapphepComponent
+    CpDaugiakhaithacIoComponent
+    
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

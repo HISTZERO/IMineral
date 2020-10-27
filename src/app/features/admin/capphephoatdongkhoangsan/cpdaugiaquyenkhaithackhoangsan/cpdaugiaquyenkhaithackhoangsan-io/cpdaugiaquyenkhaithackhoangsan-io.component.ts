@@ -2,10 +2,11 @@ import { Component, OnInit, ViewChild, ViewContainerRef } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from '@angular/router';
-import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpDauGiaQuyenKhaiThacKhoangSanTabEnum } from 'src/app/shared/constants/enum';
+import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpDauGiaQuyenKhaiThacKhoangSanTabEnum, ActionDataEnum } from 'src/app/shared/constants/enum';
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { GiayphepIoComponent } from 'src/app/features/admin/hosogiayto/giayphep/giayphep-io/giayphep-io.component';
+import { CpDaugiakhaithacThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-thongtincapphep.component';
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { ButtonBackCpDauGiaQuyenKhaiThacKhoangSan, MenuCpDauGiaQuyenKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
@@ -21,6 +22,7 @@ export class CpdaugiaquyenkhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
+  @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpDaugiakhaithacThongtincapphepComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
   // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
@@ -171,13 +173,13 @@ export class CpdaugiaquyenkhaithackhoangsanIoComponent implements OnInit {
     this.idgiayphep = id;
   }
 
-  // getThongTinDangKyThamDoFormState(action: number) {
-  //   if (action === DangKyThamDoActionEnum.Edit) {
-  //     this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = true;
-  //   } else {
-  //     this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = false;
-  //   }
-  // }
+  getThongTinDauGiaKhaiThacFormState(action: number) {
+    if (action === ActionDataEnum.Edit) {
+      this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = true;
+    } else {
+      this.giayPhepIOComp.disabledLoaiCapPhepSelectionState = false;
+    }
+  }
 
   closeIOSidenav() {
     this.matSidenavService.close();
