@@ -1,0 +1,168 @@
+<div class="card border mt-3">
+  <!-- header -->
+  <div class="card-header">
+    <div class="row">
+      <div class="col-lg-9 col-md-9 col-sm-9">
+        <h4>
+          <span class="title" *ngIf="currentAction === ActionType.Add">
+            {{
+              "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.titleAdd"
+                | translate
+            }}
+          </span>
+          <span class="title" *ngIf="currentAction === ActionType.Edit">
+            {{
+              "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.titleEdit"
+                | translate
+            }}
+          </span>
+        </h4>
+      </div>
+      <div class="col-lg-3 col-md-3 col-sm-3">
+        <button
+          class="btn btn-primary mb-sm-1"
+          style="float: right"
+          (click)="saveCapPhepPheDuyetTruLuongKS()"
+        >
+          <i class="fal fa-save"></i>
+          {{ "COMMON.default.save" | translate }}
+        </button>
+        <button
+          *ngIf="!disabledDeleteButton"
+          class="btn btn-outline-danger mr-2"
+          style="float: right"
+          (click)="deleteCapPhepPheDuyetTruLuongKS()"
+        >
+          <i class="far fa-trash"></i>
+          {{ "COMMON.default.delete" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nội dung form -->
+  <div class="card-body">
+    <form [formGroup]="capPhepPheDuyetTLKSForm">
+      <div class="row">
+        <!-- Cột trái -->
+
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <!-- Tên khu vực -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.tenkhuvucthamdo"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="tenkhuvucthamdo"
+                placeholder="{{
+                  'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.tenkhuvucthamdoPlaceholder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.tenkhuvucthamdo" class="alert-danger">{{
+                formErrors.tenkhuvucthamdo
+              }}</span>
+            </div>
+          </div>
+
+          <!-- Diện tích thăm dò -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.dientichthamdo"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="dientichthamdo"
+                placeholder="{{
+                  'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.dientichthamdoPlaceholder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.dientichthamdo" class="alert-danger">{{
+                formErrors.dientichthamdo
+              }}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Cột phải -->
+        <div class="col-lg-6 col-md-6 col-sm-6">
+          <!-- Tên khu vực -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.diadiem"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="diadiem"
+                placeholder="{{
+                  'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.diadiemPlaceholder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.diadiem" class="alert-danger">{{
+                formErrors.diadiem
+              }}</span>
+            </div>
+          </div>
+          <!-- Đơn vị diện tích -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+              >{{
+                "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.donvidientich"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-8">
+              <mat-select
+                class="form-control"
+                formControlName="donvidientich"
+                *ngIf="dataTranslate"
+                placeholder="{{
+                  'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.chondonvidientich'
+                    | translate
+                }}"
+              >
+                <mat-option value="">
+                  {{
+                    "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_thongtinchitiet.chondonvidientich"
+                      | translate
+                  }}
+                </mat-option>
+                <mat-option
+                  *ngFor="let donViDienTich of donViDienTichList"
+                  [value]="donViDienTich.id"
+                >
+                  {{ donViDienTich.name }}
+                </mat-option>
+              </mat-select>
+              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{
+                formErrors.donvidientich
+              }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

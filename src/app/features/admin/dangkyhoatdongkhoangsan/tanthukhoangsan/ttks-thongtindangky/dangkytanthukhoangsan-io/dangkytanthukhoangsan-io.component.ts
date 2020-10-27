@@ -7,7 +7,7 @@ import {
   DonViDienTich,
   DonViDoSau,
   DonViThoiHan,
-  DonViTruLuong,
+  DonViTruLuong, PhuongPhapKhaiThac,
 } from "src/app/shared/constants/common-constants";
 import {TranslateService} from "@ngx-translate/core";
 import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -80,6 +80,9 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
   // Lưu trữ đơn vị thời hạn
   public donViChieuSauList = DonViDoSau;
 
+  //Phương pháp khai thác
+  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
+
 
   // error message
   validationErrorMessages = {};
@@ -100,6 +103,7 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
     donvithoihan: DefaultValue.Empty,
     donvichieusau: DefaultValue.Empty,
     hequychieu: DefaultValue.Empty,
+    phuongphapkhaithac: DefaultValue.Empty
   };
 
   constructor(
@@ -171,12 +175,13 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
       congsuatkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
       mucsaukhaithactu: [DefaultValue.Empty, [ Validators.pattern("^[0-9-+]+$")]],
       mucsaukhaithacden: [DefaultValue.Empty, [Validators.pattern("^[0-9-+]+$")]],
-      donvitruluong: [DefaultValue.Empty],
-      donvicongsuat: [DefaultValue.Empty],
-      donvidientich: [DefaultValue.Empty],
-      donvithoihan: [DefaultValue.Empty],
+      donvitruluong: [DefaultValue.Empty, Validators.required],
+      donvicongsuat: [DefaultValue.Empty, Validators.required],
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      donvithoihan: [DefaultValue.Empty, Validators.required],
       donvichieusau: [DefaultValue.Empty],
-      hequychieu: [DefaultValue.Empty],
+      hequychieu: [DefaultValue.Empty, Validators.required],
+      phuongphapkhaithac: [DefaultValue.Empty, Validators.required]
     });
   }
 
@@ -212,6 +217,7 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
         donvithoihan: item.donvithoihan,
         donvichieusau: item.donvichieusau,
         hequychieu: item.hequychieu,
+        phuongphapkhaithac: item.phuongphapkhaithac
       });
     }
   }
@@ -244,6 +250,11 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
       },
       mucsaukhaithactu: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.numberRequired},
       mucsaukhaithacden: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.numberRequired},
+      phuongphapkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.phuongphapkhaithacRequired},
+      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.donvidientichRequired},
+      donvithoihan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.donvithoihanRequired},
+      donvitruluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.donvitruluongRequired},
+      donvicongsuat: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhoangsan.donvicongsuatRequired},
     };
   }
 
@@ -401,6 +412,7 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
       donvithoihan: DefaultValue.Empty,
       donvichieusau: DefaultValue.Empty,
       hequychieu: DefaultValue.Empty,
+      phuongphapkhaithac: DefaultValue.Empty
     });
   }
 

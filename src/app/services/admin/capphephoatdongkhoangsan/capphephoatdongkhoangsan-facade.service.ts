@@ -13,6 +13,10 @@ import { CpkhaithackhuvucService } from "src/app/services/admin/capphephoatdongk
 import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
 import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
 import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
+import { CpPheDuyetTLKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
+import {CpTanThuDvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthudvhc.service";
+import {CpTanThuLoaiKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthuloaikhoangsan.service";
+import {CptanthukhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.service";
 
 @Injectable({
   providedIn: "root",
@@ -35,7 +39,9 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepThamDoLoaiKhoangSanService() {
     return new CpThamDoLoaiKhoangSanService(this.httpClient);
   }
-
+  public getCapPhepPheDuyetTLKSService(){
+    return new CpPheDuyetTLKSService(this.httpClient)
+  }
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {
     return new CpThamDoCongTrinhService(this.httpClient);
@@ -81,4 +87,16 @@ export class CapPhepHoatDongKhoangSanFacadeService {
     return new CpTanThuKhoangSanService(this.httpClient);
   }
 
+  // cấp phép tận thu đơn vị hành chính service
+  public getCapPhepTanThuDvhcService() {
+    return new CpTanThuDvhcService(this.httpClient);
+  }
+  // cấp phép tận thu loại khoáng sản service
+  public getCapPhepTanThuLoaiKhoangSanService() {
+    return new CpTanThuLoaiKhoangSanService(this.httpClient);
+  }
+  // cấp phép thăm dò khu vực service
+  public getCapPhepTanThuKhuVucService() {
+    return new CptanthukhuvucService(this.httpClient);
+  }
 }
