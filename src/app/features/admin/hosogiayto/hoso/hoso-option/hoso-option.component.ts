@@ -180,17 +180,22 @@ export class HosoOptionComponent implements OnInit {
    *  chọn item cá nhân trong danh sách
    */
   public async selectItemHoSo(data) {
-
+   
     if (this.selectedOptionType === SelectedOptionType.NoPopup) {
       this.selectItemHoSoEvent.emit(data);
     } else if (this.selectedOptionType === SelectedOptionType.Popup) {
       if (this.nhomLoaiCapPhep === NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac) {
         var mahoso = data.mahoso;
         var idhoso = data.idhoso;
+
         if (this.loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
           data = await this.dangKyHoatDongKhoangSanFacadeService.getDangKyThamDoChuyenNhuongService().getDangKyChuyenNhuongByIdHoSo(data.idhoso).toPromise();
         } else if (this.loaiCapPhep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan) {
           data = await this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacChuyenNhuongService().getDangKyChuyenNhuongByIdHoSo(data.idhoso).toPromise();
+        }
+        
+        if(data === null){
+          data = new OutputHsHoSoModel();
         }
         data.mahoso = mahoso;
         data.idhoso = idhoso;

@@ -37,8 +37,13 @@ export class GiayphepIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
+  
+  //tslint:disable-next-line: no-output-rename
+  @Output("selectCurrentChuyenNhuongFormStateEvent") selectCurrentChuyenNhuongFormStateEvent: EventEmitter<string> = new EventEmitter();
+  
   // tslint:disable-next-line: no-output-rename
   @Output("selectNewInsertedGiayPhepEvent") selectNewInsertedGiayPhepEvent: EventEmitter<string> = new EventEmitter();
+  
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ trạng thái enable hoặc disable chọn loại cấp phép
@@ -765,10 +770,8 @@ export class GiayphepIoComponent implements OnInit {
 
   private selectCurrentFormState() {
     const loaicapphep = this.giayPhepIOForm.controls.loaicapphep.value;
-    
     if (loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan || loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan) {
-      this.selectNewInsertedGiayPhepEvent.emit(loaicapphep);
-    
+      this.selectCurrentChuyenNhuongFormStateEvent.emit(loaicapphep);
     } else {
     this.selectCurrentFormStateEvent.emit(this.currentAction);
     }

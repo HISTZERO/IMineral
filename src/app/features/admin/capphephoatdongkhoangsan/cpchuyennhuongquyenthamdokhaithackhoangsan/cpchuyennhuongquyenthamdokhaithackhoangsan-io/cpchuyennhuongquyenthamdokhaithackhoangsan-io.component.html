@@ -20,12 +20,12 @@
             <mat-tab-group mat-stretch-tabs #capPhepChuyenNhuongQuyenThamDoKhaiThacKhoanSanTabs [animationDuration]=""
               [selectedIndex]="TabType.ThongTinGiayPhep" (selectedIndexChange)="tabChange($event)">
               <mat-tab [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]"
-                label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}">
+                label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepChungTabTitle' | translate }}">
                 <app-giayphep-io [disabled]="!disabledTabState[TabType.ThongTinGiayPhep]"
-                  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepTabTitle' | translate }}"
+                  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepchuyennhuongquyenthamdokhaithackhoangsan.thongTinCapPhepChungTabTitle' | translate }}"
                   [nhomLoaiCapPhep]="nhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac"
                   [insertedState]="insertedState.SaveAndEdit" [allowAutoInit]="false"
-                  (selectCurrentFormStateEvent)="getGiayPhepIoFormState($event)"
+                  (selectCurrentChuyenNhuongFormStateEvent)="getGiayPhepIoFormState($event)"
                   (selectNewInsertedGiayPhepEvent)="getIdGiayPhep($event)" #giayPhepIOComp>
                 </app-giayphep-io>
               </mat-tab>

@@ -48,8 +48,8 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
 
   public showTabThongTin: boolean = false;
 
-  public isKhaiThac:boolean=false;
-  public isThamDo:boolean=false;
+  public isKhaiThac: boolean = false;
+  public isThamDo: boolean = false;
   // Chứa dữ liệu translate
   public dataTranslate: any;
 
@@ -92,10 +92,10 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
 
         if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
           this.showTabThongTin = true;
-          if(giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan){
+          if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan) {
             this.isKhaiThac = true;
           }
-          if(giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan){
+          if (giayPhepItem.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
             this.isThamDo = true;
 
           }
@@ -157,7 +157,7 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
       const cpKhaiThacKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepKhaiThacKhoangSanService();
       const capPhepItem = await cpKhaiThacKhoangSanService.getCapPhepKhaiThacByIdGiayPhep(idGiayPhep).toPromise();
       //console.log("Khaithac");
-      
+
       return capPhepItem;
     }
   }
@@ -185,11 +185,22 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
     }
   }
 
-  getGiayPhepIoFormState(action: any) {
-    //console.log(action);
-    this.currentAction = action;
-    this.setChuyenNhuongGiayPhepThamDoKhoangSanDisabledTabState(this.currentAction);
+  getGiayPhepIoFormState(action: string) {
+
+    if (action === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan || action === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan) {
+      this.showTabThongTin =true;
+      if(action === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan ){
+        this.isKhaiThac = true;
+        this.isThamDo = false;
+      }else if(action === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan ){
+        this.isKhaiThac = false;
+        this.isThamDo = true;
+      }
+      this.currentAction = GiayPhepActionEnum.Edit;
+      this.setChuyenNhuongGiayPhepThamDoKhoangSanDisabledTabState(this.currentAction);
     
+
+    }
   }
 
   getIdGiayPhep(id: string) {
