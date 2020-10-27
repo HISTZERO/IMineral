@@ -21,7 +21,6 @@ import { CpKtksThietbikhaithacListComponent } from "src/app/features/admin/capph
   styleUrls: ['./cp-ktks-thongtincapphep.component.scss']
 })
 export class CpKtksThongtincapphepComponent implements OnInit {
-
   @ViewChild('thongTinCapPhepKhaiThacTabs', { static: false }) thongTinCapPhepKhaiThacTabs;
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;

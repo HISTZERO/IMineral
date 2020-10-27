@@ -9,7 +9,7 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FormBuilder, FormGroup} from "@angular/forms";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
 import {DangKyKhaiThacKsActionEnum} from "src/app/shared/constants/enum";
 import {
@@ -189,11 +189,11 @@ export class DangkytanthugiahanIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyTanThuGiaHanIOForm = this.formBuilder.group({
-      truluongconlai: [DefaultValue.Empty],
-      thoihankhaithac: [DefaultValue.Empty],
-      giahandenngay: [DefaultValue.Empty],
-      donvitruluong: [DefaultValue.Empty],
-      donvithoihan: [DefaultValue.Empty],
+      truluongconlai: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      thoihankhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      giahandenngay: [DefaultValue.Empty, Validators.required],
+      donvitruluong: [DefaultValue.Empty, Validators.required],
+      donvithoihan: [DefaultValue.Empty, Validators.required],
       lydogiahan: [DefaultValue.Empty],
       idhoso: [DefaultValue.Empty],
       idgiayphep: [DefaultValue.Empty],
@@ -236,7 +236,22 @@ export class DangkytanthugiahanIoComponent implements OnInit {
    * Hàm set validate
    */
   private setValidation() {
-    this.validationErrorMessages = {};
+    this.validationErrorMessages = {
+      truluongconlai: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.truluongconlaiRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.numberRequired
+      },
+      thoihankhaithac: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.thoihankhaithacRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.numberRequired
+      },
+      donvitruluong: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.donvitruluongRequired,
+      },
+      donvithoihan: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.donvithoihanRequired,
+      },
+    };
   }
 
   /**

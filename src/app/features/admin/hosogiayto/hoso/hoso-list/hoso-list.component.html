@@ -78,11 +78,15 @@
               [allowResizing]="true"  [textWrapSettings]='wrapSettings' (dataStateChange)="dataStateChange($event)">
               <e-columns>
                 <e-column field="serialNumber" headerText="{{ 'COMMON.default.numericalOrder' | translate }}"></e-column>
+                <e-column field="tencanhantochuc" headerText="{{ 'HOSOGIAYTO.hoso.canhantochuc' | translate }}"></e-column>
+                <e-column field="diachi" headerText="{{ 'HOSOGIAYTO.hoso.diachi' | translate }}"></e-column>
                 <e-column field="mahoso" headerText="{{ 'HOSOGIAYTO.hoso.mahoso' | translate }}"></e-column>
-                <e-column field="mabiennhan" headerText="{{ 'HOSOGIAYTO.hoso.mabiennhan' | translate }}"></e-column>
-                <e-column field="tenthutuchanhchinh" headerText="{{ 'HOSOGIAYTO.hoso.thutuchanhchinh' | translate }}"></e-column>
+                <e-column field="ngaytiepnhan" headerText="{{ 'HOSOGIAYTO.hoso.ngaytiepnhan' | translate }}">
+                  <ng-template #template let-obj>
+                    {{ obj.ngaytiepnhan | convertTimeString: 'datetime' }}
+                  </ng-template>
+                </e-column>
                 <e-column field="tenloaicapphep" headerText="{{ 'HOSOGIAYTO.hoso.loaicapphep' | translate }}"></e-column>
-                <e-column field="tencoquantiepnhan" headerText="{{ 'HOSOGIAYTO.hoso.coquantiepnhan' | translate }}"></e-column>
                 <e-column field="idhoso" isPrimaryKey='true' headerText="{{ 'COMMON.default.action' | translate }}">
                   <ng-template #template let-data>
                     <div class="btn-group">

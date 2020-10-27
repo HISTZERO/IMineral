@@ -15,7 +15,9 @@ import { CpTdksKhuvucthamdoListComponent } from 'src/app/features/admin/cappheph
 
 export const CapPhepThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
-  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent
+  [LoaiCapPhepEnum.ThamDoGiaHan]: CpTdksThamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent,
+  [LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan]: CpTdksThamdokhoangsanIoComponent
 };
 
 @Component({
@@ -108,8 +110,9 @@ export class CpTdksThongtincapphepComponent implements OnInit {
     }
 
     this.itemGiayPhep =  await this.getGiayPhepById(this.idgiayphep);
-
+    
     if (!this.itemGiayPhep) {
+      
       this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.informedNotExistedGiayPhepThamDo);
       return false;
     }
@@ -240,6 +243,7 @@ export class CpTdksThongtincapphepComponent implements OnInit {
       this.capPhepThamDoLoaiKhoangSan.idcapphepthamdo = this.idcapphepthamdo;
       this.loadedTabState[CpThamDoKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepThamDoLoaiKhoangSan.manualDataInit();
     } else if (index === CpThamDoKhoangSanTabEnum.KhuVucThamDo && !this.loadedTabState[CpThamDoKhoangSanTabEnum.KhuVucThamDo]) {
+      
       this.capPhepThamDoKhuVuc.matSidenav = this.matSidenav;
       this.capPhepThamDoKhuVuc.content = this.content;
       this.capPhepThamDoKhuVuc.idcapphepthamdo = this.idcapphepthamdo;

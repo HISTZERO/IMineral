@@ -17,8 +17,7 @@ import {
   DonViDienTich,
   DonViDoSau,
   DonViThoiHan,
-  DonViTruLuong,
-  PhuongPhapKhaiThac
+  DonViTruLuong, PhuongPhapKhaiThac
 } from "src/app/shared/constants/common-constants";
 import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
 import {DefaultValue} from "src/app/shared/constants/global-var";
@@ -46,6 +45,8 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
+  @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
+  // tslint:disable-next-line:no-output-rename
   @Output("selectIdCapPhepTanThuEvent") selectIdCapPhepTanThuEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -63,23 +64,27 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
   public disabledDeleteButton = false;
   // disable control diện tích trả lại
   public disabledDienTichTraLai = false;
+  // disable control hệ quy chiếu
+  public disabledHeQuyChieu = false;
   // Chứa danh sách Hệ quy chiếu
   public allHeQuyChieu: OutputDmHeQuyChieuModel[];
   public HeQuyChieuFilters: OutputDmHeQuyChieuModel[];
+  // Lưu tên hệ quy chiếu sử dụng hiện tại
+  public tenHeQuyChieu = DefaultValue.Empty;
   // Action cấp thăm dò
   public ActionType = CapPhepThamDoActionEnum;
   // lưu dữ liệu đơn vị diện tích
   public donViDienTichList = DonViDienTich;
   // Lưu trữ đơn vị thời hạn
   public donViThoiHanList = DonViThoiHan;
+  // Lưu trữ đơn vị trữ lương
+  public donViTruLuongList = DonViTruLuong;
+  // Lưu trữ phương pháp khai thác
+  public phuongPhapKhaiThacList = PhuongPhapKhaiThac;
+  // Lưu trữ đơn vị công suất
+  public donViCongSuatList = DonViCongSuat;
   // lưu dữ liệu đơn vị diện tích
   public donViDoSauList = DonViDoSau;
-  // lưu dữ liệu đơn vị trữ lượng
-  public donViTruLuongList = DonViTruLuong;
-  // lưu dữ liệu đơn vị công suất
-  public donViCongSuatList = DonViCongSuat;
-  // Chứa phương pháp khai thác
-  public phuongPhapKhaiThac = PhuongPhapKhaiThac;
   // tile form
   public title: string;
   // giấy phep item
@@ -172,6 +177,8 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.hequychieuRequired},
       donvitruluong: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvitruluongRequired},
       donvicongsuat: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvicongsuatRequired},
+      ngaybdkhaithac: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.ngaybdkhaithacRequired},
+      ngayktkhaithac: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.ngayktkhaithacRequired},
     };
   }
 
@@ -197,6 +204,7 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       if (this.capPhepTanThuKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepTanThu();
+        this.selectHeQuyChieu();
         this.selectCurrentFormState();
         this.setFormTitle();
       } else {
@@ -251,8 +259,8 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       truluongdiachat: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       truluongkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       thoihankhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      ngaybdkhaithac: [DefaultValue.Empty],
-      ngayktkhaithac: [DefaultValue.Empty],
+      ngaybdkhaithac: [DefaultValue.Empty, Validators.required],
+      ngayktkhaithac: [DefaultValue.Empty, Validators.required],
       phuongphapkhaithac: [DefaultValue.Empty, Validators.required],
       congsuatkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       mucsaukhaithactu: [DefaultValue.Empty, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
@@ -294,6 +302,31 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
     }
   }
 
+  private showViewOfHeQuyChieu(item: OutputCpTanThuKhoangSanModel) {
+    if (item && item.hequychieu !== DefaultValue.Undefined && item.hequychieu !== DefaultValue.Null && item.hequychieu.trim() !== DefaultValue.Empty) {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(item.hequychieu);
+    } else {
+      this.tenHeQuyChieu = this.getTenHeQuyChieu(DefaultValue.Empty);
+    }
+  }
+
+  /**
+   * Hàm hiển thị tên hệ quy chiếu
+   */
+  private getTenHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const itemHeQuyChieu = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (itemHeQuyChieu) {
+        let data = this.dataTranslate.DANHMUC.hequychieu.meridian + DefaultValue.Colon + itemHeQuyChieu.meridian;
+        data += DefaultValue.Hyphen + this.dataTranslate.DANHMUC.hequychieu.prjzone + DefaultValue.Colon + itemHeQuyChieu.prjzone;
+        return data;
+      }
+    }
+
+    return DefaultValue.Empty;
+  }
+
   /**
    * Hàm lấy danh sách Lĩnh Vực
    */
@@ -303,6 +336,16 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       .getFetchAll({PageNumber: 1, PageSize: -1});
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
+  }
+
+  setDefaultHeQuyChieu(srid: string) {
+    if (this.allHeQuyChieu && this.allHeQuyChieu.length > DefaultValue.Zero) {
+      const data = this.allHeQuyChieu.find(item => item.srid === srid);
+
+      if (data) {
+        this.capPhepTanThuIOForm.controls.hequychieu.setValue(srid);
+      }
+    }
   }
 
   /**
@@ -320,6 +363,17 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
    */
   private selectIdCapPhepTanThu() {
     this.selectIdCapPhepTanThuEvent.emit(this.capPhepTanThuKhoangSan.idcappheptanthu);
+  }
+
+  /**
+   * lấy thông tin hệ quy chiếu
+   */
+  private selectHeQuyChieu() {
+    if (this.capPhepTanThuKhoangSan) {
+      this.selectHeQuyChieuEvent.emit(this.capPhepTanThuKhoangSan.hequychieu);
+    } else {
+      this.selectHeQuyChieuEvent.emit(DefaultValue.Empty);
+    }
   }
 
   /**
@@ -367,7 +421,10 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
           this.capPhepTanThuKhoangSan.idcappheptanthu = res.idcappheptanthu;
           this.currentAction = CapPhepThamDoActionEnum.Edit;
           this.selectCurrentFormState();
+          this.setFormTitle();
           this.selectIdCapPhepTanThu();
+          this.showViewOfHeQuyChieu(this.capPhepTanThuKhoangSan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -384,7 +441,9 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
         async (res) => {
           this.capPhepTanThuKhoangSan = inputModel;
           this.currentAction = CapPhepThamDoActionEnum.Edit;
-          this.selectCurrentFormState();
+          this.setFormTitle();
+          this.showViewOfHeQuyChieu(this.capPhepTanThuKhoangSan);
+          this.selectHeQuyChieu();
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -417,6 +476,9 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
               this.currentAction = CapPhepThamDoActionEnum.Add;
               this.onFormReset();
               this.selectCurrentFormState();
+              this.setFormTitle();
+              this.showViewOfHeQuyChieu(this.capPhepTanThuKhoangSan);
+              this.selectHeQuyChieu();
             },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
@@ -437,6 +499,11 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.capPhepTanThuIOForm.reset();
+    this.disabledHeQuyChieu = false;
+    this.capPhepTanThuIOForm.controls.donvidientich.setValue(DefaultValue.Empty);
+    this.capPhepTanThuIOForm.controls.donvithoihan.setValue(DefaultValue.Empty);
+    this.capPhepTanThuIOForm.controls.donvichieusau.setValue(DefaultValue.Empty);
+    this.capPhepTanThuIOForm.controls.hequychieu.setValue(DefaultValue.Empty);
   }
 
 }

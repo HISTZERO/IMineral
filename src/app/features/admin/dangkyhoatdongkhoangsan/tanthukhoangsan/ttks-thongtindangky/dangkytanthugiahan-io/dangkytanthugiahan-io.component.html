@@ -39,7 +39,7 @@
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <input type="hidden" formControlName="idgiayphep">
                 <input class="form-control" type="text" formControlName="sogiayphep"
-                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.sogiayphepPlaceholder' | translate}}" />
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.sogiayphepPlaceholder' | translate}}"/>
                 <span *ngIf="formErrors.idgiayphep || formErrors.sogiayphep"
                       class="alert-danger">{{formErrors.sogiayphep}}</span>
               </div>
@@ -131,7 +131,9 @@
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group row mx-0">
               <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithacgiahan.giahandenngay" | translate}}</label>
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithacgiahan.giahandenngay" | translate}}
+                <small>(*)</small></label>
+
               <div class="col-lg-8 col-md-8 col-sm-8 ">
                 <div class="d-flex">
                   <input class="form-control mr-2" formControlName="giahandenngay" [owlDateTimeTrigger]="dt1"
