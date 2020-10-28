@@ -1,6 +1,7 @@
 {
   "default": {
-    "bandokhuvuc": "Xem bản đồ khu vực"
+    "bandokhuvuc": "Xem bản đồ khu vực",
+    "bandokhuvucTab": "Bản đồ khu vực"
   },
   "thamdokhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký thăm dò khoáng sản",

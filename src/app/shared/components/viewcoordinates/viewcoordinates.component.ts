@@ -39,21 +39,4 @@ export class ViewcoordinatesComponent implements OnInit {
     this.gisAdvanceMapService.drawGraphicByGeoMetry(this.dataGetIO.model);
   }
 
-  // // Hàm lấy geox và geoy từ tọa độ x, tọa độ y, srid, kiểu tọa độ
-  // async getGeoxGeoy() {
-  //   const data: any = await this.cmFacadeService.getObjOptValueService().getGeoxGeoy(this.dataGetIO.model.toadox, this.dataGetIO.model.toadoy, this.dataGetIO.model.srid, this.dataGetIO.model.kieutoado);
-  //   this.viewCoordinates(data);
-  // }
-  // // View tọa độ lên bản đồ
-  // async viewCoordinates(data) {
-  //   if (data.geox && data.geoy) {
-  //     const selectedObj = [{
-  //       X: data.geox,
-  //       Y: data.geoy,
-  //     }];
-  //     this.gisBaseMapService.removeMarkers();
-  //     this.gisBaseMapService.setMarkers(selectedObj);
-  //     this.gisBaseMapService.setView(data.geox, data.geoy, 15);
-  //   }
-  // }
 }

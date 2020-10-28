@@ -28,6 +28,14 @@ export class GeometryService extends RepositoryEloquentService {
     return this.addItem(listItem);
   }
 
+  // Get geoJson by list item
+  public getGeoJson(body: any) {
+    this.setServiceInfo({
+      apiUrl: `${environment.apiIMineral + ServiceName.GEOMETRY}?geotext=${body}`
+    });
+    return this.addItem("");
+  }
+
   public checkBeDeleted(id: number) {
     return "ok";
   }

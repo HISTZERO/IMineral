@@ -83,6 +83,8 @@ export class ThongtindangkyComponent implements OnInit {
   private itemHoSo: any;
   // lưu dữ liệu hệ quy chiếu
   private heQuyChieu = DefaultValue.Empty;
+  // Chứa goemetry
+  public geoMetry: string;
   // lưu trữ componentRef
   private componentRef: any;
 
@@ -185,6 +187,10 @@ export class ThongtindangkyComponent implements OnInit {
     this.heQuyChieu = heQuyChieu;
   }
 
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
   getNumberOfDataKhuVucThamDo(data: any) {
     if (this.componentRef && this.componentRef.instance) {
       if (data) {
@@ -226,6 +232,7 @@ export class ThongtindangkyComponent implements OnInit {
       this.componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
       this.componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
       this.componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
+      this.componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
     }
   }
 
@@ -255,14 +262,18 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
       this.dangKyThamDoKhuVuc.heQuyChieu = this.heQuyChieu;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = await this.dangKyThamDoKhuVuc.manualDataInit();
-    } else if (index === DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]) {
-      // this.banDoThamDoKhuVuc.iddangkythamdo = this.iddangkythamdo;
-      // this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = await this.banDoThamDoKhuVuc.manualDataInit();
     } else if (index === DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo && !this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]) {
       this.dangKyThamDoCongTrinh.matSidenav = this.matSidenav;
       this.dangKyThamDoCongTrinh.content = this.content;
       this.dangKyThamDoCongTrinh.iddangkythamdo = this.iddangkythamdo;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = await this.dangKyThamDoCongTrinh.manualDataInit();
     }
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
   }
 }

@@ -41,7 +41,7 @@ import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
 import { InputMapLayerModel, OutputMapLayerModel, } from "src/app/models/admin/map/map-layer.model";
-import { Polygon } from "esri/geometry";
+import { Polygon, Polyline } from "esri/geometry";
 
 export const fillSymbolPolyline = {
   type: "simple-fill",
@@ -1507,11 +1507,13 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
 
       switch (geometry.type) {
         case 'Polygon':
+          await this.addPolygon(geometry.coordinates);
+          break;
         case 'MultiPolygon':
           await this.addPolygonFromCoordinates(geometry.coordinates);
           break;
         case 'MultiLineString':
-          // await this.addPolylineFromCoordinates(geometry.coordinates);
+          await this.addPolylineFromCoordinates(geometry.coordinates);
           break;
       }
 
@@ -1522,19 +1524,53 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
   }
 
   /**
+   * Vẽ polygon
+   * @params cooordinates Danh sách tọa độ
+   */
+  async addPolygon(coordinates) {
+
+    // Create a symbol for rendering the graphic
+    var fillSymbol = fillSymbolPolygon;
+
+    let polygonGraphics: any[] = await Promise.all(
+
+      coordinates.map(coordinate => {
+        // Tạo mới polygon
+        let newPolygon = new Polygon({
+          rings: coordinate,
+          spatialReference: this.spatialReference,
+        });
+        // Add the geometry and symbol to a new graphic
+        return new Graphic({
+          geometry: newPolygon,
+          symbol: fillSymbol
+        });
+
+      })
+    );
+
+    // Add the graphics to the view's graphics layer
+    this.view.graphics.addMany(polygonGraphics);
+
+    //Zoom đến extent của đối tượng vừa được add vào graphic
+    this.view.goTo(polygonGraphics);
+  }
+
+  /**
    * Vẽ polygon theo cách add Rings
    * @params cooordinates Danh sách tọa độ
    * @by: dzung
    */
   async addPolygonFromCoordinates(coordinates) {
 
+    
     // Create a symbol for rendering the graphic
     var fillSymbol = fillSymbolPolygon
     let newPolygon = new Polygon({
       rings: [],
       spatialReference: this.spatialReference
     });
-
+    
     //Duyệt các coordinates truyền vào, với mỗi item add item[0] vào rings
     coordinates.map(coordinate => {
       newPolygon.addRing(coordinate[0]);
@@ -1547,6 +1583,38 @@ export class GisAdvanceMapService extends RepositoryEloquentService {
     });
 
     // Add graphic
+    this.view.graphics.add(newGraphic);
+
+    //Zoom đến extent của đối tượng vừa được add vào graphic
+    this.view.goTo(newGraphic);
+  }
+
+  /**
+   * Vẽ polyline theo cách add Paths (Có thể gom nhiều paths -> MultiPolyline)
+   * @params cooordinates Danh sách tọa độ
+   * @by: dzung
+   */
+  async addPolylineFromCoordinates(coordinates) {
+
+    // Create a symbol for rendering the graphic
+    var fillSymbol = fillSymbolPolyline
+    let newPolyline = new Polyline({
+      paths: [],
+      spatialReference: this.spatialReference
+    });
+
+    //Duyệt các coordinates truyền vào, với mỗi item add item[0] vào paths
+    coordinates.map(coordinate => {
+      console.log(coordinate);
+      newPolyline.addPath(coordinate);
+    });
+
+    //Vẽ toàn bộ các paths và add vào graphics
+    let newGraphic = new Graphic({
+      geometry: newPolyline,
+      symbol: fillSymbol
+    });
+
     this.view.graphics.add(newGraphic);
 
     //Zoom đến extent của đối tượng vừa được add vào graphic

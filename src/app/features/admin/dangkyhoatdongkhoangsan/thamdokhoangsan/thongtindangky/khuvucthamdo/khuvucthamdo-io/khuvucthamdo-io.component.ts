@@ -276,6 +276,7 @@ export class KhuvucthamdoIoComponent implements OnInit {
         (res) => {
           this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -288,12 +289,15 @@ export class KhuvucthamdoIoComponent implements OnInit {
       );
     } else if (operMode === "edit") {
       this.inputModelKhuVuc.idthamdokhuvuc = this.obj.idthamdokhuvuc;
+      this.inputModelKhuVuc.loaicapphep = this.obj.loaicapphep;
       this.inputModelKhuVuc.iddangkythamdo = this.obj.iddangkythamdo;
       this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
       dKThamDoKhuVucService.updateKhuVucVaToaDo(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.listToaDoKhuVuc = [];
           this.matSidenavService.doParentFunction("getAllDkThamDoKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
+
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);

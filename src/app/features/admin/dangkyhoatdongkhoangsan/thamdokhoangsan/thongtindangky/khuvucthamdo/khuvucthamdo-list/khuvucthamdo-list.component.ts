@@ -28,6 +28,7 @@ export class KhuvucthamdoListComponent implements OnInit {
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-input-rename
@@ -141,7 +142,7 @@ export class KhuvucthamdoListComponent implements OnInit {
   async getAllDkThamDoKhuVuc() {
     if (this.iddangkythamdo === DefaultValue.Null || this.iddangkythamdo === DefaultValue.Undefined
       || this.iddangkythamdo.trim() === DefaultValue.Empty) {
-    return;
+      return;
     }
 
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
@@ -155,7 +156,7 @@ export class KhuvucthamdoListComponent implements OnInit {
     this.listDkThamDoKhuVuc = listData;
 
     if (this.listDkThamDoKhuVuc) {
-      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({iddangkythamdo: this.iddangkythamdo, hequychieu: this.heQuyChieu, count: this.listDkThamDoKhuVuc.length});
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({ iddangkythamdo: this.iddangkythamdo, hequychieu: this.heQuyChieu, count: this.listDkThamDoKhuVuc.length });
     } else {
       this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Null);
     }
@@ -238,7 +239,10 @@ export class KhuvucthamdoListComponent implements OnInit {
           .getDangKyThamDoKhuVucService()
           .deleteItem({ idthamdokhuvuc: this.selectedItem.idthamdokhuvuc })
           .subscribe(
-            () => this.getAllDkThamDoKhuVuc(),
+            () => {
+              this.getAllDkThamDoKhuVuc();
+              this.callBackTabThongTin();
+            },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -262,6 +266,13 @@ export class KhuvucthamdoListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName, obj) {
     this[methodName](obj);
+  }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
   }
 
 }
