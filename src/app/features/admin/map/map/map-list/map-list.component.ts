@@ -21,13 +21,7 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 import { MapIoComponent } from "src/app/features/admin/map/map/map-io/map-io.component";
-import {
-  _canAddMapListAction,
-  _canDeleteMapListAction,
-  _canDetailMapListAction,
-  _canEditMapListAction,
-  _canListMapListAction,
-} from "src/app/shared/constants/actions/map/list-map";
+// import { MapListAction } from "src/app/shared/constants/actions/map/list-map";
 import { MenuListMap } from "src/app/shared/constants/sub-menus/map/map";
 
 @Component({
@@ -63,35 +57,43 @@ export class MapListComponent implements OnInit {
   public dataTranslate: any;
 
   // Kiểm tra quyền
-  canAddMapListAction: boolean = _canAddMapListAction;
-  canDeleteMapListAction: boolean = _canDeleteMapListAction;
-  canDetailMapListAction: boolean = _canDetailMapListAction;
-  canEditMapListAction: boolean = _canEditMapListAction;
-  canListMapListAction: boolean = _canListMapListAction;
+  public canAddMapListAction: boolean;
+  public canDeleteMapListAction: boolean;
+  public canDetailMapListAction: boolean;
+  public canEditMapListAction: boolean;
+  public canListMapListAction: boolean;
 
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("ioSidebar", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   constructor(
     public router: Router,
+    private translate: TranslateService,
+    // private mapListAction: MapListAction,
     public cfr: ComponentFactoryResolver,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
-    private translate: TranslateService
+    public matSidenavService: MatsidenavService,
   ) {
     // Get new service
     this.itemService = this.mapFaceService.getMapService();
   }
 
   async ngOnInit() {
+    // Quyền
+    // this.canAddMapListAction = await this.mapListAction.canAddMapListAction();
+    // this.canDeleteMapListAction = await this.mapListAction.canDeleteMapListAction();
+    // this.canDetailMapListAction = await this.mapListAction.canDetailMapListAction();
+    // this.canEditMapListAction = await this.mapListAction.canEditMapListAction();
+    // this.canListMapListAction = await this.mapListAction.canListMapListAction();
 
     // Get all langs
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
-    this.matsidenavService.setSidenav(
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
@@ -136,23 +138,23 @@ export class MapListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.map.titleAdd);
-    this.matsidenavService.setContentComp(MapIoComponent, "new", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.map.titleAdd);
+    this.matSidenavService.setContentComp(MapIoComponent, "new", {
       categories: this.categories,
       listProjections: this.listProjections,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.map.titleEdit);
-    this.matsidenavService.setContentComp(MapIoComponent, "edit", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.map.titleEdit);
+    this.matSidenavService.setContentComp(MapIoComponent, "edit", {
       data: data,
       categories: this.categories,
       listProjections: this.listProjections,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // delete

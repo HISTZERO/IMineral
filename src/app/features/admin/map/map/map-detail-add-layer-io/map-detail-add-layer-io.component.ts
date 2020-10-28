@@ -20,8 +20,8 @@ export class MapDetailAddLayerIoComponent implements OnInit {
   public purpose: string;
 
   // List layer ids selected
-  public selectedLayerIds: number[] = [];
   public selectedItems: any[] = [];
+  public selectedLayerIds: number[] = [];
 
   // Contain list layers
   public listLayers: any;
@@ -70,10 +70,8 @@ export class MapDetailAddLayerIoComponent implements OnInit {
   async rowDataBound(args: any) {
 
     if (args.eventName === "checkboxChange") {
-
       // Result data
       this.checkedItem = args.rowData.taskData;
-      this.selectedItems = args.checkedRecords;
       this.checkedStatus = args.rowData.checkboxState;
 
       // Nếu không chọn thêm layer cho group nào

@@ -1,4 +1,8 @@
 {
+  "default": {
+    "bandokhuvuc": "Xem bản đồ khu vực",
+    "bandokhuvucTab": "Bản đồ khu vực"
+  },
   "thamdokhoangsan": {
     "titleList": "Danh sách hồ sơ đăng ký thăm dò khoáng sản",
     "titleAdd": "Thêm mới hồ sơ đăng ký thăm dò khoáng sản",
@@ -131,37 +135,35 @@
     "taiLieuXuLyHoSoTabTile": "Tài liệu xử lý hồ sơ",
     "thongTinDangKyTabTitle": "Thông tin đăng ký"
   },
-  "thongTinChiTietDauGiaQuyen":{
+  "thongTinChiTietDauGiaQuyen": {
     "titleAdd": "Thêm mới dữ liệu đăng ký đấu giá quyền khai thác khoáng sản",
     "titleEdit": "Sửa dữ liệu đăng ký đấu giá quyền khai thác khoáng sản",
-    "soThongBao":"Số thông báo",
-    "contentDelete":"Đăng ký đấu giá khai thác tại địa điểm: ",
-    "ngayThongBao":"Ngày thông báo",
-    "coQuanThongBao":"Cơ quan thông báo",
-    "tenKhuVucDauGia":"Tên khu vực đấu giá",
-    "diaDiem":"Địa điểm",
-    "tenLoaiKhoangSan":"Tên loại khoáng sản",
-    "dienTichKhuVuc":"Diện tích khu vực",
-    "donViDienTich":"Đơn vị diện tích",
-    "soThongBaoPlaceHolder":"Nhập số thông báo",
-    "ngayThongBaoPlaceHolder":"Nhập ngày thông báo",
-    "coQuanThongBaoPlaceHolder":"Nhập cơ quan thông báo",
-    "tenKhuVucDauGiaPlaceHolder":"Nhập tên khu vực đấu giá",
-    "diaDiemPlaceHolder":"Nhập địa điểm",
-    "tenLoaiKhoangSanPlaceHolder":"Nhập tên loại khoáng sản",
-    "dienTichKhuVucPlaceHolder":"Nhập diện tích khu vực",
-    "donViDienTichPlaceHolder":"Nhập đơn vị diện tích",
-    "chondonvidientich":"---Chọn đơn vị diện tích---",
-    "soThongBaoIsNumber":"Số thông báo phải là kiểu số",
-    "tenKhuVucDauGiaRequired":"Tên khu vực không được để trống",
-    "diaDiemRequired":"Địa điểm không được để trống",
-    "dienTichKhuVucRequired":"Diện tích khu vực không được để trống",
-    "dienTichKhuVucIsNumber":"Diện tích khu vực phải là kiểu số",
-    "donViDienTichRequired":"Đơn vị diện tích không được để trống",
-    "tenLoaiKhoangSanRequired":"Tên loại khoáng sản không được để trống"
+    "soThongBao": "Số thông báo",
+    "contentDelete": "Đăng ký đấu giá khai thác tại địa điểm: ",
+    "ngayThongBao": "Ngày thông báo",
+    "coQuanThongBao": "Cơ quan thông báo",
+    "tenKhuVucDauGia": "Tên khu vực đấu giá",
+    "diaDiem": "Địa điểm",
+    "tenLoaiKhoangSan": "Tên loại khoáng sản",
+    "dienTichKhuVuc": "Diện tích khu vực",
+    "donViDienTich": "Đơn vị diện tích",
+    "soThongBaoPlaceHolder": "Nhập số thông báo",
+    "ngayThongBaoPlaceHolder": "Nhập ngày thông báo",
+    "coQuanThongBaoPlaceHolder": "Nhập cơ quan thông báo",
+    "tenKhuVucDauGiaPlaceHolder": "Nhập tên khu vực đấu giá",
+    "diaDiemPlaceHolder": "Nhập địa điểm",
+    "tenLoaiKhoangSanPlaceHolder": "Nhập tên loại khoáng sản",
+    "dienTichKhuVucPlaceHolder": "Nhập diện tích khu vực",
+    "donViDienTichPlaceHolder": "Nhập đơn vị diện tích",
+    "chondonvidientich": "---Chọn đơn vị diện tích---",
+    "soThongBaoIsNumber": "Số thông báo phải là kiểu số",
+    "tenKhuVucDauGiaRequired": "Tên khu vực không được để trống",
+    "diaDiemRequired": "Địa điểm không được để trống",
+    "dienTichKhuVucRequired": "Diện tích khu vực không được để trống",
+    "dienTichKhuVucIsNumber": "Diện tích khu vực phải là kiểu số",
+    "donViDienTichRequired": "Đơn vị diện tích không được để trống",
+    "tenLoaiKhoangSanRequired": "Tên loại khoáng sản không được để trống"
   },
-
-
   "hoso": {
     "titleList": "Danh sách hồ sơ",
     "titleAdd": "Thêm mới hồ sơ",
@@ -1070,16 +1072,16 @@
     "informedNotExistedDangKyKhaiThacCongTrinh": "Đăng ký khai thác công trình không tồn tại"
   },
   "dangkykhaithacdvhc": {
-      "titleList": "Danh sách đơn vị hành chính",
-      "titleAdd": "Thêm mới đơn vị hành chính",
-      "titleEdit": "Sửa dữ liệu đơn vị hành chính",
-      "contentDelete": "Đơn vị hành chính: ",
-      "tentinh": "Tên tỉnh",
-      "tenhuyen": "Tên huyện",
-      "tenxa": "Tên xã",
-      "matinhRequired": "Yêu cầu phải chọn tỉnh",
-      "mahuyenRequired": "Yêu cầu phải chọn huyện",
-      "maxaRequired": "Yêu cầu phải chọn xã",
-      "informedNotExistedDangKyKhaiThacDvhc": "Đăng ký khai thác đơn vị hành chính không tồn tại"
+    "titleList": "Danh sách đơn vị hành chính",
+    "titleAdd": "Thêm mới đơn vị hành chính",
+    "titleEdit": "Sửa dữ liệu đơn vị hành chính",
+    "contentDelete": "Đơn vị hành chính: ",
+    "tentinh": "Tên tỉnh",
+    "tenhuyen": "Tên huyện",
+    "tenxa": "Tên xã",
+    "matinhRequired": "Yêu cầu phải chọn tỉnh",
+    "mahuyenRequired": "Yêu cầu phải chọn huyện",
+    "maxaRequired": "Yêu cầu phải chọn xã",
+    "informedNotExistedDangKyKhaiThacDvhc": "Đăng ký khai thác đơn vị hành chính không tồn tại"
   }
 }

@@ -4,13 +4,8 @@
       <mat-tab-group>
         <mat-tab label="{{ 'MAP.mapDetail.mapLayer' | translate }}">
           <ng-template matTabContent>
-            <app-layer-tree
-              [actionType]="'checkbox'"
-              [selectedChildIds]="selectedLayerIds"
-              [dataSource]="listLayers"
-              *ngIf="listLayers"
-              (rowDataBound)="rowDataBound($event)"
-            >
+            <app-layer-tree #layerTree [actionType]="'checkbox'" [selectedChildIds]="selectedLayerIds"
+              [dataSource]="listLayers" (rowDataBound)="rowDataBound($event)">
             </app-layer-tree>
           </ng-template>
         </mat-tab>
@@ -21,18 +16,12 @@
     <div class="function-toolbar">
       <div class="form-group row mx-0">
         <div class="col-12">
-          <button
-            class="btn btn-primary float-right"
-            [disabled]="selectedItems.length === 0"
-            (click)="onSubmit(purpose)"
-          >
+          <button class="btn btn-primary float-right" [disabled]="selectedItems.length === 0"
+            (click)="onSubmit(purpose)">
             <i class="far fa-save"></i>
             {{ "MAP.layerGroupDetail.btnAddNew" | translate }}
           </button>
-          <button
-            class="btn btn-danger float-right mr-3"
-            (click)="closeIOSidebar()"
-          >
+          <button class="btn btn-danger float-right mr-3" (click)="closeIOSidebar()">
             <i class="far fa-times-circle"></i>
             {{ "COMMON.default.cancel" | translate }}
           </button>

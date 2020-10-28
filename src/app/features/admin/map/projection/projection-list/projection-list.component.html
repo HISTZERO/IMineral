@@ -26,7 +26,7 @@
               <div class="card-body">
                 <ejs-grid #grid *ngIf="dataTranslate" [dataSource]="listItems" allowPaging="true" [allowResizing]="true"
                   [toolbar]="settingsCommon.toolbar" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
-                  class="table-striped">
+                  class="table-striped" (actionBegin)="actionBegin($event)">
                   <e-columns>
                     <e-column field="serialNumber" headerText="{{
                         'COMMON.default.numericalOrder' | translate
@@ -60,11 +60,11 @@
                         <div class="btn-group">
                           <button class="btn btn-sm btn-primary" (click)="editItem(data)"
                             title="{{ 'COMMON.default.edit' | translate }}" [disabled]="!canEditHeToaDoAction">
-                            <i class="far fa-edit"></i>
+                            <i class="fal fa-edit"></i>
                           </button>
                           <button class="btn btn-sm btn-danger" (click)="deleteItem(data)"
                             title="{{ 'COMMON.default.delete' | translate }}" [disabled]="!canDeleteHeToaDoAction">
-                            <i class="far fa-trash"></i>
+                            <i class="fal fa-trash"></i>
                           </button>
                         </div>
                       </ng-template>
@@ -83,7 +83,7 @@
             <i class="fad fa-chevron-double-right"></i>
           </button>
           <span style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text">{{ matsidenavService.sidenavTitle }}</span>
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #ioSidebar> </template>
       </mat-sidenav>

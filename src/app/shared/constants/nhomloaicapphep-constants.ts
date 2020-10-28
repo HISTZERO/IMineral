@@ -25,35 +25,35 @@ export const ChiTietDangKyHoatDongKS: any = {
 
 export const NhomLoaiCapPhep = [
     {
-        id: 1,
+        id: NhomLoaiCapPhepEnum.ThamDoKhoangSan,
         name: "Thăm dò khoáng sản"
     },
     {
-        id: 2,
+        id: NhomLoaiCapPhepEnum.PheDuyetTruLuong,
         name: "Phê duyệt trữ lượng khoáng sản"
     },
     {
-        id: 3,
+        id: NhomLoaiCapPhepEnum.DauGiaQuyenKhaiThac,
         name: "Đấu giá quyền khai thác khoáng sản"
     },
     {
-        id: 4,
+        id: NhomLoaiCapPhepEnum.KhaiThacKhoangSan,
         name: "Khai thác khoáng sản"
     },
     {
-        id: 5,
+        id: NhomLoaiCapPhepEnum.TanThuKhoangSan,
         name: "Tận thu khoáng sản"
     },
     {
-        id: 6,
+        id: NhomLoaiCapPhepEnum.TraLaiGiayPhep,
         name: "Trả lại giấy phép thăm do, khai thác"
     },
     {
-        id: 7,
+        id: NhomLoaiCapPhepEnum.DongCuaMo,
         name: "Đóng cửa mỏ, khoáng sản"
     },
     {
-        id: 8,
+        id: NhomLoaiCapPhepEnum.ChuyenNhuongThamDoKhaiThac,
         name: "Chuyển nhượng thăm dò khai thác"
     }
 ];

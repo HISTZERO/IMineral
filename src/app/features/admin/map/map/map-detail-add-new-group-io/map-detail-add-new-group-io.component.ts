@@ -11,6 +11,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { LayerGroupStatus } from "src/app/shared/constants/map-constants";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { InputLayerGroupModel } from "src/app/models/admin/map/layer-group.model";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-map-detail-add-new-group-io",
@@ -59,7 +60,7 @@ export class MapDetailAddNewGroupIoComponent implements OnInit {
   async ngOnInit() {
     await this.formInit();
 
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
@@ -78,8 +79,8 @@ export class MapDetailAddNewGroupIoComponent implements OnInit {
     this.createForm = this.formBuilder.group({
       groupType: [1],
       description: [],
-      groupKey: ["", Validators.required],
-      groupName: ["", Validators.required],
+      groupKey: ["", [Validators.required, Validators.maxLength(ValidateMaxLength.mediumText)]],
+      groupName: ["", [Validators.required, Validators.maxLength(ValidateMaxLength.mediumText)]],
       status: ["", Validators.required],
     });
   }
@@ -90,10 +91,12 @@ export class MapDetailAddNewGroupIoComponent implements OnInit {
       groupKey: {
         required: this.dataTranslate.MAP.mapDetailAddNewGroup
           .groupKeyRequired,
+        maxlength: this.dataTranslate.COMMON.default.maxLength
       },
       groupName: {
         required: this.dataTranslate.MAP.mapDetailAddNewGroup
           .groupNameRequired,
+        maxlength: this.dataTranslate.COMMON.default.maxLength
       },
       status: {
         required: this.dataTranslate.MAP.mapDetailAddNewGroup.statusRequired,
@@ -101,44 +104,45 @@ export class MapDetailAddNewGroupIoComponent implements OnInit {
     };
   }
 
-  // Add item
+  /**
+   * Add new layer group
+   */
   public addItem() {
+
     // Item service
     let itemService: any = this.mapFacadeService.getLayerGroupService();
 
     // Lưu
-    itemService.addItem(this.createForm.value).subscribe(
-      async (res) => {
-        // Lưu thành công
-        if (res.id) {
-          // Gán thuộc tính
-          let groupLayer: any = {};
-          groupLayer.id = res.id;
-          groupLayer.status = res.status;
-          groupLayer.mapLayerGroupName = res.groupName;
-          groupLayer.guid = uuidv4().toUpperCase();
-          groupLayer.name = res.groupName;
-          groupLayer.groupType = res.groupType;
-          groupLayer.childs = [];
+    itemService.addItem(this.createForm.value).subscribe(async (res) => {
+      if (res.id) {
 
-          // Nếu không chọn group cha
-          if (this.obj.parentItem.id === null) {
-            this.obj.listItems.push(groupLayer);
-          } else {
-            await this.recursiveAddItem(
-              this.obj.listItems,
-              this.obj.parentItem,
-              groupLayer
-            );
-          }
+        // New group
+        let groupLayer: any = {};
+        groupLayer.id = res.id;
+        groupLayer.status = res.status;
+        groupLayer.mapLayerGroupName = res.groupName;
+        groupLayer.guid = uuidv4().toUpperCase();
+        groupLayer.name = res.groupName;
+        groupLayer.groupType = res.groupType;
+        groupLayer.childs = [];
 
-          await this.matSidenavService.doParentFunction(
-            "updateListItems",
-            this.obj.listItems
-          );
-          await this.matSidenavService.close();
+        // Nếu không chọn group cha
+        if (!this.obj.parentItem.id) {
+          this.obj.listItems.push(groupLayer);
+        } else {
+          await this.recursiveAddItem(this.obj.listItems, groupLayer);
         }
-      },
+
+        // Call function update
+        await this.matSidenavService.doParentFunction(
+          "updateListItems",
+          this.obj.listItems
+        );
+
+        // Close
+        await this.matSidenavService.close();
+      }
+    },
       (error: HttpErrorResponse) => {
         this.commonService.showeNotiResult(error.message, 2000);
       },
@@ -155,12 +159,12 @@ export class MapDetailAddNewGroupIoComponent implements OnInit {
    * @param listItems Lớp và nhóm lớp dạng tree
    * @param parentItem Nhóm lớp cha
    */
-  recursiveAddItem(listItems, parentItem, groupLayer) {
+  recursiveAddItem(listItems, groupLayer) {
     listItems.map((item) => {
-      if (item.id === parentItem.id) {
+      if (item.id === this.obj.parentItem.id) {
         listItems.push(groupLayer);
       } else if (item.childs) {
-        this.recursiveAddItem(item.childs, parentItem, groupLayer);
+        this.recursiveAddItem(item.childs, groupLayer);
       }
     });
   }
