@@ -196,8 +196,8 @@ export class DangkytanthugiahanIoComponent implements OnInit {
       donvithoihan: [DefaultValue.Empty, Validators.required],
       lydogiahan: [DefaultValue.Empty],
       idhoso: [DefaultValue.Empty],
-      idgiayphep: [DefaultValue.Empty],
-      sogiayphep: [DefaultValue.Empty]
+      idgiayphep: [DefaultValue.Empty, Validators.required],
+      sogiayphep: [DefaultValue.Empty, Validators.required]
     });
   }
 
@@ -251,6 +251,12 @@ export class DangkytanthugiahanIoComponent implements OnInit {
       donvithoihan: {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.donvithoihanRequired,
       },
+      giahandenngay: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.giahandenngayRequired,
+      },
+      idgiayphep: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthugiahan.giayphepRequired,
+      }
     };
   }
 
