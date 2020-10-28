@@ -260,6 +260,10 @@ export enum CpPheDuyetTLKS_ThongTinQuyetDinhTabEnum{
   TruLuongKhuVuc=2,
   KhoiLuongTruLuong=3
 }
+export enum CpPheDuyetTLKS_LoaiKhoangSan_PhanLoai{
+  KhoangSanChinh=1,
+  KhoangSanDiKem=2
+}
 
 export enum CpTanThuKhoangSanTabEnum {
   ThongTinGiayPhep = 0,
@@ -328,6 +332,14 @@ export enum CapPhepThamDoActionEnum {
   Edit = 2
 }
 
+export enum CpChuyenNhuongThamDoKhaiThacChiTietTabEnum {
+  ThongTinChiTiet = 0,
+  DonViHanhChinh = 1,
+  LoaiKhoangSan = 2,
+  KhuVucKhaiThac = 3,
+  CongTrinhKhaiThac = 4,
+  ThietBiKhaiThac = 5
+}
 
 export enum TinhTienCapQuyenKhaiThacKhoangSanTabEnum {
   ThongTinQuyeDinh = 0,
@@ -346,4 +358,11 @@ export enum CapPhepKhaiThacActionEnum {
   Add = 1,
   Edit = 2
 }
+
+export enum CpChuyenNhuongThamDoKhaiThacActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
+
 

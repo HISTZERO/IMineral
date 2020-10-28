@@ -14,6 +14,11 @@ import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphepho
 import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
 import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
 import { CpPheDuyetTLKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
+import { CpPheDuyetTLKSLoaiKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_loaiks.service';
+import {CpTanThuDvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthudvhc.service";
+import {CpTanThuLoaiKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthuloaikhoangsan.service";
+import {CptanthukhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.service";
+import { CpPheDuyetTLKSKhuVucService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_khuvuc.service';
 
 @Injectable({
   providedIn: "root",
@@ -38,6 +43,13 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   }
   public getCapPhepPheDuyetTLKSService(){
     return new CpPheDuyetTLKSService(this.httpClient)
+  }
+  //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
+  public getCapPhepPheDuyetTLKS_loaiKSService(){
+    return new CpPheDuyetTLKSLoaiKSService(this.httpClient);
+  }
+  public getCapPhepPheDuyetTLKS_KhuVucService(){
+    return new CpPheDuyetTLKSKhuVucService(this.httpClient);
   }
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {
@@ -84,4 +96,16 @@ export class CapPhepHoatDongKhoangSanFacadeService {
     return new CpTanThuKhoangSanService(this.httpClient);
   }
 
+  // cấp phép tận thu đơn vị hành chính service
+  public getCapPhepTanThuDvhcService() {
+    return new CpTanThuDvhcService(this.httpClient);
+  }
+  // cấp phép tận thu loại khoáng sản service
+  public getCapPhepTanThuLoaiKhoangSanService() {
+    return new CpTanThuLoaiKhoangSanService(this.httpClient);
+  }
+  // cấp phép thăm dò khu vực service
+  public getCapPhepTanThuKhuVucService() {
+    return new CptanthukhuvucService(this.httpClient);
+  }
 }

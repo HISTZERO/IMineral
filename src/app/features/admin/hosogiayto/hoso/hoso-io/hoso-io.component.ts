@@ -1,26 +1,40 @@
-import { Component, OnInit, Input, ViewContainerRef, ViewChild, ComponentFactoryResolver, EventEmitter, Output } from '@angular/core';
-import { MatSidenav } from '@angular/material';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
-import { HttpErrorResponse } from '@angular/common/http';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {MatSidenav} from '@angular/material';
+import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
+import {HttpErrorResponse} from '@angular/common/http';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 
-import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, HoSoActionEnum, InsertedState } from 'src/app/shared/constants/enum';
-import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan } from 'src/app/shared/constants/common-constants';
-import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { OutputDmLoaiCapPhepModel } from 'src/app/models/admin/danhmuc/loaicapphep.model';
-import { OutputHsCoQuanTiepNhanModel } from 'src/app/models/admin/thietlap/coquantiepnhan.model';
-import { HethongFacadeService } from 'src/app/services/admin/hethong/hethong-facade.service';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
-import { DmCanhanOptionComponent } from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
-import { DmTochucOptionComponent } from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
-import { OutputDmCanhanModel } from "src/app/models/admin/danhmuc/canhan.model";
-import { OutputDmToChucModel } from "src/app/models/admin/danhmuc/tochuc.model";
-import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
+import {HoSoActionEnum, InsertedState, LoaiDoiTuongEnum, Paging, TrangThaiEnum} from 'src/app/shared/constants/enum';
+import {
+  DangKhoangSan,
+  HinhThucNhanKetQua,
+  HinhThucNopHoSo,
+  LoaiDoiTuong
+} from 'src/app/shared/constants/common-constants';
+import {LoaiGiayTo} from 'src/app/shared/constants/loaigiayto-constants';
+import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {OutputDmLoaiCapPhepModel} from 'src/app/models/admin/danhmuc/loaicapphep.model';
+import {OutputHsCoQuanTiepNhanModel} from 'src/app/models/admin/thietlap/coquantiepnhan.model';
+import {HethongFacadeService} from 'src/app/services/admin/hethong/hethong-facade.service';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
+import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import {MatsidenavService} from 'src/app/services/utilities/matsidenav.service';
+import {DmCanhanOptionComponent} from "src/app/features/admin/danhmuc/canhan/canhan-option/canhan-option.component";
+import {DmTochucOptionComponent} from "src/app/features/admin/danhmuc/tochuc/tochuc-option/tochuc-option.component";
+import {OutputDmCanhanModel} from "src/app/models/admin/danhmuc/canhan.model";
+import {OutputDmToChucModel} from "src/app/models/admin/danhmuc/tochuc.model";
+import {DefaultValue} from 'src/app/shared/constants/global-var';
+import {HoSoGiayToFacadeService} from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 
 @Component({
   selector: 'app-hoso-io',
@@ -28,8 +42,8 @@ import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosog
   styleUrls: ['./hoso-io.component.scss']
 })
 export class HosoIoComponent implements OnInit {
-  @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
-  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compio", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild("aside", {static: true}) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -38,14 +52,14 @@ export class HosoIoComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // Lưu trữ trạng thái enable hoặc disable chọn loại cấp phép
   // tslint:disable-next-line: no-input-rename
-  @Input ("disabledLoaiCapPhepSelectionState") disabledLoaiCapPhepSelectionState = false;
+  @Input("disabledLoaiCapPhepSelectionState") disabledLoaiCapPhepSelectionState = false;
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
   // State của Save button
   // tslint:disable-next-line: no-input-rename
   @Input("insertedState") insertedState = InsertedState.SaveAndRefresh;
-   // Action thao tác dữ liệu
+  // Action thao tác dữ liệu
   // tslint:disable-next-line: no-input-rename
   @Input("currentAction") currentAction: number;
   // Chữ dữ liệu Action
@@ -115,7 +129,8 @@ export class HosoIoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public matSidenavService: MatsidenavService,
     public cfr: ComponentFactoryResolver,
-    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) { }
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -142,7 +157,7 @@ export class HosoIoComponent implements OnInit {
     });
 
     if (this.idhoso !== DefaultValue.Null && this.idhoso !== DefaultValue.Undefined
-        && this.idhoso !== DefaultValue.Empty) {
+      && this.idhoso !== DefaultValue.Empty) {
       this.currentAction = HoSoActionEnum.Edit;
     } else {
       this.currentAction = HoSoActionEnum.Add;
@@ -164,14 +179,14 @@ export class HosoIoComponent implements OnInit {
       mahoso: [DefaultValue.Empty, Validators.required],
       mabiennhan: [DefaultValue.Empty],
       soden: [DefaultValue.Empty],
-      ngaynop: [DefaultValue.Empty, Validators.required],
+      ngaynop: [DefaultValue.Empty],
       ngaytiepnhan: [DefaultValue.Empty, Validators.required],
-      ngaytraketqua: [DefaultValue.Empty, Validators.required],
+      ngaytraketqua: [DefaultValue.Empty],
       loaidoituong: [LoaiDoiTuongEnum.ToChuc, Validators.required],
       loaicapphep: [DefaultValue.Empty, Validators.required],
-      hinhthucnophoso: [DefaultValue.Empty, Validators.required],
-      hinhthucnhanketqua: [DefaultValue.Empty, Validators.required],
-      idcoquantiepnhan: [DefaultValue.Empty, Validators.required],
+      hinhthucnophoso: [DefaultValue.Empty],
+      hinhthucnhanketqua: [DefaultValue.Empty],
+      idcoquantiepnhan: [DefaultValue.Empty],
       idcanhantochuc: [DefaultValue.Empty, Validators.required],
       tencanhantochuc: [DefaultValue.Empty, Validators.required],
       sogiayto: [DefaultValue.Empty, Validators.required],
@@ -190,12 +205,12 @@ export class HosoIoComponent implements OnInit {
       website: [DefaultValue.Empty],
     });
 
-    this.hosoIOForm.controls.tencanhantochuc.disable({ onlySelf: true });
-    this.hosoIOForm.controls.loaigiaytoDisplay.disable({ onlySelf: true });
-    this.hosoIOForm.controls.sogiaytoDisplay.disable({ onlySelf: true });
-    this.hosoIOForm.controls.ngaycapDisplay.disable({ onlySelf: true });
-    this.hosoIOForm.controls.noicapDisplay.disable({ onlySelf: true });
-    this.hosoIOForm.controls.diachiDisplay.disable({ onlySelf: true });
+    this.hosoIOForm.controls.tencanhantochuc.disable({onlySelf: true});
+    this.hosoIOForm.controls.loaigiaytoDisplay.disable({onlySelf: true});
+    this.hosoIOForm.controls.sogiaytoDisplay.disable({onlySelf: true});
+    this.hosoIOForm.controls.ngaycapDisplay.disable({onlySelf: true});
+    this.hosoIOForm.controls.noicapDisplay.disable({onlySelf: true});
+    this.hosoIOForm.controls.diachiDisplay.disable({onlySelf: true});
   }
 
   /**
@@ -237,7 +252,7 @@ export class HosoIoComponent implements OnInit {
           loaigiayto: inputModel.loaigiayto,
           loaigiaytoDisplay: inputModel.loaigiayto,
           ngaycap: inputModel.ngaycap,
-          ngaycapDisplay:  inputModel.ngaycap,
+          ngaycapDisplay: inputModel.ngaycap,
           noicap: inputModel.noicap,
           noicapDisplay: inputModel.noicap,
           diachi: inputModel.diachi,
@@ -258,32 +273,32 @@ export class HosoIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      mahoso: { required: this.dataTranslate.HOSOGIAYTO.hoso.mahosoRequired },
-      mabiennhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.mabiennhanRequired },
-      // soden: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.hoso.sodenRequired },
-      ngaynop: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaynopRequired },
-      ngaytiepnhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaytiepnhanRequired },
-      ngaytraketqua: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaytraketquaRequired },
-      loaidoituong: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaidoituongRequired },
-      loaicapphep: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaicapphepRequired },
-      hinhthucnophoso: { required: this.dataTranslate.HOSOGIAYTO.hoso.hinhthucnophosoRequired },
-      hinhthucnhanketqua: { required: this.dataTranslate.HOSOGIAYTO.hoso.hinhthucnhanketquaRequired },
-      idcoquantiepnhan: { required: this.dataTranslate.HOSOGIAYTO.hoso.idcoquantiepnhanRequired },
+      mahoso: {required: this.dataTranslate.HOSOGIAYTO.hoso.mahosoRequired},
+      mabiennhan: {required: this.dataTranslate.HOSOGIAYTO.hoso.mabiennhanRequired},
+      ngaynop: {required: this.dataTranslate.HOSOGIAYTO.hoso.ngaynopRequired},
+      ngaytiepnhan: {required: this.dataTranslate.HOSOGIAYTO.hoso.ngaytiepnhanRequired},
+      loaidoituong: {required: this.dataTranslate.HOSOGIAYTO.hoso.loaidoituongRequired},
+      loaicapphep: {required: this.dataTranslate.HOSOGIAYTO.hoso.loaicapphepRequired},
       idcanhantochuc: {required: this.dataTranslate.HOSOGIAYTO.hoso.tencanhantochucRequired},
-      tencanhantochuc: { required: this.dataTranslate.HOSOGIAYTO.hoso.tencanhantochucRequired },
-      sogiayto: { required: this.dataTranslate.HOSOGIAYTO.hoso.sogiaytoRequired },
-      loaigiayto: { required: this.dataTranslate.HOSOGIAYTO.hoso.loaigiaytoRequired },
-      ngaycap: { required: this.dataTranslate.HOSOGIAYTO.hoso.ngaycapRequired },
-      noicap: { required: this.dataTranslate.HOSOGIAYTO.hoso.noicapRequired },
-      diachi: { required: this.dataTranslate.HOSOGIAYTO.hoso.diachiRequired },
-      dienthoai: { pattern: this.dataTranslate.HOSOGIAYTO.hoso.dienthoaiIsNumber },
+      tencanhantochuc: {required: this.dataTranslate.HOSOGIAYTO.hoso.tencanhantochucRequired},
+      sogiayto: {required: this.dataTranslate.HOSOGIAYTO.hoso.sogiaytoRequired},
+      loaigiayto: {required: this.dataTranslate.HOSOGIAYTO.hoso.loaigiaytoRequired},
+      ngaycap: {required: this.dataTranslate.HOSOGIAYTO.hoso.ngaycapRequired},
+      noicap: {required: this.dataTranslate.HOSOGIAYTO.hoso.noicapRequired},
+      diachi: {required: this.dataTranslate.HOSOGIAYTO.hoso.diachiRequired},
+      dienthoai: {pattern: this.dataTranslate.HOSOGIAYTO.hoso.dienthoaiIsNumber},
     };
   }
 
   async getLoaiCapPhepAll() {
     const listData: any = await this.dmFacadeService
       .getDmLoaiCapPhepService()
-      .getFetchAll({ Nhomloaicapphep: this.nhomLoaiCapPhep, TrangThai: TrangThaiEnum.Active, PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({
+        Nhomloaicapphep: this.nhomLoaiCapPhep,
+        TrangThai: TrangThaiEnum.Active,
+        PageNumber: Paging.PageNumber,
+        PageSize: Paging.PageSize
+      });
     this.loaiCapPhepList = listData.items;
     this.loaiCapPhepFilters = listData.items;
   }
@@ -291,7 +306,7 @@ export class HosoIoComponent implements OnInit {
   async getCoQuanTiepNhanAll() {
     const listData: any = await this.hethongFacadeService
       .getCoQuanTiepNhanService()
-      .getFetchAll({ PageNumber: Paging.PageNumber, PageSize: Paging.PageSize });
+      .getFetchAll({PageNumber: Paging.PageNumber, PageSize: Paging.PageSize});
     this.coQuanTiepNhanList = listData.items;
     this.coQuanTiepNhanFilters = listData.items;
   }
@@ -478,7 +493,7 @@ export class HosoIoComponent implements OnInit {
       const data: any = Object.assign({}, item);
       data.tencanhantochuc = item.tentochuc;
       data.idcanhantochuc = item.idtochuc;
-      this.CreateThongTinCaNhanToChucOnUI(data,  LoaiDoiTuongEnum.ToChuc);
+      this.CreateThongTinCaNhanToChucOnUI(data, LoaiDoiTuongEnum.ToChuc);
     }
   }
 

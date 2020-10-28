@@ -4,7 +4,8 @@
       <mat-tab-group mat-stretch-tabs #thongTinDangKyTraLaiTabs [animationDuration]=""
         (selectedIndexChange)="tabChange($event)">
         <mat-tab [disabled]="disabledTabState[TabType.ThongTinChiTiet]"
-          label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietKhaiThacTabTitle' | translate }}">
+          label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.thongTinChiTietKhaiThacTabTitle' | translate }}"
+          >
           <ng-template appContentContainer>
           </ng-template>
         </mat-tab>

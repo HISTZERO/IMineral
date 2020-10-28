@@ -161,6 +161,68 @@
             </div>
           </div>
         </div>
+
+        <!-- Trữ lượng địa chất & Trữ lượng khai thác & Đơn vị trữ lượng-->
+        <div class=" row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongdiachat" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" type="text" formControlName="truluongdiachat"
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongdiachatPlaceholder' | translate}}" />
+                <span *ngIf="formErrors.truluongdiachat" class="alert-danger">{{formErrors.truluongdiachat}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongkhaithac" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" type="text" formControlName="truluongkhaithac"
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongkhaithacPlaceholder' | translate}}" />
+                <span *ngIf="formErrors.truluongkhaithac" class="alert-danger">{{formErrors.truluongkhaithac}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluong" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <mat-select class="form-control" formControlName="donvitruluong" *ngIf="dataTranslate"
+                            placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluongPlaceholder' | translate}}">
+                  <mat-option value="">
+                    {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluongPlaceholder" | translate }}
+                  </mat-option>
+                  <mat-option *ngFor="let donViTruLuong of donViTruLuongList" [value]="donViTruLuong.id">
+                    {{ donViTruLuong.name }}
+                  </mat-option>
+                </mat-select>
+                <span *ngIf="formErrors.donvitruluong" class="alert-danger">{{formErrors.donvitruluong}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucdichsudungkhoangsan" | translate}}</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <textarea class="form-control" formControlName="mucdichsudungkhoangsan"
+                          placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucdichsudungkhoangsanPlaceholder' | translate}}"></textarea>
+                <span *ngIf="formErrors.mucdichsudungkhoangsan"
+                      class="alert-danger">{{formErrors.mucdichsudungkhoangsan}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Công suất khai thác & Đơn vị công suất-->
         <div class=" row">
           <div class="col-lg-6 col-md-6 col-sm-12">
@@ -197,13 +259,48 @@
             </div>
           </div>
         </div>
+        <!-- Thời hạn khai thác &  Đơn vị thời hạn-->
+        <div class=" row">
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.thoihankhaithac" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <input class="form-control" type="text" formControlName="thoihankhaithac"
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.thoihankhaithacPlaceholder' | translate}}" />
+                <span *ngIf="formErrors.thoihankhaithac" class="alert-danger">{{formErrors.thoihankhaithac}}</span>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvithoihan" | translate }}
+                <small>(*)</small>
+              </label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <mat-select class="form-control" formControlName="donvithoihan" *ngIf="dataTranslate"
+                            placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chondonvithoihan' | translate}}">
+                  <mat-option value="">
+                    {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chondonvithoihan" | translate }}
+                  </mat-option>
+                  <mat-option *ngFor="let donViThoiHan of donViThoiHanList" [value]="donViThoiHan.id">
+                    {{ donViThoiHan.name }}
+                  </mat-option>
+                </mat-select>
+                <span *ngIf="formErrors.donvithoihan" class="alert-danger">{{formErrors.donvithoihan}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
         <!-- Mức sâu khai thác từ & Mức sâu khai thác đến & Đơn vị chiều sâu-->
         <div class=" row">
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group row mx-0">
               <label
                 class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucsaukhaithactu" | translate }}
-                <small>(*)</small>
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <input class="form-control" type="text" formControlName="mucsaukhaithactu"
@@ -216,7 +313,6 @@
             <div class="form-group row mx-0">
               <label
                 class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucsaukhaithacden" | translate }}
-                <small>(*)</small>
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <input class="form-control" type="text" formControlName="mucsaukhaithacden"
@@ -229,7 +325,6 @@
             <div class="form-group row mx-0">
               <label
                 class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvichieusau" | translate }}
-                <small>(*)</small>
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <mat-select class="form-control" formControlName="donvichieusau" *ngIf="dataTranslate"
@@ -245,106 +340,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- Trữ lượng địa chất & Trữ lượng khai thác & Đơn vị trữ lượng-->
-        <div class=" row">
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongdiachat" | translate }}
-                <small>(*)</small>
-              </label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" type="text" formControlName="truluongdiachat"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongdiachatPlaceholder' | translate}}" />
-                <span *ngIf="formErrors.truluongdiachat" class="alert-danger">{{formErrors.truluongdiachat}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongkhaithac" | translate }}
-                <small>(*)</small>
-              </label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" type="text" formControlName="truluongkhaithac"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.truluongkhaithacPlaceholder' | translate}}" />
-                <span *ngIf="formErrors.truluongkhaithac" class="alert-danger">{{formErrors.truluongkhaithac}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluong" | translate }}
-                <small>(*)</small>
-              </label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <mat-select class="form-control" formControlName="donvitruluong" *ngIf="dataTranslate"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluongPlaceholder' | translate}}">
-                  <mat-option value="">
-                    {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvitruluongPlaceholder" | translate }}
-                  </mat-option>
-                  <mat-option *ngFor="let donViTruLuong of donViTruLuongList" [value]="donViTruLuong.id">
-                    {{ donViTruLuong.name }}
-                  </mat-option>
-                </mat-select>
-                <span *ngIf="formErrors.donvitruluong" class="alert-danger">{{formErrors.donvitruluong}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Thời hạn khai thác &  Đơn vị thời hạn-->
-        <div class=" row">
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.thoihankhaithac" | translate }}
-                <small>(*)</small>
-              </label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <input class="form-control" type="text" formControlName="thoihankhaithac"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.thoihankhaithacPlaceholder' | translate}}" />
-                <span *ngIf="formErrors.thoihankhaithac" class="alert-danger">{{formErrors.thoihankhaithac}}</span>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.donvithoihan" | translate }}
-                <small>(*)</small>
-              </label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <mat-select class="form-control" formControlName="donvithoihan" *ngIf="dataTranslate"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chondonvithoihan' | translate}}">
-                  <mat-option value="">
-                    {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chondonvithoihan" | translate }}
-                  </mat-option>
-                  <mat-option *ngFor="let donViThoiHan of donViThoiHanList" [value]="donViThoiHan.id">
-                    {{ donViThoiHan.name }}
-                  </mat-option>
-                </mat-select>
-                <span *ngIf="formErrors.donvithoihan" class="alert-danger">{{formErrors.donvithoihan}}</span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <!-- Mục đích sử dụng khoáng sản & Hệ quy chiếu-->
-        <div class=" row">
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucdichsudungkhoangsan" | translate}}</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <textarea class="form-control" formControlName="mucdichsudungkhoangsan"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.mucdichsudungkhoangsanPlaceholder' | translate}}"></textarea>
-                <span *ngIf="formErrors.mucdichsudungkhoangsan"
-                  class="alert-danger">{{formErrors.mucdichsudungkhoangsan}}</span>
-              </div>
-            </div>
-          </div>
           <div class="col-lg-6 col-md-6 col-sm-12">
             <div class="form-group row mx-0">
               <label
@@ -353,8 +348,8 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <mat-select class="form-control"
-                  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chonhequychieu' | translate }}"
-                  formControlName="hequychieu" *ngIf="dataTranslate">
+                            placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chonhequychieu' | translate }}"
+                            formControlName="hequychieu" *ngIf="dataTranslate">
                   <mat-option value="">
                     {{ "DANGKYHOATDONGKHOANGSAN.dangkykhaithackhoangsanduan.chonhequychieu" | translate }}
                   </mat-option>
@@ -367,6 +362,7 @@
             </div>
           </div>
         </div>
+
       </div>
     </form>
   </div>
