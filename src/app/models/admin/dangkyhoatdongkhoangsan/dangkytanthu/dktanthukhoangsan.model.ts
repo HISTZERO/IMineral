@@ -8,6 +8,7 @@ export class OutputDkTanThuKhoangSanModel {
   congsuatkhaithac: number;
   mucsaukhaithactu: number;
   mucsaukhaithacden: number;
+  phuongphapkhaithac: number;
   donvitruluong: string;
   donvicongsuat: string;
   donvidientich: string;
@@ -30,6 +31,7 @@ export class InputDkTanThuKhoangSanModel {
   congsuatkhaithac: number;
   mucsaukhaithactu: number;
   mucsaukhaithacden: number;
+  phuongphapkhaithac: number;
   donvitruluong: string;
   donvicongsuat: string;
   donvidientich: string;

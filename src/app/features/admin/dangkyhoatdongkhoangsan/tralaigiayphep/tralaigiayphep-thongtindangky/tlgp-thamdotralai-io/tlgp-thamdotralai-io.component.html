@@ -27,7 +27,7 @@
           {{ "COMMON.default.save" | translate }}
         </button>
         <button *ngIf="!disabledDeleteButton" class="btn btn-outline-danger mr-2" style="float: right;"
-          (click)="deleteItemDangKyThamDoTraLai()">
+                (click)="deleteItemDangKyThamDoTraLai()">
           <i class="far fa-trash"></i>
           {{ "COMMON.default.delete" | translate }}
         </button>
@@ -48,15 +48,26 @@
               <div class="col-lg-6 col-md-6 col-sm-6">
                 <input type="hidden" formControlName="idgiayphep">
                 <input class="form-control" type="text" formControlName="sogiayphep"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepPlaceholder' | translate}}" />
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepPlaceholder' | translate}}"/>
                 <span *ngIf="formErrors.idgiayphep || formErrors.sogiayphep"
-                  class="alert-danger">{{formErrors.sogiayphep}}</span>
+                      class="alert-danger">{{formErrors.idgiayphep}}</span>
               </div>
               <div class="col-lg-2 col-md-2 col-sm-2">
                 <button class="btn btn-primary mb-sm-1" style="float: right;" (click)="openGiayPhepIOSidenav()">
                   <i class="fal fa-plus-square"></i>
                   {{ "COMMON.default.select" | translate }}
                 </button>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6 col-sm-12">
+            <div class="form-group row mx-0">
+              <label
+                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.lydotralai" | translate}}</label>
+              <div class="col-lg-8 col-md-8 col-sm-8">
+                <textarea class="form-control" formControlName="lydotralai"
+                          placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.lydotralaiPlaceholder' | translate}}"></textarea>
+                <span *ngIf="formErrors.lydotralai" class="alert-danger">{{formErrors.lydotralai}}</span>
               </div>
             </div>
           </div>
@@ -71,7 +82,7 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <input class="form-control" type="text" formControlName="dientichthamdo"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichthamdoPlaceholder' | translate}}" />
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichthamdoPlaceholder' | translate}}"/>
                 <span *ngIf="formErrors.dientichthamdo" class="alert-danger">{{formErrors.dientichthamdo}}</span>
               </div>
             </div>
@@ -84,7 +95,7 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <input class="form-control" type="text" formControlName="dientichtralai"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichtralaiPlaceholder' | translate}}" />
+                       placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichtralaiPlaceholder' | translate}}"/>
                 <span *ngIf="formErrors.dientichtralai" class="alert-danger">{{formErrors.dientichtralai}}</span>
               </div>
             </div>
@@ -100,7 +111,7 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <mat-select class="form-control" formControlName="donvidientich" *ngIf="dataTranslate"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.chondonvidientich' | translate}}">
+                            placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.chondonvidientich' | translate}}">
                   <mat-option value="">
                     {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.chondonvidientich" | translate }}
                   </mat-option>
@@ -112,20 +123,6 @@
               </div>
             </div>
           </div>
-        </div>
-        <!-- Hệ quy chiếu & Lý do trả lại-->
-        <div class=" row">
-          <div class="col-lg-6 col-md-6 col-sm-12">
-            <div class="form-group row mx-0">
-              <label
-                class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.lydotralai" | translate}}</label>
-              <div class="col-lg-8 col-md-8 col-sm-8">
-                <textarea class="form-control" formControlName="lydotralai"
-                  placeholder="{{'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.lydotralaiPlaceholder' | translate}}"></textarea>
-                <span *ngIf="formErrors.lydotralai" class="alert-danger">{{formErrors.lydotralai}}</span>
-              </div>
-            </div>
-          </div>
           <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isTraLaiDienTichThamDo">
             <div class="form-group row mx-0">
               <label
@@ -134,8 +131,8 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <mat-select class="form-control"
-                  placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.chonhequychieu' | translate }}"
-                  formControlName="hequychieu" *ngIf="dataTranslate">
+                            placeholder="{{ 'DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.chonhequychieu' | translate }}"
+                            formControlName="hequychieu" *ngIf="dataTranslate">
                   <mat-option value="">
                     {{ "DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.chonhequychieu" | translate }}
                   </mat-option>
