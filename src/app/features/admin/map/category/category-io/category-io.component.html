@@ -1,9 +1,7 @@
 <div class="pt-3" style="width: 510px !important;">
   <form [formGroup]="createForm" class="pt-toolbar">
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.category.catName" | translate }}:</label
-      >
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.category.catName" | translate }}:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="catName" />
         <span *ngIf="formErrors.catName" class="alert-danger">{{
@@ -12,9 +10,7 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.category.slug" | translate }}:</label
-      >
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.category.slug" | translate }}:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="slug" />
         <span *ngIf="formErrors.slug" class="alert-danger">{{
@@ -23,9 +19,7 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.category.catOrder" | translate }}:</label
-      >
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.category.catOrder" | translate }}:</label>
       <div class="col-sm-9">
         <input class="form-control" type="text" formControlName="catOrder" />
         <span *ngIf="formErrors.catOrder" class="alert-danger">{{
@@ -34,23 +28,13 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.category.catType" | translate }}:
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.category.catType" | translate }}:
       </label>
       <div class="col-sm-9">
-        <mat-select
-          placeholder="{{ 'MAP.category.catTypePlaceholder' | translate }}"
-          class="form-control"
-          formControlName="catType"
-        >
-          <mat-select-filter
-            [displayMember]="'name'"
-            [array]="categoryTypes"
-          ></mat-select-filter>
-          <mat-option
-            *ngFor="let categoryType of categoryTypes"
-            [value]="categoryType.index"
-          >
+        <mat-select placeholder="{{ 'MAP.category.catTypePlaceholder' | translate }}" class="form-control"
+          formControlName="catType">
+          <mat-select-filter [displayMember]="'name'" [array]="categoryTypes"></mat-select-filter>
+          <mat-option *ngFor="let categoryType of categoryTypes" [value]="categoryType.index">
             {{ categoryType.name }}
           </mat-option>
         </mat-select>
@@ -60,25 +44,14 @@
       </div>
     </div>
     <div class="form-group row mx-0">
-      <label class="col-sm-3 col-form-label text-right"
-        >{{ "MAP.category.catTypeParent" | translate }}:
+      <label class="col-sm-3 col-form-label text-right">{{ "MAP.category.catTypeParent" | translate }}:
       </label>
       <div class="col-sm-9">
-        <mat-select
-          placeholder="{{
+        <mat-select placeholder="{{
             'MAP.category.catTypeParentPlaceholder' | translate
-          }}"
-          class="form-control"
-          formControlName="parentId"
-        >
-          <mat-select-filter
-            [displayMember]="'name'"
-            [array]="categoriesInSelect"
-          ></mat-select-filter>
-          <mat-option
-            *ngFor="let category of categoriesInSelect"
-            [value]="category.index"
-          >
+          }}" class="form-control" formControlName="parentId">
+          <mat-select-filter [displayMember]="'name'" [array]="categoriesInSelect"></mat-select-filter>
+          <mat-option *ngFor="let category of categoriesInSelect" [value]="category.index">
             {{ category.name }}
           </mat-option>
         </mat-select>
@@ -95,25 +68,16 @@
               <i class="far fa-save"></i>
               {{ "COMMON.default.saveAndClose" | translate }}
             </button>
-            <button
-              class="btn btn-outline-primary float-right mr-3"
-              *ngIf="purpose === 'new'"
-              (click)="onContinueAdd()"
-            >
+            <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+              (click)="onContinueAdd()">
               <i class="far fa-download"></i>
               {{ "COMMON.default.saveAndRefresh" | translate }}
             </button>
-            <button
-              class="btn btn-outline-info float-right mr-3"
-              (click)="onFormReset()"
-            >
+            <button class="btn btn-outline-info float-right mr-3" (click)="onFormReset()">
               <i class="far fa-sync-alt"></i>
               {{ "COMMON.default.refresh" | translate }}
             </button>
-            <button
-              class="btn btn-danger float-right mr-3"
-              (click)="closeIOSidebar()"
-            >
+            <button class="btn btn-danger float-right mr-3" (click)="closeIOSidebar()">
               <i class="far fa-times-circle"></i>
               {{ "COMMON.default.cancel" | translate }}
             </button>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 
 import { InputLayerModel } from "src/app/models/admin/map/layer.model";
@@ -10,6 +10,8 @@ import { MapStatus } from "src/app/shared/constants/map-constants";
 import {
   validationAllErrorMessagesService,
 } from "src/app/services/utilities/validatorService";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
+import { TranslateService } from "@ngx-translate/core";
 
 @Component({
   selector: 'app-map-detail-edit-layer-properties',
@@ -31,40 +33,43 @@ export class MapDetailEditLayerPropertiesComponent implements OnInit {
   // List projection
   public listProjections: Object[];
 
+  // Data Translate
+  public dataTranslate: any;
+
   // error message
   validationErrorMessages = {
   };
 
   // form errors
   formErrors = {
-    mapId: [],
-    guid: [],
-    mapOrder: [],
-    layerGroupId: [],
-    groupOrder: [],
-    layerType: [],
-    layerName: [],
-    layerTitle: [],
-    description: [],
-    opacity: [],
-    sourceId: [],
-    status: [],
-    siteId: [],
-    extentMinx: [],
-    extentMiny: [],
-    extentMaxx: [],
-    extentMaxy: [],
-    minResolution: [],
-    maxResolution: [],
-    baselayer: [],
-    fieldsInfo: [],
-    fieldsDisplay: [],
-    fieldsInfoFormat: [],
-    fieldsInfoTemplate: [],
-    moreSettings: [],
-    legendEnabled: [],
-    tocDisplay: [],
-    userId: [],
+    mapId: [""],
+    guid: [""],
+    mapOrder: [""],
+    layerGroupId: [""],
+    groupOrder: [""],
+    layerType: [""],
+    layerName: [""],
+    layerTitle: [""],
+    description: [""],
+    opacity: [""],
+    sourceId: [""],
+    status: [""],
+    siteId: [""],
+    extentMinx: [""],
+    extentMiny: [""],
+    extentMaxx: [""],
+    extentMaxy: [""],
+    minResolution: [""],
+    maxResolution: [""],
+    baselayer: [""],
+    fieldsInfo: [""],
+    fieldsDisplay: [""],
+    fieldsInfoFormat: [""],
+    fieldsInfoTemplate: [""],
+    moreSettings: [""],
+    legendEnabled: [""],
+    tocDisplay: [""],
+    userId: [""],
   };
 
   constructor(
@@ -72,14 +77,22 @@ export class MapDetailEditLayerPropertiesComponent implements OnInit {
     public mapFacadeService: MapFacadeService,
     public commonService: CommonServiceShared,
     public matSidenavService: MatsidenavService,
+    private translate: TranslateService
   ) {
     this.matSidenavService.okCallBackFunction = null;
     this.matSidenavService.cancelCallBackFunction = null;
     this.matSidenavService.confirmStatus = null;
   }
 
-  ngOnInit() {
-    this.formInit();
+  async ngOnInit() {
+    await this.formInit();
+
+    // Translate
+    this.dataTranslate = await this.translate
+      .getTranslation(this.translate.getDefaultLang())
+      .toPromise();
+
+    this.setValidation();
   }
 
   // init FormControl
@@ -90,8 +103,8 @@ export class MapDetailEditLayerPropertiesComponent implements OnInit {
       mapOrder: [],
       layerGroupId: [],
       groupOrder: [],
-      layerType: [],
-      layerName: [],
+      layerType: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      layerName: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       layerTitle: [],
       description: [],
       opacity: [],
@@ -105,14 +118,14 @@ export class MapDetailEditLayerPropertiesComponent implements OnInit {
       minResolution: [],
       maxResolution: [],
       baselayer: [],
-      fieldsInfo: [],
-      fieldsDisplay: [],
-      fieldsInfoFormat: [],
+      fieldsInfo: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      fieldsDisplay: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      fieldsInfoFormat: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       fieldsInfoTemplate: [],
       moreSettings: [],
       legendEnabled: [],
       tocDisplay: [],
-      userId: []
+      userId: [],
     });
 
     // List projection
@@ -134,6 +147,19 @@ export class MapDetailEditLayerPropertiesComponent implements OnInit {
       "updateDisplayOptions",
       this.createForm.value
     );
+  }
+
+  // Hàm set biến validation từ data translate
+  setValidation() {
+    this.validationErrorMessages = {
+      layerType: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      layerName: {
+        maxlength: this.dataTranslate.COMMON.default.maxLength
+      },
+      fieldsInfo: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsDisplay: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsInfoFormat: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+    };
   }
 
   // Submit form

@@ -1,17 +1,18 @@
 import { Injectable } from "@angular/core";
 import { HttpClient } from "@angular/common/http";
 
-import { MapService } from "./map.service";
-import { LayerService } from "./layer.service";
-import { CategoryService } from "./category.service";
-import { MapLayerService } from "./map-layer.service";
-import { MapCommonService } from "./map-common.service";
-import { ProjectionService } from "./projection.service";
-import { LayerGroupService } from "./layer-group.service";
-import { MLayerGroupService } from "./m-layer-group.service";
-import { MapLayerGroupService } from "./map-layergroup.service";
-import { GisAdvanceMapService } from "./gis-advance-map.service";
+import { MapService } from "src/app/services/admin/map/map.service";
+import { LayerService } from "src/app/services/admin/map/layer.service";
+import { CategoryService } from "src/app/services/admin/map/category.service";
+import { MapLayerService } from "src/app/services/admin/map/map-layer.service";
+import { MapCommonService } from "src/app/services/admin/map/map-common.service";
+import { ProjectionService } from "src/app/services/admin/map/projection.service";
+import { LayerGroupService } from "src/app/services/admin/map/layer-group.service";
+import { MLayerGroupService } from "src/app/services/admin/map/m-layer-group.service";
+import { MapLayerGroupService } from "src/app/services/admin/map/map-layergroup.service";
+import { GisAdvanceMapService } from "src/app/services/admin/map/gis-advance-map.service";
 import { GisBaseMapService } from "src/app/services/admin/map/gisbasemap.service";
+import { GeometryService } from "src/app/services/admin/map/geometry.service";
 
 @Injectable({
   providedIn: "root",
@@ -72,5 +73,10 @@ export class MapFacadeService {
   // Các hàm dùng chung
   public getMapCommonService() {
     return new MapCommonService();
+  }
+
+  // geometry service
+  public getGeometryService() {
+    return new GeometryService(this.httpClient);
   }
 }

@@ -35,7 +35,7 @@ export class MapDetailAddLayerGroupIoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();

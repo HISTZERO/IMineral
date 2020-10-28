@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, AfterViewInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -6,13 +6,15 @@ import { SettingsCommon } from "src/app/shared/constants/setting-common";
 import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { LayerTreeComponent } from "src/app/shared/components/layer-tree/layer-tree.component";
+import { TreeGridComponent } from "@syncfusion/ej2-angular-treegrid";
 
 @Component({
   selector: "app-layer-group-add-layer-io",
   templateUrl: "./layer-group-add-layer-io.component.html",
   styleUrls: ["./layer-group-add-layer-io.component.scss"],
 })
-export class LayerGroupAddLayerIoComponent implements OnInit {
+export class LayerGroupAddLayerIoComponent implements OnInit, AfterViewInit {
   settingsCommon = new SettingsCommon();
 
   // public submitted = false;
@@ -29,6 +31,11 @@ export class LayerGroupAddLayerIoComponent implements OnInit {
   // Data Translate
   public dataTranslate: any;
 
+  // Tree grid
+  public treeGrid: TreeGridComponent;
+
+  @ViewChild("layerTree", { static: false }) public layerTree: LayerTreeComponent;
+
   constructor(
     public mapFacadeService: MapFacadeService,
     public commonService: CommonServiceShared,
@@ -41,7 +48,7 @@ export class LayerGroupAddLayerIoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
@@ -51,6 +58,10 @@ export class LayerGroupAddLayerIoComponent implements OnInit {
 
     // Get all layers
     this.getLayers();
+  }
+
+  ngAfterViewInit() {
+    this.treeGrid = this.layerTree.getTreeGrid();
   }
 
   // Get layers
@@ -74,7 +85,7 @@ export class LayerGroupAddLayerIoComponent implements OnInit {
    */
   rowDataBound(args: any) {
     if (args.eventName === "checkboxChange") {
-      this.selectedItems = [...args.checkedRecords];
+      this.selectedItems = [...this.treeGrid.getCheckedRecords()];
     }
   }
 
@@ -91,7 +102,7 @@ export class LayerGroupAddLayerIoComponent implements OnInit {
           .join(","),
       })
       .subscribe(
-        () => this.matSidenavService.doParentFunction("getAllItems"),
+        () => this.matSidenavService.doParentFunction("getLayersBelongToGroup"),
         (error: HttpErrorResponse) => {
           this.commonService.showeNotiResult(error.message, 2000);
         },

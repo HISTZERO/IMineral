@@ -24,6 +24,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import { DefaultValue } from 'src/app/shared/constants/global-var';
+import { ToadokhuvucComponent } from "../../../../../shared/components/toadokhuvuc/toadokhuvuc.component";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,
@@ -44,6 +45,7 @@ export class ThongtindangkyComponent implements OnInit {
   @ViewChild("dangKyThamDoLoaiKhoangSan", { static: false }) dangKyThamDoLoaiKhoangSan: LoaikhoangsanListComponent;
   @ViewChild("dangKyThamDoCongTrinh", { static: false }) dangKyThamDoCongTrinh: CongtrinhthamdoListComponent;
   @ViewChild("dangKyThamDoKhuVuc", { static: false }) dangKyThamDoKhuVuc: KhuvucthamdoListComponent;
+  @ViewChild("banDoThamDoKhuVuc", { static: false }) banDoThamDoKhuVuc: ToadokhuvucComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -58,6 +60,7 @@ export class ThongtindangkyComponent implements OnInit {
     [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: false,
     [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: false,
     [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: false,
+    [DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]: false,
     [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: false
   };
 
@@ -66,6 +69,7 @@ export class ThongtindangkyComponent implements OnInit {
     [DangKyThamDoKhoangSanTabEnum.DonViHanhChinh]: true,
     [DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan]: true,
     [DangKyThamDoKhoangSanTabEnum.KhuVucThamDo]: true,
+    [DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc]: true,
     [DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo]: true
   };
 
@@ -79,6 +83,8 @@ export class ThongtindangkyComponent implements OnInit {
   private itemHoSo: any;
   // lưu dữ liệu hệ quy chiếu
   private heQuyChieu = DefaultValue.Empty;
+  // Chứa goemetry
+  public geoMetry: string;
   // lưu trữ componentRef
   private componentRef: any;
 
@@ -141,6 +147,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
@@ -149,6 +156,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = false;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
         break;
       }
@@ -157,6 +165,7 @@ export class ThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = true;
+        this.disabledTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = true;
         this.disabledTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = true;
         break;
       }
@@ -176,6 +185,10 @@ export class ThongtindangkyComponent implements OnInit {
 
   private getHeQuyChieu(heQuyChieu: string) {
     this.heQuyChieu = heQuyChieu;
+  }
+
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
   }
 
   getNumberOfDataKhuVucThamDo(data: any) {
@@ -219,6 +232,7 @@ export class ThongtindangkyComponent implements OnInit {
       this.componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyThamDoFormState(event));
       this.componentRef.instance.selectIdDangKyThamDoEvent.subscribe(event => this.getIdDangKyThamDo(event));
       this.componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
+      this.componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
     }
   }
 
@@ -226,6 +240,7 @@ export class ThongtindangkyComponent implements OnInit {
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.DonViHanhChinh] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.KhuVucThamDo] = false;
+    this.loadedTabState[DangKyThamDoKhoangSanTabEnum.BanDoKhuVuc] = false;
     this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = false;
   }
 
@@ -253,5 +268,12 @@ export class ThongtindangkyComponent implements OnInit {
       this.dangKyThamDoCongTrinh.iddangkythamdo = this.iddangkythamdo;
       this.loadedTabState[DangKyThamDoKhoangSanTabEnum.CongTrinhThamDo] = await this.dangKyThamDoCongTrinh.manualDataInit();
     }
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
   }
 }

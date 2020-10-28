@@ -10,55 +10,29 @@
               <div class="card-header">
                 <h3>
                   <span class="title">
-                    {{ "MAP.category.titleList" | translate }}</span
-                  >
-                  <button
-                    class="btn btn-primary"
-                    style="float: right;"
-                    (click)="openIOSidebar()"
-                    [disabled]="!canAddCategoriesAction"
-                  >
+                    {{ "MAP.category.titleList" | translate }}</span>
+                  <button class="btn btn-primary" style="float: right;" (click)="openIOSidebar()"
+                    [disabled]="!canAddCategoriesAction">
                     <i class="fal fa-plus-square"></i>
                     {{ "COMMON.default.add" | translate }}
                   </button>
-                  <button
-                    class="btn btn-outline-primary mr-3"
-                    style="float: right;"
-                    (click)="getAllItems()"
-                    [disabled]="!listHeToaDoAction"
-                  >
+                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllItems()"
+                    [disabled]="!canListHeToaDoAction">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
                   </button>
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid
-                  #grid
-                  *ngIf="dataTranslate"
-                  [dataSource]="listItems"
-                  [allowResizing]="true"
-                  [toolbar]="settingsCommon.toolbar"
-                  allowPaging="true"
-                  [allowSorting]="true"
-                  [pageSettings]="settingsCommon.pageSettings"
-                  class="table-striped"
-                >
+                <ejs-grid #grid *ngIf="dataTranslate" [dataSource]="listItems" [allowResizing]="true"
+                  [toolbar]="settingsCommon.toolbar" allowPaging="true" [allowSorting]="true"
+                  [pageSettings]="settingsCommon.pageSettings" class="table-striped" (actionBegin)="actionBegin($event)">
                   <e-columns>
-                    <e-column
-                      field="serialNumber"
-                      headerText="{{
+                    <e-column field="serialNumber" headerText="{{
                         'COMMON.default.numericalOrder' | translate
-                      }}"
-                    ></e-column>
-                    <e-column
-                      field="catName"
-                      headerText="{{ 'MAP.category.catName' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="catType"
-                      headerText="{{ 'MAP.category.catType' | translate }}"
-                    >
+                      }}"></e-column>
+                    <e-column field="catName" headerText="{{ 'MAP.category.catName' | translate }}"></e-column>
+                    <e-column field="catType" headerText="{{ 'MAP.category.catType' | translate }}">
                       <ng-template #template let-data>
                         {{
                           data.catType
@@ -66,12 +40,9 @@
                         }}
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="catType"
-                      headerText="{{
+                    <e-column field="catType" headerText="{{
                         'MAP.category.catTypeParent' | translate
-                      }}"
-                    >
+                      }}">
                       <ng-template #template let-data>
                         {{
                           data.parentId
@@ -81,34 +52,18 @@
                         }}
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="catOrder"
-                      headerText="{{ 'MAP.category.catOrder' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="slug"
-                      headerText="{{ 'MAP.category.slug' | translate }}"
-                    ></e-column>
-                    <e-column
-                      headerText="{{ 'COMMON.default.action' | translate }}"
-                    >
+                    <e-column field="catOrder" headerText="{{ 'MAP.category.catOrder' | translate }}"></e-column>
+                    <e-column field="slug" headerText="{{ 'MAP.category.slug' | translate }}"></e-column>
+                    <e-column headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
-                          <button
-                            class="btn btn-sm btn-primary"
-                            (click)="editItem(data)"
-                            title="{{ 'COMMON.default.action' | translate }}"
-                            [disabled]="!canEditCategoriesAction"
-                          >
-                            <i class="far fa-edit"></i>
+                          <button class="btn btn-sm btn-primary" (click)="editItem(data)"
+                            title="{{ 'COMMON.default.action' | translate }}" [disabled]="!canEditCategoriesAction">
+                            <i class="fal fa-edit"></i>
                           </button>
-                          <button
-                            class="btn btn-sm btn-danger"
-                            (click)="deleteItem(data)"
-                            title="{{ 'COMMON.default.delete' | translate }}"
-                            [disabled]="!canDeleteCategoriesAction"
-                          >
-                            <i class="far fa-trash"></i>
+                          <button class="btn btn-sm btn-danger" (click)="deleteItem(data)"
+                            title="{{ 'COMMON.default.delete' | translate }}" [disabled]="!canDeleteCategoriesAction">
+                            <i class="fal fa-trash"></i>
                           </button>
                         </div>
                       </ng-template>
@@ -120,23 +75,14 @@
           </div>
         </div>
       </div>
-      <mat-sidenav
-        #aside
-        [fixedInViewport]="true"
-        [fixedTopGap]="50"
-        class="aside"
-        position="end"
-        style="width: 600px;"
-      >
+      <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+        style="width: 600px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title">
           <button class="btn btn-sm btn-light" (click)="closeIOSidebar()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
-          <span
-            style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text"
-            >{{ matsidenavService.sidenavTitle }}</span
-          >
+          <span style="vertical-align: middle;"
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #ioSidebar> </template>
       </mat-sidenav>

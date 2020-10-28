@@ -20,6 +20,7 @@ export class OutputMapModel implements DeserializableModel {
   webMaxscale: number;
   zoomLevel: number;
   refImageLink: string;
+  widgets: string;
   status: number;
   deserialize(input: any): this {
     return Object.assign(this, input);
@@ -46,5 +47,6 @@ export class InputMapModel {
   webMaxscale: number;
   zoomLevel: number;
   refImageLink: string;
+  widgets: string;
   status: number;
 }

@@ -8,7 +8,7 @@ import {
   OnChanges,
   SimpleChanges,
 } from "@angular/core";
-import * as cloneDeep from 'lodash.cloneDeep';
+import cloneDeep from 'lodash/cloneDeep';
 import {
   TreeGridComponent,
   RowDDService,
@@ -67,6 +67,10 @@ export class LayerTreeComponent implements OnInit, OnChanges {
     return new Promise((resolve) => setTimeout(resolve, ms));
   }
 
+  getTreeGrid(): TreeGridComponent {
+    return this.treeGrid;
+  }
+
   /**
    * Hàm kích hoạt sự kiện khi người dùng check vào checkbox
    * @param args - Trả về đối tượng được check
@@ -97,11 +101,7 @@ export class LayerTreeComponent implements OnInit, OnChanges {
     // Trả dữ liệu về cho parent component
     this.nextDataBound({
       rowData: args.rowData,
-      eventName: "checkboxChange",
-      checkedRecords: checkedRecords,
-      currentViewRecords: currentViewRecords,
-      selectedChildIds: this.selectedChildIds,
-      selectedParentIds: this.selectedParentIds,
+      eventName: "checkboxChange"
     });
   }
 
@@ -137,12 +137,11 @@ export class LayerTreeComponent implements OnInit, OnChanges {
    */
   async action(rowData: any, eventName: string, event: Event) {
     if (event) event.stopPropagation();
-
-    // Return
-    await this.nextDataBound({
+    // Return 
+    this.nextDataBound({
       rowData: rowData,
       eventName: eventName,
-      currentViewRecords: this.treeGrid.flatData,
+      // currentViewRecords: this.treeGrid.flatData,
     });
   }
 
@@ -159,14 +158,12 @@ export class LayerTreeComponent implements OnInit, OnChanges {
    * @param args Row
    */
   async treeGridRowDataBound(args: any) {
+
     // Row hiện tại
     let currentIndex = args.data.index;
 
     // Tổng row
     let totalRows = this.treeGrid.flatData.length;
-
-    // Danh sách tất cả các records
-    let currentViewRecords = this.treeGrid.flatData;
 
     // Nếu chưa phải row cuối cùng thì dừng lại
     if (currentIndex + 1 !== totalRows) return;
@@ -179,9 +176,7 @@ export class LayerTreeComponent implements OnInit, OnChanges {
 
     // Trả về các tham số khi hiển thị item cuối
     this.nextDataBound({
-      eventName: "allRowsHasBeenDisplayed",
-      currentViewRecords: currentViewRecords,
-      checkedRecords: this.treeGrid.getCheckedRecords(),
+      eventName: "allRowsHasBeenDisplayed"
     });
   }
 
