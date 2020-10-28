@@ -22,7 +22,7 @@
                         <h5 class="mt-0">
                           <span>{{"DANHMUC.dvhc.titleCity" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;"
-                            (click)="openDvhcProvinceIOSidebar()" [disabled]="!addTinhAction">
+                                  (click)="openDvhcProvinceIOSidebar()" [disabled]="!addTinhAction">
                             <i class="fal fa-plus-square"></i>
                             {{ "COMMON.default.add" | translate }}
                           </button>
@@ -32,7 +32,8 @@
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
                             <mat-select class="form-control" (selectionChange)="getAllProvinceByTrangThai($event)"
                                         [(value)]="trangthaiProvince"
-                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                                        placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}"
+                                        *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
                               </mat-option>
@@ -41,16 +42,20 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div *ngIf="disableButtonProvince" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectProvince, 'province')">
+                          <div *ngIf="disableButtonProvince"
+                               class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;"
+                                    (click)="deleteArrayItem(listDataSelectProvince, 'province')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectProvince, 'province')">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;"
+                                    (click)="changeStatus(statusEnum.NoActive, listDataSelectProvince, 'province')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectProvince, 'province')">
+                            <button class="btn btn-outline-primary " style="float: right;"
+                                    (click)="changeStatus(statusEnum.Active, listDataSelectProvince, 'province')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -59,17 +64,22 @@
 
                       </div>
                       <div class="card-body">
-                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true" [allowSelection]="true"
-                          [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
-                          [allowPaging]="true" [allowSorting]="true" [pageSettings]="settingsCommon.pageSettings"
-                          (rowSelected)="getAllDataSelectProvince()" (rowDeselected)="getAllDataSelectProvince()" [toolbar]="settingsCommon.toolbar" class="table-striped" [allowResizing]="true"
-                          (queryCellInfo)="customiseCell($event)" *ngIf="listDataDvhcProvince">
+                        <ejs-grid #gridDvhcTinh [dataSource]="listDataDvhcProvince" [allowTextWrap]="true"
+                                  [allowSelection]="true"
+                                  [textWrapSettings]='wrapSettings' [editSettings]="settingsCommon.editSettings"
+                                  [allowPaging]="true" [allowSorting]="true"
+                                  [pageSettings]="settingsCommon.pageSettings"
+                                  (rowSelected)="getAllDataSelectProvince()"
+                                  (rowDeselected)="getAllDataSelectProvince()" [toolbar]="settingsCommon.toolbar"
+                                  class="table-striped" [allowResizing]="true"
+                                  (queryCellInfo)="customiseCell($event)" *ngIf="listDataDvhcProvince">
                           <e-columns>
-                            <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}"  headerText="{{'DANHMUC.dvhc.tendvhc' | translate}}" ></e-column>
+                            <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}"
+                                      headerText="{{'DANHMUC.dvhc.tendvhc' | translate}}"></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
-                              type='checkbox'></e-column>
+                                      type='checkbox'></e-column>
                             <e-column field="id" [customAttributes]="{class: 'style-action-header'}"
-                              headerText="{{'COMMON.default.action' | translate}}">
+                                      headerText="{{'COMMON.default.action' | translate}}">
                               <ng-template #template let-data>
                                 <div class="btn-group">
                                   <button class="btn btn-sm btn-primary" title="{{
@@ -77,11 +87,7 @@
                                     }}" (click)="openDvhcEditProvince(data)" [disabled]="!editTinhAction">
                                     <i class="fal fa-edit"></i>
                                   </button>
-                                  <button class="btn btn-sm btn-danger" title="{{
-                                      'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItem(data)" [disabled]="!deleteTinhAction">
-                                    <i class="far fa-trash-alt"></i>
-                                  </button>
+
                                   <button class="btn btn-sm btn-info" title="{{
                                       'DANHMUC.dvhc.under' | translate
                                     }}" (click)="childProvince(data)" [disabled]="!listHuyenAction">
@@ -102,8 +108,8 @@
                         <h5 class="mt-0">
                           <span>{{"DANHMUC.dvhc.titleDistrict" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;"
-                            [class.disabled]="disabledDistrict" (click)="openDvhcDistrictIOSidebar()"
-                            [disabled]="!addHuyenAction">
+                                  [class.disabled]="disabledDistrict" (click)="openDvhcDistrictIOSidebar()"
+                                  [disabled]="!addHuyenAction">
                             <i class="fal fa-plus-square"></i>
                             {{ "COMMON.default.add" | translate }}
                           </button>
@@ -111,8 +117,10 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control" (selectionChange)="getDistrictByTrangThai($event)" [(value)]="trangthaiDistrict"
-                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                            <mat-select class="form-control" (selectionChange)="getDistrictByTrangThai($event)"
+                                        [(value)]="trangthaiDistrict"
+                                        placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}"
+                                        *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
                               </mat-option>
@@ -121,16 +129,20 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div *ngIf="disableButtonDistrict" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectDistrict, 'district')">
+                          <div *ngIf="disableButtonDistrict"
+                               class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;"
+                                    (click)="deleteArrayItem(listDataSelectDistrict, 'district')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectDistrict, 'district')">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;"
+                                    (click)="changeStatus(statusEnum.NoActive, listDataSelectDistrict, 'district')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.Active, listDataSelectDistrict, 'district')">
+                            <button class="btn btn-outline-primary " style="float: right;"
+                                    (click)="changeStatus(statusEnum.Active, listDataSelectDistrict, 'district')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -139,16 +151,19 @@
                       </div>
                       <div class="card-body">
                         <ejs-grid #gridDvhcHuyen [dataSource]="listDatadvhcDistrict" [allowSelection]="true"
-                          [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                          [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
-                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectDistrict()" (rowDeselected)="getAllDataSelectDistrict()"
-                          *ngIf="listDatadvhcDistrict">
+                                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true"
+                                  [allowSorting]="true"
+                                  [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
+                                  class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
+                                  (rowSelected)="getAllDataSelectDistrict()"
+                                  (rowDeselected)="getAllDataSelectDistrict()"
+                                  *ngIf="listDatadvhcDistrict">
                           <e-columns>
                             <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
-                              type='checkbox'></e-column>
+                                      type='checkbox'></e-column>
                             <e-column field="id" [customAttributes]="{class: 'style-action-header'}" headerText="{{
                                 'COMMON.default.action' | translate
                               }}" class="dvhcthaotac">
@@ -158,11 +173,6 @@
                                       'COMMON.default.edit' | translate
                                     }}" (click)="openDvhcEditDistrict(data)" [disabled]="!editHuyenAction">
                                     <i class="fal fa-edit"></i>
-                                  </button>
-                                  <button class="btn btn-sm btn-danger" title="{{
-                                      'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItem(data)" [disabled]="!deleteHuyenAction">
-                                    <i class="far fa-trash-alt"></i>
                                   </button>
                                   <button class="btn btn-sm btn-info" title="{{
                                       'DANHMUC.dvhc.under' | translate
@@ -184,7 +194,7 @@
                         <h5 class="mt-0">
                           <span>{{"DANHMUC.dvhc.titleTown" | translate}}</span>
                           <button class="btn btn-primary btn-sm" style="float: right;" [class.disabled]="disabledWard"
-                            (click)="openDvhcWardIOSidebar()" [disabled]="!addXaAction">
+                                  (click)="openDvhcWardIOSidebar()" [disabled]="!addXaAction">
                             <i class="fal fa-plus-square"></i>
                             {{ "COMMON.default.add" | translate }}
                           </button>
@@ -192,8 +202,10 @@
                         <div class="row mt-2">
                           <div class="col-xl-4 col-lg-12">
                             <label class="col-form-label text-right">{{"DANHMUC.canhan.trangthai" | translate}}:</label>
-                            <mat-select class="form-control" (selectionChange)="getWardByTrangThai($event)" [(value)]="trangthaiWard"
-                              placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}" *ngIf="dataTranslate">
+                            <mat-select class="form-control" (selectionChange)="getWardByTrangThai($event)"
+                                        [(value)]="trangthaiWard"
+                                        placeholder="{{ 'DANHMUC.canhan.chonTrangthai' | translate }}"
+                                        *ngIf="dataTranslate">
                               <mat-option value="">
                                 {{ "DANHMUC.canhan.chonTrangthai" | translate }}
                               </mat-option>
@@ -202,16 +214,20 @@
                               </mat-option>
                             </mat-select>
                           </div>
-                          <div *ngIf="disableButtonWard" class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
-                            <button class="btn btn-outline-danger mr-2" style="float: right;" (click)="deleteArrayItem(listDataSelectWard, 'ward')">
+                          <div *ngIf="disableButtonWard"
+                               class="col-xl-8 col-lg-12 d-flex align-items-end justify-content-end">
+                            <button class="btn btn-outline-danger mr-2" style="float: right;"
+                                    (click)="deleteArrayItem(listDataSelectWard, 'ward')">
                               <i class="far fa-trash"></i>
                               {{ "COMMON.default.delete" | translate }}
                             </button>
-                            <button class="btn btn-outline-secondary mr-2" style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
+                            <button class="btn btn-outline-secondary mr-2" style="float: right;"
+                                    (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
                               <i class="far fa-times-circle" style="font-size: 14px;"></i>
                               {{ "COMMON.default.unActive" | translate }}
                             </button>
-                            <button class="btn btn-outline-primary " style="float: right;" (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
+                            <button class="btn btn-outline-primary " style="float: right;"
+                                    (click)="changeStatus(statusEnum.NoActive, listDataSelectWard, 'ward')">
                               <i class="fas fa-check"></i>
                               {{ "COMMON.default.active" | translate }}
                             </button>
@@ -220,16 +236,18 @@
                       </div>
                       <div class="card-body">
                         <ejs-grid #gridDvhcXa [dataSource]="listDatadvhcWard" [allowSelection]="true"
-                          [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
-                          [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
-                          class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true" (rowSelected)="getAllDataSelectWard()" (rowDeselected)="getAllDataSelectWard()"
-                          *ngIf="listDatadvhcWard">
+                                  [editSettings]="settingsCommon.editSettings" [allowPaging]="true"
+                                  [allowSorting]="true"
+                                  [pageSettings]="settingsCommon.pageSettings" [toolbar]="settingsCommon.toolbar"
+                                  class="table-striped" (queryCellInfo)="customiseCell($event)" [allowResizing]="true"
+                                  (rowSelected)="getAllDataSelectWard()" (rowDeselected)="getAllDataSelectWard()"
+                                  *ngIf="listDatadvhcWard">
                           <e-columns>
                             <e-column field="ten" [customAttributes]="{class: 'style-dvhc-header'}" headerText="{{
                                 'DANHMUC.dvhc.tendvhc' | translate
                               }}"></e-column>
                             <e-column field="check" [customAttributes]="{class: 'style-checkbox-header'}"
-                              type='checkbox'></e-column>
+                                      type='checkbox'></e-column>
                             <e-column field="id" [customAttributes]="{class: 'style-action-header'}" headerText="{{
                                 'COMMON.default.action' | translate
                               }}">
@@ -239,11 +257,6 @@
                                       'COMMON.default.edit' | translate
                                     }}" (click)="openDvhcEditWard(data)" [disabled]="!editXaAction">
                                     <i class="fal fa-edit"></i>
-                                  </button>
-                                  <button class="btn btn-sm btn-danger mr-2" title="{{
-                                      'COMMON.default.delete' | translate
-                                    }}" (click)="deleteItem(data)" [disabled]="!deleteXaAction">
-                                    <i class="far fa-trash-alt"></i>
                                   </button>
                                 </div>
                               </ng-template>
@@ -260,15 +273,15 @@
         </div>
       </div>
       <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
-        style="width: 600px;">
+                   style="width: 600px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title">
           <button class="btn btn-sm btn-light" (click)="closeDvhcIOSidebar()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
           <span style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text">{{ matsidenavService.sidenavTitle }}</span>
+                class="ml-3 mat-sidenav-title-text">{{ matsidenavService.sidenavTitle }}</span>
         </div>
-        <template #componentdvhcio> </template>
+        <template #componentdvhcio></template>
       </mat-sidenav>
     </mat-sidenav-content>
   </mat-sidenav-container>
