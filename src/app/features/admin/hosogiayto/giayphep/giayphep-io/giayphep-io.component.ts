@@ -4,7 +4,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ActivatedRoute } from '@angular/router';
 import { HttpErrorResponse } from '@angular/common/http';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum } from 'src/app/shared/constants/enum';
+import { LoaiDoiTuongEnum, TrangThaiEnum, Paging, InsertedState, GiayPhepActionEnum, LoaiCapPhepEnum, ActionDataEnum } from 'src/app/shared/constants/enum';
 import { LoaiDoiTuong, HinhThucNopHoSo, HinhThucNhanKetQua, DangKhoangSan, DonViThoiHan, LoaiVanBan } from 'src/app/shared/constants/common-constants';
 import { LoaiGiayTo } from 'src/app/shared/constants/loaigiayto-constants';
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -37,9 +37,6 @@ export class GiayphepIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
-  
-  //tslint:disable-next-line: no-output-rename
-  @Output("selectCurrentChuyenNhuongFormStateEvent") selectCurrentChuyenNhuongFormStateEvent: EventEmitter<string> = new EventEmitter();
   
   // tslint:disable-next-line: no-output-rename
   @Output("selectNewInsertedGiayPhepEvent") selectNewInsertedGiayPhepEvent: EventEmitter<string> = new EventEmitter();
@@ -769,12 +766,9 @@ export class GiayphepIoComponent implements OnInit {
    */
 
   private selectCurrentFormState() {
-    const loaicapphep = this.giayPhepIOForm.controls.loaicapphep.value;
-    if (loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan || loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenKhaiThacKhoangSan) {
-      this.selectCurrentChuyenNhuongFormStateEvent.emit(loaicapphep);
-    } else {
+    this.currentAction = ActionDataEnum.Edit;
     this.selectCurrentFormStateEvent.emit(this.currentAction);
-    }
+    
   }
 
   /**
