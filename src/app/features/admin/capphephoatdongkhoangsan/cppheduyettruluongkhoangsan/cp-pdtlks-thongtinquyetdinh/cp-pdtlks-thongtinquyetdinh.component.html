@@ -14,27 +14,39 @@
               | translate
           }}"
         >
-          <app-cp-pdtlks-thongtinchitiet></app-cp-pdtlks-thongtinchitiet>
+          <app-cp-pdtlks-thongtinchitiet
+            (thongTinChiTietTonTaiTrigger)="
+              thongTinChiTietVuaTaoHandler($event)
+            "
+            (thongTinChiTietKhongTonTaiTrigger)="
+              thongTinChiTietKhongTonTaiHandler($event)
+            "
+          >
+          </app-cp-pdtlks-thongtinchitiet>
         </mat-tab>
 
         <!-- tab Loại khoáng sản -->
         <mat-tab
           [disabled]="disabledTabState[TabType.LoaiKhoangSan]"
           label="{{
-            'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.khuvucthamdoTabTitle'
+            'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.truluongtheoloaikhoangsanTabtile'
               | translate
           }}"
         >
+          <app-cp-pdtlks-loaikhoangsan
+            #loaiKhoangSanTab
+          ></app-cp-pdtlks-loaikhoangsan>
         </mat-tab>
 
         <!-- tab Trữ lượng khu vực -->
         <mat-tab
           [disabled]="disabledTabState[TabType.TruLuongKhuVuc]"
           label="{{
-            'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.truluongtheoloaikhoangsanTabtile'
+            'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.khuvucthamdoTabTitle'
               | translate
           }}"
         >
+        <app-cp-pdtlks-khuvuc #khuvuckhoangsanTab></app-cp-pdtlks-khuvuc>
         </mat-tab>
 
         <!-- tab Khối lượng trữ lượng -->

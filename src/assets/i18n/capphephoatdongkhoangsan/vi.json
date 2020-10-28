@@ -47,6 +47,63 @@
     "chondonvidientich":"---Chọn đơn vị diện tích---"
 
   },
+  "cappheppheduyettruluong_loaikhoangsan":{
+    "titleList": "Danh sách loại khoáng sản",
+    "titleAdd": "Thêm mới loại khoáng sản",
+    "titleEdit": "Sửa dữ liệu loại khoáng sản",
+    "tenkhoangsanHeader":"Tên khoáng sản",
+    "tenloaikhoangsanHeader":"Phân loại",
+    "captruluongHeader":"Cấp trữ lượng",
+    "truluongHeader":"Trữ lượng",
+    "donvitruluongHeader":"Đơn vị trữ lượng",
+    "contentDelete": "Loại khoáng sản: ",
+    "tenloaikhoangsan": "Loại khoáng sản",
+    "tennhomkhoangsan": "Nhóm khoáng sản",
+    "tenkhoangsan": "Tên khoáng sản",
+    "truluong": "Trữ lượng",
+    "truluongPlaceholder":"Nhập trữ lượng",
+    "donvitruluong": "Đơn vị trữ lượng",
+    "captruluong":"Cấp trữ lượng",
+    "choncaptruluong":"---Chọn cấp trữ lượng---",
+    "phanloai":"Phân loại",
+    "chonphanloai":"---Chọn phân loại---",
+    "chonloaikhoangsan": "---Chọn loại khoáng sản---",
+    "chonnhomkhoangsan": "---Chọn nhóm khoáng sản---",
+    "chondonvitruluong": "---Chọn đơn vị trữ lượng---",
+    "loaikhoangsanRequired": "Yêu cầu phải chọn loại khoáng sản",
+    "tenkhoangsanRequired": "Yêu cầu phải nhập tên khoáng sản",
+    "nhomkhoangsanRequired":"Yêu cầu chọn nhóm khoáng sản",
+    "tenkhoangsanPlaceholder": "Nhập tên khoáng sản",
+    "captruluongRequired":"Yêu cầu nhập cấp trữ lượng",
+    "donvitruluongRequired":"Yêu cầu chọn đơn vị trữ lượng",
+    "phanloaiRequired":"Yêu cầu chọn phân loại",
+    "nhomkhoangsandangdung": "Nhóm khoáng sản đang dùng",
+    "loaikhoangsandangdung": "Loại khoáng sản đang dùng",
+    "informedNotExistedDangKyThamDoLoaiKhoangSan": "Cấp phép thăm dò loại khoáng sản không tồn tại",
+    "thutu":"STT"
+  },
+  "cappheppheduyettruluongkhoangsan_khuvucthamdo":{
+    "titleList": "Danh sách khu vực thăm dò",
+    "titleAdd": "Thêm mới khu vực thăm dò",
+    "titleEdit": "Sửa dữ liệu khu vực thăm dò",
+    "thutu":"STT",
+    "tenkhuvucHeader":"Tên khu vực",
+    "dientichHeader":"Diện tích",
+    "donvidientichHeader":"Đơn vị diện tích",
+    "tenkhuvuc":"Tên khu vực",
+    "hequychieu":"Hệ quy chiếu",
+    "dientich":"Diện tích",
+    "donvidientich":"Đơn vị diện tích",
+    "donvidientichPlaceholder":"---Chọn đơn vị diện tích---",
+    "tenkhuvucPlaceholder":"Nhập tên khu vực",
+    "dientichPlaceholder":"Nhập diện tích",
+    "tenkhuvucRequired":"Tên khu vực không được để trống",
+    "dientichRequired":"Diện tích không được để trống",
+    "donvidientichRequired":"Đơn vị điện tích không được để trống",
+    "hequychieuRequired":"Hệ quy chiếu không được để trống"
+
+
+  },
   "cappheptanthukhoangsan": {
     "titleList": "Danh sách giấy phép tận thu khoáng sản",
     "titleAdd": "Thêm mới giấy phép tận thu khoáng sản",
@@ -108,7 +165,14 @@
     "donViHanhChinhDongCuaMoTabTile": "Đơn vị hành chính",
     "loaiKhoangSanDongCuaMoTabTile": "Loại khoáng sản",
     "khuVucDongCuaMoTabTile": "Khu vực đóng cửa mỏ",
-    "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác"
+    "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác",
+  
+    "donViHanhChinhChuyenNhuongTabTile": "Đơn vị hành chính",
+    "loaiKhoangSanChuyenNhuongTabTile": "Loại khoáng sản",
+    "khuVucChuyenNhuongTabTile": "Khu vực khai thác",
+    "congTrinhChuyenNhuongTabTitle": "Công trình chuyển nhượng",
+    "thongTinChiTietChuyenNhuongTabTitle": "Thông tin chi tiết"
+
   },
   "cptdksthamdokhoangsan": {
     "titleAdd": "Thêm mới cấp phép chi tiết thăm dò khoáng sản",

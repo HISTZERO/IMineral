@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 
 import { RepositoryEloquentService } from "src/app/services/data/baserepository.service";
-import {InputCpThamDoCongTrinhModel, OutputCpThamDoCongTrinhModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.model";
 import { environment } from "src/environments/environment";
 import { ServiceName } from "src/app/shared/constants/service-name";
+import { InputCpPheDuyetTLKSModel, OutputCpPheDuyetTLKSModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cppheduyettruluongkhoangsan/cpPheDuyetTLKS.model';
 
 @Injectable({
   providedIn: 'root'
@@ -15,8 +15,8 @@ export class CpPheDuyetTLKSService extends RepositoryEloquentService {
     super();
     this.setServiceInfo({
       httpClient,
-      inputModelName: new InputCpThamDoCongTrinhModel(),
-      outputModelName: new OutputCpThamDoCongTrinhModel(),
+      inputModelName: new InputCpPheDuyetTLKSModel(),
+      outputModelName: new OutputCpPheDuyetTLKSModel(),
       apiUrl: environment.apiIMineral + ServiceName.CAPPHEPPHEDUYETTLKS
     });
   }
@@ -35,4 +35,15 @@ export class CpPheDuyetTLKSService extends RepositoryEloquentService {
 
     }
   }
+  //Lấy danh sách Loại khoáng sản
+  public layDSTruLuongLoaiKhoangSanTheoGiayPhepPheDuyet(idGiayPhepPD: any) {
+    try {
+      return this.httpClient.get<any>(`${environment.apiIMineral+"cppheduyettruluongloaikhoangsan/getbyidpheduyettruluong"}?idpheduyettruluong=${idGiayPhepPD}`, {
+        headers: this.headers,
+      });
+    } catch (error) {
+
+    }
+  }
+
 }

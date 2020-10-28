@@ -11,6 +11,7 @@ import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogia
 import { ButtonBackCpPheDuyetTruLuongKhoangSan, MenuCpPheDuyetTruLuongKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { GiaypheptailieuListComponent } from 'src/app/features/admin/hosogiayto/giaypheptailieu/giaypheptailieu-list/giaypheptailieu-list.component';
+import { CpPdtlksThongtinquyetdinhComponent } from '../cp-pdtlks-thongtinquyetdinh/cp-pdtlks-thongtinquyetdinh.component';
 
 @Component({
   selector: 'app-cppheduyettruluongkhoangsan-io',
@@ -23,6 +24,8 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("giayPhepIOComp", { static: false }) giayPhepIOComp: GiayphepIoComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
+  @ViewChild("thongTinDangKyComp", { static: false }) thongtindangkyComp: CpPdtlksThongtinquyetdinhComponent;
+  
   // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpPheDuyetTruLuongKhoangSanChitiet;
@@ -194,6 +197,11 @@ export class CppheduyettruluongkhoangsanIoComponent implements OnInit {
       this.taiLieuListComp.idgiayphep = this.idgiayphep;
       this.taiLieuListComp.title = this.dataTranslate.HOSOGIAYTO.tailieu.titleList;
       this.loadedTabState[CpPheDuyetTruLuongKhoangSanTabEnum.TaiLieuGiayPhepDinhKem]  =  await this.taiLieuListComp.manualDataInit();
+    }
+    else if(index === CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep && !this.loadedTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep]){
+      this.thongtindangkyComp.matSidenav=this.matSidenav;
+      this.thongtindangkyComp.content=this.content;
+      // this.loadedTabState[CpPheDuyetTruLuongKhoangSanTabEnum.ThongTinCapPhep]  =  await this.thongtindangkyComp.manualDataInit();
     }
     // else if (index === ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuXuLyHoSoDinhKem]) {
     //   this.taiLieuXuLyHoSoListComp.matSidenav = this.matSidenav;
