@@ -5,7 +5,7 @@ import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
 import { TranslateService } from "@ngx-translate/core";
 
 import { InputMapModel } from "src/app/models/admin/map/map.model";
-import { MapUnits, MapStatus } from "src/app/shared/constants/map-constants";
+import { MapUnits, MapStatus, Widgets, WidgetPositions } from "src/app/shared/constants/map-constants";
 import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
@@ -16,6 +16,7 @@ import { MatDialog } from "@angular/material/dialog";
 import { MatdialogService } from "src/app/services/utilities/matdialog.service";
 import { ThuvienComponent } from "src/app/features/admin/thuvien/thuvien.component";
 import { OutputCategoryModel } from "src/app/models/admin/map/category.model";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-map-io",
@@ -35,6 +36,9 @@ export class MapIoComponent implements OnInit {
   // Show on select
   public mapUnits = MapUnits;
   public mapStatus = MapStatus;
+  public widgetItems = Widgets;
+  public selectedSlugs: any[] = [];
+  public widgetPositions = WidgetPositions;
 
   // Những biến dành cho phần file
   mDialog: any;
@@ -42,7 +46,8 @@ export class MapIoComponent implements OnInit {
   public fileArray: any;
 
   // List projection
-  public listProjections: Object[] = [];
+  // public listProjections: Object[] = [];
+  public listProjections: any;
 
   // List categories
   public categories: OutputCategoryModel[];
@@ -50,7 +55,13 @@ export class MapIoComponent implements OnInit {
   // Data translate
   public dataTranslate: any;
 
-  // Error message
+  // Default widget 
+  public defaultWidgets: any[] = [
+    {
+      slug: '',
+      position: ''
+    }
+  ]
 
   // Error message
   validationErrorMessages = {};
@@ -93,12 +104,23 @@ export class MapIoComponent implements OnInit {
     this.matSidenavService.confirmStatus = null;
     this.mDialog = imDialogService;
     this.mDialog.initDialg(imDialog);
+
   }
 
   async ngOnInit() {
+
+    // Widgets
+    if (this.obj.data && this.obj.data.widgets) {
+      this.defaultWidgets = JSON.parse(this.obj.data.widgets.replace(/\\\"/g, '"'));
+      this.selectedSlugs = this.defaultWidgets
+        .map(widget => widget.slug)
+        .filter(slug => slug !== null);
+    }
+
+    // Tạo mới form
     await this.formInit();
 
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
@@ -112,11 +134,46 @@ export class MapIoComponent implements OnInit {
   setValidation() {
     this.validationErrorMessages = {
       categories: { required: this.dataTranslate.MAP.map.categoriesRequired },
+      mapTitle: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      mapSlug: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      center: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      unit: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      sizeX: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      sizeY: { maxlength: this.dataTranslate.COMMON.default.maxLength }
     };
+  }
+
+  removeWidget(index: number) {
+    this.defaultWidgets.splice(index, 1);
+    this.selectedSlugs = this.defaultWidgets
+      .map(widget => widget.slug)
+      .filter(slug => slug !== null);
+  }
+
+  addNewWidget() {
+    this.defaultWidgets.push({
+      slug: '',
+      position: ''
+    });
+  }
+
+  selectedWidget(args: any, index: number) {
+    this.defaultWidgets[index].slug = args.value;
+    this.selectedSlugs = this.defaultWidgets
+      .map(widget => widget.slug)
+      .filter(slug => slug !== null);
+  }
+
+  selectedPosition(args: any, index: number) {
+    this.defaultWidgets[index].position = args.value;
   }
 
   compareFn(item1, item2) {
     return item1 && item2 ? item1 === item2.id : item1 === item2;
+  }
+
+  compareData(item1, item2) {
+    return item1 && item2 && (item1 === item2.slug || item1 === item2.position);
   }
 
   // init FormControl
@@ -125,17 +182,17 @@ export class MapIoComponent implements OnInit {
       id: [],
       categories: ["", Validators.required],
       objKey: [],
-      mapTitle: [],
-      mapSlug: [],
+      mapTitle: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
+      mapSlug: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       mapAbstract: [],
       extentMinx: [],
       extentMiny: [],
       extentMaxx: [],
       extentMaxy: [],
-      center: [],
-      unit: [],
-      sizeX: [],
-      sizeY: [],
+      center: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
+      unit: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
+      sizeX: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
+      sizeY: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       projectionId: [],
       webMinscale: [],
       webMaxscale: [],
@@ -180,10 +237,15 @@ export class MapIoComponent implements OnInit {
 
   // Add item
   public addItem(itemService) {
+
     // Set category ids
     this.inputModel.categories = this.getCategoryIds(
       this.inputModel.categories
     );
+
+    // Widgets
+    this.inputModel.widgets = JSON.stringify(this.defaultWidgets)
+      .replace(/\"/g, '\\"');
 
     itemService.addItem(this.inputModel).subscribe(
       () => this.matSidenavService.doParentFunction("getAllItems"),
@@ -200,10 +262,15 @@ export class MapIoComponent implements OnInit {
 
   // Update item
   public updateItem(itemService) {
+
     // Set category ids
     this.inputModel.categories = this.getCategoryIds(
       this.inputModel.categories
     );
+
+    // Widgets
+    this.inputModel.widgets = JSON.stringify(this.defaultWidgets)
+      .replace(/\"/g, '\\"');
 
     itemService.updateItem(this.inputModel).subscribe(
       (res) => this.matSidenavService.doParentFunction("getAllItems"),
@@ -288,6 +355,13 @@ export class MapIoComponent implements OnInit {
    */
   deleteAnh() {
     this.srcanh = "";
+  }
+
+  /**
+   * Hiển thị thông tin ảnh
+   */
+  showPreviewImage() {
+    window.open(this.srcanh, "_blank");
   }
 
   /**

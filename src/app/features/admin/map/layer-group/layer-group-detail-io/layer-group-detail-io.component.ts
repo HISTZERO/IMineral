@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import * as ClassicEditor from "@ckeditor/ckeditor5-build-classic";
-import { FormGroup, FormBuilder } from "@angular/forms";
+import { FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Component, OnInit } from "@angular/core";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -15,6 +15,7 @@ import {
 import {
   validationAllErrorMessagesService,
 } from "src/app/services/utilities/validatorService";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-layer-group-detail-io",
@@ -84,10 +85,12 @@ export class LayerGroupDetailIoComponent implements OnInit {
   async ngOnInit() {
     await this.formInit();
 
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+
+    this.setValidation();
   }
 
   // init FormControl
@@ -97,7 +100,7 @@ export class LayerGroupDetailIoComponent implements OnInit {
       layerGroupId: [],
       groupOrder: [],
       groupType: [],
-      layerName: [],
+      layerName: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       layerTitle: [],
       description: [],
       opacity: [],
@@ -109,9 +112,9 @@ export class LayerGroupDetailIoComponent implements OnInit {
       extentMaxy: [],
       minResolution: [],
       maxResolution: [],
-      fieldsInfo: [],
-      fieldsDisplay: [],
-      fieldsInfoFormat: [],
+      fieldsInfo: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      fieldsDisplay: ["", Validators.maxLength(ValidateMaxLength.longText)],
+      fieldsInfoFormat: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       fieldsInfoTemplate: [],
       moreSettings: [],
       tocDisplay: [],
@@ -130,6 +133,18 @@ export class LayerGroupDetailIoComponent implements OnInit {
       );
       this.createForm.setValue({ ...newObj });
     }
+  }
+
+  // Hàm set biến validation từ data translate
+  setValidation() {
+    this.validationErrorMessages = {
+      layerName: {
+        maxlength: this.dataTranslate.COMMON.default.maxLength
+      },
+      fieldsInfo: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsDisplay: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+      fieldsInfoFormat: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+    };
   }
 
   // Update item

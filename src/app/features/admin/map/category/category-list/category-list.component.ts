@@ -8,7 +8,7 @@ import {
 import { Router } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
 import { HttpErrorResponse } from "@angular/common/http";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, GridComponent, SearchEventArgs } from "@syncfusion/ej2-angular-grids";
 import { TranslateService } from "@ngx-translate/core";
 
 import { SettingsCommon } from "src/app/shared/constants/setting-common";
@@ -18,14 +18,10 @@ import { MapFacadeService } from "src/app/services/admin/map/map-facade.service"
 import { CategoryTypes } from "src/app/shared/constants/map-constants";
 import { InputCategoryModel } from "src/app/models/admin/map/category.model";
 import { CategoryIoComponent } from "../category-io/category-io.component";
-import {
-  _canAddCategoriesAction,
-  _canDeleteCategoriesAction,
-  _canEditCategoriesAction,
-  _canListCategoriesAction,
-} from "src/app/shared/constants/actions/map/categories";
-import { _canListHeToaDoAction } from "src/app/shared/constants/actions/map/hetoado";
+// import { CategoryAction } from "src/app/shared/constants/actions/map/categories";
+// import { HeToaDoAction } from "src/app/shared/constants/actions/map/hetoado";
 import { MenuListCategory } from "src/app/shared/constants/sub-menus/map/category";
+import { ActionGrid } from "src/app/shared/constants/share-component-constants";
 
 @Component({
   selector: "app-category-list",
@@ -48,11 +44,11 @@ export class CategoryListComponent implements OnInit {
   public categoryTypes = CategoryTypes;
 
   // Kiểm tra quyền
-  canAddCategoriesAction: boolean = _canAddCategoriesAction;
-  canDeleteCategoriesAction: boolean = _canDeleteCategoriesAction;
-  canEditCategoriesAction: boolean = _canEditCategoriesAction;
-  canListCategoriesAction: boolean = _canListCategoriesAction;
-  listHeToaDoAction: boolean = _canListHeToaDoAction;
+  public canListHeToaDoAction: boolean;
+  public canAddCategoriesAction: boolean;
+  public canEditCategoriesAction: boolean;
+  public canListCategoriesAction: boolean;
+  public canDeleteCategoriesAction: boolean;
 
   // Menu items subheader
   public navArray = MenuListCategory;
@@ -63,24 +59,38 @@ export class CategoryListComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
   public content: ViewContainerRef;
+  @ViewChild("grid", {static: false}) public grid: GridComponent;
+
 
   constructor(
     public router: Router,
+    public translate: TranslateService,
     public cfr: ComponentFactoryResolver,
+    // public heToaDoAction: HeToaDoAction,
+    // public categoryAction: CategoryAction,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
-    private translate: TranslateService
+    public matSidenavService: MatsidenavService,
   ) { }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.canListHeToaDoAction = await this.heToaDoAction.canListHeToaDoAction();
+    // this.canAddCategoriesAction = await this.categoryAction.canAddCategoriesAction();
+    // this.canEditCategoriesAction = await this.categoryAction.canEditCategoriesAction();
+    // this.canListCategoriesAction = await this.categoryAction.canListCategoriesAction();
+    // this.canDeleteCategoriesAction = await this.categoryAction.canDeleteCategoriesAction();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
     this.getAllItems();
-    this.matsidenavService.setSidenav(
+
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
@@ -104,21 +114,21 @@ export class CategoryListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.category.titleAdd);
-    this.matsidenavService.setContentComp(CategoryIoComponent, "new", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.category.titleAdd);
+    this.matSidenavService.setContentComp(CategoryIoComponent, "new", {
       categoriesInSelect: this.categoriesInSelect,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.category.titleEdit);
-    this.matsidenavService.setContentComp(CategoryIoComponent, "edit", {
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.category.titleEdit);
+    this.matSidenavService.setContentComp(CategoryIoComponent, "edit", {
       data,
       categoriesInSelect: this.categoriesInSelect,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // delete
@@ -180,6 +190,13 @@ export class CategoryListComponent implements OnInit {
     this.getAllItems();
   }
 
+  // Xử lý khi search trên grid
+  actionBegin(args: SearchEventArgs) {
+    if (args.requestType === ActionGrid.search) {
+      this.grid.searchSettings.key = this.grid.searchSettings.key.trim();
+    }
+  }
+  
   // Call method
   doFunction(methodName) {
     this[methodName]();

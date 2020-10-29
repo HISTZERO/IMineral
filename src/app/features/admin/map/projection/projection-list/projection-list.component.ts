@@ -7,7 +7,7 @@ import {
 } from "@angular/core";
 import { Router } from "@angular/router";
 import { MatSidenav } from "@angular/material/sidenav";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, GridComponent, SearchEventArgs } from "@syncfusion/ej2-angular-grids";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -20,13 +20,9 @@ import {
   InputProjectionModel,
 } from "src/app/models/admin/map/projection.model";
 import { ProjectionIoComponent } from "src/app/features/admin/map/projection/projection-io/projection-io.component";
-import {
-  _canAddHeToaDoAction,
-  _canDeleteHeToaDoAction,
-  _canEditHeToaDoAction,
-  _canListHeToaDoAction,
-} from "src/app/shared/constants/actions/map/hetoado";
+// import { HeToaDoAction } from "src/app/shared/constants/actions/map/hetoado";
 import { MenuListProjecttion } from "src/app/shared/constants/sub-menus/map/projection";
+import { ActionGrid } from "src/app/shared/constants/share-component-constants";
 
 @Component({
   selector: "app-projection-list",
@@ -49,34 +45,45 @@ export class ProjectionListComponent implements OnInit {
   public projectionStatus = ProjectionStatus;
 
   // Kiểm tra quyền
-  canAddHeToaDoAction: boolean = _canAddHeToaDoAction;
-  canDeleteHeToaDoAction: boolean = _canDeleteHeToaDoAction;
-  canEditHeToaDoAction: boolean = _canEditHeToaDoAction;
-  canListHeToaDoAction: boolean = _canListHeToaDoAction;
+  public canAddHeToaDoAction: boolean;
+  public canDeleteHeToaDoAction: boolean;
+  public canEditHeToaDoAction: boolean;
+  public canListHeToaDoAction: boolean;
 
   public navArray = MenuListProjecttion;
 
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
   public content: ViewContainerRef;
+  @ViewChild("grid", {static: false}) public grid: GridComponent;
+
 
   constructor(
     public router: Router,
+    // public heToaDoAction: HeToaDoAction,
     public cfr: ComponentFactoryResolver,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
+    public matSidenavService: MatsidenavService,
     private translate: TranslateService
   ) { }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.canAddHeToaDoAction = await this.heToaDoAction.canAddHeToaDoAction();
+    // this.canEditHeToaDoAction = await this.heToaDoAction.canEditHeToaDoAction();
+    // this.canListHeToaDoAction = await this.heToaDoAction.canListHeToaDoAction();
+    // this.canDeleteHeToaDoAction = await this.heToaDoAction.canDeleteHeToaDoAction();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
     this.getAllItems();
-    this.matsidenavService.setSidenav(
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
@@ -88,7 +95,7 @@ export class ProjectionListComponent implements OnInit {
   async getAllItems() {
     await this.mapFaceService
       .getProjectionService()
-      .getAll()
+      .getAll({ isGetAll: 1 })
       .subscribe((result) => {
         result.map((res, index) => (res.serialNumber = index + 1));
         this.listItems = result;
@@ -97,20 +104,20 @@ export class ProjectionListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(this.dataTranslate.MAP.projection.titleAdd);
-    this.matsidenavService.setContentComp(ProjectionIoComponent, "new", {});
-    this.matsidenavService.open();
+    this.matSidenavService.setTitle(this.dataTranslate.MAP.projection.titleAdd);
+    this.matSidenavService.setContentComp(ProjectionIoComponent, "new", {});
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.projection.titleEdit
     );
-    this.matsidenavService.setContentComp(ProjectionIoComponent, "edit", {
+    this.matSidenavService.setContentComp(ProjectionIoComponent, "edit", {
       data,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // delete
@@ -172,6 +179,13 @@ export class ProjectionListComponent implements OnInit {
     this.getAllItems();
   }
 
+  // Xử lý khi search trên grid
+  actionBegin(args: SearchEventArgs) {
+    if (args.requestType === ActionGrid.search) {
+      this.grid.searchSettings.key = this.grid.searchSettings.key.trim();
+    }
+  }
+  
   // Call method
   doFunction(methodName) {
     this[methodName]();

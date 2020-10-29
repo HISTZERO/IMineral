@@ -10,60 +10,30 @@
               <div class="card-header">
                 <h3>
                   <span class="title">
-                    {{ "MAP.layer.titleList" | translate }}</span
-                  >
-                  <button
-                    class="btn btn-primary"
-                    style="float: right;"
-                    (click)="openIOSidebar()"
-                    [disabled]="!canAddLayersAction || !listHeToaDoAction"
-                  >
+                    {{ "MAP.layer.titleList" | translate }}</span>
+                  <button class="btn btn-primary" style="float: right;" (click)="openIOSidebar()"
+                    [disabled]="!canAddLayersAction || !listHeToaDoAction">
                     <i class="fal fa-layer-plus"></i>
                     {{ "COMMON.default.add" | translate }}
                   </button>
-                  <button
-                    class="btn btn-outline-primary mr-3"
-                    style="float: right;"
-                    (click)="getAllItems()"
-                    [disabled]="!canListLayersAction"
-                  >
+                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getAllItems()"
+                    [disabled]="!canListLayersAction">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
                   </button>
                 </h3>
               </div>
               <div class="card-body">
-                <ejs-grid
-                  #grid
-                  *ngIf="dataTranslate"
-                  [dataSource]="listItems | async"
-                  allowPaging="true"
-                  [allowSorting]="true"
-                  [allowResizing]="true"
-                  [pageSettings]="settingsCommon.pageSettings"
-                  [toolbar]="settingsCommon.toolbar"
-                  class="table-striped"
-                  (dataStateChange)="dataStateChange($event)"
-                >
+                <ejs-grid #grid *ngIf="dataTranslate" [dataSource]="listItems | async" allowPaging="true"
+                  [allowSorting]="true" [allowResizing]="true" [pageSettings]="settingsCommon.pageSettings"
+                  [toolbar]="settingsCommon.toolbar" class="table-striped" (dataStateChange)="dataStateChange($event)">
                   <e-columns>
-                    <e-column
-                      field="serialNumber"
-                      headerText="{{
+                    <e-column field="serialNumber" headerText="{{
                         'COMMON.default.numericalOrder' | translate
-                      }}"
-                    ></e-column>
-                    <e-column
-                      field="layerTitle"
-                      headerText="{{ 'MAP.layer.layerTitle' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="copyright"
-                      headerText="{{ 'MAP.layer.license' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="layerType"
-                      headerText="{{ 'MAP.layer.layerType' | translate }}"
-                    >
+                      }}"></e-column>
+                    <e-column field="layerTitle" headerText="{{ 'MAP.layer.layerTitle' | translate }}"></e-column>
+                    <e-column field="copyright" headerText="{{ 'MAP.layer.license' | translate }}"></e-column>
+                    <e-column field="layerType" headerText="{{ 'MAP.layer.layerType' | translate }}">
                       <ng-template #template let-data>
                         {{
                           data.layerType
@@ -71,10 +41,7 @@
                         }}
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="projectionId"
-                      headerText="{{ 'MAP.layer.projection' | translate }}"
-                    >
+                    <e-column field="projectionId" headerText="{{ 'MAP.layer.projection' | translate }}">
                       <ng-template #template let-data>
                         {{
                           data.projectionId
@@ -84,19 +51,13 @@
                         }}
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="status"
-                      headerText="{{ 'MAP.layer.status' | translate }}"
-                    >
+                    <e-column field="status" headerText="{{ 'MAP.layer.status' | translate }}">
                       <ng-template #template let-data>
-                        <span
-                          *ngIf="data.status !== null"
-                          [ngClass]="{
+                        <span *ngIf="data.status !== null" [ngClass]="{
                             label: true,
                             'label-success': data.status === 1,
                             'label-default': data.status !== 1
-                          }"
-                        >
+                          }">
                           {{
                             data.status
                               | getFieldValueFromArrayObject: layerStatus:"name"
@@ -104,36 +65,23 @@
                         </span>
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="description"
-                      headerText="{{ 'MAP.layer.description' | translate }}"
-                    >
+                    <e-column field="description" headerText="{{ 'MAP.layer.description' | translate }}">
                       <ng-template #template let-data>
                         <span [innerHTML]="data.description"></span>
                       </ng-template>
                     </e-column>
-                    <e-column
-                      headerText="{{ 'COMMON.default.action' | translate }}"
-                    >
+                    <e-column headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
-                          <button
-                            class="btn btn-sm btn-primary"
-                            (click)="editItem(data)"
-                            title="{{ 'COMMON.default.action' | translate }}"
-                            [disabled]="
+                          <button class="btn btn-sm btn-primary" (click)="editItem(data)"
+                            title="{{ 'COMMON.default.action' | translate }}" [disabled]="
                               !canEditLayersAction || !listHeToaDoAction
-                            "
-                          >
-                            <i class="far fa-edit"></i>
+                            ">
+                            <i class="fal fa-edit"></i>
                           </button>
-                          <button
-                            class="btn btn-sm btn-danger"
-                            (click)="deleteItem(data)"
-                            title="{{ 'COMMON.default.delete' | translate }}"
-                            [disabled]="!canDeleteLayersAction"
-                          >
-                            <i class="far fa-trash"></i>
+                          <button class="btn btn-sm btn-danger" (click)="deleteItem(data)"
+                            title="{{ 'COMMON.default.delete' | translate }}" [disabled]="!canDeleteLayersAction">
+                            <i class="fal fa-trash"></i>
                           </button>
                         </div>
                       </ng-template>
@@ -145,23 +93,14 @@
           </div>
         </div>
       </div>
-      <mat-sidenav
-        #aside
-        [fixedInViewport]="true"
-        [fixedTopGap]="50"
-        class="aside"
-        position="end"
-        style="width: 600px;"
-      >
+      <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+        style="width: 600px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title">
           <button class="btn btn-sm btn-light" (click)="closeIOSidebar()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
-          <span
-            style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text"
-            >{{ matsidenavService.sidenavTitle }}</span
-          >
+          <span style="vertical-align: middle;"
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #ioSidebar> </template>
       </mat-sidenav>

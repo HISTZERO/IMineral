@@ -118,7 +118,8 @@ export class ServiceName {
   public static GETALLCOQUANTIEPNHAN = "getallcoquantiepnhan";
   public static GETALLCOQUANBANHANH = "getallcoquanbanhanh";
   public static GETALLCOQUANCAPPHEP = "getallcoquancapphep";
-
+  // Map
+  public static GEOMETRY = "geometry";
 
   public static NHOMTHAMSO = "nhomthamso";
   public static CONGTY = "congty";

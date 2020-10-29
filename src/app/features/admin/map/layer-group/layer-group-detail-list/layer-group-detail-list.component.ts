@@ -13,6 +13,7 @@ import {
   RowDDService,
   Grid,
   SelectionService,
+  SearchEventArgs,
 } from "@syncfusion/ej2-angular-grids";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -32,14 +33,10 @@ import {
 } from "src/app/shared/constants/map-constants";
 import { LayerGroupDetailIoComponent } from "src/app/features/admin/map/layer-group/layer-group-detail-io/layer-group-detail-io.component";
 import { LayerGroupAddLayerIoComponent } from "src/app/features/admin/map/layer-group/layer-group-add-layer-io/layer-group-add-layer-io.component";
-import {
-  _listGroupLayerByLayerGroupIdAction,
-  _addGroupLayerAction,
-  _deleteGroupLayerAction,
-  _editGroupLayerAction,
-} from "src/app/shared/constants/actions/map/group-layer";
-import { _canListLayersAction } from "src/app/shared/constants/actions/map/layers";
+// import { GroupLayerAction } from "src/app/shared/constants/actions/map/group-layer";
+// import { LayerAction } from "src/app/shared/constants/actions/map/layers";
 import { MenuListLayerGroupDetail } from "src/app/shared/constants/sub-menus/map/layer-group";
+import { ActionGrid } from "src/app/shared/constants/share-component-constants";
 
 @Component({
   selector: "app-layer-group-detail-list",
@@ -75,63 +72,78 @@ export class LayerGroupDetailListComponent implements OnInit {
   public dataTranslate: any;
 
   // Phân quyền
-  listGroupLayerByLayerGroupIdAction = _listGroupLayerByLayerGroupIdAction;
-  addGroupLayerAction = _addGroupLayerAction;
-  editGroupLayerAction = _editGroupLayerAction;
-  deleteGroupLayerAction = _deleteGroupLayerAction;
-  canListLayersAction = _canListLayersAction;
+  public addGroupLayerAction: boolean;
+  public editGroupLayerAction: boolean;
+  public deleteGroupLayerAction: boolean;
+  public listGroupLayerByLayerGroupIdAction: boolean;
+  public canListLayersAction: boolean;
 
   public navArray = MenuListLayerGroupDetail;
 
   @ViewChild("grid", { static: true }) public grid: Grid;
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   constructor(
     private route: ActivatedRoute,
+    private translate: TranslateService,
     public cfr: ComponentFactoryResolver,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
-    private translate: TranslateService
-  ) { }
+    // public groupLayerAction: GroupLayerAction,
+    // public layerAction: LayerAction,
+    public matSidenavService: MatsidenavService,
+  ) {
+    // Layer group detail id
+    this.layerGroupDetailId = parseInt(this.route.snapshot.paramMap.get("id"));
+  }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.canListLayersAction = await this.layerAction.canListLayersAction();
+    // this.addGroupLayerAction = await this.groupLayerAction.addGroupLayerAction();
+    // this.editGroupLayerAction = await this.groupLayerAction.editGroupLayerAction();
+    // this.deleteGroupLayerAction = await this.groupLayerAction.deleteGroupLayerAction();
+    // this.listGroupLayerByLayerGroupIdAction = await this.groupLayerAction.listGroupLayerByLayerGroupIdAction();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
-    this.getAllItems();
-    this.matsidenavService.setSidenav(
+    // Lấy tất cả các layer thuộc group
+    this.getLayersBelongToGroup();
+
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
       this.cfr
     );
 
-    // Layer group detail id
-    this.layerGroupDetailId = parseInt(this.route.snapshot.paramMap.get("id"));
-
+    // Lấy thông tin group
     this.getLayerGroupDetail();
   }
 
-  // Get all items
-  async getAllItems() {
+  /**
+   * Lấy danh sách layer thuộc group
+   */
+  async getLayersBelongToGroup() {
     await this.mapFaceService
       .getMLayerGroupService()
       .getByid(this.layerGroupDetailId)
       .subscribe((res) => {
+        if (!res) return;
         this.listItems = res;
-        // List items is not null
-        if (this.listItems) {
-          this.selectedItemIds = this.listItems.map((item) => item.sourceId);
-        }
+        this.selectedItemIds = this.listItems.map(item => item.sourceId);
       });
   }
 
-  // Get layer group detail
+  /**
+   * Lấy thông tin group
+   */
   getLayerGroupDetail() {
     this.mapFaceService
       .getLayerGroupService()
@@ -143,10 +155,10 @@ export class LayerGroupDetailListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.layerGroupDetail.layerGroupAddLayerTitle
     );
-    this.matsidenavService.setContentComp(
+    this.matSidenavService.setContentComp(
       LayerGroupAddLayerIoComponent,
       "new",
       {
@@ -154,18 +166,18 @@ export class LayerGroupDetailListComponent implements OnInit {
         selectedItemIds: this.selectedItemIds,
       }
     );
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.layerGroupDetail.editLayerGroupTitle
     );
-    this.matsidenavService.setContentComp(LayerGroupDetailIoComponent, "edit", {
+    this.matSidenavService.setContentComp(LayerGroupDetailIoComponent, "edit", {
       data,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // delete
@@ -198,7 +210,7 @@ export class LayerGroupDetailListComponent implements OnInit {
           .getMLayerGroupService()
           .deleteItem({ id: this.selectedItem.id })
           .subscribe(
-            () => this.getAllItems(),
+            () => this.getLayersBelongToGroup(),
             (error: HttpErrorResponse) => {
               this.commonService.showeNotiResult(error.message, 2000);
             },
@@ -224,9 +236,16 @@ export class LayerGroupDetailListComponent implements OnInit {
 
   // Refresh items
   public refreshListItems() {
-    this.getAllItems();
+    this.getLayersBelongToGroup();
   }
 
+  // Xử lý khi search trên grid
+  actionBegin(args: SearchEventArgs) {
+    if (args.requestType === ActionGrid.search) {
+      this.grid.searchSettings.key = this.grid.searchSettings.key.trim();
+    }
+  }
+  
   // Call method
   doFunction(methodName) {
     this[methodName]();
@@ -238,6 +257,7 @@ export class LayerGroupDetailListComponent implements OnInit {
    */
   rowDrop(args) {
     setTimeout(() => {
+
       // Put data
       let layers = [];
       this.grid.getCurrentViewRecords().map((row: any, index) => {

@@ -1,7 +1,7 @@
 import { TranslateService } from "@ngx-translate/core";
 import { Component, OnInit } from "@angular/core";
 import { HttpErrorResponse } from "@angular/common/http";
-import { FormBuilder, FormGroup } from "@angular/forms";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 
 import { LayerGroupStatus } from "src/app/shared/constants/map-constants";
 import { InputLayerGroupModel } from "src/app/models/admin/map/layer-group.model";
@@ -9,6 +9,7 @@ import { MapFacadeService } from "src/app/services/admin/map/map-facade.service"
 import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-map-detail-edit-layergroup-properties",
@@ -58,10 +59,12 @@ export class MapDetailEditLayergroupPropertiesComponent implements OnInit {
 
   async ngOnInit() {
     await this.formInit();
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
+
+    this.setValidation();
 
   }
 
@@ -73,7 +76,7 @@ export class MapDetailEditLayergroupPropertiesComponent implements OnInit {
       status: [],
       groupType: [],
       layerGroupId: [],
-      mapLayerGroupName: [],
+      mapLayerGroupName: ["", Validators.maxLength(ValidateMaxLength.mediumText)],
       layerGroupParentId: [],
     });
 
@@ -86,6 +89,13 @@ export class MapDetailEditLayergroupPropertiesComponent implements OnInit {
       );
       this.createForm.setValue({ ...newObj });
     }
+  }
+
+  // Hàm set biến validation từ data translate
+  setValidation() {
+    this.validationErrorMessages = {
+      mapLayerGroupName: { maxlength: this.dataTranslate.COMMON.default.maxLength },
+    };
   }
 
   // Add item

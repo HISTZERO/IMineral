@@ -9,7 +9,7 @@ import { Observable } from "rxjs";
 import { Router } from "@angular/router";
 import { HttpErrorResponse } from "@angular/common/http";
 import { TranslateService } from "@ngx-translate/core";
-import { DataStateChangeEventArgs } from "@syncfusion/ej2-angular-grids";
+import { DataStateChangeEventArgs, GridComponent, SearchEventArgs } from "@syncfusion/ej2-angular-grids";
 
 import { MatSidenav } from "@angular/material/sidenav";
 import { AdminRoutingName } from "src/app/routes/admin-routes-name";
@@ -23,14 +23,9 @@ import {
   LayerGroupTypes,
 } from "src/app/shared/constants/map-constants";
 import { LayerGroupIoComponent } from "src/app/features/admin/map/layer-group/layer-group-io/layer-group-io.component";
-import {
-  _addLayerGroupsAction,
-  _editLayerGroupsAction,
-  _deleteLayerGroupsAction,
-  _listLayerGroupsAction,
-  _detailLayerGroupsAction,
-} from "src/app/shared/constants/actions/map/layer-groups";
+// import { LayerGroupAction } from "src/app/shared/constants/actions/map/layer-groups";
 import { MenuListLayerGroup } from "src/app/shared/constants/sub-menus/map/layer-group";
+import { ActionGrid } from "src/app/shared/constants/share-component-constants";
 
 @Component({
   selector: "app-layer-group-list",
@@ -60,11 +55,11 @@ export class LayerGroupListComponent implements OnInit {
   public dataTranslate: any;
 
   // Kiểm tra quyền
-  addLayerGroupAction: boolean = _addLayerGroupsAction;
-  deleteLayerGroupsAction: boolean = _deleteLayerGroupsAction;
-  detailLayerGroupsAction: boolean = _detailLayerGroupsAction;
-  editLayerGroupsAction: boolean = _editLayerGroupsAction;
-  listLayerGroupsAction: boolean = _listLayerGroupsAction;
+  public addLayerGroupAction: boolean;
+  public deleteLayerGroupsAction: boolean;
+  public detailLayerGroupsAction: boolean;
+  public editLayerGroupsAction: boolean;
+  public listLayerGroupsAction: boolean;
 
   // Menu items sub-header
   public navArray = MenuListLayerGroup;
@@ -72,15 +67,16 @@ export class LayerGroupListComponent implements OnInit {
   buttonArray = [];
 
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
-  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true })
-  public content: ViewContainerRef;
+  @ViewChild("ioSidebar", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("grid", {static: false}) public grid: GridComponent;
 
   constructor(
     public router: Router,
     public cfr: ComponentFactoryResolver,
     public mapFaceService: MapFacadeService,
     public commonService: CommonServiceShared,
-    public matsidenavService: MatsidenavService,
+    public matSidenavService: MatsidenavService,
+    // public layerGroupAction: LayerGroupAction,
     private translate: TranslateService
   ) {
     // Get new service
@@ -88,13 +84,22 @@ export class LayerGroupListComponent implements OnInit {
   }
 
   async ngOnInit() {
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+
+    // Quyền
+    // this.addLayerGroupAction = await this.layerGroupAction.addLayerGroupsAction();
+    // this.deleteLayerGroupsAction = await this.layerGroupAction.deleteLayerGroupsAction();
+    // this.detailLayerGroupsAction = await this.layerGroupAction.detailLayerGroupsAction();
+    // this.editLayerGroupsAction = await this.layerGroupAction.editLayerGroupsAction();
+    // this.listLayerGroupsAction = await this.layerGroupAction.listLayerGroupsAction();
+
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
 
     this.getAllItems();
-    this.matsidenavService.setSidenav(
+    // Cấu hình sidenav io
+    this.matSidenavService.setSidenav(
       this.matSidenav,
       this,
       this.content,
@@ -131,25 +136,25 @@ export class LayerGroupListComponent implements OnInit {
 
   // open sidebar execute insert
   public openIOSidebar() {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.layerGroup.addLayerGroup
     );
-    this.matsidenavService.setContentComp(LayerGroupIoComponent, "new", {
+    this.matSidenavService.setContentComp(LayerGroupIoComponent, "new", {
       groupIdAndGroupName: this.groupIdAndGroupName,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   // edit open sidebar
   public editItem(data) {
-    this.matsidenavService.setTitle(
+    this.matSidenavService.setTitle(
       this.dataTranslate.MAP.layerGroup.editLayerGroup
     );
-    this.matsidenavService.setContentComp(LayerGroupIoComponent, "edit", {
+    this.matSidenavService.setContentComp(LayerGroupIoComponent, "edit", {
       data,
       groupIdAndGroupName: this.groupIdAndGroupName,
     });
-    this.matsidenavService.open();
+    this.matSidenavService.open();
   }
 
   public detailItem(id) {

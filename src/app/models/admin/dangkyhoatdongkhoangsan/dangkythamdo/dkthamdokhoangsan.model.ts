@@ -11,6 +11,7 @@ export class OutputDkThamDoKhoangSanModel {
   donvithoihan: string;
   donvichieusau: string;
   hequychieu: string;
+  geowgs: string;
   idhoso: string;
   siteid: string;
 }

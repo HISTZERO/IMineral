@@ -12,74 +12,48 @@
                   <span class="title">{{
                     "MAP.layerGroupDetail.detailTitle" | translate
                   }}</span>
-                  <button
-                    class="btn btn-primary"
-                    style="float: right;"
-                    (click)="openIOSidebar()"
-                    [disabled]="!addGroupLayerAction || !canListLayersAction"
-                  >
+                  <button class="btn btn-primary" style="float: right;" (click)="openIOSidebar()"
+                    [disabled]="!addGroupLayerAction || !canListLayersAction">
                     <i class="fal fa-plus-square"></i>
                     {{ "MAP.layerGroupDetail.addButton" | translate }}
                   </button>
-                  <button
-                    class="btn btn-outline-primary mr-3"
-                    style="float: right;"
-                    (click)="getAllItems()"
-                    [disabled]="!listGroupLayerByLayerGroupIdAction"
-                  >
+                  <button class="btn btn-outline-primary mr-3" style="float: right;" (click)="getLayersBelongToGroup()"
+                    [disabled]="!listGroupLayerByLayerGroupIdAction">
                     <i class="far fa-sync-alt"></i>
                     {{ "COMMON.default.load" | translate }}
                   </button>
                 </h3>
               </div>
               <div class="card-body">
-                <div
-                  class="group-layer-detail"
-                  *ngIf="layerGroupDetail !== undefined"
-                >
+                <div class="group-layer-detail" *ngIf="layerGroupDetail !== undefined">
                   <div class="row mx-0">
-                    <label class="col-sm-3 col-form-label text-right"
-                      >{{ "MAP.layerGroup.groupKey" | translate }}:</label
-                    >
-                    <label class="col-sm-9 col-form-label"
-                      ><strong>{{ layerGroupDetail.groupKey }}</strong></label
-                    >
+                    <label
+                      class="col-sm-3 col-form-label text-right">{{ "MAP.layerGroup.groupKey" | translate }}:</label>
+                    <label class="col-sm-9 col-form-label"><strong>{{ layerGroupDetail.groupKey }}</strong></label>
                   </div>
                   <div class="row mx-0">
-                    <label class="col-sm-3 col-form-label text-right"
-                      >{{ "MAP.layerGroup.groupName" | translate }}:</label
-                    >
-                    <label class="col-sm-9 col-form-label"
-                      ><strong>{{ layerGroupDetail.groupName }}</strong></label
-                    >
+                    <label
+                      class="col-sm-3 col-form-label text-right">{{ "MAP.layerGroup.groupName" | translate }}:</label>
+                    <label class="col-sm-9 col-form-label"><strong>{{ layerGroupDetail.groupName }}</strong></label>
                   </div>
                   <div class="row mx-0">
-                    <label class="col-sm-3 col-form-label text-right"
-                      >{{
+                    <label class="col-sm-3 col-form-label text-right">{{
                         "MAP.layerGroupDetail.layerGroupTypes" | translate
-                      }}:</label
-                    >
-                    <label class="col-sm-9 col-form-label"
-                      ><strong>{{
+                      }}:</label>
+                    <label class="col-sm-9 col-form-label"><strong>{{
                         layerGroupDetail.groupType
                           | getFieldValueFromArrayObject: layerGroupTypes:"name"
-                      }}</strong></label
-                    >
+                      }}</strong></label>
                   </div>
                   <div class="row mx-0">
-                    <label class="col-sm-3 col-form-label text-right"
-                      >{{ "MAP.map.status" | translate }}:</label
-                    >
+                    <label class="col-sm-3 col-form-label text-right">{{ "MAP.map.status" | translate }}:</label>
                     <label class="col-sm-9 col-form-label">
                       <strong>
-                        <span
-                          *ngIf="layerGroupDetail.status !== null"
-                          [ngClass]="{
+                        <span *ngIf="layerGroupDetail.status !== null" [ngClass]="{
                             label: true,
                             'label-success': layerGroupDetail.status === 1,
                             'label-default': layerGroupDetail.status !== 1
-                          }"
-                        >
+                          }">
                           {{
                             layerGroupDetail.status
                               | getFieldValueFromArrayObject
@@ -91,49 +65,27 @@
                     </label>
                   </div>
                   <div class="row mx-0">
-                    <label class="col-sm-3 col-form-label text-right"
-                      >{{ "MAP.map.description" | translate }}:</label
-                    >
-                    <label class="col-sm-9 col-form-label"
-                      ><strong
-                        [innerHtml]="layerGroupDetail.description"
-                      ></strong
-                    ></label>
+                    <label class="col-sm-3 col-form-label text-right">{{ "MAP.map.description" | translate }}:</label>
+                    <label class="col-sm-9 col-form-label"><strong
+                        [innerHtml]="layerGroupDetail.description"></strong></label>
                   </div>
                 </div>
-                <ejs-grid
-                  #grid
-                  *ngIf="dataTranslate"
-                  [dataSource]="listItems"
-                  [allowResizing]="true"
-                  [toolbar]="settingsCommon.toolbar"
-                  allowPaging="true"
-                  [allowSorting]="true"
-                  [pageSettings]="settingsCommon.pageSettings"
-                  allowRowDragAndDrop="true"
-                  (rowDrop)="rowDrop($event)"
-                  class="table-striped"
-                >
+                <ejs-grid #grid *ngIf="dataTranslate" [dataSource]="listItems" [allowResizing]="true"
+                  [toolbar]="settingsCommon.toolbar" allowPaging="true" [allowSorting]="true"
+                  [pageSettings]="settingsCommon.pageSettings" allowRowDragAndDrop="true" (rowDrop)="rowDrop($event)"
+                  class="table-striped" (actionBegin)="actionBegin($event)">
                   <e-columns>
-                    <e-column
-                      headerText="{{
+                    <e-column headerText="{{
                         'COMMON.default.numericalOrder' | translate
-                      }}"
-                    >
+                      }}">
                       <ng-template #template let-data>{{
                         +data.index + 1
                       }}</ng-template>
                     </e-column>
-                    <e-column
-                      field="layerTitle"
-                      headerText="{{ 'MAP.layer.layerName' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="layerType"
-                      headerText="{{
+                    <e-column field="layerTitle" headerText="{{ 'MAP.layer.layerName' | translate }}"></e-column>
+                    <e-column field="layerType" headerText="{{
                         'MAP.layerGroupDetail.layerType' | translate
-                      }}"
-                    >
+                      }}">
                       <ng-template #template let-data>
                         {{
                           data.layerType
@@ -141,23 +93,14 @@
                         }}
                       </ng-template>
                     </e-column>
-                    <e-column
-                      field="opacity"
-                      headerText="{{ 'MAP.layer.opacity' | translate }}"
-                    ></e-column>
-                    <e-column
-                      field="status"
-                      headerText="{{ 'MAP.map.status' | translate }}"
-                    >
+                    <e-column field="opacity" headerText="{{ 'MAP.layer.opacity' | translate }}"></e-column>
+                    <e-column field="status" headerText="{{ 'MAP.map.status' | translate }}">
                       <ng-template #template let-data>
-                        <span
-                          *ngIf="data.status !== null"
-                          [ngClass]="{
+                        <span *ngIf="data.status !== null" [ngClass]="{
                             label: true,
                             'label-success': data.status === 1,
                             'label-default': data.status !== 1
-                          }"
-                        >
+                          }">
                           {{
                             data.status
                               | getFieldValueFromArrayObject: layerStatus:"name"
@@ -165,36 +108,23 @@
                         </span>
                       </ng-template>
                     </e-column>
-                    <e-column
-                      headerText="{{ 'MAP.map.description' | translate }}"
-                    >
+                    <e-column headerText="{{ 'MAP.map.description' | translate }}">
                       <ng-template #template let-data>
                         <span [innerHtml]="data.description"></span>
                       </ng-template>
                     </e-column>
-                    <e-column
-                      headerText="{{ 'COMMON.default.action' | translate }}"
-                    >
+                    <e-column headerText="{{ 'COMMON.default.action' | translate }}">
                       <ng-template #template let-data>
                         <div class="btn-group">
-                          <button
-                            class="btn btn-sm btn-danger"
-                            (click)="deleteItem(data)"
-                            title="{{ 'COMMON.default.delete' | translate }}"
-                            [disabled]="!deleteGroupLayerAction"
-                          >
+                          <button class="btn btn-sm btn-danger" (click)="deleteItem(data)"
+                            title="{{ 'COMMON.default.delete' | translate }}" [disabled]="!deleteGroupLayerAction">
                             <i class="far fa-trash"></i>
                           </button>
-                          <button
-                            class="btn btn-sm btn-primary"
-                            (click)="editItem(data)"
-                            title="{{
+                          <button class="btn btn-sm btn-primary" (click)="editItem(data)" title="{{
                               'MAP.layerGroupDetail.displayOptions' | translate
-                            }}"
-                            [disabled]="
+                            }}" [disabled]="
                               !editGroupLayerAction || !canListLayersAction
-                            "
-                          >
+                            ">
                             <i class="fad fa-compass"></i>
                           </button>
                         </div>
@@ -208,23 +138,14 @@
         </div>
       </div>
 
-      <mat-sidenav
-        #aside
-        [fixedInViewport]="true"
-        [fixedTopGap]="50"
-        class="aside"
-        position="end"
-        style="width: 600px;"
-      >
+      <mat-sidenav #aside [fixedInViewport]="true" [fixedTopGap]="50" class="aside" position="end"
+        style="width: 600px;">
         <div class="p-2 pl-3 bg-primary text-white mat-sidenav-title">
           <button class="btn btn-sm btn-light" (click)="closeIOSidebar()">
             <i class="fad fa-chevron-double-right"></i>
           </button>
-          <span
-            style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text"
-            >{{ matsidenavService.sidenavTitle }}</span
-          >
+          <span style="vertical-align: middle;"
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #ioSidebar> </template>
       </mat-sidenav>
