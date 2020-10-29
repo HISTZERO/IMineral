@@ -145,11 +145,9 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       },
       dientichtralai: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.dientichtralaiFormat},
       chieusauthamdotu: {
-        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuRequired,
         pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdotuFormat
       },
       chieusauthamdoden: {
-        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenRequired,
         pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.chieusauthamdodenFormat
       },
       thoihanthamdo: {
@@ -161,7 +159,6 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       mucdichsudungkhoangsan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.mucdichsudungkhoangsanRequired},
       donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvidientichRequired},
       donvithoihan: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvithoihanRequired},
-      donvichieusau: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.donvichieusauRequired},
       hequychieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cptdksthamdokhoangsan.hequychieuRequired}
     };
   }
@@ -241,15 +238,15 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
       diadiem: [DefaultValue.Empty, Validators.required],
       dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       dientichtralai: [DefaultValue.Empty, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
-      chieusauthamdotu: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
-      chieusauthamdoden: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
+      chieusauthamdotu: [DefaultValue.Empty,  Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
+      chieusauthamdoden: [DefaultValue.Empty,  Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
       thoihanthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")]],
       ngaybdthamdo: [DefaultValue.Empty, Validators.required],
       ngayktthamdo: [DefaultValue.Empty, Validators.required],
       mucdichsudungkhoangsan: [DefaultValue.Empty, Validators.required],
       donvidientich: [DefaultValue.Empty, Validators.required],
       donvithoihan: [DefaultValue.Empty, Validators.required],
-      donvichieusau: [DefaultValue.Empty, Validators.required],
+      donvichieusau: [DefaultValue.Empty],
       hequychieu: [DefaultValue.Empty, Validators.required]
     });
   }

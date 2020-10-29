@@ -23,6 +23,7 @@ import {TtksDonvihanhchinhListComponent} from "src/app/features/admin/dangkyhoat
 import {TtksLoaikhoangsanListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component";
 import {TtksKhuvuctanthuListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component";
 import {HoSoGiayToFacadeService} from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
+import {DefaultValue} from "src/app/shared/constants/global-var";
 
 export const DangKyTanThuKhoangSanComponent: any = {
   [LoaiCapPhepEnum.KhaiThacTanThuKhoangSan]: DangkytanthukhoangsanIoComponent,
@@ -53,6 +54,8 @@ export class TtksThongtindangkyComponent implements OnInit {
   isDangKyTanThuKhoangSan = false;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
+  // lưu dữ liệu hệ quy chiếu
+  private heQuyChieu = DefaultValue.Empty;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: false,
@@ -169,6 +172,9 @@ export class TtksThongtindangkyComponent implements OnInit {
   getIdDangKyTanThu(idDangKyTanThu: string) {
     this.iddangkytanthu = idDangKyTanThu;
   }
+  private getHeQuyChieu(heQuyChieu: string) {
+    this.heQuyChieu = heQuyChieu;
+  }
 
   /**
    * Lấy dữ liệu hồ sơ theo IdHoSo
@@ -193,6 +199,7 @@ export class TtksThongtindangkyComponent implements OnInit {
       componentRef.instance.content = this.content;
       componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuFormState(event));
       componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThu(event));
+      componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
     }
   }
 
@@ -218,6 +225,7 @@ export class TtksThongtindangkyComponent implements OnInit {
       this.dangKyTanThuKhuVuc.content = this.content;
       this.dangKyTanThuKhuVuc.iddangkytanthu = this.iddangkytanthu;
       this.dangKyTanThuKhuVuc.loaicapphep = this.itemHoSo.loaicapphep;
+      this.dangKyTanThuKhuVuc.heQuyChieu = this.heQuyChieu;
       this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.dangKyTanThuKhuVuc.manualDataInit();
     }
 

@@ -127,7 +127,7 @@ export class DangkythamdokhoangsanIoComponent implements OnInit {
       this.dangKyThamDoKhoangSan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoKhoangSan) {
-        this.selectGeometryEvent.emit(this.dangKyThamDoKhoangSan.geowgs)
+        this.selectGeometryEvent.emit(this.dangKyThamDoKhoangSan.geowgs);
         this.currentAction = DangKyThamDoActionEnum.Edit;
         this.selectIdDangKyThamDo();
         this.selectHeQuyChieu();

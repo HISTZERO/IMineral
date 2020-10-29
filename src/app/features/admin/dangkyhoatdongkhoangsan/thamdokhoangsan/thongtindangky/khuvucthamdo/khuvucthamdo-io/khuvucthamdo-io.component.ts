@@ -19,7 +19,7 @@ import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatd
 import { InputDkThamDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdokhuvuc.model";
 import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
 import { MatdialogService } from "src/app/services/utilities/matdialog.service";
-import { MapFacadeService } from "../../../../../../../services/admin/map/map-facade.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 
 @Component({
   selector: 'app-khuvucthamdo-io',
