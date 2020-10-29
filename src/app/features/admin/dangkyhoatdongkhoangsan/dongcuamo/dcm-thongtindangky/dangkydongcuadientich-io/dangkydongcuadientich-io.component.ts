@@ -9,23 +9,23 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
-import {DangKyKhaiThacKsActionEnum} from "src/app/shared/constants/enum";
-import {DonViDienTich} from "src/app/shared/constants/common-constants";
-import {DefaultValue} from "src/app/shared/constants/global-var";
-import {TranslateService} from "@ngx-translate/core";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ActivatedRoute} from "@angular/router";
-import {OutputDkDongCuaMoModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.model";
-import {HttpErrorResponse} from "@angular/common/http";
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {GiayphepOptionComponent} from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
-import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
-import {MatSidenav} from "@angular/material/sidenav";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DangKyKhaiThacKsActionEnum } from "src/app/shared/constants/enum";
+import { DonViDienTich } from "src/app/shared/constants/common-constants";
+import { DefaultValue } from "src/app/shared/constants/global-var";
+import { TranslateService } from "@ngx-translate/core";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ActivatedRoute } from "@angular/router";
+import { OutputDkDongCuaMoModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkydongcuamo/dkdongcuamo.model";
+import { HttpErrorResponse } from "@angular/common/http";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
+import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
+import { MatSidenav } from "@angular/material/sidenav";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
 
 @Component({
   selector: 'app-dangkydongcuadientich-io',
@@ -34,8 +34,8 @@ import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
 })
 export class DangkydongcuadientichIoComponent implements OnInit {
 
-  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
-  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
@@ -45,6 +45,8 @@ export class DangkydongcuadientichIoComponent implements OnInit {
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // Chứa dữ liệu Form
   public dangKyDongCuaIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -119,6 +121,7 @@ export class DangkydongcuadientichIoComponent implements OnInit {
       this.dangKyDongCuaMo = await this.getDangKyKhaiThacKsByIdHoSo(this.idhoso);
 
       if (this.dangKyDongCuaMo) {
+        this.selectGeometryEvent.emit(this.dangKyDongCuaMo.geowgs);
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIdDangKyDongCuaMo();
         this.selectCurrentFormState();
@@ -195,8 +198,8 @@ export class DangkydongcuadientichIoComponent implements OnInit {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.dientichdongcuaRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.numberRequired
       },
-      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.donvidientichRequired},
-      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.hequychieuRequired},
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.donvidientichRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.hequychieuRequired },
       dientichkhaithac: {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.dientichkhaithacRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkydongcuadientich.numberRequired
@@ -210,7 +213,7 @@ export class DangkydongcuadientichIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -221,7 +224,7 @@ export class DangkydongcuadientichIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacKsByIdHoSo(idHoSo: string) {
     const dkKhaiThacDongCuaService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyDongCuaMoService();
-    const dangKyItem = await dkKhaiThacDongCuaService.getFetchAll({Idhoso: idHoSo});
+    const dangKyItem = await dkKhaiThacDongCuaService.getFetchAll({ Idhoso: idHoSo });
     return dangKyItem;
   }
 
@@ -320,7 +323,7 @@ export class DangkydongcuadientichIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyDongCuaMoService()
-          .deleteItem({iddangkykhaithac: this.dangKyDongCuaMo.iddangkykhaithac})
+          .deleteItem({ iddangkykhaithac: this.dangKyDongCuaMo.iddangkykhaithac })
           .subscribe(
             () => {
               this.dangKyDongCuaMo = null;

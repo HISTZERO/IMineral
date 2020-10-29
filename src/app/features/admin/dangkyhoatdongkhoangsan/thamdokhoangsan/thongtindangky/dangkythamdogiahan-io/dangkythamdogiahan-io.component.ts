@@ -31,6 +31,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   @Output("selectIdDangKyThamDoEvent") selectIdDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
   @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -111,6 +113,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       this.dangKyThamDoGiaHan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoGiaHan) {
+        this.selectGeometryEvent.emit(this.dangKyThamDoGiaHan.geowgs);
         this.currentAction = DangKyThamDoActionEnum.Edit;
         this.selectIdDangKyThamDo();
         this.selectHeQuyChieu();

@@ -79,6 +79,9 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
   // Chứa tên tab công trình thăm dò
   public tabCongTrinhThamDo: string = "";
 
+  // Chứa goemetry
+  public geoMetry: string;
+
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyTraLaiGiayPhepTabEnum.ThongTinChiTiet]: false,
@@ -86,6 +89,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     [DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan]: false,
     [DangKyTraLaiGiayPhepTabEnum.KhuVuc]: false,
     [DangKyTraLaiGiayPhepTabEnum.CongTrinh]: false,
+    [DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
@@ -94,6 +98,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     [DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan]: true,
     [DangKyTraLaiGiayPhepTabEnum.KhuVuc]: true,
     [DangKyTraLaiGiayPhepTabEnum.CongTrinh]: true,
+    [DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc]: true,
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -183,6 +188,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.KhuVuc] = true;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.CongTrinh] = true;
+        this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case DangKyTraLaiGiayPhepActionEnum.Edit: {
@@ -191,6 +197,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.KhuVuc] = false;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.CongTrinh] = false;
+        this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
@@ -199,6 +206,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.KhuVuc] = true;
         this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.CongTrinh] = true;
+        this.disabledTabState[DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -255,6 +263,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     }
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTraLaiGiayPhepFormState(event));
     componentRef.instance.selectIdDangKyTraLaiEvent.subscribe(event => this.getIdDangKyTraLaiGiayPhep(event));
+    componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
   }
 
   /**
@@ -265,6 +274,7 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     this.loadedTabState[DangKyTraLaiGiayPhepTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[DangKyTraLaiGiayPhepTabEnum.KhuVuc] = false;
     this.loadedTabState[DangKyTraLaiGiayPhepTabEnum.CongTrinh] = false;
+    this.loadedTabState[DangKyTraLaiGiayPhepTabEnum.BanDoKhuVuc] = false;
   }
 
   /**
@@ -325,4 +335,14 @@ export class TralaigiayphepThongtindangkyComponent implements OnInit {
     }
   }
 
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
+  }
 }

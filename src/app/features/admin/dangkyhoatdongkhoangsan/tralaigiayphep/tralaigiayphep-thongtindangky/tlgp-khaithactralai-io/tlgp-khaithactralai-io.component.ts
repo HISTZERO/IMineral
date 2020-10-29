@@ -37,6 +37,9 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
 
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
+
   // Chứa dữ liệu Form
   public dangKyKhaiThacTraLaiIOForm: FormGroup;
 
@@ -121,6 +124,7 @@ export class TlgpKhaithactralaiIoComponent implements OnInit {
       this.dangKyKhaiThacTraLai = await this.getDangKyKhaiThacTraLaiByIdHoSo(this.idhoso);
 
       if (this.dangKyKhaiThacTraLai) {
+        this.selectGeometryEvent.emit(this.dangKyKhaiThacTraLai.geowgs);
         this.currentAction = DangKyTraLaiGiayPhepActionEnum.Edit;
         this.selectIdDangKyKhaiThacTraLai();
         this.selectCurrentFormState();

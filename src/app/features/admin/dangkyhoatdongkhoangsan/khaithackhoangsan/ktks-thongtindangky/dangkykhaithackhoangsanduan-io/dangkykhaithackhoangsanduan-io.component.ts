@@ -36,6 +36,8 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
   @Output("selectIdDangKyKhaiThacKhoangSanEvent") selectIdDangKyKhaiThacKhoangSanEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
@@ -132,6 +134,7 @@ export class DangkykhaithackhoangsanduanIoComponent implements OnInit {
       this.dangKyKhaiThacKhoangSanDuAn = await this.getDangKyKhaiThacKhoangSanDuAnByIdHoSo(this.idhoso);
 
       if (this.dangKyKhaiThacKhoangSanDuAn) {
+        this.selectGeometryEvent.emit(this.dangKyKhaiThacKhoangSanDuAn.geowgs);
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIddangKyKhaiThacKhoangSanDuAn();
         this.selectCurrentFormState();

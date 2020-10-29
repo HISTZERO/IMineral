@@ -64,6 +64,8 @@ export class KtksThongtindangkyComponent implements OnInit {
   public idhoso;
   // Chứa thuộc tính hiển thị tab Thiết bị
   public showTabThietBi = false;
+  // Chứa goemetry
+  public geoMetry: string;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyKhaiThacKhoangSanTabEnum.ThongTinChiTiet]: true,
@@ -72,6 +74,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     [DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac]: false,
     [DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac]: false,
     [DangKyKhaiThacKhoangSanTabEnum.ThietBi]: false,
+    [DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
@@ -80,7 +83,8 @@ export class KtksThongtindangkyComponent implements OnInit {
     [DangKyKhaiThacKhoangSanTabEnum.LoaiKhoangSan]: true,
     [DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac]: true,
     [DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac]: true,
-    [DangKyKhaiThacKhoangSanTabEnum.ThietBi]: true
+    [DangKyKhaiThacKhoangSanTabEnum.ThietBi]: true,
+    [DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc]: true
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -156,6 +160,7 @@ export class KtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case DangKyKhaiThacKsActionEnum.Edit: {
@@ -165,6 +170,7 @@ export class KtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = false;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = false;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = false;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
@@ -174,6 +180,7 @@ export class KtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = true;
         this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = true;
+        this.disabledTabState[DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -215,6 +222,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     componentRef.instance.content = this.content;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyKhaiThacKhoangSanFormState(event));
     componentRef.instance.selectIdDangKyKhaiThacKhoangSanEvent.subscribe(event => this.getIdDangKyKhaiThacKhoangSan(event));
+    componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
   }
 
   private resetLoadedTabState() {
@@ -223,6 +231,7 @@ export class KtksThongtindangkyComponent implements OnInit {
     this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.KhuVucKhaiThac] = false;
     this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = false;
     this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = false;
+    this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.BanDoKhuVuc] = false;
   }
 
   async tabChange(index: any) {
@@ -248,10 +257,23 @@ export class KtksThongtindangkyComponent implements OnInit {
       this.dangKyKhaiThacCongTrinh.iddangkykhaithac = this.iddangkykhaithac;
       this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = await this.dangKyKhaiThacCongTrinh.manualDataInit();
     } else if (index === DangKyKhaiThacKhoangSanTabEnum.ThietBi && !this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi]) {
-      this.dangKyKhaiThacThietBi.matSidenav = this.matSidenav;
-      this.dangKyKhaiThacThietBi.content = this.content;
-      this.dangKyKhaiThacThietBi.iddangkykhaithac = this.iddangkykhaithac;
-      this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = await this.dangKyKhaiThacThietBi.manualDataInit();
+      if (this.showTabThietBi) {
+        this.dangKyKhaiThacThietBi.matSidenav = this.matSidenav;
+        this.dangKyKhaiThacThietBi.content = this.content;
+        this.dangKyKhaiThacThietBi.iddangkykhaithac = this.iddangkykhaithac;
+        this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.ThietBi] = await this.dangKyKhaiThacThietBi.manualDataInit();
+      }
     }
+  }
+
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
   }
 }
