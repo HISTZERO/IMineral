@@ -1,4 +1,13 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
+import {
+  Component,
+  ComponentFactoryResolver, EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
 import {DetailRowService, GridComponent, GridModel, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
 import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
 import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
@@ -11,6 +20,7 @@ import {HttpErrorResponse} from "@angular/common/http";
 import {MatSidenav} from "@angular/material/sidenav";
 import {OutputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
 import {TtksKhuvuctanthuIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component";
+import {DefaultValue} from "src/app/shared/constants/global-var";
 
 @Component({
   selector: 'app-ttks-khuvuctanthu-list',
@@ -27,6 +37,8 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
 
   // Chứa loại cấp phép
   public loaicapphep: number;
@@ -165,6 +177,11 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
       });
     }
     this.listDkKhuVucTanThu = listData;
+    if (this.listDkKhuVucTanThu) {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({ iddangkytanthu: this.iddangkytanthu, hequychieu: this.heQuyChieu, count: this.listDkKhuVucTanThu.length });
+    } else {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Null);
+    }
   }
 
   /**
@@ -202,7 +219,8 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
     this.matSidenavService.setTitle(this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkytanthukhuvuc.titleAdd);
     this.matSidenavService.setContentComp(TtksKhuvuctanthuIoComponent, "new", {
       iddangkytanthu: this.iddangkytanthu,
-      loaicapphep: this.loaicapphep
+      loaicapphep: this.loaicapphep,
+      hequychieu: this.heQuyChieu
     });
     this.matSidenavService.open();
   }
