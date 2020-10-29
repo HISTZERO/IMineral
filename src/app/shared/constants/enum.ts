@@ -307,7 +307,8 @@ export enum CpThamDoKhoangSanTabEnum {
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucThamDo = 3,
-  CongTrinhThamDo = 4
+  CongTrinhThamDo = 4,
+  BanDoKhuVuc = 5
 }
 
 export enum CpTanThuKhoangSanTabEnum {

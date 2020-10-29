@@ -131,6 +131,11 @@
                         </form>
                     </div>
                     <div class="card-body">
+                        <div *ngIf="showButtonViewMap" style="text-align: right;">
+                            <button class="btn btn-success mb-2"
+                                (click)="openDialogBanDoKhuVuc()">
+                                <i class="far fa-eye"></i> {{ 'DANGKYHOATDONGKHOANGSAN.default.bandokhuvuc' | translate}}</button>
+                        </div>
                         <ejs-grid #gridCpToaDoKhuVuc *ngIf="listToaDoKhuVuc" [dataSource]="listToaDoKhuVuc"
                             [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                             [allowTextWrap]="true" [textWrapSettings]='wrapSettings'

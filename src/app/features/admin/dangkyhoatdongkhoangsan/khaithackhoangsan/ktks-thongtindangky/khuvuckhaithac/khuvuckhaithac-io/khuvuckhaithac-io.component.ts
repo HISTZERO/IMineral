@@ -448,6 +448,9 @@ export class KhuvuckhaithacIoComponent implements OnInit {
       this.gridDkToaDoKhuVuc.refresh();
       this.dkKhaiThacToaDoKhuVucIOForm.reset();
       this.errorThuTu = "";
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -466,6 +469,9 @@ export class KhuvuckhaithacIoComponent implements OnInit {
         this.listToaDoKhuVuc.splice(i, 1);
       }
     }
+
+    // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+    this.checkStateButtonViewMap();
 
     // Làm mới grid
     this.gridDkToaDoKhuVuc.refresh();

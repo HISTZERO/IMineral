@@ -28,6 +28,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   // tslint:disable-next-line: no-output-rename
   @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-input-rename
@@ -139,7 +140,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   async getAllCpThamDoKhuVuc() {
     if (this.idcapphepthamdo === DefaultValue.Null || this.idcapphepthamdo === DefaultValue.Undefined
       || this.idcapphepthamdo.trim() === DefaultValue.Empty) {
-    return;
+      return;
     }
 
     const listData: any = await this.capPhepHoatDongKhoangSanFacadeService
@@ -153,7 +154,7 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
     this.listCpThamDoKhuVuc = listData;
 
     if (this.listCpThamDoKhuVuc) {
-      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({idcapphepthamdo: this.idcapphepthamdo, hequychieu: this.heQuyChieu, count: this.listCpThamDoKhuVuc.length});
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({ idcapphepthamdo: this.idcapphepthamdo, hequychieu: this.heQuyChieu, count: this.listCpThamDoKhuVuc.length });
     } else {
       this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
     }
@@ -236,7 +237,10 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
           .getCapPhepThamDoKhuVucService()
           .deleteItem({ idthamdokhuvuc: this.selectedItem.idthamdokhuvuc })
           .subscribe(
-            () => this.getAllCpThamDoKhuVuc(),
+            () => {
+              this.getAllCpThamDoKhuVuc();
+              this.callBackTabThongTin();
+            },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -260,6 +264,13 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName, obj) {
     this[methodName](obj);
+  }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
   }
 
 }

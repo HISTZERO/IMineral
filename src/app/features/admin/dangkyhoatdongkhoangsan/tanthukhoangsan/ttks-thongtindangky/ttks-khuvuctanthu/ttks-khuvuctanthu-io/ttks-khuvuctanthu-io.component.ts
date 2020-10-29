@@ -29,7 +29,7 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
 
 
   // Viewchild template
-  @ViewChild("gridDkToaDoKhuVuc", {static: false}) public gridDkToaDoKhuVuc: GridComponent;
+  @ViewChild("gridDkToaDoKhuVuc", { static: false }) public gridDkToaDoKhuVuc: GridComponent;
 
   // Chứa dữ liệu Form khu vực
   public dKTanThuKhuVucIOForm: FormGroup;
@@ -153,10 +153,10 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
   setValidation() {
     // Error message khu vực
     this.validationErrorMessages = {
-      tenkhuvuc: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.tenkhuvucRequired},
-      dientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.dientichRequired},
-      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.donvidientichRequired},
-      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.hequychieuRequired},
+      tenkhuvuc: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.tenkhuvucRequired },
+      dientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.dientichRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.donvidientichRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.hequychieuRequired },
     };
 
     // Error message Tọa độ
@@ -165,7 +165,7 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutuRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutuIsNumber
       },
-      sohieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieuRequired},
+      sohieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieuRequired },
       toadox: {
         required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadoxRequired,
         pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.toadoxIsNumber,
@@ -276,7 +276,7 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -426,6 +426,9 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
       this.gridDkToaDoKhuVuc.refresh();
       this.dkTanThuToaDoKhuVucIOForm.reset();
       this.errorThuTu = "";
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -445,6 +448,9 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
       }
     }
 
+    // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+    this.checkStateButtonViewMap();
+
     // Làm mới grid
     this.gridDkToaDoKhuVuc.refresh();
   }
@@ -456,7 +462,7 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
   async getToaDoByIdKhuVuc(idtanthukhuvuc: string) {
     const listToaDo: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangKyThamDoToaDoKhuVucService()
-      .getFetchAll({idtanthukhuvuc: idtanthukhuvuc});
+      .getFetchAll({ idtanthukhuvuc: idtanthukhuvuc });
     this.listToaDoKhuVuc = listToaDo;
   }
 
