@@ -42,7 +42,7 @@ export class DktanthugiahanService extends RepositoryEloquentService {
   public getDangKyTanThuGiaHanByIdGiayPhep(idGiayPhep: any) {
     try {
       this.setServiceInfo({
-        apiUrl: environment.apiIMineral + ServiceName.DANGKYTANTHUGIAHAN + "/getdktanthugiahanbyidgiayphep"
+        apiUrl: environment.apiIMineral + ServiceName.DANGKYTANTHUGIAHAN + "/clonethongtindangkytanthufromgiayphepls"
       });
 
       return this.httpClient.get(`${this.apiUrl}?idgiayphep=${idGiayPhep}`, {
