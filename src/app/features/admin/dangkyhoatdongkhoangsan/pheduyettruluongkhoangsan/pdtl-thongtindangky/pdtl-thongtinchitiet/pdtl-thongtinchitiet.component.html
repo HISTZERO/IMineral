@@ -44,19 +44,17 @@
   <div class="card-body">
     <form [formGroup]="pheDuyetTruLuongKSForm">
       <div class="row">
-        <!-- Cột trái -->
-
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- số giấy phép thăm dò -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.sogiayphepthamdo"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-6 col-md-6 col-sm-6">
+            <div class="col-lg-6 col-md-6 col-sm-10">
               <input
                 class="form-control"
                 type="text"
@@ -70,7 +68,6 @@
               <button
                 class="btn btn-primary mb-sm-1 text-nowrap"
                 style="float: right"
-
                 (click)="openDanhSachGiayPhepIOSidenav()"
               >
                 <i class="fal fa-plus-square"></i>
@@ -78,60 +75,18 @@
               </button>
             </div>
           </div>
-
-          <!-- Ngày cấp phép -->
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
-              >{{
-                "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.ngaycapphep"
-                  | translate
-              }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-              <input
-                class="form-control"
-                type="text"
-                formControlName="ngaycapphep"
-                (change)="layThongTinGiayPhepThamDo()"
-              />
-              <!-- <span *ngIf="formErrors.donvituvan" class="alert-danger">{{
-                formErrors.donvituvan
-              }}</span> -->
-            </div>
-          </div>
-
-          <!-- Cơ quan cấp phép -->
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
-              >{{
-                "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.coquancapphep"
-                  | translate
-              }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-              <input
-                class="form-control"
-                type="text"
-                formControlName="coquancapphep"
-              />
-            </div>
-          </div>
         </div>
-
-        <!-- Cột phải -->
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- Tên báo cáo thăm dò -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.tenbaocaothamdo"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <input
                 class="form-control"
                 type="text"
@@ -146,16 +101,40 @@
               }}</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <!-- Ngày cấp phép -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.ngaycapphep"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="ngaycapphep"
+                (change)="layThongTinGiayPhepThamDo()"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- ngày lập báo cáo -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.ngaylapbaocao"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <div class="d-flex">
                 <input
                   class="form-control mr-2"
@@ -180,6 +159,29 @@
               }}</span>
             </div>
           </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <!-- Cơ quan cấp phép -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongtinchitietpheduyettruluongks.coquancapphep"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="coquancapphep"
+              />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- Đơn vị tư vấn -->
           <div class="form-group row mx-0">
             <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"

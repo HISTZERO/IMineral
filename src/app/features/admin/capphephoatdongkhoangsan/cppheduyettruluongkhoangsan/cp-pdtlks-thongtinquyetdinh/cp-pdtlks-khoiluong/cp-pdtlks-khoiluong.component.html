@@ -1,0 +1,121 @@
+<div class="container-fluid mt-3">
+    <div class="row">
+      <div class="col-lg-12" style="padding: 0px">
+        <div class="card border">
+          <div class="card-header">
+            <h3 class="card-title">
+              <div class="row">
+                <div class="col-md-8 mb-sm-1">
+                  <span class="title">{{
+                    "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.titleList"
+                      | translate
+                  }}</span>
+                </div>
+                <div class="col-md-4">
+                  <button
+                    class="btn btn-primary mb-sm-1"
+                    style="float: right"
+                    (click)="showAddSideNavModal()"
+                  >
+                    <i class="fal fa-plus-square"></i>
+                    {{ "COMMON.default.add" | translate }}
+                  </button>
+                  <button
+                    class="btn btn-outline-primary mr-2"
+                    style="float: right"
+                    (click)="layDanhSachKhoiLuongTruLuong()"
+                  >
+                    <i class="far fa-sync-alt"></i>
+                    {{ "COMMON.default.load" | translate }}
+                  </button>
+                </div>
+              </div>
+            </h3>
+          </div>
+          <div class="card-body">
+            <ejs-grid
+              #gridKhoiLuongTruLuong
+              *ngIf="listKhoiluongTruLuong"
+              [dataSource]="listKhoiluongTruLuong"  
+              [editSettings]="settingsCommon.editSettings" 
+              [allowPaging]="true"
+              [allowSorting]="true"
+              [allowTextWrap]="true"
+              [textWrapSettings]="wrapSettings"
+              [pageSettings]="settingsCommon.pageSettings"
+              [toolbar]="settingsCommon.toolbar"
+              [allowResizing]="true"
+            >
+              <e-columns>
+                <!-- số thứ tự -->
+                <e-column
+                  field="thutu"
+                  headerText="{{ 'COMMON.default.numericalOrder' | translate }}"
+                ></e-column>
+
+                <!-- Tên khối lượng trữ lượng -->
+                <e-column
+                  field="tenkhoitruluong"
+                  headerText="{{
+                    'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.tenkhoitruluongHeader'
+                      | translate
+                  }}"
+                ></e-column>
+
+                <!-- Mức sâu cao nhất khối trữ lượng -->
+                <e-column
+                  field="mucsaucaodothapnhat"
+                  headerText="{{
+                    'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.mucsaucaodothapnhatHeader'
+                      | translate
+                  }}"
+                ></e-column>
+
+                <!-- Trữ lượng -->
+                <e-column
+                  field="truluong"
+                  headerText="{{
+                    'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.truluongHeader'
+                      | translate
+                  }}"
+                ></e-column>
+                 <!-- Đơn vị trữ lượng -->
+                <e-column
+                  field="donvitruluong"
+                  headerText="{{
+                    'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.donvitruluongHeader'
+                      | translate
+                  }}"
+                ></e-column>
+                <e-column
+                  field="idpheduyettruluongkhoitruluong"
+                  isPrimaryKey="true"
+                  headerText="{{ 'COMMON.default.action' | translate }}"
+                >
+                  <ng-template #template let-data>
+                    <div class="btn-group">
+                      <button
+                        class="btn btn-sm btn-primary"
+                        title="{{ 'COMMON.default.edit' | translate }}"
+                        (click)="showEditSideNavModal(data.idpheduyettruluongkhoitruluong)"
+                      >
+                        <i class="far fa-edit"></i>
+                      </button>
+                      <button
+                        class="btn btn-sm btn-danger"
+                        title="{{ 'COMMON.default.delete' | translate }}"
+                        (click)="xoaTruLuongKhoiLuong(data.idpheduyettruluongkhoitruluong)"
+                      >
+                        <i class="far fa-trash"></i>
+                      </button>
+                    </div>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
