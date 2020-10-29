@@ -44,19 +44,17 @@
   <div class="card-body">
     <form [formGroup]="dangKyDauGiaKhaiThacForm">
       <div class="row">
-        <!-- Cột trái -->
-
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- tên khu vực đấu giá -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenKhuVucDauGia"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <input
                 class="form-control"
                 type="text"
@@ -67,98 +65,22 @@
                 }}"
               />
               <span *ngIf="formErrors.tenkhuvucdaugia" class="alert-danger">{{
-          formErrors.tenkhuvucdaugia
-        }}</span>
-            </div>
-          </div>
-
-          <!-- Diện tích khu vực -->
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
-              >{{
-                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVuc"
-                  | translate
-              }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-              <input
-                class="form-control"
-                type="text"
-                formControlName="dientichkhuvuc"
-                placeholder="{{
-                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVucPlaceHolder'
-                    | translate
-                }}"
-              />
-              <span *ngIf="formErrors.dientichkhuvuc" class="alert-danger">{{
-                  formErrors.dientichkhuvuc
-                }}</span>
-            </div>
-          </div>
-
-          <!-- Tên loại khoáng sản -->
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
-              >{{
-                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSan"
-                  | translate
-              }}
-              <small>(*)</small>
-            </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-              <input
-                class="form-control"
-                type="text"
-                formControlName="tenloaikhoangsan"
-                placeholder="{{
-                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSanPlaceHolder'
-                    | translate
-                }}"
-              />
-              <span *ngIf="formErrors.tenloaikhoangsan" class="alert-danger">{{
-        formErrors.tenloaikhoangsan
-      }}</span>
-            </div>
-          </div>
-
-          <!-- cơ quan thông báo -->
-          <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
-              >{{
-                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBao"
-                  | translate
-              }}
-            </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
-              <input
-                class="form-control"
-                type="text"
-                formControlName="coquanthongbao"
-                placeholder="{{
-                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBaoPlaceHolder'
-                    | translate
-                }}"
-              />
-              <!-- <span *ngIf="formErrors.diadiem" class="alert-danger">{{
-                    formErrors.diadiem
-                  }}</span> -->
+                formErrors.tenkhuvucdaugia
+              }}</span>
             </div>
           </div>
         </div>
-
-        <!-- Cột phải -->
-        <div class="col-lg-6 col-md-6 col-sm-6">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- địa điểm -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.diaDiem"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <input
                 class="form-control"
                 type="text"
@@ -169,21 +91,51 @@
                 }}"
               />
               <span *ngIf="formErrors.diadiem" class="alert-danger">{{
-                  formErrors.diadiem
-                }}</span>
+                formErrors.diadiem
+              }}</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <!-- Diện tích khu vực -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVuc"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="dientichkhuvuc"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.dienTichKhuVucPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.dientichkhuvuc" class="alert-danger">{{
+                formErrors.dientichkhuvuc
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- Đơn vị diện tích -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.donViDienTich"
                   | translate
               }}
               <small>(*)</small>
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <mat-select
                 class="form-control"
                 formControlName="donvidientich"
@@ -206,19 +158,51 @@
                   {{ donViDienTich.name }}
                 </mat-option>
               </mat-select>
-              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
+              <span *ngIf="formErrors.donvidientich" class="alert-danger">{{
+                formErrors.donvidientich
+              }}</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <!-- Tên loại khoáng sản -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSan"
+                  | translate
+              }}
+              <small>(*)</small>
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="tenloaikhoangsan"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.tenLoaiKhoangSanPlaceHolder'
+                    | translate
+                }}"
+              />
+              <span *ngIf="formErrors.tenloaikhoangsan" class="alert-danger">{{
+                formErrors.tenloaikhoangsan
+              }}</span>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- Số thông báo -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.soThongBao"
                   | translate
               }}
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <input
                 class="form-control"
                 type="text"
@@ -229,20 +213,49 @@
                 }}"
               />
               <span *ngIf="formErrors.sothongbao" class="alert-danger">{{
-          formErrors.sothongbao
-        }}</span>
+                formErrors.sothongbao
+              }}</span>
             </div>
           </div>
+        </div>
+      </div>
 
+      <div class="row">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <!-- cơ quan thông báo -->
+          <div class="form-group row mx-0">
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
+              >{{
+                "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBao"
+                  | translate
+              }}
+            </label>
+            <div class="col-lg-8 col-md-8 col-sm-12">
+              <input
+                class="form-control"
+                type="text"
+                formControlName="coquanthongbao"
+                placeholder="{{
+                  'DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.coQuanThongBaoPlaceHolder'
+                    | translate
+                }}"
+              />
+              <!-- <span *ngIf="formErrors.diadiem" class="alert-danger">{{
+                    formErrors.diadiem
+                  }}</span> -->
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <!-- ngày thông báo -->
           <div class="form-group row mx-0">
-            <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right"
+            <label class="col-lg-4 col-md-4 col-sm-12 col-form-label text-right"
               >{{
                 "DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.ngayThongBao"
                   | translate
               }}
             </label>
-            <div class="col-lg-8 col-md-8 col-sm-8">
+            <div class="col-lg-8 col-md-8 col-sm-12">
               <div class="d-flex">
                 <input
                   class="form-control mr-2"

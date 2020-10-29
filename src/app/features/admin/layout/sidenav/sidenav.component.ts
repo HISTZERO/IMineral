@@ -103,7 +103,7 @@ export class SidenavComponent implements OnInit {
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptanthukhoangsanUri}`
         },
         {
-          label: "Trả lại giấy phép thăm do, khai thác",
+          label: "Trả lại giấy phép thăm dò, khai thác",
           faIcon: "far fa-th-list",
           link: `/${AdminRoutingName.adminUri}/${AdminRoutingName.capphephoatdongkhoangsanUri}/${AdminRoutingName.cptralaigiayphepthamdokhaithackhoangsanUri}`
         },

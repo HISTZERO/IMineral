@@ -214,7 +214,6 @@ export class ThamdokhoangsanIoComponent implements OnInit {
   }
 
   async tabChange(index: any) {
-    console.log("tab changed");
     if (index === ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem && !this.loadedTabState[ThamDoKhoangSanTabEnum.TaiLieuHoSoDinhKem]) {
       this.taiLieuBatBuocListComp.matSidenav = this.matSidenav;
       this.taiLieuBatBuocListComp.content = this.content;

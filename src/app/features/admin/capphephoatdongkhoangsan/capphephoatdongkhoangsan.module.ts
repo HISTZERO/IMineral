@@ -73,6 +73,8 @@ import { CpTtksKhuvuctanthuIoComponent } from './cptanthukhoangsan/cp-ttks-thong
 import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-list/cp-ttks-khuvuctanthu-list.component';
 import { CpPdtlksKhuvucComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc.component';
 import { CpPdtlksKhuvucIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc-io/cp-pdtlks-khuvuc-io.component';
+import { CpPdtlksKhoiluongComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong.component';
+import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong-io/cp-pdtlks-khoiluong-io.component';
 
 
 @NgModule({
@@ -134,7 +136,9 @@ import { CpPdtlksKhuvucIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtl
     CpTtksKhuvuctanthuIoComponent,
     CpTtksKhuvuctanthuListComponent,
     CpPdtlksKhuvucComponent,
-    CpPdtlksKhuvucIoComponent
+    CpPdtlksKhuvucIoComponent,
+    CpPdtlksKhoiluongComponent,
+    CpPdtlksKhoiluongIoComponent
   ],
   exports: [
   ],
@@ -166,6 +170,7 @@ import { CpPdtlksKhuvucIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtl
     CpTtksTanthukhoangsanIoComponent,
     CpPdtlksLoaikhoangsanIoComponent,
     CpPdtlksKhuvucIoComponent,
+    CpPdtlksKhoiluongIoComponent,
     CpTtksTanthukhoangsanIoComponent,
     CpTdksThongtincapphepComponent,
     CpKtksThongtincapphepComponent,

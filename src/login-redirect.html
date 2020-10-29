@@ -8,7 +8,6 @@
   mgr
     .signinRedirectCallback()
     .then((user) => {
-      console.log(user);
       replaceAndNavigate(user);
     })
     .catch((error) => {
