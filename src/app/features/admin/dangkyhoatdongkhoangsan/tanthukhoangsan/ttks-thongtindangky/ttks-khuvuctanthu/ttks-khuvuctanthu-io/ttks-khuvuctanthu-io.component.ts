@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 import { HttpErrorResponse } from "@angular/common/http";
 
@@ -14,10 +15,9 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { InputDkTanThuKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
 import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
-import { ViewcoordinatesComponent } from "../../../../../../../shared/components/viewcoordinates/viewcoordinates.component";
-import { MatDialog } from "@angular/material";
-import { MatdialogService } from "../../../../../../../services/utilities/matdialog.service";
-import { MapFacadeService } from "../../../../../../../services/admin/map/map-facade.service";
+import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 import { DefaultValue } from "src/app/shared/constants/global-var";
 
 @Component({
