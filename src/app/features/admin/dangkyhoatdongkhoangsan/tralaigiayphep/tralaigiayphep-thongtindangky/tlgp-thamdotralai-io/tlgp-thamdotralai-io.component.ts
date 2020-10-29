@@ -16,7 +16,7 @@ import { OutputDkThamDoTraLaiModel } from "src/app/models/admin/dangkyhoatdongkh
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DonViDienTich } from "src/app/shared/constants/common-constants";
-import {DefaultValue} from "src/app/shared/constants/global-var";
+import { DefaultValue } from "src/app/shared/constants/global-var";
 
 @Component({
   selector: 'app-tlgp-thamdotralai-io',
@@ -37,6 +37,9 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
 
   // Chứa dữ liệu Form
   public dangKyThamDoTraLaiIOForm: FormGroup;
@@ -121,6 +124,7 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
       this.dangKyThamDoTraLai = await this.getDangKyThamDoTraLaiByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoTraLai) {
+        this.selectGeometryEvent.emit(this.dangKyThamDoTraLai.geowgs);
         this.currentAction = DangKyTraLaiGiayPhepActionEnum.Edit;
         this.selectIdDangKyThamDoTraLai();
         this.selectCurrentFormState();
@@ -205,12 +209,12 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
-      dientichthamdo: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired},
-      dientichtralai: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichtralaiRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired},
-      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.donvidientichRequired},
-      idgiayphep: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired},
-      sogiayphep: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired},
-      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.hequychieuRequired},
+      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired },
+      dientichtralai: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichtralaiRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.donvidientichRequired },
+      idgiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired },
+      sogiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.hequychieuRequired },
     };
   }
 

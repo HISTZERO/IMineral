@@ -31,7 +31,6 @@ export class ViewcoordinatesComponent implements OnInit {
 
   // Khởi tạo bản đồ
   async mapInit() {
-    console.log(this.dataGetIO.model);
     this.gisAdvanceMapService.setBaseMap("osm");
     this.gisAdvanceMapService.setZoom(7);
     this.gisAdvanceMapService.setCenter(11701591.8, 2384835.28);

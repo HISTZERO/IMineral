@@ -39,6 +39,8 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // Chứa dữ liệu Form
   public dangKyKhaiThacVLXDIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -133,6 +135,7 @@ export class DangkykhaithacvlxdIoComponent implements OnInit {
       this.dangKyKhaiThacVLXD = await this.getDangKyKhaiThacVLXDByIdHoSo(this.idhoso);
 
       if (this.dangKyKhaiThacVLXD) {
+        this.selectGeometryEvent.emit(this.dangKyKhaiThacVLXD.geowgs);
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIddangKyKhaiThacVLXD();
         this.selectCurrentFormState();

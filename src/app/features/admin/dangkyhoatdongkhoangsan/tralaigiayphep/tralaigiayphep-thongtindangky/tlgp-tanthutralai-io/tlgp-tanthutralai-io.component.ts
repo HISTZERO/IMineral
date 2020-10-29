@@ -34,6 +34,9 @@ export class TlgpTanthutralaiIoComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
 
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
+
   // Chứa dữ liệu Form
   public dangKyTanThuTraLaiIOForm: FormGroup;
 
@@ -103,6 +106,7 @@ export class TlgpTanthutralaiIoComponent implements OnInit {
       this.dangKyTanThuTraLai = await this.getDangKyTanThuTraLaiByIdHoSo(this.idhoso);
 
       if (this.dangKyTanThuTraLai) {
+        this.selectGeometryEvent.emit(this.dangKyTanThuTraLai.geowgs);
         this.currentAction = DangKyTraLaiGiayPhepActionEnum.Edit;
         this.selectIdDangKyTanThuTraLai();
         this.selectCurrentFormState();

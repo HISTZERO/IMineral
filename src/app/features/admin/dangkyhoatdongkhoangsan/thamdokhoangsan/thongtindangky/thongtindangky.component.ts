@@ -24,7 +24,7 @@ import { CommonServiceShared } from 'src/app/services/utilities/common-service';
 import { KhuvucthamdoListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/thamdokhoangsan/thongtindangky/khuvucthamdo/khuvucthamdo-list/khuvucthamdo-list.component";
 import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import { DefaultValue } from 'src/app/shared/constants/global-var';
-import { ToadokhuvucComponent } from "../../../../../shared/components/toadokhuvuc/toadokhuvuc.component";
+import { ToadokhuvucComponent } from "src/app/shared/components/toadokhuvuc/toadokhuvuc.component";
 
 export const DangKyThamDoKhoangSanComponent: any = {
   [LoaiCapPhepEnum.ThamDoKhoangSan]: DangkythamdokhoangsanIoComponent,

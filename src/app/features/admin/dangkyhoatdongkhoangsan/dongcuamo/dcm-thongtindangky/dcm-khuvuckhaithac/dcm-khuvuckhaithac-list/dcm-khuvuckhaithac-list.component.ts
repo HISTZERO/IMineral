@@ -1,4 +1,4 @@
-import { Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
 import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { HttpErrorResponse } from "@angular/common/http";
 import { MatSidenav } from "@angular/material/sidenav";
@@ -29,6 +29,9 @@ export class DcmKhuvuckhaithacListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
+
 
   // Chứa loại cấp phép
   public loaicapphep: number;
@@ -259,5 +262,11 @@ export class DcmKhuvuckhaithacListComponent implements OnInit {
     this[methodName](obj);
   }
 
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
+  }
 
 }

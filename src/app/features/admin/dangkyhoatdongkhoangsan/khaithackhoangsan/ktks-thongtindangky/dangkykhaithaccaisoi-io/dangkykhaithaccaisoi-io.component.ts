@@ -39,6 +39,9 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
   // tslint:disable-next-line: no-input-rename
   @Input("nhomLoaiCapPhep") nhomLoaiCapPhep;
 
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
+
   // Chứa dữ liệu Form
   public dangKyKhaiThacCatSoiIOForm: FormGroup;
 
@@ -133,6 +136,7 @@ export class DangkykhaithaccaisoiIoComponent implements OnInit {
       this.dangKyKhaiThacCatSoi = await this.getDangKyKhaiThacCatSoiByIdHoSo(this.idhoso);
 
       if (this.dangKyKhaiThacCatSoi) {
+        this.selectGeometryEvent.emit(this.dangKyKhaiThacCatSoi.geowgs);
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIddangKyKhaiThacCatSoi();
         this.selectCurrentFormState();

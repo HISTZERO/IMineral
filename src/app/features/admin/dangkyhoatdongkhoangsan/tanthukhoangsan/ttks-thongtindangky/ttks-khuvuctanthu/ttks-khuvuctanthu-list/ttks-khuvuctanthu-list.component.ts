@@ -1,16 +1,16 @@
-import {Component, ComponentFactoryResolver, Input, OnInit, Type, ViewChild, ViewContainerRef} from '@angular/core';
-import {DetailRowService, GridComponent, GridModel, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
-import {HttpErrorResponse} from "@angular/common/http";
-import {MatSidenav} from "@angular/material/sidenav";
-import {OutputDkTanThuKhuVucModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
-import {TtksKhuvuctanthuIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component";
+import { Component, ComponentFactoryResolver, EventEmitter, Input, OnInit, Output, Type, ViewChild, ViewContainerRef } from '@angular/core';
+import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute } from "@angular/router";
+import { HttpErrorResponse } from "@angular/common/http";
+import { MatSidenav } from "@angular/material/sidenav";
+import { OutputDkTanThuKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkytanthu/dktanthukhuvuc.model";
+import { TtksKhuvuctanthuIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-io/ttks-khuvuctanthu-io.component";
 
 @Component({
   selector: 'app-ttks-khuvuctanthu-list',
@@ -21,12 +21,15 @@ import {TtksKhuvuctanthuIoComponent} from "src/app/features/admin/dangkyhoatdong
 export class TtksKhuvuctanthuListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridDkKhuVucTanThu", {static: false}) public gridDkKhuVucTanThu: GridComponent;
-  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
-  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild("gridDkKhuVucTanThu", { static: false }) public gridDkKhuVucTanThu: GridComponent;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
+
 
   // Chứa loại cấp phép
   public loaicapphep: number;
@@ -96,7 +99,7 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
     this.childGrid = await {
       queryString: 'serialNumber',
       columns: [
-        {field: 'thutu', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutu, width: 120},
+        { field: 'thutu', headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.thutu, width: 120 },
         {
           field: 'sohieu',
           headerText: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithackhuvuc.sohieu,
@@ -158,7 +161,7 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
   async getAllDkTanThuKhuVuc() {
     const listData: any = await this.dangKyHoatDongKhoangSanFacadeService
       .getDangkyTanThuKhuVucService()
-      .getFetchAll({iddangkytanthu: this.iddangkytanthu});
+      .getFetchAll({ iddangkytanthu: this.iddangkytanthu });
     if (listData) {
       listData.map((khuvuc, index) => {
         khuvuc.serialNumber = index + 1;
@@ -245,9 +248,12 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangkyTanThuKhuVucService()
-          .deleteItem({idtanthukhuvuc: this.selectedItem.idtanthukhuvuc})
+          .deleteItem({ idtanthukhuvuc: this.selectedItem.idtanthukhuvuc })
           .subscribe(
-            () => this.getAllDkTanThuKhuVuc(),
+            () => {
+              this.getAllDkTanThuKhuVuc();
+              this.callBackTabThongTin();
+            },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -273,4 +279,10 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
     this[methodName](obj);
   }
 
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
+  }
 }

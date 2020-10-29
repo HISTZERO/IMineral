@@ -25,9 +25,9 @@
         </mat-tab>
         <mat-tab *ngIf="showTab" [disabled]="disabledTabState[TabType.KhuVuc]"
           label="{{ isKhaiThacTraLai === true ? tabKhuVucKhaiThac : tabKhuVucThamDo}}">
-          <app-khuvuckhaithac-list *ngIf="isKhaiThacTraLai" #dangKyKhaiThacKhuVuc [allowAutoInit]="false">
+          <app-khuvuckhaithac-list *ngIf="isKhaiThacTraLai" (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" #dangKyKhaiThacKhuVuc [allowAutoInit]="false">
           </app-khuvuckhaithac-list>
-          <app-khuvucthamdo-list *ngIf="isThamDoTraLai" #dangKyThamDoKhuVuc [allowAutoInit]="false">
+          <app-khuvucthamdo-list *ngIf="isThamDoTraLai" (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" #dangKyThamDoKhuVuc [allowAutoInit]="false">
           </app-khuvucthamdo-list>
         </mat-tab>
         <mat-tab *ngIf="showTab" [disabled]="disabledTabState[TabType.CongTrinh]"
@@ -36,6 +36,11 @@
           </app-ktks-congtrinhkhaithac-list>
           <app-congtrinhthamdo-list *ngIf="isThamDoTraLai" #dangKyThamDoCongTrinh [allowAutoInit]="false">
           </app-congtrinhthamdo-list>
+        </mat-tab>
+        <mat-tab *ngIf="showTab" [disabled]="disabledTabState[TabType.BanDoKhuVuc]" label="{{ 'DANGKYHOATDONGKHOANGSAN.default.bandokhuvucTab' | translate }}">
+          <ng-template matTabContent>
+            <app-toadokhuvuc [GeometryText]="geoMetry"></app-toadokhuvuc>
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
     </div>
