@@ -14,7 +14,7 @@
           <app-ttks-loaikhoangsan-list  #dangKyTanThuLoaiKhoangSan [allowAutoInit]="false"></app-ttks-loaikhoangsan-list>
         </mat-tab>
         <mat-tab *ngIf="isDangKyTanThuKhoangSan" [disabled]="disabledTabState[TabType.KhuVucTanThu]" label="{{ 'DANGKYHOATDONGKHOANGSAN.thongtindangky.khuVucTanThuTabTile' | translate }}">
-          <app-ttks-khuvuctanthu-list #dangKyTanThuKhuVuc [allowAutoInit]="false"></app-ttks-khuvuctanthu-list>
+          <app-ttks-khuvuctanthu-list #dangKyTanThuKhuVuc (getNumberOfDataAfterInsertUpdateDeleteEvent)="getNumberOfDataKhuVucThamDo($event)" (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" [allowAutoInit]="false"></app-ttks-khuvuctanthu-list>
         </mat-tab>
       </mat-tab-group>
     </div>

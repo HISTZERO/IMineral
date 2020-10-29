@@ -167,7 +167,6 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
 
     if (this.obj && this.obj.hequychieu !== DefaultValue.Undefined && this.obj.hequychieu !== DefaultValue.Null && this.obj.hequychieu.trim() !== DefaultValue.Empty) {
       this.tenHeQuyChieu = this.getTenHeQuyChieu(this.obj.hequychieu);
-      console.log(this.tenHeQuyChieu);
     }
   }
 
@@ -267,12 +266,14 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
     // Gán dữ liệu input vào model
     this.inputModelKhuVuc = this.dKTanThuKhuVucIOForm.value;
     this.inputModelKhuVuc.iddangkytanthu = this.obj.iddangkytanthu;
+    this.inputModelKhuVuc.hequychieu = this.obj.hequychieu;
 
     if (operMode === "new") {
       this.inputModelKhuVuc.toadokhuvuc = await this.generateModelData();
       dKTanThuKhuVucService.insertKhuVucVaToaDoTanThu(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkTanThuKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -290,6 +291,7 @@ export class TtksKhuvuctanthuIoComponent implements OnInit {
       dKTanThuKhuVucService.updateKhuVucVaToaDoTanThu(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkTanThuKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);

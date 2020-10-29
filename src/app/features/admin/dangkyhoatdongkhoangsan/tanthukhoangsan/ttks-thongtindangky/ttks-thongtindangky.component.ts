@@ -56,6 +56,9 @@ export class TtksThongtindangkyComponent implements OnInit {
   public idhoso;
   // lưu dữ liệu hệ quy chiếu
   private heQuyChieu = DefaultValue.Empty;
+
+  // lưu trữ componentRef
+  private componentRef: any;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: false,
@@ -175,6 +178,22 @@ export class TtksThongtindangkyComponent implements OnInit {
   private getHeQuyChieu(heQuyChieu: string) {
     this.heQuyChieu = heQuyChieu;
   }
+  getNumberOfDataKhuVucThamDo(data: any) {
+    if (this.componentRef && this.componentRef.instance) {
+      if (data) {
+        if (data.count && data.count > DefaultValue.Zero) {
+          this.componentRef.instance.disabledHeQuyChieu = true;
+        } else {
+          this.componentRef.instance.disabledHeQuyChieu = false;
+        }
+
+        if (data.hequychieu) {
+          this.componentRef.instance.setDefaultHeQuyChieu(data.hequychieu);
+        }
+      }
+    }
+  }
+
 
   /**
    * Lấy dữ liệu hồ sơ theo IdHoSo
@@ -193,13 +212,13 @@ export class TtksThongtindangkyComponent implements OnInit {
     if (this.itemHoSo) {
       factory = this.cfr.resolveComponentFactory(DangKyTanThuKhoangSanComponent[this.itemHoSo.loaicapphep]);
       const viewContainerRef = this.contentContainer.viewContainerRef;
-      const componentRef: any = viewContainerRef.createComponent(factory);
-      componentRef.instance.idhoso = this.itemHoSo.idhoso;
-      componentRef.instance.matSidenav = this.matSidenav;
-      componentRef.instance.content = this.content;
-      componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuFormState(event));
-      componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThu(event));
-      componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
+      this.componentRef = viewContainerRef.createComponent(factory);
+      this.componentRef.instance.idhoso = this.itemHoSo.idhoso;
+      this.componentRef.instance.matSidenav = this.matSidenav;
+      this.componentRef.instance.content = this.content;
+      this.componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuFormState(event));
+      this.componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThu(event));
+      this.componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
     }
   }
 
@@ -229,6 +248,12 @@ export class TtksThongtindangkyComponent implements OnInit {
       this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.dangKyTanThuKhuVuc.manualDataInit();
     }
 
+  }
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
   }
 
 }

@@ -39,7 +39,7 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
   @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
-
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
   // Chứa loại cấp phép
   public loaicapphep: number;
 
@@ -291,4 +291,10 @@ export class TtksKhuvuctanthuListComponent implements OnInit {
     this[methodName](obj);
   }
 
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
+  }
 }
