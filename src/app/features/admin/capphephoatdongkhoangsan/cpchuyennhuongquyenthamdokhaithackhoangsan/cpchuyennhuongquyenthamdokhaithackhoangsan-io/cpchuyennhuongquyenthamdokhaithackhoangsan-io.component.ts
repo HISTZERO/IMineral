@@ -157,8 +157,6 @@ export class CpchuyennhuongquyenthamdokhaithackhoangsanIoComponent implements On
     } else if (this.isKhaiThac) {
       const cpKhaiThacKhoangSanService = this.capPhepHoatDongKhoangSanFacadeService.getCapPhepKhaiThacKhoangSanService();
       const capPhepItem = await cpKhaiThacKhoangSanService.getCapPhepKhaiThacByIdGiayPhep(idGiayPhep).toPromise();
-      //console.log("Khaithac");
-
       return capPhepItem;
     }
   }

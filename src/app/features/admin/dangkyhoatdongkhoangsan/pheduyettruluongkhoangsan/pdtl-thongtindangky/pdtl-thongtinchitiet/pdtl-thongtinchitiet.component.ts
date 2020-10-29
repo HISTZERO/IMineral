@@ -182,7 +182,6 @@ export class PdtlThongtinchitietComponent implements OnInit {
     const dangKyItem = (await dkPheDuyetTruLuongService
       .getByIdHoSo(idHoSo)
       .toPromise()) as OutputDKPheDuyetTruLuongKSModel;
-    console.log(dangKyItem);
     return dangKyItem;
   }
   /**
@@ -279,7 +278,6 @@ export class PdtlThongtinchitietComponent implements OnInit {
    */
   private selectItemGiayPhep(item: OutputGiayPhepModel) {
     if (item !== DefaultValue.Null && item !== DefaultValue.Undefined) {
-      console.log(item);
       this.pheDuyetTruLuongKSForm.controls.sogiayphep.setValue(item.sogiayphep);
       this.idgiayphep=item.idgiayphep;
       //Lấy thông tin Giấy phép từ API + bind ra giao diện
@@ -320,15 +318,12 @@ export class PdtlThongtinchitietComponent implements OnInit {
           this.pheDuyetTruLuongKSForm.controls.ngaycapphep.setValue("");
           this.pheDuyetTruLuongKSForm.controls.coquancapphep.setValue("");
         }
-      
-      console.log(sogiayphepItem);
     }
    
   }
 
   //Lưu thông tin đăng ký đấu giá khai thác khoáng sản
   async saveDangKyPheDuyetTruLuongKS() {
-    console.log(this.pheDuyetTruLuongKSForm.value);
     this.logAllValidationErrorMessages();
 
     if (!this.pheDuyetTruLuongKSForm.valid) {

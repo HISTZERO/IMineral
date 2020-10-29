@@ -1,0 +1,251 @@
+<div class="pt-3 pb-4">
+  <form [formGroup]="khoiLuongTruLuongForm" class="pt-toolbar">
+    <!-- Tên khối trữ lượng -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.tenkhoitruluong"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="tenkhoitruluong"
+          placeholder="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.tenkhoitruluongPlaceholder'
+              | translate
+          }}"
+        />
+        <span *ngIf="formErrors.tenkhoitruluong" class="alert-danger">{{
+          formErrors.tenkhoitruluong
+        }}</span>
+      </div>
+    </div>
+
+    <!-- Trữ lượng -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.truluong"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="truluong"
+          placeholder="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.truluongPlaceholder'
+              | translate
+          }}"
+        />
+        <span *ngIf="formErrors.truluong" class="alert-danger">{{
+          formErrors.truluong
+        }}</span>
+      </div>
+    </div>
+
+    <!-- Đơn vị trữ lượng -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.donvitruluong"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-select
+              class="form-control"
+              formControlName="donvitruluong"
+              *ngIf="dataTranslate"
+            >
+              <mat-option value="">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.donvitruluongPlaceholder"
+                    | translate
+                }}
+              </mat-option>
+              <mat-option
+                *ngFor="let item of donViTruLuongData"
+                [value]="item.id"
+              >
+                {{ item.name }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <span *ngIf="formErrors.donvitruluong" class="alert-danger">{{
+          formErrors.donvitruluong
+        }}</span>
+      </div>
+    </div>
+    <!-- Cấp trữ lượng -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.captruluong"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <div class="row">
+          <div class="col-sm-12">
+            <mat-select
+              class="form-control"
+              formControlName="idcaptruluong"
+              *ngIf="dataTranslate"
+            >
+              <mat-option value="">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.captruluongPlaceholder"
+                    | translate
+                }}
+              </mat-option>
+              <mat-option
+                *ngFor="let item of capTruLuongData"
+                [value]="item.idcaptruluong"
+              >
+                {{ item.macaptruluong }}
+              </mat-option>
+            </mat-select>
+          </div>
+        </div>
+        <span *ngIf="formErrors.idcaptruluong" class="alert-danger">{{
+          formErrors.idcaptruluong
+        }}</span>
+      </div>
+    </div>
+    <!-- Mức sâu thấp nhất -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.mucsaucaodothapnhat"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="mucsaucaodothapnhat"
+          placeholder="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.mucsaucaodothapnhatPlaceholder'
+              | translate
+          }}"
+        />
+        <span *ngIf="formErrors.mucsaucaodothapnhat" class="alert-danger">{{
+          formErrors.mucsaucaodothapnhat
+        }}</span>
+      </div>
+    </div>
+
+    <!-- Mức sâu cao nhất -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.mucsaucaodocaonhat"
+            | translate
+        }}
+        <small>(*)</small></label
+      >
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="mucsaucaodocaonhat"
+          placeholder="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.mucsaucaodocaonhatPlaceholder'
+              | translate
+          }}"
+        />
+        <span *ngIf="formErrors.mucsaucaodocaonhat" class="alert-danger">{{
+          formErrors.mucsaucaodocaonhat
+        }}</span>
+      </div>
+    </div>
+    <!-- Đơn vị chiều sâu -->
+    <div class="form-group row mx-0">
+        <label
+          class="col-lg-3 col-md-3 col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvichieusau" | translate }}
+          <small>(*)</small>
+        </label>
+        <div class="col-lg-9 col-md-9 col-sm-9">
+          <mat-select class="form-control" formControlName="donvichieusau" *ngIf="dataTranslate"
+                      placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.chondonvichieusau' | translate }}">
+            <mat-option value="">
+              {{ "CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.chondonvichieusau" | translate }}
+            </mat-option>
+            <mat-option *ngFor="let donViDoSau of donViDoSauList" [value]="donViDoSau.id">
+              {{ donViDoSau.name }}
+            </mat-option>
+          </mat-select>
+          <span *ngIf="formErrors.donvichieusau" class="alert-danger">{{formErrors.donvichieusau}}</span>
+        </div>
+      </div>
+    <!-- Ghi chú -->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right"
+        >{{
+          "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.ghichu"
+            | translate
+        }}
+      </label>
+      <div class="col-sm-9">
+        <input
+          class="form-control"
+          type="text"
+          formControlName="ghichu"
+          placeholder="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khoiluong.ghichuPlaceholder'
+              | translate
+          }}"
+        />
+      </div>
+    </div>
+    <div class="toolbar-container py-2">
+      <div class="function-toolbar">
+        <div class="form-group row mx-0">
+          <div class="col-12">
+            <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+              <i class="far fa-save"></i>
+              {{ "COMMON.default.saveAndClose" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-primary float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onContinueAdd(purpose)"
+            >
+              <i class="far fa-download"></i>
+              {{ "COMMON.default.saveAndRefresh" | translate }}
+            </button>
+            <button
+              class="btn btn-outline-info float-right mr-3"
+              *ngIf="purpose === 'new'"
+              (click)="onFormReset()"
+            >
+              <i class="far fa-sync-alt"></i>
+              {{ "COMMON.default.refresh" | translate }}
+            </button>
+            <button
+              class="btn btn-danger float-right mr-3"
+              (click)="closeCpThamDoLoaiKhoangSanIOSidenav()"
+            >
+              <i class="far fa-times-circle"></i>
+              {{ "COMMON.default.cancel" | translate }}
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

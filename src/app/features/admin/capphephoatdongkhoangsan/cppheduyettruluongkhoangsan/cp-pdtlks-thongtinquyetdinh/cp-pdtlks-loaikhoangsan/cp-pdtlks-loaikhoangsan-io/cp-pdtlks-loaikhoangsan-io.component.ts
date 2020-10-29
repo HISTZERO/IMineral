@@ -85,7 +85,6 @@ export class CpPdtlksLoaikhoangsanIoComponent implements OnInit {
 
     // Khởi tạo form theo dạng add or edit (nếu là edit thì binding dữ liệu trên UI)
     await this.bindingConfigAddOrUpdate();
-
   }
 
   /**
@@ -97,7 +96,7 @@ export class CpPdtlksLoaikhoangsanIoComponent implements OnInit {
       idloaikhoangsan: ["", Validators.required],
       idnhomkhoangsan: ["", Validators.required],
       idcaptruluong: ["", Validators.required],
-      truluong: ["", Validators.required],
+      truluong: ["", [Validators.required, Validators.pattern("^[0-9-+]+$")]],
       donvitruluong: ["", Validators.required],
       phanloai: ["", Validators.required],
     });
@@ -138,6 +137,8 @@ export class CpPdtlksLoaikhoangsanIoComponent implements OnInit {
       truluong: {
         required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN
           .cappheppheduyettruluong_loaikhoangsan.captruluongRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN
+          .cappheppheduyettruluongkhoangsan_khoiluong.truluongIsNumber,
       },
       donvitruluong: {
         required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN
@@ -239,10 +240,10 @@ export class CpPdtlksLoaikhoangsanIoComponent implements OnInit {
     //đẩy thông tin sang cột bên nếu là edit
     if (this.purpose == "edit") {
       this.tenNhomKhoangSanDisplay = event.source.triggerValue;
-      this.tenLoaiKhoangSanDisplay=null;
+      this.tenLoaiKhoangSanDisplay = null;
       if (event.value == "") {
         this.tenNhomKhoangSanDisplay = this.obj.tennhomkhoangsan;
-      this.tenLoaiKhoangSanDisplay = this.obj.tenloaikhoangsan;
+        this.tenLoaiKhoangSanDisplay = this.obj.tenloaikhoangsan;
       }
     }
   }
@@ -253,7 +254,7 @@ export class CpPdtlksLoaikhoangsanIoComponent implements OnInit {
     if (this.purpose == "edit") {
       this.tenLoaiKhoangSanDisplay = event.source.triggerValue;
       if (event.value == "") {
-        debugger
+        debugger;
         this.tenLoaiKhoangSanDisplay = null;
       }
     }

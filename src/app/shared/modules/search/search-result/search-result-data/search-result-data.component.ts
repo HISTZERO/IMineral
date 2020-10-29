@@ -248,7 +248,6 @@ export class SearchResultDataComponent implements OnInit, OnChanges {
   }
   // Lấy data đơn vị hành chính
   getDvhc(data) {
-    console.log(data)
     let tenXa: any;
     let tenHuyen: any;
     let tenTinh: any;
