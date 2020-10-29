@@ -9,20 +9,20 @@ import {
   ViewChild,
   ViewContainerRef
 } from '@angular/core';
-import {TranslateService} from "@ngx-translate/core";
-import {ActivatedRoute} from "@angular/router";
+import { TranslateService } from "@ngx-translate/core";
+import { ActivatedRoute } from "@angular/router";
 
-import {ContentContainerDirective} from "src/app/shared/directives/content-container/content-container.directive";
-import {DangKyTanThuKhoangSanTabEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum} from "src/app/shared/constants/enum";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {DangKyHoatDongKhoangSanFacadeService} from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
-import {MatSidenav} from "@angular/material/sidenav";
-import {DangkytanthukhoangsanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component";
-import {DangkytanthugiahanIoComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component";
-import {TtksDonvihanhchinhListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component";
-import {TtksLoaikhoangsanListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component";
-import {TtksKhuvuctanthuListComponent} from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component";
-import {HoSoGiayToFacadeService} from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
+import { ContentContainerDirective } from "src/app/shared/directives/content-container/content-container.directive";
+import { DangKyTanThuKhoangSanTabEnum, DangKyThamDoActionEnum, LoaiCapPhepEnum } from "src/app/shared/constants/enum";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { DangKyHoatDongKhoangSanFacadeService } from "src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service";
+import { MatSidenav } from "@angular/material/sidenav";
+import { DangkytanthukhoangsanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthukhoangsan-io/dangkytanthukhoangsan-io.component";
+import { DangkytanthugiahanIoComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/dangkytanthugiahan-io/dangkytanthugiahan-io.component";
+import { TtksDonvihanhchinhListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-donvihanhchinh/ttks-donvihanhchinh-list/ttks-donvihanhchinh-list.component";
+import { TtksLoaikhoangsanListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-loaikhoangsan/ttks-loaikhoangsan-list/ttks-loaikhoangsan-list.component";
+import { TtksKhuvuctanthuListComponent } from "src/app/features/admin/dangkyhoatdongkhoangsan/tanthukhoangsan/ttks-thongtindangky/ttks-khuvuctanthu/ttks-khuvuctanthu-list/ttks-khuvuctanthu-list.component";
+import { HoSoGiayToFacadeService } from "src/app/services/admin/hosogiayto/hosogiayto-facade.service";
 import {DefaultValue} from "src/app/shared/constants/global-var";
 
 export const DangKyTanThuKhoangSanComponent: any = {
@@ -37,13 +37,13 @@ export const DangKyTanThuKhoangSanComponent: any = {
 })
 export class TtksThongtindangkyComponent implements OnInit {
 
-  @ViewChild('thongTinDangKyTanThuTabs', {static: false}) thongTinDangKyTanThuTabs;
-  @ViewChild(ContentContainerDirective, {static: true}) contentContainer: ContentContainerDirective;
-  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
-  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
-  @ViewChild("dangKyTanThuKsDvhc", {static: false}) dangKyTanThuKsDvhc: TtksDonvihanhchinhListComponent;
-  @ViewChild("dangKyTanThuLoaiKhoangSan", {static: false}) dangKyTanThuLoaiKhoangSan: TtksLoaikhoangsanListComponent;
-  @ViewChild("dangKyTanThuKhuVuc", {static: false}) dangKyTanThuKhuVuc: TtksKhuvuctanthuListComponent;
+  @ViewChild('thongTinDangKyTanThuTabs', { static: false }) thongTinDangKyTanThuTabs;
+  @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
+  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild("dangKyTanThuKsDvhc", { static: false }) dangKyTanThuKsDvhc: TtksDonvihanhchinhListComponent;
+  @ViewChild("dangKyTanThuLoaiKhoangSan", { static: false }) dangKyTanThuLoaiKhoangSan: TtksLoaikhoangsanListComponent;
+  @ViewChild("dangKyTanThuKhuVuc", { static: false }) dangKyTanThuKhuVuc: TtksKhuvuctanthuListComponent;
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // tslint:disable-next-line: no-output-rename
@@ -54,14 +54,20 @@ export class TtksThongtindangkyComponent implements OnInit {
   isDangKyTanThuKhoangSan = false;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
+
+  // Chứa goemetry
+  public geoMetry: string;
+
   // lưu dữ liệu hệ quy chiếu
   private heQuyChieu = DefaultValue.Empty;
+
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [DangKyTanThuKhoangSanTabEnum.ThongTinChiTiet]: false,
     [DangKyTanThuKhoangSanTabEnum.DonViHanhChinh]: false,
     [DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan]: false,
     [DangKyTanThuKhoangSanTabEnum.KhuVucTanThu]: false,
+    [DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
@@ -69,6 +75,7 @@ export class TtksThongtindangkyComponent implements OnInit {
     [DangKyTanThuKhoangSanTabEnum.DonViHanhChinh]: true,
     [DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan]: true,
     [DangKyTanThuKhoangSanTabEnum.KhuVucTanThu]: true,
+    [DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc]: true,
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -81,11 +88,11 @@ export class TtksThongtindangkyComponent implements OnInit {
   private itemHoSo: any;
 
   constructor(private cfr: ComponentFactoryResolver,
-              private translate: TranslateService,
-              private activatedRoute: ActivatedRoute,
-              public commonService: CommonServiceShared,
-              private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
-              private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
+    private translate: TranslateService,
+    private activatedRoute: ActivatedRoute,
+    public commonService: CommonServiceShared,
+    private dangKyHoatDongKhoangSanFacadeService: DangKyHoatDongKhoangSanFacadeService,
+    private hoSoGiayToFacadeService: HoSoGiayToFacadeService) {
   }
 
   async ngOnInit() {
@@ -143,6 +150,7 @@ export class TtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case DangKyThamDoActionEnum.Edit: {
@@ -150,6 +158,7 @@ export class TtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = false;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
@@ -157,6 +166,7 @@ export class TtksThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = true;
+        this.disabledTabState[DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -199,6 +209,7 @@ export class TtksThongtindangkyComponent implements OnInit {
       componentRef.instance.content = this.content;
       componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyTanThuFormState(event));
       componentRef.instance.selectIdDangKyTanThuKhoangSanEvent.subscribe(event => this.getIdDangKyTanThu(event));
+      componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
       componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
     }
   }
@@ -207,6 +218,7 @@ export class TtksThongtindangkyComponent implements OnInit {
     this.loadedTabState[DangKyTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
     this.loadedTabState[DangKyTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[DangKyTanThuKhoangSanTabEnum.KhuVucTanThu] = false;
+    this.loadedTabState[DangKyTanThuKhoangSanTabEnum.BanDoKhuVuc] = false;
   }
 
   async tabChange(index: any) {
@@ -231,4 +243,17 @@ export class TtksThongtindangkyComponent implements OnInit {
 
   }
 
+  /**
+   * Lấy dữ liệu geometry
+   */
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
+  }
 }

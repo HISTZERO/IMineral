@@ -85,10 +85,11 @@ export class KhuvucthamdoIoComponent implements OnInit {
   // Chứa error tọa độ khu vực
   public validationErrorToaDo = {}
 
-  public mDialog: any;
-
   // Lưu tên hệ quy chiếu sử dụng hiện tại
   public tenHeQuyChieu = DefaultValue.Empty;
+
+  // Chứa service matdialog
+  public mDialog: any;
 
   // Chứa geoJson
   public dataGeoJson: any;
