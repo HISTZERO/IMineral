@@ -101,6 +101,51 @@
     "dientichRequired":"Diện tích không được để trống",
     "donvidientichRequired":"Đơn vị điện tích không được để trống",
     "hequychieuRequired":"Hệ quy chiếu không được để trống"
+  },
+  "cappheppheduyettruluongkhoangsan_khoiluong":{
+    "titleList": "Danh sách khối trữ lượng",
+    "titleAdd": "Thêm mới khối trữ lượng",
+    "titleEdit": "Sửa dữ liệu khối trữ lượng",
+    "thutu":"STT",
+
+    "tenkhoitruluong":"Tên khối trữ lượng",
+    "tenkhoitruluongHeader":"Tên khối trữ lượng",
+    "tenkhoitruluongRequired":"Tên khối trữ lượng không được để trống",
+    "tenkhoitruluongPlaceholder":"Nhập tên khối trữ lượng",
+
+    "mucsaucaodothapnhat":"Mức sâu thấp nhất(m)",
+    "mucsaucaodothapnhatHeader":"Mức sâu thấp nhất khối trữ lượng",
+    "mucsaucaodothapnhatRequired":"Mức sâu thấp nhất khối trữ lượng không được để trống",
+    "mucsaucaodothapnhatPlaceholder":"Nhập mức sâu thấp nhất",
+    "mucsaucaodothapnhatIsNumber":"Mức sâu thấp nhất phải là kiểu số",
+
+    "mucsaucaodocaonhat":"Mức sâu cao nhất(m)",
+    "mucsaucaodocaonhatHeader":"Mức sâu cao nhất khối trữ lượng",
+    "mucsaucaodocaonhatRequired":"Mức sâu cao nhất khối trữ lượng không được để trống",
+    "mucsaucaodocaonhatPlaceholder":"Nhập mức sâu cao nhất",
+    "mucsaucaodocaonhatIsNumber":"Mức sâu cao nhất phải là kiểu số",
+
+    "truluong":"Trữ lượng",
+    "truluongHeader":"Trữ lượng",
+    "truluongPlaceholder":"Nhập trữ lượng",
+    "truluongRequired":"Trữ lượng không được để trống",
+    "truluongIsNumber":"Trữ lượng phải là kiểu số",
+
+    "captruluong":"Cấp trữ lượng",
+    "captruluongPlaceholder":"---Chọn cấp trữ lượng---",
+    "captruluongRequired":"Cấp trữ lượng không được để trống",
+
+    "donvitruluong":"Đơn vị trữ lượng",
+    "donvitruluongHeader":"Đơn vị trữ lượng",
+    "donvitruluongPlaceholder":"---Chọn đơn vị trữ lượng---",
+    "donvitruluongRequired":"Đơn vị trữ lượng không được để trống",
+
+    "donvichieusau":"Đơn vị chiều sâu",
+    "donvichieusauPlaceholder":"Nhập đơn vị chiều sâu",
+    "donvichieusauRequired":"Đơn vị chiều sâu không được để trống",
+
+    "ghichu":"Ghi chú",
+    "ghichuPlaceholder":"Nhập ghi chú"
 
 
   },

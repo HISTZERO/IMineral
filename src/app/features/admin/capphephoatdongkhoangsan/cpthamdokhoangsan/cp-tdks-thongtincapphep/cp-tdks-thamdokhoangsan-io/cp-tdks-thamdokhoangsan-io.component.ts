@@ -184,7 +184,6 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
 
     if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan)) {
       this.capPhepThamDoKhoangSan = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
-     // console.log(this.capPhepThamDoKhoangSan);
       if (this.capPhepThamDoKhoangSan) {
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();

@@ -97,6 +97,8 @@ export class ServiceName {
   public static CAPPHEPPHEDUYETTLKS_LOAIKS="cppheduyettruluongloaikhoangsan";
   //cấp phép phê duyệt trữ lượng khoáng sản -khu vực thăm dò
   public static CAPPHEPPHEDUYETTLKS_KHUVUC="cpPheDuyetTruLuongkhuvuc"
+  // cấp phép phê duyệt trữ lượng khoáng sản - khối lượng trữ lượng
+  public static CAPPHEPPHEDUYETTLKS_KHOITRULUONG="cppheduyettruluongkhoitruluong"
   // Cấp phép tận thu khoáng sản
   public static CPTANTHUKHOANGSAN = "cptanthukhoangsan";
   public static CPTANTHUDVHC = "cappheptanthudvhc";
