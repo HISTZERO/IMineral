@@ -18,6 +18,8 @@ import { CpPheDuyetTLKSLoaiKSService } from './cppheduyettruluongkhoangsan/cpphe
 import {CpTanThuDvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthudvhc.service";
 import {CpTanThuLoaiKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthuloaikhoangsan.service";
 import {CptanthukhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.service";
+import { CpPheDuyetTLKSKhuVucService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_khuvuc.service';
+import { CpPheDuyetKhoangSanKhoiLuongTruLuongService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_khoiluong.service';
 
 @Injectable({
   providedIn: "root",
@@ -40,12 +42,21 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepThamDoLoaiKhoangSanService() {
     return new CpThamDoLoaiKhoangSanService(this.httpClient);
   }
+  // cấp phép phê duyệt trữ lượng khoáng sản
   public getCapPhepPheDuyetTLKSService(){
     return new CpPheDuyetTLKSService(this.httpClient)
   }
   //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
   public getCapPhepPheDuyetTLKS_loaiKSService(){
     return new CpPheDuyetTLKSLoaiKSService(this.httpClient);
+  }
+   //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
+   public getCapPhepPheDuyetTLKS_khoiLuongTruLuongService(){
+    return new CpPheDuyetKhoangSanKhoiLuongTruLuongService(this.httpClient);
+  }
+  // cấp phép phê duyệt trữ lượng ks - Khu vực khai thác
+  public getCapPhepPheDuyetTLKS_KhuVucService(){
+    return new CpPheDuyetTLKSKhuVucService(this.httpClient);
   }
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {

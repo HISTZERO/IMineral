@@ -31,6 +31,8 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   @Output("selectIdDangKyThamDoEvent") selectIdDangKyThamDoEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
   @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Nhóm loại cấp phép
@@ -111,6 +113,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       this.dangKyThamDoGiaHan = await this.getDangKyThamDoByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoGiaHan) {
+        this.selectGeometryEvent.emit(this.dangKyThamDoGiaHan.geowgs);
         this.currentAction = DangKyThamDoActionEnum.Edit;
         this.selectIdDangKyThamDo();
         this.selectHeQuyChieu();
@@ -142,7 +145,7 @@ export class DangkythamdogiahanIoComponent implements OnInit {
       dientichtralai: [DefaultValue.Empty,  Validators.pattern("^[0-9]+\\.{0,1}\\d{0,2}$")],
       donvidientich: [DefaultValue.Empty, Validators.required],
       giahandenngay: [DefaultValue.Empty, Validators.required],
-      lydogiahan: [DefaultValue.Empty, Validators.required],
+      lydogiahan: [DefaultValue.Empty],
       hequychieu: [DefaultValue.Empty, Validators.required],
       sogiayphep: [DefaultValue.Empty, Validators.required],
       idgiayphep: [DefaultValue.Empty, Validators.required]
@@ -215,11 +218,10 @@ export class DangkythamdogiahanIoComponent implements OnInit {
   private setValidation() {
     this.validationErrorMessages = {
       dientichcapphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichcapphepFormat },
-      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdotuFormat },
+      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichthamdoFormat },
       dientichtralai: { pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.dientichtralaiFormat },
       donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.donvidientichRequired },
       giahandenngay: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.giahandenngayRequired },
-      lydogiahan: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.lydogiahanRequired },
       hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.hequychieuRequired },
       idgiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.idgiayphepRequired },
       sogiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdogiahan.sogiayphepRequired }

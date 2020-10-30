@@ -1,0 +1,138 @@
+<div class="card border mt-3">
+  <div class="card-header">
+    <h3>
+      <div class="row">
+        <div class="col-md-4 mb-sm-1">
+          <span class="title">{{
+            "CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.titleList"
+              | translate
+          }}</span>
+        </div>
+        <div class="col-md-8">
+          <button
+            class="btn btn-primary mb-sm-1"
+            style="float: right"
+            (click)="openAddSideNavModal()"
+          >
+            <i class="fal fa-plus-square"></i>
+            {{ "COMMON.default.add" | translate }}
+          </button>
+          <button
+            class="btn btn-outline-primary mr-2"
+            style="float: right"
+            (click)="layDanhSachKhuVuc()"
+          >
+            <i class="far fa-sync-alt"></i>
+            {{ "COMMON.default.load" | translate }}
+          </button>
+        </div>
+      </div>
+    </h3>
+  </div>
+  <div class="card-body">
+    <ejs-grid
+      #gridKhuVucThamDo
+      *ngIf="listKhuVuc"
+      [dataSource]="listKhuVuc"
+      [editSettings]="settingsCommon.editSettings"
+      [allowPaging]="true"
+      [allowSorting]="true"
+      [allowTextWrap]="true"
+      [pageSettings]="settingsCommon.pageSettings"
+      [toolbar]="settingsCommon.toolbar"
+      [allowResizing]="true"
+    >
+      <ng-template #detailTemplate let-obj>
+        <table class="table table-striped">
+          <thead class="thead-secondary">
+            <tr>
+              <th scope="col">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutu"
+                    | translate
+                }}
+              </th>
+              <th scope="col">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieu"
+                    | translate
+                }}
+              </th>
+              <th scope="col">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadox"
+                    | translate
+                }}
+              </th>
+              <th scope="col">
+                {{
+                  "CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoy"
+                    | translate
+                }}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let i of obj.listtoado">
+              <th scope="row">{{ i.thutu }}</th>
+              <td>{{ i.sohieu }}</td>
+              <td>{{ i.toadox }}</td>
+              <td>{{ i.toadoy }}</td>
+            </tr>
+          </tbody>
+        </table>
+      </ng-template>
+      <e-columns>
+        <e-column
+          field="thutu"
+          headerText="{{ 'COMMON.default.numericalOrder' | translate }}"
+        ></e-column>
+        <e-column
+          field="tenkhuvuc"
+          headerText="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.tenkhuvucHeader'
+              | translate
+          }}"
+        ></e-column>
+        <e-column
+          field="dientich"
+          headerText="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.dientichHeader'
+              | translate
+          }}"
+        ></e-column>
+        <e-column
+          field="donvidientich"
+          headerText="{{
+            'CAPPHEPHOATDONGKHOANGSAN.cappheppheduyettruluongkhoangsan_khuvucthamdo.donvidientichHeader'
+              | translate
+          }}"
+        ></e-column>
+        <e-column
+          field="idpheduyettruluongkhuvuc"
+          isPrimaryKey="true"
+          headerText="{{ 'COMMON.default.action' | translate }}"
+        >
+          <ng-template #template let-data>
+            <div class="btn-group">
+              <button
+                class="btn btn-sm btn-primary"
+                title="{{ 'COMMON.default.edit' | translate }}"
+                (click)="editItemCpKhaiThacKhuVuc(data.idpheduyettruluongkhuvuc)"
+              >
+                <i class="far fa-edit"></i>
+              </button>
+              <button
+                class="btn btn-sm btn-danger"
+                title="{{ 'COMMON.default.delete' | translate }}"
+               (click)= "deleteItemCpKhaiThacKhuVuc(data)"
+              >
+                <i class="far fa-trash"></i>
+              </button>
+            </div>
+          </ng-template>
+        </e-column>
+      </e-columns>
+    </ejs-grid>
+  </div>
+</div>

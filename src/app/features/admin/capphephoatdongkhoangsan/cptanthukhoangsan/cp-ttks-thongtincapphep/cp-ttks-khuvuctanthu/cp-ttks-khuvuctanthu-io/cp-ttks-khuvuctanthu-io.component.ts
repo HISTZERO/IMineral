@@ -103,7 +103,6 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
   }
 
   async ngOnInit() {
-    console.log(this.obj);
     // Khởi tạo form
     await this.formInit();
     // Lấy dữ liệu translate

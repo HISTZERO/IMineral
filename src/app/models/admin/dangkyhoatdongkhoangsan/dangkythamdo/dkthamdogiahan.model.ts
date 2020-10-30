@@ -12,6 +12,7 @@ export class OutputDkThamDoGiaHanModel {
   sogiayphep: string;
   ngaycapphep: Date;
   siteid: string;
+  geowgs: string;
 }
 
 export class InputDkThamDoGiaHanModel {

@@ -155,7 +155,6 @@
                           </div>
                         </div>
                       </mat-tab>
-
                       <!-- Layer groups list -->
                       <mat-tab [label]="
                           'MAP.mapDetail.layerAndGroupLayerMap' | translate
@@ -204,9 +203,9 @@
                             <div class="clearfix"></div>
                           </div>
                           <div class="layer-list mt-3">
-                            <app-layer-tree id="map-detail" [actionType]="'button'"
-                              *ngIf="listItems && listItems.length" [allowRowDragAndDrop]="true"
-                              [dataSource]="listItems" (rowDataBound)="rowDataBound($event)">
+                            <app-layer-tree #layerTree id="map-detail" [actionType]="'button'"
+                              [allowRowDragAndDrop]="true" [dataSource]="listItems"
+                              (rowDataBound)="rowDataBound($event)">
                             </app-layer-tree>
                           </div>
                         </div>
@@ -237,7 +236,7 @@
             <i class="fad fa-chevron-double-right"></i>
           </button>
           <span style="vertical-align: middle;"
-            class="ml-3 mat-sidenav-title-text">{{ matsidenavService.sidenavTitle }}</span>
+            class="ml-3 mat-sidenav-title-text">{{ matSidenavService.sidenavTitle }}</span>
         </div>
         <template #ioSidebar> </template>
       </mat-sidenav>

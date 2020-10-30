@@ -64,7 +64,6 @@ export class MatsidenavService {
   public setContentComp(comp: any, purpose?: string, obj?: any) {
     this.contentComp = comp;
     const factory = this.cfr.resolveComponentFactory(this.contentComp);
-    console.log(this.vcf);
     this.vcf.clear();
     this.compRef = this.vcf.createComponent(factory, 0);
     if (obj) {

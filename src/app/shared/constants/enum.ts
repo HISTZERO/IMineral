@@ -183,7 +183,8 @@ export enum DangKyThamDoKhoangSanTabEnum {
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucThamDo = 3,
-  CongTrinhThamDo = 4
+  CongTrinhThamDo = 4,
+  BanDoKhuVuc = 5,
 }
 
 export enum DangKyKhaiThacKhoangSanTabEnum {
@@ -192,7 +193,8 @@ export enum DangKyKhaiThacKhoangSanTabEnum {
   LoaiKhoangSan = 2,
   KhuVucKhaiThac = 3,
   CongTrinhKhaiThac = 4,
-  ThietBi = 5
+  ThietBi = 5,
+  BanDoKhuVuc = 6,
 }
 
 export enum DangKyPheDuyetTruLuongTabEnum {
@@ -220,6 +222,7 @@ export enum DangKyTraLaiGiayPhepTabEnum {
   LoaiKhoangSan = 2,
   KhuVuc = 3,
   CongTrinh = 4,
+  BanDoKhuVuc = 5
 }
 
 export enum DangKyTanThuKhoangSanTabEnum {
@@ -227,6 +230,7 @@ export enum DangKyTanThuKhoangSanTabEnum {
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucTanThu = 3,
+  BanDoKhuVuc = 4
 }
 
 export enum DangKyDongCuaMoTabEnum {
@@ -235,6 +239,7 @@ export enum DangKyDongCuaMoTabEnum {
   DonViHanhChinh = 2,
   LoaiKhoangSan = 3,
   CongTrinhKhaiThac = 4,
+  BanDoKhuVuc = 5
 }
 
 export enum CpThamDoKhoangSanTabEnum {

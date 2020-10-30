@@ -1,3 +1,4 @@
+import { MatDialog } from "@angular/material";
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
@@ -14,6 +15,9 @@ import { CommonServiceShared } from "src/app/services/utilities/common-service";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { OutputDkThamDoToaDoKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkythamdo/dkthamdotoadokhuvuc.model";
 import { InputDkKhaiThacKhuVucModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithackhuvuc.model";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
+import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
 
 @Component({
   selector: 'app-dcm-khuvuckhaithac-io',
@@ -33,7 +37,6 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
 
   // Chứa danh sách tọa độ
   public listToaDoKhuVuc: OutputDkThamDoToaDoKhuVucModel[] = [];
-
 
   // Chứa dữ liệu đối tượng truyền từ list comp
   public obj: any;
@@ -69,7 +72,16 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
   validationErrorMessages = {};
 
   // Chứa error tọa độ khu vực
-  public validationErrorToaDo = {}
+  public validationErrorToaDo = {};
+
+  // Chứa service mat dialog
+  public mDialog: any;
+
+  // Chứa geoJson
+  public dataGeoJson: any;
+
+  // Chứa trạng thái hiển thị nút xem bản đồ khu vực
+  public showButtonViewMap: boolean = false;
 
   // Form errors khu vực
   formErrors = {
@@ -93,7 +105,13 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private imDialog: MatDialog,
+    imDialogService: MatdialogService,
+    private mapFacadeService: MapFacadeService,
+  ) {
+    this.mDialog = imDialogService;
+    this.mDialog.initDialg(imDialog);
   }
 
   async ngOnInit() {
@@ -250,6 +268,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
       dKThamDoKhuVucService.insertKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -267,6 +286,7 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
       dKThamDoKhuVucService.updateKhuVucVaToaDoKhaiThac(this.inputModelKhuVuc).subscribe(
         (res) => {
           this.matSidenavService.doParentFunction("getAllDkKhaiThacKhuVuc");
+          this.matSidenavService.doParentFunction("callBackTabThongTin");
         },
         (error: HttpErrorResponse) => {
           this.commonService.showDialogWarning(error.error.errors);
@@ -413,4 +433,38 @@ export class DcmKhuvuckhaithacIoComponent implements OnInit {
     this.listToaDoKhuVuc = listToaDo;
   }
 
+  // Hàm hiển thị bản đồ khu vực trên dialog
+  async openDialogBanDoKhuVuc() {
+    await this.customDataViewMap();
+    await this.mDialog.setDialog(this, ViewcoordinatesComponent, "", "", this.dataGeoJson, "70%", "70vh");
+    await this.mDialog.open();
+  }
+
+  /**
+   * Check dữ liệu để hiển thị nút xem bản đồ khu vực
+   */
+  public checkStateButtonViewMap() {
+    // Kiểm tra nếu dữ liệu tọa độ lớn hơn hoặc bằng 3 thì hiển thị nút xem bản đồ khu vực
+    if (this.listToaDoKhuVuc.length >= 3) {
+      this.showButtonViewMap = true;
+    } else {
+      this.showButtonViewMap = false;
+    }
+  }
+
+  /**
+   * Custom dữ liệu tọa độ để hiển thị lên bản đồ
+   */
+  async customDataViewMap() {
+    let listData: any = [];
+
+    await this.listToaDoKhuVuc.map(toado => {
+      listData.push({
+        toadox: toado.toadox,
+        toadoy: toado.toadoy,
+      });
+    });
+
+    this.dataGeoJson = await this.mapFacadeService.getGeometryService().getGeoJsonByListItem(listData, this.obj.hequychieu).toPromise();
+  }
 }

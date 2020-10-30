@@ -16,6 +16,7 @@ import { OutputDkThamDoTraLaiModel } from "src/app/models/admin/dangkyhoatdongkh
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
 import { DonViDienTich } from "src/app/shared/constants/common-constants";
+import { DefaultValue } from "src/app/shared/constants/global-var";
 
 @Component({
   selector: 'app-tlgp-thamdotralai-io',
@@ -36,6 +37,9 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
 
   // Chứa dữ liệu Form
   public dangKyThamDoTraLaiIOForm: FormGroup;
@@ -73,13 +77,13 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    dientichthamdo: "",
-    dientichtralai: "",
-    donvidientich: "",
-    lydotralai: "",
-    hequychieu: "",
-    idgiayphep: "",
-    sogiayphep: ""
+    dientichthamdo: DefaultValue.Empty,
+    dientichtralai: DefaultValue.Empty,
+    donvidientich: DefaultValue.Empty,
+    lydotralai: DefaultValue.Empty,
+    hequychieu: DefaultValue.Empty,
+    idgiayphep: DefaultValue.Empty,
+    sogiayphep: DefaultValue.Empty
   };
 
   constructor(
@@ -120,6 +124,7 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
       this.dangKyThamDoTraLai = await this.getDangKyThamDoTraLaiByIdHoSo(this.idhoso);
 
       if (this.dangKyThamDoTraLai) {
+        this.selectGeometryEvent.emit(this.dangKyThamDoTraLai.geowgs);
         this.currentAction = DangKyTraLaiGiayPhepActionEnum.Edit;
         this.selectIdDangKyThamDoTraLai();
         this.selectCurrentFormState();
@@ -146,13 +151,13 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyThamDoTraLaiIOForm = this.formBuilder.group({
-      dientichthamdo: [""],
-      dientichtralai: [""],
-      donvidientich: [""],
-      lydotralai: [""],
-      idgiayphep: [""],
-      sogiayphep: ["", Validators.required],
-      hequychieu: [""]
+      dientichthamdo: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      dientichtralai: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      lydotralai: [DefaultValue.Empty],
+      idgiayphep: [DefaultValue.Empty, Validators.required],
+      sogiayphep: [DefaultValue.Empty, Validators.required],
+      hequychieu: [DefaultValue.Empty, Validators.required]
     });
     this.dangKyThamDoTraLaiIOForm.controls.sogiayphep.disable({ onlySelf: true });
   }
@@ -204,6 +209,12 @@ export class TlgpThamdotralaiIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
+      dientichthamdo: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichthamdoRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired },
+      dientichtralai: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.dientichtralaiRequired, pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.numberRequired },
+      donvidientich: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.donvidientichRequired },
+      idgiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired },
+      sogiayphep: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.sogiayphepRequired },
+      hequychieu: { required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkythamdotralai.hequychieuRequired },
     };
   }
 

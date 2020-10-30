@@ -105,7 +105,6 @@ export class DgqThongtinchitietComponent implements OnInit {
       },
       donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.thongTinChiTietDauGiaQuyen.donViDienTichRequired}
     };
-    console.log(this.validationErrorMessages);
   }
 
   /**

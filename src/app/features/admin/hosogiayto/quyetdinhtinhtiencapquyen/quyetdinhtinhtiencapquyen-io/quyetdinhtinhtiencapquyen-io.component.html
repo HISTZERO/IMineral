@@ -7,7 +7,7 @@
             <div class="col-lg-9 col-md-9 col-sm-9">
               <h4>
                 <span class="title font-weight-bold">
-                  {{ 'HOSOGIAYTO.giayphep.thongTinQuyetDinhTitle' | translate}}
+                  {{ 'HOSOGIAYTO.giayphep.thongTinQuyetDinhTinhTienCapQuyenTitle' | translate}}
                 </span>
               </h4>
             </div>
@@ -27,31 +27,9 @@
                   <div class="col-lg-12 col-md-12 col-sm-12">
                     <h5>
                       <span class="title font-weight-bold">
-                        {{ 'HOSOGIAYTO.giayphep.thongTinQuyetDinhTinhTienCapQuyenTitle' | translate}}
+                        {{ 'HOSOGIAYTO.giayphep.thongTinQuyetDinhTitle' | translate}}
                       </span>
                     </h5>
-                  </div>
-                </div>
-                <div class="form-group row mx-0">
-                  <label class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{"HOSOGIAYTO.giayphep.loaicapphep" | translate}}
-                    <small>(*)</small>
-                  </label>
-                  <div class="col-lg-8 col-md-8 col-sm-8" *ngIf="!disabledLoaiCapPhepSelectionState">
-                    <mat-select class="form-control" placeholder="{{ 'HOSOGIAYTO.giayphep.chonloaicapphep' | translate }}" formControlName="loaicapphep"
-                      *ngIf="dataTranslate" (selectionChange)="selectItemLoaiCapPhepChange($event)">
-                      <mat-select-filter [displayMember]="'tenloaicapphep'" [array]="loaiCapPhepFilters" (filteredReturn)="loaiCapPhepList = $event">
-                      </mat-select-filter>
-                      <mat-option value="">
-                        {{ "HOSOGIAYTO.giayphep.chonloaicapphep" | translate }}
-                      </mat-option>
-                      <mat-option *ngFor="let loaiCapPhep of loaiCapPhepList" [value]="loaiCapPhep.maloaicapphep">
-                        {{ loaiCapPhep.tenloaicapphep }}
-                      </mat-option>
-                    </mat-select>
-                    <span *ngIf="formErrors.loaicapphep" class="alert-danger">{{formErrors.loaicapphep}}</span>
-                  </div>
-                  <div class="col-lg-8 col-md-8 col-sm-8 font-weight-bold" style="padding-top: 9px;" *ngIf="disabledLoaiCapPhepSelectionState">
-                    {{tenLoaiCapPhep}}
                   </div>
                 </div>
                 <div class="form-group row mx-0">

@@ -10,6 +10,7 @@ import { MatsidenavService } from "src/app/services/utilities/matsidenav.service
 import { LayerGroupStatus } from "src/app/shared/constants/map-constants";
 import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
 import { InputLayerGroupModel } from "src/app/models/admin/map/layer-group.model";
+import { ValidateMaxLength } from "src/app/shared/constants/consts/enum";
 
 @Component({
   selector: "app-layer-group-io",
@@ -58,7 +59,7 @@ export class LayerGroupIoComponent implements OnInit {
 
   async ngOnInit() {
     await this.formInit();
-    // Lấy dữ liệu biến translate để gán vào các biến trong component
+    // Translate
     this.dataTranslate = await this.translate
       .getTranslation(this.translate.getDefaultLang())
       .toPromise();
@@ -76,10 +77,10 @@ export class LayerGroupIoComponent implements OnInit {
   formInit() {
     this.createForm = this.formBuilder.group({
       id: [],
-      groupType: [],
+      groupType: [0],
       description: [],
-      groupKey: ["", Validators.required],
-      groupName: ["", Validators.required],
+      groupKey: ["", [Validators.required, Validators.maxLength(ValidateMaxLength.mediumText)]],
+      groupName: ["", [Validators.required, Validators.maxLength(ValidateMaxLength.mediumText)]],
       status: ["", Validators.required],
     });
 
@@ -99,9 +100,11 @@ export class LayerGroupIoComponent implements OnInit {
     this.validationErrorMessages = {
       groupKey: {
         required: this.dataTranslate.MAP.layerGroup.groupKeyRequired,
+        maxlength: this.dataTranslate.COMMON.default.maxLength
       },
       groupName: {
         required: this.dataTranslate.MAP.layerGroup.groupNameRequired,
+        maxlength: this.dataTranslate.COMMON.default.maxLength
       },
       status: { required: this.dataTranslate.MAP.layerGroup.statusRequired },
     };

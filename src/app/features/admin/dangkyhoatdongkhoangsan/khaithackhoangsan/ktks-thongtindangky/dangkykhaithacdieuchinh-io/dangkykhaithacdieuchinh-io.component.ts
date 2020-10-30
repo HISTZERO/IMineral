@@ -1,21 +1,39 @@
-import { Component, OnInit, Input, ComponentFactoryResolver, EventEmitter, Output, ViewChild, Type, ViewContainerRef } from '@angular/core';
-import { TranslateService } from '@ngx-translate/core';
-import { ActivatedRoute } from '@angular/router';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { HttpErrorResponse } from '@angular/common/http';
-import { MatSidenav } from "@angular/material";
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from '@angular/core';
+import {TranslateService} from '@ngx-translate/core';
+import {ActivatedRoute} from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {HttpErrorResponse} from '@angular/common/http';
+import {MatSidenav} from "@angular/material";
 
-import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import { DangKyHoatDongKhoangSanFacadeService } from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
-import { DangKyKhaiThacKsActionEnum } from 'src/app/shared/constants/enum';
-import { CommonServiceShared } from 'src/app/services/utilities/common-service';
-import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
-import { OutputDmHeQuyChieuModel } from 'src/app/models/admin/danhmuc/hequychieu.model';
-import { DonViCongSuat, DonViDienTich, DonViDoSau, DonViThoiHan, DonViTruLuong, PhuongPhapKhaiThac } from 'src/app/shared/constants/common-constants';
-import { OutputGiayPhepModel } from "src/app/models/admin/hosogiayto/giayphep.model";
-import { GiayphepOptionComponent } from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdieuchinh.model";
+import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import {DangKyHoatDongKhoangSanFacadeService} from 'src/app/services/admin/dangkyhoatdongkhoangsan/dangkyhoatdongkhoangsan-facade.service';
+import {DangKyKhaiThacKsActionEnum} from 'src/app/shared/constants/enum';
+import {CommonServiceShared} from 'src/app/services/utilities/common-service';
+import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
+import {OutputDmHeQuyChieuModel} from 'src/app/models/admin/danhmuc/hequychieu.model';
+import {
+  DonViCongSuat,
+  DonViDienTich,
+  DonViDoSau,
+  DonViThoiHan,
+  DonViTruLuong,
+  PhuongPhapKhaiThac
+} from 'src/app/shared/constants/common-constants';
+import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
+import {GiayphepOptionComponent} from "src/app/features/admin/hosogiayto/giayphep/giayphep-option/giayphep-option.component";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {OutputDkKhaiThacDieuChinhModel} from "src/app/models/admin/dangkyhoatdongkhoangsan/dangkykhaithac/dkkhaithacdieuchinh.model";
+import {DefaultValue} from "src/app/shared/constants/global-var";
 
 @Component({
   selector: 'app-dangkykhaithacdieuchinh-io',
@@ -24,8 +42,8 @@ import { OutputDkKhaiThacDieuChinhModel } from "src/app/models/admin/dangkyhoatd
 })
 export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
 
   // tslint:disable-next-line: no-output-rename
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
@@ -35,6 +53,9 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
 
   // Nhóm loại cấp phép
   // tslint:disable-next-line: no-input-rename
@@ -88,22 +109,22 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
 
   // form errors
   formErrors = {
-    dientichkhaithac: "",
-    truluongdiachat: "",
-    truluongkhaithac: "",
-    thoihankhaithac: "",
-    phuongphapkhaithac: "",
-    congsuatkhaithac: "",
-    mucsaukhaithactu: "",
-    mucsaukhaithacden: "",
-    donvitruluong: "",
-    donvicongsuat: "",
-    donvidientich: "",
-    donvithoihan: "",
-    donvichieusau: "",
-    hequychieu: "",
-    idgiayphep: "",
-    sogiayphep: "",
+    dientichkhaithac: DefaultValue.Empty,
+    truluongdiachat: DefaultValue.Empty,
+    truluongkhaithac: DefaultValue.Empty,
+    thoihankhaithac: DefaultValue.Empty,
+    phuongphapkhaithac: DefaultValue.Empty,
+    congsuatkhaithac: DefaultValue.Empty,
+    mucsaukhaithactu: DefaultValue.Empty,
+    mucsaukhaithacden: DefaultValue.Empty,
+    donvitruluong: DefaultValue.Empty,
+    donvicongsuat: DefaultValue.Empty,
+    donvidientich: DefaultValue.Empty,
+    donvithoihan: DefaultValue.Empty,
+    donvichieusau: DefaultValue.Empty,
+    hequychieu: DefaultValue.Empty,
+    idgiayphep: DefaultValue.Empty,
+    sogiayphep: DefaultValue.Empty,
   };
 
   constructor(
@@ -115,7 +136,8 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     public cfr: ComponentFactoryResolver,
     public matSidenavService: MatsidenavService
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
 
@@ -144,6 +166,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
       this.dangKyKhaiThacDieuChinh = await this.getDangKyKhaiThacDieuChinhByIdHoSo(this.idhoso);
 
       if (this.dangKyKhaiThacDieuChinh) {
+        this.selectGeometryEvent.emit(this.dangKyKhaiThacDieuChinh.geowgs);
         this.currentAction = DangKyKhaiThacKsActionEnum.Edit;
         this.selectIdDangKyKhaiThacDieuChinh();
         this.selectCurrentFormState();
@@ -166,9 +189,9 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   }
 
   /**
-     * Lấy dữ liệu hồ sơ theo idGiayPhep
-     * @param idGiayPhep
-     */
+   * Lấy dữ liệu hồ sơ theo idGiayPhep
+   * @param idGiayPhep
+   */
   private async cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(idGiayPhep: string) {
     const khaiThacDieuChinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
     const dkKhaiThacItem = await khaiThacDieuChinhService.cloneThongTinDangKyKhaiThacDieuChinhFromGiayPhepLS(idGiayPhep).toPromise();
@@ -226,24 +249,24 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    */
   private formInit() {
     this.dangKyKhaiThacDieuChinhIOForm = this.formBuilder.group({
-      dientichkhaithac: [""],
-      truluongdiachat: [""],
-      truluongkhaithac: [""],
-      thoihankhaithac: [""],
-      phuongphapkhaithac: [""],
-      congsuatkhaithac: [""],
-      mucsaukhaithactu: [""],
-      mucsaukhaithacden: [""],
-      donvitruluong: [""],
-      donvicongsuat: [""],
-      donvidientich: ["", Validators.required],
-      donvithoihan: ["", Validators.required],
-      donvichieusau: ["", Validators.required],
-      hequychieu: ["", Validators.required],
-      idgiayphep: ["", Validators.required],
-      sogiayphep: ["", Validators.required]
+      dientichkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      truluongdiachat: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      truluongkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      thoihankhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      phuongphapkhaithac: [DefaultValue.Empty, Validators.required],
+      congsuatkhaithac: [DefaultValue.Empty, [Validators.required, Validators.pattern("^[0-9-+]+$")]],
+      mucsaukhaithactu: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
+      mucsaukhaithacden: [DefaultValue.Empty, Validators.pattern("^[0-9-+]+$")],
+      donvitruluong: [DefaultValue.Empty, Validators.required],
+      donvicongsuat: [DefaultValue.Empty, Validators.required],
+      donvidientich: [DefaultValue.Empty, Validators.required],
+      donvithoihan: [DefaultValue.Empty, Validators.required],
+      donvichieusau: [DefaultValue.Empty],
+      hequychieu: [DefaultValue.Empty, Validators.required],
+      idgiayphep: [DefaultValue.Empty, Validators.required],
+      sogiayphep: [DefaultValue.Empty, Validators.required]
     });
-    this.dangKyKhaiThacDieuChinhIOForm.controls.sogiayphep.disable({ onlySelf: true });
+    this.dangKyKhaiThacDieuChinhIOForm.controls.sogiayphep.disable({onlySelf: true});
   }
 
   /**
@@ -291,6 +314,36 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    */
   private setValidation() {
     this.validationErrorMessages = {
+      dientichkhaithac: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.dientichkhaithacRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired
+      },
+      truluongdiachat: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.truluongdiachatRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired
+      },
+      truluongkhaithac: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.truluongkhaithacRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired
+      },
+      thoihankhaithac: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.thoihankhaithacRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired
+      },
+      phuongphapkhaithac: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.phuongphapkhaithacRequired},
+      congsuatkhaithac: {
+        required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.congsuatkhaithacRequired,
+        pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired
+      },
+      mucsaukhaithactu: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired},
+      mucsaukhaithacden: {pattern: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.numberRequired},
+      donvitruluong: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.donvitruluongRequired},
+      donvicongsuat: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.donvicongsuatRequired},
+      donvidientich: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.donvidientichRequired},
+      donvithoihan: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.donvithoihanRequired},
+      hequychieu: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.hequychieuRequired},
+      idgiayphep: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.giayphepRequired},
+      sogiayphep: {required: this.dataTranslate.DANGKYHOATDONGKHOANGSAN.dangkykhaithacdieuchinh.giayphepRequired},
     };
   }
 
@@ -300,7 +353,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({ PageNumber: 1, PageSize: -1 });
+      .getFetchAll({PageNumber: 1, PageSize: -1});
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -311,7 +364,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
    */
   private async getDangKyKhaiThacDieuChinhByIdHoSo(idHoSo: string) {
     const dkKhaiThacDieuChinhService = this.dangKyHoatDongKhoangSanFacadeService.getDangKyKhaiThacDieuChinhService();
-    const dangKyItem = await dkKhaiThacDieuChinhService.getFetchAll({ Idhoso: idHoSo });
+    const dangKyItem = await dkKhaiThacDieuChinhService.getFetchAll({Idhoso: idHoSo});
     return dangKyItem;
   }
 
@@ -410,7 +463,7 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
       if (result === "confirm") {
         await this.dangKyHoatDongKhoangSanFacadeService
           .getDangKyKhaiThacDieuChinhService()
-          .deleteItem({ iddangkykhaithac: this.dangKyKhaiThacDieuChinh.iddangkykhaithac })
+          .deleteItem({iddangkykhaithac: this.dangKyKhaiThacDieuChinh.iddangkykhaithac})
           .subscribe(
             () => {
               this.dangKyKhaiThacDieuChinh = null;
@@ -437,22 +490,22 @@ export class DangkykhaithacdieuchinhIoComponent implements OnInit {
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
     this.dangKyKhaiThacDieuChinhIOForm.reset({
-      dientichkhaithac: "",
-      truluongdiachat: "",
-      truluongkhaithac: "",
-      thoihankhaithac: "",
-      phuongphapkhaithac: "",
-      congsuatkhaithac: "",
-      mucsaukhaithactu: "",
-      mucsaukhaithacden: "",
-      donvitruluong: "",
-      donvicongsuat: "",
-      donvidientich: "",
-      donvithoihan: "",
-      donvichieusau: "",
-      hequychieu: "",
-      idgiayphep: "",
-      sogiayphep: "",
+      dientichkhaithac: DefaultValue.Empty,
+      truluongdiachat: DefaultValue.Empty,
+      truluongkhaithac: DefaultValue.Empty,
+      thoihankhaithac: DefaultValue.Empty,
+      phuongphapkhaithac: DefaultValue.Empty,
+      congsuatkhaithac: DefaultValue.Empty,
+      mucsaukhaithactu: DefaultValue.Empty,
+      mucsaukhaithacden: DefaultValue.Empty,
+      donvitruluong: DefaultValue.Empty,
+      donvicongsuat: DefaultValue.Empty,
+      donvidientich: DefaultValue.Empty,
+      donvithoihan: DefaultValue.Empty,
+      donvichieusau: DefaultValue.Empty,
+      hequychieu: DefaultValue.Empty,
+      idgiayphep: DefaultValue.Empty,
+      sogiayphep: DefaultValue.Empty,
     });
   }
 

@@ -2,6 +2,8 @@ import { Component, Input, OnInit, Type, ViewChild, ViewContainerRef } from "@an
 import { MatSidenav } from '@angular/material';
 import { ActivatedRoute } from "@angular/router";
 import { CpPheDuyetTLKS_ThongTinQuyetDinhTabEnum } from "src/app/shared/constants/enum";
+import { CpPdtlksKhoiluongComponent } from './cp-pdtlks-khoiluong/cp-pdtlks-khoiluong.component';
+import { CpPdtlksKhuvucComponent } from './cp-pdtlks-khuvuc/cp-pdtlks-khuvuc.component';
 import { CpPdtlksLoaikhoangsanComponent } from './cp-pdtlks-loaikhoangsan/cp-pdtlks-loaikhoangsan.component';
 
 @Component({
@@ -24,6 +26,8 @@ export class CpPdtlksThongtinquyetdinhComponent implements OnInit {
     [this.TabType.KhoiLuongTruLuong]: true,
   };
   @ViewChild("loaiKhoangSanTab",{ static: false }) loaiKhoangSanTab : CpPdtlksLoaikhoangsanComponent;
+  @ViewChild("khuvuckhoangsanTab",{ static: false }) khuVucTab :CpPdtlksKhuvucComponent;
+  @ViewChild("khoiluongtruluong",{ static: false }) khoiluongTab :CpPdtlksKhoiluongComponent;
 
   ngOnInit() {
   }
@@ -43,6 +47,21 @@ export class CpPdtlksThongtinquyetdinhComponent implements OnInit {
       this.loaiKhoangSanTab.matSidenav=this.matSidenav;
       this.loaiKhoangSanTab.manualDataInit();
 
+    }
+    else if(index===this.TabType.TruLuongKhuVuc && !this.loadedTabState[this.TabType.TruLuongKhuVuc]){
+      this.loadedTabState[this.TabType.TruLuongKhuVuc]=true;
+      this.khuVucTab.idPheDuyetTruLuong=this.idpheduyettruluong;
+      this.khuVucTab.content=this.content;
+      this.khuVucTab.matSidenav=this.matSidenav;
+      this.khuVucTab.manualDataInit();
+
+    }
+    else if(index==this.TabType.KhoiLuongTruLuong && !this.loadedTabState[this.TabType.KhoiLuongTruLuong]){
+      this.loadedTabState[this.TabType.KhoiLuongTruLuong]=true;
+      this.khoiluongTab.idpheduyettruluong=this.idpheduyettruluong;
+      this.khoiluongTab.content=this.content;
+      this.khoiluongTab.matSidenav=this.matSidenav;
+      this.khoiluongTab.manualDataInit();
     }
   }
 

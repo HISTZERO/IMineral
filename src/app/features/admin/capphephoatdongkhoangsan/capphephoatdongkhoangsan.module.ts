@@ -75,6 +75,11 @@ import { CpDaugiakhaithacIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp
 import { CpDaugiakhaithacKhuvucListComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-list/cp-daugiakhaithac-khuvuc-list.component';
 import { CpDaugiakhaithacKhuvucIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-io/cp-daugiakhaithac-khuvuc-io.component';
 import { CpDaugiaThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugia-thongtincapphep.component';
+import { CpPdtlksKhuvucComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc.component';
+import { CpPdtlksKhuvucIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc-io/cp-pdtlks-khuvuc-io.component';
+import { CpPdtlksKhoiluongComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong.component';
+import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong-io/cp-pdtlks-khoiluong-io.component';
+
 
 
 @NgModule({
@@ -139,6 +144,10 @@ import { CpDaugiaThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangs
     CpDaugiakhaithacKhuvucListComponent,
     CpDaugiakhaithacKhuvucIoComponent,
     CpDaugiaThongtincapphepComponent
+    CpPdtlksKhuvucComponent,
+    CpPdtlksKhuvucIoComponent,
+    CpPdtlksKhoiluongComponent,
+    CpPdtlksKhoiluongIoComponent
   ],
   exports: [
   ],
@@ -169,6 +178,8 @@ import { CpDaugiaThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangs
     CpKtksKhaithackhoangsanIoComponent,
     CpTtksTanthukhoangsanIoComponent,
     CpPdtlksLoaikhoangsanIoComponent,
+    CpPdtlksKhuvucIoComponent,
+    CpPdtlksKhoiluongIoComponent,
     CpTtksTanthukhoangsanIoComponent,
     CpTdksThongtincapphepComponent,
     CpKtksThongtincapphepComponent,

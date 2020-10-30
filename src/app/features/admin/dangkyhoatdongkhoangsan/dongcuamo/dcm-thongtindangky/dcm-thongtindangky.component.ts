@@ -56,7 +56,9 @@ export class DcmThongtindangkyComponent implements OnInit {
   public TabType = DangKyDongCuaMoTabEnum;
   // Lưu trữ dữ liệu id hồ sơ
   public idhoso;
-
+  // Chứa goemetry
+  public geoMetry: string;
+  // Chứa thuộc tính xác định có phải loại cấp phép đóng cửa mỏ diện tích khai thác
   public isDongCuaDienTich = false;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
@@ -65,6 +67,7 @@ export class DcmThongtindangkyComponent implements OnInit {
     [DangKyDongCuaMoTabEnum.LoaiKhoangSan]: false,
     [DangKyDongCuaMoTabEnum.KhuVucKhaiThac]: false,
     [DangKyDongCuaMoTabEnum.CongTrinhKhaiThac]: false,
+    [DangKyDongCuaMoTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
@@ -73,6 +76,7 @@ export class DcmThongtindangkyComponent implements OnInit {
     [DangKyDongCuaMoTabEnum.LoaiKhoangSan]: true,
     [DangKyDongCuaMoTabEnum.KhuVucKhaiThac]: true,
     [DangKyDongCuaMoTabEnum.CongTrinhKhaiThac]: true,
+    [DangKyDongCuaMoTabEnum.BanDoKhuVuc]: true,
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -147,6 +151,7 @@ export class DcmThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyDongCuaMoTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyDongCuaMoTabEnum.KhuVucKhaiThac] = true;
         this.disabledTabState[DangKyDongCuaMoTabEnum.CongTrinhKhaiThac] = true;
+        this.disabledTabState[DangKyDongCuaMoTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case DangKyThamDoActionEnum.Edit: {
@@ -155,6 +160,7 @@ export class DcmThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyDongCuaMoTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[DangKyDongCuaMoTabEnum.KhuVucKhaiThac] = false;
         this.disabledTabState[DangKyDongCuaMoTabEnum.CongTrinhKhaiThac] = false;
+        this.disabledTabState[DangKyDongCuaMoTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
@@ -163,6 +169,7 @@ export class DcmThongtindangkyComponent implements OnInit {
         this.disabledTabState[DangKyDongCuaMoTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[DangKyDongCuaMoTabEnum.KhuVucKhaiThac] = true;
         this.disabledTabState[DangKyDongCuaMoTabEnum.CongTrinhKhaiThac] = true;
+        this.disabledTabState[DangKyDongCuaMoTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -202,6 +209,7 @@ export class DcmThongtindangkyComponent implements OnInit {
       componentRef.instance.content = this.content;
       componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getDangKyDongCuaMoFormState(event));
       componentRef.instance.selectIdDangKyDongCuaMoEvent.subscribe(event => this.getIdDangKyKhaiThac(event));
+      componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
     }
   }
 
@@ -213,10 +221,12 @@ export class DcmThongtindangkyComponent implements OnInit {
 
   async tabChange(index: any) {
     if (index === DangKyDongCuaMoTabEnum.DonViHanhChinh && !this.loadedTabState[DangKyDongCuaMoTabEnum.DonViHanhChinh]) {
-      this.dangKyKhaiThacDvhc.matSidenav = this.matSidenav;
-      this.dangKyKhaiThacDvhc.content = this.content;
-      this.dangKyKhaiThacDvhc.iddangkykhaithac = this.iddangkykhaithac;
-      this.loadedTabState[DangKyDongCuaMoTabEnum.DonViHanhChinh] = await this.dangKyKhaiThacDvhc.manualDataInit();
+      if (this.itemHoSo.loaicapphep === LoaiCapPhepEnum.DongCuaMotPhanDienTichKhuVucKhaiThacKhoangSan) {
+        this.dangKyKhaiThacDvhc.matSidenav = this.matSidenav;
+        this.dangKyKhaiThacDvhc.content = this.content;
+        this.dangKyKhaiThacDvhc.iddangkykhaithac = this.iddangkykhaithac;
+        this.loadedTabState[DangKyDongCuaMoTabEnum.DonViHanhChinh] = await this.dangKyKhaiThacDvhc.manualDataInit();
+      }
     } else if (index === DangKyDongCuaMoTabEnum.LoaiKhoangSan && !this.loadedTabState[DangKyDongCuaMoTabEnum.LoaiKhoangSan]) {
       this.dangKyKhaiThacLoaiKhoangSan.matSidenav = this.matSidenav;
       this.dangKyKhaiThacLoaiKhoangSan.content = this.content;
@@ -235,5 +245,16 @@ export class DcmThongtindangkyComponent implements OnInit {
       this.loadedTabState[DangKyKhaiThacKhoangSanTabEnum.CongTrinhKhaiThac] = await this.dangKyKhaiThacCongTrinh.manualDataInit();
       //
     }
+  }
+
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showDangKyViewComponent();
   }
 }
