@@ -87,6 +87,9 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
   // Lưu trữ đơn vị thời hạn
   public donViChieuSauList = DonViDoSau;
 
+  // disable control hệ quy chiếu
+  public disabledHeQuyChieu = false;
+
   //Phương pháp khai thác
   public phuongPhapKhaiThac = PhuongPhapKhaiThac;
 
@@ -416,6 +419,7 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
    */
   onFormReset() {
     // Hàm .reset sẽ xóa trắng mọi control trên form
+    this.disabledHeQuyChieu = false;
     this.dangKyTanThuKhoangSanIOForm.reset({
       diadiem: DefaultValue.Empty,
       dientichkhaithac: DefaultValue.Empty,
@@ -431,7 +435,7 @@ export class DangkytanthukhoangsanIoComponent implements OnInit {
       donvithoihan: DefaultValue.Empty,
       donvichieusau: DefaultValue.Empty,
       hequychieu: DefaultValue.Empty,
-      phuongphapkhaithac: DefaultValue.Empty
+      phuongphapkhaithac: DefaultValue.Empty,
     });
   }
   /**

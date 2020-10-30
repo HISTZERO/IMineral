@@ -80,7 +80,7 @@
             </div>
           </div>
         </div>
-        <!-- Diện tích khai thác & Diện tích trả lại & Đơn vị diện tích-->
+        <!-- Diện tích khai thác & Diện tích trả lại -->
         <div class=" row">
           <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="!isDongCuaMo">
             <div class="form-group row mx-0">
@@ -98,8 +98,12 @@
           </div>
           <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isDongCuaMo || isDongCuaMoMotPhan || isTraLaiMotPhanDienTichKhaiThac">
             <div class="form-group row mx-0">
-              <label
+              <label *ngIf="isDongCuaMo || isTraLaiMotPhanDienTichKhaiThac"
                 class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.dientichtralai" | translate }}
+                <small>(*)</small>
+              </label>
+              <label *ngIf="isDongCuaMoMotPhan"
+                     class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.dientichdongcua" | translate }}
                 <small>(*)</small>
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
@@ -141,7 +145,7 @@
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
                 <mat-select class="form-control" formControlName="phuongphapkhaithac"
-                            *ngIf="dataTranslate">
+                            *ngIf="dataTranslate" placeholder=" {{ 'CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.phuongphapkhaithacPlaceholder' | translate }}">
                   <mat-option value="">
                     {{ "CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.phuongphapkhaithacPlaceholder" | translate }}
                   </mat-option>
@@ -187,7 +191,7 @@
 
         <!-- Trữ lượng trả lại & đơn vị trữ lượng-->
 
-          <div class="col-lg-6 col-md-6 col-sm-12" *ngIf="isDongCuaMoMotPhan || isTraLaiMotPhanDienTichKhaiThac">
+          <div class="col-lg-6 col-md-6 col-sm-12" *ngIf=" isTraLaiMotPhanDienTichKhaiThac">
             <div class="form-group row mx-0">
               <label
                 class="col-lg-4 col-md-4 col-sm-4 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.truluongtralai" | translate }}
@@ -248,7 +252,7 @@
                 <small>(*)</small>
               </label>
               <div class="col-lg-8 col-md-8 col-sm-8">
-                <mat-select class="form-control" formControlName="donvicongsuat" *ngIf="dataTranslate">
+                <mat-select class="form-control" formControlName="donvicongsuat" *ngIf="dataTranslate" placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.donvicongsuatPlaceholder' | translate }}">
                   <mat-option value="">
                     {{ "CAPPHEPHOATDONGKHOANGSAN.cpktkskhaithackhoangsan.donvicongsuatPlaceholder" | translate }}
                   </mat-option>

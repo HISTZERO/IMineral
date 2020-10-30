@@ -170,7 +170,15 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
         required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.truluongkhaithacRequired,
         pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
       },
-      congsuatkhaithac: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.congsuatkhaithacRequired},
+      thoihankhaithac: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.thoihankhaithacRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
+      },
+      congsuatkhaithac: {
+        required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.congsuatkhaithacRequired,
+        pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired
+      },
+      phuongphapkhaithac: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.phuongphapkhaithacRequired},
       mucsaukhaithactu: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
       mucsaukhaithacden: {pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.numberRequired},
       donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.cpttkstanthukhoangsan.donvidientichRequired},
