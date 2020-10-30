@@ -71,10 +71,15 @@ import { CpTtksLoaikhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thon
 import { CpTtksLoaikhoangsanListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-loaikhoangsan/cp-ttks-loaikhoangsan-list/cp-ttks-loaikhoangsan-list.component';
 import { CpTtksKhuvuctanthuIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-io/cp-ttks-khuvuctanthu-io.component';
 import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-list/cp-ttks-khuvuctanthu-list.component';
+import { CpDaugiakhaithacIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component';
+import { CpDaugiakhaithacKhuvucListComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-list/cp-daugiakhaithac-khuvuc-list.component';
+import { CpDaugiakhaithacKhuvucIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-io/cp-daugiakhaithac-khuvuc-io.component';
+import { CpDaugiaThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugia-thongtincapphep.component';
 import { CpPdtlksKhuvucComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc.component';
 import { CpPdtlksKhuvucIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khuvuc/cp-pdtlks-khuvuc-io/cp-pdtlks-khuvuc-io.component';
 import { CpPdtlksKhoiluongComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong.component';
 import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-pdtlks-thongtinquyetdinh/cp-pdtlks-khoiluong/cp-pdtlks-khoiluong-io/cp-pdtlks-khoiluong-io.component';
+
 
 
 @NgModule({
@@ -135,10 +140,14 @@ import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-p
     CpTtksLoaikhoangsanListComponent,
     CpTtksKhuvuctanthuIoComponent,
     CpTtksKhuvuctanthuListComponent,
+    CpDaugiakhaithacIoComponent,
+    CpDaugiakhaithacKhuvucListComponent,
+    CpDaugiakhaithacKhuvucIoComponent,
+    CpDaugiaThongtincapphepComponent,
     CpPdtlksKhuvucComponent,
     CpPdtlksKhuvucIoComponent,
     CpPdtlksKhoiluongComponent,
-    CpPdtlksKhoiluongIoComponent
+    CpPdtlksKhoiluongIoComponent,
   ],
   exports: [
   ],
@@ -177,7 +186,8 @@ import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-p
     CpTtksDonvihanhchinhIoComponent,
     CpTtksLoaikhoangsanIoComponent,
     CpTtksKhuvuctanthuIoComponent,
-    CpTdksThongtincapphepComponent
+    CpDaugiakhaithacIoComponent,
+    CpDaugiakhaithacKhuvucIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

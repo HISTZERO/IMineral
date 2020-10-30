@@ -1,32 +1,35 @@
-import { Injectable } from "@angular/core";
-import { HttpClient } from "@angular/common/http";
+import {Injectable} from "@angular/core";
+import {HttpClient} from "@angular/common/http";
 
-import { CpThamDoKhoangSanService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.service';
-import { CpThamDoDvhcService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdodvhc.service';
-import { CpThamDoLoaiKhoangSanService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.service';
-import { CpThamDoCongTrinhService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.service';
-import { CpthamdokhuvucService } from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.service';
-import { CpkhaithackhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan.service";
-import { CpkhaithacdvhcService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacdvhc.service";
-import { CpkhaithaccongtrinhService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.service";
-import { CpkhaithackhuvucService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.service";
-import { CpkhaithacloaikhoangsanService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
-import { CpkhaithacthietbiService } from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
+import {CpThamDoKhoangSanService} from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhoangsan.service';
+import {CpThamDoDvhcService} from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdodvhc.service';
+import {CpThamDoLoaiKhoangSanService} from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdoloaikhoangsan.service';
+import {CpThamDoCongTrinhService} from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdocongtrinh.service';
+import {CpthamdokhuvucService} from 'src/app/services/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.service';
+import {CpkhaithackhoangsanService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhoangsan.service";
+import {CpkhaithacdvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacdvhc.service";
+import {CpkhaithaccongtrinhService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithaccongtrinh.service";
+import {CpkhaithackhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.service";
+import {CpkhaithacloaikhoangsanService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacloaikhoangsan.service";
+import {CpkhaithacthietbiService} from "src/app/services/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithacthietbi.service";
 import {CpTanThuKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhoangsan.service";
-import { CpPheDuyetTLKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
-import { CpPheDuyetTLKSLoaiKSService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_loaiks.service';
+import {CpPheDuyetTLKSService} from './cppheduyettruluongkhoangsan/cppheduyettruluongks.service';
+import {CpPheDuyetTLKSLoaiKSService} from './cppheduyettruluongkhoangsan/cppheduyettruluong_loaiks.service';
 import {CpTanThuDvhcService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthudvhc.service";
 import {CpTanThuLoaiKhoangSanService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthuloaikhoangsan.service";
 import {CptanthukhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.service";
-import { CpPheDuyetTLKSKhuVucService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_khuvuc.service';
-import { CpPheDuyetKhoangSanKhoiLuongTruLuongService } from './cppheduyettruluongkhoangsan/cppheduyettruluong_khoiluong.service';
+import {CpPheDuyetTLKSKhuVucService} from './cppheduyettruluongkhoangsan/cppheduyettruluong_khuvuc.service';
+import {CpPheDuyetKhoangSanKhoiLuongTruLuongService} from './cppheduyettruluongkhoangsan/cppheduyettruluong_khoiluong.service';
+import {CpdaugiakhaithacService} from "src/app/services/admin/capphephoatdongkhoangsan/cpdaugiakhaithac/cpdaugiakhaithac.service";
+import {CpdaugiakhuvucService} from "src/app/services/admin/capphephoatdongkhoangsan/cpdaugiakhaithac/cpdaugiakhaithackhuvuc.service";
 
 @Injectable({
   providedIn: "root",
 })
 
 export class CapPhepHoatDongKhoangSanFacadeService {
-  constructor(private httpClient: HttpClient) { }
+  constructor(private httpClient: HttpClient) {
+  }
 
   // Cấp phép  thăm dò service
   public getCapPhepThamDoKhoangSanService() {
@@ -42,22 +45,27 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepThamDoLoaiKhoangSanService() {
     return new CpThamDoLoaiKhoangSanService(this.httpClient);
   }
+
   // cấp phép phê duyệt trữ lượng khoáng sản
-  public getCapPhepPheDuyetTLKSService(){
+  public getCapPhepPheDuyetTLKSService() {
     return new CpPheDuyetTLKSService(this.httpClient)
   }
+
   //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
-  public getCapPhepPheDuyetTLKS_loaiKSService(){
+  public getCapPhepPheDuyetTLKS_loaiKSService() {
     return new CpPheDuyetTLKSLoaiKSService(this.httpClient);
   }
-   //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
-   public getCapPhepPheDuyetTLKS_khoiLuongTruLuongService(){
+
+  //cấp phép phê duyệt trữ lượng khoáng sản- loại khoáng sản
+  public getCapPhepPheDuyetTLKS_khoiLuongTruLuongService() {
     return new CpPheDuyetKhoangSanKhoiLuongTruLuongService(this.httpClient);
   }
+
   // cấp phép phê duyệt trữ lượng ks - Khu vực khai thác
-  public getCapPhepPheDuyetTLKS_KhuVucService(){
+  public getCapPhepPheDuyetTLKS_KhuVucService() {
     return new CpPheDuyetTLKSKhuVucService(this.httpClient);
   }
+
   // cấp phép thăm dò công trình service
   public getCapPhepThamDoCongTrinhService() {
     return new CpThamDoCongTrinhService(this.httpClient);
@@ -107,12 +115,24 @@ export class CapPhepHoatDongKhoangSanFacadeService {
   public getCapPhepTanThuDvhcService() {
     return new CpTanThuDvhcService(this.httpClient);
   }
+
   // cấp phép tận thu loại khoáng sản service
   public getCapPhepTanThuLoaiKhoangSanService() {
     return new CpTanThuLoaiKhoangSanService(this.httpClient);
   }
+
   // cấp phép thăm dò khu vực service
   public getCapPhepTanThuKhuVucService() {
     return new CptanthukhuvucService(this.httpClient);
+  }
+
+  // Cấp phép khai thác khoáng sản service
+  public getCapPhepDauGiaService() {
+    return new CpdaugiakhaithacService(this.httpClient);
+  }
+
+  // Cấp phép đấu giá khu vực service
+  public getCapPhepDauGiaKhuVucService() {
+    return new CpdaugiakhuvucService(this.httpClient);
   }
 }

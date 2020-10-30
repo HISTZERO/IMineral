@@ -1,0 +1,196 @@
+<div class="pt-3 pb-4">
+  <form [formGroup]="cpDauGiaKhuVucIOForm" class="pt-toolbar">
+    <div class="form-group row mx-0">
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.tenkhuvuc" | translate }}
+        <small>(*)</small></label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="tenkhuvuc"
+               placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.tenkhuvucPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.tenkhuvuc" class="alert-danger">{{formErrors.tenkhuvuc}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label
+        class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.dientich" | translate}}
+        <small>(*)</small></label>
+      <div class="col-sm-9">
+        <input class="form-control" type="text" formControlName="dientich"
+               placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.dientichPlaceholder' | translate}}" />
+        <span *ngIf="formErrors.dientich" class="alert-danger">{{formErrors.dientich}}</span>
+      </div>
+    </div>
+    <div class="form-group row mx-0">
+      <label
+        class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.donvidientich" | translate }}
+        <small>(*)</small>
+      </label>
+      <div class="col-sm-9">
+        <mat-select class="form-control" formControlName="donvidientich" *ngIf="dataTranslate"
+                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chondonvidientich' | translate}}">
+          <mat-option value="">
+            {{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chondonvidientich" | translate }}
+          </mat-option>
+          <mat-option *ngFor="let donViDienTich of donViDienTichList" [value]="donViDienTich.id">
+            {{ donViDienTich.name }}
+          </mat-option>
+        </mat-select>
+        <span *ngIf="formErrors.donvidientich" class="alert-danger">{{formErrors.donvidientich}}</span>
+      </div>
+    </div>
+    <!--    <div class="form-group row mx-0" *ngIf="obj.loaicapphep === loaiCapPhep.ThamDoGiaHan">-->
+    <!--      <label-->
+    <!--        class="col-sm-3 col-form-label text-right">{{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.loaikhuvuc" | translate }}-->
+    <!--        <small>(*)</small>-->
+    <!--      </label>-->
+    <!--      <div class="col-sm-9">-->
+    <!--        <mat-select class="form-control" formControlName="loaikhuvuc" *ngIf="dataTranslate"-->
+    <!--                    placeholder="{{'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chonloaikhuvuc' | translate}}">-->
+    <!--          <mat-option [value]="0">-->
+    <!--            {{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chonloaikhuvuc" | translate }}-->
+    <!--          </mat-option>-->
+    <!--          <mat-option *ngFor="let loaiKV of loaiKhuVuc" [value]="loaiKV.id">-->
+    <!--            {{ loaiKV.name }}-->
+    <!--          </mat-option>-->
+    <!--        </mat-select>-->
+    <!--        <span *ngIf="formErrors.loaikhuvuc" class="alert-danger">{{formErrors.loaikhuvuc}}</span>-->
+    <!--      </div>-->
+    <!--    </div>-->
+    <div class="form-group row mx-0">
+      <label class="col-sm-3 col-form-label text-right">{{"CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.hequychieu" | translate}}
+        <small>(*)</small>
+      </label>
+      <!-- <div class="col-sm-9">
+          <mat-select class="form-control"
+              placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chonhequychieu' | translate }}"
+              formControlName="hequychieu" *ngIf="dataTranslate">
+              <mat-option value="">
+                  {{ "CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.chonhequychieu" | translate }}
+              </mat-option>
+              <mat-option *ngFor="let hequychieu of allHeQuyChieu" [value]="hequychieu.srid">
+                  {{("DANHMUC.hequychieu.meridian"  | translate) + ": " + hequychieu.meridian + " - " + ("DANHMUC.hequychieu.prjzone"  | translate) + ": " + hequychieu.prjzone}}
+              </mat-option>
+          </mat-select>
+          <span *ngIf="formErrors.hequychieu" class="alert-danger">{{formErrors.hequychieu}}</span>
+      </div> -->
+      <div class="col-sm-9 font-weight-bold" style="padding-top: 9px;">
+        {{tenHeQuyChieu}}
+      </div>
+    </div>
+  </form>
+  <div class="container-fluid mt-5">
+    <div class="row">
+      <div class="col-12 px-0">
+        <div class="card border">
+          <div class="card-header">
+            <form [formGroup]="cpDauGiaToaDoKhuVucIOForm">
+              <div class="row">
+                <div class="col-2">
+                  <div class="form-group mb-1">
+                    <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.thutu' | translate}}:</label>
+                    <input type="text" class="form-control" formControlName="thutu"
+                           placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.thutuPlaceholder' | translate}}">
+                    <span *ngIf="formErrorsToaDo.thutu"
+                          class="alert-danger">{{formErrorsToaDo.thutu}}</span>
+                    <span *ngIf="errorThuTu" class="alert-danger">{{errorThuTu}}</span>
+                  </div>
+                </div>
+                <div class="col-2">
+                  <div class="form-group mb-1">
+                    <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.sohieu' | translate}}:</label>
+                    <input type="text" class="form-control" formControlName="sohieu"
+                           placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.sohieuPlaceholder' | translate}}">
+                    <span *ngIf="formErrorsToaDo.sohieu"
+                          class="alert-danger">{{formErrorsToaDo.sohieu}}</span>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group mb-1">
+                    <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadox' | translate}}:</label>
+                    <input type="text" class="form-control" formControlName="toadox"
+                           placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadoxPlaceholder' | translate}}">
+                    <span *ngIf="formErrorsToaDo.toadox"
+                          class="alert-danger">{{formErrorsToaDo.toadox}}</span>
+                  </div>
+                </div>
+                <div class="col-3">
+                  <div class="form-group mb-1">
+                    <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadoy' | translate}}:</label>
+                    <input type="text" class="form-control" formControlName="toadoy"
+                           placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadoyPlaceholder' | translate}}">
+                    <span *ngIf="formErrorsToaDo.toadoy"
+                          class="alert-danger">{{formErrorsToaDo.toadoy}}</span>
+                  </div>
+                </div>
+                <div class="col-2 mb-1">
+                  <button class="btn btn-success" style="position: absolute;top: 28px;"
+                          (click)="saveToaDoKhuVuc()">{{ 'COMMON.default.save' | translate }}</button>
+                </div>
+
+              </div>
+            </form>
+          </div>
+          <div class="card-body">
+            <ejs-grid #gridCpToaDoKhuVuc *ngIf="listToaDoKhuVuc" [dataSource]="listToaDoKhuVuc"
+                      [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
+                      [allowTextWrap]="true" [textWrapSettings]='wrapSettings'
+                      [pageSettings]="settingsCommon.pageSettings" class="table-striped" [allowResizing]="true">
+              <e-columns>
+                <e-column field="thutu"
+                          headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.thutu' | translate }}">
+                </e-column>
+                <e-column field="sohieu"
+                          headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.sohieu' | translate }}">
+                </e-column>
+                <e-column field="toadox"
+                          headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadox' | translate }}">
+                </e-column>
+                <e-column field="toadoy"
+                          headerText="{{ 'CAPPHEPHOATDONGKHOANGSAN.cappheptanthukhuvuc.toadoy' | translate }}">
+                </e-column>
+                <e-column field="iddaugiakhuvuc" isPrimaryKey='true'
+                          headerText="{{ 'COMMON.default.action' | translate }}">
+                  <ng-template #template let-data>
+                    <div class="btn-group">
+                      <button class="btn btn-sm btn-danger"
+                              title="{{ 'COMMON.default.delete' | translate }}"
+                              (click)="deleteToaDoKhuVuc(data)">
+                        <i class="far fa-trash"></i>
+                      </button>
+                    </div>
+                  </ng-template>
+                </e-column>
+              </e-columns>
+            </ejs-grid>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="toolbar-container py-2">
+    <div class="function-toolbar">
+      <div class="form-group row mx-0">
+        <div class="col-12">
+          <button class="btn btn-primary float-right" (click)="onSubmit(purpose)">
+            <i class="far fa-save"></i>
+            {{ "COMMON.default.saveAndClose" | translate }}
+          </button>
+          <button class="btn btn-outline-primary float-right mr-3" *ngIf="purpose === 'new'"
+                  (click)="onContinueAdd(purpose)">
+            <i class="far fa-download"></i>
+            {{ "COMMON.default.saveAndRefresh" | translate }}
+          </button>
+          <button class="btn btn-outline-info float-right mr-3" *ngIf="purpose === 'new'"
+                  (click)="onFormReset()">
+            <i class="far fa-sync-alt"></i>
+            {{ "COMMON.default.refresh" | translate }}
+          </button>
+          <button class="btn btn-danger float-right mr-3" (click)="closeKhuVucToaDoIOSidenav()">
+            <i class="far fa-times-circle"></i>
+            {{ "COMMON.default.cancel" | translate }}
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
