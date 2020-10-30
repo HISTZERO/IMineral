@@ -8,7 +8,12 @@
             </ng-template>
           </mat-tab>
           <mat-tab [disabled]="disabledTabState[TabType.KhuVucDongCuaMo]" label="{{ titleNameTabKhuVuc }}">
-            <app-cp-ktks-khuvuckhaithac-list #capPhepDongCuaMoKhuVuc [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
+            <app-cp-ktks-khuvuckhaithac-list #capPhepDongCuaMoKhuVuc (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
+          </mat-tab>
+          <mat-tab [disabled]="disabledTabState[TabType.BanDoKhuVuc]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.default.bandokhuvucTab' | translate }}">
+            <ng-template matTabContent>
+              <app-toadokhuvuc [GeometryText]="geoMetry"></app-toadokhuvuc>
+            </ng-template>
           </mat-tab>
         </mat-tab-group>
       </div>

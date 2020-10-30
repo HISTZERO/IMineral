@@ -15,10 +15,13 @@ import { ThongTinKhoangSanTabEnum } from 'src/app/shared/constants/enum';
   templateUrl: './thongtinkhuvuckhoangsan.component.html',
   styleUrls: ['./thongtinkhuvuckhoangsan.component.scss']
 })
-export class ThongtinkhuvuckhoangsanComponent implements OnInit {
-  @ViewChild("tab", { static: true }) khuVucKhoangSanTab: MatTabGroup;
+export class ThongtinkhuvuckhoangsanComponent implements OnInit, AfterViewInit {
+  @ViewChild("khuVucKhoangSanTab", { static: false }) khuVucKhoangSanTab: MatTabGroup;
   @ViewChild(ContentContainerDirective, { static: true }) contentContainer: ContentContainerDirective;
   @ViewChild("khuVucToaDoListComp", { static: false }) khuVucToaDoListComp: KhuvuctoadoListComponent;
+
+  // Chứa goemetry
+  public geoMetry: string;
 
   public loadedTabState: any = {
     [ThongTinKhoangSanTabEnum.ThongTinChung]: false,
@@ -85,6 +88,12 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
     ];
     this.selectedDefaultTab = ThongTinKhoangSanTabEnum.ThongTinChung;
     this.showViewDetailComponent();
+    
+  }
+
+  ngAfterViewInit() {
+    this.khuVucKhoangSanTab.selectedIndex = 0;
+    this.khuVucKhoangSanTab.realignInkBar();
   }
 
   /**
@@ -105,11 +114,31 @@ export class ThongtinkhuvuckhoangsanComponent implements OnInit {
     const viewContainerRef = this.contentContainer.viewContainerRef;
     const componentRef: any = viewContainerRef.createComponent(factory);
     componentRef.instance.idKhuVuc = this.idKhuVuc;
+    componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
   }
 
+  /**
+   * Hàm chạy khi thay đổi tab
+   * @param index 
+   */
   async tabChange(index: any) {
     if (index === ThongTinKhoangSanTabEnum.ToaDo && !this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo]) {
       this.loadedTabState[ThongTinKhoangSanTabEnum.ToaDo] = await this.khuVucToaDoListComp.manualDataInit();
     }
+  }
+
+  /**
+   * Lấy dữ liệu geo gán vào biến
+   * @param geo 
+   */
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showViewDetailComponent();
   }
 }

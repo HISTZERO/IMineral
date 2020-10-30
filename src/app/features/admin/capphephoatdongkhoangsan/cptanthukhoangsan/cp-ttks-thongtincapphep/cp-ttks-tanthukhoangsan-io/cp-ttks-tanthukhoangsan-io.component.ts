@@ -50,6 +50,8 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
   @Output("selectIdCapPhepTanThuEvent") selectIdCapPhepTanThuEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // Chứa dữ liệu Form
   public capPhepTanThuIOForm: FormGroup;
   // Chứa dữ liệu translate
@@ -210,6 +212,7 @@ export class CpTtksTanthukhoangsanIoComponent implements OnInit {
       this.capPhepTanThuKhoangSan = await this.getCapPhepTanThuByIdGiayPhep(this.idgiayphep);
 
       if (this.capPhepTanThuKhoangSan) {
+        this.selectGeometryEvent.emit(this.capPhepTanThuKhoangSan.geowgs);
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepTanThu();
         this.selectHeQuyChieu();

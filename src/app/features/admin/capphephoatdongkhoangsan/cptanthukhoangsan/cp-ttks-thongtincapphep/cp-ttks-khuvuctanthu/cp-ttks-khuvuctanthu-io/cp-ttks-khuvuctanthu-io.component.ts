@@ -1,20 +1,25 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {FormBuilder, FormGroup, Validators} from "@angular/forms";
-import {LoaiCapPhepEnum} from "src/app/shared/constants/enum";
-import {OutputDmHeQuyChieuModel} from "src/app/models/admin/danhmuc/hequychieu.model";
-import {DonViDienTich} from "src/app/shared/constants/common-constants";
-import {SettingsCommon} from "src/app/shared/constants/setting-common";
-import {DefaultValue} from "src/app/shared/constants/global-var";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {CapPhepHoatDongKhoangSanFacadeService} from "src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
-import {DmFacadeService} from "src/app/services/admin/danhmuc/danhmuc-facade.service";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {TranslateService} from "@ngx-translate/core";
-import {HttpErrorResponse} from "@angular/common/http";
-import {validationAllErrorMessagesService} from "src/app/services/utilities/validatorService";
-import {OutputCpTanThuToaDoKhuVucModel} from "src/app/models/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthutoadokhuvuc.model";
-import {InputCpTanThuKhuVucModel} from "src/app/models/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.model";
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { MatDialog } from "@angular/material";
+
+import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
+import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
+import { DonViDienTich } from "src/app/shared/constants/common-constants";
+import { SettingsCommon } from "src/app/shared/constants/setting-common";
+import { DefaultValue } from "src/app/shared/constants/global-var";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { CapPhepHoatDongKhoangSanFacadeService } from "src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service";
+import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { validationAllErrorMessagesService } from "src/app/services/utilities/validatorService";
+import { OutputCpTanThuToaDoKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthutoadokhuvuc.model";
+import { InputCpTanThuKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cptanthukhoangsan/cptanthukhuvuc.model";
+import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 
 @Component({
   selector: 'app-cp-ttks-khuvuctanthu-io',
@@ -25,7 +30,7 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
 
 
   // Viewchild template
-  @ViewChild("gridCpToaDoKhuVuc", {static: false}) public gridCpToaDoKhuVuc: GridComponent;
+  @ViewChild("gridCpToaDoKhuVuc", { static: false }) public gridCpToaDoKhuVuc: GridComponent;
 
   // Chứa dữ liệu Form khu vực
   public cpTanThuKhuVucIOForm: FormGroup;
@@ -77,6 +82,14 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
   // Lưu tên hệ quy chiếu sử dụng hiện tại
   public tenHeQuyChieu = DefaultValue.Empty;
 
+  public mDialog: any;
+
+  // Chứa geoJson
+  public dataGeoJson: any;
+
+  // Chứa trạng thái hiển thị nút xem bản đồ khu vực
+  public showButtonViewMap: boolean = false;
+
   // Form errors khu vực
   formErrors = {
     tenkhuvuc: DefaultValue.Empty,
@@ -99,7 +112,13 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService) {
+    private translate: TranslateService,
+    private imDialog: MatDialog,
+    imDialogService: MatdialogService,
+    private mapFacadeService: MapFacadeService,
+  ) {
+    this.mDialog = imDialogService;
+    this.mDialog.initDialg(imDialog);
   }
 
   async ngOnInit() {
@@ -131,9 +150,9 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
   setValidation() {
     // Error message khu vực
     this.validationErrorMessages = {
-      tenkhuvuc: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvucRequired},
-      dientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientichRequired},
-      donvidientich: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientichRequired}
+      tenkhuvuc: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.tenkhuvucRequired },
+      dientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.dientichRequired },
+      donvidientich: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.donvidientichRequired }
       // hequychieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.hequychieuRequired },
     };
 
@@ -143,7 +162,7 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
         required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuRequired,
         pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutuIsNumber
       },
-      sohieu: {required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieuRequired},
+      sohieu: { required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieuRequired },
       toadox: {
         required: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoxRequired,
         pattern: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoxIsNumber,
@@ -198,6 +217,9 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
         // hequychieu: this.obj.hequychieu,
       });
       this.listToaDoKhuVuc = this.obj.listtoado;
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -224,7 +246,7 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
   async geAllHeQuyChieu() {
     const allHeQuyChieuData: any = await this.dmFacadeService
       .getDmHeQuyChieuService()
-      .getFetchAll({PageNumber: 1, PageSize: -1});
+      .getFetchAll({ PageNumber: 1, PageSize: -1 });
     this.allHeQuyChieu = allHeQuyChieuData.items;
     this.HeQuyChieuFilters = allHeQuyChieuData.items;
   }
@@ -399,6 +421,9 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
       this.gridCpToaDoKhuVuc.refresh();
       this.cpTanThuToaDoKhuVucIOForm.reset();
       this.errorThuTu = DefaultValue.Empty;
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -418,8 +443,45 @@ export class CpTtksKhuvuctanthuIoComponent implements OnInit {
       }
     }
 
+    // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+    this.checkStateButtonViewMap();
+
     // Làm mới grid
     this.gridCpToaDoKhuVuc.refresh();
   }
 
+  // Hàm hiển thị bản đồ khu vực trên dialog
+  async openDialogBanDoKhuVuc() {
+    await this.customDataViewMap();
+    await this.mDialog.setDialog(this, ViewcoordinatesComponent, "", "", this.dataGeoJson, "70%", "70vh");
+    await this.mDialog.open();
+  }
+
+  /**
+   * Check dữ liệu để hiển thị nút xem bản đồ khu vực
+   */
+  public checkStateButtonViewMap() {
+    // Kiểm tra nếu dữ liệu tọa độ lớn hơn hoặc bằng 3 thì hiển thị nút xem bản đồ khu vực
+    if (this.listToaDoKhuVuc.length >= 3) {
+      this.showButtonViewMap = true;
+    } else {
+      this.showButtonViewMap = false;
+    }
+  }
+
+  /**
+   * Custom dữ liệu tọa độ để hiển thị lên bản đồ
+   */
+  async customDataViewMap() {
+    let listData: any = [];
+
+    await this.listToaDoKhuVuc.map(toado => {
+      listData.push({
+        toadox: toado.toadox,
+        toadoy: toado.toadoy,
+      });
+    });
+
+    this.dataGeoJson = await this.mapFacadeService.getGeometryService().getGeoJsonByListItem(listData, this.obj.hequychieu).toPromise();
+  }
 }

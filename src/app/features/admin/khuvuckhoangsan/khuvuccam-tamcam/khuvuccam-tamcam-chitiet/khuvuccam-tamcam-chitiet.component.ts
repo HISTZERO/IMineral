@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver } from '@angular/core';
+import { Component, OnInit, ViewChild, ViewContainerRef, ComponentFactoryResolver, Output, EventEmitter } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
 
@@ -18,6 +18,8 @@ import { MaLoaiHinh } from "src/app/shared/constants/common-constants";
 export class KhuvuccamTamcamChitietComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compKvCamTamCamIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
 
   // Chứa id khu vực cấm, tạm cấm
   public idKhuVuc: string;
@@ -61,6 +63,7 @@ export class KhuvuccamTamcamChitietComponent implements OnInit {
       .getKhuVucCamTamCamService()
       .getByid(this.idKhuVuc).subscribe(res => {
         this.obj = res;
+        this.selectGeometryEvent.emit(res.geowgs);
         this.getHeQuyChieuBySrid(res.hequychieu);
       });
   }

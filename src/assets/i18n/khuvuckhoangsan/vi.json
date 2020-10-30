@@ -1,7 +1,8 @@
 {
   "default": {
     "thongtinchung": "THÔNG TIN CHUNG",
-    "toado": "TỌA ĐỘ"
+    "toado": "TỌA ĐỘ",
+    "bandokhuvucTab": "BẢN ĐỒ KHU VỰC"
   },
   "khuvucdaugia": {
     "titleList": "Danh sách khu vực dấu giá",

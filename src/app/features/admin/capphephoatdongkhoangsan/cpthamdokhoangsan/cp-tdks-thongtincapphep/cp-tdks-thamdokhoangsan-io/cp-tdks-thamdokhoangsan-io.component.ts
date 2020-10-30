@@ -41,6 +41,8 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
   @Output("selectHeQuyChieuEvent") selectHeQuyChieuEvent: EventEmitter<string> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
   @Output("selectIdCapPhepThamDoEvent") selectIdCapPhepThamDoEvent: EventEmitter<string> = new EventEmitter();
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Chứa dữ liệu Form
@@ -182,6 +184,7 @@ export class CpTdksThamdokhoangsanIoComponent implements OnInit {
     if (this.itemGiayPhep && (this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoKhoangSan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ThamDoGiaHan || this.itemGiayPhep.loaicapphep === LoaiCapPhepEnum.ChuyenNhuongQuyenThamDoKhoangSan)) {
       this.capPhepThamDoKhoangSan = await this.getCapPhepThamDoByIdGiayPhep(this.idgiayphep);
       if (this.capPhepThamDoKhoangSan) {
+        this.selectGeometryEvent.emit(this.capPhepThamDoKhoangSan.geowgs);
         this.currentAction = CapPhepThamDoActionEnum.Edit;
         this.selectIdCapPhepThamDo();
         this.selectHeQuyChieu();

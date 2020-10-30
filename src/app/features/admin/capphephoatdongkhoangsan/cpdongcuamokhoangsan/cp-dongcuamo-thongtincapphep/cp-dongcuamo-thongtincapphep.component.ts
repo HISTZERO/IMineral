@@ -34,15 +34,19 @@ export class CpDongcuamoThongtincapphepComponent implements OnInit {
   public idgiayphep;
   // Chứa tên tab khu vực đóng cửa mỏ 1 phần
   public titleNameTabKhuVuc: string = "";
+  // Chứa goemetry
+  public geoMetry: string;
   // Lưu trữ trạng thais tab được select
   public loadedTabState: any = {
     [CpDongCuaMoChiTietTabEnum.ThongTinChiTiet]: false,
     [CpDongCuaMoChiTietTabEnum.KhuVucDongCuaMo]: false,
+    [CpDongCuaMoChiTietTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
     [CpDongCuaMoChiTietTabEnum.ThongTinChiTiet]: true,
     [CpDongCuaMoChiTietTabEnum.KhuVucDongCuaMo]: true,
+    [CpDongCuaMoChiTietTabEnum.BanDoKhuVuc]: true,
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -115,16 +119,19 @@ export class CpDongcuamoThongtincapphepComponent implements OnInit {
       case CapPhepKhaiThacActionEnum.Add: {
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.KhuVucDongCuaMo] = true;
+        this.disabledTabState[CpDongCuaMoChiTietTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case CapPhepKhaiThacActionEnum.Edit: {
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.ThongTinChiTiet] = false;
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.KhuVucDongCuaMo] = false;
+        this.disabledTabState[CpDongCuaMoChiTietTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.ThongTinChiTiet] = true;
         this.disabledTabState[CpDongCuaMoChiTietTabEnum.KhuVucDongCuaMo] = true;
+        this.disabledTabState[CpDongCuaMoChiTietTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -171,6 +178,7 @@ export class CpDongcuamoThongtincapphepComponent implements OnInit {
     componentRef.instance.itemGiayPhep = this.itemGiayPhep;
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepKhaiThacFormState(event));
     componentRef.instance.selectIdCapPhepKhaiThacEvent.subscribe(event => this.getIdCapPhepKhaiThac(event));
+    componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
   }
 
   async tabChange(index: any) {
@@ -183,4 +191,14 @@ export class CpDongcuamoThongtincapphepComponent implements OnInit {
     }
   }
 
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showCapPhepViewComponent();
+  }
 }

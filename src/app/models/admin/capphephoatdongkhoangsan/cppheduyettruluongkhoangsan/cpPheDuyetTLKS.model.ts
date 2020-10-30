@@ -5,6 +5,7 @@ export class OutputCpPheDuyetTLKSModel {
     diadiem: string;
     dientichthamdo: number;
     donvidientich: string;
+    geowgs: string;
   }
   
   export class InputCpPheDuyetTLKSModel {
