@@ -211,7 +211,6 @@
     "loaiKhoangSanDongCuaMoTabTile": "Loại khoáng sản",
     "khuVucDongCuaMoTabTile": "Khu vực đóng cửa mỏ",
     "khuVucDongCuaMoMotPhanTabTile": "Khu vực đóng cửa một phần diện tích và tiếp tục khai thác",
-
     "donViHanhChinhChuyenNhuongTabTile": "Đơn vị hành chính",
     "loaiKhoangSanChuyenNhuongTabTile": "Loại khoáng sản",
     "khuVucChuyenNhuongTabTile": "Khu vực khai thác",
@@ -394,6 +393,7 @@
     "dientichkhaithac": "Diện tích khai thác",
     "dientichkhaithacRequired": "Diện tích khai thác không được để trống",
     "dientichtralai": "Diện tích trả lại",
+    "dientichdongcua": "Diện tích đóng cửa",
     "dientichtralaiRequired": "Diện tích trả lại không được để trống",
     "truluongdiachat": "Trữ lượng địa chất",
     "truluongdiachatRequired": "Trữ lượng địa chất không được để trống",
