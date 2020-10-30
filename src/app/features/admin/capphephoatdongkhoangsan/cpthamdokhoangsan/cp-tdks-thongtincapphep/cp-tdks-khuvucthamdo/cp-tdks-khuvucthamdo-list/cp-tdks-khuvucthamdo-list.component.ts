@@ -63,6 +63,9 @@ export class CpTdksKhuvucthamdoListComponent implements OnInit {
   public idHoSo: string;
 
   public data = [];
+  
+  // Chứa goemetry
+  public geoMetry: string;
 
   public childGrid: GridModel = {};
 

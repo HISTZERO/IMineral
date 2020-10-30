@@ -1,8 +1,10 @@
 import { HttpErrorResponse } from "@angular/common/http";
 import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatDialog } from "@angular/material";
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+
 import { OutputCpThamDoToaDoKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdotoadokhuvuc.model";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
 import { DmFacadeService } from "src/app/services/admin/danhmuc/danhmuc-facade.service";
@@ -15,10 +17,9 @@ import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { InputCpThamDoKhuVucModel } from 'src/app/models/admin/capphephoatdongkhoangsan/cpthamdokhuvuc.model';
-import { ViewcoordinatesComponent } from "../../../../../../../shared/components/viewcoordinates/viewcoordinates.component";
-import { MatDialog } from "@angular/material";
-import { MatdialogService } from "../../../../../../../services/utilities/matdialog.service";
-import { MapFacadeService } from "../../../../../../../services/admin/map/map-facade.service";
+import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 
 @Component({
   selector: 'app-cp-tdks-khuvucthamdo-io',
@@ -75,16 +76,17 @@ export class CpTdksKhuvucthamdoIoComponent implements OnInit {
   // Chứa thông báo lỗi thứ tự
   public errorThuTu = DefaultValue.Empty;
 
-  // Chứa trạng thái hiển thị nút xem bản đồ khu vực
-  public showButtonViewMap: boolean = false;
-
   // error message
   validationErrorMessages = {};
 
   // Chứa error tọa độ khu vực
   public validationErrorToaDo = {};
+
   // Lưu tên hệ quy chiếu sử dụng hiện tại
   public tenHeQuyChieu = DefaultValue.Empty;
+
+  // Chứa trạng thái hiển thị nút xem bản đồ khu vực
+  public showButtonViewMap: boolean = false;
 
   public mDialog: any;
 

@@ -2,62 +2,48 @@
   <div class="card border">
     <div class="card-body">
       <!-- Tab thông tin chi tiết -->
-      <mat-tab-group
-        mat-stretch-tabs
-        [animationDuration]=""
-        (selectedIndexChange)="tabChange($event)"
-      >
-        <mat-tab
-          [disabled]="disabledTabState[TabType.ThongTinChiTiet]"
-          label="{{
+      <mat-tab-group mat-stretch-tabs [animationDuration]="" (selectedIndexChange)="tabChange($event)">
+        <mat-tab [disabled]="disabledTabState[TabType.ThongTinChiTiet]" label="{{
             'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.thongTinChiTietTabTitle'
               | translate
-          }}"
-        >
-          <app-cp-pdtlks-thongtinchitiet
-            (thongTinChiTietTonTaiTrigger)="
+          }}">
+          <app-cp-pdtlks-thongtinchitiet (thongTinChiTietTonTaiTrigger)="
               thongTinChiTietVuaTaoHandler($event)
-            "
-            (thongTinChiTietKhongTonTaiTrigger)="
+            " (thongTinChiTietKhongTonTaiTrigger)="
               thongTinChiTietKhongTonTaiHandler($event)
-            "
-          >
+            " (geoMetryDataEvent)="getGeometry($event)"
+            >
           </app-cp-pdtlks-thongtinchitiet>
         </mat-tab>
 
         <!-- tab Loại khoáng sản -->
-        <mat-tab
-          [disabled]="disabledTabState[TabType.LoaiKhoangSan]"
-          label="{{
+        <mat-tab [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{
             'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.truluongtheoloaikhoangsanTabtile'
               | translate
-          }}"
-        >
-          <app-cp-pdtlks-loaikhoangsan
-            #loaiKhoangSanTab
-          ></app-cp-pdtlks-loaikhoangsan>
+          }}">
+          <app-cp-pdtlks-loaikhoangsan #loaiKhoangSanTab></app-cp-pdtlks-loaikhoangsan>
         </mat-tab>
 
         <!-- tab Trữ lượng khu vực -->
-        <mat-tab
-          [disabled]="disabledTabState[TabType.TruLuongKhuVuc]"
-          label="{{
+        <mat-tab [disabled]="disabledTabState[TabType.TruLuongKhuVuc]" label="{{
             'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.khuvucthamdoTabTitle'
               | translate
-          }}"
-        >
-        <app-cp-pdtlks-khuvuc #khuvuckhoangsanTab></app-cp-pdtlks-khuvuc>
+          }}">
+          <app-cp-pdtlks-khuvuc #khuvuckhoangsanTab (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()"></app-cp-pdtlks-khuvuc>
         </mat-tab>
 
         <!-- tab Khối lượng trữ lượng -->
-        <mat-tab
-          [disabled]="disabledTabState[TabType.KhoiLuongTruLuong]"
-          label="{{
+        <mat-tab [disabled]="disabledTabState[TabType.KhoiLuongTruLuong]" label="{{
             'CAPPHEPHOATDONGKHOANGSAN.thongtinchitiet_capphepktks.truluongtheokhoitruluongTabTitle'
               | translate
-          }}"
-        >
-        <app-cp-pdtlks-khoiluong #khoiluongtruluong></app-cp-pdtlks-khoiluong>
+          }}">
+          <app-cp-pdtlks-khoiluong #khoiluongtruluong></app-cp-pdtlks-khoiluong>
+        </mat-tab>
+
+        <mat-tab [disabled]="disabledTabState[TabType.BanDoKhuVuc]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.default.bandokhuvucTab' | translate }}">
+          <ng-template matTabContent>
+            <app-toadokhuvuc [GeometryText]="geoMetry"></app-toadokhuvuc>
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
     </div>

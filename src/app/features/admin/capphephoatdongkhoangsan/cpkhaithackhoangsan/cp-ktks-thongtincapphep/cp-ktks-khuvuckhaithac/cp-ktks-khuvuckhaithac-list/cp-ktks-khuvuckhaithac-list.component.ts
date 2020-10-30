@@ -1,5 +1,5 @@
 import { HttpErrorResponse } from "@angular/common/http";
-import { ComponentFactoryResolver, Input, Type, ViewChild, ViewContainerRef } from "@angular/core";
+import { ComponentFactoryResolver, EventEmitter, Input, Output, Type, ViewChild, ViewContainerRef } from "@angular/core";
 import { Component, OnInit } from '@angular/core';
 import { MatSidenav } from "@angular/material";
 import { TranslateService } from "@ngx-translate/core";
@@ -29,6 +29,8 @@ export class CpKtksKhuvuckhaithacListComponent implements OnInit {
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
 
   // Chứa loại cấp phép
   public loaicapphep: number;
@@ -218,7 +220,10 @@ export class CpKtksKhuvuckhaithacListComponent implements OnInit {
           .getCapPhepKhaiThacKhuVucService()
           .deleteItem({ idkhaithackhuvuc: this.selectedItem.idkhaithackhuvuc })
           .subscribe(
-            () => this.getAllCpKhaiThacKhuVuc(),
+            () => {
+              this.getAllCpKhaiThacKhuVuc();
+              this.callBackTabThongTin();
+            },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -242,6 +247,13 @@ export class CpKtksKhuvuckhaithacListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName, obj) {
     this[methodName](obj);
+  }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
   }
 
 }

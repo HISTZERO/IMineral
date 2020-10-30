@@ -10,10 +10,6 @@ import {
   ViewContainerRef
 } from '@angular/core';
 import {ContentContainerDirective} from "src/app/shared/directives/content-container/content-container.directive";
-import {CpTdksDonvihanhchinhListComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-donvihanhchinh/cp-tdks-donvihanhchinh-list/cp-tdks-donvihanhchinh-list.component";
-import {CpTdksLoaikhoangsanListComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-loaikhoangsan/cp-tdks-loaikhoangsan-list/cp-tdks-loaikhoangsan-list.component";
-import {CpTdksCongtrinhthamdoListComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-congtrinhthamdo/cp-tdks-congtrinhthamdo-list/cp-tdks-congtrinhthamdo-list.component";
-import {CpTdksKhuvucthamdoListComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpthamdokhoangsan/cp-tdks-thongtincapphep/cp-tdks-khuvucthamdo/cp-tdks-khuvucthamdo-list/cp-tdks-khuvucthamdo-list.component";
 import {CapPhepThamDoActionEnum, CpTanThuKhoangSanTabEnum, LoaiCapPhepEnum} from "src/app/shared/constants/enum";
 import {TranslateService} from "@ngx-translate/core";
 import {ActivatedRoute} from "@angular/router";
@@ -53,6 +49,8 @@ export class CpTtksThongtincapphepComponent implements OnInit {
   public TabType = CpTanThuKhoangSanTabEnum;
   // Lưu trữ dữ liệu id giấy phép
   public idgiayphep;
+  // Chứa goemetry
+  public geoMetry: string;
 
   // lưu dữ liệu hệ quy chiếu
   private heQuyChieu = DefaultValue.Empty;
@@ -62,6 +60,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     [CpTanThuKhoangSanTabEnum.DonViHanhChinh]: false,
     [CpTanThuKhoangSanTabEnum.LoaiKhoangSan]: false,
     [CpTanThuKhoangSanTabEnum.KhuVucTanThu]: false,
+    [CpTanThuKhoangSanTabEnum.BanDoKhuVuc]: false,
   };
 
   public disabledTabState: any = {
@@ -69,6 +68,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     [CpTanThuKhoangSanTabEnum.DonViHanhChinh]: true,
     [CpTanThuKhoangSanTabEnum.LoaiKhoangSan]: true,
     [CpTanThuKhoangSanTabEnum.KhuVucTanThu]: true,
+    [CpTanThuKhoangSanTabEnum.BanDoKhuVuc]: true,
   };
 
   // Lưu trữ dữ liệu action hiện tại
@@ -138,6 +138,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = true;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
       case CapPhepThamDoActionEnum.Edit: {
@@ -145,6 +146,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = false;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.BanDoKhuVuc] = false;
         break;
       }
       default: {
@@ -152,6 +154,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
         this.disabledTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = true;
         this.disabledTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = true;
+        this.disabledTabState[CpTanThuKhoangSanTabEnum.BanDoKhuVuc] = true;
         break;
       }
     }
@@ -161,6 +164,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = false;
     this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = false;
     this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = false;
+    this.loadedTabState[CpTanThuKhoangSanTabEnum.BanDoKhuVuc] = false;
   }
 
   getCapPhepTanThuFormState(action: number) {
@@ -212,6 +216,7 @@ export class CpTtksThongtincapphepComponent implements OnInit {
     componentRef.instance.selectCurrentFormStateEvent.subscribe(event => this.getCapPhepTanThuFormState(event));
     componentRef.instance.selectIdCapPhepTanThuEvent.subscribe(event => this.getIdCapPhepTanThu(event));
     componentRef.instance.selectHeQuyChieuEvent.subscribe(event => this.getHeQuyChieu(event));
+    componentRef.instance.selectGeometryEvent.subscribe(event => this.getGeometry(event));
   }
 
   async tabChange(index: any) {
@@ -233,5 +238,16 @@ export class CpTtksThongtincapphepComponent implements OnInit {
         this.capPhepTanThuKhuVuc.heQuyChieu = this.heQuyChieu;
         this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.capPhepTanThuKhuVuc.manualDataInit();
       }
+  }
+
+  private getGeometry(geo: string) {
+    this.geoMetry = geo;
+  }
+
+  /**
+   * Hàm load lại dữ liệu tab thông tin chi tiết
+   */
+  public reloadDataTabThongTinChiTiet() {
+    this.showCapPhepViewComponent();
   }
 }

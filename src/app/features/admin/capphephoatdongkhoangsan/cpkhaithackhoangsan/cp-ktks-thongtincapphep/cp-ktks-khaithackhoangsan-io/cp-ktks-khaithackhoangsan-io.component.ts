@@ -48,6 +48,8 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
   @Output("selectCurrentFormStateEvent") selectCurrentFormStateEvent: EventEmitter<number> = new EventEmitter();
   // tslint:disable-next-line: no-output-rename
   @Output("selectIdCapPhepKhaiThacEvent") selectIdCapPhepKhaiThacEvent: EventEmitter<string> = new EventEmitter();
+  // Output geometry event
+  @Output("selectGeometryEvent") selectGeometryEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
   // Chứa dữ liệu Form
@@ -236,6 +238,7 @@ export class CpKtksKhaithackhoangsanIoComponent implements OnInit {
       }
 
       if (this.capPhepKhaiThacKhoangSan) {
+        this.selectGeometryEvent.emit(this.capPhepKhaiThacKhoangSan.geowgs);
         this.currentAction = CapPhepKhaiThacActionEnum.Edit;
         this.selectIdCapPhepKhaiThac();
         this.selectCurrentFormState();

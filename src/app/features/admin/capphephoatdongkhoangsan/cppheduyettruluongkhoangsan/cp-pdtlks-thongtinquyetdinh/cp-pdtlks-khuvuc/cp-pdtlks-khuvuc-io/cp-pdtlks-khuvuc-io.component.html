@@ -104,7 +104,7 @@
                                         <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieu' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="sohieu"
                                             placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieuPlaceholder' | translate}}">
-                                            <span *ngIf="formErrorsToaDo.sohieu"
+                                        <span *ngIf="formErrorsToaDo.sohieu"
                                             class="alert-danger">{{formErrorsToaDo.sohieu}}</span>
                                     </div>
                                 </div>
@@ -113,7 +113,7 @@
                                         <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadox' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="toadox"
                                             placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoxPlaceholder' | translate}}">
-                                            <span *ngIf="formErrorsToaDo.toadox"
+                                        <span *ngIf="formErrorsToaDo.toadox"
                                             class="alert-danger">{{formErrorsToaDo.toadox}}</span>
                                     </div>
                                 </div>
@@ -122,7 +122,7 @@
                                         <label>{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoy' | translate}}:</label>
                                         <input type="text" class="form-control" formControlName="toadoy"
                                             placeholder="{{ 'CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoyPlaceholder' | translate}}">
-                                            <span *ngIf="formErrorsToaDo.toadoy"
+                                        <span *ngIf="formErrorsToaDo.toadoy"
                                             class="alert-danger">{{formErrorsToaDo.toadoy}}</span>
                                     </div>
                                 </div>
@@ -137,6 +137,11 @@
                         </form>
                     </div>
                     <div class="card-body">
+                        <div *ngIf="showButtonViewMap" style="text-align: right;">
+                            <button class="btn btn-success mb-2" (click)="openDialogBanDoKhuVuc()">
+                                <i class="far fa-eye"></i>
+                                {{ 'CAPPHEPHOATDONGKHOANGSAN.default.bandokhuvuc' | translate}}</button>
+                        </div>
                         <ejs-grid #gridCpToaDoKhuVuc *ngIf="listToaDoKhuVuc" [dataSource]="listToaDoKhuVuc"
                             [editSettings]="settingsCommon.editSettings" [allowPaging]="true" [allowSorting]="true"
                             [allowTextWrap]="true" [textWrapSettings]='wrapSettings'

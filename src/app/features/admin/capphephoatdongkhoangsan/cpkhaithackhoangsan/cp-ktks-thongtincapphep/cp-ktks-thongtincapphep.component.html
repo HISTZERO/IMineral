@@ -14,13 +14,18 @@
             <app-cp-ktks-loaikhoangsan-list #capPhepKhaiThacLoaiKhoangSan [allowAutoInit]="false"></app-cp-ktks-loaikhoangsan-list>
           </mat-tab>
           <mat-tab [disabled]="disabledTabState[TabType.KhuVucKhaiThac]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucKhaiThacTabTile' | translate }}">
-            <app-cp-ktks-khuvuckhaithac-list #capPhepKhaiThacKhuVuc [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
+            <app-cp-ktks-khuvuckhaithac-list #capPhepKhaiThacKhuVuc (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" [allowAutoInit]="false"></app-cp-ktks-khuvuckhaithac-list>
           </mat-tab>
           <mat-tab  [disabled]="disabledTabState[TabType.CongTrinhKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.congTrinhKhaiThacTabTitle' | translate }}">
             <app-cp-ktks-congtrinhkhaithac-list #capPhepCongTrinhKhaiThac [allowAutoInit]="false"></app-cp-ktks-congtrinhkhaithac-list>
           </mat-tab>
           <mat-tab *ngIf="showTabThietBi" [disabled]="disabledTabState[TabType.ThietBiKhaiThac]"  label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thietBiKhaiThacTabTitle' | translate }}">
             <app-cp-ktks-thietbikhaithac-list #capPhepKhaiThacThietBi [allowAutoInit]="false"></app-cp-ktks-thietbikhaithac-list>
+          </mat-tab>
+          <mat-tab [disabled]="disabledTabState[TabType.BanDoKhuVuc]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.default.bandokhuvucTab' | translate }}">
+            <ng-template matTabContent>
+              <app-toadokhuvuc [GeometryText]="geoMetry"></app-toadokhuvuc>
+            </ng-template>
           </mat-tab>
         </mat-tab-group>
       </div>

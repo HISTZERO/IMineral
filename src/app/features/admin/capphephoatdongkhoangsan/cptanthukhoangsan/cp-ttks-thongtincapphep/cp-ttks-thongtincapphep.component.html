@@ -2,19 +2,30 @@
   <div class="card border">
     <div class="card-body">
       <mat-tab-group mat-stretch-tabs #thongTinCapPhepThamDoTabs [animationDuration]=""
-                     (selectedIndexChange)="tabChange($event)">
-        <mat-tab  [disabled]="disabledTabState[TabType.ThongTinChiTiet]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thongTinChiTietTabTitle' | translate }}">
+        (selectedIndexChange)="tabChange($event)">
+        <mat-tab [disabled]="disabledTabState[TabType.ThongTinChiTiet]"
+          label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.thongTinChiTietTabTitle' | translate }}">
           <ng-template appContentContainer>
           </ng-template>
         </mat-tab>
-        <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhTabTile' | translate }}">
+        <mat-tab [disabled]="disabledTabState[TabType.DonViHanhChinh]"
+          label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.donViHanhChinhTabTile' | translate }}">
           <app-cp-ttks-donvihanhchinh-list #capPhepTanThuDvhc [allowAutoInit]="false"></app-cp-ttks-donvihanhchinh-list>
         </mat-tab>
-        <mat-tab  [disabled]="disabledTabState[TabType.LoaiKhoangSan]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanTabTile' | translate }}">
-          <app-cp-ttks-loaikhoangsan-list #capPhepTanThuLoaiKhoangSan [allowAutoInit]="false"></app-cp-ttks-loaikhoangsan-list>
+        <mat-tab [disabled]="disabledTabState[TabType.LoaiKhoangSan]"
+          label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.loaiKhoangSanTabTile' | translate }}">
+          <app-cp-ttks-loaikhoangsan-list #capPhepTanThuLoaiKhoangSan [allowAutoInit]="false">
+          </app-cp-ttks-loaikhoangsan-list>
         </mat-tab>
-        <mat-tab [disabled]="disabledTabState[TabType.KhuVucTanThu]" label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucTanThuTabTile' | translate }}">
-          <app-cp-ttks-khuvuctanthu-list #capPhepTanThuKhuVuc [allowAutoInit]="false"></app-cp-ttks-khuvuctanthu-list>
+        <mat-tab [disabled]="disabledTabState[TabType.KhuVucTanThu]"
+          label="{{ 'CAPPHEPHOATDONGKHOANGSAN.thongtincapphep.khuVucTanThuTabTile' | translate }}">
+          <app-cp-ttks-khuvuctanthu-list #capPhepTanThuKhuVuc (callBackTabThongTinChiTiet)="reloadDataTabThongTinChiTiet()" [allowAutoInit]="false"></app-cp-ttks-khuvuctanthu-list>
+        </mat-tab>
+        <mat-tab [disabled]="disabledTabState[TabType.BanDoKhuVuc]"
+          label="{{ 'CAPPHEPHOATDONGKHOANGSAN.default.bandokhuvucTab' | translate }}">
+          <ng-template matTabContent>
+            <app-toadokhuvuc [GeometryText]="geoMetry"></app-toadokhuvuc>
+          </ng-template>
         </mat-tab>
       </mat-tab-group>
     </div>
