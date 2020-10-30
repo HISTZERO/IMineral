@@ -71,9 +71,10 @@ import { CpTtksLoaikhoangsanIoComponent } from './cptanthukhoangsan/cp-ttks-thon
 import { CpTtksLoaikhoangsanListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-loaikhoangsan/cp-ttks-loaikhoangsan-list/cp-ttks-loaikhoangsan-list.component';
 import { CpTtksKhuvuctanthuIoComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-io/cp-ttks-khuvuctanthu-io.component';
 import { CpTtksKhuvuctanthuListComponent } from './cptanthukhoangsan/cp-ttks-thongtincapphep/cp-ttks-khuvuctanthu/cp-ttks-khuvuctanthu-list/cp-ttks-khuvuctanthu-list.component';
-import { CpDaugiakhaithacThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-thongtincapphep.component';
-import { CpDaugiakhaithacIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component';
-import { CpDaugiakhaithacKhuvucComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc.component';
+import { CpDaugiakhaithacIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component';
+import { CpDaugiakhaithacKhuvucListComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-list/cp-daugiakhaithac-khuvuc-list.component';
+import { CpDaugiakhaithacKhuvucIoComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-io/cp-daugiakhaithac-khuvuc-io.component';
+import { CpDaugiaThongtincapphepComponent } from './cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugia-thongtincapphep.component';
 
 
 @NgModule({
@@ -134,9 +135,10 @@ import { CpDaugiakhaithacKhuvucComponent } from './cpdaugiaquyenkhaithackhoangsa
     CpTtksLoaikhoangsanListComponent,
     CpTtksKhuvuctanthuIoComponent,
     CpTtksKhuvuctanthuListComponent,
-    CpDaugiakhaithacThongtincapphepComponent,
     CpDaugiakhaithacIoComponent,
-    CpDaugiakhaithacKhuvucComponent
+    CpDaugiakhaithacKhuvucListComponent,
+    CpDaugiakhaithacKhuvucIoComponent,
+    CpDaugiaThongtincapphepComponent
   ],
   exports: [
   ],
