@@ -8,8 +8,8 @@ import { CapPhepKhaiThacActionEnum, CpDauGiaKhaiThacKhoangSanTabEnum, LoaiCapPhe
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { HoSoGiayToFacadeService } from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { ContentContainerDirective } from 'src/app/shared/directives/content-container/content-container.directive';
-import { CpDaugiakhaithacIoComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component";
-import { CpDaugiakhaithacKhuvucListComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-list/cp-daugiakhaithac-khuvuc-list.component";
+import { CpDaugiakhaithacIoComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-io/cp-daugiakhaithac-io.component";
+import { CpDaugiakhaithacKhuvucListComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-list/cp-daugiakhaithac-khuvuc-list.component";
 
 @Component({
   selector: 'app-cp-daugia-thongtincapphep',

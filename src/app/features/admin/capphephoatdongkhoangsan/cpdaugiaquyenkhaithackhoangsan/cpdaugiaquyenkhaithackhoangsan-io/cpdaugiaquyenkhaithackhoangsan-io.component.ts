@@ -6,7 +6,7 @@ import {InsertedState, NhomTaiLieuEnum, GiayPhepActionEnum, CpDauGiaQuyenKhaiTha
 import { MatsidenavService } from 'src/app/services/utilities/matsidenav.service';
 import { NhomLoaiCapPhepEnum } from "src/app/shared/constants/nhomloaicapphep-constants";
 import { QuyetdinhIoComponent } from 'src/app/features/admin/hosogiayto/quyetdinh/quyetdinh-io/quyetdinh-io.component';
-import { CpDaugiakhaithacThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugiakhaithac-thongtincapphep/cp-daugiakhaithac-thongtincapphep.component';
+import { CpDaugiaThongtincapphepComponent } from 'src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugia-thongtincapphep.component';
 import {HoSoGiayToFacadeService} from 'src/app/services/admin/hosogiayto/hosogiayto-facade.service';
 import { ButtonBackCpDauGiaQuyenKhaiThacKhoangSan, MenuCpDauGiaQuyenKhaiThacKhoangSanChitiet } from 'src/app/shared/constants/sub-menus/capphephoatdongkhoangsan/capphephoatdongkhoangsan';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
@@ -22,7 +22,7 @@ export class CpdaugiaquyenkhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
   @ViewChild("compio", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
   @ViewChild("quyetDinhIOComp", { static: false })quyetDinhIOComp: QuyetdinhIoComponent;
-  @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpDaugiakhaithacThongtincapphepComponent;
+  @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpDaugiaThongtincapphepComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
   // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
   // Chứa dữ liệu menu item trên subheader
