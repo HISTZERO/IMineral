@@ -273,10 +273,4 @@ export class TtksThongtindangkyComponent implements OnInit {
     this.geoMetry = geo;
   }
 
-  /**
-   * Hàm load lại dữ liệu tab thông tin chi tiết
-   */
-  public reloadDataTabThongTinChiTiet() {
-    this.showDangKyViewComponent();
-  }
 }
