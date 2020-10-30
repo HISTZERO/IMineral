@@ -24,7 +24,7 @@ export class CpdaugiaquyenkhaithackhoangsanIoComponent implements OnInit {
   @ViewChild("quyetDinhIOComp", { static: false })quyetDinhIOComp: QuyetdinhIoComponent;
   @ViewChild("thongTinCapPhepComp", { static: false }) thongTinCapPhepComp: CpDaugiaThongtincapphepComponent;
   @ViewChild("taiLieuListComp", { static: false }) taiLieuListComp: GiaypheptailieuListComponent;
-  // @ViewChild("thongTinDangKyComp", { static: false }) thongTinDangKyComp: ThongtindangkyComponent;
+
   // Chứa dữ liệu menu item trên subheader
   public navArray = MenuCpDauGiaQuyenKhaiThacKhoangSanChitiet;
 

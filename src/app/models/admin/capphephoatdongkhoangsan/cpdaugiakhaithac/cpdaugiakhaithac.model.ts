@@ -11,7 +11,7 @@ export class OutputCpDauGiaKhaiThacModel {
     geom: string;
     geovn: string;
     geowgs: string;
-    siteid: string
+    siteid: string;
 }
 
 export class InputCpDauGiaKhaiThacModel {
@@ -23,7 +23,7 @@ export class InputCpDauGiaKhaiThacModel {
     donvidientich: string;
     giatrungdaugia: number;
     idgiayphep: string;
-    hequychieu: string
+    hequychieu: string;
 }
 
 

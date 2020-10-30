@@ -1,34 +1,48 @@
-import { HttpErrorResponse } from "@angular/common/http";
-import { ComponentFactoryResolver, Input, Type, ViewChild, ViewContainerRef } from "@angular/core";
-import { Component, OnInit } from '@angular/core';
-import { MatSidenav } from "@angular/material";
-import { TranslateService } from "@ngx-translate/core";
-import { DetailRowService, GridComponent, GridModel, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
-import { ActivatedRoute } from "@angular/router";
+import {HttpErrorResponse} from "@angular/common/http";
+import {
+  Component,
+  ComponentFactoryResolver,
+  EventEmitter,
+  Input,
+  OnInit,
+  Output,
+  Type,
+  ViewChild,
+  ViewContainerRef
+} from "@angular/core";
+import {MatSidenav} from "@angular/material";
+import {TranslateService} from "@ngx-translate/core";
+import {DetailRowService, GridComponent, GridModel, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
+import {ActivatedRoute} from "@angular/router";
 
-import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
-import { CommonServiceShared } from "src/app/services/utilities/common-service";
-import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
-import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
-import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
-import { OutputCpKhaiThacKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.model";
-import { CpKtksKhuvuckhaithacIoComponent } from "src/app/features/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cp-ktks-thongtincapphep/cp-ktks-khuvuckhaithac/cp-ktks-khuvuckhaithac-io/cp-ktks-khuvuckhaithac-io.component";
+import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
+import {CommonServiceShared} from "src/app/services/utilities/common-service";
+import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
+import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
+import {CapPhepHoatDongKhoangSanFacadeService} from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
+import {DefaultValue} from "src/app/shared/constants/global-var";
+import {OutputCpDauGiaKhuVucModel} from "src/app/models/admin/capphephoatdongkhoangsan/cpdaugiakhaithac/cpdaugiakhuvuc.model";
+import {CpDaugiakhaithacKhuvucIoComponent} from "src/app/features/admin/capphephoatdongkhoangsan/cpdaugiaquyenkhaithackhoangsan/cp-daugia-thongtincapphep/cp-daugiakhaithac-khuvuc/cp-daugiakhaithac-khuvuc-io/cp-daugiakhaithac-khuvuc-io.component";
 
 @Component({
   selector: 'app-cp-daugiakhaithac-khuvuc-list',
   templateUrl: './cp-daugiakhaithac-khuvuc-list.component.html',
-  styleUrls: ['./cp-daugiakhaithac-khuvuc-list.component.scss']
+  styleUrls: ['./cp-daugiakhaithac-khuvuc-list.component.scss'],
+  providers: [DetailRowService],
 })
 export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
 
-  // Viewchild template
-  @ViewChild("gridCpKhaiThacKhuVuc", { static: false }) public gridCpKhaiThacKhuVuc: GridComponent;
-  @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
-  @ViewChild(Type, { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
 
+  // Viewchild template
+  @ViewChild("gridCpDauGiaKhuVuc", {static: false}) public gridCpDauGiaKhuVuc: GridComponent;
+  @ViewChild(Type, {static: true}) public matSidenav: MatSidenav;
+  @ViewChild(Type, {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  // tslint:disable-next-line: no-output-rename
+  @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
-
+  // tslint:disable-next-line: no-input-rename
+  @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
   // Chứa loại cấp phép
   public loaicapphep: number;
 
@@ -38,11 +52,14 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
   // Chứa danh sách item đã chọn
   public listDataSelect: any[];
 
-  // Chứa danh sách cấp phép khai thác khu vực
-  public listCpKhaiThacKhuVuc: OutputCpKhaiThacKhuVucModel[];
+  // Chứa danh sách khu vực thăm dò
+  public listCpDauGiaKhuVuc: OutputCpDauGiaKhuVucModel[];
 
   // Chứa dữ liệu đã chọn
-  public selectedItem: OutputCpKhaiThacKhuVucModel;
+  public selectedItem: OutputCpDauGiaKhuVucModel;
+
+  // Chứa danh sách dữ liệu
+  public listData: any;
 
   // Chứa dữ liệu translate
   public dataTranslate: any;
@@ -50,8 +67,10 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
   // Chứa kiểu wrap text trên grid
   public wrapSettings: TextWrapSettingsModel;
 
-  // Chứa dữ liệu Iddangkykhaithac
-  public idcapphepkhaithac: string;
+  // Chứa dữ liệu idcapphepdaugia
+  public idcapphepdaugia: string;
+
+  public idHoSo: string;
 
   public data = [];
 
@@ -66,7 +85,8 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
     public thietlapFacadeService: ThietlapFacadeService,
     private translate: TranslateService,
     private activatedRoute: ActivatedRoute
-  ) { }
+  ) {
+  }
 
   async ngOnInit() {
     this.getDataTranslate();
@@ -93,10 +113,22 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
     this.childGrid = await {
       queryString: 'serialNumber',
       columns: [
-        { field: 'thutu', headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.thutu, width: 120 },
-        { field: 'sohieu', headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.sohieu, width: 150 },
-        { field: 'toadox', headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadox, width: 150 },
-        { field: 'toadoy', headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.toadoy, width: 150 }
+        {field: 'thutu', headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.thutu, width: 120},
+        {
+          field: 'sohieu',
+          headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.sohieu,
+          width: 150
+        },
+        {
+          field: 'toadox',
+          headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadox,
+          width: 150
+        },
+        {
+          field: 'toadoy',
+          headerText: this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.toadoy,
+          width: 150
+        }
       ],
       allowResizing: true,
     };
@@ -114,44 +146,59 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
     } else {
       this.settingsCommon.pageSettings.pageSize = 10;
     }
-    // Gọi hàm lấy dữ liệu cấp phép khai thác khu vực
-    await this.getAllCpKhaiThacKhuVuc();
+    // Gọi hàm lấy dữ liệu khu vực
+    await this.getAllCpDauGiaKhuVuc();
   }
 
   /**
    * Hàm load lại dữ liệu grid
    */
   public reloadDataGrid() {
-    this.getAllCpKhaiThacKhuVuc();
+    this.getAllCpDauGiaKhuVuc();
   }
 
   /**
-   * Hàm lấy dữ liệu cấp phép khai thác khu vực
+   * Hàm lấy dữ liệu Dvdc
    */
-  async getAllCpKhaiThacKhuVuc() {
+  async getAllCpDauGiaKhuVuc() {
+    if (this.idcapphepdaugia === DefaultValue.Null || this.idcapphepdaugia === DefaultValue.Undefined
+      || this.idcapphepdaugia.trim() === DefaultValue.Empty) {
+      return;
+    }
+
     const listData: any = await this.capPhepHoatDongKhoangSanFacadeService
-      .getCapPhepKhaiThacKhuVucService()
-      .getCpKhaiThacKhuVucByIdCapPhep(this.idcapphepkhaithac).toPromise();
+      .getCapPhepDauGiaKhuVucService()
+      .getCpDauGiaKhuVucByIdCapPhep(this.idcapphepdaugia).toPromise();
     if (listData) {
       listData.map((khuvuc, index) => {
         khuvuc.serialNumber = index + 1;
       });
     }
-    this.listCpKhaiThacKhuVuc = listData;
+    this.listCpDauGiaKhuVuc = listData;
+
+    if (this.listCpDauGiaKhuVuc) {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit({
+        idcapphepdaugia: this.idcapphepdaugia,
+        hequychieu: this.heQuyChieu,
+        count: this.listCpDauGiaKhuVuc.length
+      });
+    } else {
+      this.getNumberOfDataAfterInsertUpdateDeleteEvent.emit(DefaultValue.Zero);
+    }
   }
 
   /**
    * Hàm mở sidenav chức năng sửa dữ liệu
    * @param id
    */
-  async editItemCpKhaiThacKhuVuc(id: any) {
+  async editItemCpDauGiaKhuVuc(id: any) {
     // Lấy dữ liệu khu vực theo id
     const dataItem: any = await this.capPhepHoatDongKhoangSanFacadeService
-      .getCapPhepKhaiThacKhuVucService()
+      .getCapPhepDauGiaKhuVucService()
       .getByid(id).toPromise();
 
     if (!dataItem) {
-      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.informedNotExistedCapPhepKhaiThacKhuVuc);
+      this.commonService.showDialogWarning(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.informedNotExistedCapPhepThamDoKhuVuc);
       return;
     }
 
@@ -159,35 +206,39 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    await this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.titleEdit);
-    await this.matSidenavService.setContentComp(CpKtksKhuvuckhaithacIoComponent, "edit", dataItem);
+    await this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.titleEdit);
+    await this.matSidenavService.setContentComp(CpDaugiakhaithacKhuvucIoComponent, "edit", dataItem);
     await this.matSidenavService.open();
   }
 
   /**
    * Hàm mở sidenav chức năng thêm mới
    */
-  public openCpKhaiThacKhuVucIOSidenav() {
+  public openCpDauGiaKhuVucIOSidenav() {
     // clear Sidenav
     this.matSidenavService.clearSidenav();
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
-    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.titleAdd);
-    this.matSidenavService.setContentComp(CpKtksKhuvuckhaithacIoComponent, "new", { idcapphepkhaithac: this.idcapphepkhaithac, loaicapphep: this.loaicapphep });
+    this.matSidenavService.setTitle(this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.titleAdd);
+    this.matSidenavService.setContentComp(CpDaugiakhaithacKhuvucIoComponent, "new", {
+      idcapphepdaugia: this.idcapphepdaugia,
+      loaicapphep: this.loaicapphep,
+      hequychieu: this.heQuyChieu
+    });
     this.matSidenavService.open();
   }
 
   /**
    *  Hàm xóa một bản ghi, được gọi khi nhấn nút xóa trên giao diện list
    */
-  async deleteItemCpKhaiThacKhuVuc(data) {
+  async deleteItemCpDauGiaKhuVuc(data) {
     this.selectedItem = data;
     // Phải check xem dữ liệu muốn xóa có đang được dùng ko, đang dùng thì ko xóa
     // Trường hợp dữ liệu có thể xóa thì Phải hỏi người dùng xem có muốn xóa không
     // Nếu đồng ý xóa
     const canDelete: string = this.capPhepHoatDongKhoangSanFacadeService
-      .getCapPhepKhaiThacKhuVucService()
-      .checkBeDeleted(this.selectedItem.idkhaithackhuvuc);
+      .getCapPhepDauGiaKhuVucService()
+      .checkBeDeleted(this.selectedItem.iddaugiakhuvuc);
     this.canBeDeletedCheck(canDelete);
   }
 
@@ -208,16 +259,16 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
    */
   confirmDeleteDiaLog() {
     const dialogRef = this.commonService.confirmDeleteDiaLogService(
-      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepkhaithackhuvuc.contentDelete,
+      this.dataTranslate.CAPPHEPHOATDONGKHOANGSAN.capphepthamdokhuvuc.contentDelete,
       this.selectedItem.tenkhuvuc
     );
     dialogRef.afterClosed().subscribe(async (result) => {
       if (result === "confirm") {
         await this.capPhepHoatDongKhoangSanFacadeService
-          .getCapPhepKhaiThacKhuVucService()
-          .deleteItem({ idkhaithackhuvuc: this.selectedItem.idkhaithackhuvuc })
+          .getCapPhepDauGiaKhuVucService()
+          .deleteItem({iddaugiakhuvuc: this.selectedItem.iddaugiakhuvuc})
           .subscribe(
-            () => this.getAllCpKhaiThacKhuVuc(),
+            () => this.getAllCpDauGiaKhuVuc(),
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -242,5 +293,4 @@ export class CpDaugiakhaithacKhuvucListComponent implements OnInit {
   doFunction(methodName, obj) {
     this[methodName](obj);
   }
-
 }

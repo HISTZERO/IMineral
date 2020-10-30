@@ -143,11 +143,11 @@ import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-p
     CpDaugiakhaithacIoComponent,
     CpDaugiakhaithacKhuvucListComponent,
     CpDaugiakhaithacKhuvucIoComponent,
-    CpDaugiaThongtincapphepComponent
+    CpDaugiaThongtincapphepComponent,
     CpPdtlksKhuvucComponent,
     CpPdtlksKhuvucIoComponent,
     CpPdtlksKhoiluongComponent,
-    CpPdtlksKhoiluongIoComponent
+    CpPdtlksKhoiluongIoComponent,
   ],
   exports: [
   ],
@@ -186,8 +186,8 @@ import { CpPdtlksKhoiluongIoComponent } from './cppheduyettruluongkhoangsan/cp-p
     CpTtksDonvihanhchinhIoComponent,
     CpTtksLoaikhoangsanIoComponent,
     CpTtksKhuvuctanthuIoComponent,
-    CpDaugiakhaithacIoComponent
-    
+    CpDaugiakhaithacIoComponent,
+    CpDaugiakhaithacKhuvucIoComponent
   ],
   providers: [
     { provide: OWL_MOMENT_DATE_TIME_ADAPTER_OPTIONS, useValue: { useUtc: true } },

@@ -17,7 +17,8 @@ import {
   DonViDienTich,
   DonViDoSau,
   DonViThoiHan,
-  DonViTruLuong, PhuongPhapKhaiThac
+  DonViTruLuong,
+  PhuongPhapKhaiThac
 } from "src/app/shared/constants/common-constants";
 import {OutputGiayPhepModel} from "src/app/models/admin/hosogiayto/giayphep.model";
 import {DefaultValue} from "src/app/shared/constants/global-var";
