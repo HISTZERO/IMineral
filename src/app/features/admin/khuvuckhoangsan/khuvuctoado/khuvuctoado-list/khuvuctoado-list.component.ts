@@ -1,26 +1,26 @@
-import {Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input} from "@angular/core";
-import {MatSidenav} from "@angular/material/sidenav";
-import {TranslateService} from "@ngx-translate/core";
-import {HttpErrorResponse} from "@angular/common/http";
-import {GridComponent, TextWrapSettingsModel} from "@syncfusion/ej2-angular-grids";
-import {FormBuilder} from "@angular/forms";
-import {ActivatedRoute} from "@angular/router";
+import { Component, ComponentFactoryResolver, OnInit, ViewChild, ViewContainerRef, Input, Output, EventEmitter } from "@angular/core";
+import { MatSidenav } from "@angular/material/sidenav";
+import { TranslateService } from "@ngx-translate/core";
+import { HttpErrorResponse } from "@angular/common/http";
+import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { FormBuilder } from "@angular/forms";
+import { ActivatedRoute } from "@angular/router";
 
-import {SettingsCommon, ThietLapHeThong} from "src/app/shared/constants/setting-common";
-import {MatsidenavService} from "src/app/services/utilities/matsidenav.service";
-import {KhuvuctoadoIoComponent} from "src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-io/khuvuctoado-io.component";
-import {CommonServiceShared} from "src/app/services/utilities/common-service";
-import {ThietlapFacadeService} from "src/app/services/admin/thietlap/thietlap-facade.service";
-import {KhuVucKhoangSanFacadeService} from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
+import { SettingsCommon, ThietLapHeThong } from "src/app/shared/constants/setting-common";
+import { MatsidenavService } from "src/app/services/utilities/matsidenav.service";
+import { KhuvuctoadoIoComponent } from "src/app/features/admin/khuvuckhoangsan/khuvuctoado/khuvuctoado-io/khuvuctoado-io.component";
+import { CommonServiceShared } from "src/app/services/utilities/common-service";
+import { ThietlapFacadeService } from "src/app/services/admin/thietlap/thietlap-facade.service";
+import { KhuVucKhoangSanFacadeService } from "src/app/services/admin/khuvuckhoangsan/khuvuckhoangsan-facade.service";
 import {
   KhuVucKhoangSanEnum,
   MaLoaiHinhEnum,
   keyKhuVucKhoangSan,
   KhuVucKhoangSan
 } from "src/app/shared/constants/khuvuckhoangsan-constants";
-import {OutputKhuVucToaDoModel} from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
-import {GeneralClientService} from "src/app/services/admin/common/general-client.service";
-import {SequenceModel} from 'src/app/models/admin/common/sequence.model';
+import { OutputKhuVucToaDoModel } from 'src/app/models/admin/khuvuckhoangsan/khuvuctoado.model';
+import { GeneralClientService } from "src/app/services/admin/common/general-client.service";
+import { SequenceModel } from 'src/app/models/admin/common/sequence.model';
 
 @Component({
   selector: 'app-khuvuctoado-list',
@@ -30,9 +30,11 @@ import {SequenceModel} from 'src/app/models/admin/common/sequence.model';
 export class KhuvuctoadoListComponent implements OnInit {
 
   // Viewchild template
-  @ViewChild("gridToaDo", {static: false}) public gridToaDo: GridComponent;
-  @ViewChild("aside", {static: true}) public matSidenav: MatSidenav;
-  @ViewChild("compToaDoIO", {read: ViewContainerRef, static: true}) public content: ViewContainerRef;
+  @ViewChild("gridToaDo", { static: false }) public gridToaDo: GridComponent;
+  @ViewChild("aside", { static: true }) public matSidenav: MatSidenav;
+  @ViewChild("compToaDoIO", { read: ViewContainerRef, static: true }) public content: ViewContainerRef;
+
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
 
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
@@ -102,7 +104,7 @@ export class KhuvuctoadoListComponent implements OnInit {
     // Gọi hàm lấy dữ liệu translate
     await this.getDataTranslate();
     // Setting wrap mode
-    this.wrapSettings = {wrapMode: 'Both'};
+    this.wrapSettings = { wrapMode: 'Both' };
     // Khởi tạo sidenav
     this.matSidenavService.setSidenav(this.matSidenav, this, this.content, this.cfr);
 
@@ -208,7 +210,7 @@ export class KhuvuctoadoListComponent implements OnInit {
   async getAllToaDo() {
     const listData: any = await this.kvKhoangSanFacadeSv
       .getKhuVucToaDoService()
-      .getFetchAll({idKhuvuc: this.idKhuVuc}) as OutputKhuVucToaDoModel[];
+      .getFetchAll({ idKhuvuc: this.idKhuVuc }) as OutputKhuVucToaDoModel[];
     this.listToaDo = this.generalClientService.generateOrderOf(listData, "serialNumber", 1);
   }
 
@@ -237,7 +239,7 @@ export class KhuvuctoadoListComponent implements OnInit {
   openKhuVucToaDoIOSidenav() {
     if (this.thongTinKhuVucKhoangSan !== null) {
       let dataItem: any = {
-        item: {idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaiKhuVuc},
+        item: { idkhuvuc: this.thongTinKhuVucKhoangSan.idkhuvuc, loaikhuvuc: this.loaiKhuVuc },
         listData: this.listToaDo
       };
       this.matSidenavService.setTitle(this.dataTranslate.KHUVUCKHOANGSAN.khuvuctoado.titleAdd);
@@ -338,9 +340,12 @@ export class KhuvuctoadoListComponent implements OnInit {
       if (result === "confirm") {
         if ((this.listToaDo === null || this.listToaDo.length === 0) && this.idKhuVuc !== null && this.idKhuVuc !== undefined) {
           await this.kvKhoangSanFacadeSv.getKhuVucToaDoService()
-            .deleteItem({idkhuvuc: this.idKhuVuc})
+            .deleteItem({ idkhuvuc: this.idKhuVuc })
             .subscribe(
-              () => this.getAllToaDo(),
+              () => {
+                this.getAllToaDo();
+                this.callBackTabThongTin();
+              },
               (error: HttpErrorResponse) => {
                 this.commonService.showDialogWarning(error.error.errors);
               },
@@ -359,9 +364,12 @@ export class KhuvuctoadoListComponent implements OnInit {
             );
           } else {
             await this.kvKhoangSanFacadeSv.getKhuVucToaDoService()
-              .updateItem({list: this.listToaDo})
+              .updateItem({ list: this.listToaDo })
               .subscribe(
-                () => this.getAllToaDo(),
+                () => {
+                  this.getAllToaDo();
+                  this.callBackTabThongTin();
+                },
                 (error: HttpErrorResponse) => {
                   this.commonService.showDialogWarning(error.error.errors);
                 },
@@ -387,6 +395,13 @@ export class KhuvuctoadoListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName, obj) {
     this[methodName](obj);
+  }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
   }
 
 }
