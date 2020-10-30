@@ -3,6 +3,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from "@angular/forms";
 import { TranslateService } from "@ngx-translate/core";
 import { GridComponent, TextWrapSettingsModel } from "@syncfusion/ej2-angular-grids";
+import { MatDialog } from "@angular/material";
 
 import { OutputCpThamDoToaDoKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpthamdotoadokhuvuc.model";
 import { OutputDmHeQuyChieuModel } from "src/app/models/admin/danhmuc/hequychieu.model";
@@ -16,6 +17,9 @@ import { LoaiCapPhepEnum } from "src/app/shared/constants/enum";
 import { CapPhepHoatDongKhoangSanFacadeService } from 'src/app/services/admin/capphephoatdongkhoangsan/capphephoatdongkhoangsan-facade.service';
 import { DefaultValue } from 'src/app/shared/constants/global-var';
 import { InputCpKhaiThacKhuVucModel } from "src/app/models/admin/capphephoatdongkhoangsan/cpkhaithackhoangsan/cpkhaithackhuvuc.model";
+import { ViewcoordinatesComponent } from "src/app/shared/components/viewcoordinates/viewcoordinates.component";
+import { MatdialogService } from "src/app/services/utilities/matdialog.service";
+import { MapFacadeService } from "src/app/services/admin/map/map-facade.service";
 
 @Component({
   selector: 'app-cp-ktks-khuvuckhaithac-io',
@@ -79,7 +83,15 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
   validationErrorMessages = {};
 
   // Chứa error tọa độ khu vực
-  public validationErrorToaDo = {}
+  public validationErrorToaDo = {};
+
+  public mDialog: any;
+
+  // Chứa geoJson
+  public dataGeoJson: any;
+
+  // Chứa trạng thái hiển thị nút xem bản đồ khu vực
+  public showButtonViewMap: boolean = false;
 
   // Form errors khu vực
   formErrors = {
@@ -104,7 +116,14 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
     public dmFacadeService: DmFacadeService,
     private formBuilder: FormBuilder,
     public commonService: CommonServiceShared,
-    private translate: TranslateService) { }
+    private translate: TranslateService,
+    private imDialog: MatDialog,
+    imDialogService: MatdialogService,
+    private mapFacadeService: MapFacadeService,
+  ) {
+    this.mDialog = imDialogService;
+    this.mDialog.initDialg(imDialog);
+  }
 
   async ngOnInit() {
     // Khởi tạo form
@@ -204,6 +223,9 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
       });
 
       this.listToaDoKhuVuc = this.obj.listtoado;
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -399,6 +421,9 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
       this.gridCpToaDoKhuVuc.refresh();
       this.cpThamDoToaDoKhuVucIOForm.reset();
       this.errorThuTu = DefaultValue.Empty;
+
+      // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+      this.checkStateButtonViewMap();
     }
   }
 
@@ -418,8 +443,45 @@ export class CpKtksKhuvuckhaithacIoComponent implements OnInit {
       }
     }
 
+    // Kiểm tra dữ liệu để hiển thị nút xem bản đồ
+    this.checkStateButtonViewMap();
+    
     // Làm mới grid
     this.gridCpToaDoKhuVuc.refresh();
   }
 
+  // Hàm hiển thị bản đồ khu vực trên dialog
+  async openDialogBanDoKhuVuc() {
+    await this.customDataViewMap();
+    await this.mDialog.setDialog(this, ViewcoordinatesComponent, "", "", this.dataGeoJson, "70%", "70vh");
+    await this.mDialog.open();
+  }
+
+  /**
+   * Check dữ liệu để hiển thị nút xem bản đồ khu vực
+   */
+  public checkStateButtonViewMap() {
+    // Kiểm tra nếu dữ liệu tọa độ lớn hơn hoặc bằng 3 thì hiển thị nút xem bản đồ khu vực
+    if (this.listToaDoKhuVuc.length >= 3) {
+      this.showButtonViewMap = true;
+    } else {
+      this.showButtonViewMap = false;
+    }
+  }
+
+  /**
+   * Custom dữ liệu tọa độ để hiển thị lên bản đồ
+   */
+  async customDataViewMap() {
+    let listData: any = [];
+
+    await this.listToaDoKhuVuc.map(toado => {
+      listData.push({
+        toadox: toado.toadox,
+        toadoy: toado.toadoy,
+      });
+    });
+
+    this.dataGeoJson = await this.mapFacadeService.getGeometryService().getGeoJsonByListItem(listData, this.obj.hequychieu).toPromise();
+  }
 }
