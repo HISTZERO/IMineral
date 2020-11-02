@@ -2,8 +2,10 @@ import { HttpErrorResponse } from '@angular/common/http';
 import {
   Component,
   ComponentFactoryResolver,
+  EventEmitter,
   Input,
   OnInit,
+  Output,
   Type,
   ViewChild,
   ViewContainerRef,
@@ -31,9 +33,9 @@ export class CpPdtlksKhuvucComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   // có id này thì mới lấy được dữ liệu trên trang này
   @Input() idPheDuyetTruLuong: string;
-  @ViewChild("gridKhuVucThamDo", { static: false })
-  public gridKhuVuc: GridComponent;
+  @ViewChild("gridKhuVucThamDo", { static: false }) public gridKhuVuc: GridComponent;
   @ViewChild(Type, { static: true }) public matSidenav: MatSidenav;
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
   @ViewChild(Type, { read: ViewContainerRef, static: true })
   public content: ViewContainerRef;
   // Chứa dữ liệu danh sách khu vực
@@ -160,7 +162,10 @@ export class CpPdtlksKhuvucComponent implements OnInit {
           .getCapPhepPheDuyetTLKS_KhuVucService()
           .deleteItem({ idPheDuyetTruLuongkhuvuc: data.idpheduyettruluongkhuvuc })
           .subscribe(
-            () => this.layDanhSachKhuVuc(),
+            () => {
+              this.layDanhSachKhuVuc();
+              this.callBackTabThongTin();
+            },
             (error: HttpErrorResponse) => {
               this.commonService.showDialogWarning(error.error.errors);
             },
@@ -173,4 +178,12 @@ export class CpPdtlksKhuvucComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
+  }
+
 }

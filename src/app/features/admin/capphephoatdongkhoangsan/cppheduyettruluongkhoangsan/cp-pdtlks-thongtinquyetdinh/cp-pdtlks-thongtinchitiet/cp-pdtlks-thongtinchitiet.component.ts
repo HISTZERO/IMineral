@@ -21,6 +21,7 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
   @Input("allowAutoInit") allowAutoInit = true;
   @Output() thongTinChiTietTonTaiTrigger = new EventEmitter();
   @Output() thongTinChiTietKhongTonTaiTrigger = new EventEmitter();
+  @Output() geoMetryDataEvent = new EventEmitter();
 
   public currentAction: number = 2;
 
@@ -148,6 +149,7 @@ export class CpPdtlksThongtinchitietComponent implements OnInit {
       );
 
       if (this.capPhepPheDuyetTruLuongKSItem) {
+        this.geoMetryDataEvent.emit(this.capPhepPheDuyetTruLuongKSItem.geowgs);
         this.currentAction = ActionDataEnum.Edit;
         //fire sự kiện : bản ghi thông tin chi tiết tồn tại, đồng thời truyền theo ID của bản ghi Thông tin
          this.thongTinChiTietTonTaiTrigger.emit(this.capPhepPheDuyetTruLuongKSItem.idpheduyettruluong);

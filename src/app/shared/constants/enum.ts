@@ -13,7 +13,7 @@ export enum SelectedOptionType {
 
 export enum donvido {
   m = 0,
-  cm ,
+  cm,
   mol,
   l,
 }
@@ -70,7 +70,7 @@ export enum LoaiCapPhepEnum {
   ChapThuanKhaoSatLayMau = "23",
   TinhTienCapQuyen = "24"
 }
-export enum ActionDataEnum{
+export enum ActionDataEnum {
   None = 0,
   Add = 1,
   Edit = 2
@@ -259,15 +259,16 @@ export enum CpPheDuyetTruLuongKhoangSanTabEnum {
   TaiLieuGiayPhepDinhKem = 1,
   ThongTinCapPhep = 2
 }
-export enum CpPheDuyetTLKS_ThongTinQuyetDinhTabEnum{
-  ThongTinChiTiet=0,
-  LoaiKhoangSan=1,
-  TruLuongKhuVuc=2,
-  KhoiLuongTruLuong=3
+export enum CpPheDuyetTLKS_ThongTinQuyetDinhTabEnum {
+  ThongTinChiTiet = 0,
+  LoaiKhoangSan = 1,
+  TruLuongKhuVuc = 2,
+  KhoiLuongTruLuong = 3,
+  BanDoKhuVuc = 4
 }
-export enum CpPheDuyetTLKS_LoaiKhoangSan_PhanLoai{
-  KhoangSanChinh=1,
-  KhoangSanDiKem=2
+export enum CpPheDuyetTLKS_LoaiKhoangSan_PhanLoai {
+  KhoangSanChinh = 1,
+  KhoangSanDiKem = 2
 }
 
 export enum CpTanThuKhoangSanTabEnum {
@@ -307,7 +308,8 @@ export enum CpThamDoKhoangSanTabEnum {
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucThamDo = 3,
-  CongTrinhThamDo = 4
+  CongTrinhThamDo = 4,
+  BanDoKhuVuc = 5
 }
 
 export enum CpTanThuKhoangSanTabEnum {
@@ -315,6 +317,7 @@ export enum CpTanThuKhoangSanTabEnum {
   DonViHanhChinh = 1,
   LoaiKhoangSan = 2,
   KhuVucTanThu = 3,
+  BanDoKhuVuc = 4
 }
 
 export enum CpKhaiThacKhoangSanChiTietTabEnum {
@@ -323,12 +326,14 @@ export enum CpKhaiThacKhoangSanChiTietTabEnum {
   LoaiKhoangSan = 2,
   KhuVucKhaiThac = 3,
   CongTrinhKhaiThac = 4,
-  ThietBiKhaiThac = 5
+  ThietBiKhaiThac = 5,
+  BanDoKhuVuc = 6
 }
 
 export enum CpDongCuaMoChiTietTabEnum {
   ThongTinChiTiet = 0,
   KhuVucDongCuaMo = 1,
+  BanDoKhuVuc = 2
 }
 
 export enum CapPhepThamDoActionEnum {
@@ -369,5 +374,13 @@ export enum CpChuyenNhuongThamDoKhaiThacActionEnum {
   Add = 1,
   Edit = 2
 }
-
+export enum CpDauGiaKhaiThacKhoangSanTabEnum {
+  ThongTinChiTiet = 0,
+  KhuVucDauGia = 1
+}
+export enum CapPhepDauGiaKhaiThacActionEnum {
+  None = 0,
+  Add = 1,
+  Edit = 2
+}
 

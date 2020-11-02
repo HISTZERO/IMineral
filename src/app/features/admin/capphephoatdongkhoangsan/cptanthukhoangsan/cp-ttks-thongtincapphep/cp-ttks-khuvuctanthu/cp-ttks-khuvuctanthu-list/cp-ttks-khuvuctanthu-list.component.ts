@@ -40,6 +40,7 @@ export class CpTtksKhuvuctanthuListComponent implements OnInit {
   @Output("getNumberOfDataAfterInsertUpdateDeleteEvent") getNumberOfDataAfterInsertUpdateDeleteEvent: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("allowAutoInit") allowAutoInit = true;
+  @Output("callBackTabThongTinChiTiet") callBackTabThongTinChiTiet: EventEmitter<any> = new EventEmitter();
   // tslint:disable-next-line: no-input-rename
   @Input("heQuyChieu") heQuyChieu = DefaultValue.Empty;
   // Chứa loại cấp phép
@@ -291,6 +292,13 @@ export class CpTtksKhuvuctanthuListComponent implements OnInit {
   // Hàm dùng để gọi các hàm khác, truyền vào tên hàm cần thực thi
   doFunction(methodName, obj) {
     this[methodName](obj);
+  }
+
+  /**
+   * Gọi lại tab thông tin chi tiết để load lại dữ liệu
+   */
+  public callBackTabThongTin() {
+    this.callBackTabThongTinChiTiet.emit();
   }
 
 }
