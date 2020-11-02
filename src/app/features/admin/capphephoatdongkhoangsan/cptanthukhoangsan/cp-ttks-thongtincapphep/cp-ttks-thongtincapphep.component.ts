@@ -220,24 +220,24 @@ export class CpTtksThongtincapphepComponent implements OnInit {
   }
 
   async tabChange(index: any) {
-      if (index === CpTanThuKhoangSanTabEnum.DonViHanhChinh && !this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh]) {
-        this.capPhepTanThuDvhc.matSidenav = this.matSidenav;
-        this.capPhepTanThuDvhc.content = this.content;
-        this.capPhepTanThuDvhc.idcappheptanthu = this.idcappheptanthu;
-        this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = await this.capPhepTanThuDvhc.manualDataInit();
-     }  else if (index === CpTanThuKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan]) {
-        this.capPhepTanThuLoaiKhoangSan.matSidenav = this.matSidenav;
-        this.capPhepTanThuLoaiKhoangSan.content = this.content;
-        this.capPhepTanThuLoaiKhoangSan.idcappheptanthu = this.idcappheptanthu;
-        this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepTanThuLoaiKhoangSan.manualDataInit();
-      } else if (index === CpTanThuKhoangSanTabEnum.KhuVucTanThu && !this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu]) {
-        this.capPhepTanThuKhuVuc.matSidenav = this.matSidenav;
-        this.capPhepTanThuKhuVuc.content = this.content;
-        this.capPhepTanThuKhuVuc.idcappheptanthu = this.idcappheptanthu;
-        this.capPhepTanThuKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
-        this.capPhepTanThuKhuVuc.heQuyChieu = this.heQuyChieu;
-        this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.capPhepTanThuKhuVuc.manualDataInit();
-      }
+    if (index === CpTanThuKhoangSanTabEnum.DonViHanhChinh && !this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh]) {
+      this.capPhepTanThuDvhc.matSidenav = this.matSidenav;
+      this.capPhepTanThuDvhc.content = this.content;
+      this.capPhepTanThuDvhc.idcappheptanthu = this.idcappheptanthu;
+      this.loadedTabState[CpTanThuKhoangSanTabEnum.DonViHanhChinh] = await this.capPhepTanThuDvhc.manualDataInit();
+    } else if (index === CpTanThuKhoangSanTabEnum.LoaiKhoangSan && !this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan]) {
+      this.capPhepTanThuLoaiKhoangSan.matSidenav = this.matSidenav;
+      this.capPhepTanThuLoaiKhoangSan.content = this.content;
+      this.capPhepTanThuLoaiKhoangSan.idcappheptanthu = this.idcappheptanthu;
+      this.loadedTabState[CpTanThuKhoangSanTabEnum.LoaiKhoangSan] = await this.capPhepTanThuLoaiKhoangSan.manualDataInit();
+    } else if (index === CpTanThuKhoangSanTabEnum.KhuVucTanThu && !this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu]) {
+      this.capPhepTanThuKhuVuc.matSidenav = this.matSidenav;
+      this.capPhepTanThuKhuVuc.content = this.content;
+      this.capPhepTanThuKhuVuc.idcappheptanthu = this.idcappheptanthu;
+      this.capPhepTanThuKhuVuc.loaicapphep = this.itemGiayPhep.loaicapphep;
+      this.capPhepTanThuKhuVuc.heQuyChieu = this.heQuyChieu;
+      this.loadedTabState[CpTanThuKhoangSanTabEnum.KhuVucTanThu] = await this.capPhepTanThuKhuVuc.manualDataInit();
+    }
   }
 
   private getGeometry(geo: string) {
