@@ -456,6 +456,7 @@ export class QuyetdinhIoComponent implements OnInit {
       && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepKhaiThacKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepTanThuKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.TraLaiGiayPhepThamDoKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucKhaiThacKhoangSan
       && loaiCapPhep !== LoaiCapPhepEnum.TraLaiMotPhanDienTichKhuVucThamDoKhoangSan && loaiCapPhep !== LoaiCapPhepEnum.PheDuyetTruLuongKhoangSan
+      && loaiCapPhep !== LoaiCapPhepEnum.DauGiaQuyenKhaiThacKhoangSanKhuVucDaThamDo && loaiCapPhep !== LoaiCapPhepEnum.DauGiaQuyenKhaiThacKhoangSanKhuVucChuaThamDo
     ) {
       this.commonService.informationDiaLogService(
         DefaultValue.Empty,
